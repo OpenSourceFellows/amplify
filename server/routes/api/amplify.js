@@ -107,7 +107,35 @@ function CheckUndefined(itemToCheck, repInfo){
 }
 
 router.get('/', (req, res) => {
-    res.send('hellow world!!');
+    var campaigns = [
+        {
+            "name_of_org": "M4BL",
+            "name": "The Breathe Act",
+            "cause": "Civic Rights",
+            "type": "Grant",
+            "page_url": "www.thebreatheact.org",
+            "letters_counter": 0
+        },
+        {
+            "name_of_org": "AAAJ",
+            "name": "AAAJ",
+            "cause": "Education",
+            "type": "Accelerator",
+            "page_url": "www.aaaj.org",
+            "letters_counter": 0
+        },
+        {
+            "name_of_org": "TheSoapBoxProject",
+            "name": "ClimateCare",
+            "cause": "Climate Justice",
+            "type": "Starter",
+            "page_url": "www.thesoapboxproject.org",
+            "letters_counter": 0
+        }
+    ];
+
+
+    res.send(campaigns);
 });
 
 module.exports = router;
