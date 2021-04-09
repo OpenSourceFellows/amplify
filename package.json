@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Ally-Guide/amplify-back-end/issues"
   },
-  "homepage": "https://github.com/Ally-Guide/amplify-back-end#readme"
+  "homepage": "https://github.com/Ally-Guide/amplify-back-end#readme",
+  "dependencies": {
+    "express-openid-connect": "^2.3.1"
+  }
 }
