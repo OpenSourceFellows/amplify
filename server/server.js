@@ -1,4 +1,4 @@
-const app = require("./index")
+const app = require("./app")
 const express = require("express")
 
 //handle production
