@@ -14,5 +14,4 @@ app.use(
   })
 );
 
-module.exports = app;
-
+//temporarily removed export until auth is working
