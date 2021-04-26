@@ -2,10 +2,10 @@
   "name": "amplify-back-end",
   "version": "1.0.0",
   "description": "Purpose:",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "test": "jest",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
