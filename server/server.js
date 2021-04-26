@@ -1,3 +1,5 @@
+const app = require("./index")
+
 //handle production
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(__dirname + '/public'));
