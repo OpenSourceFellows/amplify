@@ -2,11 +2,11 @@
   "name": "amp-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
   },
   "author": "",
   "license": "MIT",
