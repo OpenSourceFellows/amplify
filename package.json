@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",
     "format": "prettier --write 'server/**/*.js'",
+    "lint": "eslint 'server/**/*.js'",
     "start": "node server/server.js",
     "dev": "nodemon server/server.js"
   },
