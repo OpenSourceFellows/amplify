@@ -16,4 +16,6 @@ Milestones
 Epic Boards
 
 
-Get Started
+## Getting Started
+
+Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
