@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
+const db = require('../../config/knex');
 require('dotenv').config()
 
 //Endpoints
@@ -107,35 +108,18 @@ function CheckUndefined(itemToCheck, repInfo){
 }
 
 router.get('/', (req, res) => {
-    var campaigns = [
-        {
-            "name_of_org": "M4BL",
-            "name": "The Breathe Act",
-            "cause": "Civic Rights",
-            "type": "Grant",
-            "page_url": "www.thebreatheact.org",
-            "letters_counter": 0
-        },
-        {
-            "name_of_org": "AAAJ",
-            "name": "AAAJ",
-            "cause": "Education",
-            "type": "Accelerator",
-            "page_url": "www.aaaj.org",
-            "letters_counter": 0
-        },
-        {
-            "name_of_org": "TheSoapBoxProject",
-            "name": "ClimateCare",
-            "cause": "Climate Justice",
-            "type": "Starter",
-            "page_url": "www.thesoapboxproject.org",
-            "letters_counter": 0
-        }
-    ];
+    const result = db.select('*').from('user_campaigns')
+    .then(function(){
+        
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+    
+    console.log(result);
 
 
-    res.send(campaigns);
+    res.send(result);
 });
 
 module.exports = router;
