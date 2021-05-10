@@ -101,6 +101,7 @@ function CheckUndefined(itemToCheck, repInfo) {
 router.get('/', (req, res) => {
     var campaigns = [
         {
+            id: 1,
             name_of_org: 'M4BL',
             name: 'The Breathe Act',
             cause: 'Civic Rights',
@@ -109,6 +110,7 @@ router.get('/', (req, res) => {
             letters_counter: 0,
         },
         {
+            id: 2,
             name_of_org: 'AAAJ',
             name: 'AAAJ',
             cause: 'Education',
@@ -117,6 +119,7 @@ router.get('/', (req, res) => {
             letters_counter: 0,
         },
         {
+            id: 3,
             name_of_org: 'TheSoapBoxProject',
             name: 'ClimateCare',
             cause: 'Climate Justice',
