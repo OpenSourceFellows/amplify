@@ -107,19 +107,15 @@ function CheckUndefined(itemToCheck, repInfo){
     }
 }
 
-router.get('/', (req, res) => {
-    const result = db.select('*').from('user_campaigns')
-    .then(function(){
-        
-    })
-    .catch(function(error){
+router.get('/', async (req, res) => {
+    try {
+        const result = await db.select('*').from('user_campaigns');
+        console.log(result);
+        res.send(result);
+    } catch (error) {
         console.log(error);
-    });
-    
-    console.log(result);
-
-
-    res.send(result);
+        res.status(500).send({ error: "Whoops" });
+    }
 });
 
 module.exports = router;
