@@ -6,6 +6,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",
+    "format": "prettier --write 'server/**/*.js'",
+    "lint": "eslint 'server/**/*.js'",
     "start": "node server/server.js",
     "dev": "nodemon server/server.js"
   },
@@ -16,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-openid-connect": "^2.3.1",
     "knex": "^0.95.4",
     "pg": "^8.6.0"
   },
