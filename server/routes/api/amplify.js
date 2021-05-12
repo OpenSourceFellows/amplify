@@ -4,6 +4,8 @@ const router = express.Router()
 const db = require('../../config/knex')
 require('dotenv').config()
 
+const CIVIC_API_KEY = process.env.CIVIC_API_KEY || process.env.CivicAPI
+
 //Endpoints
 
 // Get
@@ -15,7 +17,7 @@ router.get('/:zipCode', (req, res) => {
     axios
         .get('https://www.googleapis.com/civicinfo/v2/representatives', {
             params: {
-                key: process.env.CivicAPI, //add key here
+                key: CIVIC_API_KEY,
                 address: zipCode,
             },
         })
