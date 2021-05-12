@@ -1,6 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const router = express.Router()
+const db = require('../../config/knex')
 require('dotenv').config()
 
 //Endpoints
@@ -98,38 +99,15 @@ function CheckUndefined(itemToCheck, repInfo) {
     }
 }
 
-router.get('/', (req, res) => {
-    var campaigns = [
-        {
-            id: 1,
-            name_of_org: 'M4BL',
-            name: 'The Breathe Act',
-            cause: 'Civic Rights',
-            type: 'Grant',
-            page_url: 'www.thebreatheact.org',
-            letters_counter: 0,
-        },
-        {
-            id: 2,
-            name_of_org: 'AAAJ',
-            name: 'AAAJ',
-            cause: 'Education',
-            type: 'Accelerator',
-            page_url: 'www.aaaj.org',
-            letters_counter: 0,
-        },
-        {
-            id: 3,
-            name_of_org: 'TheSoapBoxProject',
-            name: 'ClimateCare',
-            cause: 'Climate Justice',
-            type: 'Starter',
-            page_url: 'www.thesoapboxproject.org',
-            letters_counter: 0,
-        },
-    ]
-
-    res.send(campaigns)
+router.get('/', async (req, res) => {
+    try {
+        const result = await db.select('*').from('user_campaigns');
+        console.log(result);
+        res.send(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ error: 'Whoops' });
+    }
 })
 
 module.exports = router
