@@ -4,7 +4,7 @@ const router = express.Router()
 const db = require('../../config/knex')
 require('dotenv').config()
 
-const CIVIC_API_KEY = process.env.CIVIC_API_KEY || process.env.CivicAPI
+const CIVIC_API_KEY = getCivicApiKey()
 
 //Endpoints
 
@@ -113,3 +113,22 @@ router.get('/', async (req, res) => {
 })
 
 module.exports = router
+
+// Temporary implemntation for fallback with deprecation warnings
+function getCivicApiKey () {
+    const { CIVIC_API_KEY, CivicAPI } = process.env
+    const civicApiKey = CIVIC_API_KEY || CivicAPI
+
+    if (CivicAPI) {
+        if (CIVIC_API_KEY) {
+            console.warn('Using "CIVIC_API_KEY" environment variable.')
+            console.warn('Please remove your deprecated "CivicAPI" environment variable!')
+        } else {
+            console.warn('Expected "CIVIC_API_KEY" environment variable was not found.')
+            console.warn('Falling back to deprecated "CivicAPI" environment variable....')
+            console.warn('Please update your environment to use the expected key!')
+        }
+    }
+
+    return civicApiKey
+}
