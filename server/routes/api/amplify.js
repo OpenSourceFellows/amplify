@@ -1,8 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const axios = require('axios')
 const router = express.Router()
 const db = require('../../config/knex')
-require('dotenv').config()
 
 const CIVIC_API_KEY = getCivicApiKey()
 
