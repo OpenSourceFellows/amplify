@@ -98,3 +98,24 @@ CivicAPI=<YOUR_API_KEY>
 ```
 
 7. Save the changes to the `.env` file.
+
+#### Connecting to the production PostgreSQL database locally
+
+:warning: _For trusted collaborators ONLY!_ :warning:
+
+1. Using your authorized Heroku account, you can find the `DATABASE_URL` [Config Var](https://devcenter.heroku.com/articles/config-vars) on our deployed Heroku app's "Settings" page.
+
+2. Create a file called `.env` in the project's root directory.
+3. Add a new key-value pair to the file containing the Heroku `DATABASE_URL` value, e.g.
+
+```
+# PostgreSQL database connection string for production
+DATABASE_URL=<OUR_HEROKU_DATABASE_URL>
+```
+
+4. Save the changes to the `.env` file.
+5. When starting your local server, you must set your `NODE_ENV` environment variable to `"production"` in order for `knex` to connect to this Heroku production database, e.g.
+
+```shell
+NODE_ENV=production npm start
+```
