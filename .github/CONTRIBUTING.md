@@ -60,7 +60,7 @@ https://www.googleapis.com/civicinfo/v2/elections?key=<YOUR_API_KEY>
 
 ```
 # API key for the Google Civic API
-CivicAPI=<YOUR_API_KEY>
+CIVIC_API_KEY=<YOUR_API_KEY>
 ```
 
 7. Save the changes to the `.env` file.

@@ -7,6 +7,8 @@ const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
 
+const CIVIC_API_KEY = getCivicApiKey()
+
 //Endpoints
 
 // Get
@@ -18,7 +20,7 @@ router.get('/:zipCode', (req, res) => {
     axios
         .get('https://www.googleapis.com/civicinfo/v2/representatives', {
             params: {
-                key: process.env.CivicAPI, //add key here
+                key: CIVIC_API_KEY,
                 address: zipCode,
             },
         })
@@ -114,3 +116,22 @@ router.get('/', async (req, res) => {
 })
 
 module.exports = router
+
+// Temporary implemntation for fallback with deprecation warnings
+function getCivicApiKey () {
+    const { CIVIC_API_KEY, CivicAPI } = process.env
+    const civicApiKey = CIVIC_API_KEY || CivicAPI
+
+    if (CivicAPI) {
+        if (CIVIC_API_KEY) {
+            console.warn('Using "CIVIC_API_KEY" environment variable.')
+            console.warn('Please remove your deprecated "CivicAPI" environment variable!')
+        } else {
+            console.warn('Expected "CIVIC_API_KEY" environment variable was not found.')
+            console.warn('Falling back to deprecated "CivicAPI" environment variable....')
+            console.warn('Please update your environment to use the expected key!')
+        }
+    }
+
+    return civicApiKey
+}
