@@ -1,7 +1,7 @@
 const { createClient, getConfig, getEnv } = require('../server/db')
 
 // See https://www.postgresql.org/docs/13/errcodes-appendix.html
-const DUPLICATE_DATABASE_ERROR = '42P04'
+const INVALID_CATALOG_NAME_ERROR = '3D000'
 
 destroyDatabase()
 
@@ -33,8 +33,8 @@ async function dropDatabase (config) {
     await db.raw(`DROP DATABASE ${database}`)
     console.log(`Dropped database "${database}"!`)
   } catch (error) {
-    if (error.code === DUPLICATE_DATABASE_ERROR) {
-      console.warn(`Error dropping database "${database}": it already exists!`)
+    if (error.code === INVALID_CATALOG_NAME_ERROR) {
+      console.warn(`Error dropping database "${database}": it does not exist!`)
     } else {
       console.error(`Error dropping database "${database}": ${error.message}`)
       throw error
