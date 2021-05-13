@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -e
+
+command -v brew >/dev/null 2>&1 || {
+  echo "==> Installing Homebrew..."
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+echo "==> Upgrading Homebrew..."
+brew upgrade
+
+brew bundle check >/dev/null 2>&1 || {
+  echo "==> Installing Homebrew dependencies..."
+  brew bundle
+}
+
+echo "==> Starting PostgreSQL service..."
+brew services start postgres
+
+echo "==> Installing Node dependencies..."
+npm install
+
+echo "==> Creating and setting up databases..."
+npm run db:create
+
+echo '‼️ Create a ".env" file based on the ".env.example" file, then enter all of your environment variables.'
