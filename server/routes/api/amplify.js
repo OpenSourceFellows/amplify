@@ -1,8 +1,11 @@
+require('dotenv').config()
+
 const express = require('express')
 const axios = require('axios')
+const { createClient } = require('../../db')
+
 const router = express.Router()
-const db = require('../../config/knex')
-require('dotenv').config()
+const db = createClient()
 
 //Endpoints
 
