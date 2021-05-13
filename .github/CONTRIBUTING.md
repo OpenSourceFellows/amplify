@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-If you are using a MacOS or Linux device, you can setup all of the prerequisites by running one convenient script:
+If you are using a MacOS or Linux system, you can setup all of the prerequisites by running one convenient script:
 
 ```shell
 script/bootstrap
