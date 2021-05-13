@@ -2,22 +2,54 @@
 
 ## For Developers
 
+### Prerequisites
+
+If you are using a MacOSX device, you can setup all of the prerequisites by running one convenient script:
+
+```shell
+script/bootstrap
+```
+
+#### Node.js & npm
+
+Ensure a modern version of [Node.js (and npm)](https://nodejs.org/en/download/) are installed.
+
+Currently used versions in production:
+- Node.js @ `14.x`
+- npm @ `6.x`
+
+#### PostgreSQL server
+
+Ensure a [PostgreSQL server is installed](https://www.postgresql.org/download/) and running.
+
+Currently used version in production:
+- PostgreSQL @ `13.x`
+
 ### Getting Started
 
-1. Clone the repository
+1. Clone the repository.
+
 2. Install the dependencies. From a terminal, navigate to the project's root directory and run:
 
 ```shell
 npm install
 ```
 
-3. Run the tests to ensure everything is working as expected:
+3. Create the local PostgreSQL databases:
+
+```shell
+npm run db:create
+```
+
+4. Ensure you have [configured your environment](#configuration).
+
+5. Run the tests to ensure everything is working as expected:
 
 ```shell
 npm test
 ```
 
-4. Start the server, either simply:
+6. Start the server, either simply:
 
 ```shell
 # Simple approach
@@ -31,7 +63,9 @@ npm start
 npm run dev
 ```
 
-### Using the Google Civic Information API locally
+### Configuration
+
+#### Using the Google Civic Information API locally
 
 1. Using your preferred Google account, head to the [Google API Console's Credentials page](https://console.developers.google.com/apis/credentials) to create a new Project and API key. If you need a bit more guidance, refer to [Google's guide](https://developers.google.com/civic-information/docs/using_api).
 2. Hit the following URL, substituting your own API key in:

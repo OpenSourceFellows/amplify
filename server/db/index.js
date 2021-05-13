@@ -1,12 +1,12 @@
 const knex = require('knex')
 const knexfile = require('../../knexfile')
 
-function createClient () {
-  return knex(getConfig())
+function createClient (config) {
+  return knex(config || getConfig())
 }
 
-function getConfig () {
-  const targetEnv = process.env.NODE_ENV || 'development'
+function getConfig (env) {
+  const targetEnv = env || getEnv()
   const config = knexfile[targetEnv]
 
   if (!config) {
@@ -16,7 +16,21 @@ function getConfig () {
   return config
 }
 
+function getEnv () {
+  let targetEnv = process.env.NODE_ENV || 'development'
+  // Prefer `--env test` and `--env=test` command line arguments if provided
+  process.argv.forEach((val, i) => {
+    if (val === '--env' && process.argv[i + 1]) {
+      targetEnv = process.argv[i + 1]
+    } else if (val.startsWith('--env=') && val.length > 6) {
+      targetEnv = val.slice(6)
+    }
+  })
+  return targetEnv
+}
+
 module.exports = {
   createClient,
-  getConfig
+  getConfig,
+  getEnv
 }
