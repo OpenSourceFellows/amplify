@@ -18,11 +18,11 @@ const baseConfig = {
 
   migrations: {
     tableName: 'knex_migrations',
-    directory: './db/migrations'
+    directory: './server/db/migrations'
   },
 
   seeds: {
-    directory: `./db/seeds/${NODE_ENV}`
+    directory: `./server/db/seeds/${NODE_ENV}`
   },
 
   // Turn these off in production for performance reasons
