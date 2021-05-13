@@ -2,12 +2,6 @@
 
 set -e
 
-if [ "$(uname -s)" != "Darwin" ]; then
-  echo >&2 "This script currently only supports running on MacOSX devices!"
-  echo >&2 "Aborting...."
-  exit 1
-fi
-
 command -v brew >/dev/null 2>&1 || {
   echo "==> Installing Homebrew..."
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
