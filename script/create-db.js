@@ -13,7 +13,7 @@ async function bootstrapDatabase () {
 
   const config = getConfig(targetEnv)
   await createDatabase(config)
-  //await migrateToLatestSchemas(config)
+  await migrateToLatestSchemas(config)
   //await runDataSeeders(config)
 }
 
@@ -54,6 +54,7 @@ async function migrateToLatestSchemas (config) {
   try {
     db = createClient(config)
     await db.migrate.latest()
+    console.log(`Migrated database "${database}" to latest schemas!`)
   } catch (error) {
     console.error(`Error migrating to latest schemas for database "${database}": ${error.message}`)
     throw error
@@ -70,6 +71,7 @@ async function runDataSeeders (config) {
   try {
     db = createClient(config)
     await db.seed.run()
+    console.log(`Created seed data in database "${database}"!`)
   } catch (error) {
     console.error(`Error creating seed data for database "${database}": ${error.message}`)
     throw error
