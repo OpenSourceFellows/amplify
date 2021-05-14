@@ -1,4 +1,4 @@
-const tableName = 'user_volunteers'
+const tableName = 'volunteers'
 
 module.exports = {
 
