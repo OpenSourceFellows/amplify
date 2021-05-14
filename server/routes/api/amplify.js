@@ -106,7 +106,7 @@ function CheckUndefined(itemToCheck, repInfo) {
 
 router.get('/', async (req, res) => {
     try {
-        const result = await db.select('*').from('user_campaigns');
+        const result = await db.select('*').from('campaigns');
         console.log(result);
         res.send(result);
     } catch (error) {
