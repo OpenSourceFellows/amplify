@@ -23,7 +23,8 @@ const baseConfig = {
   },
 
   seeds: {
-    directory: `./server/db/seeds/${NODE_ENV}`
+    directory: `./server/db/seeds/${NODE_ENV}`,
+    stub: './server/db/_seed.stub.js'
   },
 
   // Turn these off in production for performance reasons
