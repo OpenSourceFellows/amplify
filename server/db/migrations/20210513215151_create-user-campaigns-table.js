@@ -29,12 +29,12 @@ module.exports = {
             { useNative: true, enumName: 'campaign_type' }
           ).notNullable()
 
-          // Indexes
-          table.index(['name'])
-          table.index(['organization'])
+        // Indexes
+        table.index(['name'])
+        table.index(['organization'])
 
-          // Unique indexes
-          table.unique(['name', 'organization'])
+        // Unique indexes
+        table.unique(['name', 'organization'])
       })
   },
 
