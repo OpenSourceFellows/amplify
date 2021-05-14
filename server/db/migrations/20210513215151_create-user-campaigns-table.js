@@ -40,8 +40,7 @@ module.exports = {
 
   async down (knex) {
     // Drop the table
-    await knex.schema
-      .dropTable(tableName)
+    await knex.schema.dropTable(tableName)
 
     // Manually remove the native enum types
     await knex.raw(`DROP TYPE IF EXISTS cause_type;`)
