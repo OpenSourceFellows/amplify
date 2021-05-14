@@ -18,7 +18,8 @@ const baseConfig = {
 
   migrations: {
     tableName: 'knex_migrations',
-    directory: './server/db/migrations'
+    directory: './server/db/migrations',
+    stub: './server/db/_migration.stub.js'
   },
 
   seeds: {
