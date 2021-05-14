@@ -20,14 +20,16 @@ module.exports = {
             'cause',
             ['Civic Rights', 'Education', 'Climate Justice'],
             { useNative: true, enumName: 'cause_type' }
-          ).notNullable()
+          )
+          .notNullable()
 
         table
           .enum(
             'type',
             ['Starter', 'Accelerator', 'Grant'],
             { useNative: true, enumName: 'campaign_type' }
-          ).notNullable()
+          )
+          .notNullable()
 
         // Indexes
         table.index(['name'])
