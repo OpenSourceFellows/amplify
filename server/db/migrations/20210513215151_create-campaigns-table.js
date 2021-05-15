@@ -13,6 +13,7 @@ module.exports = {
         table.string('name').notNullable()
         table.string('organization').notNullable()
         table.text('page_url').notNullable()
+        table.integer('letters_sent').notNullable()
 
         // Fields using native enum types
         table
