@@ -1,20 +1,20 @@
 <template>
     <div class="home">
         <home-hero></home-hero>
-        <home-details></home-details>
+        <campaign-cards></campaign-cards>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HomeHero from '@/components/HomeHero.vue';
-import HomeDetails from '@/components/HomeDetails';
+import CampaignCards from '@/components/CampaignCards';
 
 export default {
     name: 'Home',
     components: {
         HomeHero,
-        HomeDetails
+        CampaignCards
     }
 };
 </script>
