@@ -45,10 +45,14 @@ npm install
 
   ℹ️ This should should not be necessary if you successfully ran `script/bootstrap`.
 
-4. Create the local PostgreSQL databases:
+4. Create and seed the local PostgreSQL databases:
 
 ```shell
 npm run db:create
+```
+   followed by
+```shell
+npm run db:seed
 ```
 
   ℹ️ This should should not be necessary if you successfully ran `script/bootstrap`.
