@@ -1,21 +1,18 @@
 <template>
     <v-container fluid="false">
-        <v-parallax
-            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-            height="300"
-        >
+        <v-parallax height="400" class="hero-image">
             <v-row
                 align="center"
                 justify="center"
                 align-content="center"
                 class="header-row"
             >
-                <v-col class="text-center" cols="12">
+                <v-col class="text-center" cols="10">
                     <h1 class="display-1 font-weight-thin mb-4">
-                        Vuetify
+                        Amplify
                     </h1>
                     <h4 class="subheading">
-                        Build your application today!
+                        Changes start by doing.
                     </h4>
                 </v-col>
             </v-row>
@@ -32,5 +29,9 @@ export default {
 <style lang="less">
 .header-row {
     align-items: center;
+}
+.hero-image {
+    background-image: url('../assets/amplify.png');
+    background-position-y: -35px;
 }
 </style>
