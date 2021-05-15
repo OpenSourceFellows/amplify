@@ -29,27 +29,39 @@ Currently used version in production:
 
 1. Clone the repository.
 
-2. Install the dependencies. From a terminal, navigate to the project's root directory and run:
+2. If you are using a MacOS or Linux system, you can setup all of the prerequisites by running one convenient script:
+
+```shell
+script/bootstrap
+```
+
+  If you can successfully run that script, you may skip ahead to Step 5.
+
+3. Install the dependencies. From a terminal, navigate to the project's root directory and run:
 
 ```shell
 npm install
 ```
 
-3. Create the local PostgreSQL databases:
+  ℹ️ This should should not be necessary if you successfully ran `script/bootstrap`.
+
+4. Create the local PostgreSQL databases:
 
 ```shell
 npm run db:create
 ```
 
-4. Ensure you have [configured your environment](#configuration).
+  ℹ️ This should should not be necessary if you successfully ran `script/bootstrap`.
 
-5. Run the tests to ensure everything is working as expected:
+5. Ensure you have [configured your environment](#configuration).
+
+6. Run the tests to ensure everything is working as expected:
 
 ```shell
 npm test
 ```
 
-6. Start the server, either simply:
+7. Start the server, either simply:
 
 ```shell
 # Simple approach
@@ -89,7 +101,7 @@ https://www.googleapis.com/civicinfo/v2/elections?key=<YOUR_API_KEY>
 
   This time around, you should succeed with a JSON response body containing an `elections` array.
 
-5. Create a file called  `.env` in the project's root directory.
+5. Create a file called  `.env` in the project's root directory, preferrably using the `.env.example` file as your template.
 6. Add a new key-value pair to the file containing your new API key, e.g.
 
 ```
@@ -99,13 +111,30 @@ CIVIC_API_KEY=<YOUR_API_KEY>
 
 7. Save the changes to the `.env` file.
 
+#### Ignoring the Auth0 authentication locally
+
+Although the authentication check is not required locally, the module in use still expects certain values to be passed in regardless of their validity.
+
+1. Create a file called  `.env` in the project's root directory, preferrably using the `.env.example` file as your template.
+2. Add set of a new key-value pairs to the file with literal nonsense values, e.g.
+
+```
+# Auth0 authentication parameters
+ISSUER_BASE_URL=https://YOUR_AUTH_DOMAIN
+CLIENT_ID=YOUR_CLIENT_ID
+BASE_URL=https://localhost:5000/
+SECRET=LONG_RANDOM_VALUE
+```
+
+3. Save the changes to the `.env` file.
+
 #### Connecting to the production PostgreSQL database locally
 
 :warning: _For trusted collaborators ONLY!_ :warning:
 
 1. Using your authorized Heroku account, you can find the `DATABASE_URL` [Config Var](https://devcenter.heroku.com/articles/config-vars) on our deployed Heroku app's "Settings" page.
 
-2. Create a file called `.env` in the project's root directory.
+2. Create a file called `.env` in the project's root directory, preferrably using the `.env.example` file as your template.
 3. Add a new key-value pair to the file containing the Heroku `DATABASE_URL` value, e.g.
 
 ```
