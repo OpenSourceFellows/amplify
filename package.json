@@ -16,7 +16,7 @@
     "db:migrate": "npm run db:migrate:dev && npm run db:migrate:test",
     "db:migrate:dev": "knex migrate:latest --verbose --env development",
     "db:migrate:test": "knex migrate:latest --verbose --env test",
-    "db:migrate:prod": "knex migrate:latest --verbose --env production"
+    "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run"
   },
   "author": "",
