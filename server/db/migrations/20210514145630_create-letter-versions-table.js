@@ -17,16 +17,17 @@ module.exports = {
         table.foreign('campaign_id').references('campaigns.id')
 
         // Fields using native enum types
-        table
-          .enum(
-            'office_division',
-            ['Federal', 'State', 'County', 'Municipality'],
-            { useNative: true, enumName: 'political_division' }
-          )
-          .notNullable()
-          .defaultTo('Federal')
+        // table
+        //   .enum(
+        //     'office_division',
+        //     ['Federal', 'State', 'County', 'Municipality'],
+        //     { useNative: true, enumName: 'political_division' }
+        //   )
+        //   .notNullable()
+        //   .defaultTo('Federal')
 
         // More simple fields
+        table.string('office_division')
         table.string('state')
         table.string('county')
         table.string('municipality')
@@ -46,40 +47,20 @@ module.exports = {
     //  - the value for "state" must be NULL
     //  - the value for "county" must be NULL
     //  - the value for "municipality" must be NULL
-    await knex.raw(
-      `
-      ALTER TABLE "${tableName}"
-      ADD CONSTRAINT "office_divisions_are_valid"
-      CHECK (
-        (
-          office_division = 'Federal' AND
-          state IS NULL AND
-          county IS NULL AND
-          municipality IS NULL
-        )
-        OR
-        (
-          office_division = 'State' AND
-          state IS NOT NULL AND
-          county IS NULL AND
-          municipality IS NULL
-        )
-        OR
-        (
-          office_division = 'County' AND
-          state IS NOT NULL AND
-          county IS NOT NULL AND
-          municipality IS NULL
-        )
-        OR
-        (
-          office_division = 'Municipality' AND
-          state IS NOT NULL AND
-          municipality IS NOT NULL
-        )
-      );
-      `
-    )
+    // await knex.raw(
+    //   `
+    //   ALTER TABLE "${tableName}"
+    //   ADD CONSTRAINT "office_divisions_are_valid"
+    //   CHECK (
+    //     (
+    //       office_division = 'Federal' AND
+    //       state IS NULL AND
+    //       county IS NULL AND
+    //       municipality IS NULL
+    //     )
+    //   );
+    //   `
+    // )
   },
 
   async down (knex) {

@@ -45,8 +45,6 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_dev',
-      user: 'pe_dev',
-      password: 'pe_dev'
     }
   },
 
