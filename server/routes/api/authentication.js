@@ -1,13 +1,9 @@
 require('dotenv').config()
 const express = require('express')
-const router = express.router
+const router = express.Router()
 
 router.get('/isAuthenticated', (req, res) => {
-    if (req.user) {
-        res.send(true)
-    } else {
-        res.send(false)
-    }
+    res.send(req.oidc.isAuthenticated())
 })
 
 module.exports = router

@@ -106,30 +106,38 @@ function CheckUndefined(itemToCheck, repInfo) {
 
 router.get('/', async (req, res) => {
     try {
-        const result = await db.select('*').from('campaigns');
-        console.log(result);
-        res.send(result);
+        const result = await db.select('*').from('campaigns')
+        console.log(result)
+        res.send(result)
     } catch (error) {
-        console.log(error);
-        res.status(500).send({ error: 'Whoops' });
+        console.log(error)
+        res.status(500).send({ error: 'Whoops' })
     }
 })
 
 module.exports = router
 
 // Temporary implemntation for fallback with deprecation warnings
-function getCivicApiKey () {
+function getCivicApiKey() {
     const { CIVIC_API_KEY, CivicAPI } = process.env
     const civicApiKey = CIVIC_API_KEY || CivicAPI
 
     if (CivicAPI) {
         if (CIVIC_API_KEY) {
             console.warn('Using "CIVIC_API_KEY" environment variable.')
-            console.warn('Please remove your deprecated "CivicAPI" environment variable!')
+            console.warn(
+                'Please remove your deprecated "CivicAPI" environment variable!'
+            )
         } else {
-            console.warn('Expected "CIVIC_API_KEY" environment variable was not found.')
-            console.warn('Falling back to deprecated "CivicAPI" environment variable....')
-            console.warn('Please update your environment to use the expected key!')
+            console.warn(
+                'Expected "CIVIC_API_KEY" environment variable was not found.'
+            )
+            console.warn(
+                'Falling back to deprecated "CivicAPI" environment variable....'
+            )
+            console.warn(
+                'Please update your environment to use the expected key!'
+            )
         }
     }
 
