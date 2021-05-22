@@ -1,0 +1,755 @@
+Script started on Sat May 15 13:15:51 2021
+[0m[49m[39m[27m[24m[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                           [0m[49m[39m[27m[24m[K
+[1A7[0m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m                                                                                                                                                                                                                                                                                       [0m[49m[38;5;242m01:15:51 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[0m[49m[39m[27m[24m[25C[?25l8[0m[49m[39m[27m[24m[J]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[49m[39m[27m[24m[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                           [0m[49m[39m[27m[24m[K[0m[27m[24m[J[0m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[279C[0m[49m[38;5;242m01:15:51 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[290D[?1h=[?12l[?25h[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[274C[0m[49m[38;5;242m01:15:51 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[285D[?12l[?25h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:15:51 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hscriptls    script/.script/./script/[1C[1C[1C[1C[1C[1C[1C[1Cbootstrap[1m [0m[0m [?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ./script/bootstrap[K[?12l[?25h
+]2;./script/bootstrap]1;./script/bootstrap==> Upgrading Homebrew...
+Updating Homebrew...
+[34m==>[0m [1mAuto-updated Homebrew![0m
+Updated 9 taps (khanhas/tap, heroku/brew, golangci/tap, homebrew/core, homebrew/cask, homebrew/bundle, homebrew/services, koekeishiya/formulae and github/bootstrap).
+[34m==>[0m [1mNew Formulae[0m
+atuin                     ddcctl                    gcc@10                    imath                     lefthook                  lychee                    oksh                      pgxnclient                rmw                       seqkit                    trojan-go                 webhook
+autorestic                elan-init                 gnupg@2.2                 julia                     lm-sensors                mr2                       openexr@2                 qodem                     scotch                    stp                       tssh                      xfig
+cadical                   fabric-installer          gtksourceview5            ki                        lsix                      nox                       openj9                    revive                    search-that-hash          sysstat                   virtualenvwrapper         zellij
+[34m==>[0m [1mUpdated Formulae[0m
+Updated 1174 formulae.
+[34m==>[0m [1mDeleted Formulae[0m
+aurora-cli                                                                     erlang@20                                                                      protobuf-swift                                                                 protobuf@3.7
+[34m==>[0m [1mNew Casks[0m
+crescendo                   firefly                     fpc-src-laz                 ilspy                       jellyfin-media-player       menuwhere                   pronterface                 sbarex-qlmarkdown           siyuan                      tabtopus                    vitalsigns
+cryptonomic-galleon         flameshot                   hancom-word                 invoker                     mem                         mixed-in-key                qudedup-extract-tool        shield                      slidepilot                  usr-sse2-rdm                waltr-pro
+depthmapx                   fpc-laz                     hook                        irpf2021                    menu-bar-splitter           mutesync                    recut                       shortcutor                  specter                     vitals
+[34m==>[0m [1mUpdated Casks[0m
+Updated 889 casks.
+[34m==>[0m [1mDeleted Casks[0m
+adventure               cellery                 cliqz                   duckstation             fpcsrc                  lingo                   netbeans-cpp            netbeans-java-se        opennx                  revisions               swift-explorer          transmit-disk           wakeonlan
+audiobookbinder         clipbuddy               cuteclips               family-tree-builder     hubic                   meshcommander           netbeans-java-ee        nndd                    printrun                spideroak-share         tracks-live             vrep
+
+[32m==>[0m [1mUpgrading 22 outdated packages:[0m
+postgresql 13.2_1 -> 13.3
+tree-sitter 0.19.3 -> 0.19.4
+go 1.16 -> 1.16.3
+gh 1.7.0 -> 1.9.2
+minikube 1.18.1 -> 1.20.0_1
+unibilium 2.1.0 -> 2.1.1
+heroku/brew/heroku 7.51.0 -> 7.53.1
+cmake 3.19.6 -> 3.20.2
+icu4c 68.2 -> 69.1
+luarocks 3.5.0 -> 3.7.0
+ruby-build 20210309 -> 20210510
+sqlite 3.35.3 -> 3.35.5
+lua 5.4.2 -> 5.4.3
+golangci/tap/golangci-lint 1.39.0 -> 1.40.1
+khanhas/tap/spicetify-cli 1.2.1 -> 2.1.0
+luajit-openresty 20201229_1 -> 20210510
+postgresql@10 10.16_1 -> 10.17
+kubernetes-cli 1.20.4 -> 1.21.0
+node 15.11.0 -> 16.1.0
+luv 1.36.0-0 -> 1.41.0-0
+fzf 0.25.1 -> 0.27.0
+python@3.9 3.9.2_4 -> 3.9.5
+[32m==>[0m [1mUpgrading [32micu4c[39m 68.2 -> 69.1 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/icu4c/manifests/69.1[0m
+#=#=#                                                                         ##################################                                        47.7%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/icu4c/blobs/sha256:3f75c907dadc6e7e647920506e740a312e56279369f3c9708cac54b018410120[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:3f75c907dadc6e7e647920506e740a312e56279369f3c9708cac54b018410120?se=2021-05-15T20%3A25%3A00Z&sig=a5cO8OM6UHjrt14J2dEzgNv6cDMDljMILIslnT%2BrwHQ%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#                                                                          1.7%###                                                                        5.3%#######                                                                   10.0%##########                                                                14.8%###############                                                           20.9%####################                                                      28.8%############################                                              39.4%####################################                                      51.2%#############################################                             62.9%####################################################                      72.7%##############################################################            86.3%###################################################################       93.7%######################################################################## 100.0%
+[34m==>[0m [1mPouring icu4c--69.1.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+icu4c is keg-only, which means it was not symlinked into /usr/local,
+because macOS provides libicucore.dylib (but nothing else).
+
+If you need to have icu4c first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/icu4c/bin:$PATH"' >> ~/.zshrc
+  echo 'export PATH="/usr/local/opt/icu4c/sbin:$PATH"' >> ~/.zshrc
+
+For compilers to find icu4c you may need to set:
+  export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+  export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+
+For pkg-config to find icu4c you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
+
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/icu4c/69.1: 259 files, 72.8MB
+Removing: /usr/local/Cellar/icu4c/68.2... (259 files, 72.5MB)
+Removing: /Users/teakopp/Library/Caches/Homebrew/icu4c--68.2.catalina.bottle.tar.gz... (27.1MB)
+[32m==>[0m [1mUpgrading [32mluajit-openresty[39m 20201229_1 -> 20210510 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/luajit-openresty/manifests/20210510[0m
+#=#=#                                                                         ###############                                                           21.7%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/luajit-openresty/blobs/sha256:31b27b774a37110992c1f4430f2a5b5059dca29dd05e744654a16ae06adee76d[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:31b27b774a37110992c1f4430f2a5b5059dca29dd05e744654a16ae06adee76d?se=2021-05-15T20%3A25%3A00Z&sig=V%2BM1MGviiX6e301WgeVTyUa4C6orM4h71EfIKT68Rr4%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+####################################                                      51.3%######################################################################## 100.0%
+[34m==>[0m [1mPouring luajit-openresty--20210510.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+luajit-openresty is keg-only, which means it was not symlinked into /usr/local,
+because it conflicts with the LuaJIT formula.
+
+If you need to have luajit-openresty first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/luajit-openresty/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find luajit-openresty you may need to set:
+  export LDFLAGS="-L/usr/local/opt/luajit-openresty/lib"
+  export CPPFLAGS="-I/usr/local/opt/luajit-openresty/include"
+
+For pkg-config to find luajit-openresty you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/luajit-openresty/lib/pkgconfig"
+
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/luajit-openresty/20210510: 38 files, 1.8MB
+Removing: /usr/local/Cellar/luajit-openresty/20201229_1... (38 files, 1.8MB)
+Removing: /Users/teakopp/Library/Caches/Homebrew/luajit-openresty--20201229_1.catalina.bottle.tar.gz... (793.0KB)
+[32m==>[0m [1mUpgrading [32mpostgresql@10[39m 10.16_1 -> 10.17 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/postgresql/10/manifests/10.17[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/postgresql/10/blobs/sha256:71564a949308c86d7a539def6d45c19ef3d9b30e01f939e5f2dd657e4c974428[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:71564a949308c86d7a539def6d45c19ef3d9b30e01f939e5f2dd657e4c974428?se=2021-05-15T20%3A25%3A00Z&sig=LlzR9pjEp5SdHUpDtqF90YUhY04%2F6nlYGzSJR3Z3ao4%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+####                                                                       5.8%############                                                              17.3%##########################                                                37.2%############################################                              62.2%##################################################################        92.1%######################################################################## 100.0%
+[34m==>[0m [1mPouring postgresql@10--10.17.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+This formula has created a default database cluster with:
+  initdb --locale=C -E UTF-8 /usr/local/var/postgresql@10
+For more details, read:
+  https://www.postgresql.org/docs/10/app-initdb.html
+
+postgresql@10 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have postgresql@10 first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/postgresql@10/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find postgresql@10 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/postgresql@10/lib"
+  export CPPFLAGS="-I/usr/local/opt/postgresql@10/include"
+
+For pkg-config to find postgresql@10 you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/postgresql@10/lib/pkgconfig"
+
+
+To have launchd start postgresql@10 now and restart at login:
+  brew services start postgresql@10
+Or, if you don't want/need a background service you can just run:
+  pg_ctl -D /usr/local/var/postgresql@10 start
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/postgresql@10/10.17: 1,710 files, 25.1MB
+Removing: /usr/local/Cellar/postgresql@10/10.16_1... (1,710 files, 25.1MB)
+Removing: /Users/teakopp/Library/Caches/Homebrew/postgresql@10--10.16_1.catalina.bottle.tar.gz... (7MB)
+[32m==>[0m [1mUpgrading [32msqlite[39m 3.35.3 -> 3.35.5 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/sqlite/manifests/3.35.5[0m
+#=#=#                                                                         ##########################################################                81.3%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/sqlite/blobs/sha256:217e257590018c8e0b2e994f8f8c9fa548459f1532acecf0b229f9885bf0ce22[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:217e257590018c8e0b2e994f8f8c9fa548459f1532acecf0b229f9885bf0ce22?se=2021-05-15T20%3A25%3A00Z&sig=NujQdBJBm%2BAzjJt6ns658c5hMgmng%2F7WwX3eXzg4CoM%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#############                                                             19.3%######################################                                    53.7%######################################################################## 100.0%
+[34m==>[0m [1mPouring sqlite--3.35.5.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+sqlite is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have sqlite first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/sqlite/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find sqlite you may need to set:
+  export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+  export CPPFLAGS="-I/usr/local/opt/sqlite/include"
+
+For pkg-config to find sqlite you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/sqlite/3.35.5: 11 files, 4.2MB
+Removing: /usr/local/Cellar/sqlite/3.34.0... (11 files, 4.1MB)
+Removing: /usr/local/Cellar/sqlite/3.35.3... (11 files, 4.2MB)
+[32m==>[0m [1mUpgrading [32mminikube[39m 1.18.1 -> 1.20.0_1 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.21.0[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:d124e2ae0aa980f93648f325715ab88b09a9df9213f6a448e816630403271896[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:d124e2ae0aa980f93648f325715ab88b09a9df9213f6a448e816630403271896?se=2021-05-15T20%3A25%3A00Z&sig=apbkVQzdVeyBXBBZrDlbDqBVCPMdSA2M3jcAX8P%2BtO0%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#                                                                          2.0%#####                                                                      7.6%############                                                              17.0%###################                                                       27.6%#####################                                                     29.4%#############################                                             40.8%#######################################                                   55.0%#################################################                         68.7%#############################################################             85.5%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/minikube/manifests/1.20.0_1[0m
+#=#=#                                                                         #####################################                                     52.1%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/minikube/blobs/sha256:2e42dc4ea7cdf2f4182738578c63870df81e12c6a90ebca87617ed6f2149c8b9[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:2e42dc4ea7cdf2f4182738578c63870df81e12c6a90ebca87617ed6f2149c8b9?se=2021-05-15T20%3A25%3A00Z&sig=JglHpnB5VvBlMK%2B3jVBvY7wGBU9Pq9DURbbVVo2Ww%2Bs%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#=#=#                                                                                                                                                    0.1%                                                                           0.1%                                                                           0.3%                                                                           0.4%                                                                           0.7%                                                                           1.2%##                                                                         3.2%##                                                                         3.5%##                                                                         3.7%###                                                                        4.3%####                                                                       5.9%####                                                                       6.9%#####                                                                      7.9%#######                                                                   10.2%########                                                                  11.5%##########                                                                15.1%############                                                              17.2%############                                                              17.8%#############                                                             18.7%###############                                                           20.9%################                                                          22.2%################                                                          23.3%#################                                                         24.4%##################                                                        25.6%####################                                                      28.5%#######################                                                   33.2%##########################                                                36.2%##########################                                                36.2%###########################                                               37.8%############################                                              39.5%#############################                                             41.3%################################                                          44.8%##################################                                        47.2%##################################                                        48.3%#####################################                                     51.9%########################################                                  55.8%##########################################                                59.7%############################################                              62.4%#################################################                         69.3%#######################################################                   76.5%#############################################################             85.6%####################################################################      95.7%######################################################################## 100.0%
+[32m==>[0m [1mInstalling dependencies for minikube: [32mkubernetes-cli[39m[0m
+[32m==>[0m [1mInstalling minikube dependency: [32mkubernetes-cli[39m[0m
+[34m==>[0m [1mPouring kubernetes-cli--1.21.0.catalina.bottle.tar.gz[0m
+[31mError:[0m The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+Could not symlink bin/kubectl
+Target /usr/local/bin/kubectl
+already exists. You may want to remove it:
+  rm '/usr/local/bin/kubectl'
+
+To force the link and overwrite all conflicting files:
+  brew link --overwrite kubernetes-cli
+
+To list all files that would be deleted:
+  brew link --overwrite --dry-run kubernetes-cli
+
+Possible conflicting files are:
+/usr/local/bin/kubectl -> /Applications/Docker.app/Contents/Resources/bin/kubectl
+[34m==>[0m [1mCaveats[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/kubernetes-cli/1.21.0: 229 files, 57MB
+[32m==>[0m [1mInstalling [32mminikube[39m[0m
+[34m==>[0m [1mPouring minikube--1.20.0_1.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/minikube/1.20.0_1: 9 files, 63.6MB
+Removing: /usr/local/Cellar/minikube/1.18.1... (8 files, 59.4MB)
+[32m==>[0m [1mUpgrading [32munibilium[39m 2.1.0 -> 2.1.1 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/unibilium/manifests/2.1.1[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/unibilium/blobs/sha256:06ca0a9cc4c001e5136b14b210c7a37ff7ecb85e2f1c348a3655b325094ac697[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:06ca0a9cc4c001e5136b14b210c7a37ff7ecb85e2f1c348a3655b325094ac697?se=2021-05-15T20%3A25%3A00Z&sig=IA7zcaBufnHouQVuF7jS7RFb6%2BXg2BXqg7zlHtmUYiA%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#=#=#                                                                         ##O#- #                                                                       ##O=#  #                                                                      #####################################################################     96.3%######################################################################## 100.0%
+[34m==>[0m [1mPouring unibilium--2.1.1.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/unibilium/2.1.1: 63 files, 279.3KB
+Removing: /usr/local/Cellar/unibilium/2.1.0... (63 files, 279KB)
+[32m==>[0m [1mUpgrading [32mheroku/brew/heroku[39m 7.51.0 -> 7.53.1 [0m
+[34m==>[0m [1mDownloading https://cli-assets.heroku.com/heroku-v7.53.1/heroku-v7.53.1.tar.xz[0m
+                                                                           0.2%#                                                                          2.2%##                                                                         3.5%#####                                                                      7.6%#########                                                                 13.2%##############                                                            20.4%####################                                                      28.2%##########################                                                37.1%##################################                                        47.9%###########################################                               60.1%#####################################################                     74.4%#################################################################         90.4%######################################################################## 100.0%
+[33mWarning:[0m A newer Command Line Tools release is available.
+Update them from Software Update in System Preferences or run:
+  softwareupdate --all --install --force
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  [4mhttps://developer.apple.com/download/more/[24m.
+
+[34m==>[0m [1mCaveats[0m
+To use the Heroku CLI's autocomplete --
+  Via homebrew's shell completion:
+    1) Follow homebrew's install instructions https://docs.brew.sh/Shell-Completion
+        NOTE: For zsh, as the instructions mention, be sure compinit is autoloaded
+              and called, either explicitly or via a framework like oh-my-zsh.
+    2) Then run
+      $ heroku autocomplete --refresh-cache
+  OR
+  Use our standalone setup:
+    1) Run and follow the install steps:
+      $ heroku autocomplete
+
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/heroku/7.53.1: 28,788 files, 63.0MB, built in 48 seconds
+Removing: /usr/local/Cellar/heroku/7.51.0... (28,544 files, 62.4MB)
+[32m==>[0m [1mUpgrading [32mcmake[39m 3.19.6 -> 3.20.2 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/cmake/manifests/3.20.2[0m
+#=#=#                                                                         ##O#- #                                                                       ###############################                                           43.7%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/cmake/blobs/sha256:abf670453c8e7394215bbad68cf11e1bae8e598a86cc7886f4d3a9f48e9ef87a[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:abf670453c8e7394215bbad68cf11e1bae8e598a86cc7886f4d3a9f48e9ef87a?se=2021-05-15T20%3A25%3A00Z&sig=ykzfi5a2FOXbbhzeyMVpC5sWVest9MX07Phm%2FONoJXc%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+                                                                           0.4%###                                                                        4.4%######                                                                     9.4%##########                                                                15.1%##############                                                            20.0%#################                                                         24.8%#####################                                                     30.2%##########################                                                36.6%##############################                                            42.8%##################################                                        48.0%#######################################                                   54.7%############################################                              61.7%#################################################                         69.0%#####################################################                     74.9%##########################################################                81.4%################################################################          89.6%######################################################################    98.1%######################################################################## 100.0%
+[34m==>[0m [1mPouring cmake--3.20.2.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+Emacs Lisp files have been installed to:
+  /usr/local/share/emacs/site-lisp/cmake
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/cmake/3.20.2: 6,468 files, 69.6MB
+Removing: /usr/local/Cellar/cmake/3.19.6... (6,376 files, 64.0MB)
+[32m==>[0m [1mUpgrading [32mluarocks[39m 3.5.0 -> 3.7.0 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/lua/manifests/5.4.3-1[0m
+#=#=#                                                                         ################                                                          22.6%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/lua/blobs/sha256:e79726810bfb57b4803ddba7f83a6e1b231724a3d19d8bfc63ba6a003f2fe886[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:e79726810bfb57b4803ddba7f83a6e1b231724a3d19d8bfc63ba6a003f2fe886?se=2021-05-15T20%3A25%3A00Z&sig=HylY9KdL1QCA51kSB6oQSobL57X9l5u4USLR%2FLknZwY%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/luarocks/manifests/3.7.0[0m
+#=#=#                                                                         ############                                                              17.9%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/luarocks/blobs/sha256:b7d91bbc4ec33e19953bc1ed4127557c530b66c0e0ff7eec1a188268b486b594[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:b7d91bbc4ec33e19953bc1ed4127557c530b66c0e0ff7eec1a188268b486b594?se=2021-05-15T20%3A25%3A00Z&sig=KHMHH8lF7tUFJmOq4W8e7lhVuVsEjl5mprJzZ3XD6z8%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+######################################################################## 100.0%
+[32m==>[0m [1mInstalling dependencies for luarocks: [32mlua[39m[0m
+[32m==>[0m [1mInstalling luarocks dependency: [32mlua[39m[0m
+[34m==>[0m [1mPouring lua--5.4.3.catalina.bottle.1.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+You may also want luarocks:
+  brew install luarocks
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/lua/5.4.3: 29 files, 743.7KB
+[32m==>[0m [1mInstalling [32mluarocks[39m[0m
+[34m==>[0m [1mPouring luarocks--3.7.0.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+LuaRocks supports multiple versions of Lua. By default it is configured
+to use Lua5.4, but you can require it to use another version at runtime
+with the `--lua-dir` flag, like this:
+
+  luarocks --lua-dir=/usr/local/opt/lua@5.1 install say
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/luarocks/3.7.0: 105 files, 715KB
+Removing: /usr/local/Cellar/luarocks/3.5.0... (104 files, 707.3KB)
+[32m==>[0m [1mUpgrading [32mruby-build[39m 20210309 -> 20210510 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/ruby-build/manifests/20210510[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/ruby-build/blobs/sha256:92c2ec2f10038f644c8d8c0adcc123170d384f72951570724f0b2cd2c380164c[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:92c2ec2f10038f644c8d8c0adcc123170d384f72951570724f0b2cd2c380164c?se=2021-05-15T20%3A25%3A00Z&sig=ZNHLonXijd7T8wfPxYGzCa9GC3WEqDLh28adQQqJi9o%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+######################################################################## 100.0%
+[34m==>[0m [1mPouring ruby-build--20210510.all.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+ruby-build installs a non-Homebrew OpenSSL for each Ruby version installed and these are never upgraded.
+
+To link Rubies to Homebrew's OpenSSL 1.1 (which is upgraded) add the following
+to your ~/.zshrc:
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+Note: this may interfere with building old versions of Ruby (e.g <2.4) that use
+OpenSSL <1.1.
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/ruby-build/20210510: 530 files, 264.4KB
+Removing: /usr/local/Cellar/ruby-build/20210309... (522 files, 260.4KB)
+[32m==>[0m [1mUpgrading [32mlua[39m 5.4.3 -> 5.4.3 [0m
+Removing: /usr/local/Cellar/lua/5.4.2... (28 files, 403.8KB)
+[32m==>[0m [1mUpgrading [32mgolangci/tap/golangci-lint[39m 1.39.0 -> 1.40.1 [0m
+[34m==>[0m [1mDownloading https://github.com/golangci/golangci-lint/releases/download/v1.40.1/golangci-lint-1.40.1-darwin-amd64.tar.gz[0m
+[34m==>[0m [1mDownloading from https://github-releases.githubusercontent.com/132145189/f318a380-b4c4-11eb-9ccf-acbd0374cc62?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20210515%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210515T201858Z&X-Amz-Expires=300&X-Amz-Signature=0817e2adc3b59a56f87b29bf64[0m
+#####                                                                      7.8%###################                                                       26.6%####################################                                      51.2%##########################################################                81.9%######################################################################## 100.0%
+[34m==>[0m [1mCaveats[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/golangci-lint/1.40.1: 8 files, 25.6MB, built in 5 seconds
+Removing: /usr/local/Cellar/golangci-lint/1.39.0... (8 files, 22.4MB)
+Removing: /Users/teakopp/Library/Caches/Homebrew/golangci-lint--1.39.0.tar.gz... (8MB)
+[32m==>[0m [1mUpgrading [32mkhanhas/tap/spicetify-cli[39m 1.2.1 -> 2.1.0 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/go/manifests/1.16.3[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/go/blobs/sha256:69c28f5e60612801c66e51e93d32068f822b245ab83246cb6cb374572eb59e15[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:69c28f5e60612801c66e51e93d32068f822b245ab83246cb6cb374572eb59e15?se=2021-05-15T20%3A25%3A00Z&sig=Ji8Hz%2F4a0CijBoIQDebrcbKACcBZ7%2BcvJyo29%2BLz88Y%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+                                                                           0.3%                                                                           1.0%#                                                                          2.1%##                                                                         3.4%###                                                                        5.3%#####                                                                      7.3%######                                                                     9.5%########                                                                  11.8%#########                                                                 13.4%#########                                                                 13.8%##########                                                                13.9%##########                                                                14.6%###########                                                               15.7%############                                                              17.7%#############                                                             18.6%##############                                                            20.0%##############                                                            20.6%###############                                                           22.2%#################                                                         24.8%###################                                                       27.6%#####################                                                     30.4%#######################                                                   32.3%########################                                                  34.4%##########################                                                37.1%############################                                              39.7%##############################                                            42.2%################################                                          44.7%#################################                                         47.2%###################################                                       49.6%#####################################                                     52.0%#######################################                                   54.6%#########################################                                 57.3%###########################################                               60.2%#############################################                             62.6%###############################################                           65.3%################################################                          68.0%##################################################                        70.4%####################################################                      72.6%#####################################################                     74.5%#######################################################                   77.1%#########################################################                 79.8%###########################################################               82.1%#############################################################             84.9%##############################################################            87.5%#################################################################         90.4%##################################################################        92.8%####################################################################      95.4%######################################################################    98.2%#######################################################################   98.9%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://github.com/khanhas/spicetify-cli/archive/v2.1.0.tar.gz[0m
+[34m==>[0m [1mDownloading from https://codeload.github.com/khanhas/spicetify-cli/tar.gz/v2.1.0[0m
+#=#=#                                                                         ##O#- #                                                                       ##=O#- #                                                                      
+[33mWarning:[0m A newer Command Line Tools release is available.
+Update them from Software Update in System Preferences or run:
+  softwareupdate --all --install --force
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  [4mhttps://developer.apple.com/download/more/[24m.
+
+[32m==>[0m [1mInstalling dependencies for khanhas/tap/spicetify-cli: [32mgo[39m[0m
+[32m==>[0m [1mInstalling khanhas/tap/spicetify-cli dependency: [32mgo[39m[0m
+[34m==>[0m [1mPouring go--1.16.3.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/go/1.16.3: 9,955 files, 503.5MB
+[32m==>[0m [1mInstalling [32mkhanhas/tap/spicetify-cli[39m[0m
+[34m==>[0m [1mgo build -o spicetify[0m
+🍺  /usr/local/Cellar/spicetify-cli/2.1.0: 25 files, 9.9MB, built in 11 seconds
+Removing: /usr/local/Cellar/spicetify-cli/1.2.1... (25 files, 9.9MB)
+Removing: /Users/teakopp/Library/Caches/Homebrew/spicetify-cli--1.2.1.tar.gz... (617.5KB)
+[32m==>[0m [1mUpgrading [32mkubernetes-cli[39m 1.21.0 -> 1.21.0 [0m
+Removing: /usr/local/Cellar/kubernetes-cli/1.20.4... (246 files, 46.2MB)
+[32m==>[0m [1mUpgrading [32mnode[39m 15.11.0 -> 16.1.0 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/brotli/manifests/1.0.9[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/brotli/blobs/sha256:a382d95787cc2a5742a1d713f939bbc91ca6e097aee7f49f95cc111dca9fa9d7[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:a382d95787cc2a5742a1d713f939bbc91ca6e097aee7f49f95cc111dca9fa9d7?se=2021-05-15T20%3A25%3A00Z&sig=EqjtKdmGfhVorNNFjpgmMUbQynKjvyIWKpPE8NII6MI%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+########################                                                  33.5%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/c-ares/manifests/1.17.1[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/c-ares/blobs/sha256:3fc1e6a9c560039998b288db7dfb268c87db614841a6fa1048880b8b6bdd6e4c[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:3fc1e6a9c560039998b288db7dfb268c87db614841a6fa1048880b8b6bdd6e4c?se=2021-05-15T20%3A25%3A00Z&sig=VAAZ9pr%2FWiWk%2BgXxb739FnYNruyIoZYYPflyz25SSUc%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#=#=#                                                                         ##O#- #                                                                       #################                                                         24.7%##########################################                                58.4%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/jemalloc/manifests/5.2.1_1[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/jemalloc/blobs/sha256:b1b211e5bead798c236d478dd74310a97a7b59470f607b608c07222648b08bf5[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:b1b211e5bead798c236d478dd74310a97a7b59470f607b608c07222648b08bf5?se=2021-05-15T20%3A25%3A00Z&sig=XQn5f7wNLrgFzy%2FMN6m%2BpXVGOTqkR%2FxS%2FtHqlUOHmVI%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+###############################################                           65.8%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/libev/manifests/4.33[0m
+#=#=#                                                                         ##O#- #                                                                       ###############                                                           21.6%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/libev/blobs/sha256:e5481e2ba48282bffb5ecc059f0ddddd9807400593e849ed4b48b1fed3a14698[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:e5481e2ba48282bffb5ecc059f0ddddd9807400593e849ed4b48b1fed3a14698?se=2021-05-15T20%3A25%3A00Z&sig=%2FGYX9JFtcxZaV7A8m9FRWii7AdwXtbVC7%2BuWxPWKG7g%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/nghttp2/manifests/1.43.0[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/nghttp2/blobs/sha256:5db5819e321f04b2301165cc267913ceacb161faa0504f4e067e074a101871b8[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:5db5819e321f04b2301165cc267913ceacb161faa0504f4e067e074a101871b8?se=2021-05-15T20%3A30%3A00Z&sig=kNQTuUuobFA%2FtbZxnDOHN7gb7%2BYLYH1363ilIZblHa0%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+###############################                                           44.2%##############################################################            87.3%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/node/manifests/16.1.0[0m
+#=#=#                                                                         ##O#- #                                                                       ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/node/blobs/sha256:e38a85b22cedbab34810ab88675cbb348285b9c078ddd5582c8e865cd4371f76[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:e38a85b22cedbab34810ab88675cbb348285b9c078ddd5582c8e865cd4371f76?se=2021-05-15T20%3A30%3A00Z&sig=yaWG759g25OzSN258AqYdHPFZZc25VfVWcPRgIuQP1M%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+##                                                                         4.0%##########                                                                14.3%####################                                                      28.9%################################                                          45.5%########################################                                  56.5%#####################################################                     74.1%#######################################################################   99.1%######################################################################## 100.0%
+[32m==>[0m [1mInstalling dependencies for node: [32mbrotli[39m, [32mc-ares[39m, [32mjemalloc[39m, [32mlibev[39m and [32mnghttp2[39m[0m
+[32m==>[0m [1mInstalling node dependency: [32mbrotli[39m[0m
+[34m==>[0m [1mPouring brotli--1.0.9.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/brotli/1.0.9: 25 files, 2.3MB
+[32m==>[0m [1mInstalling node dependency: [32mc-ares[39m[0m
+[34m==>[0m [1mPouring c-ares--1.17.1.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/c-ares/1.17.1: 85 files, 672.5KB
+[32m==>[0m [1mInstalling node dependency: [32mjemalloc[39m[0m
+[34m==>[0m [1mPouring jemalloc--5.2.1_1.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/jemalloc/5.2.1_1: 16 files, 2MB
+[32m==>[0m [1mInstalling node dependency: [32mlibev[39m[0m
+[34m==>[0m [1mPouring libev--4.33.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/libev/4.33: 12 files, 454.9KB
+[32m==>[0m [1mInstalling node dependency: [32mnghttp2[39m[0m
+[34m==>[0m [1mPouring nghttp2--1.43.0.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/nghttp2/1.43.0: 24 files, 2.8MB
+[32m==>[0m [1mInstalling [32mnode[39m[0m
+[34m==>[0m [1mPouring node--16.1.0.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/node/16.1.0: 2,778 files, 48.9MB
+Removing: /usr/local/Cellar/node/15.11.0... (3,298 files, 56.5MB)
+[32m==>[0m [1mUpgrading [32mluv[39m 1.36.0-0 -> 1.41.0-0 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/luv/manifests/1.41.0-0[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/luv/blobs/sha256:b3c644231c6c5d55f82770cf8d0db7649347ec28dc430f6e983f17b9c19febc9[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:b3c644231c6c5d55f82770cf8d0db7649347ec28dc430f6e983f17b9c19febc9?se=2021-05-15T20%3A30%3A00Z&sig=qS%2Bvhyte2NzGq2CAVkQWPj0XoN%2FGPncpAeEltIYbzbE%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#####################################################                     74.7%######################################################################## 100.0%
+[34m==>[0m [1mPouring luv--1.41.0-0.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/luv/1.41.0-0: 14 files, 525KB
+Removing: /usr/local/Cellar/luv/1.36.0-0... (10 files, 346.8KB)
+[32m==>[0m [1mUpgrading [32mfzf[39m 0.25.1 -> 0.27.0 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/fzf/manifests/0.27.0[0m
+#=#=#                                                                         ##O#- #                                                                       ##O=#  #                                                                      ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/fzf/blobs/sha256:6a204ecb17beb7375a73569dba8c6ea1a097fa16a42b38a8fa456d205d107e7b[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:6a204ecb17beb7375a73569dba8c6ea1a097fa16a42b38a8fa456d205d107e7b?se=2021-05-15T20%3A30%3A00Z&sig=cYHbGEMmFxs2uG3aJh0Coba5DJk2u2FuMLMZNiHDBuY%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#=#=#                                                                         ##O#- #                                                                       #################################################                         68.1%######################################################################## 100.0%
+[34m==>[0m [1mPouring fzf--0.27.0.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+To install useful keybindings and fuzzy completion:
+  /usr/local/opt/fzf/install
+
+To use fzf in Vim, add the following line to your .vimrc:
+  set rtp+=/usr/local/opt/fzf
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/fzf/0.27.0: 17 files, 2.8MB
+Removing: /usr/local/Cellar/fzf/0.25.1... (17 files, 2.8MB)
+[32m==>[0m [1mUpgrading [32mpostgresql[39m 13.2_1 -> 13.3 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/postgresql/manifests/13.3[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/postgresql/blobs/sha256:74e946503c73cd0efc55ad4b373efbd8f4fb8a9e26a670b878c6db25794aea4a[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:74e946503c73cd0efc55ad4b373efbd8f4fb8a9e26a670b878c6db25794aea4a?se=2021-05-15T20%3A30%3A00Z&sig=3IlZHmk26Bo%2BFGwgqaz2D%2BLBzE%2BUbSpBkqV%2FXXXVi3E%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+####                                                                       6.2%##############                                                            20.0%##########################                                                36.2%##########################################                                58.6%#############################################                             62.9%################################################                          67.7%################################################################          90.1%######################################################################## 100.0%
+[34m==>[0m [1mPouring postgresql--13.3.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+To migrate existing data from a previous major version of PostgreSQL run:
+  brew postgresql-upgrade-database
+
+This formula has created a default database cluster with:
+  initdb --locale=C -E UTF-8 /usr/local/var/postgres
+For more details, read:
+  https://www.postgresql.org/docs/13/app-initdb.html
+
+To have launchd start postgresql now and restart at login:
+  brew services start postgresql
+Or, if you don't want/need a background service you can just run:
+  pg_ctl -D /usr/local/var/postgres start
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/postgresql/13.3: 3,225 files, 42.7MB
+Removing: /usr/local/Cellar/postgresql/13.2_1... (3,218 files, 42.6MB)
+Removing: /Users/teakopp/Library/Caches/Homebrew/postgresql--13.2_1.catalina.bottle.tar.gz... (11.1MB)
+[32m==>[0m [1mUpgrading [32mpython@3.9[39m 3.9.2_4 -> 3.9.5 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/python/3.9/manifests/3.9.5[0m
+#=#=#                                                                         ##O#- #                                                                       #############                                                             18.5%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/python/3.9/blobs/sha256:5d79eedf91642b87bd25e7b791b941ce9aad4735fecd1bc59c9c7faab50cbca6[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:5d79eedf91642b87bd25e7b791b941ce9aad4735fecd1bc59c9c7faab50cbca6?se=2021-05-15T20%3A30%3A00Z&sig=uiK9hBaQZz1OYKl2RpXq1HoKcacMqgMkgrsdpA9PFR0%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#=#=#                                                                         ##O#- #                                                                       ##                                                                         3.4%####                                                                       6.8%##########                                                                14.6%###################                                                       27.0%################################                                          45.7%################################################                          67.7%##################################################################        92.3%######################################################################## 100.0%
+[34m==>[0m [1mPouring python@3.9--3.9.5.catalina.bottle.tar.gz[0m
+[34m==>[0m [1m/usr/local/Cellar/python@3.9/3.9.5/bin/python3 -m ensurepip[0m
+[34m==>[0m [1m/usr/local/Cellar/python@3.9/3.9.5/bin/python3 -m pip install -v --no-deps --no-index --upgrade --isolated --target=/usr/local/lib/python3.9/site-packages /usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/ensurepip/_bundled/setuptools-56.0.0-py3-none-any.whl /usr/local/Ce[0m
+[34m==>[0m [1mCaveats[0m
+Python has been installed as
+  /usr/local/bin/python3
+
+Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to
+`python3`, `python3-config`, `pip3` etc., respectively, have been installed into
+  /usr/local/opt/python@3.9/libexec/bin
+
+You can install Python packages with
+  pip3 install <package>
+They will install into the site-package directory
+  /usr/local/lib/python3.9/site-packages
+
+tkinter is no longer included with this formula, but it is available separately:
+  brew install python-tk@3.9
+
+See: https://docs.brew.sh/Homebrew-and-Python
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/python@3.9/3.9.5: 3,076 files, 54.5MB
+Removing: /usr/local/Cellar/python@3.9/3.9.2_4... (3,126 files, 55.5MB)
+[32m==>[0m [1mUpgrading [32mtree-sitter[39m 0.19.3 -> 0.19.4 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/tree-sitter/manifests/0.19.4[0m
+#=#=#                                                                         ##O#- #                                                                       ################                                                          22.8%######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/tree-sitter/blobs/sha256:69de9d7d8b6fcfa238886dab08f18d96609d01e826fb2be05dc6ed90584f4863[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:69de9d7d8b6fcfa238886dab08f18d96609d01e826fb2be05dc6ed90584f4863?se=2021-05-15T20%3A30%3A00Z&sig=yqFD%2BkuraHaqLREuGiDVUMWT%2FGIIBEwFhadHeRzz6TY%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#######                                                                   10.4%#########################                                                 35.3%###################################################                       72.1%######################################################################## 100.0%
+[34m==>[0m [1mPouring tree-sitter--0.19.4.catalina.bottle.tar.gz[0m
+🍺  /usr/local/Cellar/tree-sitter/0.19.4: 18 files, 12.6MB
+Removing: /usr/local/Cellar/tree-sitter/0.19.3... (18 files, 12.6MB)
+[32m==>[0m [1mUpgrading [32mgo[39m 1.16.3 -> 1.16.3 [0m
+Removing: /usr/local/Cellar/go/1.16... (9,967 files, 503.5MB)
+[32m==>[0m [1mUpgrading [32mgh[39m 1.7.0 -> 1.9.2 [0m
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/gh/manifests/1.9.2[0m
+#=#=#                                                                         ######################################################################## 100.0%
+[34m==>[0m [1mDownloading https://ghcr.io/v2/homebrew/core/gh/blobs/sha256:0d6c1fbee481e0cde4edbaa38de0ba666636f44bbe07b5b780defc8c51f2a11a[0m
+[34m==>[0m [1mDownloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:0d6c1fbee481e0cde4edbaa38de0ba666636f44bbe07b5b780defc8c51f2a11a?se=2021-05-15T20%3A30%3A00Z&sig=kHhE1UFzaxOc1UzSOKzavNfKy3mqnO6DZZOQLdnL5Tk%3D&sp=r&spr=https&sr=b&sv=2019-12-12[0m
+#####                                                                      8.1%##################                                                        26.2%########################                                                  33.5%#########################################                                 57.5%###############################################################           88.1%######################################################################## 100.0%
+[34m==>[0m [1mPouring gh--1.9.2.catalina.bottle.tar.gz[0m
+[34m==>[0m [1mCaveats[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mSummary[0m
+🍺  /usr/local/Cellar/gh/1.9.2: 89 files, 28.5MB
+Removing: /usr/local/Cellar/gh/1.7.0... (75 files, 20.3MB)
+[32m==>[0m [1mCaveats[0m
+[34m==>[0m [1micu4c[0m
+icu4c is keg-only, which means it was not symlinked into /usr/local,
+because macOS provides libicucore.dylib (but nothing else).
+
+If you need to have icu4c first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/icu4c/bin:$PATH"' >> ~/.zshrc
+  echo 'export PATH="/usr/local/opt/icu4c/sbin:$PATH"' >> ~/.zshrc
+
+For compilers to find icu4c you may need to set:
+  export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+  export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+
+For pkg-config to find icu4c you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
+
+[34m==>[0m [1mluajit-openresty[0m
+luajit-openresty is keg-only, which means it was not symlinked into /usr/local,
+because it conflicts with the LuaJIT formula.
+
+If you need to have luajit-openresty first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/luajit-openresty/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find luajit-openresty you may need to set:
+  export LDFLAGS="-L/usr/local/opt/luajit-openresty/lib"
+  export CPPFLAGS="-I/usr/local/opt/luajit-openresty/include"
+
+For pkg-config to find luajit-openresty you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/luajit-openresty/lib/pkgconfig"
+
+[34m==>[0m [1mpostgresql@10[0m
+This formula has created a default database cluster with:
+  initdb --locale=C -E UTF-8 /usr/local/var/postgresql@10
+For more details, read:
+  https://www.postgresql.org/docs/10/app-initdb.html
+
+postgresql@10 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have postgresql@10 first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/postgresql@10/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find postgresql@10 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/postgresql@10/lib"
+  export CPPFLAGS="-I/usr/local/opt/postgresql@10/include"
+
+For pkg-config to find postgresql@10 you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/postgresql@10/lib/pkgconfig"
+
+
+To have launchd start postgresql@10 now and restart at login:
+  brew services start postgresql@10
+Or, if you don't want/need a background service you can just run:
+  pg_ctl -D /usr/local/var/postgresql@10 start
+[34m==>[0m [1msqlite[0m
+sqlite is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have sqlite first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/sqlite/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find sqlite you may need to set:
+  export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+  export CPPFLAGS="-I/usr/local/opt/sqlite/include"
+
+For pkg-config to find sqlite you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+
+[34m==>[0m [1mkubernetes-cli[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mminikube[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mheroku[0m
+To use the Heroku CLI's autocomplete --
+  Via homebrew's shell completion:
+    1) Follow homebrew's install instructions https://docs.brew.sh/Shell-Completion
+        NOTE: For zsh, as the instructions mention, be sure compinit is autoloaded
+              and called, either explicitly or via a framework like oh-my-zsh.
+    2) Then run
+      $ heroku autocomplete --refresh-cache
+  OR
+  Use our standalone setup:
+    1) Run and follow the install steps:
+      $ heroku autocomplete
+
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mcmake[0m
+Emacs Lisp files have been installed to:
+  /usr/local/share/emacs/site-lisp/cmake
+[34m==>[0m [1mlua[0m
+You may also want luarocks:
+  brew install luarocks
+[34m==>[0m [1mluarocks[0m
+LuaRocks supports multiple versions of Lua. By default it is configured
+to use Lua5.4, but you can require it to use another version at runtime
+with the `--lua-dir` flag, like this:
+
+  luarocks --lua-dir=/usr/local/opt/lua@5.1 install say
+[34m==>[0m [1mruby-build[0m
+ruby-build installs a non-Homebrew OpenSSL for each Ruby version installed and these are never upgraded.
+
+To link Rubies to Homebrew's OpenSSL 1.1 (which is upgraded) add the following
+to your ~/.zshrc:
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+Note: this may interfere with building old versions of Ruby (e.g <2.4) that use
+OpenSSL <1.1.
+[34m==>[0m [1mgolangci-lint[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[34m==>[0m [1mfzf[0m
+To install useful keybindings and fuzzy completion:
+  /usr/local/opt/fzf/install
+
+To use fzf in Vim, add the following line to your .vimrc:
+  set rtp+=/usr/local/opt/fzf
+[34m==>[0m [1mpostgresql[0m
+To migrate existing data from a previous major version of PostgreSQL run:
+  brew postgresql-upgrade-database
+
+This formula has created a default database cluster with:
+  initdb --locale=C -E UTF-8 /usr/local/var/postgres
+For more details, read:
+  https://www.postgresql.org/docs/13/app-initdb.html
+
+To have launchd start postgresql now and restart at login:
+  brew services start postgresql
+Or, if you don't want/need a background service you can just run:
+  pg_ctl -D /usr/local/var/postgres start
+[34m==>[0m [1mpython@3.9[0m
+Python has been installed as
+  /usr/local/bin/python3
+
+Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to
+`python3`, `python3-config`, `pip3` etc., respectively, have been installed into
+  /usr/local/opt/python@3.9/libexec/bin
+
+You can install Python packages with
+  pip3 install <package>
+They will install into the site-package directory
+  /usr/local/lib/python3.9/site-packages
+
+tkinter is no longer included with this formula, but it is available separately:
+  brew install python-tk@3.9
+
+See: https://docs.brew.sh/Homebrew-and-Python
+[34m==>[0m [1mgh[0m
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;92;87m❯[0m[38;2;255;92;87m[49m[38;2;255;92;87m[0m[38;2;255;92;87m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[266C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[284D[?1h=[?2004h./script/bootstrap[18Dscript            [12D
+[J[0mSCRIPT  [Jscript[J[A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript[K[260C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[278DSCRIPT[1m=[0m
+[J[7mSCRIPT[0m  [Jscript[J[A[0m[27m[24m[0m[27m[24m[39m[49m[31CSCRIPT[1m=[0m[K[259C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[277D
+[7mSCRIPT[0m  [7mSCRIPT[0m  [A[0m[27m[24m[0m[27m[24m[39m[49m[31CSCRIPT[1m=[0m[K[259C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[277Dscript[0m 
+[8C[7mscript[0mSCRIPT  [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript[K[260C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[278D
+[J[A[37C[1m [0m[0m 
+[J[J[0mBrewfile           [JLICENSE            [JREADME.md          [Jknexfile.js        [Jpackage-lock.json  [Jpackage.json       [J[1;31mscript[0m/            [J[1;31mserver[0m/            [Jtypescript       [J[A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript[K[260C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[277DBrewfile
+[J[7mBrewfile         [0m  [JLICENSE            [JREADME.md          [Jknexfile.js        [Jpackage-lock.json  [Jpackage.json       [J[1;31mscript[0m/            [J[1;31mserver[0m/            [Jtypescript       [J[A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript Brewfile[K[251C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[269D
+[7mBrewfile         [0m  [7mBrewfile         [0m  [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript Brewfile[K[251C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[269D[8DLICENSE 
+[19C[7mLICENSE          [0m  Brewfile           [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript LICENSE[K[252C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[270DREADME.md
+[38C[7mREADME.md        [0m  [19CLICENSE            [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript README.md[K[250C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[268D[9Dknexfile.js
+[57C[7mknexfile.js      [0m  [38CREADME.md          [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript knexfile.js[K[248C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[266D[11Dpackage-lock.json
+[76C[7mpackage-lock.json[0m  [57Cknexfile.js        [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript package-lock.json[K[242C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[260D[10D.json     
+[95C[7mpackage.json     [0m  [76Cpackage-lock.json  [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript package.json[K[247C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[265D[12Dscript[1m/[0m     
+[114C[7mscript/          [0m  [95Cpackage.json       [A[0m[27m[24m[0m[27m[24m[39m[49m[31Cscript script[1m/[0m[K[252C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[270D
+[J[A[45C[0m           s  sscs  ../s
+[J[J[1;31mscript[0m/  [J[1;31mserver[0m/[J[A[0m[27m[24m[0m[27m[24m[39m[49m[31C./s[K[263C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[281Dcript[1m/[0m
+[J[7mscript/[0m  [J[1;31mserver[0m/[J[A[0m[27m[24m[0m[27m[24m[39m[49m[31C./script[1m/[0m[K[257C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[275D
+[7mscript/[0m  [7mscript/[0m  [A[0m[27m[24m[0m[27m[24m[39m[49m[31C./script[1m/[0m[K[257C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[275D
+[J[A[40C[0m/bootstrap[1m [0m[0m 
+[J[J[0mBrewfile           [JLICENSE            [JREADME.md          [Jknexfile.js        [Jpackage-lock.json  [Jpackage.json       [J[1;31mscript[0m/            [J[1;31mserver[0m/            [Jtypescript       [J[A[0m[27m[24m[0m[27m[24m[39m[49m[31C./script/bootstrap[K[248C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[265D          [1C[1m/[0m[0m/bootstrap[1m [0m[0m 
+[J[J[0mBrewfile           [JLICENSE            [JREADME.md          [Jknexfile.js        [Jpackage-lock.json  [Jpackage.json       [J[1;31mscript[0m/            [J[1;31mserver[0m/            [Jtypescript       [J[A[0m[27m[24m[0m[27m[24m[39m[49m[31C./script/bootstrap[K[248C[0m[49m[38;2;243;249;157m5m 30s[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;2;243;249;157m[0m[38;2;243;249;157m[49m[38;5;242m 01:21:32 PM[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[39m[0m[27m[24m[39m[49m[265D                .  lls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;92;87m❯[0m[38;2;255;92;87m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:22:03 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004hls./script/bootstrap                .  lldl  s lls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:22:52 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004hccd script[1m/[0m[0m [?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m cd script[K[?12l[?25h
+]2;cd script]1;cd[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end/script]1;..ck-end/script[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end/script[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[266C[0m[49m[38;5;242m01:22:59 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[277D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end/script[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[266C[0m[49m[38;5;242m01:22:59 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[277D[?12l[?25hlls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;ls[31mbootstrap[39;49m[0m    create-db.js drop-db.js
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end/script]1;..ck-end/script[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end/script[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[266C[0m[49m[38;5;242m01:23:00 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[277D[?1h=[?2004hnnode create-db.js[1m [0m[0m [?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m node create-db.js[K[?12l[?25h
+]2;node create-db.js]1;nodenode:internal/modules/cjs/loader:944
+  throw err;
+  ^
+
+Error: Cannot find module 'knex'
+Require stack:
+- /Users/teakopp/dev/amplify-back-end/server/db/index.js
+- /Users/teakopp/dev/amplify-back-end/script/create-db.js
+[90m    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:941:15)[39m
+[90m    at Function.Module._load (node:internal/modules/cjs/loader:774:27)[39m
+[90m    at Module.require (node:internal/modules/cjs/loader:1013:19)[39m
+[90m    at require (node:internal/modules/cjs/helpers:93:18)[39m
+    at Object.<anonymous> (/Users/teakopp/dev/amplify-back-end/server/db/index.js:1:14)
+[90m    at Module._compile (node:internal/modules/cjs/loader:1109:14)[39m
+[90m    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)[39m
+[90m    at Module.load (node:internal/modules/cjs/loader:989:32)[39m
+[90m    at Function.Module._load (node:internal/modules/cjs/loader:829:14)[39m
+[90m    at Module.require (node:internal/modules/cjs/loader:1013:19)[39m {
+  code: [32m'MODULE_NOT_FOUND'[39m,
+  requireStack: [
+    [32m'/Users/teakopp/dev/amplify-back-end/server/db/index.js'[39m,
+    [32m'/Users/teakopp/dev/amplify-back-end/script/create-db.js'[39m
+  ]
+}
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end/script]1;..ck-end/script[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end/script[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;92;87m❯[0m[38;2;255;92;87m[49m[38;2;255;92;87m[0m[38;2;255;92;87m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[266C[0m[49m[38;5;242m01:23:09 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[277D[?1h=[?2004hnnpm i [7mknex[27m[27mk[27mn[27me[27m      n  nnpm n  n ccd ..[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;92;87m❯[0m[38;2;255;92;87m[49m[39m[27m[24m cd ..[K[?12l[?25h
+]2;cd ..]1;cd[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:26 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:26 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hlls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:28 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004hc nnpm i knex[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m npm i knex[K[?12l[?25h
+]2;npm i knex]1;npm[?25l⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠇ reify: [32;40mtiming[0m [35marborist:ctor[0m Completed in 0ms[0m[K⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠹ idealTree:amplify-back-end: [7msill[0m [35midealTree[0m buildDeps[0m[K⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠹ idealTree:amplify-back-end: [7msill[0m [35midealTree[0m buildDeps[0m[K⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠹ idealTree:amplify-back-end: [7msill[0m [35midealTree[0m buildDeps[0m[K⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠹ idealTree:amplify-back-end: [7msill[0m [35midealTree[0m buildDeps[0m[K⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠹ idealTree:amplify-back-end: [7msill[0m [35midealTree[0m buildDeps[0m[K⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠹ idealTree:amplify-back-end: [7msill[0m [35midealTree[0m buildDeps[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 727ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 727ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠴ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠴ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠴ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠸ reify:@babel/code-frame: [32;40mtiming[0m [35mreify:loadBundles[0m Completed in 0ms[0m[K⸨[7m          [27m[90m░░░░░░░░[0m⸩ ⠋ reify:anymatch: [32;40mtiming[0m [35mreifyNode:node_modules/sane/node_modules/braces/node_modules/extend-shallow[0m Completed in 1883ms[0m[K⸨[7m           [27m[90m░░░░░░░[0m⸩ ⠇ reify:fill-range: [32;40mtiming[0m [35mreifyNode:node_modules/semver-diff[0m Completed in 1936ms[0m[K⸨[7m             [27m[90m░░░░░[0m⸩ ⠸ reify:signal-exit: [32;40mtiming[0m [35mreifyNode:node_modules/snapdragon-node[0m Completed in 1989ms[0m[K⸨[7m               [27m[90m░░░[0m⸩ ⠙ reify:execa: [32;40mtiming[0m [35mreifyNode:node_modules/statuses[0m Completed in 2057ms[0m[K⸨[7m                [27m[90m░░[0m⸩ ⠦ reify:source-map-resolve: [32;40mtiming[0m [35mreifyNode:node_modules/string-width/node_modules/emoji-regex[0m Completed in 2112ms[0m[K⸨[7m                [27m[90m░░[0m⸩ ⠦ reify:micromatch: [32;40mtiming[0m [35mreifyNode:node_modules/sane[0m Completed in 2162ms[0m[K⸨[7m                 [27m[90m░[0m⸩ ⠹ reify:json-schema-traverse: [32;40mtiming[0m [35mreifyNode:node_modules/tr46[0m Completed in 2215ms[0m[K⸨[7m                 [27m[90m░[0m⸩ ⠇ reify:tweetnacl: [32;40mtiming[0m [35mreifyNode:node_modules/regexpp[0m Completed in 2263ms[0m[K⸨[7m                 [27m[90m░[0m⸩ ⠴ reify:xmlchars: [32;40mtiming[0m [35mreifyNode:node_modules/cssstyle/node_modules/cssom[0m Completed in 2301ms[0m[K⸨[7m                 [27m[90m░[0m⸩ ⠦ reify:json5: [32;40mhttp[0m [35mfetch[0m GET 200 https://registry.npmjs.org/tarn/-/tarn-3.0.1.tgz 2034ms[0m[K⸨[7m                 [27m[90m░[0m⸩ ⠴ reify:jest-config: [32;40mtiming[0m [35mreifyNode:node_modules/esm[0m Completed in 2390ms[0m[K⸨[7m                  [27m⸩ ⠙ reify:type-fest: [32;40mtiming[0m [35mreifyNode:node_modules/pg-pool[0m Completed in 2459ms[0m[K⸨[7m                  [27m⸩ ⠹ reify:jest-jasmine2: [32;40mtiming[0m [35mreifyNode:node_modules/@babel/traverse[0m Completed in 2497ms[0m[K⸨[7m                  [27m⸩ ⠦ reify:@jest/core: [32;40mtiming[0m [35mreifyNode:node_modules/@babel/parser[0m Completed in 2548ms[0m[K⸨[7m                  [27m⸩ ⠸ reify:resolve: [32;40mtiming[0m [35mreifyNode:node_modules/ajv[0m Completed in 2589ms[0m[K⸨[7m                  [27m⸩ ⠼ reify:@babel/types: [32;40mtiming[0m [35mreifyNode:node_modules/resolve[0m Completed in 2612ms[0m[K⸨[7m                  [27m⸩ ⠧ reify:node-notifier: [32;40mtiming[0m [35mreifyNode:node_modules/knex[0m Completed in 2705ms[0m[K⸨[7m                  [27m⸩ ⠧ reify:node-notifier: [32;40mtiming[0m [35mreifyNode:node_modules/knex[0m Completed in 2705ms[0m[K⸨[7m                  [27m⸩ ⠋ reify:jsdom: [32;40mtiming[0m [35mreifyNode:node_modules/eslint[0m Completed in 2779ms[0m[K⸨[7m                  [27m⸩ ⠴ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠴ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠙ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠙ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠙ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠇ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠇ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠇ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K⸨[7m                  [27m⸩ ⠇ reify:prettier: [32;40mtiming[0m [35mreifyNode:node_modules/lodash[0m Completed in 2836ms[0m[K[K[?25h
+added 906 packages, and audited 907 packages in 4s
+
+found [32m[1m0[22m[39m vulnerabilities
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:38 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:38 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hlls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       [1m[36mnode_modules[39;49m[0m      package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:45 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:45 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hnnpm i [?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m npm i[K[1C[?12l[?25h
+]2;npm i]1;npm[?25l⸨[90m░░░░░░░░░░░░░░░░░░[0m⸩ ⠇ reify: [32;40mtiming[0m [35marborist:ctor[0m Completed in 0ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠴ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠏ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠋ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠋ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠋ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠋ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K⸨[7m         [27m[90m░░░░░░░░░[0m⸩ ⠋ idealTree: [32;40mtiming[0m [35midealTree[0m Completed in 359ms[0m[K[K[?25h
+up to date, audited 907 packages in 1s
+
+found [32m[1m0[22m[39m vulnerabilities
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:51 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004hlls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       [1m[36mnode_modules[39;49m[0m      package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:23:52 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004hlsnpm i ls   npm i knex      n  ../script[1m/[0m[0m/create-db.js[1m [0m[0m n./script/create-db.js[21Dno./script/create-db.js[21Dd./script/create-db.js[21De./script/create-db.js[21D ./script/create-db.js[21D[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m node ./script/create-db.js[K[21D[?12l[?25h
+]2;node ./script/create-db.js]1;nodeCreated database "pe_dev"!
+Migrated database "pe_dev" to latest schemas!
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:24:07 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:24:07 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hlls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       [1m[36mnode_modules[39;49m[0m      package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:51:31 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:51:31 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hlsnode ./script/create-db.js[26Dls                        [24Dnpm i   n  lls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       [1m[36mnode_modules[39;49m[0m      package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:52:14 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:52:14 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hlsnode ./script/create-db.js[26Dls                        [24Dnode ./script/create-db.js --env=development[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m node ./script/create-db.js --env=development[K[14D[?12l[?25h
+]2;node ./script/create-db.js --env=development]1;nodeError creating database "pe_dev": it already exists!
+Migrated database "pe_dev" to latest schemas!
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:52:31 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:52:31 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25hnode ./script/create-db.js --env=development                                        n  lls[?1l>[?25l
+[A[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[39m[27m[24m ls[K[?12l[?25h
+]2;ls -G]1;lsBrewfile          LICENSE           README.md         knexfile.js       [1m[36mnode_modules[39;49m[0m      package-lock.json package.json      [1m[36mscript[39;49m[0m            [1m[36mserver[39;49m[0m            typescript
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                                                                                                                                            ]2;teakopp@NorfNorf:~/dev/amplify-back-end]1;..lify-back-end[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:54:32 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?1h=[?2004h[?25l[0m[27m[24m[J[0m[38;5;242m[49m[39m[0m[49m[38;2;87;199;255m~/dev/amplify-back-end[0m[38;2;87;199;255m[49m[38;2;87;199;255m[0m[38;2;87;199;255m[49m [0m[38;2;87;199;255m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242mmain[0m[38;2;0;0;242m[49m[38;5;242m*[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m[38;5;242m[0m[38;2;0;0;242m[49m [0m[38;2;0;0;242m[49m[38;2;255;106;193m❯[0m[38;2;255;106;193m[49m[38;2;255;106;193m[0m[38;2;255;106;193m[49m[30m[0m[38;2;0;0;0m[49m[39m [0m[49m[39m[K[273C[0m[49m[38;5;242m01:54:32 PM[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[38;5;242m[0m[38;5;242m[49m[39m[284D[?12l[?25h

@@ -16,12 +16,14 @@ app.use(cors())
 
 const amplify = require('./routes/api/amplify')
 const campaigns = require('./routes/api/campaigns')
+const authentication = require('./routes/api/authentication')
 // const give = require('./routes/api/give');
 
 // const email = require('./routes/api/email')
 
 app.use('/api/amplify', amplify)
 app.use('/api/campaigns', campaigns)
+app.use('/api/authentication', authentication)
 // app.use('/api/give', give);
 // app.use('/api/library', library);
 // app.use('/api/email', email);

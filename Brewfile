@@ -1,2 +1,0 @@
-brew "node"
-brew "postgresql"
