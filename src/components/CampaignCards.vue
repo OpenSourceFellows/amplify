@@ -8,7 +8,7 @@
                     <v-card-title v-text="campaign.name"></v-card-title>
 
                     <v-card-subtitle
-                        v-text="campaign.name_of_org"
+                        v-text="campaign.organization"
                         style="text-align:left"
                     >
                     </v-card-subtitle>
