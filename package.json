@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "heroku-postbuild": "cd amplify-front-end && npm install && npm run build"
+    "build": "vue-cli-service build",
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
