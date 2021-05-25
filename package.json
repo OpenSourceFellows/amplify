@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "heroku-postbuild": "cd amplify-front-end && npm install && npm run build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
