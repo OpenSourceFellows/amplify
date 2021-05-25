@@ -1,4 +1,3 @@
-// PARENT
 <template lang="html">
     <section class="search-reps">
         <v-row>
@@ -36,12 +35,9 @@
                 </div>
             </v-col>
             <v-col cols="6">
-                <v-col v-text="repName"/>
-                <v-col>//LETTER DISPLAY CHILD HERE</v-col>
-                <letter-display
-                    :congressMembers="congressMembers"
-                ></letter-display
-            ></v-col>
+                <letter-display v-if="shouldRender"></letter-display>
+                <letter-load v-else :repName="repName"> </letter-load>
+            </v-col>
         </v-row>
     </section>
 </template>
@@ -49,13 +45,15 @@
 <script lang="js">
 import LetterDisplay from '@/components/LetterDisplay.vue';
 import RepresentativeCard from '@/components/RepresentativeCard.vue';
+import LetterLoad from '@/components/LetterLoad.vue';
 import axios from 'axios';
 
   export default  {
     name: 'SearchReps',
     components:{
         LetterDisplay,
-        RepresentativeCard
+        RepresentativeCard,
+        LetterLoad
     },
     props: [],
     mounted () {
@@ -63,15 +61,17 @@ import axios from 'axios';
     },
     data () {
       return {
-          repName: "",
+          repName: String,
           congressMembers:[],
           hasContent: false,
-          search: ""
+          search: "",
+          shouldRender:true
       }
     },
     methods: {
         handleRepClick (member) {
             this.repName = `Dear ${member.name}`
+            this.shouldRender = false
         },
         CheckInputContent: function () {
                 if (this.search != "") {

@@ -1,4 +1,3 @@
-// PARENT
 <template lang="html">
     <v-card v-on:click="handleRepClick(member)">
         <v-card-title v-text="member.name"></v-card-title>
@@ -25,7 +24,4 @@
 }
 </script>
 
-<style scoped lang="less">
-.search-reps {
-}
-</style>
+<style scoped lang="less"></style>

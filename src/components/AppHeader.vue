@@ -1,6 +1,6 @@
 <template>
     <header>
-        <img alt="Vue logo" src="../assets/logo.png" height="50" />
+        <img alt="Vue logo" src="../assets/logo.svg" height="50" />
         <p>Amplify</p>
         <nav>
             <ul>
