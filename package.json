@@ -17,8 +17,7 @@
     "db:migrate:dev": "knex migrate:latest --verbose --env development",
     "db:migrate:test": "knex migrate:latest --verbose --env test",
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
-    "db:seed": "knex seed:run",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "db:seed": "knex seed:run"
   },
   "author": "",
   "license": "MIT",
