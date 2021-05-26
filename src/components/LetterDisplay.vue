@@ -7,13 +7,13 @@
 
             <v-card-text>
                 <v-stepper complete vertical>
-                    <v-stepper-step step="1">
+                    <v-stepper-step color="blue" step="1">
                         Enter postal code
                     </v-stepper-step>
 
                     <v-stepper-content step="1"> </v-stepper-content>
 
-                    <v-stepper-step step="2">
+                    <v-stepper-step color="green" step="2">
                         Select a reprenstative
                     </v-stepper-step>
 
@@ -49,8 +49,17 @@
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .letter-display {
     height: 500px;
+}
+
+.v-stepper__step__step {
+    background-color: #2196f3 !important;
+    border-color: #2196f3 !important;
+}
+
+.v-stepper__label {
+    color: grey !important;
 }
 </style>
