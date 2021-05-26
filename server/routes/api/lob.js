@@ -6,28 +6,20 @@ const db = createClient()
 
 router.get('/:template_id', async (req, res) => {
     const template_id = req.params.template_id;
-    const templateinfo = {};
+    var templateinfo = {};
+
     try {
-        
         axios
-        .get('https://api.lob.com/v1/templates/', {
-            params: {
-                key: LiveLob,
-                id: template_id
+        .get('https://api.lob.com/v1/templates/'+template_id, {
+            auth: {
+                username: process.env.LiveLob,      
             },
         })
         .then(function (response) {
             templateinfo = response.data
-            console.log(templateinfo);
-       
-            //res.send(congressMembers)
+            res.send(templateinfo);
         })
-        .catch(function (error) {
-            console.log(error)
-        })
-
-
-        res.send(result);
+        
     } catch (error) {
         console.log(error);
         res.status(500).send({ error: 'Whoops' });
