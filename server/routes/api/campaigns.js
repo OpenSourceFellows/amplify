@@ -15,4 +15,15 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/', async (req, res) => {
+    try {
+        const result = await db.select('*').from('campaigns')
+        console.log(result)
+        res.send(result)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ error: 'Whoops' })
+    }
+})
+
 module.exports = router
