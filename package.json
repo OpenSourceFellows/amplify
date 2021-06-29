@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build": "vue-cli-service build",
-    "start": "node main.js"
+    "start": "npm run serve"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",

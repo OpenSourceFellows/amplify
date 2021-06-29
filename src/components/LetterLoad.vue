@@ -1,12 +1,29 @@
 <template lang="html">
     <section class="letter-load">
         <v-card>
-            <v-card-title>{{ repName }}</v-card-title>
+            <!-- <v-card-title>{{ repName }}</v-card-title>
             <v-card-text>
                 {{ letterBody }}
-            </v-card-text>
+            </v-card-text> -->
+
+            <div v-show="isSubmitted">
+                <v-card-title>{{ repName }}</v-card-title>
+                <v-card-text>
+                    {{ letterBody }}
+                </v-card-text>
+            </div>
+            <div v-show="!isSubmitted">
+                <v-card-text> clicked</v-card-text>
+            </div>
+
             <v-card-actions>
-                <v-btn text color="primary"> Send Letter </v-btn>
+                <v-btn
+                    v-on:click="isSubmitted = !isSubmitted"
+                    text
+                    color="primary"
+                >
+                    Send Letter
+                </v-btn>
             </v-card-actions>
         </v-card>
     </section>
@@ -25,6 +42,7 @@
     },
     data () {
       return {
+          isSubmitted: true
 
       }
     },
