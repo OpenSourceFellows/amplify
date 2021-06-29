@@ -86,7 +86,7 @@ import axios from 'axios';
                     'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
                 )
                     return fin;
-                });
+                }).catch((e)=> console.error(e));
 
                 this.letterBody = res.template_id;
 
