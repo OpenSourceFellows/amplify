@@ -72,23 +72,24 @@ import axios from 'axios';
     methods: {
         async handleRepClick (member) {
             try{
+
                 this.repName = `Dear ${member.name}`;
                 this.shouldRender = false;
                 // from campaign id find template id and then make get request with template id
                 let campaignId =this.$route.params.campaignId
 
-                const res = await axios.get(
+                const versions = await axios.get(
                     'https://murmuring-headland-63935.herokuapp.com/api/Letter_Versions/'+ campaignId
-                ).then((res)=> {
-                    // make request to lob endpoint using template_id
-                    let latestVersion = res.data[res.data.length - 1];
-                    const fin =  axios.get(
-                    'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
-                )
-                    return fin;
-                }).catch((e)=> console.error(e));
+                    );
 
-                this.letterBody = res.template_id;
+                let latestVersion = versions.data[versions.data.length - 1].template_id;
+
+                const letter = await axios.get(
+                    'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
+                    );
+        
+               
+                this.letterBody = letter;
 
             } catch(e){
                 console.error(e);
