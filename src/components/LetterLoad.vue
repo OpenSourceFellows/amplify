@@ -9,7 +9,7 @@
             <div v-show="isSubmitted">
                 <v-card-title>{{ repName }}</v-card-title>
                 <v-card-text>
-                    {{ letterBody }}
+                  <span v-html="letterBody"></span>
                 </v-card-text>
             </div>
             <div v-show="!isSubmitted">
@@ -40,6 +40,8 @@
     mounted () {
 
     },
+
+
     data () {
       return {
           isSubmitted: true
