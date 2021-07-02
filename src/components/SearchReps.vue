@@ -93,7 +93,6 @@ import axios from 'axios';
                     'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
                     );
         
-               
                 this.letterBody = letter.data.versions[0].html;
 
 
