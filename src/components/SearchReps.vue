@@ -36,7 +36,8 @@
             </v-col>
             <v-col cols="6">
                 <letter-display v-if="shouldRender"></letter-display>
-                <letter-load v-else :repName="repName"> </letter-load>
+                <letter-load v-else :repName="repName" :letterBody="letterBody"> 
+                </letter-load>
             </v-col>
         </v-row>
     </section>
@@ -62,6 +63,7 @@ import axios from 'axios';
     data () {
       return {
           repName: String,
+          letterBody: String,
           congressMembers:[],
           hasContent: false,
           search: "",
@@ -69,9 +71,32 @@ import axios from 'axios';
       }
     },
     methods: {
-        handleRepClick (member) {
-            this.repName = `Dear ${member.name}`
-            this.shouldRender = false
+        async handleRepClick (member) {
+            try{
+
+                this.repName = `Dear ${member.name}`;
+                this.shouldRender = false;
+                //from campaign id find template id and then make get request with template id
+                let campaignId =this.$route.params.campaignId
+
+                const versions = await axios.get(
+                    'https://murmuring-headland-63935.herokuapp.com/api/Letter_Versions/'+ campaignId
+                    );
+
+                let latestVersion = versions.data[versions.data.length - 1].template_id;
+
+
+                const letter = await axios.get(
+                    'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
+                    );
+                this.letterBody = letter.data.versions[0].html;
+
+
+
+            } catch(e){
+                console.error(e);
+            }
+            
         },
         CheckInputContent: function () {
                 if (this.search != "") {
