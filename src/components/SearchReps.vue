@@ -85,10 +85,6 @@ import axios from 'axios';
 
                 let latestVersion = versions.data[versions.data.length - 1].template_id;
 
-                console.log(versions.data.length);
-                console.log(latestVersion);
-
-     
                 const letter = await axios.get(
                     'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
                     );
