@@ -19,7 +19,7 @@ describe('/api/amplify/:zipcode', () => {
     })
 })
 
-describe('/api/amplify/', () => {
+describe.skip('/api/amplify/', () => {
     const route = '/api/amplify/'
     test('returns 200 status', async () => {
         const response = await request(app).get(route)
