@@ -18,7 +18,7 @@ const DELIVERABILITY_WARNINGS = {
     deliverable_unnecessary_unit: 'Address may be deliverable but contains an unnecessary suite number'
 }
 
-router.get('/:templateId', async (req, res) => {
+router.get(['/templates/:templateId', '/:templateId'], async (req, res) => {
     const { templateId } = req.params
     var templateInfo = {}
 
