@@ -6,9 +6,6 @@ const Lob = require('lob')
 const router = express.Router()
 const db = createClient()
 
-const LOB_API_KEY = getLobApiKey()
-const lob = new Lob({ apiKey: LOB_API_KEY })
-
 const ALLOWED_ADDRESS_FIELDS = ['line1', 'line2', 'city', 'state', 'zip']
 const VALID_US_ZIP_CODE_MATCH = /^(?:\d{1,4}|\d{5}(?:[+-]?\d{4})?)$/
 const DELIVERABILITY_WARNINGS = {
@@ -28,9 +25,7 @@ router.get(['/templates/:templateId', '/:templateId'], async (req, res) => {
         const response = await axios.get(
             `https://api.lob.com/v1/templates/${templateId}`,
             {
-                auth: {
-                    username: LOB_API_KEY
-                }
+                auth: { username: getLobApiKey() }
             }
         )
 
@@ -92,6 +87,7 @@ router.post('/addressVerification', async (req, res) => {
     const zipCode = zip ? zip.padStart(5, '0') : null
 
     try {
+        const lob = new Lob({ apiKey: getLobApiKey() })
         const response = await lob.usVerifications.verify({
             primary_line: line1,
             secondary_line: line2,
