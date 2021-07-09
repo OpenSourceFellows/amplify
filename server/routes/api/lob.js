@@ -112,7 +112,7 @@ router.post('/addressVerification', async (req, res) => {
                 address_type: addressType,
                 record_type: recordType
             }
-        } = response.data
+        } = response
 
         const undeliverable = !deliverability || deliverability === 'undeliverable'
         const isResidential = addressType === 'residential'
