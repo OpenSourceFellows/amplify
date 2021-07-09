@@ -25,7 +25,7 @@ router.get(['/templates/:templateId', '/:templateId'], async (req, res) => {
     try {
         // We must use `axios` here as the `lob` package does not yet support
         // the [beta] Templates API.
-        const response = axios.get(
+        const response = await axios.get(
             `https://api.lob.com/v1/templates/${templateId}`,
             {
                 auth: {
