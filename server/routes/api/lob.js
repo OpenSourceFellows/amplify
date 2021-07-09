@@ -189,15 +189,30 @@ function handleLobError (error, res) {
     let errorMessage = 'Whoops'
 
     if (error) {
-        if (error.response) {
+        // error.response is from the `axios` package
+        // error._response is from the `lob` package
+        if (error.response || error._response) {
             status = 502
 
-            const { status: statusCode, data: lobApiError } = error.response
-            console.error(`Lob API error (${statusCode}): ${JSON.stringify(lobApiError)}`)
+            let lobStatus = null
+            let lobApiError = {}
+
+            // Handle Lob API errors from `axios` requests
+            if (error.response) {
+                lobStatus = error.response.status
+                lobApiError = error.response.data.error
+            }
+            // Handle Lob API errors from `lob` requests
+            else if (error._response) {
+                lobStatus = error._response.statusCode
+                lobApiError = error._response.body.error
+            }
+
+            console.error(`Lob API error (${lobStatus}): ${JSON.stringify(lobApiError)}`)
 
             // If the error is being blamed on the request...
             // See: https://docs.lob.com/#errors
-            if ([400, 422].includes(statusCode)) {
+            if ([400, 404, 422].includes(lobStatus)) {
                 status = 400
                 errorMessage = lobApiError.message
             }
