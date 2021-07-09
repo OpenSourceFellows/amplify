@@ -204,7 +204,9 @@ function handleLobError (error, res) {
                 lobApiError = error._response.body.error
             }
 
-            console.error(`Lob API error (${lobStatus}): ${JSON.stringify(lobApiError)}`)
+            if (process.env.NODE_ENV !== 'test') {
+                console.error(`Lob API error (${lobStatus}): ${JSON.stringify(lobApiError)}`)
+            }
 
             // If the error is being blamed on the request...
             // See: https://docs.lob.com/#errors
