@@ -102,8 +102,13 @@ router.post('/addressVerification', async (req, res) => {
 
         const {
             deliverability,
+            primary_line: revisedLine1,
+            secondary_line: revisedLine2,
             components: {
-                state: stateAbbr,
+                city: revisedCity,
+                state: revisedState,
+                zip_code: revisedZip,
+                zip_code_plus_4: revisedZipPlus4,
                 address_type: addressType,
                 record_type: recordType
             }
@@ -112,7 +117,7 @@ router.post('/addressVerification', async (req, res) => {
         const undeliverable = !deliverability || deliverability === 'undeliverable'
         const isResidential = addressType === 'residential'
         const isPostOfficeBox = recordType === 'po_box'
-        const isPuertoRico = stateAbbr === 'PR'
+        const isPuertoRico = revisedState === 'PR'
 
         const deliverable = !undeliverable && isResidential && !isPostOfficeBox && !isPuertoRico
         const warning = DELIVERABILITY_WARNINGS[deliverability] || null
@@ -132,7 +137,17 @@ router.post('/addressVerification', async (req, res) => {
             return res.status(400).send({ error: errorMessage })
         }
 
-        return res.status(200).send({ deliverable, warning })
+        return res.status(200).send({
+            deliverable,
+            warning,
+            revisedAddress: {
+                line1: revisedLine1,
+                line2: revisedLine2 || null,
+                city: revisedCity,
+                state: revisedState,
+                zip: revisedZip + (revisedZipPlus4 ? '-' + revisedZipPlus4 : '')
+            }
+        })
     } catch (error) {
         // This endpoint should not return anything other than `200` status
         // codes, even for undeliverable addresses
