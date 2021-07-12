@@ -117,7 +117,7 @@ function CheckUndefined(itemToCheck, repInfo) {
 
 module.exports = router
 
-// Temporary implemntation for fallback with deprecation warnings
+// Temporary implementation for fallback with deprecation warnings
 function getCivicApiKey() {
     const { CIVIC_API_KEY, CivicAPI } = process.env
     const civicApiKey = CIVIC_API_KEY || CivicAPI
