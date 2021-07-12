@@ -110,24 +110,24 @@ router.post('/addressVerification', async (req, res) => {
             }
         } = response
 
-        const undeliverable = !deliverability || deliverability === 'undeliverable'
+        const isUndeliverable = !deliverability || deliverability === 'undeliverable'
         const isResidential = addressType === 'residential'
         const isPostOfficeBox = recordType === 'po_box'
         const isPuertoRico = revisedState === 'PR'
 
-        const deliverable = !undeliverable && isResidential && !isPostOfficeBox && !isPuertoRico
+        const deliverable = !isUndeliverable && isResidential && !isPostOfficeBox && !isPuertoRico
         const warning = DELIVERABILITY_WARNINGS[deliverability] || null
 
         if (!deliverable) {
-            let errorMessage = null
-            if (!isResidential) {
-                errorMessage = 'Non-residential addresses are not currently supported'
-            } else if (isPostOfficeBox) {
-                errorMessage = 'Post office boxes are not currently supported'
-            } else if (isPuertoRico) {
-                errorMessage = 'Puerto Rico addresses are not currently supported'
-            } else {
-                errorMessage = 'Address is undeliverable'
+            let errorMessage = 'Address is undeliverable'
+            if (!isUndeliverable) {
+                if (!isResidential) {
+                    errorMessage = 'Non-residential addresses are not currently supported'
+                } else if (isPostOfficeBox) {
+                    errorMessage = 'Post office boxes are not currently supported'
+                } else if (isPuertoRico) {
+                    errorMessage = 'Puerto Rico addresses are not currently supported'
+                }
             }
 
             return res.status(400).send({ error: errorMessage })
