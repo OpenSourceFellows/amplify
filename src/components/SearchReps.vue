@@ -87,7 +87,7 @@ import axios from 'axios';
 
 
                 const letter = await axios.get(
-                    'https://murmuring-headland-63935.herokuapp.com/api/lob/'+ latestVersion
+                    'https://murmuring-headland-63935.herokuapp.com/api/templates'+ latestVersion
                     );
                 this.letterBody = letter.data.versions[0].html;
 
