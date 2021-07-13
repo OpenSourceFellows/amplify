@@ -108,7 +108,7 @@ import axios from 'axios';
         async CreateRepList() {
         try {
             const res = await axios.get(
-                'https://murmuring-headland-63935.herokuapp.com/api/amplify/' + this.search
+                'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.search
             );
             this.congressMembers = res.data;
             this.hasContent=true;
