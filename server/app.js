@@ -10,8 +10,8 @@ app.use(
     })
 )
 
-//Middleware
-//app.use(express.json());
+// Middleware
+app.use(express.json());
 app.use(cors())
 
 const amplify = require('./routes/api/amplify');
