@@ -115,6 +115,30 @@ CIVIC_API_KEY=<YOUR_API_KEY>
 
 7. Save the changes to the `.env` file.
 
+#### Using the Lob API locally
+
+1. Login to your personal [Heroku dashboard](https://dashboard.heroku.com/).
+2. Switch to the `programequity` team under the project dropdown (which probably defaulted to `Personal`).
+  - :information_source: If you do not see that team, you probably need to be added by a project administrator.
+3. Go into the backend application, currently named `murmuring-headland-63935`.
+4. Go into the "Settings" tab.
+5. In the "Config Vars" section, click the "Reveal Config Vars" button to expand the list of existing environment variables.
+6. Find the `LOB_API_KEY` and `TEST_LOB_API_KEY` variables.
+7. Create a file called  `.env` in the project's root directory, preferrably using the `.env.example` file as your template.
+8. Add a set of new key-value pairs to the file containing the API keys with the values from the Heroku application, e.g.
+
+```
+# Production environment API key for the Lob API
+LOB_API_KEY=<HEROKU_VARIABLE>
+
+# Test environment API key for the Lob API
+# This is only required for running the integration tests successfully!
+TEST_LOB_API_KEY=<HEROKU_VARIABLE>
+```
+
+9. Save the changes to the `.env` file.
+
+
 #### Ignoring the Auth0 authentication locally
 
 Although the authentication check is not required locally, the module in use still expects certain values to be passed in regardless of their validity.
