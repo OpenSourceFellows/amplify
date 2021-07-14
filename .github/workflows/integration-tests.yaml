@@ -33,6 +33,8 @@ jobs:
         env:
           # Google Civic API key
           CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
+          # Test environment Lob API key
+          LOB_API_KEY: ${{ secrets.TEST_LOB_API_KEY }}
           # Auth0 authentication parameters with nonsensical sample values
           ISSUER_BASE_URL: https://YOUR_AUTH_DOMAIN
           CLIENT_ID: YOUR_CLIENT_ID
