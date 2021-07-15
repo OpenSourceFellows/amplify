@@ -11,7 +11,7 @@ env:
   CI: true
 
 jobs:
-  lint:
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
