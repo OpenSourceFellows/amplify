@@ -31,20 +31,19 @@ const baseConfig = {
   asyncStackTraces: !isProduction,
 
   // Required for Heroku PostgreSQL
-  ...isProduction && {
+  ...(isProduction && {
     ssl: {
       rejectUnauthorized: false
     }
-  }
+  })
 }
 
 // Export the configuration matrix
 module.exports = {
-
   development: {
     ...baseConfig,
     connection: {
-      database: 'pe_dev',
+      database: 'pe_dev'
     }
   },
 
