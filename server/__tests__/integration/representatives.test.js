@@ -18,11 +18,3 @@ describe('/api/representatives/:zipcode', () => {
         expect(response.status).toBe(200)
     })
 })
-
-describe.skip('/api/representatives/', () => {
-    const route = '/api/representatives/'
-    test('returns 200 status', async () => {
-        const response = await request(app).get(route)
-        expect(response.status).toBe(200)
-    })
-})
