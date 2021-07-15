@@ -1,5 +1,4 @@
 const express = require('express')
-const axios = require('axios')
 const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
