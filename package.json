@@ -1,8 +1,18 @@
 {
   "private": true,
-  "name": "amp-server",
+  "name": "amplify-back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "The API backend for ProgramEquity",
+  "author": "Ally Guide",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ally-Guide/amplify-back-end.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ally-Guide/amplify-back-end/issues"
+  },
+  "homepage": "https://www.programequity.com/",
   "main": "server/server.js",
   "scripts": {
     "postinstall": "husky install",
@@ -23,8 +33,6 @@
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
