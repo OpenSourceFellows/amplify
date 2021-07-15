@@ -1,22 +1,24 @@
 const knex = require('knex')
 const knexfile = require('../../knexfile')
 
-function createClient (config) {
+function createClient(config) {
   return knex(config || getConfig())
 }
 
-function getConfig (env) {
+function getConfig(env) {
   const targetEnv = env || getEnv()
   const config = knexfile[targetEnv]
 
   if (!config) {
-    throw new Error(`No config found in "knexfile.js" for environment "${targetEnv}"`)
+    throw new Error(
+      `No config found in "knexfile.js" for environment "${targetEnv}"`
+    )
   }
 
   return config
 }
 
-function getEnv () {
+function getEnv() {
   let targetEnv = process.env.NODE_ENV || 'development'
   // Prefer `--env test` and `--env=test` command line arguments if provided
   process.argv.forEach((val, i) => {

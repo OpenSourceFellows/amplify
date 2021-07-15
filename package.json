@@ -6,7 +6,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",
-    "format": "prettier --write 'server/**/*.js'",
+    "format": "prettier --write . '!**/*.md'",
+    "format-check": "prettier --check . '!**/*.md'",
     "lint": "eslint --fix .",
     "lint-check": "eslint .",
     "start": "node server/server.js",
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "prettier": "2.2.1",

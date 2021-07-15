@@ -5,5 +5,5 @@ module.exports = {
 
   async down(knex) {
     await knex.schema.doSomethingForReal()
-  },
+  }
 }

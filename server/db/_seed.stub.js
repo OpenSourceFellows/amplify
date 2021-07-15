@@ -1,6 +1,5 @@
 module.exports = {
-
-  async seed (knex) {
+  async seed(knex) {
     // Deletes ALL existing entries
     await knex('table_name').del()
 
@@ -11,5 +10,4 @@ module.exports = {
       { id: 3, colName: 'rowValue3' }
     ])
   }
-
 }
