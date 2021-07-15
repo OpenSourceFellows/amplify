@@ -10,9 +10,12 @@ const ALLOWED_ADDRESS_FIELDS = ['line1', 'line2', 'city', 'state', 'zip']
 const VALID_US_ZIP_CODE_MATCH = /^(?:\d{1,4}|\d{5}(?:[+-]?\d{4})?)$/
 const DELIVERABILITY_WARNINGS = {
     undeliverable: 'Address is not deliverable',
-    deliverable_incorrect_unit: 'Address may be deliverable but contains a suite number that does not exist',
-    deliverable_missing_unit: 'Address may be deliverable but is missing a suite number',
-    deliverable_unnecessary_unit: 'Address may be deliverable but contains an unnecessary suite number'
+    deliverable_incorrect_unit:
+        'Address may be deliverable but contains a suite number that does not exist',
+    deliverable_missing_unit:
+        'Address may be deliverable but is missing a suite number',
+    deliverable_unnecessary_unit:
+        'Address may be deliverable but contains an unnecessary suite number',
 }
 
 router.get(['/templates/:templateId', '/:templateId'], async (req, res) => {
@@ -25,14 +28,13 @@ router.get(['/templates/:templateId', '/:templateId'], async (req, res) => {
         const response = await axios.get(
             `https://api.lob.com/v1/templates/${templateId}`,
             {
-                auth: { username: getLobApiKey() }
+                auth: { username: getLobApiKey() },
             }
         )
 
         templateInfo = response.data
         return res.status(200).send(templateInfo)
-    }
-    catch (error) {
+    } catch (error) {
         return handleLobError(error, res)
     }
 })
@@ -47,36 +49,47 @@ router.post('/addressVerification', async (req, res) => {
             throw new Error('Address object cannot be empty')
         }
 
-        const disallowedKeys = keys.reduce(
-            (badKeys, key) => {
-                if (!ALLOWED_ADDRESS_FIELDS.includes(key)) {
-                    badKeys.push(key)
-                }
-                return badKeys
-            },
-            []
-        )
+        const disallowedKeys = keys.reduce((badKeys, key) => {
+            if (!ALLOWED_ADDRESS_FIELDS.includes(key)) {
+                badKeys.push(key)
+            }
+            return badKeys
+        }, [])
 
         if (disallowedKeys.length > 0) {
-            throw new Error(`Address object contained unexpected keys: ${JSON.stringify(disallowedKeys)}`)
+            throw new Error(
+                `Address object contained unexpected keys: ${JSON.stringify(
+                    disallowedKeys
+                )}`
+            )
         }
 
         if (!(address.line1 || '').trim()) {
-            throw new Error('Address object must contain a primary line (line1)')
+            throw new Error(
+                'Address object must contain a primary line (line1)'
+            )
         }
 
         const { zip } = address
         if (zip != null && typeof zip !== 'string') {
-            throw new Error('Address object must contain a string-based ZIP code')
+            throw new Error(
+                'Address object must contain a string-based ZIP code'
+            )
         }
 
         let zipCode = (zip || '').trim()
         if (zipCode) {
             if (!VALID_US_ZIP_CODE_MATCH.test(zipCode)) {
-                throw new Error(`Address object contained an invalid ZIP code: ${zipCode}`)
+                throw new Error(
+                    `Address object contained an invalid ZIP code: ${zipCode}`
+                )
             }
-        } else if (!((address.city || '').trim() && (address.state || '').trim())) {
-            throw new Error('Address object must include both city and state, or a ZIP code')
+        } else if (
+            !((address.city || '').trim() && (address.state || '').trim())
+        ) {
+            throw new Error(
+                'Address object must include both city and state, or a ZIP code'
+            )
         }
     } catch (validationError) {
         return res.status(400).send({ error: validationError.message })
@@ -93,7 +106,7 @@ router.post('/addressVerification', async (req, res) => {
             secondary_line: line2,
             city,
             state,
-            zip_code: zipCode
+            zip_code: zipCode,
         })
 
         const {
@@ -106,27 +119,35 @@ router.post('/addressVerification', async (req, res) => {
                 zip_code: revisedZip,
                 zip_code_plus_4: revisedZipPlus4,
                 address_type: addressType,
-                record_type: recordType
-            }
+                record_type: recordType,
+            },
         } = response
 
-        const isUndeliverable = !deliverability || deliverability === 'undeliverable'
+        const isUndeliverable =
+            !deliverability || deliverability === 'undeliverable'
         const isResidential = addressType === 'residential'
         const isPostOfficeBox = recordType === 'po_box'
         const isPuertoRico = revisedState === 'PR'
 
-        const deliverable = !isUndeliverable && isResidential && !isPostOfficeBox && !isPuertoRico
+        const deliverable =
+            !isUndeliverable &&
+            isResidential &&
+            !isPostOfficeBox &&
+            !isPuertoRico
         const warning = DELIVERABILITY_WARNINGS[deliverability] || null
 
         if (!deliverable) {
             let errorMessage = 'Address is undeliverable'
             if (!isUndeliverable) {
                 if (!isResidential) {
-                    errorMessage = 'Non-residential addresses are not currently supported'
+                    errorMessage =
+                        'Non-residential addresses are not currently supported'
                 } else if (isPostOfficeBox) {
-                    errorMessage = 'Post office boxes are not currently supported'
+                    errorMessage =
+                        'Post office boxes are not currently supported'
                 } else if (isPuertoRico) {
-                    errorMessage = 'Puerto Rico addresses are not currently supported'
+                    errorMessage =
+                        'Puerto Rico addresses are not currently supported'
                 }
             }
 
@@ -141,8 +162,9 @@ router.post('/addressVerification', async (req, res) => {
                 line2: revisedLine2 || null,
                 city: revisedCity,
                 state: revisedState,
-                zip: revisedZip + (revisedZipPlus4 ? '-' + revisedZipPlus4 : '')
-            }
+                zip:
+                    revisedZip + (revisedZipPlus4 ? '-' + revisedZipPlus4 : ''),
+            },
         })
     } catch (error) {
         // This endpoint should not return anything other than `200` status
@@ -154,7 +176,7 @@ router.post('/addressVerification', async (req, res) => {
 module.exports = router
 
 // Temporary implementation for fallback with deprecation warnings
-function getLobApiKey () {
+function getLobApiKey() {
     const { LOB_API_KEY, LiveLob } = process.env
     const lobApiKey = LOB_API_KEY || LiveLob
 
@@ -180,7 +202,7 @@ function getLobApiKey () {
     return lobApiKey
 }
 
-function handleLobError (error, res) {
+function handleLobError(error, res) {
     let status = 500
     let errorMessage = 'Whoops'
 
@@ -205,7 +227,11 @@ function handleLobError (error, res) {
             }
 
             if (process.env.NODE_ENV !== 'test') {
-                console.error(`Lob API error (${lobStatus}): ${JSON.stringify(lobApiError)}`)
+                console.error(
+                    `Lob API error (${lobStatus}): ${JSON.stringify(
+                        lobApiError
+                    )}`
+                )
             }
 
             // If the error is being blamed on the request...

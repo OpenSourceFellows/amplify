@@ -13,7 +13,10 @@ beforeAll(() => {
     let lobApiKey = LOB_API_KEY || ''
 
     // Lob API keys starts with either "live_" (production) or "test_" (testing)
-    if (!lobApiKey.startsWith(LOB_TEST_KEY_PREFIX) && (TEST_LOB_API_KEY || '').startsWith(LOB_TEST_KEY_PREFIX)) {
+    if (
+        !lobApiKey.startsWith(LOB_TEST_KEY_PREFIX) &&
+        (TEST_LOB_API_KEY || '').startsWith(LOB_TEST_KEY_PREFIX)
+    ) {
         lobApiKey = TEST_LOB_API_KEY
     }
 
@@ -39,42 +42,42 @@ describe('GET /api/lob/templates/:templateId', () => {
     // From https://docs.lob.com/#templates_object
     const someDate = '2017-11-07T22:56:10.962Z'
     const exampleLobResponse = {
-      id: templateId,
-      description: 'Test Template',
-      versions: [
-        {
-          id: 'vrsn_362184d96d9b0c9',
-          description: 'Test Template',
-          html: '<html>HTML for {{name}}</html>',
-          date_created: someDate,
-          date_modified: someDate,
-          object: 'version'
-        }
-      ],
-      published_version: {
-        id: 'vrsn_362184d96d9b0c9',
+        id: templateId,
         description: 'Test Template',
-        html: '<html>HTML for {{name}}</html>',
+        versions: [
+            {
+                id: 'vrsn_362184d96d9b0c9',
+                description: 'Test Template',
+                html: '<html>HTML for {{name}}</html>',
+                date_created: someDate,
+                date_modified: someDate,
+                object: 'version',
+            },
+        ],
+        published_version: {
+            id: 'vrsn_362184d96d9b0c9',
+            description: 'Test Template',
+            html: '<html>HTML for {{name}}</html>',
+            date_created: someDate,
+            date_modified: someDate,
+            object: 'version',
+        },
+        metadata: {},
         date_created: someDate,
         date_modified: someDate,
-        object: 'version'
-      },
-      metadata: {},
-      date_created: someDate,
-      date_modified: someDate,
-      object: 'template'
+        object: 'template',
     }
 
     test('returns 200 status for an existing template', async () => {
         const spy = jest.spyOn(axios, 'get')
         spy.mockImplementation((url) => {
-          if (url !== `${LOB_API_HOST}/v1/templates/${templateId}`) {
-              throw new Error('unexpected call to `axios.get`')
-          }
-          return {
-              status: 200,
-              data: exampleLobResponse
-          }
+            if (url !== `${LOB_API_HOST}/v1/templates/${templateId}`) {
+                throw new Error('unexpected call to `axios.get`')
+            }
+            return {
+                status: 200,
+                data: exampleLobResponse,
+            }
         })
 
         const response = await request(app).get(route)
@@ -101,9 +104,9 @@ describe('GET /api/lob/templates/:templateId', () => {
                     error: {
                         message: 'template not found',
                         status_code: 404,
-                        code: 'not_found'
-                    }
-                }
+                        code: 'not_found',
+                    },
+                },
             }
             throw axiosError
         })
@@ -119,13 +122,13 @@ describe('GET /api/lob/templates/:templateId', () => {
     test('temporarily supports deprecated route /api/lob/:templateId', async () => {
         const spy = jest.spyOn(axios, 'get')
         spy.mockImplementation((url) => {
-          if (url !== `${LOB_API_HOST}/v1/templates/${templateId}`) {
-              throw new Error('unexpected call to `axios.get`')
-          }
-          return {
-              status: 200,
-              data: exampleLobResponse
-          }
+            if (url !== `${LOB_API_HOST}/v1/templates/${templateId}`) {
+                throw new Error('unexpected call to `axios.get`')
+            }
+            return {
+                status: 200,
+                data: exampleLobResponse,
+            }
         })
 
         const deprecatedRoute = `/api/lob/${templateId}`
@@ -157,8 +160,8 @@ describe('POST /api/lob/addressVerification', () => {
                 line2: null,
                 city: 'SAN FRANCISCO',
                 state: 'CA',
-                zip: '94115-2525'
-            }
+                zip: '94115-2525',
+            },
         })
     })
 
@@ -185,8 +188,8 @@ describe('POST /api/lob/addressVerification', () => {
                 line2: null,
                 city: 'SAN FRANCISCO',
                 state: 'CA',
-                zip: '94115-2525'
-            }
+                zip: '94115-2525',
+            },
         })
     })
 
@@ -256,9 +259,10 @@ describe('POST /api/lob/addressVerification', () => {
                 line1: '1709 BRODERICK ST APT 505',
                 line2: null,
                 state: 'CA',
-                zip: '94115-2525'
+                zip: '94115-2525',
             },
-            warning: 'Address may be deliverable but contains an unnecessary suite number'
+            warning:
+                'Address may be deliverable but contains an unnecessary suite number',
         })
     })
 
@@ -267,7 +271,9 @@ describe('POST /api/lob/addressVerification', () => {
             .post(route)
             .send({ line1: 'po box', zip })
         expect(response.status).toBe(400)
-        expect(response.body).toEqual({ error: 'Post office boxes are not currently supported' })
+        expect(response.body).toEqual({
+            error: 'Post office boxes are not currently supported',
+        })
     })
 
     test('returns 400 status for residence in Puerto Rico', async () => {
@@ -275,7 +281,9 @@ describe('POST /api/lob/addressVerification', () => {
             .post(route)
             .send({ line1: 'puerto rico', zip })
         expect(response.status).toBe(400)
-        expect(response.body).toEqual({ error: 'Puerto Rico addresses are not currently supported' })
+        expect(response.body).toEqual({
+            error: 'Puerto Rico addresses are not currently supported',
+        })
     })
 
     test('returns 400 status for commercial building', async () => {
@@ -283,7 +291,9 @@ describe('POST /api/lob/addressVerification', () => {
             .post(route)
             .send({ line1: 'deliverable', zip })
         expect(response.status).toBe(400)
-        expect(response.body).toEqual({ error: 'Non-residential addresses are not currently supported' })
+        expect(response.body).toEqual({
+            error: 'Non-residential addresses are not currently supported',
+        })
     })
 
     test('returns 400 status for commercial highrise', async () => {
@@ -291,7 +301,9 @@ describe('POST /api/lob/addressVerification', () => {
             .post(route)
             .send({ line1: 'commercial highrise', zip })
         expect(response.status).toBe(400)
-        expect(response.body).toEqual({ error: 'Non-residential addresses are not currently supported' })
+        expect(response.body).toEqual({
+            error: 'Non-residential addresses are not currently supported',
+        })
     })
 
     test('returns 400 status for undeliverable address', async () => {
@@ -301,5 +313,4 @@ describe('POST /api/lob/addressVerification', () => {
         expect(response.status).toBe(400)
         expect(response.body).toEqual({ error: 'Address is undeliverable' })
     })
-
 })
