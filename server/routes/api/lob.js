@@ -1,10 +1,8 @@
 const express = require('express')
 const axios = require('axios')
-const { createClient } = require('../../db')
 const Lob = require('lob')
 
 const router = express.Router()
-const db = createClient()
 
 const ALLOWED_ADDRESS_FIELDS = ['line1', 'line2', 'city', 'state', 'zip']
 const VALID_US_ZIP_CODE_MATCH = /^(?:\d{1,4}|\d{5}(?:[+-]?\d{4})?)$/
