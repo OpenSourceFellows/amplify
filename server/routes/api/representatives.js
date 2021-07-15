@@ -2,118 +2,71 @@ require('dotenv').config()
 
 const express = require('express')
 const axios = require('axios')
-const { createClient } = require('../../db')
 
 const router = express.Router()
-const db = createClient()
 
 const CIVIC_API_KEY = getCivicApiKey()
 
-//Endpoints
+// Endpoints
 
 // Get
-router.get('/:zipCode', (req, res) => {
-    var congressMembers = []
-    var reps = []
-    var zipCode = req.params.zipCode
+router.get('/:zipCode', async (req, res) => {
+    const congressMembers = []
+    const { zipCode } = req.params
 
-    axios
-        .get('https://www.googleapis.com/civicinfo/v2/representatives', {
-            params: {
-                key: CIVIC_API_KEY,
-                address: zipCode,
-            },
-        })
-        .then(function (response) {
-            reps = response.data.officials
-            response.data.offices.forEach((repInfo) => {
-                repInfo.officialIndices.forEach((position) => {
-                    if (position > 1) {
-                        var rep = reps[position]
-                        var officeInfo = {
-                            name: '',
-                            title: '',
-                            city: '',
-                            state: '',
-                            email: '',
-                            twitter: '',
-                            facebook: '',
-                            contactPage: '',
-                            photoUrl: '',
-                        }
-                        if (rep.name == undefined || rep.name == '') {
-                        } else {
-                            officeInfo.name = rep.name
-                        }
-                        if (repInfo.name == undefined || rep.name == '') {
-                        } else {
-                            officeInfo.title = repInfo.name
-                        }
+    try {
+        const response = await axios
+            .get('https://www.googleapis.com/civicinfo/v2/representatives', {
+                params: {
+                    key: CIVIC_API_KEY,
+                    address: zipCode
+                }
+            })
 
-                        if (rep.address == undefined || rep.address == '') {
-                        } else {
-                            officeInfo.city = rep.address[0].city
-                            officeInfo.state = rep.address[0].state
+        const { offices, officials } = response.data
+        offices
+            .slice(2) // skip President and VP
+            .forEach((officeType) => {
+                officeType.officialIndices.forEach((position) => {
+                    const rep = officials[position]
+                    const repInfo = {
+                        name: rep.name || '',
+                        title: officeType.name || '',
+                        city: '',
+                        state: '',
+                        email: Array.isArray(rep.emails) && rep.emails[0] || 'Not Made Public',
+                        twitter: 'Not Made Public',
+                        facebook: 'Not Made Public',
+                        contactPage: Array.isArray(rep.urls) && rep.urls[0] || '',
+                        photoUrl: rep.photoUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+                    }
+
+                    if (Array.isArray(rep.address) && rep.address[0]) {
+                        repInfo.city = rep.address[0].city
+                        repInfo.state = rep.address[0].state
+                    }
+
+                    if (Array.isArray(rep.channels) && rep.channels.length > 0) {
+                        const facebook = rep.channels.find(({ type }) => type === 'Facebook')
+                        if (facebook) {
+                            repInfo.facebook = facebook.id
                         }
-                        if (repInfo.email == undefined) {
-                            officeInfo.email = 'Has Not Been Made Public'
-                        } else {
-                            officeInfo.email = rep.email
-                        }
-                        if (rep.photoUrl == undefined) {
-                            officeInfo.photoUrl =
-                                'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
-                        } else {
-                            officeInfo.photoUrl = rep.photoUrl
-                        }
-                        officeInfo = FlattenChannels(rep, officeInfo)
-                        if (officeInfo !== undefined) {
-                            congressMembers.push(officeInfo)
+                        const twitter = rep.channels.find(({ type }) => type === 'Twitter')
+                        if (twitter) {
+                            repInfo.twitter = twitter.id
                         }
                     }
+
+                    congressMembers.push(repInfo)
                 })
             })
-            res.send(congressMembers)
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+
+        res.send(congressMembers)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ error: 'Whoops' })
+    }
 })
-
-function FlattenChannels(rep, flattenRepInfo) {
-    if (rep.channels == undefined) {
-        flattenRepInfo.facebook = 'Not Made Public'
-        flattenRepInfo.twitter = 'Not Made Public'
-    } else {
-        rep.channels.forEach((channel) => {
-            if (channel.type == 'Facebook') {
-                flattenRepInfo.facebook = channel.id
-            }
-            if (channel.type == 'Twitter') {
-                flattenRepInfo.twitter = channel.id
-            }
-        })
-        return flattenRepInfo
-    }
-}
-
-function CheckUndefined(itemToCheck, repInfo) {
-    if (itemToCheck !== undefined || itemToCheck !== '') {
-    } else {
-        itemToCheck = repInfo
-    }
-}
-
-// router.get('/', async (req, res) => {
-//     try {
-//         const result = await db.select('*').from('campaigns')
-//         console.log(result)
-//         res.send(result)
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).send({ error: 'Whoops' })
-//     }
-// })
 
 module.exports = router
 
