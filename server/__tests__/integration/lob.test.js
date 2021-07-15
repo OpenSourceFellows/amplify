@@ -118,26 +118,6 @@ describe('GET /api/lob/templates/:templateId', () => {
     expect(spy).toHaveBeenCalled()
     spy.mockRestore()
   })
-
-  test('temporarily supports deprecated route /api/lob/:templateId', async () => {
-    const spy = jest.spyOn(axios, 'get')
-    spy.mockImplementation((url) => {
-      if (url !== `${LOB_API_HOST}/v1/templates/${templateId}`) {
-        throw new Error('unexpected call to `axios.get`')
-      }
-      return {
-        status: 200,
-        data: exampleLobResponse
-      }
-    })
-
-    const deprecatedRoute = `/api/lob/${templateId}`
-    const response = await request(app).get(deprecatedRoute)
-    expect(response.status).toBe(200)
-
-    expect(spy).toHaveBeenCalled()
-    spy.mockRestore()
-  })
 })
 
 describe('POST /api/lob/addressVerification', () => {
