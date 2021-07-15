@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",
     "format": "prettier --write 'server/**/*.js'",
-    "lint": "eslint 'server/**/*.js'",
+    "lint": "eslint --fix .",
+    "lint-check": "eslint .",
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
     "db:create": "npm run db:create:dev && npm run db:create:test",
