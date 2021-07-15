@@ -1,6 +1,6 @@
 const jwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
-const { domain, audience } = require('../config/env.dev')
+const { domain, audience } = require('./config/env.dev')
 
 const checkJwt = jwt({
     secret: jwksRsa.expressJwtSecret({
