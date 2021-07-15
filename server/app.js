@@ -14,7 +14,7 @@ app.use(
 app.use(express.json());
 app.use(cors())
 
-const amplify = require('./routes/api/amplify');
+const representatives = require('./routes/api/representatives');
 const campaigns = require('./routes/api/campaigns');
 const authentication = require('./routes/api/authentication');
 const letter_versions = require('./routes/api/letter_versions');
@@ -23,7 +23,7 @@ const lob = require('./routes/api/lob');
 
 // const email = require('./routes/api/email')
 
-app.use('/api/amplify', amplify);
+app.use('/api/representatives', representatives);
 app.use('/api/campaigns', campaigns);
 app.use('/api/authentication', authentication);
 app.use('/api/letter_versions', letter_versions);

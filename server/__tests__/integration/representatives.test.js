@@ -10,17 +10,17 @@ afterAll(async () => {
     await new Promise((resolve) => setTimeout(() => resolve(), 500)) // avoid jest open handle error
 })
 
-describe('/api/amplify/:zipcode', () => {
+describe('/api/representatives/:zipcode', () => {
     const zipcode = '92107'
-    const route = '/api/amplify/' + zipcode
+    const route = '/api/representatives/' + zipcode
     test('returns 200 status', async () => {
         const response = await request(app).get(route)
         expect(response.status).toBe(200)
     })
 })
 
-describe.skip('/api/amplify/', () => {
-    const route = '/api/amplify/'
+describe.skip('/api/representatives/', () => {
+    const route = '/api/representatives/'
     test('returns 200 status', async () => {
         const response = await request(app).get(route)
         expect(response.status).toBe(200)
