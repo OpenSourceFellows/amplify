@@ -147,15 +147,24 @@ Although the authentication check is not required locally, the module in use sti
 2. Add set of a new key-value pairs to the file with literal nonsense values, e.g.
 
 ```
-# Auth0 authentication parameters
-ISSUER_BASE_URL=https://YOUR_AUTH_DOMAIN
-CLIENT_ID=YOUR_CLIENT_ID
-BASE_URL=https://localhost:5000/
-SECRET=LONG_RANDOM_VALUE
+SERVER_PORT=6060
+CLIENT_ORIGIN_URL=http://localhost:4040
+AUTH0_AUDIENCE=your_Auth0_identifier_value
+AUTH0_DOMAIN=your_Auth0_domain
 ```
 
 3. Save the changes to the `.env` file.
 
+
+#### Setting up Auth0 authentication locally
+
+1. Follow above steps for configuring .env file.
+2. Sign up for an account at [Auth0](https://auth0.com/).
+3. Select `personal` when prompted with the type of account being created.
+4. Go to [API dashboard](https://manage.auth0.com/#/apis) and click `Create API` button.
+5. Add a Name to your API. It can be named anything you'd like.
+6. Set its Identifier value. `http://localhost:5000/` is recommended. For more information see this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
+7. 
 #### Connecting to the production PostgreSQL database locally
 
 :warning: _For trusted collaborators ONLY!_ :warning:

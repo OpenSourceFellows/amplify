@@ -2,13 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const { auth } = require('express-openid-connect')
-
-app.use(
-    auth({
-        authRequired: false,
-    })
-)
 
 // Middleware
 app.use(express.json())

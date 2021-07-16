@@ -8,8 +8,8 @@ const {
 } = require('../../auth/messages/messages.service')
 const { checkJwt } = require('../../auth/check-jwt')
 
-router.get('/isAuthenticated', (req, res) => {
-    res.send(req.oidc.isAuthenticated())
+router.get('/isAuthenticated', checkJwt, (req, res) => {
+    res.send(true)
 })
 
 router.get('/public-message', (req, res) => {
