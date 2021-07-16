@@ -164,7 +164,12 @@ AUTH0_DOMAIN=your_Auth0_domain
 4. Go to [API dashboard](https://manage.auth0.com/#/apis) and click `Create API` button.
 5. Add a Name to your API. It can be named anything you'd like.
 6. Set its Identifier value. `http://localhost:5000/` is recommended. For more information see this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
-7. 
+7. Click on the "Test" tab.
+8. Locate the section called " Asking Auth0 for tokens from my application".
+9. Click on the cURL tab to show a mock POST request.
+10. Copy your Auth0 domain, which is part of the --url parameter value: tenant-name.region.auth0.com.
+11. Paste the Auth0 domain value as the value of `AUTH0_DOMAIN` in .env.
+
 #### Connecting to the production PostgreSQL database locally
 
 :warning: _For trusted collaborators ONLY!_ :warning:
