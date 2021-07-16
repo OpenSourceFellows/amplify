@@ -1,15 +1,29 @@
 {
   "private": true,
-  "name": "amp-server",
+  "name": "amplify-back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "The API backend for ProgramEquity",
+  "author": "Ally Guide",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ally-Guide/amplify-back-end.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ally-Guide/amplify-back-end/issues"
+  },
+  "homepage": "https://www.programequity.com/",
   "main": "server/server.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
-    "format": "prettier --write 'server/**/*.js'",
-    "lint": "eslint 'server/**/*.js'",
+    "postinstall": "husky install",
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint .",
+    "format": "prettier --write . '!**/*.md'",
+    "format:check": "prettier --check . '!**/*.md'",
+    "test": "jest --detectOpenHandles --forceExit",
+    "precommit": "npm run lint:check && npm run format:check",
     "db:create": "npm run db:create:dev && npm run db:create:test",
     "db:create:dev": "node script/create-db.js --env development",
     "db:create:test": "node script/drop-db.js --env test && node script/create-db.js --env test",
@@ -19,8 +33,6 @@
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
@@ -34,6 +46,8 @@
   },
   "devDependencies": {
     "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "prettier": "2.2.1",

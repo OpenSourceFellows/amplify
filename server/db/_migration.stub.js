@@ -1,4 +1,5 @@
 module.exports = {
+<<<<<<< HEAD
     async up(knex) {
         // await knex...
     },
@@ -6,4 +7,13 @@ module.exports = {
     async down(knex) {
         // await knex...
     },
+=======
+  async up(knex) {
+    await knex.schema.doSomethingForReal()
+  },
+
+  async down(knex) {
+    await knex.schema.doSomethingForReal()
+  }
+>>>>>>> origin/main
 }

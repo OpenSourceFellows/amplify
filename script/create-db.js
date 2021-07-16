@@ -5,7 +5,7 @@ const DUPLICATE_DATABASE_ERROR = '42P04'
 
 bootstrapDatabase()
 
-async function bootstrapDatabase () {
+async function bootstrapDatabase() {
   const targetEnv = getEnv()
   if (targetEnv === 'production') {
     throw new Error('This script should not be used in production!')
@@ -17,7 +17,7 @@ async function bootstrapDatabase () {
   //await runDataSeeders(config)
 }
 
-async function createDatabase (config) {
+async function createDatabase(config) {
   const { database } = config.connection
   let db
 
@@ -47,7 +47,7 @@ async function createDatabase (config) {
   }
 }
 
-async function migrateToLatestSchemas (config) {
+async function migrateToLatestSchemas(config) {
   const { database } = config.connection
   let db
 
@@ -56,7 +56,9 @@ async function migrateToLatestSchemas (config) {
     await db.migrate.latest()
     console.log(`Migrated database "${database}" to latest schemas!`)
   } catch (error) {
-    console.error(`Error migrating to latest schemas for database "${database}": ${error.message}`)
+    console.error(
+      `Error migrating to latest schemas for database "${database}": ${error.message}`
+    )
     throw error
   } finally {
     // Disconnect
@@ -64,7 +66,8 @@ async function migrateToLatestSchemas (config) {
   }
 }
 
-async function runDataSeeders (config) {
+// eslint-disable-next-line no-unused-vars
+async function runDataSeeders(config) {
   const { database } = config.connection
   let db
 
@@ -73,7 +76,9 @@ async function runDataSeeders (config) {
     await db.seed.run()
     console.log(`Created seed data in database "${database}"!`)
   } catch (error) {
-    console.error(`Error creating seed data for database "${database}": ${error.message}`)
+    console.error(
+      `Error creating seed data for database "${database}": ${error.message}`
+    )
     throw error
   } finally {
     // Disconnect

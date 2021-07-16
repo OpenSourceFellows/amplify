@@ -5,7 +5,7 @@ const INVALID_CATALOG_NAME_ERROR = '3D000'
 
 destroyDatabase()
 
-async function destroyDatabase () {
+async function destroyDatabase() {
   const targetEnv = getEnv()
   if (targetEnv === 'production') {
     throw new Error('This script should not be used in production!')
@@ -15,7 +15,7 @@ async function destroyDatabase () {
   await dropDatabase(config)
 }
 
-async function dropDatabase (config) {
+async function dropDatabase(config) {
   const { database } = config.connection
   let db
 

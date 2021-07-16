@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 
+<<<<<<< HEAD
 const {
     getPublicMessage,
     getProtectedMessage,
@@ -20,6 +21,10 @@ router.get('/public-message', (req, res) => {
 router.get('/protected-message', checkJwt, (req, res) => {
     const message = getProtectedMessage()
     res.status(200).send(message)
+=======
+router.get('/isAuthenticated', (req, res) => {
+  res.send(req.oidc.isAuthenticated())
+>>>>>>> origin/main
 })
 
 module.exports = router
