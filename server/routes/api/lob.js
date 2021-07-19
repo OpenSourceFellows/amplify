@@ -7,36 +7,6 @@ const router = express.Router()
 const ALLOWED_ADDRESS_FIELDS = ['line1', 'line2', 'city', 'state', 'zip']
 const VALID_US_ZIP_CODE_MATCH = /^(?:\d{1,4}|\d{5}(?:[+-]?\d{4})?)$/
 const DELIVERABILITY_WARNINGS = {
-<<<<<<< HEAD
-    undeliverable: 'Address is not deliverable',
-    deliverable_incorrect_unit:
-        'Address may be deliverable but contains a suite number that does not exist',
-    deliverable_missing_unit:
-        'Address may be deliverable but is missing a suite number',
-    deliverable_unnecessary_unit:
-        'Address may be deliverable but contains an unnecessary suite number',
-}
-
-router.get(['/templates/:templateId', '/:templateId'], async (req, res) => {
-    const { templateId } = req.params
-    var templateInfo = {}
-
-    try {
-        // We must use `axios` here as the `lob` package does not yet support
-        // the [beta] Templates API.
-        const response = await axios.get(
-            `https://api.lob.com/v1/templates/${templateId}`,
-            {
-                auth: { username: getLobApiKey() },
-            }
-        )
-
-        templateInfo = response.data
-        return res.status(200).send(templateInfo)
-    } catch (error) {
-        return handleLobError(error, res)
-    }
-=======
   undeliverable: 'Address is not deliverable',
   deliverable_incorrect_unit:
     'Address may be deliverable but contains a suite number that does not exist',
@@ -65,117 +35,11 @@ router.get('/templates/:templateId', async (req, res) => {
   } catch (error) {
     return handleLobError(error, res)
   }
->>>>>>> origin/main
 })
 
 router.post('/addressVerification', async (req, res) => {
   const address = req.body
 
-<<<<<<< HEAD
-        const disallowedKeys = keys.reduce((badKeys, key) => {
-            if (!ALLOWED_ADDRESS_FIELDS.includes(key)) {
-                badKeys.push(key)
-            }
-            return badKeys
-        }, [])
-
-        if (disallowedKeys.length > 0) {
-            throw new Error(
-                `Address object contained unexpected keys: ${JSON.stringify(
-                    disallowedKeys
-                )}`
-            )
-        }
-
-        if (!(address.line1 || '').trim()) {
-            throw new Error(
-                'Address object must contain a primary line (line1)'
-            )
-        }
-
-        const { zip } = address
-        if (zip != null && typeof zip !== 'string') {
-            throw new Error(
-                'Address object must contain a string-based ZIP code'
-            )
-        }
-
-        let zipCode = (zip || '').trim()
-        if (zipCode) {
-            if (!VALID_US_ZIP_CODE_MATCH.test(zipCode)) {
-                throw new Error(
-                    `Address object contained an invalid ZIP code: ${zipCode}`
-                )
-            }
-        } else if (
-            !((address.city || '').trim() && (address.state || '').trim())
-        ) {
-            throw new Error(
-                'Address object must include both city and state, or a ZIP code'
-            )
-        }
-    } catch (validationError) {
-        return res.status(400).send({ error: validationError.message })
-    }
-
-    const { line1, line2, city, state, zip } = address
-    // Ensure the ZIP code is at least 5 digits
-    const zipCode = zip ? zip.padStart(5, '0') : null
-
-    try {
-        const lob = new Lob({ apiKey: getLobApiKey() })
-        const response = await lob.usVerifications.verify({
-            primary_line: line1,
-            secondary_line: line2,
-            city,
-            state,
-            zip_code: zipCode,
-        })
-
-        const {
-            deliverability,
-            primary_line: revisedLine1,
-            secondary_line: revisedLine2,
-            components: {
-                city: revisedCity,
-                state: revisedState,
-                zip_code: revisedZip,
-                zip_code_plus_4: revisedZipPlus4,
-                address_type: addressType,
-                record_type: recordType,
-            },
-        } = response
-
-        const isUndeliverable =
-            !deliverability || deliverability === 'undeliverable'
-        const isResidential = addressType === 'residential'
-        const isPostOfficeBox = recordType === 'po_box'
-        const isPuertoRico = revisedState === 'PR'
-
-        const deliverable =
-            !isUndeliverable &&
-            isResidential &&
-            !isPostOfficeBox &&
-            !isPuertoRico
-        const warning = DELIVERABILITY_WARNINGS[deliverability] || null
-
-        if (!deliverable) {
-            let errorMessage = 'Address is undeliverable'
-            if (!isUndeliverable) {
-                if (!isResidential) {
-                    errorMessage =
-                        'Non-residential addresses are not currently supported'
-                } else if (isPostOfficeBox) {
-                    errorMessage =
-                        'Post office boxes are not currently supported'
-                } else if (isPuertoRico) {
-                    errorMessage =
-                        'Puerto Rico addresses are not currently supported'
-                }
-            }
-
-            return res.status(400).send({ error: errorMessage })
-=======
   // Very rough schema validation
   try {
     const keys = Object.keys(address || {}).sort()
@@ -270,30 +134,10 @@ router.post('/addressVerification', async (req, res) => {
           errorMessage = 'Post office boxes are not currently supported'
         } else if (isPuertoRico) {
           errorMessage = 'Puerto Rico addresses are not currently supported'
->>>>>>> origin/main
         }
       }
 
-<<<<<<< HEAD
-        return res.status(200).send({
-            deliverable,
-            warning,
-            revisedAddress: {
-                line1: revisedLine1,
-                line2: revisedLine2 || null,
-                city: revisedCity,
-                state: revisedState,
-                zip:
-                    revisedZip + (revisedZipPlus4 ? '-' + revisedZipPlus4 : ''),
-            },
-        })
-    } catch (error) {
-        // This endpoint should not return anything other than `200` status
-        // codes, even for undeliverable addresses
-        return handleLobError(error, res)
-=======
       return res.status(400).send({ error: errorMessage })
->>>>>>> origin/main
     }
 
     return res.status(200).send({
@@ -318,28 +162,6 @@ module.exports = router
 
 // Temporary implementation for fallback with deprecation warnings
 function getLobApiKey() {
-<<<<<<< HEAD
-    const { LOB_API_KEY, LiveLob } = process.env
-    const lobApiKey = LOB_API_KEY || LiveLob
-
-    if (LiveLob) {
-        if (LOB_API_KEY) {
-            console.warn('Using "LOB_API_KEY" environment variable.')
-            console.warn(
-                'Please remove your deprecated "LiveLob" environment variable!'
-            )
-        } else {
-            console.warn(
-                'Expected "LOB_API_KEY" environment variable was not found.'
-            )
-            console.warn(
-                'Falling back to deprecated "LiveLob" environment variable....'
-            )
-            console.warn(
-                'Please update your environment to use the expected key!'
-            )
-        }
-=======
   const { LOB_API_KEY, LiveLob } = process.env
   const lobApiKey = LOB_API_KEY || LiveLob
 
@@ -355,7 +177,6 @@ function getLobApiKey() {
         'Falling back to deprecated "LiveLob" environment variable....'
       )
       console.warn('Please update your environment to use the expected key!')
->>>>>>> origin/main
     }
   }
 
@@ -363,48 +184,6 @@ function getLobApiKey() {
 }
 
 function handleLobError(error, res) {
-<<<<<<< HEAD
-    let status = 500
-    let errorMessage = 'Whoops'
-
-    if (error) {
-        // error.response is from the `axios` package
-        // error._response is from the `lob` package
-        if (error.response || error._response) {
-            status = 502
-
-            let lobStatus = null
-            let lobApiError = {}
-
-            // Handle Lob API errors from `axios` requests
-            if (error.response) {
-                lobStatus = error.response.status
-                lobApiError = error.response.data.error
-            }
-            // Handle Lob API errors from `lob` requests
-            else if (error._response) {
-                lobStatus = error._response.statusCode
-                lobApiError = error._response.body.error
-            }
-
-            if (process.env.NODE_ENV !== 'test') {
-                console.error(
-                    `Lob API error (${lobStatus}): ${JSON.stringify(
-                        lobApiError
-                    )}`
-                )
-            }
-
-            // If the error is being blamed on the request...
-            // See: https://docs.lob.com/#errors
-            if ([400, 404, 422].includes(lobStatus)) {
-                status = 400
-                errorMessage = lobApiError.message
-            }
-        } else {
-            console.error(error)
-        }
-=======
   let status = 500
   let errorMessage = 'Whoops'
 
@@ -442,7 +221,6 @@ function handleLobError(error, res) {
       }
     } else {
       console.error(error)
->>>>>>> origin/main
     }
   }
 
