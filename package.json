@@ -38,7 +38,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-openid-connect": "^2.3.1",
+    "express-jwt": "^6.0.0",
+    "jwks-rsa": "^2.0.3",
     "knex": "^0.95.5",
     "lob": "^6.2.0",
     "pg": "^8.6.0"

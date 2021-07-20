@@ -147,14 +147,45 @@ Although the authentication check is not required locally, the module in use sti
 2. Add set of a new key-value pairs to the file with literal nonsense values, e.g.
 
 ```
-# Auth0 authentication parameters
-ISSUER_BASE_URL=https://YOUR_AUTH_DOMAIN
-CLIENT_ID=YOUR_CLIENT_ID
-BASE_URL=https://localhost:5000/
-SECRET=LONG_RANDOM_VALUE
+SERVER_PORT=6060
+CLIENT_ORIGIN_URL=http://localhost:4040
+AUTH0_AUDIENCE=your_Auth0_identifier_value
+AUTH0_DOMAIN=your_Auth0_domain
 ```
 
 3. Save the changes to the `.env` file.
+
+
+#### Setting up Auth0 authentication locally
+
+
+1. Follow the steps for `Ignoring the Auth0 authentication locally` for configuring the .env file.
+1. Create a file called  `.env` in the project's root directory, preferrably using the `.env.example` file as your template.
+2. Add set of a new key-value pairs to the file with literal nonsense values, e.g.
+
+```
+SERVER_PORT=6060
+CLIENT_ORIGIN_URL=http://localhost:4040
+AUTH0_AUDIENCE=
+AUTH0_DOMAIN=
+```
+
+3. Save the changes to the `.env` file.
+
+The following instructions can also be found in this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
+
+4. Sign up for an account at [Auth0](https://auth0.com/).
+5. Select `personal` when prompted with the type of account being created.
+6. Go to [API dashboard](https://manage.auth0.com/#/apis) and click `Create API` button.
+7. Add a Name to your API. It can be named anything you'd like.
+8. Set the Identifier value. `http://localhost:5000/` is recommended. For more information see this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
+9. Set `AUTH0_AUDIENCE=http://localhost:5000/` or another Identifier value from the step above.
+10. Click on the "Test" tab.
+11. Locate the section called " Asking Auth0 for tokens from my application".
+12. Click on the cURL tab to show a mock POST request.
+13. Copy your Auth0 domain, which is part of the --url parameter value: tenant-name.region.auth0.com. For more information see this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
+14. In .env, set `AUTH0_DOMAIN` value equal to domain value from step above.
+
 
 #### Connecting to the production PostgreSQL database locally
 
