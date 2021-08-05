@@ -6,8 +6,9 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public'))
 
   //Handle SPA
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
-}
+  app.get(/.*/, (req, res) => {
+   res.send('Hello World!')
+})
 
 const port = process.env.PORT || 5000
 
