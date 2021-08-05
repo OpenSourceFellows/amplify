@@ -8,7 +8,8 @@ if (process.env.NODE_ENV === 'production') {
   //Handle SPA
   app.get(/.*/, (req, res) => {
    res.send('Hello World!')
-})
+  }
+}
 
 const port = process.env.PORT || 5000
 
