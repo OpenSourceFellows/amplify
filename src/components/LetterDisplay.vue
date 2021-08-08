@@ -2,7 +2,7 @@
     <section class="letter-display">
         <v-card class="mx-auto">
             <v-card-title
-                >Take 3 hours worth of action in 5 minutes</v-card-title
+                >Take <span class="Attention"> 3 hours worth of action</span> in 5 minutes</v-card-title
             >
 
             <v-card-text>
@@ -78,6 +78,10 @@
 <style lang="less">
 .letter-display {
     height: 500px;
+}
+
+.Attention {
+    color: blue;
 }
 
 .v-stepper__label {
