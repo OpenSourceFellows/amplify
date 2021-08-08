@@ -35,7 +35,7 @@
                 </div>
             </v-col>
             <v-col cols="6">
-                <letter-display v-if="shouldRender"></letter-display>
+                <letter-display v-if="shouldRender" :is-step1="isStep1" :is-step2="isStep2" :is-step3="isStep3"></letter-display>
                 <letter-load v-else :repName="repName" :letterBody="letterBody"> 
                 </letter-load>
             </v-col>
@@ -67,7 +67,10 @@ import axios from 'axios';
           congressMembers:[],
           hasContent: false,
           search: "",
-          shouldRender:true
+          shouldRender:true,
+          isStep1: Boolean,
+          isStep2: Boolean,
+          isStep3: Boolean,
       }
     },
     methods: {
@@ -90,8 +93,8 @@ import axios from 'axios';
                     'https://murmuring-headland-63935.herokuapp.com/api/lob/templates/' + latestVersion
                     );
                 this.letterBody = letter.data.versions[0].html;
-
-
+                this.isStep2 = true;
+    
 
             } catch(e){
                 console.error(e);
@@ -113,6 +116,7 @@ import axios from 'axios';
             this.congressMembers = res.data;
             this.hasContent=true;
             console.log(res.data);
+            this.isStep1 = true;
         } catch (e) {
             console.error(e);
         }

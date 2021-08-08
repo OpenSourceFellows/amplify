@@ -6,21 +6,46 @@
             >
 
             <v-card-text>
-                <v-stepper complete vertical>
-                    <v-stepper-step color="blue" step="1">
+                <v-stepper vertical>
+
+                    
+                        <v-stepper-step v-if="isStep1 == true" color="blue" step="1" complete>
                         Enter postal code
-                    </v-stepper-step>
+                        </v-stepper-step>
+    
+
+                   
+                        <v-stepper-step  v-else color="blue" step="1">
+                        Enter postal code
+                        </v-stepper-step>
+                    
 
                     <v-stepper-content step="1"> </v-stepper-content>
 
-                    <v-stepper-step color="green" step="2">
+                    
+                        <v-stepper-step v-if="isStep2 == true" color="blue" step="2" complete>
                         Select a reprenstative
-                    </v-stepper-step>
+                        </v-stepper-step>
+                    
+                    
+                        <v-stepper-step v-else color="blue" step="2">
+                        Select a reprenstative
+                        </v-stepper-step>
+                    
 
                     <v-stepper-content step="2"> </v-stepper-content>
-                    <v-stepper-step step="3">
+                    
+                  
+                        <v-stepper-step  v-if="isStep3 == true" color="blue" step="3" complete>
                         Send your letter
                     </v-stepper-step>
+                  
+    
+                        <v-stepper-step v-else color="blue" step="3" >
+                        Send your letter
+                    </v-stepper-step>
+        
+                    
 
                     <v-stepper-content step="3"> </v-stepper-content>
                 </v-stepper>
@@ -35,28 +60,24 @@
 
   export default  {
     name: 'letter-display',
+    props: ['isStep1', 'isStep2', 'isStep3'],
     data () {
       return {
-
+          
       }
     },
     methods: {
-
+       
     },
     computed: {
-
-    }
+        
+    },
 }
 </script>
 
 <style lang="less">
 .letter-display {
     height: 500px;
-}
-
-.v-stepper__step__step {
-    background-color: #2196f3 !important;
-    border-color: #2196f3 !important;
 }
 
 .v-stepper__label {

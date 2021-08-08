@@ -1,11 +1,6 @@
 <template lang="html">
     <section class="letter-load">
         <v-card>
-            <!-- <v-card-title>{{ repName }}</v-card-title>
-            <v-card-text>
-                {{ letterBody }}
-            </v-card-text> -->
-
             <div v-show="isSubmitted">
                 <v-card-title>{{ repName }}</v-card-title>
                 <v-card-text>
