@@ -4,11 +4,16 @@
             <div v-show="isSubmitted">
                 <v-card-title>{{ repName }}</v-card-title>
                 <v-card-text>
-                  <span v-html="letterBody"></span>
+                    <span v-html="letterBody"></span>
                 </v-card-text>
             </div>
             <div v-show="!isSubmitted">
                 <v-card-text> clicked</v-card-text>
+
+                <div class="col-md text-center text-md-left">
+                    <h2>You are logged in as {{ $auth.user.name }}</h2>
+                    <!-- { JSON.stringify($auth.user, null, 2) }} -->
+                </div>
             </div>
 
             <v-card-actions>

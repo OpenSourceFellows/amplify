@@ -9,6 +9,7 @@
     "start": "npm run serve"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.17.0",
     "@babel/polyfill": "^7.4.4",
     "axios": "^0.21.1",
     "cli-plugin-eslint": "^0.1.0",

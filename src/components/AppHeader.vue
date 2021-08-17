@@ -7,10 +7,18 @@
                 <li><router-link to="/">Home</router-link></li>
                 <li><router-link to="/about">About</router-link></li>
             </ul>
+            <AuthNav />
         </nav>
     </header>
 </template>
 
+<script>
+import AuthNav from '@/components/AuthNav';
+export default {
+    name: 'NavBar',
+    components: { AuthNav }
+};
+</script>
 <style lang="less">
 header {
     display: flex;
