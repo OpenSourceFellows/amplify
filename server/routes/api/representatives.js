@@ -38,8 +38,8 @@ router.get('/:zipCode', async (req, res) => {
             address_line2: '',
             address_city: '',
             address_state: '',
-            address_zip:'',
-            address_country:'US',
+            address_zip: '',
+            address_country: 'US',
             email:
               (Array.isArray(rep.emails) && rep.emails[0]) || 'Not Made Public',
             twitter: 'Not Made Public',
@@ -56,7 +56,7 @@ router.get('/:zipCode', async (req, res) => {
             repInfo.address_state = rep.address[0].state
             repInfo.address_zip = rep.address[0].zip
           }
-          
+
           if (Array.isArray(rep.channels) && rep.channels.length > 0) {
             const facebook = rep.channels.find(
               ({ type }) => type === 'Facebook'
@@ -69,7 +69,7 @@ router.get('/:zipCode', async (req, res) => {
               repInfo.twitter = twitter.id
             }
           }
-          console.log(repInfo);
+          console.log(repInfo)
           congressMembers.push(repInfo)
         })
       })
