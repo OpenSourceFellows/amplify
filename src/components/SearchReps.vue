@@ -35,8 +35,13 @@
                 </div>
             </v-col>
             <v-col cols="6">
-                <letter-display v-if="shouldRender" :is-step1="isStep1" :is-step2="isStep2" :is-step3="isStep3"></letter-display>
-                <letter-load v-else :repName="repName" :letterBody="letterBody"> 
+                <letter-display
+                    v-if="shouldRender"
+                    :is-step1="isStep1"
+                    :is-step2="isStep2"
+                    :is-step3="isStep3"
+                ></letter-display>
+                <letter-load v-else :repName="repName" :letterBody="letterBody">
                 </letter-load>
             </v-col>
         </v-row>
@@ -80,7 +85,7 @@ import axios from 'axios';
                 this.repName = `Dear ${member.name}`;
                 this.shouldRender = false;
                 //from campaign id find template id and then make get request with template id
-                let campaignId =this.$route.params.campaignId
+                var campaignId =this.$route.params.campaignId;
 
                 const versions = await axios.get(
                     'https://murmuring-headland-63935.herokuapp.com/api/Letter_Versions/'+ campaignId
@@ -94,12 +99,12 @@ import axios from 'axios';
                     );
                 this.letterBody = letter.data.versions[0].html;
                 this.isStep2 = true;
-    
+
 
             } catch(e){
                 console.error(e);
             }
-            
+
         },
         CheckInputContent: function () {
                 if (this.search != "") {
