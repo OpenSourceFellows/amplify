@@ -17,21 +17,19 @@ export default {
     methods: {
         login() {
             // set local storage item equal to current campaign id
-            console.log(this.cmpId);
+            console.log("'login()'" + this.cmpId);
             localStorage.setItem('campaignId', this.cmpId);
             this.$auth.loginWithRedirect({
-                redirect_uri: 'http://localhost:8080/campaign/redirect'
+                redirect_uri: 'http://localhost:8080/campaign/-1'
             });
         }
     },
     mounted() {
         // check if campaign id in local storage if yes redirect to page with campaign id
         var cmpId = localStorage.getItem('campaignId');
-        console.log(cmpId);
-        console.log(this.cmpId);
         if (cmpId !== null && this.cmpId !== cmpId) {
             this.$router.push(`/campaign/${cmpId}`);
-            console.log(cmpId);
+            console.log("'route'" + cmpId);
         }
     }
 };
