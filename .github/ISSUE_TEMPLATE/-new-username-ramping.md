@@ -5,24 +5,28 @@ Resources:
 - Project Specification 
 - Invision Prototypes
 
-Week 1 
+Week 1: Get familiar with this repo
 - [ ] Read Project Specification : understand app stucture 
 - [ ] set up your repo: are you able to run npm?
-- [ ] pick an issue with label "good first issue" 
+- [ ] pick an issue with label "widget" 
 
-Week 2: 
+Week 2: Meet the team 
 - [ ] Read Project Specifications: Vuetify 
 - [ ] Drop into a pair hour 
+- [ ] pick an issue with label "good first issue" 
 
-Week 3: 
+
+Week 3: Become active
 - [ ] Read Project Specification: Data Structures
 - [ ] Write 2 questions that came up 
-- [ ] Submit a pull request:  caching input, 
+- [ ] Submit a pull request:  caching input 
 
-Week 4: 
+Week 4: Ramping up
 - [ ] Read Project Specifications: Features 
 - [ ] Submit an issue for optimization or bug fix 
 - [ ] Submit a pull request on any of these labels: letter append, payment verification
 
-Week 5: 
-- [ ] suggest subbtask issues 
+Week 5: spread your wings 
+- [ ] suggest subtask issues 
+- [ ] solve a bug fix 
+- [ ] try an issue with the label: 
