@@ -1,3 +1,12 @@
+---
+name: New Volunteer
+about: An onboarding guide for new volunteers working on frontend
+title: 'New Volunteer'
+labels: ramping, needs buddy
+assignees: '@mahrsbar'
+
+---
+
 Hi and welcome to being one of the AdvoCats! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
 
 Resources: 
