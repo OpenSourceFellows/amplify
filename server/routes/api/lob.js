@@ -1,6 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const Lob = require('lob')
+const dateFns = require('date-fns')
 
 const router = express.Router()
 
@@ -15,6 +16,44 @@ const DELIVERABILITY_WARNINGS = {
   deliverable_unnecessary_unit:
     'Address may be deliverable but contains an unnecessary suite number'
 }
+
+router.post('/create-letter', async (req, res) => {
+  // expected to object
+  // description: any letter description
+  // to: {
+  // name: 'Manisha Priyadarshini',
+  // address_line1: '210 King St',
+  // address_line2: '# 6100',
+  // address_city: 'San Francisco',
+  // address_state: 'CA',
+  // address_zip: '94107'
+  //     },
+  // from: address_id from lob
+  // file: template_id from lob
+  const { description, to, from, template_id } = req.body || {}
+  const lobApiKey = getLobApiKey()
+  const lob = new Lob({ apiKey: lobApiKey })
+  try {
+    await lob.letters.create(
+      {
+        description,
+        to,
+        from,
+        file: template_id,
+        color: false,
+        send_date: dateFns.format(dateFns.addDays(new Date(), 14), 'yyyy-MM-dd')
+      },
+      function (err, res) {
+        console.log({ err, res })
+      }
+    )
+    res.send({
+      status: 'ok'
+    })
+  } catch (err) {
+    console.log('something was wrong', err)
+  }
+})
 
 router.get('/templates/:templateId', async (req, res) => {
   const { templateId } = req.params
@@ -164,6 +203,8 @@ module.exports = router
 function getLobApiKey() {
   const { LOB_API_KEY, LiveLob } = process.env
   const lobApiKey = LOB_API_KEY || LiveLob
+
+  console.log({ lobApiKey })
 
   if (LiveLob) {
     if (LOB_API_KEY) {
