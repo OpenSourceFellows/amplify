@@ -34,7 +34,7 @@
     "db:seed": "knex seed:run"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "cors": "^2.8.5",
     "date-fns": "^2.25.0",
     "dotenv": "^8.2.0",
