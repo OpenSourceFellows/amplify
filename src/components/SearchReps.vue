@@ -12,10 +12,16 @@
                                 label="Postal Code"
                                 required
                                 v-on:keyup="CheckInputContent"
-                                v-model="search"
+                                v-model="postalCode"
                             ></v-text-field>
                         </v-form>
-                        <v-btn v-on:click="CreateRepList()" clickclass="mr-4"
+                        <v-btn
+                            :to="{
+                                name: 'Reps',
+                                params: { postalCode: postalCode }
+                            }"
+                            v-on:click="CreateRepList()"
+                            clickclass="mr-4"
                             >Submit
                         </v-btn>
                     </v-card-text>
@@ -35,8 +41,13 @@
                 </div>
             </v-col>
             <v-col cols="6">
-                <letter-display v-if="shouldRender" :is-step1="isStep1" :is-step2="isStep2" :is-step3="isStep3"></letter-display>
-                <letter-load v-else :repName="repName" :letterBody="letterBody"> 
+                <letter-display
+                    v-if="shouldRender"
+                    :is-step1="isStep1"
+                    :is-step2="isStep2"
+                    :is-step3="isStep3"
+                ></letter-display>
+                <letter-load v-else :repName="repName" :letterBody="letterBody">
                 </letter-load>
             </v-col>
         </v-row>
@@ -56,9 +67,8 @@ import axios from 'axios';
         RepresentativeCard,
         LetterLoad
     },
-    props: [],
-    mounted () {
-
+    mounted() {
+        this.CreateRepList()
     },
     data () {
       return {
@@ -66,12 +76,12 @@ import axios from 'axios';
           letterBody: String,
           congressMembers:[],
           hasContent: false,
-          search: "",
+          postalCode: this.$route.params.postalCode ||"",
           shouldRender:true,
           isStep1: Boolean,
           isStep2: Boolean,
-          isStep3: Boolean,
-      }
+          isStep3: Boolean
+          }
     },
     methods: {
         async handleRepClick (member) {
@@ -80,7 +90,7 @@ import axios from 'axios';
                 this.repName = `Dear ${member.name}`;
                 this.shouldRender = false;
                 //from campaign id find template id and then make get request with template id
-                let campaignId =this.$route.params.campaignId
+                var campaignId =this.$route.params.campaignId;
 
                 const versions = await axios.get(
                     'https://murmuring-headland-63935.herokuapp.com/api/Letter_Versions/'+ campaignId
@@ -94,15 +104,15 @@ import axios from 'axios';
                     );
                 this.letterBody = letter.data.versions[0].html;
                 this.isStep2 = true;
-    
+
 
             } catch(e){
                 console.error(e);
             }
-            
+
         },
         CheckInputContent: function () {
-                if (this.search != "") {
+                if (this.postalCode != "" ) {
                     this.hasContent = true;
                 } else {
                     this.hasContent = false;
@@ -111,18 +121,20 @@ import axios from 'axios';
         async CreateRepList() {
         try {
             const res = await axios.get(
-                'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.search
+                'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
             );
             this.congressMembers = res.data;
             this.hasContent=true;
             console.log(res.data);
+
             this.isStep1 = true;
         } catch (e) {
             console.error(e);
         }
-    },
-}
-}
+
+        }
+    }
+  }
 </script>
 
 <style scoped lang="less">

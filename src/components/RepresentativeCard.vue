@@ -1,5 +1,11 @@
 <template lang="html">
-    <v-card v-on:click="handleRepClick(member)">
+    <v-card
+        v-on:click="handleRepClick(member)"
+        :to="{
+            name: 'RepClick',
+            params: { member: member.name }
+        }"
+    >
         <v-card-title v-text="member.name"></v-card-title>
         <v-card-subtitle v-text="member.title" style="text-align:left">
         </v-card-subtitle>
@@ -16,9 +22,12 @@
     components: {
     },
     props: ['member', 'handleRepClick'],
-    mounted () {},
+    mounted () {
+      this.handleRepClick(this.member);
+    },
     data () {
-      return {}
+      return {
+      }
     },
     methods: {},
 }

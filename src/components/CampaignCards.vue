@@ -21,7 +21,10 @@
                         <v-btn
                             color="orange lighten-2"
                             text
-                            :to="`/campaign/${campaign.id}`"
+                            :to="{
+                                name: 'Campaign',
+                                params: { campaignId: campaign.id }
+                            }"
                         >
                             View Campaign
                         </v-btn>

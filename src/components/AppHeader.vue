@@ -11,6 +11,11 @@
     </header>
 </template>
 
+<script>
+export default {
+    name: 'NavBar'
+};
+</script>
 <style lang="less">
 header {
     display: flex;
