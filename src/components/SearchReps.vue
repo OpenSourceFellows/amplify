@@ -12,10 +12,16 @@
                                 label="Postal Code"
                                 required
                                 v-on:keyup="CheckInputContent"
-                                v-model="search"
+                                v-model="postalCode"
                             ></v-text-field>
                         </v-form>
-                        <v-btn v-on:click="CreateRepList()" clickclass="mr-4"
+                        <v-btn
+                            :to="{
+                                name: 'Reps',
+                                params: { postalCode: postalCode }
+                            }"
+                            v-on:click="CreateRepList()"
+                            clickclass="mr-4"
                             >Submit
                         </v-btn>
                     </v-card-text>
@@ -61,9 +67,8 @@ import axios from 'axios';
         RepresentativeCard,
         LetterLoad
     },
-    props: [],
-    mounted () {
-
+    mounted() {
+        this.CreateRepList()
     },
     data () {
       return {
@@ -71,12 +76,12 @@ import axios from 'axios';
           letterBody: String,
           congressMembers:[],
           hasContent: false,
-          search: "",
+          postalCode: this.$route.params.postalCode ||"",
           shouldRender:true,
           isStep1: Boolean,
           isStep2: Boolean,
-          isStep3: Boolean,
-      }
+          isStep3: Boolean
+          }
     },
     methods: {
         async handleRepClick (member) {
@@ -107,7 +112,7 @@ import axios from 'axios';
 
         },
         CheckInputContent: function () {
-                if (this.search != "") {
+                if (this.postalCode != "" ) {
                     this.hasContent = true;
                 } else {
                     this.hasContent = false;
@@ -116,18 +121,20 @@ import axios from 'axios';
         async CreateRepList() {
         try {
             const res = await axios.get(
-                'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.search
+                'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
             );
             this.congressMembers = res.data;
             this.hasContent=true;
             console.log(res.data);
+
             this.isStep1 = true;
         } catch (e) {
             console.error(e);
         }
-    },
-}
-}
+
+        }
+    }
+  }
 </script>
 
 <style scoped lang="less">
