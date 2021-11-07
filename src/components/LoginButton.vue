@@ -4,7 +4,7 @@
         v-if="!$auth.isAuthenticated"
         @click="login"
     >
-        Log In
+        LOG IN TO SEND
     </button>
 </template>
 

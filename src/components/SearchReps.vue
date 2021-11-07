@@ -41,14 +41,24 @@
                 </div>
             </v-col>
             <v-col cols="6">
-                <letter-display
-                    v-if="shouldRender"
-                    :is-step1="isStep1"
-                    :is-step2="isStep2"
-                    :is-step3="isStep3"
-                ></letter-display>
-                <letter-load v-else :repName="repName" :letterBody="letterBody">
-                </letter-load>
+                <div v-if="$auth.isAuthenticated">
+                    <take-action :repName="repName" :letterBody="letterBody">
+                    </take-action>
+                </div>
+                <div v-else>
+                    <letter-display
+                        v-if="shouldRender"
+                        :is-step1="isStep1"
+                        :is-step2="isStep2"
+                        :is-step3="isStep3"
+                    ></letter-display>
+                    <letter-load
+                        v-else
+                        :repName="repName"
+                        :letterBody="letterBody"
+                    >
+                    </letter-load>
+                </div>
             </v-col>
         </v-row>
     </section>
@@ -58,6 +68,7 @@
 import LetterDisplay from '@/components/LetterDisplay.vue';
 import RepresentativeCard from '@/components/RepresentativeCard.vue';
 import LetterLoad from '@/components/LetterLoad.vue';
+import takeAction from '@/components/takeAction.vue';
 import axios from 'axios';
 
   export default  {
@@ -65,7 +76,8 @@ import axios from 'axios';
     components:{
         LetterDisplay,
         RepresentativeCard,
-        LetterLoad
+        LetterLoad,
+        takeAction
     },
     mounted() {
         this.CreateRepList()
