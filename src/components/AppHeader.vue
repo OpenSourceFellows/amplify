@@ -1,43 +1,42 @@
 <template>
-    <header>
-        <img alt="Vue logo" src="../assets/logo.svg" height="50" />
-        <p>Amplify</p>
-        <nav>
-            <ul>
-                <li><router-link to="/">Home</router-link></li>
-                <li><router-link to="/about">About</router-link></li>
-            </ul>
-        </nav>
-    </header>
+    <v-toolbar color="theme_darkBlue">
+        <v-app-bar-nav-icon>
+            <img alt="Vue logo" src="../assets/logo.svg" height="40" />
+        </v-app-bar-nav-icon>
+
+        <v-toolbar-title class="white--text text-h6"
+            >PASS THE POLICY</v-toolbar-title
+        >
+
+        <v-spacer></v-spacer>
+
+        <v-toolbar-items>
+            <v-btn
+                class="white--text"
+                color="theme_darkBlue"
+                elevation="0"
+                v-for="item in menuItems"
+                :key="item.title"
+                :to="item.path"
+            >
+                {{ item.title }}
+            </v-btn>
+        </v-toolbar-items>
+    </v-toolbar>
 </template>
 
 <script>
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    data() {
+        return {
+            dialog: false,
+            menuItems: [
+                { title: 'Home', path: '/' },
+                { title: 'About', path: '/about' }
+            ]
+        };
+    }
 };
 </script>
-<style lang="less">
-header {
-    display: flex;
-    border-bottom: 1px solid #ccc;
-    padding: 0.5rem 1rem;
-    align-items: center;
-
-    p {
-        margin-left: 1rem;
-    }
-}
-
-nav {
-    margin-left: auto;
-
-    ul {
-        list-style: none;
-    }
-
-    ul li {
-        display: inline-flex;
-        margin-left: 1rem;
-    }
-}
-</style>
+<style lang="less"></style>

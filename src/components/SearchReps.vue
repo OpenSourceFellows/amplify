@@ -1,6 +1,6 @@
 <template lang="html">
     <section class="search-reps">
-        <v-row>
+        <v-row class="pa-14">
             <v-col>
                 <v-card flat>
                     <v-card-text>

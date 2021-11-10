@@ -1,11 +1,16 @@
 <template>
     <v-footer dark padless>
-        <v-card flat tile class="indigo flex lighten-1 white--text text-center">
+        <v-card
+            flat
+            tile
+            class="flex lighten-1 text-center"
+            color="theme_mediumGray"
+        >
             <v-card-text>
                 <v-btn
                     v-for="icon in icons"
                     :key="icon"
-                    class="mx-4 white--text"
+                    class="mx-4 theme_darkBlue--text"
                     icon
                 >
                     <v-icon size="24px">
@@ -14,15 +19,16 @@
                 </v-btn>
             </v-card-text>
 
-            <v-card-text class="white--text pt-0">
+            <v-card-text class="theme_darkBlue--text pt-0">
                 Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit
                 amet. Mauris cursus commodo interdum.fewfawfwf
             </v-card-text>
 
             <v-divider></v-divider>
 
-            <v-card-text class="white--text">
-                {{ new Date().getFullYear() }} — <strong>Amplify</strong>
+            <v-card-text class="theme_mediumGray--text">
+                © {{ new Date().getFullYear() }} —
+                <strong> PASSTHEPOLICY. ALL RIGHTS RESERVED.</strong>
             </v-card-text>
         </v-card>
     </v-footer>
