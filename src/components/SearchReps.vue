@@ -1,8 +1,8 @@
 <template lang="html">
     <section class="search-reps">
         <v-row>
-            <v-col cols="6">
-                <v-card>
+            <v-col>
+                <v-card flat>
                     <v-card-text>
                         <v-subheader class="pa-0">
                             Where do you live?
@@ -29,6 +29,7 @@
                 <div id="reprenstatives-list" v-show="hasContent">
                     <div>
                         <v-card
+                            flat
                             v-for="member in congressMembers"
                             :key="member.name"
                         >
@@ -36,11 +37,13 @@
                                 :handleRepClick="handleRepClick"
                                 :member="member"
                             ></representative-card>
+                            <v-divider></v-divider>
                         </v-card>
                     </div>
                 </div>
             </v-col>
-            <v-col cols="6">
+            <v-divider vertical></v-divider>
+            <v-col>
                 <div v-if="$auth.isAuthenticated">
                     <take-action :repName="repName" :letterBody="letterBody">
                     </take-action>
