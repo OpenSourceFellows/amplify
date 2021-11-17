@@ -2,50 +2,54 @@
     <section class="letter-display">
         <v-card class="mx-auto">
             <v-card-title
-                >Take <span class="Attention"> 3 hours worth of action</span> in 5 minutes</v-card-title
+                >Take <span class="Attention"> 3 hours worth of action</span> in
+                5 minutes</v-card-title
             >
 
             <v-card-text>
                 <v-stepper vertical>
-
-                    
-                        <v-stepper-step v-if="isStep1 == true" color="blue" step="1" complete>
+                    <v-stepper-step
+                        v-if="isStep1 == true"
+                        color="blue"
+                        step="1"
+                        complete
+                    >
                         Enter postal code
-                        </v-stepper-step>
-    
+                    </v-stepper-step>
 
-                   
-                        <v-stepper-step  v-else color="blue" step="1">
+                    <v-stepper-step v-else color="blue" step="1">
                         Enter postal code
-                        </v-stepper-step>
-                    
+                    </v-stepper-step>
 
                     <v-stepper-content step="1"> </v-stepper-content>
 
-                    
-                        <v-stepper-step v-if="isStep2 == true" color="blue" step="2" complete>
+                    <v-stepper-step
+                        v-if="isStep2 == true"
+                        color="blue"
+                        step="2"
+                        complete
+                    >
                         Select a reprenstative
-                        </v-stepper-step>
-                    
-                    
-                        <v-stepper-step v-else color="blue" step="2">
+                    </v-stepper-step>
+
+                    <v-stepper-step v-else color="blue" step="2">
                         Select a reprenstative
-                        </v-stepper-step>
-                    
+                    </v-stepper-step>
 
                     <v-stepper-content step="2"> </v-stepper-content>
-                    
-                  
-                        <v-stepper-step  v-if="isStep3 == true" color="blue" step="3" complete>
+
+                    <v-stepper-step
+                        v-if="isStep3 == true"
+                        color="blue"
+                        step="3"
+                        complete
+                    >
                         Send your letter
                     </v-stepper-step>
-                  
-    
-                        <v-stepper-step v-else color="blue" step="3" >
+
+                    <v-stepper-step v-else color="blue" step="3">
                         Send your letter
                     </v-stepper-step>
-        
-                    
 
                     <v-stepper-content step="3"> </v-stepper-content>
                 </v-stepper>
@@ -63,14 +67,14 @@
     props: ['isStep1', 'isStep2', 'isStep3'],
     data () {
       return {
-          
+
       }
     },
     methods: {
-       
+
     },
     computed: {
-        
+
     },
 }
 </script>

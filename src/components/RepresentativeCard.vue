@@ -1,5 +1,6 @@
 <template lang="html">
     <v-card
+        flat
         v-on:click="handleRepClick(member)"
         :to="{
             name: 'RepClick',

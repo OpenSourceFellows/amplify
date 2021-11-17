@@ -1,8 +1,8 @@
 <template lang="html">
     <section class="search-reps">
-        <v-row>
-            <v-col cols="6">
-                <v-card>
+        <v-row class="pa-14">
+            <v-col>
+                <v-card flat>
                     <v-card-text>
                         <v-subheader class="pa-0">
                             Where do you live?
@@ -29,6 +29,7 @@
                 <div id="reprenstatives-list" v-show="hasContent">
                     <div>
                         <v-card
+                            flat
                             v-for="member in congressMembers"
                             :key="member.name"
                         >
@@ -36,19 +37,31 @@
                                 :handleRepClick="handleRepClick"
                                 :member="member"
                             ></representative-card>
+                            <v-divider></v-divider>
                         </v-card>
                     </div>
                 </div>
             </v-col>
-            <v-col cols="6">
-                <letter-display
-                    v-if="shouldRender"
-                    :is-step1="isStep1"
-                    :is-step2="isStep2"
-                    :is-step3="isStep3"
-                ></letter-display>
-                <letter-load v-else :repName="repName" :letterBody="letterBody">
-                </letter-load>
+            <v-divider vertical></v-divider>
+            <v-col>
+                <div v-if="$auth.isAuthenticated">
+                    <take-action :repName="repName" :letterBody="letterBody">
+                    </take-action>
+                </div>
+                <div v-else>
+                    <letter-display
+                        v-if="shouldRender"
+                        :is-step1="isStep1"
+                        :is-step2="isStep2"
+                        :is-step3="isStep3"
+                    ></letter-display>
+                    <letter-load
+                        v-else
+                        :repName="repName"
+                        :letterBody="letterBody"
+                    >
+                    </letter-load>
+                </div>
             </v-col>
         </v-row>
     </section>
@@ -58,6 +71,7 @@
 import LetterDisplay from '@/components/LetterDisplay.vue';
 import RepresentativeCard from '@/components/RepresentativeCard.vue';
 import LetterLoad from '@/components/LetterLoad.vue';
+import takeAction from '@/components/takeAction.vue';
 import axios from 'axios';
 
   export default  {
@@ -65,7 +79,8 @@ import axios from 'axios';
     components:{
         LetterDisplay,
         RepresentativeCard,
-        LetterLoad
+        LetterLoad,
+        takeAction
     },
     mounted() {
         this.CreateRepList()
