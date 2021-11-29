@@ -18,18 +18,17 @@ const DELIVERABILITY_WARNINGS = {
 }
 
 router.post('/create-letter', async (req, res) => {
-  // expected to object
-  // description: any letter description
-  // to: {
-  // name: 'Manisha Priyadarshini',
-  // address_line1: '210 King St',
-  // address_line2: '# 6100',
-  // address_city: 'San Francisco',
-  // address_state: 'CA',
-  // address_zip: '94107'
-  //     },
-  // from: address_id from lob
-  // file: template_id from lob
+  // Create Lob address using variables passed into route via post body
+  await Lob.addresses.create({
+    name: req.body.name,
+    address_line1: req.body.address_line1,
+    address_line2: req.body.address_line2,
+    address_city: req.body.address_city,
+    address_state: req.body.state,
+    address_zip: req.body.address_zip,
+    address_country: 'US'
+  })
+
   const { description, to, from, template_id } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
