@@ -18,26 +18,27 @@ const DELIVERABILITY_WARNINGS = {
 }
 
 router.post('/create-letter', async (req, res) => {
-  // Create Lob address using variables passed into route via post body
-  await Lob.addresses.create({
-    name: req.body.name,
-    address_line1: req.body.address_line1,
-    address_line2: req.body.address_line2,
-    address_city: req.body.address_city,
-    address_state: req.body.state,
-    address_zip: req.body.address_zip,
-    address_country: 'US'
-  })
-
-  const { description, to, from, template_id } = req.body || {}
+  const { description, to, template_id } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   try {
+    // Create Lob address using variables passed into route via post body
+    const addressResponse = await Lob.addresses.create({
+      name: req.body.name,
+      address_line1: req.body.address_line1,
+      address_line2: req.body.address_line2,
+      address_city: req.body.address_city,
+      address_state: req.body.state,
+      address_zip: req.body.address_zip,
+      address_country: 'US'
+    })
+
+    // Create letter using lob library
     await lob.letters.create(
       {
         description,
         to,
-        from,
+        from: addressResponse,
         file: template_id,
         color: false,
         send_date: dateFns.format(dateFns.addDays(new Date(), 14), 'yyyy-MM-dd')
