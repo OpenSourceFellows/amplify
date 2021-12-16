@@ -1,0 +1,66 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/javascript-node-postgres
+// Update the VARIANT arg in docker-compose.yml to pick a Node.js version
+{
+  "name": "ProgramEquity/amplify-back-end",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
+  // Set minimum specificiations for Codespaces machine types
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "2gb",
+    "storage": "4gb"
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "sqltools.connections": [
+      {
+        "name": "Container database",
+        "driver": "PostgreSQL",
+        "previewLimit": 50,
+        "server": "localhost",
+        "port": 5433, // Default PostgreSQL port is 5432
+        "database": "postgres",
+        "username": "postgres",
+        "password": "postgres"
+      }
+    ],
+    "files.watcherExclude": {
+      "**/.git": true,
+      "**/node_modules": true
+    }
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [5000, 5433],
+  "portsAttributes": {
+    "5000": {
+      "label": "app"
+    },
+    "5433": {
+      "label": "db"
+    }
+  },
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": ".devcontainer/post-create-command.sh",
+
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node",
+
+  // Ensure we have the latest Git and GitHub CLI available
+  "features": {
+    "git": "latest",
+    "github-cli": "latest"
+  }
+}
