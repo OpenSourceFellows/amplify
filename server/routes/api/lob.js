@@ -18,6 +18,7 @@ const DELIVERABILITY_WARNINGS = {
 }
 
 router.post('/create-letter', async (req, res) => {
+  // Get description, to, and template_id from request body
   const { description, to, template_id } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
@@ -78,6 +79,7 @@ router.post('/create-letter', async (req, res) => {
 
   try {
     const lob = new Lob({ apiKey: getLobApiKey() })
+    // Verify address using lob's basic field validation
     const response = await lob.usVerifications.verify({
       primary_line: line1,
       secondary_line: line2,
