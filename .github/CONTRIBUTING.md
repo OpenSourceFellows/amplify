@@ -10,7 +10,7 @@ TODO
 
 #### Using a Docker environment
 
-We recommend using VS Code with the ["Remote Development" extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) to quickly spin up a full-featured development environment using Docker on your local system:
+We recommend using VS Code with the [Microsoft "Remote Development" extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) to quickly spin up a full-featured development environment using Docker on your local system:
 
 1. Follow the [installation guide](https://code.visualstudio.com/docs/remote/containers#_installation)
 2. Then either:
