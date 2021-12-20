@@ -2,7 +2,24 @@
 
 ## For Developers
 
-### Prerequisites
+### Setup
+
+#### Using GitHub Codespaces
+
+TODO
+
+#### Using a Docker environment
+
+We recommend using VS Code with the ["Remote Development" extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) to quickly spin up a full-featured development environment using Docker on your local system:
+
+1. Follow the [installation guide](https://code.visualstudio.com/docs/remote/containers#_installation)
+2. Then either:
+  - Clone the repository locally and follow the [quick start guide to open that folder in a container](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container);
+  - Or follow the [quick start guide to open a container for the repository or a pull request _without_ cloning it to your local system](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume)
+
+#### Using your local system
+
+##### Prerequisites
 
 If you are using a MacOS or Linux system, you can setup all of the prerequisites by running one convenient script:
 
@@ -10,7 +27,7 @@ If you are using a MacOS or Linux system, you can setup all of the prerequisites
 script/bootstrap
 ```
 
-#### Node.js & npm
+###### Node.js & npm
 
 Ensure a modern version of [Node.js (and npm)](https://nodejs.org/en/download/) are installed.
 
@@ -18,14 +35,14 @@ Currently used versions in production:
 - Node.js @ `14.x`
 - npm @ `6.x`
 
-#### PostgreSQL server
+###### PostgreSQL server
 
 Ensure a [PostgreSQL server is installed](https://www.postgresql.org/download/) and running.
 
 Currently used version in production:
 - PostgreSQL @ `13.x`
 
-### Getting Started
+##### Getting Started
 
 1. Clone the repository.
 
