@@ -294,3 +294,29 @@ describe('POST /api/lob/addressVerification', () => {
     expect(response.body).toEqual({ error: 'Address is undeliverable' })
   })
 })
+
+describe('POST /api/lob/create-letter', () => {
+  // For more information on these testing values, check the Lob API docs.
+  // See: https://docs.lob.com/node#us-verification-test-environment
+
+  const route = '/api/lob/create-letter'
+  const zip = '' // nonsense
+
+  test('returns 200 status for an address meeting all requirements', async () => {
+    const response = await request(app)
+      .post(route)
+      .send({ line1: 'residential house', zip })
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual({
+      deliverable: true,
+      warning: null,
+      revisedAddress: {
+        line1: '1709 BRODERICK ST',
+        line2: null,
+        city: 'SAN FRANCISCO',
+        state: 'CA',
+        zip: '94115-2525'
+      }
+    })
+  })
+})
