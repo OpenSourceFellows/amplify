@@ -26,7 +26,7 @@ Add a short description on how its more convenient than the original
 - [ ] better mobile design 
 - [ ] 
 
-**What are tasks across design, frontend, and backend?** (if theres any tasks needed that integrate a new API, pick a different color like red) 
+**What are tasks across design, frontend, and backend?** (if theres any tasks needed that integrate architecture or security, pick a different color like red) 
 _List issues for each task with files that need to be changed in subtasks within _ 
 
 Design (use purple template and link the issue here)
@@ -37,7 +37,7 @@ Frontend (use blue template and link the issue here)
 - [ ] 
 - [ ] 
 
-Backend (use grey template and link the issue here) 
+Backend (use grey and black template and link the issue here) 
 - [ ] 
 - [ ] 
 
