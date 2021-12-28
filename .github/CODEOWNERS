@@ -3,4 +3,4 @@
 * @ProgramEquity/devs
 
 //  Design & Devs should be able to approve doc changes
-*.md @ProgramEquity/devs @@ProgramEquity/design
+*.md @ProgramEquity/devs @ProgramEquity/design
