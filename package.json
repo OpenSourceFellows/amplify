@@ -33,6 +33,9 @@
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run"
   },
+  "engines": {
+    "node": ">= 14.0.0"
+  },
   "dependencies": {
     "axios": "^0.21.2",
     "cors": "^2.8.5",
