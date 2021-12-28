@@ -25,6 +25,7 @@ const baseConfig = {
   },
 
   seeds: {
+    // This value intentionally results in a failure if not overridden (or handled)
     directory: `./server/db/seeds/non-existent-directory`,
     stub: './server/db/_seed.stub.js'
   },
