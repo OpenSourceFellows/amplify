@@ -1,0 +1,8 @@
+👋 Welcome to developing ProgramEquity/amplify-back-end in GitHub Codespaces!
+
+👢 Your environment is all set up.
+
+🚀 To get started, start the server with the VS code task (⇧⌘B) or
+   run `npm start`.
+
+❓ Having troubles? Visit #devs in Slack for support!
