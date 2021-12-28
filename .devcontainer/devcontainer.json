@@ -52,6 +52,10 @@
     }
   },
 
+  "containerEnv": {
+    "POSTGRES_PORT": 5433
+  },
+
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": ".devcontainer/post-create-command.sh",
 

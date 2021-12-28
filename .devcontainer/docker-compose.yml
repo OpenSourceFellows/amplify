@@ -11,6 +11,10 @@ services:
         # Append -buster to pin to Debian.
         VARIANT: '16-buster'
 
+    # Specify environment variables to set
+    environment:
+      - POSTGRES_PORT=5433
+
     volumes:
       - ..:/workspace:cached
 

@@ -1,4 +1,5 @@
 const NODE_ENV = process.env.NODE_ENV || 'development'
+const { POSTGRES_PORT } = process.env
 const isProduction = NODE_ENV === 'production'
 
 // Required for Heroku PostgreSQL
@@ -43,14 +44,16 @@ module.exports = {
   development: {
     ...baseConfig,
     connection: {
-      database: 'pe_dev'
+      database: 'pe_dev',
+      ...(POSTGRES_PORT && { port: POSTGRES_PORT })
     }
   },
 
   test: {
     ...baseConfig,
     connection: {
-      database: 'pe_test'
+      database: 'pe_test',
+      ...(POSTGRES_PORT && { port: POSTGRES_PORT })
     }
   },
 
