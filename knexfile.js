@@ -1,6 +1,6 @@
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isProduction = NODE_ENV === 'production'
-const { POSTGRES_PORT } = process.env
+const POSTGRES_PORT = parseInt(process.env.POSTGRES_PORT, 10) || undefined
 
 // Required for Heroku PostgreSQL
 // See: https://stackoverflow.com/questions/66497248/heroku-postgres-not-able-to-connect-error-no-pg-hba-conf-entry-for-host
