@@ -66,6 +66,6 @@ module.exports = {
     await knex.schema.dropTable(tableName)
 
     // Manually remove the native enum types
-    await knex.raw(`DROP TYPE IF EXISTS political_division;`)
+    // await knex.raw(`DROP TYPE IF EXISTS political_division;`)
   }
 }
