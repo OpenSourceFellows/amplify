@@ -6,7 +6,7 @@
 
 #### Using GitHub Codespaces
 
-TODO
+[GitHub Codespaces](https://github.com/features/codespaces) is not enabled for this repository yet. When it is, you can learn more about using it from the [official GitHub documentation](https://docs.github.com/codespaces).
 
 #### Using a Docker environment
 
