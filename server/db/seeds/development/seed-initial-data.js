@@ -1,7 +1,6 @@
 module.exports = {
   async seed(knex) {
     // Deletes ALL existing entries
-    await knex('letter_versions').del() // Because these have foreign keys linked to the campaigns table
     await knex('campaigns').del()
 
     // Inserts seed entries
