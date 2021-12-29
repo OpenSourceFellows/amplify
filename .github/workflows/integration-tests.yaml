@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
 
-env:
-  CI: true
-
 jobs:
   test:
     if: ${{ github.repository == 'Ally-Guide/amplify-back-end' }}

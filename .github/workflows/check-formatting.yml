@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
 
-env:
-  CI: true
-
 jobs:
   check:
     runs-on: ubuntu-latest
