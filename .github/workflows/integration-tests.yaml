@@ -41,4 +41,4 @@ jobs:
           SERVER_PORT: 6060
           CLIENT_ORIGIN_URL: http://localhost:4040
           AUTH0_AUDIENCE: your_Auth0_identifier_value
-          AUTH0_DOMAIN: your_Auth0_domai
+          AUTH0_DOMAIN: your_Auth0_domain
