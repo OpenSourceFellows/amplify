@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   test:
-    if: ${{ github.repository == 'Ally-Guide/amplify-back-end' }}
+    if: ${{ github.repository == 'ProgramEquity/amplify-back-end' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
