@@ -38,14 +38,14 @@
     "cors": "^2.8.5",
     "date-fns": "^2.25.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "express-jwt": "^6.0.0",
     "express-rate-limit": "^5.5.1",
     "jwks-rsa": "^2.0.3",
-    "knex": "^0.95.5",
+    "knex": "^0.95.15",
     "lob": "^6.2.0",
     "pg": "^8.6.0",
-    "stripe": "^8.163.0"
+    "stripe": "^8.195.0"
   },
   "devDependencies": {
     "eslint": "^7.25.0",
