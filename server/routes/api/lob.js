@@ -204,8 +204,6 @@ function getLobApiKey() {
   const { LOB_API_KEY, LiveLob } = process.env
   const lobApiKey = LOB_API_KEY || LiveLob
 
-  console.log({ lobApiKey })
-
   if (LiveLob) {
     if (LOB_API_KEY) {
       console.warn('Using "LOB_API_KEY" environment variable.')
