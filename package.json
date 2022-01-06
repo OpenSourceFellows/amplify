@@ -40,7 +40,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.2",
     "express-jwt": "^6.0.0",
-    "express-rate-limit": "^5.5.1",
+    "express-rate-limit": "^6.0.5",
     "jwks-rsa": "^2.0.3",
     "knex": "^0.95.15",
     "lob": "^6.2.0",
