@@ -1,0 +1,6 @@
+
+// All PRs will require one dev team approval. To give another team PR approval add them below
+* @ProgramEquity/devs
+
+//  Design & Devs should be able to approve doc changes
+*.md @ProgramEquity/devs @ProgramEquity/design

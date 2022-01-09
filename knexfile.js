@@ -1,5 +1,7 @@
-const NODE_ENV = process.env.NODE_ENV || 'development'
-const isProduction = NODE_ENV === 'production'
+const { getEnv } = require('./server/db/util')
+
+const targetEnv = getEnv()
+const isProduction = targetEnv === 'production'
 
 // Required for Heroku PostgreSQL
 // See: https://stackoverflow.com/questions/66497248/heroku-postgres-not-able-to-connect-error-no-pg-hba-conf-entry-for-host
@@ -23,7 +25,8 @@ const baseConfig = {
   },
 
   seeds: {
-    directory: `./server/db/seeds/${NODE_ENV}`,
+    // This value intentionally results in a failure if not overridden (or handled)
+    directory: `./server/db/seeds/non-existent-directory`,
     stub: './server/db/_seed.stub.js'
   },
 
@@ -44,6 +47,10 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_dev'
+    },
+    seeds: {
+      ...baseConfig.seeds,
+      directory: './server/db/seeds/development'
     }
   },
 
@@ -51,6 +58,10 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_test'
+    },
+    seeds: {
+      ...baseConfig.seeds,
+      directory: './server/db/seeds/test'
     }
   },
 
