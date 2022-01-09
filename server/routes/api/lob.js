@@ -18,7 +18,7 @@ const DELIVERABILITY_WARNINGS = {
 
 router.post('/createAddress', async (req, res) => {
   // Get description, to, and template_id from request body
-  const { description, to } = req.body || {}
+  const address = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
 
@@ -26,17 +26,48 @@ router.post('/createAddress', async (req, res) => {
     // Create Lob address using variables passed into route via post body
     const addressResponse = await lob.addresses.create(
       {
-        description: description,
-        name: to.name,
-        address_line1: to.primary_line,
-        address_line2: to.secondary_line,
-        address_city: to.city,
-        address_state: to.state,
-        address_zip: to.zip,
+        description: address.description,
+        name: address.name,
+        address_line1: address.primary_line,
+        address_line2: address.secondary_line,
+        address_city: address.city,
+        address_state: address.state,
+        address_zip: address.zip,
         address_country: 'US'
       },
       function (err, res) {
-        res.status(200).send({ adr_id: addressResponse.body.id })
+        res.status(200).send({ address_id: addressResponse.body.id })
+      }
+    )
+  } catch (error) {
+    res.status(500).send({ error: 'Something failed!' })
+  }
+})
+
+router.post('/createLetter', async (req, res) => {
+  // Get description, to, and template_id from request body
+  const { description, to, from, template_id } = req.body || {}
+  const lobApiKey = getLobApiKey()
+  const lob = new Lob({ apiKey: lobApiKey })
+
+  try {
+    // Create Lob address using variables passed into route via post body
+    lob.letters.create(
+      {
+        description: description,
+        to: {
+          name: to.name,
+          address_line1: to.address_line1,
+          address_line2: to.address_line2,
+          address_city: to.address_city,
+          address_state: to.address_state,
+          address_zip: to.address_zip
+        },
+        from: from.address_id,
+        file: template_id
+      },
+      function (err, res) {
+        res.status(200).send('ok')
       }
     )
   } catch (error) {
