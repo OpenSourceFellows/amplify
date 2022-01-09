@@ -43,9 +43,10 @@ router.post('/createAddress', async (req, res) => {
 
 router.post('/createLetter', async (req, res) => {
   // Get description, to, and template_id from request body
-  const { description, to, from, template_id } = req.body || {}
+  const { description, to, from, template_id, charge } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
+  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
   try {
     // Create Lob address using variables passed into route via post body
@@ -68,8 +69,15 @@ router.post('/createLetter', async (req, res) => {
       .status(200)
       .send({ expected_delivery_date: letter.expected_delivery_date })
   } catch (error) {
-    console.log(error)
-    res.status(500).send({ error: 'Something failed!' })
+    // We'll need a stripe test env key to test this in our integration tests
+    const refund = await stripe.refunds.create({
+      charge: charge
+    })
+    // TODO handle error for refund error. Not doing this currently because chance of
+    // user making it this far in the process and both LOB API and Stripe failing is very small.
+    res.status(500).send({
+      error: `Something failed! A refund of ${refund.amount} ${refund.currency} has been issued`
+    })
   }
 })
 
