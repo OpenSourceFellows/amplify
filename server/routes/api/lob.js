@@ -36,7 +36,7 @@ router.post('/createAddress', async (req, res) => {
         address_country: 'US'
       },
       function (err, res) {
-        res.status(200).send({ address_id: addressResponse.body.id })
+        return res.status(200).send({ address_id: addressResponse.body.id })
       }
     )
   } catch (error) {
@@ -67,7 +67,7 @@ router.post('/createLetter', async (req, res) => {
         file: template_id
       },
       function (err, res) {
-        res.status(200).send('ok')
+        return res.status(200).send('ok')
       }
     )
   } catch (error) {
