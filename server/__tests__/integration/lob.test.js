@@ -299,7 +299,7 @@ describe('POST /api/lob/createLetter', () => {
   // For more information on these testing values, check the Lob API docs.
   // See: https://docs.lob.com/node#us-verification-test-environment
 
-  const route = '/api/lob/create-letter'
+  const route = '/api/lob/createLetter'
 
   test('returns 200 status for an address meeting all requirements', async () => {
     const description = {
