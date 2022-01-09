@@ -300,12 +300,33 @@ describe('POST /api/lob/create-letter', () => {
   // See: https://docs.lob.com/node#us-verification-test-environment
 
   const route = '/api/lob/create-letter'
-  const zip = '' // nonsense
 
   test('returns 200 status for an address meeting all requirements', async () => {
+    const description = {
+      description: 'This is a test description'
+    }
+    const to = {
+      description: 'Jane - Office',
+      name: 'Jane Doe',
+      email: 'jane@lob.com',
+      company: 'Lob',
+      address_line1: '1709 BRODERICK ST',
+      address_city: 'SAN FRANCISCO',
+      address_state: 'CA',
+      address_zip: '94115-2525'
+    }
+    const from = {
+      name: 'Harry',
+      address_line1: '210 King St',
+      address_line2: '# 6100',
+      address_city: 'San Francisco',
+      address_state: 'CA',
+      address_zip: '94107'
+    }
+    const template_id = 'tmpl_1057bb6f50f81fb'
     const response = await request(app)
       .post(route)
-      .send({ line1: 'residential house', zip })
+      .send({ description, to, from, template_id })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
