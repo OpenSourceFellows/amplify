@@ -27,11 +27,11 @@ router.post('/createAddress', async (req, res) => {
     const addressResponse = await lob.addresses.create({
       description: address.description,
       name: address.name,
-      address_line1: address.primary_line,
-      address_line2: address.secondary_line,
-      address_city: address.city,
-      address_state: address.state,
-      address_zip: address.zip,
+      address_line1: address.address_line1,
+      address_line2: address.address_line2,
+      address_city: address.address_city,
+      address_state: address.address_state,
+      address_zip: address.address_zip,
       address_country: 'US'
     })
 
