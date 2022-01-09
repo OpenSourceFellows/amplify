@@ -295,7 +295,7 @@ describe('POST /api/lob/addressVerification', () => {
   })
 })
 
-describe('POST /api/lob/create-letter', () => {
+describe('POST /api/lob/createLetter', () => {
   // For more information on these testing values, check the Lob API docs.
   // See: https://docs.lob.com/node#us-verification-test-environment
 
