@@ -295,6 +295,32 @@ describe('POST /api/lob/addressVerification', () => {
   })
 })
 
+describe('POST /api/lob/createAddress', () => {
+  // For more information on these testing values, check the Lob API docs.
+  // See: https://docs.lob.com/node#us-verification-test-environment
+
+  const route = '/api/lob/createAddress'
+
+  test('returns 200 status for an address meeting all requirements', async () => {
+    const address = {
+      description: 'Jane - Office',
+      name: 'Jane Doe',
+      email: 'jane@lob.com',
+      company: 'Lob',
+      address_line1: '1709 BRODERICK ST',
+      address_city: 'SAN FRANCISCO',
+      address_state: 'CA',
+      address_zip: '94115-2525'
+    }
+
+    const response = await request(app).post(route).send(address)
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual({
+      address_id: expect.any(String)
+    })
+  })
+})
+
 describe('POST /api/lob/createLetter', () => {
   // For more information on these testing values, check the Lob API docs.
   // See: https://docs.lob.com/node#us-verification-test-environment
@@ -316,28 +342,13 @@ describe('POST /api/lob/createLetter', () => {
       address_zip: '94115-2525'
     }
     const from = {
-      name: 'Harry',
-      address_line1: '210 King St',
-      address_line2: '# 6100',
-      address_city: 'San Francisco',
-      address_state: 'CA',
-      address_zip: '94107'
+      from: 'adr_a51ce9e665632ceb'
     }
     const template_id = 'tmpl_1057bb6f50f81fb'
     const response = await request(app)
       .post(route)
       .send({ description, to, from, template_id })
     expect(response.status).toBe(200)
-    expect(response.body).toEqual({
-      deliverable: true,
-      warning: null,
-      revisedAddress: {
-        line1: '1709 BRODERICK ST',
-        line2: null,
-        city: 'SAN FRANCISCO',
-        state: 'CA',
-        zip: '94115-2525'
-      }
-    })
+    expect(response.body).toEqual('ok')
   })
 })
