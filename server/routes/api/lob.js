@@ -35,7 +35,7 @@ router.post('/createAddress', async (req, res) => {
       address_country: 'US'
     })
 
-    return res.status(200).send({ address_id: addressResponse.body.id })
+    res.status(200).send({ address_id: addressResponse.id })
   } catch (error) {
     res.status(500).send({ error: 'Something failed!' })
   }
@@ -49,7 +49,7 @@ router.post('/createLetter', async (req, res) => {
 
   try {
     // Create Lob address using variables passed into route via post body
-    await lob.letters.create({
+    const letter = await lob.letters.create({
       description: description,
       to: {
         name: to.name,
@@ -60,11 +60,15 @@ router.post('/createLetter', async (req, res) => {
         address_zip: to.address_zip
       },
       from: from.address_id,
-      file: template_id
+      file: template_id,
+      color: false
     })
 
-    return res.status(200).send('ok')
+    res
+      .status(200)
+      .send({ expected_delivery_date: letter.expected_delivery_date })
   } catch (error) {
+    console.log(error)
     res.status(500).send({ error: 'Something failed!' })
   }
 })
