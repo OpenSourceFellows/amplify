@@ -24,21 +24,18 @@ router.post('/createAddress', async (req, res) => {
 
   try {
     // Create Lob address using variables passed into route via post body
-    const addressResponse = await lob.addresses.create(
-      {
-        description: address.description,
-        name: address.name,
-        address_line1: address.primary_line,
-        address_line2: address.secondary_line,
-        address_city: address.city,
-        address_state: address.state,
-        address_zip: address.zip,
-        address_country: 'US'
-      },
-      function (err, res) {
-        return res.status(200).send({ address_id: addressResponse.body.id })
-      }
-    )
+    const addressResponse = await lob.addresses.create({
+      description: address.description,
+      name: address.name,
+      address_line1: address.primary_line,
+      address_line2: address.secondary_line,
+      address_city: address.city,
+      address_state: address.state,
+      address_zip: address.zip,
+      address_country: 'US'
+    })
+
+    return res.status(200).send({ address_id: addressResponse.body.id })
   } catch (error) {
     res.status(500).send({ error: 'Something failed!' })
   }
@@ -52,24 +49,21 @@ router.post('/createLetter', async (req, res) => {
 
   try {
     // Create Lob address using variables passed into route via post body
-    await lob.letters.create(
-      {
-        description: description,
-        to: {
-          name: to.name,
-          address_line1: to.address_line1,
-          address_line2: to.address_line2,
-          address_city: to.address_city,
-          address_state: to.address_state,
-          address_zip: to.address_zip
-        },
-        from: from.address_id,
-        file: template_id
+    await lob.letters.create({
+      description: description,
+      to: {
+        name: to.name,
+        address_line1: to.address_line1,
+        address_line2: to.address_line2,
+        address_city: to.address_city,
+        address_state: to.address_state,
+        address_zip: to.address_zip
       },
-      function (err, res) {
-        return res.status(200).send('ok')
-      }
-    )
+      from: from.address_id,
+      file: template_id
+    })
+
+    return res.status(200).send('ok')
   } catch (error) {
     res.status(500).send({ error: 'Something failed!' })
   }
