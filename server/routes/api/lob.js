@@ -52,7 +52,7 @@ router.post('/createLetter', async (req, res) => {
 
   try {
     // Create Lob address using variables passed into route via post body
-    lob.letters.create(
+    await lob.letters.create(
       {
         description: description,
         to: {
