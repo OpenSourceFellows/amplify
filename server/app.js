@@ -19,7 +19,7 @@ const apiLimiter = rateLimit({
 })
 
 // only apply to requests that begin with /api/
-app.use('/api/', apiLimiter)
+app.use('/api', apiLimiter)
 
 const representatives = require('./routes/api/representatives')
 const campaigns = require('./routes/api/campaigns')
