@@ -11,7 +11,7 @@ app.use(cors())
 // Rate Limiting
 // Enable if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB or API Gateway, Nginx, etc)
 // see https://expressjs.com/en/guide/behind-proxies.html
-app.set('trust proxy', 1)
+app.set('trust proxy', true)
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -19,7 +19,7 @@ const apiLimiter = rateLimit({
 })
 
 // only apply to requests that begin with /api/
-app.use('/api/', apiLimiter)
+app.use('/api', apiLimiter)
 
 const representatives = require('./routes/api/representatives')
 const campaigns = require('./routes/api/campaigns')
