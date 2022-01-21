@@ -6,14 +6,11 @@
 
 **Which topic does this educate the constituent around? (add a short description on how its clearer than the original) ?**
 
-_Advocacy:_
+_Advocacy values to consider:_
 - [ ] Testimonials should be personal
-- [ ] Showing up to certain representatives 
-- [ ] Intermediary steps like committees 
-
-_Legislative:_ 
-- [ ] talks about letter solvency in CMS
-- [ ] Data by Jurisdiction
+- [ ] Language should be simple
+- [ ] People are lead by causes and their impact
+- [ ] Accessibility across abilities 
 
 
 **What are frontend tasks?** (if theres any tasks needed outside of the template below, pick a different color like blue) 
