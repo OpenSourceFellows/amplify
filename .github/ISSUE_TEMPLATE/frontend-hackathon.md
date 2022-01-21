@@ -12,12 +12,13 @@
   - [ ] 🍐 Assign yourself to an issue with the label ‘ramped’ (can pair with someone within your skill group here)
   - [ ] Create a pull request to implement the issue you have self-assigned
   - [ ] Open at least one issue to correct a bug or inconsistency in the component you’ve been implementing within using the bug issue template [NEED LINK].
+
+#### Milestone: During Hackathon (focus: enhancement, higher level thinking)
+ - [ ] Respond to one thread in the screens in [Design Enhancement Discussion](https://github.com/ProgramEquity/amplify-back-end/discussions/129) 
+ - [ ] Work with pod team to create a mockup of suggestion 
+ - [ ] Open up a design enhancement issue
  
 #### Wrap Up
  - [ ] Two post it notes per board
  - [ ] Took End Survey
 
-#### Milestone: During Hackathon (focus: enhancement, higher level thinking)
- - [ ] Respond to one thread in the screens in [Design Enhancement Discussion](https://github.com/ProgramEquity/amplify-back-end/discussions/129) 
- - [ ] Work with pod team to create a mockup of suggestion 
- - [ ] Open up a design enhancement issue 
