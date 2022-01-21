@@ -1,7 +1,7 @@
 ---
 name: "@username Goals issue"
 about: Describe this issue template's purpose here.
-title: ''
+title: 'Student Goals'
 labels: ''
 assignees: ''
 
