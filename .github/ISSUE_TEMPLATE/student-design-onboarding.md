@@ -1,7 +1,7 @@
 ---
 name: New UI/UX Design Volunteer
 about: An onboarding guide for new volunteers working on UI/UX Design 
-title: 'New Volunteer'
+title: 'UI/UX Student'
 labels: ramping, needs buddy
 assignees: '@evelynluu2'
 
