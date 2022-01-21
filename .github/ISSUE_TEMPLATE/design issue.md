@@ -30,6 +30,6 @@ _List files that need to be changed next to task_
 
 --------------------------
 For Coordinator
-- [ ] add appropriate labels: "good-first-issue", "frontend", "screen label" 
+- [ ] add appropriate labels: "good-first-issue", "design", "screen label", "intermediate"
 - [ ] assign time label 
 - [ ] Approved and on project board
