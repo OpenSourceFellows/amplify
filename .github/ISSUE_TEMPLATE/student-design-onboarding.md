@@ -3,7 +3,7 @@ name: New UI/UX Design Volunteer
 about: An onboarding guide for new volunteers working on UI/UX Design 
 title: 'New Volunteer'
 labels: ramping, needs buddy
-assignees: '@@evelynluu2'
+assignees: '@evelynluu2'
 
 ---
 
