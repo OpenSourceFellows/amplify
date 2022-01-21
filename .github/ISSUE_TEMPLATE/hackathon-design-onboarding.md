@@ -1,25 +1,33 @@
 Hi and welcome to being part of ProgramEquity via Advocats or MLH Fellows! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
 
 **Resources:**
-- [ ] Project Board 
+- [Project Board]() Pick an issue
 - [Figma](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=977%3A525): use to brainstorm and prototype design 
 - [Project Design Discussion](https://github.com/ProgramEquity/amplify-front-end/discussions/63) has background information to create an issue
 - [Invision Prototypes](https://manishapriyadarshini245795.invisionapp.com/overview/Amplify-cknropnaf0s0901873w3z29g8/screens) to demo current user journey 
 
-Week 1: Get familiar with this repo
-- [ ] Attend orientation 
-- [ ] Join the following GitHub Repos: front-end 
+Milestone: Pre Work
+- [ ] Review Style Guide
 - [ ] Star these discussions: Design Enhancement, Design Meetings
 - [ ] Read Figma Contribution Guidelines 
 - [ ] Read [Research Product Brief ](https://www.notion.so/programequity/Dare-to-Dream-Civic-Engagement-is-key-to-change-595ca4db3a2948c6b44569b58d530c8c)
-- [ ] Schedule 1-1 with your buddy for 15-30 minutes 
 
-Week 2: Meet the team 
-- [ ] Review Style Guide
+
+Milestone: Ramping during Hackathon – become familiar 
 - [ ] Review Community Informed Design Accessibility Guide 
 - [ ] pick an issue with label "good first design" 
 - [ ] Shadow team meeting: take notes
 - [ ] Contribute a suggestion or idea at the meeting  
+Milestone: During Hackathon – ramped (focus: implement)
+
+
+Wrap Up
+- [ ] Two post it notes per board
+- [ ] Took End Survey
+
+
+Week 2: Meet the team 
+
 
 
 Week 3: Become active
