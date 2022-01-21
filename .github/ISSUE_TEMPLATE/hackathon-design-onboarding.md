@@ -1,12 +1,11 @@
-
 ---
-name: Hackathon UI/UX 
-about: An onboarding guide for hackathon volunteers working on UI/UX Design 
-title: 'Hackathon UI/UX Participant'
-labels: ramping
-assignees: '@evelynluu2'
-
+name: "Hackathon Design issue"
+about: 'Onboarding issue for Hackathon Participants '
+title: 'Hackathon UI/UX'
+labels: 'design'
+assignees: ''
 ---
+
 Hi and welcome to being part of ProgramEquity via the Dare to Dream Hackathon! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
 
 **Resources:**
