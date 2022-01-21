@@ -1,4 +1,4 @@
-Hi and welcome to being part of ProgramEquity via Advocats or MLH Fellows! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
+Hi and welcome to being part of ProgramEquity via the Dare to Dream Hackathon! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
 
 **Resources:**
 - [Project Board]() Pick an issue
