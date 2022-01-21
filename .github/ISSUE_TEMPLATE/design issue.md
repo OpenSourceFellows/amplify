@@ -1,3 +1,10 @@
+---
+name: "Design issue"
+about: 'template to submit design changes or accessibility bugs'
+title: 'Design issue'
+labels: 'design'
+assignees: ''
+---
 **What screen is this?**
 
 **Which component? Which piece of copy or graphic?** 
