@@ -1,3 +1,11 @@
+---
+name: Hackathon Frontend 
+about: An onboarding guide for new volunteers working on UI/UX Design 
+title: 'New Volunteer'
+labels: onboarding, hackathon
+assignees: '@mahrsbar'
+---
+
 #### Milestone: Pre Work
  - [ ] Navigate to the [frontend repo](https://github.com/ProgramEquity) and review the [ReadMe](https://github.com/ProgramEquity/amplify-front-end#readme) 
    - Pay particular attention to Contribution workflow, Prod Design, Advocacy Group Challenges Brief
