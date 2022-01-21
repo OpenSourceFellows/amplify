@@ -5,9 +5,9 @@ title: 'Design issue'
 labels: 'design'
 assignees: ''
 ---
-**What screen is this?**
+## What screen is this?
 
-**Which component? Which piece of copy or graphic?** 
+## Which component? Which piece of copy or graphic?
 
 **What is the change propoosed? (add a figma screenshot, follow the workflow here)**
 
