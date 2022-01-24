@@ -1,7 +1,7 @@
 ---
-name: Hackathon Frontend 
+name: Hackathon Frontend Onboarding
 about: An onboarding guide for new volunteers working on UI/UX Design 
-title: 'New Volunteer'
+title: 'Hackathon Frontend Onboarding'
 labels: onboarding, hackathon
 assignees: '@mahrsbar'
 ---
