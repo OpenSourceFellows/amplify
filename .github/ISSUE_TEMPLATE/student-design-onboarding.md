@@ -1,5 +1,5 @@
 ---
-name: New UI/UX Design Volunteer
+name: New UI/UX Student
 about: An onboarding guide for new volunteers working on UI/UX Design 
 title: 'UI/UX Student'
 labels: ramping, needs buddy
