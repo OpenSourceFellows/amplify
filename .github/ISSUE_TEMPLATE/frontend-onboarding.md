@@ -1,7 +1,7 @@
 ---
-name: New Volunteer
+name: New Frontend Volunteer
 about: An onboarding guide for new volunteers working on frontend
-title: 'New Volunteer'
+title: 'New Frontend Volunteer'
 labels: ramping, needs buddy
 assignees: '@mahrsbar'
 
