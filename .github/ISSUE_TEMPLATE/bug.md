@@ -42,3 +42,9 @@ Before you open an issue, please check if a similar issue already exists or has 
 
 ## Possible Implementation
 <!--- Not obligatory, but suggest an idea for implementing addition or change -->
+
+## Labels 
+Please add the following labels dependent on the bug type 
+- Security Bug: Creates an issue that can cause harm 
+- Vulnerability Bug: Creates an issue to update a supply chain dependency error
+- Functional Bug: something that is causing a crash of the app 
