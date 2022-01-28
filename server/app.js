@@ -13,9 +13,10 @@ app.use(cors())
 // see https://expressjs.com/en/guide/behind-proxies.html
 app.set('trust proxy', true)
 
+// to unblock for now
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100
+  windowMs: 1 * 60 * 1000, // 1 minutes
+  max: 100000
 })
 
 // only apply to requests that begin with /api/
