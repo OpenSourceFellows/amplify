@@ -85,7 +85,8 @@ module.exports = {
 }
 
 function convertAddressStringToObject(addressStr) {
-  const reAddress = /^((?<line1>[^,]+), )?((?<line2>.+), )?(?<city>[^,]+), (?<state>[^,]+) (?<zip>[\d-]+)$/
+  const reAddress =
+    /^((?<line1>[^,]+), )?((?<line2>.+), )?(?<city>[^,]+), (?<state>[^,]+) (?<zip>[\d-]+)$/
   const match = addressStr.match(reAddress)
   if (!match) return null
   return {
