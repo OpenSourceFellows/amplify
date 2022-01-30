@@ -34,7 +34,7 @@
                             :key="member.name"
                         >
                             <representative-card
-                                :handleRepClick="handleRepClick"
+                            @handleRepSelected="handleRepSelected"
                                 :member="member"
                             ></representative-card>
                             <v-divider></v-divider>
@@ -45,7 +45,8 @@
             <v-divider vertical></v-divider>
             <v-col>
                 <div v-if="$auth.isAuthenticated">
-                    <take-action :repName="repName" :letterBody="letterBody">
+                    <take-action  :letterBody="letterBody" :selectedRep="selectedRep"
+>
                     </take-action>
                 </div>
                 <div v-else>
@@ -57,8 +58,8 @@
                     ></letter-display>
                     <letter-load
                         v-else
-                        :repName="repName"
                         :letterBody="letterBody"
+                        :selectedRep="selectedRep"
                     >
                     </letter-load>
                 </div>
@@ -68,88 +69,65 @@
 </template>
 
 <script lang="js">
-import LetterDisplay from '@/components/LetterDisplay.vue';
-import RepresentativeCard from '@/components/RepresentativeCard.vue';
-import LetterLoad from '@/components/LetterLoad.vue';
-import takeAction from '@/components/takeAction.vue';
-import axios from 'axios';
+import LetterDisplay from '@/components/LetterDisplay.vue'
+import RepresentativeCard from '@/components/RepresentativeCard.vue'
+import LetterLoad from '@/components/LetterLoad.vue'
+import takeAction from '@/components/takeAction.vue'
+import axios from 'axios'
 
-  export default  {
-    name: 'SearchReps',
-    components:{
-        LetterDisplay,
-        RepresentativeCard,
-        LetterLoad,
-        takeAction
+export default {
+  name: 'SearchReps',
+  components: {
+    LetterDisplay,
+    RepresentativeCard,
+    LetterLoad,
+    takeAction
+  },
+  mounted () {
+    this.CreateRepList()
+  },
+  data () {
+    return {
+      letterBody: '',
+      selectedRep: {},
+      congressMembers: [],
+      hasContent: true,
+      postalCode: this.$route.params.postalCode || '',
+      shouldRender: false,
+      isStep1: Boolean,
+      isStep2: Boolean,
+      isStep3: Boolean
+    }
+  },
+  methods: {
+    handleRepSelected (letterBody, selectedRep, step2) {
+      this.letterBody = letterBody
+      this.selectedRep = selectedRep
+      this.step2 = step2
     },
-    mounted() {
-        this.CreateRepList()
+    CheckInputContent: function () {
+      if (this.postalCode !== '') {
+        this.hasContent = true
+      } else {
+        this.hasContent = false
+      }
     },
-    data () {
-      return {
-          repName: String,
-          letterBody: String,
-          congressMembers:[],
-          hasContent: false,
-          postalCode: this.$route.params.postalCode ||"",
-          shouldRender:true,
-          isStep1: Boolean,
-          isStep2: Boolean,
-          isStep3: Boolean
-          }
-    },
-    methods: {
-        async handleRepClick (member) {
-            try{
+    async CreateRepList () {
+      try {
+        const res = await axios.get(
+          'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
+        )
+        this.congressMembers = res.data
+        this.hasContent = true
+        console.log(res.data)
 
-                this.repName = `Dear ${member.name}`;
-                this.shouldRender = false;
-                //from campaign id find template id and then make get request with template id
-                var campaignId =this.$route.params.campaignId;
-
-                const versions = await axios.get(
-                    'https://murmuring-headland-63935.herokuapp.com/api/Letter_Versions/'+ campaignId
-                    );
-
-                let latestVersion = versions.data[versions.data.length - 1].template_id;
-
-
-                const letter = await axios.get(
-                    'https://murmuring-headland-63935.herokuapp.com/api/lob/templates/' + latestVersion
-                    );
-                this.letterBody = letter.data.versions[0].html;
-                this.isStep2 = true;
-
-
-            } catch(e){
-                console.error(e);
-            }
-
-        },
-        CheckInputContent: function () {
-                if (this.postalCode != "" ) {
-                    this.hasContent = true;
-                } else {
-                    this.hasContent = false;
-                }
-            },
-        async CreateRepList() {
-        try {
-            const res = await axios.get(
-                'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
-            );
-            this.congressMembers = res.data;
-            this.hasContent=true;
-            console.log(res.data);
-
-            this.isStep1 = true;
-        } catch (e) {
-            console.error(e);
-        }
-
-        }
+        this.isStep1 = true
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
+}
 </script>
 
 <style scoped lang="less">

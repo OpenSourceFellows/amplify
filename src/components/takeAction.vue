@@ -19,7 +19,7 @@
                     </v-list-item>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                    <letter-load :repName="repName" :letterBody="letterBody" />
+                    <letter-load :selectedRep="selectedRep" :repName="repName" :letterBody="letterBody" />
                 </v-expansion-panel-content>
             </v-expansion-panel>
 
@@ -46,10 +46,7 @@
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <sign-name />
                 </v-expansion-panel-content>
             </v-expansion-panel>
             <v-expansion-panel>
@@ -84,29 +81,31 @@
 </template>
 
 <script lang="js">
-import LetterLoad from '@/components/LetterLoad.vue';
+import LetterLoad from '@/components/LetterLoad.vue'
+import SignName from '@/components/SignName.vue'
 
-  export default  {
-    name: 'take-action',
-    components:{LetterLoad},
-      props: {
-        repName: String,
-        letterBody: String
-        },
-    mounted () {
+export default {
+  name: 'take-action',
+  components: { LetterLoad, SignName },
+  props: {
+    repName: String,
+    letterBody: String,
+    selectedRep: Object
+  },
+  mounted () {
 
-    },
-    data () {
-      return {
-  panel: 0
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+  },
+  data () {
+    return {
+      panel: 0
     }
+  },
+  methods: {
+
+  },
+  computed: {
+
+  }
 }
 </script>
 
