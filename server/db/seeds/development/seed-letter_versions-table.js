@@ -11,8 +11,7 @@ module.exports = {
         campaign_id: 1,
         office_division: 'Federal',
         state: null,
-        county: null,
-        municipality: null
+        county: null
       },
       {
         id: 2,
@@ -20,8 +19,7 @@ module.exports = {
         campaign_id: 1,
         office_division: 'State',
         state: 'California',
-        county: null,
-        municipality: null
+        county: null
       },
       {
         id: 3,
@@ -29,8 +27,7 @@ module.exports = {
         campaign_id: 1,
         office_division: 'County',
         state: 'California',
-        county: null,
-        municipality: null
+        county: null
       },
       {
         id: 4,
@@ -38,8 +35,7 @@ module.exports = {
         campaign_id: 2,
         office_division: 'County',
         state: 'California',
-        county: 'Sacramento',
-        municipality: null
+        county: 'Sacramento'
       },
       {
         id: 5,
@@ -47,8 +43,7 @@ module.exports = {
         campaign_id: 2,
         office_division: 'State',
         state: 'California',
-        county: 'LA',
-        municipality: null
+        county: 'LA'
       },
       {
         id: 6,
@@ -56,8 +51,7 @@ module.exports = {
         campaign_id: 2,
         office_division: 'Federal',
         state: null,
-        county: null,
-        municipality: null
+        county: null
       },
       {
         id: 7,
@@ -65,8 +59,7 @@ module.exports = {
         campaign_id: 3,
         office_division: 'Federal',
         state: null,
-        county: null,
-        municipality: null
+        county: null
       },
       {
         id: 8,
@@ -74,8 +67,7 @@ module.exports = {
         campaign_id: 3,
         office_division: 'State',
         state: 'California',
-        county: null,
-        municipality: null
+        county: null
       },
       {
         id: 9,
@@ -83,8 +75,7 @@ module.exports = {
         campaign_id: 3,
         office_division: 'County',
         state: 'California',
-        county: 'San Francisco',
-        municipality: null
+        county: 'San Francisco'
       }
     ])
   }
