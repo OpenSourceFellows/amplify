@@ -5,7 +5,9 @@ module.exports = {
     await knex.schema.alterTable(tableName, function (table) {
       // Rename columns
       table.renameColumn('campaignid', 'campaign_id')
+    })
 
+    await knex.schema.alterTable(tableName, function (table) {
       // Add NOT NULL constraints to simple fields
       table.integer('campaign_id').unsigned().notNullable().alter()
       table.string('template_id').notNullable().alter()
@@ -36,7 +38,9 @@ module.exports = {
 
       // Drop unique indexes
       table.dropUnique(['template_id'])
+    })
 
+    await knex.schema.alterTable(tableName, function (table) {
       // Rename columns
       table.renameColumn('campaign_id', 'campaignid')
     })

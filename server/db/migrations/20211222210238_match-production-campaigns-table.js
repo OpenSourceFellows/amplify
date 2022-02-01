@@ -22,7 +22,9 @@ module.exports = {
       // Change type from native enum to string and drop NOT NULL constraint
       table.string('cause').nullable().alter()
       table.string('type').nullable().alter()
+    })
 
+    await knex.schema.alterTable(tableName, function (table) {
       // Rename column
       table.renameColumn('letters_sent', 'letters_counter')
     })
@@ -37,7 +39,9 @@ module.exports = {
     await knex.schema.alterTable(tableName, function (table) {
       // Rename column
       table.renameColumn('letters_counter', 'letters_sent')
+    })
 
+    await knex.schema.alterTable(tableName, function (table) {
       // Add NOT NULL constraints to simple fields
       table.string('name').notNullable().alter()
       table.string('organization').notNullable().alter()
