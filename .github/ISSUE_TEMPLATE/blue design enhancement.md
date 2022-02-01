@@ -1,4 +1,11 @@
+---
+name: UI/UX Design Task
+about: Template to create accessibility issues that need to be designed for 
+title: 'UI/UX task'
+labels: accessibility
+assignees: '@evelynluu2'
 
+---
 
 **What screen is this?**
 
