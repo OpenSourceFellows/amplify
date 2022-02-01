@@ -1,5 +1,7 @@
-const NODE_ENV = process.env.NODE_ENV || 'development'
-const isProduction = NODE_ENV === 'production'
+const { getEnv } = require('./server/db/util')
+
+const targetEnv = getEnv()
+const isProduction = targetEnv === 'production'
 const POSTGRES_PORT = parseInt(process.env.POSTGRES_PORT, 10) || undefined
 
 // Required for Heroku PostgreSQL
@@ -24,7 +26,8 @@ const baseConfig = {
   },
 
   seeds: {
-    directory: `./server/db/seeds/${NODE_ENV}`,
+    // This value intentionally results in a failure if not overridden (or handled)
+    directory: `./server/db/seeds/non-existent-directory`,
     stub: './server/db/_seed.stub.js'
   },
 
@@ -46,6 +49,10 @@ module.exports = {
     connection: {
       database: 'pe_dev',
       ...(POSTGRES_PORT && { port: POSTGRES_PORT })
+    },
+    seeds: {
+      ...baseConfig.seeds,
+      directory: './server/db/seeds/development'
     }
   },
 
@@ -54,6 +61,10 @@ module.exports = {
     connection: {
       database: 'pe_test',
       ...(POSTGRES_PORT && { port: POSTGRES_PORT })
+    },
+    seeds: {
+      ...baseConfig.seeds,
+      directory: './server/db/seeds/test'
     }
   },
 

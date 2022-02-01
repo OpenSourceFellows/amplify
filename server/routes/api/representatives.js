@@ -69,7 +69,6 @@ router.get('/:zipCode', async (req, res) => {
               repInfo.twitter = twitter.id
             }
           }
-          console.log(repInfo)
           congressMembers.push(repInfo)
         })
       })

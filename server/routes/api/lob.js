@@ -1,7 +1,6 @@
 const express = require('express')
 const axios = require('axios')
 const Lob = require('lob')
-const dateFns = require('date-fns')
 
 const router = express.Router()
 
@@ -17,41 +16,68 @@ const DELIVERABILITY_WARNINGS = {
     'Address may be deliverable but contains an unnecessary suite number'
 }
 
-router.post('/create-letter', async (req, res) => {
-  // expected to object
-  // description: any letter description
-  // to: {
-  // name: 'Manisha Priyadarshini',
-  // address_line1: '210 King St',
-  // address_line2: '# 6100',
-  // address_city: 'San Francisco',
-  // address_state: 'CA',
-  // address_zip: '94107'
-  //     },
-  // from: address_id from lob
-  // file: template_id from lob
-  const { description, to, from, template_id } = req.body || {}
+router.post('/createAddress', async (req, res) => {
+  // Get description, to, and template_id from request body
+  const address = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
+
   try {
-    await lob.letters.create(
-      {
-        description,
-        to,
-        from,
-        file: template_id,
-        color: false,
-        send_date: dateFns.format(dateFns.addDays(new Date(), 14), 'yyyy-MM-dd')
-      },
-      function (err, res) {
-        console.log({ err, res })
-      }
-    )
-    res.send({
-      status: 'ok'
+    // Create Lob address using variables passed into route via post body
+    const addressResponse = await lob.addresses.create({
+      description: address.description,
+      name: address.name,
+      address_line1: address.address_line1,
+      address_line2: address.address_line2,
+      address_city: address.address_city,
+      address_state: address.address_state,
+      address_zip: address.address_zip,
+      address_country: 'US'
     })
-  } catch (err) {
-    console.log('something was wrong', err)
+
+    res.status(200).send({ address_id: addressResponse.id })
+  } catch (error) {
+    res.status(500).send({ error: 'Something failed!' })
+  }
+})
+
+router.post('/createLetter', async (req, res) => {
+  // Get description, to, and template_id from request body
+  const { description, to, from, template_id, charge } = req.body || {}
+  const lobApiKey = getLobApiKey()
+  const lob = new Lob({ apiKey: lobApiKey })
+  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
+  try {
+    // Create Lob address using variables passed into route via post body
+    const letter = await lob.letters.create({
+      description: description,
+      to: {
+        name: to.name,
+        address_line1: to.address_line1,
+        address_line2: to.address_line2,
+        address_city: to.address_city,
+        address_state: to.address_state,
+        address_zip: to.address_zip
+      },
+      from: from.address_id,
+      file: template_id,
+      color: false
+    })
+
+    res
+      .status(200)
+      .send({ expected_delivery_date: letter.expected_delivery_date })
+  } catch (error) {
+    // We'll need a stripe test env key to test this in our integration tests
+    const refund = await stripe.refunds.create({
+      charge: charge
+    })
+    // TODO handle error for refund error. Not doing this currently because chance of
+    // user making it this far in the process and both LOB API and Stripe failing is very small.
+    res.status(500).send({
+      error: `Something failed! A refund of ${refund.amount} ${refund.currency} has been issued`
+    })
   }
 })
 
@@ -203,8 +229,6 @@ module.exports = router
 function getLobApiKey() {
   const { LOB_API_KEY, LiveLob } = process.env
   const lobApiKey = LOB_API_KEY || LiveLob
-
-  console.log({ lobApiKey })
 
   if (LiveLob) {
     if (LOB_API_KEY) {
