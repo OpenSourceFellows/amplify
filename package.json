@@ -31,7 +31,8 @@
     "db:migrate:dev": "knex migrate:latest --verbose --env development",
     "db:migrate:test": "knex migrate:latest --verbose --env test",
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
-    "db:seed": "knex seed:run"
+    "db:seed": "knex seed:run",
+    "heroku-postbuild": "npm run db:migrate:prod"
   },
   "engines": {
     "node": ">= 14.0.0"
