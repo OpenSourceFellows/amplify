@@ -17,9 +17,7 @@ module.exports = {
 
       // Add indexes
       table.index(['campaign_id'])
-
-      // Add unique indexes
-      table.unique(['template_id'])
+      table.index(['template_id'])
     })
   },
 
@@ -35,9 +33,7 @@ module.exports = {
 
       // Drop indexes
       table.dropIndex(['campaign_id'])
-
-      // Drop unique indexes
-      table.dropUnique(['template_id'])
+      table.dropIndex(['template_id'])
     })
 
     await knex.schema.alterTable(tableName, function (table) {
