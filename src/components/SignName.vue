@@ -64,6 +64,7 @@
                         placeholder="79938"
                     ></v-text-field>
                 </v-card-text>
+                <v-card-text> {{message}} </v-card-text>
                 <v-divider class="mt-12"></v-divider>
                 <v-card-actions>
                     <v-btn text>
@@ -83,14 +84,16 @@
                                     <v-icon>mdi-refresh</v-icon>
                                 </v-btn>
                             </template>
-                            <span>Refresh form</span>
+
                         </v-tooltip>
                     </v-slide-x-reverse-transition>
-                    <v-btn color="primary" text @click="submit">
+                    <v-btn color="theme_darkBlue" text @click="submit">
                         Submit
                     </v-btn>
                 </v-card-actions>
+
             </v-card>
+
         </template>
     </section>
 </template>
@@ -112,7 +115,8 @@ export default {
     zip: null,
     country: null,
     formHasErrors: false,
-    JSONstring: ''
+    JSONstring: '',
+    message: ''
   }),
 
   computed: {
@@ -160,8 +164,9 @@ export default {
       })
 
       axios.post('https://murmuring-headland-63935.herokuapp.com/api/lob/addressVerification', this.form)
-        .then(function (response) {
+        .then((response) => {
           console.log(response)
+          this.message = 'Address verified!'
         })
         .catch(function (error) {
           console.log(error)
