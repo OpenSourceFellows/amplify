@@ -5,11 +5,38 @@ title: 'Frontend or Design bug'
 labels: 'bug'
 assignees: ''
 ---
+Thank you for taking the time to file an issue. Please make sure you have completed the relevant items from the checklist below. After doing so, you may delete the checklist.
+
 ## What screen is this?
 
 ## Which component? Which piece of copy or graphic?
 
-**What is the change propoosed? (add a figma screenshot, follow the workflow here)**
+**What is the change proposed? (add a figma screenshot, follow the workflow here)**
+
+
+- [ ] Briefly describe the bug's *user-visible* impact in the title
+- [ ] If possible, include reproduction steps using the template below.
+- [ ] If this is an API bug, please include curl commands and output if possible.
+- [ ] If this is a visual bug, please include a screenshot or a GIF.
+- [ ] Content bug
+- [ ] Record any ideas you have as to the cause of the problem or how to fix it.
+- [ ] Add any labels that you might think are relevant to the problem.
+
+
+**Steps to reproduce:**
+
+1.
+2.
+3.
+
+**Actual behaviour:**
+
+[Describe the behavior that actually happens under the conditions listed above.]
+
+**Expected behaviour:**
+
+[Describe what you expect the behaviour under the conditions listed above to be.]
+
 
 **Which topic does this educate the constituent around? (add a short description on how its clearer than the original) ?**
 
