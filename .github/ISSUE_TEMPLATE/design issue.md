@@ -1,8 +1,8 @@
 ---
-name: "Design issue"
+name: "Frontend or Design bug"
 about: 'template to submit design changes or accessibility bugs'
-title: 'Design issue'
-labels: 'design'
+title: 'Frontend or Design bug'
+labels: 'bug'
 assignees: ''
 ---
 ## What screen is this?
