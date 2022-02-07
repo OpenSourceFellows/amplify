@@ -5,7 +5,7 @@ title: 'UI/UX Student'
 labels: ramping, needs buddy
 assignees: '@evelynluu2'
 
----
+
 
 Hi and welcome to being part of ProgramEquity via Advocats or MLH Fellows! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
 
