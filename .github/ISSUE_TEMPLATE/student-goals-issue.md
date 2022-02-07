@@ -5,7 +5,6 @@ title: 'Student Goals'
 labels: ''
 assignees: ''
 
----
 
 What is your past background: 
 
