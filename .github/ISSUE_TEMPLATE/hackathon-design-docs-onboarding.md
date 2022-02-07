@@ -1,7 +1,7 @@
 ---
-name: "Hackathon Design issue"
+name: "Hackathon Design Docs Onboarding"
 about: 'Onboarding issue for Hackathon Participants '
-title: 'Hackathon UI/UX'
+title: 'Hackathon Design Docs Onboarding"'
 labels: 'design'
 assignees: ''
 ---
