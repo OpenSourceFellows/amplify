@@ -22,7 +22,12 @@ Would you like to become a contributor? Please check out our [contributors guide
 
 <img width="789" alt="Screen Shot 2021-05-15 at 11 29 24 AM" src="https://user-images.githubusercontent.com/9143339/118374438-ea7da700-b570-11eb-9e1b-d6521e9a439c.png">
 
-**Maintainers**
-
+**Hackathon Leads**
+@jamesgreene 
+@teakopp
+@nawazkhan
+@beexiong 
+@ctate 
+@joelbirchler
 
 
