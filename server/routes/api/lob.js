@@ -27,11 +27,11 @@ router.post('/createAddress', async (req, res) => {
     const addressResponse = await lob.addresses.create({
       description: address.description,
       name: address.name,
-      address_line1: address.address_line1,
-      address_line2: address.address_line2,
-      address_city: address.address_city,
-      address_state: address.address_state,
-      address_zip: address.address_zip,
+      address_line1: address.line1,
+      address_line2: address.line2,
+      address_city: address.city,
+      address_state: address.state,
+      address_zip: address.zip,
       address_country: 'US'
     })
 
@@ -54,11 +54,11 @@ router.post('/createLetter', async (req, res) => {
       description: description,
       to: {
         name: to.name,
-        address_line1: to.address_line1,
-        address_line2: to.address_line2,
-        address_city: to.address_city,
-        address_state: to.address_state,
-        address_zip: to.address_zip
+        address_line1: to.line1,
+        address_line2: to.line2,
+        address_city: to.city,
+        address_state: to.state,
+        address_zip: to.zip
       },
       from: from.address_id,
       file: template_id,
