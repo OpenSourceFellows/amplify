@@ -56,18 +56,12 @@
     "POSTGRES_PORT": 5433
   },
 
-  // Use 'onCreateCommand' to run commands while the container is being created.
-  "onCreateCommand": ".devcontainer/on-create-command.sh",
-
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": ".devcontainer/post-create-command.sh",
 
-  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "node",
+  // Use 'postAttachCommand' to run commands after the container is attached to by a client.
+  "postAttachCommand": ".devcontainer/post-attach-command.sh",
 
-  // Ensure we have the latest Git and GitHub CLI available
-  "features": {
-    "git": "latest",
-    "github-cli": "latest"
-  }
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node"
 }
