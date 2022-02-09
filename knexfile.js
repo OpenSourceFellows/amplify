@@ -2,6 +2,7 @@ const { getEnv } = require('./server/db/util')
 
 const targetEnv = getEnv()
 const isProduction = targetEnv === 'production'
+const POSTGRES_PORT = parseInt(process.env.POSTGRES_PORT, 10) || undefined
 
 // Required for Heroku PostgreSQL
 // See: https://stackoverflow.com/questions/66497248/heroku-postgres-not-able-to-connect-error-no-pg-hba-conf-entry-for-host
@@ -46,7 +47,8 @@ module.exports = {
   development: {
     ...baseConfig,
     connection: {
-      database: 'pe_dev'
+      database: 'pe_dev',
+      ...(POSTGRES_PORT && { port: POSTGRES_PORT })
     },
     seeds: {
       ...baseConfig.seeds,
@@ -57,7 +59,8 @@ module.exports = {
   test: {
     ...baseConfig,
     connection: {
-      database: 'pe_test'
+      database: 'pe_test',
+      ...(POSTGRES_PORT && { port: POSTGRES_PORT })
     },
     seeds: {
       ...baseConfig.seeds,
