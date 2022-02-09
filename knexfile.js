@@ -2,6 +2,7 @@ const { getEnv } = require('./server/db/util')
 
 const targetEnv = getEnv()
 const isProduction = targetEnv === 'production'
+const { POSTGRES_USER, POSTGRES_PASSWORD } = process.env
 const POSTGRES_PORT = parseInt(process.env.POSTGRES_PORT, 10) || undefined
 
 // Required for Heroku PostgreSQL
@@ -48,6 +49,8 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_dev',
+      ...(POSTGRES_USER && { user: POSTGRES_USER }),
+      ...(POSTGRES_PASSWORD && { password: POSTGRES_PASSWORD }),
       ...(POSTGRES_PORT && { port: POSTGRES_PORT })
     },
     seeds: {
@@ -60,6 +63,8 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_test',
+      ...(POSTGRES_USER && { user: POSTGRES_USER }),
+      ...(POSTGRES_PASSWORD && { password: POSTGRES_PASSWORD }),
       ...(POSTGRES_PORT && { port: POSTGRES_PORT })
     },
     seeds: {
