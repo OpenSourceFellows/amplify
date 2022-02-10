@@ -44,7 +44,7 @@ sudo yum module reset -y nodejs
 sudo yum module install -y nodejs:16
 ```
 
-First, install the Node.js and Node.js Package Manager packages. 
+Next, install the Node.js and Node.js Package Manager packages. 
 
 ```bash
 pkcon install -y nodejs
