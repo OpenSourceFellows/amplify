@@ -70,10 +70,7 @@
                     </v-list-item>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <donate-money></donate-money>
                 </v-expansion-panel-content>
             </v-expansion-panel>
         </v-expansion-panels>
@@ -83,10 +80,11 @@
 <script lang="js">
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
+import donateMoney from '@/components/donateMoney.vue'
 
 export default {
   name: 'take-action',
-  components: { LetterLoad, SignName },
+  components: { LetterLoad, SignName, donateMoney },
   props: {
     repName: String,
     letterBody: String,
