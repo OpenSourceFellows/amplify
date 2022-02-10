@@ -3,7 +3,10 @@
         <v-row>
             <v-col v-for="campaign in campaigns" :key="campaign.id">
                 <v-card class="mx-auto" max-width="344">
-                    <v-img src="../assets/reachout.jpeg" height="200px"></v-img>
+                    <v-img
+                        :src="require('@/assets/images/cardimage.jpeg')"
+                        height="200px"
+                    ></v-img>
 
                     <v-card-title v-text="campaign.name"></v-card-title>
 

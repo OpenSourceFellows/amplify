@@ -38,22 +38,24 @@
 <script lang="js">
 
 export default {
-  name: 'donate-money',
-  props: [],
-  mounted () {
+    name: 'donate-money',
+    props: [],
+    mounted () {
 
-  },
-  data () {
-    return {
+    },
+    data () {
+        return {
+
+        }
+    },
+    methods: {
+        submit () {
+            this.$router.push('/complete')
+        }
+    },
+    computed: {
 
     }
-  },
-  methods: {
-
-  },
-  computed: {
-
-  }
 }
 
 </script>

@@ -20,6 +20,10 @@ export default {
     },
     components: {
         SearchReps
+    },
+    props: {
+        campaign: Object,
+        test: String
     }
 };
 </script>

@@ -1,11 +1,11 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import SearchReps from '../components/SearchReps';
-import RepresentativeCard from '../components/RepresentativeCard';
-// import Reps from '../components/Reps';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import SearchReps from '../components/SearchReps'
+import RepresentativeCard from '../components/RepresentativeCard'
+// import Reps from '../components/Reps'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
     {
@@ -24,7 +24,7 @@ const routes = [
         component: () => import('../views/Campaign.vue'),
         children: [
             {
-                path: 'postalcode/:postalCode',
+                path: 'postalcode/:postalCode?',
                 name: 'Reps',
                 component: SearchReps,
                 props: true,
@@ -38,13 +38,18 @@ const routes = [
                 ]
             }
         ]
-    }
-];
+    },
+    {
+        path: '/complete',
+        name: 'CompletePage',
+        component: () => import('../views/CompletePage.vue')
+    },
+]
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
-});
+})
 
-export default router;
+export default router

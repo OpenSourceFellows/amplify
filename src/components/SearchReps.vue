@@ -7,6 +7,7 @@
                         <v-subheader class="pa-0">
                             Where do you live?
                         </v-subheader>
+
                         <v-form ref="form">
                             <v-text-field
                                 label="Postal Code"
@@ -15,6 +16,7 @@
                                 v-model="postalCode"
                             ></v-text-field>
                         </v-form>
+
                         <v-btn
                             :to="{
                                 name: 'Reps',
@@ -34,7 +36,7 @@
                             :key="member.name"
                         >
                             <representative-card
-                            @handleRepSelected="handleRepSelected"
+                                @handleRepSelected="handleRepSelected"
                                 :member="member"
                             ></representative-card>
                             <v-divider></v-divider>
@@ -44,24 +46,28 @@
             </v-col>
             <v-divider vertical></v-divider>
             <v-col>
-                <div v-if="$auth.isAuthenticated">
-                    <take-action  :letterBody="letterBody" :selectedRep="selectedRep"
->
-                    </take-action>
+                <div v-if="!listVisible">
+                    <div>
+                        <img
+                            alt="Vue logo"
+                            src="../assets/images/StepsGraphic.png"
+                            width="70%"
+                        />
+                    </div>
+                    <p class="text-h6 pa-10">
+                        The bill establishes an interim goal to reduce
+                        greenhouse gas emissions to at least 50% below 2005
+                        levels by 2030 as well as a national goal to achieve
+                        net-zero greenhouse gas emissions by 2050.
+                    </p>
+                    <p></p>
                 </div>
+
                 <div v-else>
-                    <letter-display
-                        v-if="shouldRender"
-                        :is-step1="isStep1"
-                        :is-step2="isStep2"
-                        :is-step3="isStep3"
-                    ></letter-display>
-                    <letter-load
-                        v-else
+                    <take-action
                         :letterBody="letterBody"
                         :selectedRep="selectedRep"
-                    >
-                    </letter-load>
+                    ></take-action>
                 </div>
             </v-col>
         </v-row>
@@ -69,64 +75,54 @@
 </template>
 
 <script lang="js">
-import LetterDisplay from '@/components/LetterDisplay.vue'
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
-import LetterLoad from '@/components/LetterLoad.vue'
-import takeAction from '@/components/takeAction.vue'
+import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
 
 export default {
-  name: 'SearchReps',
-  components: {
-    LetterDisplay,
-    RepresentativeCard,
-    LetterLoad,
-    takeAction
-  },
-  mounted () {
-    this.CreateRepList()
-  },
-  data () {
-    return {
-      letterBody: '',
-      selectedRep: {},
-      congressMembers: [],
-      hasContent: true,
-      postalCode: this.$route.params.postalCode || '',
-      shouldRender: false,
-      isStep1: Boolean,
-      isStep2: Boolean,
-      isStep3: Boolean
-    }
-  },
-  methods: {
-    handleRepSelected (letterBody, selectedRep, step2) {
-      this.letterBody = letterBody
-      this.selectedRep = selectedRep
-      this.step2 = step2
+    name: 'SearchReps',
+    components: {
+        RepresentativeCard,
+        TakeAction
     },
-    CheckInputContent: function () {
-      if (this.postalCode !== '') {
-        this.hasContent = true
-      } else {
-        this.hasContent = false
-      }
-    },
-    async CreateRepList () {
-      try {
-        const res = await axios.get(
-          'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
-        )
-        this.congressMembers = res.data
-        this.hasContent = true
-        console.log(res.data)
 
-        this.isStep1 = true
-      } catch (e) {
-        console.error(e)
-      }
+    data () {
+        return {
+            letterBody: '',
+            selectedRep: {},
+            congressMembers: [],
+            hasContent: true,
+            postalCode: this.$route.params.postalCode || '',
+            listVisible: false,
+        }
+    },
+    methods: {
+        handleRepSelected (letterBody, selectedRep, step2) {
+            this.letterBody = letterBody
+            this.selectedRep = selectedRep
+            this.step2 = step2
+        },
+        CheckInputContent: function () {
+            if (this.postalCode !== '') {
+                this.hasContent = true
+            } else {
+                this.hasContent = false
+            }
+        },
+        async CreateRepList () {
+            try {
+                const res = await axios.get(
+                    'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
+                )
+                this.congressMembers = res.data
+                this.hasContent = true
+                console.log(res.data)
+                this.listVisible=true
+                } catch (e) {
+                console.error(e)
+            }
+        }
     }
-  }
 }
 </script>
 

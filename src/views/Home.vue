@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import HomeHero from '@/components/HomeHero.vue';
 import CampaignCards from '@/components/CampaignCards';
 
