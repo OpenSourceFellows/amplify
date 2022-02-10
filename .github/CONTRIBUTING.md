@@ -33,6 +33,23 @@ If you are using a MacOS or Linux system, you can setup all of the prerequisites
 script/bootstrap
 ```
 
+##### Linux prerequisites
+
+Here are some steps you can follow to install the prerequisites on RHEL, CentOS or Fedora Linux. 
+
+First, reset and install a more recent version of Node.js like version 16. 
+
+```bash
+sudo yum module reset -y nodejs
+sudo yum module install -y nodejs:16
+```
+
+First, install the Node.js and Node.js Package Manager packages. 
+
+```bash
+pkcon install -y nodejs
+```
+
 ###### Node.js & npm
 
 Ensure a modern version of [Node.js (and npm)](https://nodejs.org/en/download/) are installed.
@@ -59,6 +76,14 @@ script/bootstrap
 ```
 
   If you can successfully run that script, you may skip ahead to Step 5.
+
+###### Linux PostgreSQL server
+
+Here are some steps you can follow to install the PostgreSQL relational database on RHEL, CentOS or Fedora Linux. 
+
+```bash
+pkcon install -y postgresql-server
+```
 
 3. Install the dependencies. From a terminal, navigate to the project's root directory and run:
 
