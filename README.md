@@ -6,7 +6,7 @@
 
 ## Project setup
 Make sure you have Node and NPM installed. </br></br>
-Current versions are: </br>
+Working versions are: </br>
 node: 16.13.1</br>
 npm: 8.1.2 </br>
 
