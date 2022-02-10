@@ -12,21 +12,23 @@
 
                     <v-card-subtitle
                         v-text="campaign.organization"
-                        style="text-align:left"
+                        style="text-align: left"
                     >
                     </v-card-subtitle>
-                    <v-card-text
-                        v-text="campaign.page_url"
-                        style="text-align:left"
-                    >
-                    </v-card-text>
+                    <v-card-actions>
+                        <a :href="'//' + campaign.page_url" target="_blank">
+                            {{ campaign.page_url }}
+                        </a>
+
+                        <v-spacer></v-spacer>
+                    </v-card-actions>
                     <v-card-actions>
                         <v-btn
                             color="orange lighten-2"
                             text
                             :to="{
                                 name: 'Campaign',
-                                params: { campaignId: campaign.id }
+                                params: { campaignId: campaign.id },
                             }"
                         >
                             View Campaign
@@ -47,7 +49,7 @@ export default {
     name: 'CampaignCards',
     data() {
         return {
-            campaigns: []
+            campaigns: [],
         };
     },
     async created() {
@@ -59,7 +61,7 @@ export default {
         } catch (e) {
             console.error(e);
         }
-    }
+    },
 };
 </script>
 
