@@ -2,6 +2,22 @@
 
 ## Getting Started
 
+This repo contains both the Frontend and Backend portions of the amplify application.
+
+The frontend code is maintained in the `src` directory.
+
+Code for the backend (API) is stored in the `server` directory.
+
+You will need to copy the `.env.example` file to a `.env` file in this repo.
+
+Then run `script/bootstrap` to install all local dependencies.
+
+You can develop locally in both applications by running `npm run dev` which will launch a vue server at `localhost:8081` and an express API server at `localhost:6000`
+
+It is also possible to run the frontend or backend independently with either `npm run fe-dev` or `npm run be-dev` respectively.
+
+
+
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 **Resources:**
