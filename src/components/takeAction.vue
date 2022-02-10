@@ -84,11 +84,11 @@
 <script lang="js">
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
-import DonateMoney from '@/components/DonateMoney.vue'
+import donateMoney from '@/components/donateMoney.vue'
 
 export default {
     name: 'take-action',
-    components: { LetterLoad, SignName, DonateMoney },
+    components: { LetterLoad, SignName, donateMoney },
     props: {
         repName: String,
         letterBody: String,
