@@ -3,7 +3,10 @@
         <v-row>
             <v-col v-for="campaign in campaigns" :key="campaign.id">
                 <v-card class="mx-auto" max-width="344">
-                    <v-img src="../assets/reachout.jpeg" height="200px"></v-img>
+                    <v-img
+                        :src="require('@/assets/images/cardimage.jpeg')"
+                        height="200px"
+                    ></v-img>
 
                     <v-card-title v-text="campaign.name"></v-card-title>
 
@@ -34,21 +37,17 @@
                 </v-card>
             </v-col>
         </v-row>
-        <Campaign :test="test"></Campaign>
-
     </v-container>
 </template>
 
 <script>
 import axios from 'axios';
-import Campaign from '@/views/Campaign.vue'
 
 export default {
     name: 'CampaignCards',
     data() {
         return {
-            campaigns: [],
-            test:"ABC"
+            campaigns: []
         };
     },
     async created() {

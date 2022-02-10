@@ -19,7 +19,11 @@
                     </v-list-item>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                    <letter-load :selectedRep="selectedRep" :repName="repName" :letterBody="letterBody" />
+                    <letter-load
+                        :selectedRep="selectedRep"
+                        :repName="repName"
+                        :letterBody="letterBody"
+                    />
                 </v-expansion-panel-content>
             </v-expansion-panel>
 
@@ -80,11 +84,11 @@
 <script lang="js">
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
-import donateMoney from '@/components/donateMoney.vue'
+import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
     name: 'take-action',
-    components: { LetterLoad, SignName, donateMoney },
+    components: { LetterLoad, SignName, DonateMoney },
     props: {
         repName: String,
         letterBody: String,

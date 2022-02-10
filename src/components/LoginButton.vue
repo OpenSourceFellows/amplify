@@ -1,11 +1,9 @@
 <template>
-    <button
-        class="btn btn-primary btn-block"
-        v-if="!$auth.isAuthenticated"
-        @click="login"
-    >
-        LOG IN TO SEND
-    </button>
+    <v-row>
+        <v-btn color="primary" v-if="!$auth.isAuthenticated" @click="login">
+            LOG IN TO SEND
+        </v-btn>
+    </v-row>
 </template>
 
 <script>
