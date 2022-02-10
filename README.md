@@ -49,12 +49,12 @@ Goal Structure:
 
 ## Project setup
 ```shell
-npm install
+script/bootstrap
 ```
 
 ### Compiles and hot-reloads full app for development
 ```shell
-npm run dev-serve
+npm run dev
 ```
 
 #### For backend only
