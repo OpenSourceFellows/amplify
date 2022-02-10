@@ -6,20 +6,6 @@ const router = express.Router()
 const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
-const MIN_LETTER_COST = 150
-
-const calculateOrderAmount = (donation = []) => {
-  // calling the db to get the donation amount based on the Id
-  if (donation.length > 0) {
-    return donation[0].price
-  }
-  return MIN_LETTER_COST
-}
-
-// to-do: create a campaignId and donationId columns in the transactions table
-// delete campaignId from variants
-// Create checkout tables in production
-
 router.post('/create-transaction', async (req, res) => {
   const { transaction, email, campaignId, donationId } = req.body || {}
   if (!transaction || !email) {
@@ -47,27 +33,22 @@ router.post('/create-transaction', async (req, res) => {
 })
 
 // 1. send a request to `/create-payment-intent`
-// sample request object from the UI:
-// items = {
-//   donationId: 2,
-// }
-// 2. donationId should be sent if the user chooses either 10, 15, or 20
-// 3. hardcode the donationIds in the UI for now
-// 4. This API will return the client secret. Use it to complete the transaction in the UI
-// 5. Once the transaction is successful in the UI, pass the data to the `/`
+// with a `donationAmount` as string or integer
+// If user doesn't select any particular `donationAmount`, send `1` in the donationAmount
+// 2. This API will return the client secret. Use it to complete the transaction in the UI
 
 router.post('/create-payment-intent', async (req, res) => {
   try {
-    const { items } = req.body || {}
-    let donation
+    const acceptableCharges = [1, 2, 20, 50]
+    const { donationAmount } = req.body || {}
+    const parsedDonationAmount = parseInt(donationAmount, 10)
 
-    if (items && items.donationId) {
-      donation = await db('variants').where('id', items.donationId)
+    if (!acceptableCharges.includes(parsedDonationAmount)) {
+      return res.status(400).send({ error: 'Invalid Amount' })
     }
 
-    const donationAmount = calculateOrderAmount(donation)
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: donationAmount,
+      amount: parsedDonationAmount * 100, // in cents
       currency: 'usd'
     })
     res.send({
