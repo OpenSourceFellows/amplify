@@ -4,8 +4,14 @@
 - Wiki: API methods, Data Structures 
 - Weekly meetings on Thursdays at 2pt, contact @mahrsbar to be added
 
-
 ## Project setup
+Make sure you have Node and NPM installed. </br></br>
+Current versions are: </br>
+node: 16.13.1</br>
+npm: 8.1.2 </br>
+
+Then clone the repo, and run the following command
+
 ```
 npm install
 ```
