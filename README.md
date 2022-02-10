@@ -1,10 +1,10 @@
-# amplify-back-end
+# amplify
 
 ## Getting Started
 
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
-**Resources:** 
+**Resources:**
 - [Overall Project Board](https://github.com/ProgramEquity/amplify-back-end/projects?type=beta)
 - [Feature Breakdown](https://github.com/ProgramEquity/amplify-back-end/discussions/137)
 - [OSS Architecture](https://github.com/ProgramEquity/amplify-back-end/discussions/170)
@@ -23,21 +23,72 @@ Would you like to become a contributor? Please check out our [contributors guide
 
 **App Structure**
 
-Current Structure: 
+Current Structure:
 
 <img width="772" alt="Screen Shot 2022-01-26 at 1 31 37 PM" src="https://user-images.githubusercontent.com/9143339/153340605-dd7fd6e6-a5f3-466f-95e2-d941f8c0c2ee.png">
 
-Goal Structure: 
+Goal Structure:
 
 <img width="739" alt="Screen Shot 2022-01-26 at 1 31 28 PM" src="https://user-images.githubusercontent.com/9143339/153340595-f749e711-2e42-4069-aad6-3e949efda7d9.png">
 
 
 **Hackathon Leads**
-@jamesgreene 
+@jamesgreene
 @teakopp
 @nawazkhan
-@beexiong 
-@ctate 
+@beexiong
+@ctate
 @joelbirchler
 
+# amplify
+- Project Walkthrough: create this issue to start contributing
+- Project Scope: Deeper dive of feature user stories and component structure
+- Wiki: API methods, Data Structures
+- Weekly meetings on Thursdays at 2pt, contact @mahrsbar to be added
 
+
+## Project setup
+```shell
+npm install
+```
+
+### Compiles and hot-reloads full app for development
+```shell
+npm run dev-serve
+```
+
+#### For backend only
+```shell
+npm run be-dev
+```
+
+#### For backend only
+```shell
+npm run fe-dev
+```
+### Compiles and minifies for production
+```shell
+npm run build
+```
+
+### Lints and fixes files
+```shell
+npm run lint
+```
+
+### Build and run as if in prod
+```shell
+npm run start
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Project Walkthrough
+create this issue to ramp with a buddy
+
+User Journey:
+<img width="1561" alt="Screen Shot 2021-11-11 at 1 51 44 PM" src="https://user-images.githubusercontent.com/9143339/141374196-a32d140f-885c-4e45-8bba-99696f81ee80.png">
+
+
+Try out our [figma](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653)

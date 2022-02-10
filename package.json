@@ -17,8 +17,9 @@
   "scripts": {
     "postinstall": "husky install",
     "be-start": "node server/server.js",
+    "be-dev": "nodemon server/dev-server.js",
     "start": "npm run build && npm run be-start",
-    "dev": "concurrently \"nodemon server/devserver.js\" \"npm run fe-start\"",
+    "dev": "concurrently \"npm run be-dev\" \"npm run fe-dev\"",
     "lint": "eslint --fix .",
     "lint:check": "eslint .",
     "format": "prettier --write . '!**/*.md'",
@@ -36,7 +37,7 @@
     "heroku-postbuild": "npm run db:migrate:prod",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "fe-start": "npm run serve"
+    "fe-dev": "npm run serve"
   },
   "engines": {
     "node": ">= 14.0.0"
