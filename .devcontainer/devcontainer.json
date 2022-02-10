@@ -56,12 +56,9 @@
     "POSTGRES_PORT": 5433
   },
 
+  // Use 'onCreateCommand' to run commands when the container is being created.
+  "onCreateCommand": ".devcontainer/on-create-command.sh",
+
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": ".devcontainer/post-create-command.sh",
-
-  // Use 'postAttachCommand' to run commands after the container is attached to by a client.
-  "postAttachCommand": ".devcontainer/post-attach-command.sh",
-
-  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "node"
+  "postCreateCommand": ".devcontainer/post-create-command.sh"
 }
