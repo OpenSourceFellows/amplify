@@ -17,8 +17,8 @@
   "scripts": {
     "postinstall": "husky install",
     "be-start": "node server/server.js",
-    "start": "concurrently \"npm run be-start\" \"npm run fe-start\"",
-    "dev": "nodemon server/server.js",
+    "start": "npm run build && npm run be-start",
+    "dev": "concurrently \"nodemon server/devserver.js\" \"npm run fe-start\"",
     "lint": "eslint --fix .",
     "lint:check": "eslint .",
     "format": "prettier --write . '!**/*.md'",
