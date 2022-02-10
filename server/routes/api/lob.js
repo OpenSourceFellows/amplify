@@ -23,6 +23,47 @@ router.post('/createAddress', async (req, res) => {
   const lob = new Lob({ apiKey: lobApiKey })
 
   try {
+    const response = await lob.usVerifications.verify({
+      primary_line: address.line1,
+      secondary_line: address.line2,
+      city: address.city,
+      state: address.state,
+      zip_code: address.zipCode
+    })
+
+    const {
+      deliverability,
+      components: {
+        state: revisedState,
+        address_type: addressType,
+        record_type: recordType
+      }
+    } = response
+
+    const isUndeliverable =
+      !deliverability || deliverability === 'undeliverable'
+    const isResidential = addressType === 'residential'
+    const isPostOfficeBox = recordType === 'po_box'
+    const isPuertoRico = revisedState === 'PR'
+
+    const deliverable =
+      !isUndeliverable && isResidential && !isPostOfficeBox && !isPuertoRico
+
+    if (!deliverable) {
+      let errorMessage = 'Address is undeliverable'
+      if (!isUndeliverable) {
+        if (!isResidential) {
+          errorMessage = 'Non-residential addresses are not currently supported'
+        } else if (isPostOfficeBox) {
+          errorMessage = 'Post office boxes are not currently supported'
+        } else if (isPuertoRico) {
+          errorMessage = 'Puerto Rico addresses are not currently supported'
+        }
+      }
+
+      return res.status(400).send({ error: errorMessage })
+    }
+
     // Create Lob address using variables passed into route via post body
     const addressResponse = await lob.addresses.create({
       description: address.description,

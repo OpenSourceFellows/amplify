@@ -312,7 +312,7 @@ describe('POST /api/lob/createAddress', () => {
       name: 'Jane Doe',
       email: 'jane@lob.com',
       company: 'Lob',
-      line1: '1709 BRODERICK ST',
+      line1: 'residential house',
       city: 'SAN FRANCISCO',
       state: 'CA',
       zip: '94115-2525'
