@@ -10,6 +10,8 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.17.0",
     "@babel/polyfill": "^7.4.4",
+    "@stripe/stripe-js": "^1.22.0",
+    "@vue-stripe/vue-stripe": "^4.4.1",
     "axios": "^0.21.1",
     "cli-plugin-eslint": "^0.1.0",
     "core-js": "^3.6.5",
