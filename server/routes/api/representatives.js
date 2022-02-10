@@ -14,6 +14,14 @@ router.get('/:zipCode', async (req, res) => {
   const congressMembers = []
   const { zipCode } = req.params
 
+  if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
+    res.status(400).send({
+      error:
+        'Invalid zip code format, valid examples are 84054-6013 or 84054. The zipcode used was ' +
+        zipCode
+    })
+    return
+  }
   try {
     const response = await axios.get(
       'https://www.googleapis.com/civicinfo/v2/representatives',
