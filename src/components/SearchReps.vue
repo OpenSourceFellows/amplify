@@ -76,14 +76,14 @@
 
 <script lang="js">
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
-import takeAction from '@/components/takeAction.vue'
+import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
 
 export default {
     name: 'SearchReps',
     components: {
         RepresentativeCard,
-        takeAction
+        TakeAction
     },
 
     data () {
