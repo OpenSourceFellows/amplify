@@ -62,7 +62,7 @@ npm run dev-serve
 npm run be-dev
 ```
 
-#### For backend only
+#### For frontend only
 ```shell
 npm run fe-dev
 ```
