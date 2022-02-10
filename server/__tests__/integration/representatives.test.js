@@ -11,10 +11,16 @@ afterAll(async () => {
 })
 
 describe('/api/representatives/:zipcode', () => {
-  const zipcode = '92107'
-  const route = '/api/representatives/' + zipcode
   test('returns 200 status', async () => {
-    const response = await request(app).get(route)
+    const response = await request(app).get('/api/representatives/92107')
     expect(response.status).toBe(200)
+  })
+  test('returns 200 status', async () => {
+    const response = await request(app).get('/api/representatives/92107-1234')
+    expect(response.status).toBe(200)
+  })
+  test('returns 400 status', async () => {
+    const response = await request(app).get('/api/representatives/cat')
+    expect(response.status).toBe(400)
   })
 })
