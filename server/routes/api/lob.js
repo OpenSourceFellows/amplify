@@ -4,7 +4,17 @@ const Lob = require('lob')
 
 const router = express.Router()
 
-const ALLOWED_ADDRESS_FIELDS = ['line1', 'line2', 'city', 'state', 'zip']
+const ALLOWED_ADDRESS_FIELDS = [
+  'name',
+  'email',
+  'company',
+  'description',
+  'line1',
+  'line2',
+  'city',
+  'state',
+  'zip'
+]
 const VALID_US_ZIP_CODE_MATCH = /^(?:\d{1,4}|\d{5}(?:[+-]?\d{4})?)$/
 const DELIVERABILITY_WARNINGS = {
   undeliverable: 'Address is not deliverable',
@@ -21,6 +31,53 @@ router.post('/createAddress', async (req, res) => {
   const address = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
+
+  // Very rough schema validation
+  try {
+    const keys = Object.keys(address || {}).sort()
+    if (!address || keys.length === 0) {
+      throw new Error('Address object cannot be empty')
+    }
+
+    const disallowedKeys = keys.reduce((badKeys, key) => {
+      if (!ALLOWED_ADDRESS_FIELDS.includes(key)) {
+        badKeys.push(key)
+      }
+      return badKeys
+    }, [])
+
+    if (disallowedKeys.length > 0) {
+      throw new Error(
+        `Address object contained unexpected keys: ${JSON.stringify(
+          disallowedKeys
+        )}`
+      )
+    }
+
+    if (!(address.line1 || '').trim()) {
+      throw new Error('Address object must contain a primary line (line1)')
+    }
+
+    const { zip } = address
+    if (zip != null && typeof zip !== 'string') {
+      throw new Error('Address object must contain a string-based ZIP code')
+    }
+
+    let zipCode = (zip || '').trim()
+    if (zipCode) {
+      if (!VALID_US_ZIP_CODE_MATCH.test(zipCode)) {
+        throw new Error(
+          `Address object contained an invalid ZIP code: ${zipCode}`
+        )
+      }
+    } else if (!((address.city || '').trim() && (address.state || '').trim())) {
+      throw new Error(
+        'Address object must include both city and state, or a ZIP code'
+      )
+    }
+  } catch (validationError) {
+    return res.status(400).send({ error: validationError.message })
+  }
 
   try {
     const response = await lob.usVerifications.verify({
