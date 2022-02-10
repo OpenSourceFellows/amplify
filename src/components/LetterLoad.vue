@@ -20,9 +20,18 @@
         <v-card-title> {{ selectedRep.name }} </v-card-title>
 
         <v-card-text>
-          <span v-html="letterBody"></span>
+          <span class="text-sm-left" v-html="letterBody"></span>
         </v-card-text>
+
+        <v-text-field
+          label="I'm in support because (This is optional but when you add your story - it makes a difference"
+          :rules="rules"
+          outlined
+          color="blue"
+        >
+        </v-text-field>
       </div>
+
       <div v-show="!isSubmitted">
         <v-card-text> clicked</v-card-text>
 
