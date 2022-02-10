@@ -87,7 +87,7 @@
 
                         </v-tooltip>
                     </v-slide-x-reverse-transition>
-                    <v-btn color="theme_darkBlue" text @click="submit">
+                    <v-btn color="primary" text @click="submit">
                         Submit
                     </v-btn>
                 </v-card-actions>
@@ -103,76 +103,87 @@ import axios from 'axios'
 
 export default {
 
-  name: 'sign-name',
+    name: 'sign-name',
 
-  data: () => ({
-    errorMessages: '',
-    name: null,
-    line1: null,
-    line2: null,
-    city: null,
-    state: null,
-    zip: null,
-    country: null,
-    formHasErrors: false,
-    JSONstring: '',
-    message: ''
-  }),
+    data: () => ({
+        errorMessages: '',
+        name: null,
+        line1: null,
+        line2: null,
+        city: null,
+        state: null,
+        zip: null,
+        country: null,
+        formHasErrors: false,
+        JSONstring: '',
+        message: ''
+    }),
 
-  computed: {
-    form () {
-      return {
-        line1: this.line1,
-        line2: this.line2,
-        city: this.city,
-        state: this.state,
-        zip: this.zip
-      }
-    }
-  },
-
-  watch: {
-    name () {
-      this.errorMessages = ''
-    }
-  },
-
-  methods: {
-
-    addressCheck () {
-      this.errorMessages = this.address && !this.name
-        ? 'Hey! I\'m required'
-        : ''
-
-      return true
+    computed: {
+        form () {
+            return {
+                line1: this.line1,
+                line2: this.line2,
+                city: this.city,
+                state: this.state,
+                zip: this.zip
+            }
+        }
     },
-    resetForm () {
-      this.errorMessages = []
-      this.formHasErrors = false
 
-      Object.keys(this.form).forEach(f => {
-        this.$refs[f].reset()
-      })
+    watch: {
+        name () {
+            this.errorMessages = ''
+        }
     },
-    submit () {
-      this.formHasErrors = false
 
-      Object.keys(this.form).forEach(f => {
-        if (!this.form[f]) this.formHasErrors = true
+    methods: {
 
-        this.$refs[f].validate(true)
-      })
+        addressCheck () {
+            this.errorMessages = this.address && !this.name
+                ? "Hey! I'm required"
+                : ''
 
-      axios.post('https://murmuring-headland-63935.herokuapp.com/api/lob/addressVerification', this.form)
-        .then((response) => {
-          console.log(response)
-          this.message = 'Address verified!'
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+            return true
+        },
+        resetForm () {
+            this.errorMessages = []
+            this.formHasErrors = false
+
+            Object.keys(this.form).forEach(f => {
+                this.$refs[f].reset()
+            })
+        },
+        submit () {
+            this.formHasErrors = false
+
+            Object.keys(this.form).forEach(f => {
+                if (!this.form[f]) this.formHasErrors = true
+
+                this.$refs[f].validate(true)
+            })
+
+            axios.post('https://murmuring-headland-63935.herokuapp.com/api/lob/addressVerification', this.form)
+                .then((response) => {
+                    console.log(response)
+                    console.log(this.form)
+                    this.message = 'Address verified!'
+                    if (response.status === 200) {
+                        return axios.post('https://murmuring-headland-63935.herokuapp.com/api/lob/createAddress', response.data)
+                            .then((response) => {
+                                console.log(response)
+                            })
+                            .catch(function (error) {
+                                console.log(error)
+                            })
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+
     }
-  }
 }
 </script>
 

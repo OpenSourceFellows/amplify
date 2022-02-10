@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import LoginButton from '@/components/LoginButton';
-import LogoutButton from '@/components/LogoutButton';
+import LoginButton from '@/components/LoginButton'
+import LogoutButton from '@/components/LogoutButton'
 
 export default {
     name: 'AuthenticationButton',
     components: { LogoutButton, LoginButton }
-};
+}
 </script>

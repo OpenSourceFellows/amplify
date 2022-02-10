@@ -42,16 +42,12 @@
 import AuthNav from '@/components/AuthNav'
 
 export default {
-  name: 'letter-load',
+  name: 'LetterLoad',
   components: { AuthNav },
   props: {
     repName: String,
     letterBody: String,
     selectedRep: Object
-  },
-
-  mounted () {
-
   },
 
   data () {
@@ -60,14 +56,18 @@ export default {
       isSubmitted: true
     }
   },
+  computed: {
+
+  },
+
+  mounted () {
+
+  },
   methods: {
     currentDate () {
       const current = new Date()
       const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`; return date
     }
-
-  },
-  computed: {
 
   }
 }

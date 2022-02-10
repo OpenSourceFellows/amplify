@@ -76,57 +76,55 @@ import takeAction from '@/components/takeAction.vue'
 import axios from 'axios'
 
 export default {
-  name: 'SearchReps',
-  components: {
-    LetterDisplay,
-    RepresentativeCard,
-    LetterLoad,
-    takeAction
-  },
-  mounted () {
-    this.CreateRepList()
-  },
-  data () {
-    return {
-      letterBody: '',
-      selectedRep: {},
-      congressMembers: [],
-      hasContent: true,
-      postalCode: this.$route.params.postalCode || '',
-      shouldRender: false,
-      isStep1: Boolean,
-      isStep2: Boolean,
-      isStep3: Boolean
-    }
-  },
-  methods: {
-    handleRepSelected (letterBody, selectedRep, step2) {
-      this.letterBody = letterBody
-      this.selectedRep = selectedRep
-      this.step2 = step2
+    name: 'SearchReps',
+    components: {
+        LetterDisplay,
+        RepresentativeCard,
+        LetterLoad,
+        takeAction
     },
-    CheckInputContent: function () {
-      if (this.postalCode !== '') {
-        this.hasContent = true
-      } else {
-        this.hasContent = false
-      }
-    },
-    async CreateRepList () {
-      try {
-        const res = await axios.get(
-          'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
-        )
-        this.congressMembers = res.data
-        this.hasContent = true
-        console.log(res.data)
 
-        this.isStep1 = true
-      } catch (e) {
-        console.error(e)
-      }
+    data () {
+        return {
+            letterBody: '',
+            selectedRep: {},
+            congressMembers: [],
+            hasContent: true,
+            postalCode: this.$route.params.postalCode || '',
+            shouldRender: false,
+            isStep1: Boolean,
+            isStep2: Boolean,
+            isStep3: Boolean
+        }
+    },
+    methods: {
+        handleRepSelected (letterBody, selectedRep, step2) {
+            this.letterBody = letterBody
+            this.selectedRep = selectedRep
+            this.step2 = step2
+        },
+        CheckInputContent: function () {
+            if (this.postalCode !== '') {
+                this.hasContent = true
+            } else {
+                this.hasContent = false
+            }
+        },
+        async CreateRepList () {
+            try {
+                const res = await axios.get(
+                    'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
+                )
+                this.congressMembers = res.data
+                this.hasContent = true
+                console.log(res.data)
+
+                this.isStep1 = true
+            } catch (e) {
+                console.error(e)
+            }
+        }
     }
-  }
 }
 </script>
 

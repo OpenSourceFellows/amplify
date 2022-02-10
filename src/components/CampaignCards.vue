@@ -34,17 +34,21 @@
                 </v-card>
             </v-col>
         </v-row>
+        <Campaign :test="test"></Campaign>
+
     </v-container>
 </template>
 
 <script>
 import axios from 'axios';
+import Campaign from '@/views/Campaign.vue'
 
 export default {
     name: 'CampaignCards',
     data() {
         return {
-            campaigns: []
+            campaigns: [],
+            test:"ABC"
         };
     },
     async created() {

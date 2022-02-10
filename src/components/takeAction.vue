@@ -83,27 +83,27 @@ import SignName from '@/components/SignName.vue'
 import donateMoney from '@/components/donateMoney.vue'
 
 export default {
-  name: 'take-action',
-  components: { LetterLoad, SignName, donateMoney },
-  props: {
-    repName: String,
-    letterBody: String,
-    selectedRep: Object
-  },
-  mounted () {
+    name: 'take-action',
+    components: { LetterLoad, SignName, donateMoney },
+    props: {
+        repName: String,
+        letterBody: String,
+        selectedRep: Object
+    },
+    mounted () {
 
-  },
-  data () {
-    return {
-      panel: 0
+    },
+    data () {
+        return {
+            panel: 0
+        }
+    },
+    methods: {
+
+    },
+    computed: {
+
     }
-  },
-  methods: {
-
-  },
-  computed: {
-
-  }
 }
 </script>
 

@@ -1,37 +1,30 @@
 <template>
-    <v-container fluid="false">
-        <v-parallax height="400" class="hero-image">
-            <v-row
-                align="center"
-                justify="center"
-                align-content="center"
-                class="header-row"
-            >
-                <v-col class="text-center" cols="10">
-                    <h1 class="display-1 font-weight-thin mb-4">
+    <v-container fluid class="pa-0">
+        <v-parallax height="200" class="hero-background ">
+            <v-row align="center">
+                <v-col>
+                    <p class="text-h3 font-weight-medium mb-4">
                         Amplify
-                    </h1>
-                    <h4 class="subheading">
-                        Changes start by doing.
-                    </h4>
+                    </p>
+                    <p class="text-h5 text-uppercase">
+                        Learn. Support. Put it in print.
+                    </p>
                 </v-col>
             </v-row>
         </v-parallax>
+       <v-card flat width="80%" class="pa-10 ma-auto"><p class="text-h6">Choose a cause to reach out to your representative for the Climate Can’t Wait Campaign 2022. </p>
+        <p> 30 advocacy orgs across New York are pushing a historic package that can drastically address climate change. Your assignment? Make sure you get the word out, we’ll handle post.</p></v-card>
     </v-container>
 </template>
 
 <script>
 export default {
     name: 'HomeHero'
-};
+}
 </script>
 
 <style lang="less">
-.header-row {
-    align-items: center;
-}
-.hero-image {
-    background-image: url('../assets/amplify.png');
-    background-position-y: -35px;
+.hero-background {
+    background-color: #38618C;
 }
 </style>
