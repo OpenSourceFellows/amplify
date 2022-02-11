@@ -52,7 +52,7 @@
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-jwt": "^6.0.0",
     "express-rate-limit": "^6.2.1",
