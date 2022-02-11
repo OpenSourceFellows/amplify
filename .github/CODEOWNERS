@@ -1,6 +1,5 @@
-
-// All PRs will require one dev team approval. To give another team PR approval add them below
+# All PRs will require one dev team approval
 * @ProgramEquity/devs
 
-//  Design & Devs should be able to approve doc changes
+#  Design & Devs should be able to approve Markdown changes
 *.md @ProgramEquity/devs @ProgramEquity/design
