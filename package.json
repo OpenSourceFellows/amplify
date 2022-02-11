@@ -1,0 +1,52 @@
+{
+  "name": "amplify-front-end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "start": "npm run serve"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.17.0",
+    "@babel/polyfill": "^7.4.4",
+    "@stripe/stripe-js": "^1.22.0",
+    "@vue-stripe/vue-stripe": "^4.4.1",
+    "axios": "^0.21.1",
+    "cli-plugin-eslint": "^0.1.0",
+    "core-js": "^3.6.5",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuetify": "^2.6.3",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
+    "prettier": "^1.19.1",
+    "sass": "^1.32.0",
+    "sass-loader": "^10.0.0",
+    "style-resources-loader": "^1.4.1",
+    "vue-cli-plugin-style-resources-loader": "~0.1.5",
+    "vue-eslint-parser": "^8.2.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "singleQuote": true,
+    "useTabs": false
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 10"
+  ]
+}
