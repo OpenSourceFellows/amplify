@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Update 'VARIANT' to pick a default version of Node.js: 16, 14, 12.
+        # Append -bullseye to pin to local arm64/Apple Silicon.
+        # Append -buster to pin to Debian.
+        VARIANT: '16-buster'
+
+    # Specify environment variables to set
+    environment:
+      - POSTGRESS_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5433
+
+    volumes:
+      - ..:/workspace:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: node
+
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5433
+    expose:
+      - '5433' # Publishes port to other containers but NOT to host machine
+    ports:
+      - '5433:5433' # Expose PostgreSQL to the host machine on port 5433
+    command: '-p 5433' # Run the container's PostgreSQL server on non-standard port 5433 as well
+
+volumes:
+  postgres-data: null

@@ -1,0 +1,44 @@
+name: Integration Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  test:
+    if: ${{ github.repository == 'ProgramEquity/amplify-back-end' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+
+      - name: Setup node
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561
+        with:
+          node-version: 16.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- server/__tests__/integration/
+        env:
+          # Google Civic API key
+          CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
+          # Test environment Lob API key
+          LOB_API_KEY: ${{ secrets.TEST_LOB_API_KEY }}
+          # Auth0 authentication parameters with nonsensical sample values
+          SERVER_PORT: 6060
+          CLIENT_ORIGIN_URL: http://localhost:4040
+          AUTH0_AUDIENCE: your_Auth0_identifier_value
+          AUTH0_DOMAIN: your_Auth0_domain
