@@ -35,32 +35,6 @@ export const useAuth0 = ({
         error: null
       }
     },
-    methods: {
-      async handleRedirectCallback() {
-        this.isLoading = true
-        try {
-          await this.auth0Client.handleRedirectCallback()
-          this.user = await this.auth0Client.getUser()
-          this.isAuthenticated = true
-        } catch (error) {
-          this.error = error
-        } finally {
-          this.isLoading = false
-        }
-      },
-
-      loginWithRedirect(options) {
-        return this.auth0Client.loginWithRedirect(options)
-      },
-
-      logout(options) {
-        return this.auth0Client.logout(options)
-      },
-
-      getTokenSilently(o) {
-        return this.auth0Client.getTokenSilently(o)
-      }
-    },
 
     async created() {
       this.auth0Client = await createAuth0Client({
@@ -86,6 +60,32 @@ export const useAuth0 = ({
         this.isAuthenticated = await this.auth0Client.isAuthenticated()
         this.user = await this.auth0Client.getUser()
         this.isLoading = false
+      }
+    },
+    methods: {
+      async handleRedirectCallback() {
+        this.isLoading = true
+        try {
+          await this.auth0Client.handleRedirectCallback()
+          this.user = await this.auth0Client.getUser()
+          this.isAuthenticated = true
+        } catch (error) {
+          this.error = error
+        } finally {
+          this.isLoading = false
+        }
+      },
+
+      loginWithRedirect(options) {
+        return this.auth0Client.loginWithRedirect(options)
+      },
+
+      logout(options) {
+        return this.auth0Client.logout(options)
+      },
+
+      getTokenSilently(o) {
+        return this.auth0Client.getTokenSilently(o)
       }
     }
   })
