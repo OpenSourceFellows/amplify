@@ -47,7 +47,7 @@
     "@babel/polyfill": "^7.4.4",
     "@stripe/stripe-js": "^1.22.0",
     "@vue-stripe/vue-stripe": "^4.4.1",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "cli-plugin-eslint": "^0.1.0",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
