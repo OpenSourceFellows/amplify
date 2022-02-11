@@ -1,20 +1,20 @@
 <template lang="html">
-    <v-card
-        flat
-        v-on:click="handleRepClick"
-        :to="{
-            name: 'RepClick',
-            params: { member: member.name }
-        }"
-    >
-        <v-card-title v-text="member.name"></v-card-title>
-        <v-card-subtitle v-text="member.title" style="text-align:left">
-        </v-card-subtitle>
-        <v-card-subtitle
-            v-text="member.city"
-            style="text-align:left"
-        ></v-card-subtitle>
-    </v-card>
+  <v-card
+    flat
+    v-on:click="handleRepClick"
+    :to="{
+      name: 'RepClick',
+      params: { member: member.name }
+    }"
+  >
+    <v-card-title v-text="member.name"></v-card-title>
+    <v-card-subtitle v-text="member.title" style="text-align: left">
+    </v-card-subtitle>
+    <v-card-subtitle
+      v-text="member.city"
+      style="text-align: left"
+    ></v-card-subtitle>
+  </v-card>
 </template>
 
 <script lang="js">

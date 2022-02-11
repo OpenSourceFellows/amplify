@@ -26,9 +26,9 @@ const vuetify = new Vuetify({
         theme_mediumGray: '#BBBBBB',
         theme_lightGray: '#EEEEEE',
         theme_white: 'FFFFFF'
-      },
-    },
-  },
+      }
+    }
+  }
 })
 
 export default vuetify

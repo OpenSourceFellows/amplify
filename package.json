@@ -91,11 +91,6 @@
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
   },
-  "prettier": {
-    "tabWidth": 4,
-    "singleQuote": true,
-    "useTabs": false
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
