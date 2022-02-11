@@ -2,7 +2,6 @@
   <section class="action-complete">
     <h1>action-complete Component</h1>
   </section>
-
 </template>
 
 <script lang="js">
@@ -25,11 +24,9 @@ export default {
 
     }
 }
-
 </script>
 
 <style scoped lang="less">
-  .action-complete {
-
-  }
+.action-complete {
+}
 </style>
