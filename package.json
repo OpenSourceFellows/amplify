@@ -46,7 +46,7 @@
     "express-jwt": "^6.0.0",
     "express-rate-limit": "^6.2.1",
     "jwks-rsa": "^2.0.3",
-    "knex": "^0.95.15",
+    "knex": "^1.0.3",
     "lob": "^6.5.5",
     "pg": "^8.6.0",
     "stripe": "^8.202.0"
