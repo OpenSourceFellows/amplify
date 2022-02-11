@@ -84,7 +84,7 @@
     "nodemon": "^2.0.7",
     "prettier": "2.5.1",
     "sass": "^1.32.0",
-    "sass-loader": "^10.0.0",
+    "sass-loader": "^12.4.0",
     "style-resources-loader": "^1.4.1",
     "supertest": "^6.2.2",
     "vue-cli-plugin-style-resources-loader": "~0.1.5",
