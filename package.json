@@ -58,6 +58,6 @@
     "jest": "^27.4.7",
     "nodemon": "^2.0.7",
     "prettier": "2.5.1",
-    "supertest": "^6.1.3"
+    "supertest": "^6.2.2"
   }
 }
