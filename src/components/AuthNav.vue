@@ -1,14 +1,14 @@
 <template>
-    <div class="navbar-nav ml-auto">
-        <AuthenticationButton />
-    </div>
+  <div class="navbar-nav ml-auto">
+    <AuthenticationButton />
+  </div>
 </template>
 
 <script>
-import AuthenticationButton from '@/components/AuthenticationButton';
+import AuthenticationButton from '@/components/AuthenticationButton'
 
 export default {
-    name: 'AuthNav',
-    components: { AuthenticationButton }
-};
+  name: 'AuthNav',
+  components: { AuthenticationButton }
+}
 </script>
