@@ -19,7 +19,7 @@ echo "installing Node"
 nodenv install -s
 
 echo "==> Starting PostgreSQL service..."
-brew services start postgres
+brew services restart postgres
 
 echo "==> Installing Node dependencies..."
 npm install
