@@ -34,10 +34,12 @@
     "db:migrate:test": "knex migrate:latest --verbose --env test",
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run",
-    "heroku-postbuild": "npm run db:migrate:prod",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "fe-dev": "npm run serve"
+    "fe-dev": "npm run serve",
+    "heroku-postbuild": "./script/heroku-postbuild.sh",
+    "deploy:fe": "npm run build",
+    "deploy:be": "npm run db:migrate:prod"
   },
   "engines": {
     "node": ">= 14.0.0"
