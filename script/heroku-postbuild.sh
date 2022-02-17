@@ -39,9 +39,9 @@ else
   STARTUP_SCRIPT=$(npm pkg get scripts.fe-start)
 fi
 
-# Remove trailing quote
-STARTUP_SCRIPT="${STARTUP_SCRIPT%\"}"
-# Remove leading quote
-STARTUP_SCRIPT="${STARTUP_SCRIPT#\"}"
+# Remove the leading and trailing quote pair
+if [[ "${STARTUP_SCRIPT}" == \"*\" ]]; then
+  STARTUP_SCRIPT="${STARTUP_SCRIPT:1:-1}"
+fi
 # Overwrite the value of `scripts.start` in the package.json file
 npm set-script start "${STARTUP_SCRIPT}"
