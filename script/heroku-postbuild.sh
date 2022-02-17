@@ -26,7 +26,27 @@ fi
 
 # Otherwise, run the relevant `npm run deploy:*` command
 if [[ "${IS_BACKEND}" == "true" ]]; then
+  # Retrieve the value of `scripts.be-start` from the package.json file
+  BACKEND_STARTUP=$(npm pkg get scripts.be-start)
+  # Remove trailing quote
+  BACKEND_STARTUP="${BACKEND_STARTUP%\"}"
+  # Remove leading quote
+  BACKEND_STARTUP="${BACKEND_STARTUP#\"}"
+  # Overwrite the value of `scripts.start` in the package.json file
+  npm set-script start "${BACKEND_STARTUP}"
+
+  # Run the build/deploy operations
   npm run deploy:be
 else
+  # Retrieve the value of `scripts.fe-start` from the package.json file
+  FRONTEND_STARTUP=$(npm pkg get scripts.fe-start)
+  # Remove trailing quote
+  FRONTEND_STARTUP="${FRONTEND_STARTUP%\"}"
+  # Remove leading quote
+  FRONTEND_STARTUP="${FRONTEND_STARTUP#\"}"
+  # Overwrite the value of `scripts.start` in the package.json file
+  npm set-script start "${FRONTEND_STARTUP}"
+
+  # Run the build/deploy operations
   npm run deploy:fe
 fi
