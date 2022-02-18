@@ -51,6 +51,7 @@
     "@vue-stripe/vue-stripe": "^4.4.1",
     "axios": "^0.25.0",
     "cli-plugin-eslint": "^0.1.0",
+    "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
