@@ -6,9 +6,9 @@ set -e
 # Inspect variables to analyze the current deployment environment
 #
 
-# If DYNO is not empty and NODE_HOME contains the substring "heroku/", then we
+# If DYNO is not empty and STACK begins with the substring "heroku-", then we
 # can assume we are running on Heroku
-if [[ ! -z "${DYNO}" && "${NODE_HOME}" =~ .*"heroku/".* ]]; then
+if [[ ! -z "${DYNO}" && "${STACK}" =~ ^"heroku-".* ]]; then
   IS_HEROKU=true
 fi
 
@@ -20,7 +20,6 @@ fi
 
 # Fail hard if we are not running on Heroku
 if [[ "${IS_HEROKU}" != "true" ]]; then
-  printenv
   echo "❌ ERROR! Cannot run this script outside of Heroku." >&2
   exit 1
 fi
