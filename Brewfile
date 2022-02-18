@@ -1,2 +1,2 @@
-brew "node"
+brew "nodenv"
 brew "postgresql"
