@@ -42,9 +42,9 @@
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [5000, 5433],
+  "forwardPorts": [6000, 5433],
   "portsAttributes": {
-    "5000": {
+    "6000": {
       "label": "app"
     },
     "5433": {
