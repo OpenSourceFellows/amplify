@@ -12,7 +12,7 @@ You will need to copy the `.env.example` file to a `.env` file in this repo.
 
 Then run `script/bootstrap` to install all local dependencies.
 
-You can develop locally in both applications by running `npm run dev` which will launch a vue server at `localhost:8081` and an express API server at `localhost:6000`
+You can develop locally in both applications by running `npm run dev` which will launch a vue server at `localhost:8080` and an express API server at `localhost:6000`
 
 It is also possible to run the frontend or backend independently with either `npm run fe-dev` or `npm run be-dev` respectively.
 
