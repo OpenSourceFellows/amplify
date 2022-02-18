@@ -40,7 +40,7 @@
     "fe-dev": "npm run serve"
   },
   "engines": {
-    "node": ">= 14.0.0"
+    "node": "16.x"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.17.0",
