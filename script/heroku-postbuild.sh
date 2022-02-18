@@ -20,6 +20,7 @@ fi
 
 # Fail hard if we are not running on Heroku
 if [[ "${IS_HEROKU}" != "true" ]]; then
+  printenv
   echo "❌ ERROR! Cannot run this script outside of Heroku." >&2
   exit 1
 fi
