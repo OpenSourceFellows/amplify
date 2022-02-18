@@ -1,9 +1,10 @@
-👋 Welcome to developing ProgramEquity/amplify-back-end in GitHub Codespaces!
+👋 Welcome to developing ProgramEquity/amplify in GitHub Codespaces!
 
 👢 Your environment is all set up.
 
-🚀 To get started, start the server with the VS code task (⇧⌘B) or
-   run `npm start`.
-   verify at `/api/campaigns`
+🚀 To get started, start the servers by running `npm run dev`.
+
+🕸️ Verify the frontend at http://localhost:8080/
+🧪 Verify the API backend at http://localhost:6000/api/campaigns
 
 ❓ Having troubles? Visit #devs in Slack for support!

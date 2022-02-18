@@ -1,32 +1,36 @@
 <template lang="html">
   <section class="take-action">
     <v-expansion-panels v-model="panel" flat>
-      <v-expansion-panel v-model="panel">
+      <v-expansion-panel :key="0" v-model="panel">
         <v-expansion-panel-header>
           <v-list-item-avatar class="grey lighten-2" max-width="40px">
             <span> 1</span>
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title>Review the letter</v-list-item-title>
-              <v-list-item-subtitle
-                >Add any additional details to organizer
-                requests.</v-list-item-subtitle
-              >
+              <v-list-item-title> Review the letter </v-list-item-title>
+              <v-list-item-subtitle>
+                Add any additional details to organizer requests.
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <letter-load
-            :selectedRep="selectedRep"
-            :repName="repName"
-            :letterBody="letterBody"
+            :selected-rep="selectedRep"
+            :rep-name="repName"
+            :letter-body="letterBody"
           />
+        </v-expansion-panel-content>
+        <v-expansion-panel-content>
+          <v-btn width="160" dark color="theme_darkBlue" @click="nextPage">
+            Next
+          </v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
 
-      <v-expansion-panel>
-        <v-divider></v-divider>
+      <v-expansion-panel :key="1">
+        <v-divider />
 
         <v-expansion-panel-header class="flex-nowrap">
           <v-list-item-avatar class="grey lighten-2 50px" max-width="40px">
@@ -43,9 +47,14 @@
         <v-expansion-panel-content>
           <sign-name />
         </v-expansion-panel-content>
+        <v-expansion-panel-content>
+          <v-btn width="160" dark color="theme_darkBlue" @click="nextPage">
+            Next
+          </v-btn>
+        </v-expansion-panel-content>
       </v-expansion-panel>
-      <v-expansion-panel>
-        <v-divider></v-divider>
+      <v-expansion-panel :key="2">
+        <v-divider />
 
         <v-expansion-panel-header>
           <v-list-item-avatar class="grey lighten-2" max-width="40px">
@@ -54,15 +63,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Send the letter</v-list-item-title>
-              <v-list-item-subtitle
-                >Postage is $1.50 to send your letter.Learn more about what how
-                this fee is used.</v-list-item-subtitle
-              >
+              <v-list-item-subtitle>
+                Postage is $1.50 to send your letter.Learn more about what how
+                this fee is used.
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <donate-money></donate-money>
+          <donate-money />
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -75,26 +84,37 @@ import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
-    name: 'take-action',
+    name: 'TakeAction',
     components: { LetterLoad, SignName, DonateMoney },
     props: {
-        repName: String,
-        letterBody: String,
-        selectedRep: Object
-    },
-    mounted () {
-
+        repName: {
+          type: String,
+          required: true
+        },
+        letterBody: {
+          type: String,
+          required: true
+        },
+        selectedRep: {
+          type: Object,
+          required: true
+        }
     },
     data () {
         return {
             panel: 0
         }
     },
-    methods: {
-
-    },
     computed: {
 
+    },
+    mounted () {
+
+    },
+    methods: {
+        nextPage () {
+            this.panel = this.panel += 1
+        }
     }
 }
 </script>
