@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  outputDir: path.resolve(__dirname, './server/views'),
+  outputDir: path.resolve(__dirname, './dist'),
 
   devServer: {
     host: 'localhost'
