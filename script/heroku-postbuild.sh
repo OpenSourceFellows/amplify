@@ -19,7 +19,7 @@ fi
 
 
 # Fail hard if we are not running on Heroku
-if [[ "${IS_HEROKU}" != "true" ]]l; then
+if [[ "${IS_HEROKU}" != "true" ]]; then
   echo "❌ ERROR! Cannot run this script outside of Heroku." >&2
   exit 1
 fi
