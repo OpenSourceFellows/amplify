@@ -272,14 +272,12 @@ This is a simple way to organize feature branches and branch owners
 - Feature branch examples
 
   - The top level feature  
-
     `<feature>/<github-handle>`
 
   - A sub topic of that feature    
-
     `<feature>/<sub-topic>`
 
-  - Sub topics that you want to contribute to 
+  - Sub topics that you want to contribute to.
     `<feature>/<sub-topic>/<github-handle>`
 
 > Note: Branches should be short lived! To **prevent a branching mess**, please delete your branch as soon as your PR was successfully merged 🙏
