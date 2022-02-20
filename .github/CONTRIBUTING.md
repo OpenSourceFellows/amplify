@@ -1,5 +1,7 @@
 # Contributing
 
+[:open_file_folder: Dev Environment Setup](#Setup)&nbsp;&nbsp;&nbsp; [:open_file_folder: Configuration](#Configuration)&nbsp;&nbsp;&nbsp; [:open_file_folder: Branching](#Branching-Recommendation)&nbsp;&nbsp;&nbsp; [:open_file_folder: Pull Request](#Pull-Requests)
+
 ## For Developers
 
 ### Setup
@@ -255,3 +257,37 @@ DATABASE_URL=<OUR_HEROKU_DATABASE_URL>
 ```shell
 NODE_ENV=production npm start
 ```
+
+---
+
+### Branching-Recommendation
+
+This is a simple way to organize feature branches and branch owners
+
+#### Branch Naming Convention
+
+- Personal branch example (for anything that you consider 'your own')
+  `<github-handle>/feature` 
+
+- Feature branch examples
+
+  - The top level feature  
+
+    `<feature>/<github-handle>`
+
+  - A sub topic of that feature    
+
+    `<feature>/<sub-topic>`
+
+  - Sub topics that you want to contribute to 
+    `<feature>/<sub-topic>/<github-handle>`
+
+> Note: Branches should be short lived! To **prevent a branching mess**, please delete your branch as soon as your PR was successfully merged 🙏
+
+---
+
+### Pull-Requests
+
+Please the `Link the Issues` that the code changes are based on `to your Pull Request` (PR). 
+
+Any successful merge of the PR will automtically resolve the linked `Issues`.
