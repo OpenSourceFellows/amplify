@@ -288,6 +288,6 @@ This is a simple way to organize feature branches and branch owners
 
 ### Pull-Requests
 
-Please the `Link the Issues` that the code changes are based on `to your Pull Request` (PR). 
+Please `Link the Issues` that code changes are based on `to your Pull Request` (PR). 
 
 Any successful merge of the PR will automtically resolve the linked `Issues`.
