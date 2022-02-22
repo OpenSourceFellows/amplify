@@ -24,7 +24,7 @@
         </v-card-text>
 
         <v-text-field
-          label="I'm in support because (This is optional but when you add your story - it makes a difference"
+          label="I support this cause because... (This is optional but when you add your story - it makes a difference"
           :rules="rules"
           outlined
           color="blue"
