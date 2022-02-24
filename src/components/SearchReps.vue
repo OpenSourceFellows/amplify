@@ -105,7 +105,7 @@ export default {
         async CreateRepList () {
             try {
                 const res = await axios.get(
-                    'https://murmuring-headland-63935.herokuapp.com/api/representatives/' + this.postalCode
+                    '/api/representatives/' + this.postalCode
                 )
                 this.congressMembers = res.data
                 this.hasContent = true

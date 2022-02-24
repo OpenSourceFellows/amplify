@@ -54,9 +54,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get(
-        'https://murmuring-headland-63935.herokuapp.com/api/campaigns'
-      )
+      const res = await axios.get('/api/campaigns')
       this.campaigns = res.data
     } catch (e) {
       console.error(e)
