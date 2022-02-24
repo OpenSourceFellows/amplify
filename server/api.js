@@ -2,7 +2,6 @@
 require('dotenv').config()
 
 const express = require('express')
-const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 
 const representatives = require('./routes/api/representatives')
@@ -17,7 +16,6 @@ const apiRouter = express.Router()
 
 // Middleware
 apiRouter.use(express.json())
-apiRouter.use(cors())
 
 // Rate Limiting
 const apiLimiter = rateLimit({
