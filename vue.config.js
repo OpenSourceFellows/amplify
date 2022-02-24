@@ -1,10 +1,14 @@
 const path = require('path')
+const apiRouter = require('./server/api')
 
 module.exports = {
   outputDir: path.resolve(__dirname, './dist'),
 
   devServer: {
-    host: 'localhost'
+    host: 'localhost',
+    before: (expressApp) => {
+      expressApp.use('/api', apiRouter)
+    }
   },
 
   pluginOptions: {

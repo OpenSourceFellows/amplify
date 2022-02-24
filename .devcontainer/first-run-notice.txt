@@ -2,9 +2,8 @@
 
 👢 Your environment is all set up.
 
-🚀 To get started, start the servers by running `npm run dev`.
+🚀 To get started, start the server by running `npm run dev`.
 
-🕸️ Verify the frontend at http://localhost:8080/
-🧪 Verify the API backend at http://localhost:6000/api/campaigns
+🧪 Verify the app at http://localhost:8080/
 
 ❓ Having troubles? Visit #devs in Slack for support!

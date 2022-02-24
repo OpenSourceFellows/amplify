@@ -16,10 +16,8 @@
   "main": "server/server.js",
   "scripts": {
     "postinstall": "husky install",
-    "be-start": "node server/server.js",
-    "be-dev": "nodemon server/dev-server.js",
-    "start": "npm run build && npm run be-start",
-    "dev": "concurrently \"npm run be-dev\" \"npm run fe-dev\"",
+    "start": "node server/server.js",
+    "dev": "npm run serve",
     "lint": "DEBUG=eslint:cli-engine eslint --fix .",
     "lint:check": "DEBUG=eslint:cli-engine eslint .",
     "format": "prettier --write .",
@@ -36,8 +34,7 @@
     "db:seed": "knex seed:run",
     "heroku-postbuild": "npm run db:migrate:prod",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "fe-dev": "npm run serve"
+    "build": "vue-cli-service build"
   },
   "engines": {
     "node": "16.x"
