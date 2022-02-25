@@ -1,7 +1,12 @@
 require('dotenv').config()
-const app = require('../../app')
 const request = require('supertest')
 const axios = require('axios')
+const express = require('express')
+const apiRouter = require('../../api')
+
+// Create a test application
+const app = express()
+app.use('/api', apiRouter)
 
 const LOB_API_HOST = 'https://api.lob.com'
 const LOB_TEST_KEY_PREFIX = 'test_'
