@@ -2,15 +2,15 @@
   "private": true,
   "name": "amplify",
   "version": "1.0.0",
-  "description": "The  frontend and API backend for ProgramEquity",
-  "author": "Ally Guide",
+  "description": "The frontend and API backend for ProgramEquity",
+  "author": "ProgramEquity",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ally-Guide/amplify-back-end.git"
+    "url": "git+https://github.com/ProgramEquity/amplify.git"
   },
   "bugs": {
-    "url": "https://github.com/Ally-Guide/amplify-back-end/issues"
+    "url": "https://github.com/ProgramEquity/amplify/issues"
   },
   "homepage": "https://www.programequity.com/",
   "main": "server/server.js",
