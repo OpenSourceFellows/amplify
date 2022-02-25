@@ -21,12 +21,12 @@ It is also possible to run the frontend or backend independently with either `np
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 **Resources:**
-- [Overall Project Board](https://github.com/ProgramEquity/amplify-back-end/projects?type=beta)
-- [Feature Breakdown](https://github.com/ProgramEquity/amplify-back-end/discussions/137)
-- [OSS Architecture](https://github.com/ProgramEquity/amplify-back-end/discussions/170)
+- [Overall Project Board](https://github.com/ProgramEquity/amplify/projects?type=beta)
+- [Feature Breakdown](https://github.com/ProgramEquity/amplify/discussions/62)
+- [OSS Architecture](https://github.com/ProgramEquity/amplify/discussions/61)
 - We meet every:
   - [Tuesday from 2-3:00 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=NWh1NzdqYmRncXJsbzVlMTVocXBkMXFkZ2JfMjAyMTExMjNUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) to pair program
-  - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify-back-end/discussions/113)
+  - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify/discussions/63)
   - Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 
 
