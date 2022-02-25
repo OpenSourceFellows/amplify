@@ -32,7 +32,7 @@
     "db:migrate:test": "knex migrate:latest --verbose --env test",
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run",
-    "heroku-postbuild": "npm run db:migrate:prod",
+    "heroku-postbuild": "npm run build && npm run db:migrate:prod",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
