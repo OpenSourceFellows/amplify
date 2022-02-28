@@ -113,17 +113,10 @@ npm run db:seed
 npm test
 ```
 
-7. Start the server, either simply:
+7. Start the server:
 
 ```shell
 # Simple approach
-npm start
-```
-
-  or with `nodemon` to automatically restart on changes:
-
-```shell
-# nodemon approach with automatic restarts
 npm run dev
 ```
 
@@ -195,8 +188,8 @@ Although the authentication check is not required locally, the module in use sti
 2. Add set of a new key-value pairs to the file with literal nonsense values, e.g.
 
 ```
-SERVER_PORT=6060
-CLIENT_ORIGIN_URL=http://localhost:4040
+SERVER_PORT=8080
+CLIENT_ORIGIN_URL=http://localhost:8080
 AUTH0_AUDIENCE=your_Auth0_identifier_value
 AUTH0_DOMAIN=your_Auth0_domain
 ```
@@ -212,8 +205,8 @@ AUTH0_DOMAIN=your_Auth0_domain
 2. Add set of a new key-value pairs to the file with literal nonsense values, e.g.
 
 ```
-SERVER_PORT=6060
-CLIENT_ORIGIN_URL=http://localhost:4040
+SERVER_PORT=8080
+CLIENT_ORIGIN_URL=http://localhost:8080
 AUTH0_AUDIENCE=
 AUTH0_DOMAIN=
 ```
@@ -226,8 +219,8 @@ The following instructions can also be found in this [guide](https://auth0.com/b
 5. Select `personal` when prompted with the type of account being created.
 6. Go to [API dashboard](https://manage.auth0.com/#/apis) and click `Create API` button.
 7. Add a Name to your API. It can be named anything you'd like.
-8. Set the Identifier value. `http://localhost:5000/` is recommended. For more information see this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
-9. Set `AUTH0_AUDIENCE=http://localhost:5000/` or another Identifier value from the step above.
+8. Set the Identifier value. `http://localhost:8080/` is recommended. For more information see this [guide](https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Calling-an-API)
+9. Set `AUTH0_AUDIENCE=http://localhost:8080/` or another Identifier value from the step above.
 10. Click on the "Test" tab.
 11. Locate the section called " Asking Auth0 for tokens from my application".
 12. Click on the cURL tab to show a mock POST request.

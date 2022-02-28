@@ -153,13 +153,13 @@ export default {
                 this.$refs[f].validate(true)
             })
 
-            axios.post('https://murmuring-headland-63935.herokuapp.com/api/lob/addressVerification', this.form)
+            axios.post('/api/lob/addressVerification', this.form)
                 .then((response) => {
                     console.log(response)
                     console.log(this.form)
                     this.message = 'Address verified!'
                     if (response.status === 200) {
-                        return axios.post('https://murmuring-headland-63935.herokuapp.com/api/lob/createAddress', response.data)
+                        return axios.post('/api/lob/createAddress', response.data)
                             .then((response) => {
                                 console.log(response)
                             })
