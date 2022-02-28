@@ -38,12 +38,12 @@ export default {
         const campaignId = this.$route.params.campaignId
 
         const versions = await axios.get(
-          'https://murmuring-headland-63935.herokuapp.com/api/Letter_Versions/' + campaignId
+          '/api/Letter_Versions/' + campaignId
         )
         const latestVersion = versions.data[versions.data.length - 1].template_id
 
         const letter = await axios.get(
-          'https://murmuring-headland-63935.herokuapp.com/api/lob/templates/' + latestVersion
+          '/api/lob/templates/' + latestVersion
         )
 
         const letterBody = letter.data.versions[0].html

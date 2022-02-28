@@ -2,31 +2,28 @@
 
 ## Getting Started
 
-This repo contains both the Frontend and Backend portions of the amplify application.
+This repo contains both the frontend and backend portions of the Amplify application.
 
-The frontend code is maintained in the `src` directory.
+The frontend code is stored in the `src/` directory.
 
-Code for the backend (API) is stored in the `server` directory.
+The backend (API) code is stored in the `server/` directory.
 
 You will need to copy the `.env.example` file to a `.env` file in this repo.
 
 Then run `script/bootstrap` to install all local dependencies.
 
-You can develop locally in both applications by running `npm run dev` which will launch a vue server at `localhost:8080` and an express API server at `localhost:6000`
-
-It is also possible to run the frontend or backend independently with either `npm run fe-dev` or `npm run be-dev` respectively.
-
+You can develop locally by running `npm run dev` which will launch a Vue + API server at `http://localhost:8080/`
 
 
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 **Resources:**
-- [Overall Project Board](https://github.com/ProgramEquity/amplify-back-end/projects?type=beta)
-- [Feature Breakdown](https://github.com/ProgramEquity/amplify-back-end/discussions/137)
-- [OSS Architecture](https://github.com/ProgramEquity/amplify-back-end/discussions/170)
+- [Overall Project Board](https://github.com/ProgramEquity/amplify/projects?type=beta)
+- [Feature Breakdown](https://github.com/ProgramEquity/amplify/discussions/62)
+- [OSS Architecture](https://github.com/ProgramEquity/amplify/discussions/61)
 - We meet every:
   - [Tuesday from 2-3:00 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=NWh1NzdqYmRncXJsbzVlMTVocXBkMXFkZ2JfMjAyMTExMjNUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) to pair program
-  - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify-back-end/discussions/113)
+  - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify/discussions/63)
   - Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 
 
@@ -73,15 +70,6 @@ script/bootstrap
 npm run dev
 ```
 
-#### For backend only
-```shell
-npm run be-dev
-```
-
-#### For frontend only
-```shell
-npm run fe-dev
-```
 ### Compiles and minifies for production
 ```shell
 npm run build
@@ -94,7 +82,7 @@ npm run lint
 
 ### Build and run as if in prod
 ```shell
-npm run start
+npm start
 ```
 
 ### Customize configuration

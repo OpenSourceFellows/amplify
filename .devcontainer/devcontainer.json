@@ -2,7 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/javascript-node-postgres
 // Update the VARIANT arg in docker-compose.yml to pick a Node.js version
 {
-  "name": "ProgramEquity/amplify-back-end",
+  "name": "ProgramEquity/amplify",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
@@ -42,13 +42,10 @@
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [8080, 6000, 5433],
+  "forwardPorts": [8080, 5433],
   "portsAttributes": {
     "8080": {
-      "label": "web"
-    },
-    "6000": {
-      "label": "api"
+      "label": "app"
     },
     "5433": {
       "label": "db"

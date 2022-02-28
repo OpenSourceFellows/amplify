@@ -36,7 +36,7 @@ Week 3: Become active
 - [ ] Update documentation based on design confirmation 
 - 
 Week 4: Ramping up
-- [ ] Submit an issue for [accessibility fix ](https://github.com/ProgramEquity/amplify-back-end/issues/new?assignees=%40evelynluu2&labels=accessibility&template=blue+design+enhancement.md&title=UI%2FUX+task)
+- [ ] Submit an issue for [accessibility fix ](https://github.com/ProgramEquity/amplify/issues/new?assignees=%40evelynluu2&labels=accessibility&template=blue+design+enhancement.md&title=UI%2FUX+task)
 - [ ] Pick an intermediate design issue for pair hour 
 - [ ] Write 2 questions that came up and share in team meeting agenda: take notes
 

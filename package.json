@@ -2,24 +2,22 @@
   "private": true,
   "name": "amplify",
   "version": "1.0.0",
-  "description": "The  frontend and API backend for ProgramEquity",
-  "author": "Ally Guide",
+  "description": "The frontend and API backend for ProgramEquity",
+  "author": "ProgramEquity",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ally-Guide/amplify-back-end.git"
+    "url": "git+https://github.com/ProgramEquity/amplify.git"
   },
   "bugs": {
-    "url": "https://github.com/Ally-Guide/amplify-back-end/issues"
+    "url": "https://github.com/ProgramEquity/amplify/issues"
   },
   "homepage": "https://www.programequity.com/",
   "main": "server/server.js",
   "scripts": {
     "postinstall": "husky install",
-    "be-start": "node server/server.js",
-    "be-dev": "nodemon server/dev-server.js",
-    "start": "npm run build && npm run be-start",
-    "dev": "concurrently \"npm run be-dev\" \"npm run fe-dev\"",
+    "start": "node server/server.js",
+    "dev": "npm run serve",
     "lint": "DEBUG=eslint:cli-engine eslint --fix .",
     "lint:check": "DEBUG=eslint:cli-engine eslint .",
     "format": "prettier --write .",
@@ -34,10 +32,9 @@
     "db:migrate:test": "knex migrate:latest --verbose --env test",
     "db:migrate:prod": "knex migrate:latest --verbose --env production",
     "db:seed": "knex seed:run",
-    "heroku-postbuild": "npm run db:migrate:prod",
+    "heroku-postbuild": "npm run build && npm run db:migrate:prod",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "fe-dev": "npm run serve"
+    "build": "vue-cli-service build"
   },
   "engines": {
     "node": "16.x"
@@ -51,7 +48,6 @@
     "cli-plugin-eslint": "^0.1.0",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
-    "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
