@@ -38,7 +38,7 @@ jobs:
           # Test environment Lob API key
           LOB_API_KEY: ${{ secrets.TEST_LOB_API_KEY }}
           # Auth0 authentication parameters with nonsensical sample values
-          SERVER_PORT: 6060
-          CLIENT_ORIGIN_URL: http://localhost:4040
+          SERVER_PORT: 8080
+          CLIENT_ORIGIN_URL: http://localhost:8080
           AUTH0_AUDIENCE: your_Auth0_identifier_value
           AUTH0_DOMAIN: your_Auth0_domain

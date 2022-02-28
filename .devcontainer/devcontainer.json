@@ -42,13 +42,10 @@
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [8080, 6000, 5433],
+  "forwardPorts": [8080, 5433],
   "portsAttributes": {
     "8080": {
-      "label": "web"
-    },
-    "6000": {
-      "label": "api"
+      "label": "app"
     },
     "5433": {
       "label": "db"
