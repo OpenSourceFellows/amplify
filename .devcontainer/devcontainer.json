@@ -2,7 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/javascript-node-postgres
 // Update the VARIANT arg in docker-compose.yml to pick a Node.js version
 {
-  "name": "ProgramEquity/amplify-back-end",
+  "name": "ProgramEquity/amplify",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
