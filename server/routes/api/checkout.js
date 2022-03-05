@@ -7,30 +7,31 @@ const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 router.post('/create-transaction', async (req, res) => {
-  const { transaction, email, campaignId, donationId } = req.body || {}
-  if (!transaction || !email) {
-    return null
+  const { session_id/*,  email, campaignId, donationId */} = req.body || {}
+  if (!session_id /*|| !email*/) {
+    return res.status(400).send({ error: 'No session ID' })
   }
+  const session = await stripe.checkout.sessions.retrieve(session_id);
+  const customer = await stripe.customers.retrieve(session.customer);
 
   const formattedTransaction = {
-    stripe_transaction_id: transaction.id,
-    amount: transaction.amount,
-    stripe_client_secret: transaction.client_secret,
-    currency: transaction.currency,
-    payment_method: transaction.payment_method,
-    payment_method_type: transaction.payment_method_types[0],
-    email // to-do: get user email from the server auth, if possible
+    stripe_transaction_id: session_id,
+    amount: session.amount_total,
+    currency: session.currency,
+    payment_method: "something not empty", // Not sure what this is for
+    payment_method_type: session.payment_method_types[0],
+    email: session.customer_details.email // to-do: get user email from the server auth, if possible
   }
 
   try {
+    // Expire session?
     await db('transactions').insert(formattedTransaction)
-    res.send({
-      status: 'ok'
-    })
+    res.status(200).send(formattedTransaction)
   } catch (error) {
     console.log({ error })
+    res.status(400).send()
   }
-})
+});
 
 // 1. send a request to `/create-payment-intent`
 // with a `donationAmount` as string or integer
@@ -65,8 +66,8 @@ router.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       allow_promotion_codes: true,
       success_url:
-        'http://localhost:8080/about?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://localhost:8080'
+        'http://localhost:8080/donated?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:8080'
     })
 
     res.redirect(303, session.url)
@@ -74,5 +75,7 @@ router.post('/create-checkout-session', async (req, res) => {
     console.log({ error })
   }
 })
+
+
 
 module.exports = router
