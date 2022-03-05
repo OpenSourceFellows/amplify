@@ -1,7 +1,7 @@
 <template lang="html">
   <section class="action-complete">
     <h1>action-complete Component</h1>
-    <h1>Thank you {{ data.email }} for your ${{ data.amount }} donation!</h1>
+    <h1>Thank you {{ data.email }} for your ${{ data.amount * 0.01 }} donation!</h1>
   </section>
 </template>
 
