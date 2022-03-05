@@ -4,7 +4,8 @@ module.exports = {
   outputDir: path.resolve(__dirname, './dist'),
 
   devServer: {
-    host: 'localhost'
+    host: 'localhost',
+    proxy: 'http://localhost:6000'
   },
 
   pluginOptions: {
