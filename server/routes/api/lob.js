@@ -85,7 +85,7 @@ router.post('/createAddress', async (req, res) => {
       secondary_line: address.line2,
       city: address.city,
       state: address.state,
-      zip_code: address.zipCode
+      zip_code: address.zip
     })
 
     const {
