@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Donate from '../views/Donate.vue'
 import SearchReps from '../components/SearchReps'
 import RepresentativeCard from '../components/RepresentativeCard'
 // import Reps from '../components/Reps'
