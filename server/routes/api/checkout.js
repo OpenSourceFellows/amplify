@@ -66,7 +66,7 @@ router.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       allow_promotion_codes: true,
       success_url:
-        'http://localhost:8080/donated?session_id={CHECKOUT_SESSION_ID}',
+        'http://localhost:8080/complete?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:8080'
     })
 
