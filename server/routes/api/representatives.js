@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const axios = require('axios')
+const qs = require('qs')
 
 const router = express.Router()
 
@@ -28,11 +29,23 @@ router.get('/:zipCode', async (req, res) => {
       params: {
         search_postal: zipCode,
         search_country: 'US',
+        district_type: [
+          'NATIONAL_UPPER',
+          'NATIONAL_LOWER',
+          'STATE_EXEC',
+          'STATE_UPPER',
+          'STATE_LOWER',
+          'LOCAL_EXEC',
+          'LOCAL'
+        ],
         order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
+        sort: 'asc',
         max: 200,
         format: 'json',
         key: CICERO_API_KEY
-      }
+      },
+      paramsSerializer: (params) =>
+        qs.stringify(params, { arrayFormat: 'repeat' })
     })
 
     const { errors, results } = response
