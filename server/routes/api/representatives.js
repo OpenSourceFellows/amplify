@@ -95,7 +95,7 @@ router.get('/:zipCode', async (req, res) => {
                 (id) => id.identifier_type === 'FACEBOOK-CAMPAIGN'
               ) || { identifier_value: '' }
             ).identifier_value.replace(
-              /^(?:https?:\/\/(www\.)?facebook\.com\/)?(.+)\/?$/,
+              /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
               '$1'
             ) || 'Not Made Public',
           contactPage:
