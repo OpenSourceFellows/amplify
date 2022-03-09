@@ -68,7 +68,7 @@
     "@vue/cli-plugin-babel": "~5.0.1",
     "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~5.0.1",
     "@vue/cli-service": "~4.5.0",
     "concurrently": "^7.0.0",
     "eslint": "^8.10.0",
