@@ -90,8 +90,13 @@ router.post('/createAddress', async (req, res) => {
 
     const {
       deliverability,
+      primary_line: revisedLine1,
+      secondary_line: revisedLine2,
       components: {
+        city: revisedCity,
         state: revisedState,
+        zip_code: revisedZip,
+        zip_code_plus_4: revisedZipPlus4,
         address_type: addressType,
         record_type: recordType
       }
@@ -125,11 +130,11 @@ router.post('/createAddress', async (req, res) => {
     const addressResponse = await lob.addresses.create({
       description: address.description,
       name: address.name,
-      address_line1: address.line1,
-      address_line2: address.line2,
-      address_city: address.city,
-      address_state: address.state,
-      address_zip: address.zip,
+      address_line1: revisedLine1,
+      address_line2: revisedLine2,
+      address_city: revisedCity,
+      address_state: revisedState,
+      address_zip: revisedZip + (revisedZipPlus4 ? `-${revisedZipPlus4}` : ''),
       address_country: 'US'
     })
 
