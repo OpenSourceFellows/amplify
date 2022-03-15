@@ -5,6 +5,7 @@ const express = require('express')
 const rateLimit = require('express-rate-limit')
 
 const representatives = require('./routes/api/representatives')
+const representativesViaOpenStates = require('./routes/api/representatives.openstates')
 const campaigns = require('./routes/api/campaigns')
 const authentication = require('./routes/api/authentication')
 const letterVersions = require('./routes/api/letter_versions')
@@ -26,6 +27,7 @@ apiRouter.use(apiLimiter)
 
 // Routes
 apiRouter.use('/representatives', representatives)
+apiRouter.use('/representatives.openstates', representativesViaOpenStates)
 apiRouter.use('/campaigns', campaigns)
 apiRouter.use('/authentication', authentication)
 apiRouter.use('/letter_versions', letterVersions)

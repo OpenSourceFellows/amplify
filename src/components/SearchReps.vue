@@ -104,9 +104,11 @@ export default {
         },
         async CreateRepList () {
             try {
-                const res = await axios.get(
-                    '/api/representatives/' + this.postalCode
-                )
+                // via Google Civic
+                // const repsApiUrl = '/api/representatives/' + this.postalCode
+                // via Open States
+                const repsApiUrl = '/api/representatives.openstates/' + this.postalCode
+                const res = await axios.get(repsApiUrl)
                 this.congressMembers = res.data
                 this.hasContent = true
                 console.log(res.data)
