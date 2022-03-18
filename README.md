@@ -8,14 +8,7 @@ The frontend code is stored in the `src/` directory.
 
 The backend (API) code is stored in the `server/` directory.
 
-You will need to copy the `.env.example` file to a `.env` file in this repo.
 
-Then run `script/bootstrap` to install all local dependencies.
-
-You can develop locally by running `npm run dev` which will launch a Vue + API server at `http://localhost:8080/`
-
-
-Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 **Resources:**
 - [Overall Project Board](https://github.com/ProgramEquity/amplify/projects?type=beta)
@@ -45,14 +38,6 @@ Goal Structure:
 <img width="739" alt="Screen Shot 2022-01-26 at 1 31 28 PM" src="https://user-images.githubusercontent.com/9143339/153340595-f749e711-2e42-4069-aad6-3e949efda7d9.png">
 
 
-**Hackathon Leads**
-@jamesgreene
-@teakopp
-@nawazkhan
-@beexiong
-@ctate
-@joelbirchler
-
 # amplify
 - Project Walkthrough: create this issue to start contributing
 - Project Scope: Deeper dive of feature user stories and component structure
@@ -61,9 +46,15 @@ Goal Structure:
 
 
 ## Project setup
+
+https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
+
+Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
+
 ```shell
 script/bootstrap
 ```
+You will need to copy the `.env.example` file to a `.env` file in this repo.
 
 ### Compiles and hot-reloads full app for development
 ```shell
@@ -88,11 +79,14 @@ npm start
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## Project Walkthrough
-create this issue to ramp with a buddy
+## App Walkthrough
 
-User Journey:
+**User Journey:**
+
+https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b691-81491830001a.mp4
+
+
 <img width="1561" alt="Screen Shot 2021-11-11 at 1 51 44 PM" src="https://user-images.githubusercontent.com/9143339/141374196-a32d140f-885c-4e45-8bba-99696f81ee80.png">
 
 
-Try out our [figma](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653)
+Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653)
