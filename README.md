@@ -33,17 +33,6 @@ The backend (API) code is stored in the `server/` directory.
   - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify/discussions/63)
   - Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 
-**App Structure**
-
-Current Structure:
-
-<img width="772" alt="Screen Shot 2022-01-26 at 1 31 37 PM" src="https://user-images.githubusercontent.com/9143339/153340605-dd7fd6e6-a5f3-466f-95e2-d941f8c0c2ee.png">
-
-Goal Structure:
-
-<img width="739" alt="Screen Shot 2022-01-26 at 1 31 28 PM" src="https://user-images.githubusercontent.com/9143339/153340595-f749e711-2e42-4069-aad6-3e949efda7d9.png">
-
-
 
 ## Project setup
 
@@ -80,6 +69,17 @@ npm start
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## App Walkthrough
+
+**App Structure**
+
+Current Structure:
+
+<img width="772" alt="Screen Shot 2022-01-26 at 1 31 37 PM" src="https://user-images.githubusercontent.com/9143339/153340605-dd7fd6e6-a5f3-466f-95e2-d941f8c0c2ee.png">
+
+Goal Structure:
+
+<img width="739" alt="Screen Shot 2022-01-26 at 1 31 28 PM" src="https://user-images.githubusercontent.com/9143339/153340595-f749e711-2e42-4069-aad6-3e949efda7d9.png">
+
 
 **User Journey:**
 
