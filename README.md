@@ -11,21 +11,27 @@ The backend (API) code is stored in the `server/` directory.
 
 
 **Resources:**
-- [Overall Project Board](https://github.com/ProgramEquity/amplify/projects?type=beta)
-- [Feature Breakdown](https://github.com/ProgramEquity/amplify/discussions/62)
-- [OSS Architecture](https://github.com/ProgramEquity/amplify/discussions/61)
+- Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 - We meet every:
   - [Tuesday from 2-3:00 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=NWh1NzdqYmRncXJsbzVlMTVocXBkMXFkZ2JfMjAyMTExMjNUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) to pair program
   - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify/discussions/63)
-  - Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 
 
-**Workflow:**
+**Project Workflow:**
 
 [Enablement Deck](https://docs.google.com/presentation/d/1llJgeTU1EzRSYB8kL-IQeAdoq7p6xb4ApEac5E3M8Qo/edit?usp=sharing)
 
 <img width="792" alt="Screen Shot 2021-05-15 at 11 26 45 AM" src="https://user-images.githubusercontent.com/9143339/118374352-79d68a80-b570-11eb-9f21-703ce12a9638.png">
 
+- [Overall Project Board](https://github.com/ProgramEquity/amplify/projects?type=beta)
+- [Feature Breakdown](https://github.com/ProgramEquity/amplify/discussions/62)
+- [OSS Architecture](https://github.com/ProgramEquity/amplify/discussions/61)
+- [Wiki](https://github.com/ProgramEquity/amplify/wiki): API methods, Data Structures
+
+- We meety every: 
+-  - [Tuesday from 2-3:00 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=NWh1NzdqYmRncXJsbzVlMTVocXBkMXFkZ2JfMjAyMTExMjNUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) to pair program
+  - [Thursday from 2:00-2:30 pt](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify/discussions/63)
+  - Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 
 **App Structure**
 
@@ -37,12 +43,6 @@ Goal Structure:
 
 <img width="739" alt="Screen Shot 2022-01-26 at 1 31 28 PM" src="https://user-images.githubusercontent.com/9143339/153340595-f749e711-2e42-4069-aad6-3e949efda7d9.png">
 
-
-# amplify
-- Project Walkthrough: create this issue to start contributing
-- Project Scope: Deeper dive of feature user stories and component structure
-- Wiki: API methods, Data Structures
-- Weekly meetings on Thursdays at 2pt, contact @mahrsbar to be added
 
 
 ## Project setup
