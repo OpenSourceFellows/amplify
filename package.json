@@ -58,10 +58,10 @@
     "lob": "^6.5.5",
     "pg": "^8.7.3",
     "register-service-worker": "^1.7.1",
-    "stripe": "^8.202.0",
+    "stripe": "^8.207.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
-    "vuetify": "^2.6.3",
+    "vuetify": "^2.6.4",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -72,7 +72,7 @@
     "@vue/cli-service": "~4.5.0",
     "concurrently": "^7.0.0",
     "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^8.5.0",
     "husky": "^7.0.0",
     "jest": "^27.5.1",
