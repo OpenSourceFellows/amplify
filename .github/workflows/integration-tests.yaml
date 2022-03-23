@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- server/__tests__/integration/
+        run: npm test -- --ci --reporters=default --reporters=jest-junit server/__tests__/integration/
         env:
           # Google Civic API key
           CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
