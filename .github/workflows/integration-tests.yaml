@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- server/__tests__/integration/
+        run: npm test -- server/__tests__/integration/ --ci --reporters=default --reporters=jest-junit
         env:
           # Google Civic API key
           CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
@@ -42,3 +42,10 @@ jobs:
           CLIENT_ORIGIN_URL: http://localhost:8080
           AUTH0_AUDIENCE: your_Auth0_identifier_value
           AUTH0_DOMAIN: your_Auth0_domain
+
+      - name: Publish Integration Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: 'junit.xml'
+          check_name: 'Integration Test Results'
