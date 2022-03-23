@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 require('dotenv').config()
 const request = require('supertest')
 const express = require('express')
@@ -9,6 +11,12 @@ app.use('/api', apiRouter)
 
 afterEach(() => {
   jest.clearAllMocks()
+})
+
+describe('GET /api/...', () => {
+  test.skip('fake test', async () => {
+    expect(true).toBe(true)
+  })
 })
 
 afterAll(async () => {
