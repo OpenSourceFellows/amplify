@@ -17,9 +17,8 @@
                 label="Postal Code"
                 required
                 v-model="postalCode"
-              ></v-text-field>
+              />
             </v-form>
-
           </v-card-text>
         </v-card>
         <div id="reprenstatives-list" v-show="hasContent">
