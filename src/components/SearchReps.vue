@@ -20,15 +20,6 @@
               ></v-text-field>
             </v-form>
 
-            <v-btn
-              :to="{
-                name: 'Reps',
-                params: { postalCode: postalCode }
-              }"
-              v-on:click="CreateRepList()"
-              clickclass="mr-4"
-              >Submit
-            </v-btn>
           </v-card-text>
         </v-card>
         <div id="reprenstatives-list" v-show="hasContent">
