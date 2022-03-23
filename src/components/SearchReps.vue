@@ -8,9 +8,14 @@
 
             <v-form ref="form">
               <v-text-field
+                :to="{
+                  name: 'Reps',
+                  params: { postalCode: postalCode }
+                }"
+                v-on:keyup="CreateRepList()"
+                v-on:keydown.enter.prevent="CreateRepList()"
                 label="Postal Code"
                 required
-                v-on:keyup="CheckInputContent"
                 v-model="postalCode"
               ></v-text-field>
             </v-form>
