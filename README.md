@@ -83,4 +83,4 @@ https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b
 <img width="1561" alt="Screen Shot 2021-11-11 at 1 51 44 PM" src="https://user-images.githubusercontent.com/9143339/141374196-a32d140f-885c-4e45-8bba-99696f81ee80.png">
 
 
-Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653)
+Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653) or review [App Research](https://www.notion.so/programequity/Dare-to-Dream-Civic-Engagement-is-key-to-change-595ca4db3a2948c6b44569b58d530c8c)
