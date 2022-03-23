@@ -32,6 +32,6 @@ apiRouter.use('/authentication', authentication)
 apiRouter.use('/letter_versions', letterVersions)
 apiRouter.use('/lob', lob)
 apiRouter.use('/checkout', checkout)
-apiRouter.use('/twili', twilio)
+apiRouter.use('/twilio', twilio)
 
 module.exports = apiRouter
