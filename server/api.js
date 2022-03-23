@@ -10,7 +10,7 @@ const authentication = require('./routes/api/authentication')
 const letterVersions = require('./routes/api/letter_versions')
 const lob = require('./routes/api/lob')
 const checkout = require('./routes/api/checkout')
-const twilio = require('./routes/api/twilio')
+//const twilio = require('./routes/api/twilio')
 
 // Created a nested router
 const apiRouter = express.Router()
@@ -32,6 +32,6 @@ apiRouter.use('/authentication', authentication)
 apiRouter.use('/letter_versions', letterVersions)
 apiRouter.use('/lob', lob)
 apiRouter.use('/checkout', checkout)
-apiRouter.use('/twilio', twilio)
+//apiRouter.use('/twilio', twilio)
 
 module.exports = apiRouter
