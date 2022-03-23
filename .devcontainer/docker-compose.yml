@@ -20,6 +20,7 @@ services:
 
     volumes:
       - ..:/workspace:cached
+      - node-modules:/workspace/node_modules
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
@@ -48,3 +49,4 @@ services:
 
 volumes:
   postgres-data: null
+  node-modules: null

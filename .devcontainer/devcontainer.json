@@ -57,10 +57,10 @@
   },
 
   // Use 'onCreateCommand' to run commands when the container is being created.
-  "onCreateCommand": ".devcontainer/on-create-command.sh",
+  "onCreateCommand": "chmod +x .devcontainer/on-create-command.sh && .devcontainer/on-create-command.sh",
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": ".devcontainer/post-create-command.sh",
+  "postCreateCommand": "chmod +x .devcontainer/post-create-command.sh && cp .env.example .env && .devcontainer/post-create-command.sh",
 
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "node"
