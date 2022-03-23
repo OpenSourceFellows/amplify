@@ -1,12 +1,12 @@
 const express = require('express')
-const { createClient } = require('../../db')
 const router = express.Router()
-const db = createClient()
+const Campaign = require('../../db/models/campaign')
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const result = await db('campaigns').where('id', id)
+    const result = await Campaign.query().select('*').where('id', '=', id)
+    console.log(result)
     res.send(result)
   } catch (error) {
     console.log(error)
@@ -16,7 +16,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const result = await db.select('*').from('campaigns')
+    const result = await Campaign.query()
     console.log(result)
     res.send(result)
   } catch (error) {
