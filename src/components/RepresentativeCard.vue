@@ -10,10 +10,9 @@
     <v-card-title v-text="member.name"></v-card-title>
     <v-card-subtitle v-text="member.title" style="text-align: left">
     </v-card-subtitle>
-    <v-card-subtitle
-      v-text="member.city"
-      style="text-align: left"
-    ></v-card-subtitle>
+    <v-card-subtitle style="text-align: left">
+      <img v-bind:src="member.photoUrl" height="75" />
+    </v-card-subtitle>
   </v-card>
 </template>
 
