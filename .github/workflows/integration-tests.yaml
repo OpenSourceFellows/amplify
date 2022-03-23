@@ -45,9 +45,18 @@ jobs:
           AUTH0_AUDIENCE: your_Auth0_identifier_value
           AUTH0_DOMAIN: your_Auth0_domain
 
-      - name: Publish Integration Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+      # This is used by the subsequent publish-test-results.yaml
+      - name: Upload Event File
         if: always()
+        uses: actions/upload-artifact@v2
         with:
-          files: 'junit.xml'
-          check_name: 'Integration Test Results'
+          name: Event File
+          path: ${{ github.event_path }}
+
+      # This is used by the subsequent publish-test-results.yaml
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Integration Test Results
+          path: junit.xml
