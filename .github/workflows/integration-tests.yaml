@@ -6,8 +6,6 @@ on:
 
 permissions:
   contents: read
-  checks: write
-  pull-requests: write
 
 # This allows a subsequently queued workflow run to interrupt previous runs
 concurrency:
