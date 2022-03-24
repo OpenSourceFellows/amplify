@@ -8,7 +8,7 @@ The frontend code is stored in the `src/` directory.
 
 The backend (API) code is stored in the `server/` directory.
 
-
+The repository uses Codespaces (Development Containers) to create a working development environment, enabling developers to open the project and start working immediately.
 
 **Project Workflow:**
 
@@ -32,12 +32,23 @@ The backend (API) code is stored in the `server/` directory.
 
 https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
 
-Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
+Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝 
+
+Make sure to review the contributors guide to understand the development environment.
+
+This repository supports [Codespaces](https://docs.github.com/en/codespaces/overview) and VS Code [Development Containers](https://code.visualstudio.com/docs/remote/containers). If you are using Codespaces, the environment will be automatically provisioned and configured  with a sample `.env` file to enable you to get started quickly. You will need to configure the keys in this file to enable the full functionality. Run `npm build dev` to finish the configuration and launch the server.
+
+If you are developing locally using Visual Studio Code with the **[Visual Studio Code Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)** extension with the related Docker [System Requirements](https://code.visualstudio.com/docs/remote/containers#_system-requirements), a configured container will be created automatically when you open Visual Studio Code. This environment will have a sample `.env` file. You will need to configure the keys in this file to enable the full functionality. Run `npm build dev` to finish the configuration and launch the server.
+
+We strongly encourage you to use one of these container solutions; however, if you want to run the environment locally outside of a container, you can manually configure your environment by running the included Bash script:
 
 ```shell
 script/bootstrap
 ```
-You will need to copy the `.env.example` file to a `.env` file in this repo.
+You will need to copy the `.env.example` file and create a `.env` file. This file will then need to be configured with additional keys to enable the full functionality.
+
+## Using NPM
+To configure the development environment and start the local application, you will need to use NPM. **Note**: you should run `npm run dev` to start the environment and initialize the pre-commit hooks required for contributing code.
 
 ### Compiles and hot-reloads full app for development
 ```shell
