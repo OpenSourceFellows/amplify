@@ -15,7 +15,7 @@
   "homepage": "https://www.programequity.com/",
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "npx husky install",
     "start": "node server/server.js",
     "dev": "npm run serve",
     "lint": "DEBUG=eslint:cli-engine eslint --fix .",
