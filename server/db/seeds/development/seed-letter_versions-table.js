@@ -7,75 +7,39 @@ module.exports = {
     await knex('letter_versions').insert([
       {
         id: 1,
-        template_id: 'tmpl_1057bb6f50f81fb ',
+        template_id: 'tmpl_1057bb6f50f81fb',
         campaign_id: 1,
         office_division: 'Federal',
         state: null,
-        county: null
+        county: null,
+        municipality: null
       },
       {
         id: 2,
-        template_id: 'tmpl_1057bb6j23k81fg',
-        campaign_id: 1,
+        template_id: 'tmpl_9e6109bc1a3f946',
+        campaign_id: 2,
         office_division: 'State',
-        state: 'California',
-        county: null
+        state: 'NY',
+        county: null,
+        municipality: null
       },
       {
         id: 3,
-        template_id: 'tmpl_1057bb322qwj2f',
-        campaign_id: 1,
-        office_division: 'County',
-        state: 'California',
-        county: null
+        template_id: 'tmpl_89271b28e7205a0',
+        campaign_id: 3,
+        office_division: 'State',
+        state: 'NY',
+        county: null,
+        municipality: null
       },
       {
         id: 4,
-        template_id: 'tmpl_1057bb32jhiw81fg',
-        campaign_id: 2,
-        office_division: 'County',
-        state: 'California',
-        county: 'Sacramento'
-      },
-      {
-        id: 5,
-        template_id: 'tmpl_1057bb21jk1lssmm',
-        campaign_id: 2,
+        template_id: 'tmpl_85417656223f2dd',
+        campaign_id: 4,
         office_division: 'State',
-        state: 'California',
-        county: 'LA'
-      },
-      {
-        id: 6,
-        template_id: 'tmpl_1057bb3320ed30',
-        campaign_id: 2,
-        office_division: 'Federal',
-        state: null,
-        county: null
-      },
-      {
-        id: 7,
-        template_id: 'tmpl_1057bb342jmdlslal',
-        campaign_id: 3,
-        office_division: 'Federal',
-        state: null,
-        county: null
-      },
-      {
-        id: 8,
-        template_id: 'tmpl_1057bb12reew81fg',
-        campaign_id: 3,
-        office_division: 'State',
-        state: 'California',
-        county: null
-      },
-      {
-        id: 9,
-        template_id: 'tmpl_1057bb3e23kwkkq',
-        campaign_id: 3,
-        office_division: 'County',
-        state: 'California',
-        county: 'San Francisco'
+        state: 'NY',
+        county: null,
+        municipality: null
       }
     ])
   }

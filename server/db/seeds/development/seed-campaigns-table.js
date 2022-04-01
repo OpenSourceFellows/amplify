@@ -9,28 +9,37 @@ module.exports = {
       {
         id: 1,
         organization: 'M4BL',
-        name: 'The Breath Act',
+        name: 'The Breathe Act',
         cause: 'Civic Rights',
         type: 'Grant',
-        page_url: 'www.thebreatheact.org',
+        page_url: 'breatheact.org',
         letters_counter: 0
       },
       {
         id: 2,
-        organization: 'AAAJ',
-        name: 'AAAJ',
-        cause: 'Education',
-        type: 'Accelerator',
-        page_url: 'www.aaaj.org ',
+        organization: 'Sunrise New York',
+        name: 'Climate and Community Investment Act',
+        cause: 'Climate Justice',
+        type: 'Grant',
+        page_url: 'climatecantwait.org',
         letters_counter: 0
       },
       {
         id: 3,
-        organization: 'TheSoapBox Project',
-        name: 'ClimateCare',
+        organization: 'Sunrise New York',
+        name: 'Energy Efficiency, Equity and Jobs Assembly Bill',
         cause: 'Climate Justice',
-        type: 'Starter',
-        page_url: 'www.thesoapboxproject.com',
+        type: 'Grant',
+        page_url: 'climatecantwait.org',
+        letters_counter: 0
+      },
+      {
+        id: 4,
+        organization: 'Sunrise New York',
+        name: 'Proposed Actions on EJ Communities',
+        cause: 'Climate Justice',
+        type: 'Grant',
+        page_url: 'climatecantwait.org',
         letters_counter: 0
       }
     ])
