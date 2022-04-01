@@ -58,7 +58,7 @@
     "lob": "^6.5.5",
     "pg": "^8.7.3",
     "register-service-worker": "^1.7.1",
-    "stripe": "^8.207.0",
+    "stripe": "^8.215.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.6.4",
