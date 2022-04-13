@@ -1,8 +1,14 @@
 const { Model } = require('objection')
 const { createClient } = require('../')
 
-// One-time configuration to link all Objection models with Knex
-Model.knex(createClient())
+class BaseModel extends Model {
+  static get modelPaths() {
+    return [__dirname]
+  }
+}
 
-// Export the Objection Model base class
-module.exports = Model
+// One-time configuration to link all Objection models derived from this class with Knex
+BaseModel.knex(createClient())
+
+// Export the base class
+module.exports = BaseModel
