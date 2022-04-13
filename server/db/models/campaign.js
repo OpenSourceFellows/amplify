@@ -1,6 +1,6 @@
-const Model = require('./_base')
+const BaseModel = require('./_base')
 
-class Campaign extends Model {
+class Campaign extends BaseModel {
   static get tableName() {
     return 'campaigns'
   }
