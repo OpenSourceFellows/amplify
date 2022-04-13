@@ -16,6 +16,6 @@ module.exports = {
   },
 
   async down(knex) {
-    await knex.schema.dropTable()
+    await knex.schema.dropTable(tableName)
   }
 }
