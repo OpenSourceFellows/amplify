@@ -44,7 +44,7 @@
     "@babel/polyfill": "^7.4.4",
     "@stripe/stripe-js": "^1.26.0",
     "@vue-stripe/vue-stripe": "^4.4.2",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "cli-plugin-eslint": "^0.1.0",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.21.1",
