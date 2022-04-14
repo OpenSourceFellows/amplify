@@ -5,7 +5,7 @@ const Campaign = require('../../db/models/campaign')
 router.get('/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const result = await Campaign.query().select('*').where('id', '=', id)
+    const result = await Campaign.query().select('*').where('id', id)
     console.log(result)
     res.send(result)
   } catch (error) {
