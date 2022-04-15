@@ -5,9 +5,9 @@ const Campaign = require('../../db/models/campaign')
 router.get('/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const campaigns = await Campaign.query().select('*').where('id', id)
-    console.log(campaigns)
-    res.send(campaigns)
+    const campaign = await Campaign.query().findById(id)
+    console.log(campaign)
+    res.send(campaign)
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Whoops' })
