@@ -38,8 +38,17 @@ class Campaign extends BaseModel {
 
   // This object defines the relations to other models.
   static get relationMappings() {
-    // TODO: Implement this once additional related models classes are defined
-    return {}
+    const LetterVersion = require('./letter-version')
+    return {
+      letter_versions: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: LetterVersion,
+        join: {
+          from: 'campaigns.id',
+          to: 'letter_versions.campaign_id'
+        }
+      }
+    }
   }
 }
 
