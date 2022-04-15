@@ -41,7 +41,7 @@ class LetterVersion extends BaseModel {
   static get relationMappings() {
     const Campaign = require('./campaign')
     return {
-      campaign: {
+      Campaign: {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: Campaign,
         join: {

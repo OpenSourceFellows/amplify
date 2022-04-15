@@ -40,7 +40,7 @@ class Campaign extends BaseModel {
   static get relationMappings() {
     const LetterVersion = require('./letter-version')
     return {
-      letter_versions: {
+      LetterVersions: {
         relation: BaseModel.HasManyRelation,
         modelClass: LetterVersion,
         join: {
