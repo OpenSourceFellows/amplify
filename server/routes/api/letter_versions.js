@@ -1,13 +1,15 @@
 const express = require('express')
-const { createClient } = require('../../db')
 const router = express.Router()
-const db = createClient()
+const LetterVersion = require('../../db/models/letter-version')
 
 router.get('/:campaignId', async (req, res) => {
   const campaignId = req.params.campaignId
   try {
-    const result = await db('letter_versions').where('campaign_id', campaignId)
-    res.send(result)
+    const letterVersions = await LetterVersion.query().where(
+      'campaign_id',
+      campaignId
+    )
+    res.send(letterVersions)
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Whoops' })
