@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   description: ""
   version: 1.0.0
@@ -6,86 +6,235 @@ info:
   license:
     name: MIT
     url: https://github.com/ProgramEquity/amplify/blob/main/LICENSE
-paths: {}
-definitions:
-  Campaign:
-    type: object
-    required:
-      - organization
-      - name
-      - cause
-      - type
-      - page_url
-    properties:
-      id:
-        type: integer
-      organization:
-        type: string
-        minLength: 1
-        maxLength: 255
-      name:
-        type: string
-        minLength: 1
-        maxLength: 255
-      cause:
-        type: string
-        enum:
-          - Civic Rights
-          - Education
-          - Climate Justice
-      type:
-        type: string
-        enum:
-          - Starter
-          - Accelerator
-          - Grant
-      page_url:
-        type: string
-        minLength: 1
-      logo_url:
-        type: string
-        minLength: 1
-      letters_counter:
-        type: integer
-        minimum: 0
-      letters_goal:
-        type: integer
-        minimum: 0
-        nullable: true
-      donation_goal:
-        type: integer
-        minimum: 0
-        nullable: true
-  LetterVersion:
-    type: object
-    required:
-      - campaign_id
-      - template_id
-      - office_division
-    properties:
-      id:
-        type: integer
-      campaign_id:
-        type: integer
-        minimum: 1
-      template_id:
-        type: string
-        minLength: 1
-        maxLength: 255
-      office_division:
-        type: string
-        enum:
-          - Federal
-          - State
-          - County
-          - Municipality
-      state:
-        type: string
-        minLength: 2
-        maxLength: 2
-      county:
-        type: string
-        minLength: 1
-      municipality:
-        type: string
-        minLength: 1
+paths:
+  /api/campaigns:
+    get:
+      summary: returns a JSON array of campaigns
+      responses:
+        200:
+          description: Campaigns response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Campaigns:
+                    $ref: '#/components/schemas/Campaign'
+        500:
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+  /api/campaigns/{id}:
+    get:
+      summary: Returns a campaign based on id
+      responses:
+        200:
+          description: Campaign response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        500:
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+  /api/letter_versions/{campaignId}:
+    get:
+      summary: Returns all versions of each letter, including the template id, sent out for a campaign based on campaign ID
+      responses:
+        200:
+          description: Letter Versions response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LetterVersion'
+        500:
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+      parameters: 
+        - name: campaignId
+          description: ID of campaign to return letter versions for
+          in: path
+          required: true
+          schema:
+            type: integer
+  /api/representatives/{zipCode}:
+    get:
+      summary: Returns representatives 
+      description: Returns Representatives based on zip code utilizing <a href="https://developers.google.com/civic-information">Google's Civic Information API</a>
+      responses:
+        200:
+          description: Array of representatives, info found via <a href="https://developers.google.com/civic-information">Google's Civic Information API</a>
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Representative'
+        400:
+          description: Invalid Zip Code Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/InvalidZipError'
+        500:
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+      parameters: 
+        - name: zipCode
+          description: Zip code around which to search for representatives.  Must be in the form of a valid 5-digit or Zip+4 9-digit format.
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+components:
+  schemas:
+    Campaign:
+      type: object
+      required:
+        - organization
+        - name
+        - cause
+        - type
+        - page_url
+      properties:
+        id:
+          type: integer
+        organization:
+          type: string
+          minLength: 1
+          maxLength: 255
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        cause:
+          type: string
+          enum:
+            - Civic Rights
+            - Education
+            - Climate Justice
+        type:
+          type: string
+          enum:
+            - Starter
+            - Accelerator
+            - Grant
+        page_url:
+          type: string
+          minLength: 1
+        logo_url:
+          type: string
+          minLength: 1
+        letters_counter:
+          type: integer
+          minimum: 0
+        letters_goal:
+          type: integer
+          minimum: 0
+          nullable: true
+        donation_goal:
+          type: integer
+          minimum: 0
+          nullable: true
+    LetterVersion:
+      type: object
+      required:
+        - campaign_id
+        - template_id
+        - office_division
+      properties:
+        id:
+          type: integer
+        campaign_id:
+          type: integer
+          minimum: 1
+        template_id:
+          type: string
+          minLength: 1
+          maxLength: 255
+        office_division:
+          type: string
+          default: Federal
+          enum:
+            - Federal
+            - State
+            - County
+            - Municipality
+        state:
+          type: string
+          minLength: 2
+          maxLength: 2
+        county:
+          type: string
+          minLength: 1
+        municipality:
+          type: string
+          minLength: 1
+    Representative:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        address_city:
+          type: string
+        address_state:
+          type: string
+        address_zip:
+          type: string
+        address_country:
+          type: string
+          default: 'US'
+        email:
+          type: string
+        twitter:
+          type: string
+        facebook:
+          type: string
+        contactPage:
+          type: string
+        photoUrl:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          default: 'Whoops'
+    InvalidZipError:
+      type: object
+      properties:
+        error:
+          type: string
+          default: 'Invalid zip code format, valid examples are 84054-6013 or 84054. The zip code used was {zip code}'
+      
