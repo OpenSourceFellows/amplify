@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: 1.0.0
+  title: Amplify API
+  license:
+    name: MIT
+    url: https://github.com/ProgramEquity/amplify/blob/main/LICENSE
+paths: {}
+definitions:
+  Campaign:
+    type: object
+    required:
+      - organization
+      - name
+      - cause
+      - type
+      - page_url
+    properties:
+      id:
+        type: integer
+      organization:
+        type: string
+        minLength: 1
+        maxLength: 255
+      name:
+        type: string
+        minLength: 1
+        maxLength: 255
+      cause:
+        type: string
+        enum:
+          - Civic Rights
+          - Education
+          - Climate Justice
+      type:
+        type: string
+        enum:
+          - Starter
+          - Accelerator
+          - Grant
+      page_url:
+        type: string
+        minLength: 1
+      logo_url:
+        type: string
+        minLength: 1
+      letters_counter:
+        type: integer
+        minimum: 0
+      letters_goal:
+        type: integer
+        minimum: 0
+        nullable: true
+      donation_goal:
+        type: integer
+        minimum: 0
+        nullable: true
+  LetterVersion:
+    type: object
+    required:
+      - campaign_id
+      - template_id
+      - office_division
+    properties:
+      id:
+        type: integer
+      campaign_id:
+        type: integer
+        minimum: 1
+      template_id:
+        type: string
+        minLength: 1
+        maxLength: 255
+      office_division:
+        type: string
+        enum:
+          - Federal
+          - State
+          - County
+          - Municipality
+      state:
+        type: string
+        minLength: 2
+        maxLength: 2
+      county:
+        type: string
+        minLength: 1
+      municipality:
+        type: string
+        minLength: 1
