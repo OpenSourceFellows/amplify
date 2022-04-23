@@ -9,7 +9,7 @@ info:
 paths:
   /api/campaigns:
     get:
-      summary: returns a JSON array of campaigns
+      summary: Returns a JSON array of campaigns
       responses:
         200:
           description: Campaigns response
@@ -29,7 +29,7 @@ paths:
                 $ref: '#/components/schemas/Error'
   /api/campaigns/{id}:
     get:
-      summary: Returns a campaign based on id
+      summary: Returns a campaign based on its id
       responses:
         200:
           description: Campaign response
@@ -78,7 +78,7 @@ paths:
             type: integer
   /api/representatives/{zipCode}:
     get:
-      summary: Returns representatives 
+      summary: Returns representatives based on zip code
       description: Returns Representatives based on zip code utilizing <a href="https://developers.google.com/civic-information">Google's Civic Information API</a>
       responses:
         200:
@@ -111,6 +111,72 @@ paths:
           schema:
             type: string
             maxLength: 10
+  /api/lob/createLetter:
+    summary: Create a letter to a representative
+    post:
+      description: ''
+      requestBody:
+        $ref: '#/components/requestBodies/CreateLetter'
+      responses:
+        200:
+          description: Letter sent successfully
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  expected_delivery_date:
+                    type: string
+        500:
+          description: Letter creation failed
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+                    default: Something failed!
+  /api/lob/createAddress:
+    description: ''
+    post:
+      description:
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+      responses:
+        200:
+        400:
+        500:
+  /api/lob/addressVerification:
+    description: ''
+    post:
+      description:
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+      responses:
+        200:
+        400:
+        500:
+  /api/lob/templates/{templateId}:
+    get:
+      summary: Returns a Lob letter template ID
+      description: Returns a Lob letter template ID from the the <a href="https://docs.lob.com/#operation/template_retrieve">Lob's template API</a>
+      responses:
+      parameters: 
+        - name: templateId
+          description: ID of the Lob letter template
+          in: path
+          required: true
+          schema:
+            type: integer
 components:
   schemas:
     Campaign:
@@ -225,6 +291,27 @@ components:
           type: string
         photoUrl:
           type: string
+    Address:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        description:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
     Error:
       type: object
       properties:
@@ -237,4 +324,28 @@ components:
         error:
           type: string
           default: 'Invalid zip code format, valid examples are 84054-6013 or 84054. The zip code used was {zip code}'
+  requestBodies:
+    CreateLetter:
+      description: A JSON object containing information to create a letter to a representative via the <a href="https://docs.lob.com/#operation/letter_create">Lob letter creation API</a>
+      required: true
+      content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  maxLength: 255
+                to:
+                  $ref: '#/components/schemas/Address'
+                from:
+                  type: object
+                  properties:
+                    address_id:
+                      type: integer
+                      description: "The address_id returned from /api/createAddress"
+                template_id:
+                  type: string
+                  default: 'The Lob template_id created for this letter'
+                
       
