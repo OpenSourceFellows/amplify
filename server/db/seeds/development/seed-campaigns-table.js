@@ -12,8 +12,7 @@ module.exports = {
         name: 'The Breathe Act',
         cause: 'Civic Rights',
         type: 'Grant',
-        page_url: 'breatheact.org',
-        letters_counter: 0
+        page_url: 'breatheact.org'
       },
       {
         id: 2,
@@ -21,8 +20,7 @@ module.exports = {
         name: 'Climate and Community Investment Act',
         cause: 'Climate Justice',
         type: 'Grant',
-        page_url: 'climatecantwait.org',
-        letters_counter: 0
+        page_url: 'climatecantwait.org'
       },
       {
         id: 3,
@@ -30,8 +28,7 @@ module.exports = {
         name: 'Energy Efficiency, Equity and Jobs Assembly Bill',
         cause: 'Climate Justice',
         type: 'Grant',
-        page_url: 'climatecantwait.org',
-        letters_counter: 0
+        page_url: 'climatecantwait.org'
       },
       {
         id: 4,
@@ -39,8 +36,7 @@ module.exports = {
         name: 'Proposed Actions on EJ Communities',
         cause: 'Climate Justice',
         type: 'Grant',
-        page_url: 'climatecantwait.org',
-        letters_counter: 0
+        page_url: 'climatecantwait.org'
       }
     ])
   }
