@@ -24,8 +24,6 @@ class Campaign extends BaseModel {
         type: { type: 'string', enum: ['Starter', 'Accelerator', 'Grant'] },
         page_url: { type: 'string', minLength: 1 },
         logo_url: { type: 'string', minLength: 1 },
-        // TODO: Move `letters_counter` to be a mapped relation
-        letters_counter: { type: 'integer', minimum: 0 },
         letters_goal: {
           anyOf: [{ type: 'integer', minimum: 0 }, { type: 'null' }]
         },
