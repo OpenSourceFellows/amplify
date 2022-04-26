@@ -32,8 +32,8 @@ jobs:
         with:
           output: api-docs
           spec-file: swagger.yml
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy API Docs to GitHub Pages🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: api-docs
+          branch: api-docs
+          folder: api-docs
