@@ -6,9 +6,6 @@ on:
     paths:
       - 'swagger.yml'
 
-permissions:
-  contents: read
-
 jobs:
   upload-swagger-spec:
     runs-on: windows-latest
