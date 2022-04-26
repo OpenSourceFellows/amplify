@@ -20,6 +20,7 @@ jobs:
     needs: upload-swagger-spec
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Download swagger.yml
         uses: actions/download-artifact@v2
         with:
@@ -27,10 +28,10 @@ jobs:
       - name: Generate Swagger UI
         uses: Legion2/swagger-ui-action@v1
         with:
-          output: docs
+          output: api-docs
           spec-file: swagger.yml
       - name: Deploy API Docs to GitHub Pages🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: api-docs
-          folder: docs
+          folder: api-docs
