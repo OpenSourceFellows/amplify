@@ -28,10 +28,10 @@ jobs:
       - name: Generate Swagger UI
         uses: Legion2/swagger-ui-action@v1
         with:
-          output: api-docs
+          output: docs
           spec-file: swagger.yml
       - name: Deploy API Docs to GitHub Pages🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: api-docs
-          folder: api-docs
+          folder: docs
