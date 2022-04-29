@@ -4,10 +4,7 @@
       <v-col v-for="campaign in campaigns" :key="campaign.id">
         <v-card class="mx-auto" max-width="344">
           <v-img
-            :src="
-              require('@/assets/images/Campaigns/' + campaign.name + '.png')
-            "
-            :lazy-src="require('@/assets/images/cardimage.jpeg')"
+            :src="getCampaignLogo(campaign)"
             :alt="'Campaign logo for ' + campaign.name"
             height="200px"
           ></v-img>
@@ -53,7 +50,9 @@ export default {
   name: 'CampaignCards',
   data() {
     return {
-      campaigns: []
+      campaigns: [],
+      publicPath: process.env.BASE_URL,
+      defaultCampaignLogoUrl: require('@/assets/images/cardimage.jpeg')
     }
   },
   async created() {
@@ -62,6 +61,17 @@ export default {
       this.campaigns = res.data
     } catch (e) {
       console.error(e)
+    }
+  },
+  methods: {
+    getCampaignLogo(campaign) {
+      if (!campaign.logo_url) {
+        return this.defaultCampaignLogoUrl
+      }
+      if (campaign.logo_url.startsWith('/')) {
+        return `${this.publicPath}${campaign.logo_url.slice(1)}`
+      }
+      return campaign.logo_url
     }
   }
 }
