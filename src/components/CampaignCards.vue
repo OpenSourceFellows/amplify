@@ -4,7 +4,11 @@
       <v-col v-for="campaign in campaigns" :key="campaign.id">
         <v-card class="mx-auto" max-width="344">
           <v-img
-            :src="require('@/assets/images/cardimage.jpeg')"
+            :src="
+              require('@/assets/images/Campaigns/' + campaign.name + '.png')
+            "
+            :lazy-src="require('@/assets/images/cardimage.jpeg')"
+            :alt="'Campaign logo for ' + campaign.name"
             height="200px"
           ></v-img>
 
