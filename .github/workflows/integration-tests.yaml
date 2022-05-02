@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- server/__tests__/integration/
+        run: npm test -- server/__tests__/integration/ --ci --reporters=default --reporters=jest-junit
         env:
           # Google Civic API key
           CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
@@ -42,3 +42,19 @@ jobs:
           CLIENT_ORIGIN_URL: http://localhost:8080
           AUTH0_AUDIENCE: your_Auth0_identifier_value
           AUTH0_DOMAIN: your_Auth0_domain
+
+      # This is used by the subsequent publish-test-results.yaml
+      - name: Upload Event File
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Event File
+          path: ${{ github.event_path }}
+
+      # This is used by the subsequent publish-test-results.yaml
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Integration Test Results
+          path: junit.xml
