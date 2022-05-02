@@ -84,7 +84,7 @@
     "sass": "^1.49.10",
     "sass-loader": "^12.6.0",
     "style-resources-loader": "^1.4.1",
-    "supertest": "^6.2.2",
+    "supertest": "^6.2.3",
     "vue-cli-plugin-style-resources-loader": "~0.1.5",
     "vue-eslint-parser": "^8.3.0",
     "vue-template-compiler": "^2.6.11",
