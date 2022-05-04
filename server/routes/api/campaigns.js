@@ -7,18 +7,18 @@ const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 router.post('/create-transaction', async (req, res) => {
-  const { session_id/*,  email, campaignId, donationId */} = req.body || {}
+  const { session_id /*,  email, campaignId, donationId */ } = req.body || {}
   if (!session_id /*|| !email*/) {
     return res.status(400).send({ error: 'No session ID' })
   }
-  const session = await stripe.checkout.sessions.retrieve(session_id);
-  const customer = await stripe.customers.retrieve(session.customer);
+  const session = await stripe.checkout.sessions.retrieve(session_id)
+  const customer = await stripe.customers.retrieve(session.customer)
 
   const formattedTransaction = {
     stripe_transaction_id: session_id,
     amount: session.amount_total,
     currency: session.currency,
-    payment_method: "something not empty", // Not sure what this is for
+    payment_method: 'something not empty', // Not sure what this is for
     payment_method_type: session.payment_method_types[0],
     email: session.customer_details.email // to-do: get user email from the server auth, if possible
   }
@@ -31,7 +31,7 @@ router.post('/create-transaction', async (req, res) => {
     console.log({ error })
     res.status(400).send()
   }
-});
+})
 
 // 1. send a request to `/create-payment-intent`
 // with a `donationAmount` as string or integer
@@ -75,7 +75,5 @@ router.post('/create-checkout-session', async (req, res) => {
     console.log({ error })
   }
 })
-
-
 
 module.exports = router
