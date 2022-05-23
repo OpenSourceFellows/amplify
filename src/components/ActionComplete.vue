@@ -1,16 +1,14 @@
 <template lang="html">
   <section class="action-complete">
     <div class="text-section up">
-      <v-icon 
-        class="icon" 
-        size="64px" 
-        color="blue lighten-1"
-      >
+      <v-icon class="icon" size="64px" color="blue lighten-1">
         mdi-mailbox
       </v-icon>
       <div class="content">
         <h1>Congratulations!</h1>
-        <p>Expected to be delivered: <span>{{get_date_format}}</span></p>
+        <p>
+          Expected to be delivered: <span>{{ get_date_format }}</span>
+        </p>
       </div>
     </div>
     <div class="text-section down">
@@ -21,8 +19,8 @@
       </p>
       <div class="avartar-content">
         <div v-for="(item, index) in persons" class="item" :key="index">
-            <img :src="item[1]"/>
-            <p>{{item[0]}}</p>
+          <img :src="item[1]" />
+          <p>{{ item[0] }}</p>
         </div>
       </div>
     </div>
@@ -50,7 +48,7 @@ export default {
       console.log("date : ", date)
       if(date)
         return `${date.getFullYear()} - ${date.getMonth() + 1} - ${date.getDate()}`;
-      else 
+      else
         return '--'
 
     }

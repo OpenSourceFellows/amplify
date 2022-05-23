@@ -12,7 +12,7 @@
 import ActionComplete from '@/components/ActionComplete.vue'
 import CauseCarousel from '@/components/CauseCarousel.vue'
 import CompleteHero from '@/components/CompleteHero.vue'
-import "../styles/views/CompletePage.less"
+import '../styles/views/CompletePage.less'
 
 export default {
   components: {
@@ -22,4 +22,3 @@ export default {
   }
 }
 </script>
-
