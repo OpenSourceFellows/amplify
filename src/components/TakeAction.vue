@@ -89,7 +89,7 @@ export default {
     props: {
         repName: {
           type: String,
-          required: true
+          required: false
         },
         letterBody: {
           type: String,

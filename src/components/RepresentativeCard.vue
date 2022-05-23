@@ -46,6 +46,8 @@ export default {
           '/api/lob/templates/' + latestVersion
         )
 
+        console.log("representive card letter: ", letter);
+
         const letterBody = letter.data.versions[0].html
         const selectedRep = this.member
         this.$emit('handleRepSelected', letterBody, selectedRep, true)

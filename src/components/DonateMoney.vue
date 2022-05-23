@@ -33,6 +33,8 @@ export default {
     data () {
         return {
 
+          text: ""
+
         }
     },
     methods: {
