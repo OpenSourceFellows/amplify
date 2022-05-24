@@ -8,7 +8,11 @@
             height="200px"
           ></v-img>
 
-          <v-card-title v-text="campaign.name"></v-card-title>
+          <v-card-title>
+            <p>
+              {{ campaign.name }}
+            </p>
+          </v-card-title>
 
           <v-card-subtitle
             v-text="campaign.organization"
