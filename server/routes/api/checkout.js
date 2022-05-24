@@ -49,6 +49,7 @@ router.post('/create-checkout-session', async (req, res) => {
     if (!acceptableCharges.includes(parsedDonationAmount)) {
       return res.status(400).send({ error: 'Invalid Amount' })
     }
+    const origin = req.get('origin')
 
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -65,9 +66,8 @@ router.post('/create-checkout-session', async (req, res) => {
       ],
       mode: 'payment',
       allow_promotion_codes: true,
-      success_url:
-        'https://amplify-app-production.herokuapp.com/complete?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://amplify-app-production.herokuapp.com/'
+      success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: origin
     })
 
     res.json({ url: session.url })

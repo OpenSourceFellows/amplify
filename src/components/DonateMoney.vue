@@ -42,6 +42,7 @@ export default {
           {donationAmount: this.donation})
                 .then((response) => {
                   console.log(response);
+                  location.href = response.data.url
                 })
                 .catch(function (error) {
                     console.log(error)
