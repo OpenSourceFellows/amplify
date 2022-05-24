@@ -60,6 +60,7 @@
     "register-service-worker": "^1.7.1",
     "stripe": "^8.207.0",
     "vue": "^2.6.11",
+    "vue-horizontal-list": "^1.3.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.6.4",
     "vuex": "^3.4.0"
