@@ -24,21 +24,54 @@
         </div>
       </div>
     </div>
+    <div class="d-flex justify-center align-center">
+      <v-card
+        v-for="rep in representatives"
+        :key="rep.id"
+        class="mx-3"
+        height="198"
+        width="208"
+      >
+        <v-img
+          :src="require(`../../public/representatives/${rep.profilePicture}`)"
+        />
+        <div class="card-label">
+          <p class="rep-name">
+            {{ rep.representativeName }}
+          </p>
+        </div>
+      </v-card>
+    </div>
   </section>
 </template>
 
 <script lang="js">
-import "../styles/components/ActionComplete.less"
-const img1 = require("../assets/images/person-1.jpg")
-const img2 = require("../assets/images/person-2.jpg")
-const img3 = require("../assets/images/person-3.jpg")
+import axios from 'axios'
+
 export default {
   name: 'ActionComplete',
   props: [],
   data() {
     return {
-      delivery_date: new Date(),
-      persons : [["JOHN CRONIN", img1], ['SCOTT BROWN', img2], ['MICHAEL JUSHMEREK', img3]]
+      expectedDate: "",
+      representatives: [
+        {
+          id: 1,
+          representativeName: "John Cronin",
+          profilePicture: "rep1.png"
+        },
+        {
+          id: 2,
+          representativeName: "Scott Brown",
+          profilePicture: "rep2.png"
+        },
+        {
+          id: 3,
+          representativeName: "Michael Kushmerek",
+          profilePicture: "rep3.png"
+        }
+      ]
+
     }
   },
   computed: {
@@ -54,10 +87,54 @@ export default {
     }
 
   },
-  mounted() {
+  async mounted() {
+    // const ltr_id = 1;
+     try {
+      // const res = await axios.get(`https://api.lob.com/v1/letters/${ltr_id}`)
+      const res = await axios.get(`/api/letters`)
+      console.log(res)
+      this.expectedDate = res.data.expected_delivery_date
+    } catch (err) {
+      console.error(err);
+    }
 
   },
   methods: {
   }
 }
 </script>
+<style scoped lang="less">
+.action-complete {
+  text-align: left;
+  padding: 40px;
+
+  .icon {
+    float: left;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .text-section {
+    padding: 16px;
+  }
+
+  .card-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #38618c;
+    padding: 5px;
+    z-index: 5;
+    width: 100%;
+    text-align: center;
+
+    .rep-name {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 300;
+      text-transform: uppercase;
+      margin: 0;
+    }
+  }
+}
+</style>

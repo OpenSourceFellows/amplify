@@ -7,52 +7,39 @@
       start with a different cause.
     </p>
 
-    <!-- <v-flex>
-      <v-carousel hide-delimiters style="box-shadow: 0px 0px">
-        <v-carousel-item v-for="i in 2" :key="i" style="margin: 64px">
-          <v-layout row align-content-space-between>
-            <v-flex v-for="j in 6" :key="j" sm3 offset-1>
-              <v-card>
-                <v-img
-                  src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-                />
-                <v-card-title primary-title>
-                  <div>Card text</div>
-                </v-card-title>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-carousel-item>
-      </v-carousel>
-    </v-flex> -->
-
-    <vue-horizontal-list :items="items" :options="options">
-      <template #nav-prev>
-        <v-icon large> mdi-chevron-left </v-icon>
-      </template>
-
-      <template #nav-next>
-        <v-icon large> mdi-chevron-right </v-icon>
-      </template>
-
-      <template #default="{ item }">
-        <div
-          class="item"
-          :style="{
-            'background-image': `url(https://cdn.vuetifyjs.com/images/cards/desert.jpg)`
-          }"
+    <v-sheet class="mx-auto" elevation="0" max-width="900">
+      <v-slide-group v-model="model" class="pa-4" show-arrows>
+        <v-slide-item
+          v-for="bill in campaignBills"
+          :key="bill.id"
+          v-slot="{ active, toggle }"
         >
-          <!-- <h5>{{ item.title }}</h5> -->
-          <p>{{ item.name }}</p>
-        </div>
-      </template>
-    </vue-horizontal-list>
+          <v-card
+            :color="active ? 'primary' : 'grey lighten-1'"
+            class="ma-4"
+            height="160"
+            width="220"
+            @click="toggle"
+          >
+            <v-img
+              :src="require(`../../public/campaignBills/${bill.image}`)"
+              class="white--text font-weight-bold text-capitalize"
+            >
+              <div class="bill-card--overlay">
+                <p>
+                  {{ bill.title }}
+                </p>
+              </div>
+            </v-img>
+          </v-card>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
   </section>
 </template>
 
 <script lang="js">
 
-import VueHorizontalList from "vue-horizontal-list";
 import axios from "axios"
 
 import "../styles/components/CauseCarousel.less"
@@ -60,28 +47,46 @@ import "../styles/components/CauseCarousel.less"
 export default {
   name: 'CauseCarousel',
   components: {
-    VueHorizontalList
+
   },
   props: [],
   data() {
     return {
-      options: {
-        responsive: [
-          { end: 576, size: 1 },
-          { start: 576, end: 768, size: 2 },
-          { start: 768, end: 992, size: 3 },
-          { size: 4 },
-        ],
-        list: {
-          // 1200 because @media (min-width: 1200px) and therefore I want to switch to windowed mode
-          // windowed: 1200,
-          // Because: #app {padding: 80px 24px;}
-          padding: 32,
+      campaignBills: [
+        {
+          id: 1,
+          title: "The Green New Deal",
+          image: "bill1.png"
         },
+        {
+          id: 2,
+          title: "Teachers Fossil Fuel Divestment",
+          image: "bill2.png"
+        },
+        {
+          id: 3,
+          title: "Build Public Renewables Act",
+          image: "bill3.png"
+        },
+        {
+          id: 4,
+          title: "Consolidated Appropriations Act, 2022",
+          image: "bill2.png"
+        },
+        {
+          id: 5,
+          title: "	Infrastructure Investment and Jobs Act",
+          image: "bill1.png"
+        },
+        {
+          id: 6,
+          title: "Women’s Health Protection Act of 2022",
+          image: "bill3.png"
+        }
+        ],
         position: {
           start: 0,
-        }
-      },
+        },
       items: [
         // { title: "Item 1", content: "The Grean \n New Deal", image: "https://cdn.vuetifyjs.com/images/cards/desert.jpg" },
         // { title: "Item 2", content: "Teachers Fossil \n Foeis Divestment", image: "https://cdn.vuetifyjs.com/images/cards/desert.jpg" },
@@ -116,3 +121,17 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="less">
+.cause-carousel {
+  text-align: left;
+  padding: 56px;
+}
+.bill-card--overlay {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(66, 103, 178, 0.35);
+  padding: 10px;
+  font-size: 18px;
+}
+</style>

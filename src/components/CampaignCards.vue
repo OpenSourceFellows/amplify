@@ -6,7 +6,7 @@
           <v-img
             :src="require('@/assets/images/cardimage.jpeg')"
             height="200px"
-          ></v-img>
+          />
 
           <v-card-title>
             <p>
@@ -17,8 +17,7 @@
           <v-card-subtitle
             v-text="campaign.organization"
             style="text-align: left"
-          >
-          </v-card-subtitle>
+          />
           <v-card-actions>
             <a :href="'//' + campaign.page_url" target="_blank">
               {{ campaign.page_url }}

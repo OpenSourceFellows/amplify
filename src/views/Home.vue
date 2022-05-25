@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <home-hero></home-hero>
-    <campaign-cards></campaign-cards>
+    <home-hero />
+    <campaign-cards />
   </div>
 </template>
 
