@@ -71,7 +71,7 @@ router.post('/create-checkout-session', async (req, res) => {
       cancel_url: origin
     })
 
-    res.json({ url: session.url, paymentIntent: session.paymentIntent })
+    res.json({ url: session.url })
   } catch (error) {
     console.log({ error })
   }
