@@ -145,13 +145,23 @@ router.post('/createAddress', async (req, res) => {
 })
 
 router.post('/createLetter', async (req, res) => {
-  // Get description, to, and template_id from request body
-  const { description, to, from, template_id, charge } = req.body || {}
+  // Get description, to, and template_id, paymentIntent, and donation amount from request body
+  const { description, to, from, template_id, paymentIntent, charge } =
+    req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
   try {
+    // Check for completed payment before creating letter.
+    const paymentVerification = await stripe.paymentIntents.retrieve(
+      paymentIntent
+    )
+
+    if (paymentVerification.status !== 'succeeded') {
+      throw new Error('Payment has not yet cleared.')
+    }
+
     // Create Lob address using variables passed into route via post body
     const letter = await lob.letters.create({
       description: description,

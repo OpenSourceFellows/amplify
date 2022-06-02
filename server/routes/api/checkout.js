@@ -49,6 +49,7 @@ router.post('/create-checkout-session', async (req, res) => {
     if (!acceptableCharges.includes(parsedDonationAmount)) {
       return res.status(400).send({ error: 'Invalid Amount' })
     }
+
     const origin = req.get('origin')
 
     const session = await stripe.checkout.sessions.create({
@@ -70,7 +71,7 @@ router.post('/create-checkout-session', async (req, res) => {
       cancel_url: origin
     })
 
-    res.json({ url: session.url })
+    res.json({ url: session.url, paymentIntent: session.paymentIntent })
   } catch (error) {
     console.log({ error })
   }
