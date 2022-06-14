@@ -10,7 +10,7 @@
           ></v-img>
 
           <v-card-title 
-            stygitle="word-break: break-word"  
+            style="word-break: break-word"  
             v-text="campaign.name"
           >
           </v-card-title>
