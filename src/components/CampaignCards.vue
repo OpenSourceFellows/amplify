@@ -9,10 +9,7 @@
             height="200px"
           ></v-img>
 
-          <v-card-title 
-            style="word-break: break-word"  
-            v-text="campaign.name"
-          >
+          <v-card-title style="word-break: break-word" v-text="campaign.name">
           </v-card-title>
 
           <v-card-subtitle
