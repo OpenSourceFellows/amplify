@@ -11,7 +11,7 @@
             label="Full Name"
             placeholder="John Doe"
             required
-          ></v-text-field>
+          />
           <v-text-field
             ref="line1"
             v-model="line1"
@@ -26,7 +26,7 @@
             placeholder="Snowy Rock Pl"
             counter="25"
             required
-          ></v-text-field>
+          />
           <v-text-field
             ref="line2"
             v-model="line2"
@@ -34,7 +34,7 @@
             placeholder="Snowy Rock Pl"
             counter="25"
             required
-          ></v-text-field>
+          />
 
           <v-text-field
             ref="city"
@@ -43,7 +43,7 @@
             label="City"
             placeholder="El Paso"
             required
-          ></v-text-field>
+          />
           <v-text-field
             ref="state"
             v-model="state"
@@ -51,7 +51,7 @@
             label="State"
             required
             placeholder="TX"
-          ></v-text-field>
+          />
           <v-text-field
             ref="zip"
             v-model="zip"
@@ -59,16 +59,16 @@
             label="ZIP / Postal Code"
             required
             placeholder="79938"
-          ></v-text-field>
+          />
         </v-card-text>
         <v-card-text> {{ message }} </v-card-text>
-        <v-divider class="mt-12"></v-divider>
+        <v-divider class="mt-12" />
         <v-card-actions>
           <v-btn text> Cancel </v-btn>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-slide-x-reverse-transition>
             <v-tooltip v-if="formHasErrors" left>
-              <template v-slot:activator="{ on, attrs }">
+              <template #activator="{ on, attrs }">
                 <v-btn
                   icon
                   class="my-0"
@@ -93,7 +93,7 @@ import axios from 'axios'
 
 export default {
 
-    name: 'sign-name',
+    name: 'SignName',
 
     data: () => ({
         errorMessages: '',
@@ -153,20 +153,12 @@ export default {
                 this.$refs[f].validate(true)
             })
 
-            axios.post('/api/lob/addressVerification', this.form)
+            axios.post('/api/lob/createAddress', this.form)
                 .then((response) => {
                     console.log(response)
                     console.log(this.form)
                     this.message = 'Address verified!'
-                    if (response.status === 200) {
-                        return axios.post('/api/lob/createAddress', response.data)
-                            .then((response) => {
-                                console.log(response)
-                            })
-                            .catch(function (error) {
-                                console.log(error)
-                            })
-                    }
+
                 })
                 .catch(function (error) {
                     console.log(error)
