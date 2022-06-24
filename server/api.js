@@ -2,6 +2,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 
 const representatives = require('./routes/api/representatives')
@@ -17,6 +18,12 @@ const apiRouter = express.Router()
 
 // Middleware
 apiRouter.use(express.json())
+
+// Allow CORS support but only for development scenarios (e.g. to enable Postman testing)
+const { NODE_ENV } = process.env
+if (!NODE_ENV || NODE_ENV === 'development') {
+  apiRouter.use(cors())
+}
 
 // Rate Limiting
 const apiLimiter = rateLimit({
