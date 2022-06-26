@@ -7,15 +7,16 @@ const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 router.post('/create-transaction', async (req, res) => {
-  const { session_id /*,  email, campaignId, donationId */ } = req.body || {}
-  if (!session_id /*|| !email*/) {
+  console.log(req.body)
+  const { sessionId /*,  email, campaignId, donationId */ } = req.body || {}
+  if (!sessionId /*|| !email*/) {
     return res.status(400).send({ error: 'No session ID' })
   }
-  const session = await stripe.checkout.sessions.retrieve(session_id)
+  const session = await stripe.checkout.sessions.retrieve(sessionId)
   const customer = await stripe.customers.retrieve(session.customer)
 
   const formattedTransaction = {
-    stripe_transaction_id: session_id,
+    stripe_transaction_id: sessionId,
     amount: session.amount_total,
     currency: session.currency,
     payment_method: 'something not empty', // Not sure what this is for

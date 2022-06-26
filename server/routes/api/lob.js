@@ -145,16 +145,19 @@ router.post('/createAddress', async (req, res) => {
 })
 
 router.post('/createLetter', async (req, res) => {
-  // Get description, to, and template_id, and paymentIntent id from request body
-  const { description, to, from, template_id, paymentIntentId } = req.body || {}
+  // Get description, to, and template_id, and Stripe session id from request body
+  const { description, to, from, template_id, sessionId } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
+
   try {
     // Check for completed payment before creating letter. Status can be succeeded, failed, or pending. Return server error if failure or pending.
+
     const paymentVerification = await stripe.paymentIntents.retrieve(
-      paymentIntentId
+      checkoutSession.payment_intent
     )
 
     if (paymentVerification.status !== 'succeeded') {
@@ -186,7 +189,7 @@ router.post('/createLetter', async (req, res) => {
   } catch (error) {
     // We'll need a stripe test env key to test this in our integration tests
     const refund = await stripe.refunds.create({
-      payment_intent: paymentIntentId
+      payment_intent: checkoutSession.payment_intent
     })
     // TODO handle error for refund error. Not doing this currently because chance of
     // user making it this far in the process and both LOB API and Stripe failing is very small.

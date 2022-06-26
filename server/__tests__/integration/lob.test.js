@@ -354,12 +354,12 @@ describe('POST /api/lob/createLetter', () => {
 
     const template_id = 'tmpl_1057bb6f50f81fb'
 
-    // A test payment intent that should return status of 'succeeded'
-    const paymentIntentId = 'pi_3L7VXGFqipIA40A31qbflVvO'
+    // A test checkout session id that should return status of 'succeeded'
+    const sessionId = 'pi_3L7VXGFqipIA40A31qbflVvO'
 
     const response = await request(app)
       .post(route)
-      .send({ description, to, from, template_id, paymentIntentId })
+      .send({ description, to, from, template_id, sessionId })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       expected_delivery_date: expect.any(String)
