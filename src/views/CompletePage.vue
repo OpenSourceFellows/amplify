@@ -1,8 +1,7 @@
 <template>
-  <div class="complete-page">
-    <h1>This is the complete page</h1>
-    <action-complete></action-complete>
-    <cause-carousel></cause-carousel>
+  <div>
+    <action-complete />
+    <cause-carousel />
   </div>
 </template>
 
