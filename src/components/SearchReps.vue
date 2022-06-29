@@ -15,6 +15,36 @@
               ></v-text-field>
             </v-form>
 
+              <v-row>
+               <v-btn
+                                rounded
+                                dark
+                                :style="{
+         backgroundColor : currentFilter === 'country' ? 'blue !important' : 'white',color: currentFilter ===  'country' ? 'white' : 'black'}"
+                                v-on:click="FilterList('country')"
+                            >
+                                Federal
+                            </v-btn>
+                            <v-btn
+                                rounded
+                                dark
+                                :style="{
+           backgroundColor : currentFilter === 'administrativeArea1' ? 'blue !important' : 'white',color: currentFilter === 'administrativeArea1' ? 'white' : 'black'}"
+
+                                v-on:click="FilterList('administrativeArea1')"
+                            >
+                                State
+                            </v-btn>
+                            <v-btn
+                                rounded
+                                dark
+                                :style="{
+           backgroundColor : currentFilter === 'administrativeArea1' ? 'blue !important' : 'white', color:currentFilter ===  'administrativeArea2' ? 'white' : 'black'}"
+                                v-on:click="FilterList('administrativeArea1')"
+                            >
+                                County
+                            </v-btn>
+                </v-row>
             <v-btn
               :to="{
                 name: 'Reps',
@@ -83,6 +113,7 @@ export default {
         return {
             letterBody: '',
             selectedRep: {},
+            currentFilter: String,
             congressMembers: [],
             hasContent: true,
             postalCode: this.$route.params.postalCode || '',
@@ -90,6 +121,7 @@ export default {
         }
     },
     methods: {
+
         handleRepSelected (letterBody, selectedRep, step2) {
             this.letterBody = letterBody
             this.selectedRep = selectedRep
@@ -102,8 +134,9 @@ export default {
                 this.hasContent = false
             }
         },
+
         async CreateRepList () {
-            try {
+           try {
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
@@ -114,6 +147,38 @@ export default {
                 } catch (e) {
                 console.error(e)
             }
+        },
+        async FilterList(level) {
+            this.currentFilter = level;
+
+            try {
+                const params = {};
+                if (this.currentFilter != null) {
+                  params.filter = this.currentFilter
+                }
+                const res = await axios.get(
+                    '/api/representatives/' + this.postalCode,
+                    { params }
+                )
+                
+                this.congressMembers = res.data
+                // debugger
+                // this.hasContent = true 
+                // console.log(this.congressMembers)
+                // this.listVisible=true
+                // debugger
+                } catch (e) {
+                console.error(e)
+            }
+
+            // try {
+            //     const representatives = await axios.get(
+            //         `https://www.googleapis.com/civicinfo/v2/representatives?address=${this.postalCode}&levels=${level}&key=AIzaSyAc8hv6aZUE4mmrWdqgfPMPpi8SZgH6Hww`
+            //     ); 
+            //     this.congressMembers = representatives.data.officials       
+            // } catch (e) {
+            //     console.error(e);
+            // }
         }
     }
 }
