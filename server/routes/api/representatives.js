@@ -13,6 +13,7 @@ const CIVIC_API_KEY = getCivicApiKey()
 router.get('/:zipCode', async (req, res) => {
   const congressMembers = []
   const { zipCode } = req.params
+  const { filter } = req.query
 
   if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
     res.status(400).send({
@@ -23,13 +24,19 @@ router.get('/:zipCode', async (req, res) => {
     return
   }
   try {
+    const params = {
+      key: CIVIC_API_KEY,
+      address: zipCode
+    }
+
+    if (filter != null) {
+      params.levels = filter
+    }
+
     const response = await axios.get(
       'https://www.googleapis.com/civicinfo/v2/representatives',
       {
-        params: {
-          key: CIVIC_API_KEY,
-          address: zipCode
-        }
+        params
       }
     )
 

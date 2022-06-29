@@ -104,8 +104,15 @@ export default {
         },
         async CreateRepList () {
             try {
+                const params = {};
+
+                if (this.filter != null) {
+                  params.filter = this.filter
+                }
+
                 const res = await axios.get(
-                    '/api/representatives/' + this.postalCode
+                    '/api/representatives/' + this.postalCode,
+                    { params }
                 )
                 this.congressMembers = res.data
                 this.hasContent = true
