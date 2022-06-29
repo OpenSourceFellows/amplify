@@ -8,45 +8,48 @@
         representatives, from the comfort of your home or on the go.
       </p>
 
-      <v-btn-toggle v-model="text" tile color="deep-purple accent-3" group>
-        <v-btn elevation="2" raised value="2"> 2 </v-btn>
+      <v-btn-toggle v-model="donation" tile color="deep-purple accent-3" group>
+        <v-btn elevation="2" raised :value="2"> 2 </v-btn>
 
-        <v-btn elevation="2" raised value="20"> 20 </v-btn>
+        <v-btn elevation="2" raised :value="20"> 20 </v-btn>
 
-        <v-btn elevation="2" raisedvalue="50"> 50 </v-btn>
+        <v-btn elevation="2" :value="50"> 50 </v-btn>
       </v-btn-toggle>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit"> Submit</v-btn>
+      <v-btn outlined color="primary" text @click="submit"> Submit </v-btn>
     </div>
   </section>
 </template>
 
 <script lang="js">
-
+import axios from 'axios'
 export default {
-    name: 'donate-money',
+    name: 'DonateMoney',
     props: [],
-    mounted () {
-
-    },
     data () {
         return {
-
-        }
-    },
-    methods: {
-        submit () {
-            this.$router.push('/complete')
+          donation:1
         }
     },
     computed: {
-
+    },
+    mounted () {
+    },
+    methods: {
+        submit () {
+          axios.post('/api/checkout/create-checkout-session',
+          {donationAmount: this.donation})
+                .then((response) => {
+                  console.log(response);
+                  location.href = response.data.url
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
     }
 }
 </script>
 
-<style scoped lang="less">
-.donate-money {
-}
-</style>
+<style scoped lang="less"></style>
