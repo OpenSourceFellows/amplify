@@ -15,36 +15,60 @@
               ></v-text-field>
             </v-form>
 
-              <v-row>
-               <v-btn
+            <v-row>
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'country' ? 'blue !important' : 'white',
+                  color: currentFilter === 'country' ? 'white' : 'black'
+                }"
+                v-on:click="FilterList('country')"
+              >
+                Federal
+              </v-btn>
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'administrativeArea1'
+                      ? 'blue !important'
+                      : 'white',
+                  color:
+                    currentFilter === 'administrativeArea1' ? 'white' : 'black'
+                }"
+                v-on:click="FilterList('administrativeArea1')"
+              >
+                State
+              </v-btn>
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'administrativeArea2'
+                      ? 'blue !important'
+                      : 'white',
+                  color:
+                    currentFilter === 'administrativeArea2' ? 'white' : 'black'
+                }"
+                v-on:click="FilterList('administrativeArea2')"
+              >
+                County
+              </v-btn>
+              <!-- <v-btn
                                 rounded
                                 dark
                                 :style="{
-         backgroundColor : currentFilter === 'country' ? 'blue !important' : 'white',color: currentFilter ===  'country' ? 'white' : 'black'}"
-                                v-on:click="FilterList('country')"
+         backgroundColor : currentFilter === 'locality' ? 'blue !important' : 'white',color: currentFilter ===  'locality' ? 'white' : 'black'}"
+                                v-on:click="FilterList('locality')"
                             >
-                                Federal
-                            </v-btn>
-                            <v-btn
-                                rounded
-                                dark
-                                :style="{
-           backgroundColor : currentFilter === 'administrativeArea1' ? 'blue !important' : 'white',color: currentFilter === 'administrativeArea1' ? 'white' : 'black'}"
+                                Locality
+                            </v-btn> -->
+            </v-row>
 
-                                v-on:click="FilterList('administrativeArea1')"
-                            >
-                                State
-                            </v-btn>
-                            <v-btn
-                                rounded
-                                dark
-                                :style="{
-           backgroundColor : currentFilter === 'administrativeArea1' ? 'blue !important' : 'white', color:currentFilter ===  'administrativeArea2' ? 'white' : 'black'}"
-                                v-on:click="FilterList('administrativeArea1')"
-                            >
-                                County
-                            </v-btn>
-                </v-row>
             <v-btn
               :to="{
                 name: 'Reps',
@@ -101,27 +125,24 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-
 export default {
     name: 'SearchReps',
     components: {
         RepresentativeCard,
         TakeAction
     },
-
     data () {
         return {
             letterBody: '',
             selectedRep: {},
-            currentFilter: String,
             congressMembers: [],
+            currentFilter: String,
             hasContent: true,
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
         }
     },
     methods: {
-
         handleRepSelected (letterBody, selectedRep, step2) {
             this.letterBody = letterBody
             this.selectedRep = selectedRep
@@ -134,9 +155,8 @@ export default {
                 this.hasContent = false
             }
         },
-
         async CreateRepList () {
-           try {
+            try {
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
@@ -148,9 +168,8 @@ export default {
                 console.error(e)
             }
         },
-        async FilterList(level) {
+         async FilterList(level) {
             this.currentFilter = level;
-
             try {
                 const params = {};
                 if (this.currentFilter != null) {
@@ -160,26 +179,18 @@ export default {
                     '/api/representatives/' + this.postalCode,
                     { params }
                 )
-                
+
                 this.congressMembers = res.data
                 // debugger
-                // this.hasContent = true 
+                // this.hasContent = true
                 // console.log(this.congressMembers)
                 // this.listVisible=true
                 // debugger
                 } catch (e) {
                 console.error(e)
             }
+         }
 
-            // try {
-            //     const representatives = await axios.get(
-            //         `https://www.googleapis.com/civicinfo/v2/representatives?address=${this.postalCode}&levels=${level}&key=AIzaSyAc8hv6aZUE4mmrWdqgfPMPpi8SZgH6Hww`
-            //     ); 
-            //     this.congressMembers = representatives.data.officials       
-            // } catch (e) {
-            //     console.error(e);
-            // }
-        }
     }
 }
 </script>
