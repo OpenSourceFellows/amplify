@@ -42,7 +42,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.21.0",
     "@babel/polyfill": "^7.4.4",
-    "@stripe/stripe-js": "^1.29.0",
+    "@stripe/stripe-js": "^1.32.0",
     "@vue-stripe/vue-stripe": "^4.4.2",
     "axios": "^0.27.2",
     "cli-plugin-eslint": "^0.1.0",
