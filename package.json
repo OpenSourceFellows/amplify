@@ -58,7 +58,7 @@
     "pg": "^8.7.3",
     "register-service-worker": "^1.7.1",
     "stripe": "^8.219.0",
-    "vue": "^2.6.11",
+    "vue": "^2.7.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.6.4",
     "vuex": "^3.4.0"
@@ -83,7 +83,7 @@
     "supertest": "^6.2.3",
     "vue-cli-plugin-style-resources-loader": "~0.1.5",
     "vue-eslint-parser": "^8.3.0",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.7.0",
     "vuetify-loader": "^1.7.0"
   },
   "browserslist": [
