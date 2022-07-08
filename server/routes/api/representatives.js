@@ -43,8 +43,7 @@ router.get('/:zipCode', async (req, res) => {
 
     const { offices, officials } = response.data
     offices
-      .slice(0)
-      // .slice(2) // skip President and VP
+      .slice(2) // skip President and VP
       .forEach((officeType) => {
         officeType.officialIndices.forEach((position) => {
           const rep = officials[position]

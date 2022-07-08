@@ -58,15 +58,18 @@
               >
                 County
               </v-btn>
-              <!-- <v-btn
-                                rounded
-                                dark
-                                :style="{
-         backgroundColor : currentFilter === 'locality' ? 'blue !important' : 'white',color: currentFilter ===  'locality' ? 'white' : 'black'}"
-                                v-on:click="FilterList('locality')"
-                            >
-                                Locality
-                            </v-btn> -->
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'locality' ? 'blue !important' : 'white',
+                  color: currentFilter === 'locality' ? 'white' : 'black'
+                }"
+                v-on:click="FilterList('locality')"
+              >
+                Locality
+              </v-btn>
             </v-row>
 
             <v-btn
@@ -160,9 +163,11 @@ export default {
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
+
+
                 this.congressMembers = res.data
                 this.hasContent = true
-                console.log(res.data)
+                // console.log(res.data)
                 this.listVisible=true
                 } catch (e) {
                 console.error(e)
@@ -175,17 +180,20 @@ export default {
                 if (this.currentFilter != null) {
                   params.filter = this.currentFilter
                 }
+                console.log(params)
+
+
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode,
-                    { params }
+                    {
+                      params
+                      }
                 )
 
+             console.log(res)
                 this.congressMembers = res.data
-                // debugger
-                // this.hasContent = true
-                // console.log(this.congressMembers)
-                // this.listVisible=true
-                // debugger
+
+
                 } catch (e) {
                 console.error(e)
             }
