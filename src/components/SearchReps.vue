@@ -28,6 +28,19 @@
               >
                 Federal
               </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'locality' ? 'blue !important' : 'white',
+                  color: currentFilter === 'locality' ? 'white' : 'black'
+                }"
+                v-on:click="FilterList('locality')"
+              >
+                Local
+              </v-btn>
               <v-btn
                 rounded
                 dark
@@ -57,18 +70,6 @@
                 v-on:click="FilterList('administrativeArea2')"
               >
                 County
-              </v-btn>
-              <v-btn
-                rounded
-                dark
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'locality' ? 'blue !important' : 'white',
-                  color: currentFilter === 'locality' ? 'white' : 'black'
-                }"
-                v-on:click="FilterList('locality')"
-              >
-                Locality
               </v-btn>
             </v-row>
 

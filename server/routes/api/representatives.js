@@ -42,52 +42,61 @@ router.get('/:zipCode', async (req, res) => {
     console.log(response)
 
     const { offices, officials } = response.data
-    offices
-      .slice(2) // skip President and VP
-      .forEach((officeType) => {
-        officeType.officialIndices.forEach((position) => {
-          const rep = officials[position]
-          const repInfo = {
-            name: rep.name || '',
-            title: officeType.name || '',
-            address_line1: '',
-            address_line2: '',
-            address_city: '',
-            address_state: '',
-            address_zip: '',
-            address_country: 'US',
-            email:
-              (Array.isArray(rep.emails) && rep.emails[0]) || 'Not Made Public',
-            twitter: 'Not Made Public',
-            facebook: 'Not Made Public',
-            contactPage: (Array.isArray(rep.urls) && rep.urls[0]) || '',
-            photoUrl:
-              rep.photoUrl ||
-              'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
-          }
 
-          if (Array.isArray(rep.address) && rep.address[0]) {
-            repInfo.address_line1 = rep.address[0].line1
-            repInfo.address_city = rep.address[0].city
-            repInfo.address_state = rep.address[0].state
-            repInfo.address_zip = rep.address[0].zip
-          }
+    const getOfficials = (officeType) => {
+      officeType.officialIndices.forEach((position) => {
+        const rep = officials[position]
+        const repInfo = {
+          name: rep.name || '',
+          title: officeType.name || '',
+          address_line1: '',
+          address_line2: '',
+          address_city: '',
+          address_state: '',
+          address_zip: '',
+          address_country: 'US',
+          email:
+            (Array.isArray(rep.emails) && rep.emails[0]) || 'Not Made Public',
+          twitter: 'Not Made Public',
+          facebook: 'Not Made Public',
+          contactPage: (Array.isArray(rep.urls) && rep.urls[0]) || '',
+          photoUrl:
+            rep.photoUrl ||
+            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+        }
 
-          if (Array.isArray(rep.channels) && rep.channels.length > 0) {
-            const facebook = rep.channels.find(
-              ({ type }) => type === 'Facebook'
-            )
-            if (facebook) {
-              repInfo.facebook = facebook.id
-            }
-            const twitter = rep.channels.find(({ type }) => type === 'Twitter')
-            if (twitter) {
-              repInfo.twitter = twitter.id
-            }
+        if (Array.isArray(rep.address) && rep.address[0]) {
+          repInfo.address_line1 = rep.address[0].line1
+          repInfo.address_city = rep.address[0].city
+          repInfo.address_state = rep.address[0].state
+          repInfo.address_zip = rep.address[0].zip
+        }
+
+        if (Array.isArray(rep.channels) && rep.channels.length > 0) {
+          const facebook = rep.channels.find(({ type }) => type === 'Facebook')
+          if (facebook) {
+            repInfo.facebook = facebook.id
           }
-          congressMembers.push(repInfo)
-        })
+          const twitter = rep.channels.find(({ type }) => type === 'Twitter')
+          if (twitter) {
+            repInfo.twitter = twitter.id
+          }
+        }
+        congressMembers.push(repInfo)
       })
+    }
+
+    if (
+      filter === 'administrativeArea1' ||
+      filter === 'administrativeArea2' ||
+      filter === 'locality'
+    ) {
+      offices.slice(0).forEach((officeType) => getOfficials(officeType))
+    } else {
+      offices
+        .slice(2) // skip President and VP
+        .forEach((officeType) => getOfficials(officeType))
+    }
 
     res.send(congressMembers)
   } catch (error) {
