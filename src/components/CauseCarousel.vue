@@ -1,15 +1,11 @@
 <template lang="html">
   <section class="d-flex flex-column align-center my-6">
-    <h4 class="text-h4">
-      Other Bills that Need Your Help
-    </h4>
+    <h4 class="text-h4">Other Bills that Need Your Help</h4>
     <p class="text-h6">
       Other people are also engaging with {{ repName }} on these causes.
     </p>
 
-    <v-sheet
-      class="d-flex justify-center cause-carousel"
-    >
+    <v-sheet class="d-flex justify-center cause-carousel">
       <v-slide-group
         v-model="slides"
         show-arrows
@@ -45,7 +41,7 @@ export default {
       }
     },
     computed: {
-      
+
     },
     created () {
       // Get campaigns from campaigns api
@@ -73,5 +69,4 @@ export default {
 .cause-carousel {
   width: 100%;
 }
-
 </style>

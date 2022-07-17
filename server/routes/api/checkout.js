@@ -8,7 +8,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 router.post('/create-transaction', async (req, res) => {
   console.log(req.body)
-  const { sessionId,  email /*, campaignId, donationId */ } = req.body || {}
+  const { sessionId, email /*, campaignId, donationId */ } = req.body || {}
   if (!sessionId /*|| !email*/) {
     return res.status(400).send({ error: 'No session ID' })
   }

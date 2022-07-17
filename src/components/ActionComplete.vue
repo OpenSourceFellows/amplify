@@ -8,17 +8,19 @@
         alt="mailbox"
         height="150px"
         class="mailbox"
-      >
+      />
       <div class="text-xs-center text-md-left mx-4">
         <h2 class="text-h3 text-md-h2 font-weight-bold mb-2">
           Congratulations!
         </h2>
         <h5 class="text-h5 font-weight-regular">
-          Thank you for your donation of 
-          <span class="font-weight-bold">${{ donationAmount }}</span>.
-          <br>
+          Thank you for your donation of
+          <span class="font-weight-bold">${{ donationAmount }}</span
+          >.
+          <br />
           Your letter is expected to be delivered on
-          <span class="font-weight-bold">{{ expectedDeliveryDate }}</span>.
+          <span class="font-weight-bold">{{ expectedDeliveryDate }}</span
+          >.
         </h5>
       </div>
 
@@ -142,5 +144,4 @@ export default {
 .mailbox {
   height: 150px;
 }
-
 </style>
