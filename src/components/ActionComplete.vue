@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="d-flex flex-column align-center">
-    <section class="d-flex flex-column flex-md-row justify-center align-center my-6 action-complete">
-      <img 
+    <section
+      class="d-flex flex-column flex-md-row justify-center align-center my-6 action-complete"
+    >
+      <img
         src="../assets/images/mailbox.png"
         alt="mailbox"
         height="150px"
@@ -12,19 +14,27 @@
           Congratulations!
         </h2>
         <h5 class="text-h5 font-weight-regular">
-          Your letter is expected to be delivered on <span class="font-weight-bold">{{ expectedDeliveryDate }}</span>.
+          Thank you for your donation of 
+          <span class="font-weight-bold">${{ donationAmount }}</span>.
+          <br>
+          Your letter is expected to be delivered on
+          <span class="font-weight-bold">{{ expectedDeliveryDate }}</span>.
         </h5>
       </div>
 
       <!-- Area for progress bar? -->
     </section>
 
-    <section class="d-flex flex-column justify-center align-center my-6 action-complete">
+    <!-- TODO: Fill with rep info later on
+    <section
+      class="d-flex flex-column justify-center align-center my-6 action-complete"
+    >
       <h4 class="text-h4">
         Want to send another letter for this campaign?
       </h4>
       <p class="text-h6 px-6">
-        Here are other local representatives who will play key roles in deciding policy. Your letter ensures that they pay attention.
+        Here are other local representatives who will play key roles in deciding
+        policy. Your letter ensures that they pay attention.
       </p>
 
       <div class="d-flex flex-row justify-center">
@@ -42,6 +52,7 @@
         </v-card>
       </div>
     </section>
+    -->
   </div>
 </template>
 
@@ -92,7 +103,7 @@ export default {
 
       // Create letter with lob api.
       // this.createCampaignLetter(letterDetails)
-      
+
       // Display success details in template.
 
     },
@@ -100,12 +111,9 @@ export default {
       createTransactionRecord(sessionId) {
         // Uses sessionId from Stripe to create db entry about transaction.
 
-        // Not sure why this is here, but it does not seem to serve a purpose.
-        // axios.defaults.baseURL = '//localhost:6000/';
-
         axios.post( '/api/checkout/create-transaction', { sessionId })
         .then((res) => {
-          const { email, amount } = res.data 
+          const { email, amount } = res.data
           this.email = email
           this.amount = amount
         })
@@ -122,6 +130,7 @@ export default {
             console.log(res)
           })
           .catch((err) => {
+            // TODO: Needs error handling
             console.error(err)
           })
       }
@@ -130,9 +139,8 @@ export default {
 </script>
 
 <style scoped lang="less">
-
 .mailbox {
-  height: 150px
+  height: 150px;
 }
 
 </style>
