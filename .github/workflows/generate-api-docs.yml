@@ -20,7 +20,8 @@ jobs:
       - uses: mshick/add-pr-comment@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: Looks like you've updated the API spec! Make sure to check the output of the `Lint Open API Spec`` action and make sure you've run `script/lint-and-bundle-openapi-schema.sh` and have committed any resulting changes."
+          message: |
+            Looks like you've updated the OpenAPI spec! Make sure to check the output of the `Lint Open API Spec`` action and make sure you've run `script/lint-and-bundle-openapi-schema.sh` and have committed any resulting changes.
   upload-openapi-spec:
     runs-on: windows-latest
     steps:
@@ -46,7 +47,7 @@ jobs:
         with:
           output: api-docs
           spec-file: openapi.yml
-      
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
