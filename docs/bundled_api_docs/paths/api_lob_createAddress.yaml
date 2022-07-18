@@ -1,0 +1,13 @@
+description: ''
+post:
+  description: ''
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Address.yaml
+  responses:
+    '200': null
+    '400': null
+    '500': null

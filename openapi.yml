@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
-  description: ""
-  version: 1.0.0
   title: Amplify API
+  description: ''
+  version: 1.0.0
   license:
     name: MIT
     url: https://github.com/ProgramEquity/amplify/blob/main/LICENSE
@@ -11,7 +11,7 @@ paths:
     get:
       summary: Returns a JSON array of campaigns
       responses:
-        200:
+        '200':
           description: Campaigns response
           content:
             application/json:
@@ -20,7 +20,7 @@ paths:
                 properties:
                   Campaigns:
                     $ref: '#/components/schemas/Campaign'
-        500:
+        '500':
           description: Error
           content:
             application/json:
@@ -31,20 +31,20 @@ paths:
     get:
       summary: Returns a campaign based on its id
       responses:
-        200:
+        '200':
           description: Campaign response
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Campaign'
-        500:
+        '500':
           description: Error
           content:
             application/json:
               schema:
                 type: object
                 $ref: '#/components/schemas/Error'
-      parameters: 
+      parameters:
         - name: id
           in: path
           required: true
@@ -52,9 +52,11 @@ paths:
             type: integer
   /api/letter_versions/{campaignId}:
     get:
-      summary: Returns all versions of each letter, including the template id, sent out for a campaign based on campaign ID
+      summary: >-
+        Returns all versions of each letter, including the template id, sent out
+        for a campaign based on campaign ID
       responses:
-        200:
+        '200':
           description: Letter Versions response
           content:
             application/json:
@@ -62,14 +64,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LetterVersion'
-        500:
+        '500':
           description: Error
           content:
             application/json:
               schema:
                 type: object
                 $ref: '#/components/schemas/Error'
-      parameters: 
+      parameters:
         - name: campaignId
           description: ID of campaign to return letter versions for
           in: path
@@ -79,33 +81,43 @@ paths:
   /api/representatives/{zipCode}:
     get:
       summary: Returns representatives based on zip code
-      description: Returns Representatives based on zip code utilizing <a href="https://developers.google.com/civic-information">Google's Civic Information API</a>
+      description: >-
+        Returns Representatives based on zip code utilizing <a
+        href="https://developers.google.com/civic-information">Google's Civic
+        Information API</a>
+      externalDocs:
+        url: https://developers.google.com/civic-information
       responses:
-        200:
-          description: Array of representatives, info found via <a href="https://developers.google.com/civic-information">Google's Civic Information API</a>
+        '200':
+          description: >-
+            Array of representatives, info found via <a
+            href="https://developers.google.com/civic-information">Google's
+            Civic Information API</a>
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Representative'
-        400:
+        '400':
           description: Invalid Zip Code Error
           content:
             application/json:
               schema:
                 type: object
                 $ref: '#/components/schemas/InvalidZipError'
-        500:
+        '500':
           description: Error
           content:
             application/json:
               schema:
                 type: object
                 $ref: '#/components/schemas/Error'
-      parameters: 
+      parameters:
         - name: zipCode
-          description: Zip code around which to search for representatives.  Must be in the form of a valid 5-digit or Zip+4 9-digit format.
+          description: >-
+            Zip code around which to search for representatives.  Must be in the
+            form of a valid 5-digit or Zip+4 9-digit format.
           in: path
           required: true
           schema:
@@ -115,23 +127,25 @@ paths:
     summary: Create a letter to a representative
     post:
       description: ''
+      externalDocs:
+        url: https://docs.lob.com/#operation/letter_create
       requestBody:
         $ref: '#/components/requestBodies/CreateLetter'
       responses:
-        200:
+        '200':
           description: Letter sent successfully
           content:
             application/json:
-              schema: 
+              schema:
                 type: object
                 properties:
                   expected_delivery_date:
                     type: string
-        500:
+        '500':
           description: Letter creation failed
           content:
             application/json:
-              schema: 
+              schema:
                 type: object
                 properties:
                   error:
@@ -140,37 +154,41 @@ paths:
   /api/lob/createAddress:
     description: ''
     post:
-      description:
+      description: ''
       requestBody:
         required: true
         content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
       responses:
-        200:
-        400:
-        500:
+        '200': null
+        '400': null
+        '500': null
   /api/lob/addressVerification:
     description: ''
     post:
-      description:
+      description: ''
       requestBody:
         required: true
         content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
       responses:
-        200:
-        400:
-        500:
+        '200': null
+        '400': null
+        '500': null
   /api/lob/templates/{templateId}:
     get:
       summary: Returns a Lob letter template ID
-      description: Returns a Lob letter template ID from the the <a href="https://docs.lob.com/#operation/template_retrieve">Lob's template API</a>
-      responses:
-      parameters: 
+      description: >-
+        Returns a Lob letter template ID from the the <a
+        href="https://docs.lob.com/#operation/template_retrieve">Lob's template
+        API</a>
+      externalDocs:
+        url: https://docs.lob.com/#operation/template_retrieve
+      parameters:
         - name: templateId
           description: ID of the Lob letter template
           in: path
@@ -222,11 +240,15 @@ components:
         letters_goal:
           type: integer
           minimum: 0
-          nullable: true
         donation_goal:
           type: integer
           minimum: 0
-          nullable: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          default: Whoops
     LetterVersion:
       type: object
       required:
@@ -280,7 +302,7 @@ components:
           type: string
         address_country:
           type: string
-          default: 'US'
+          default: US
         email:
           type: string
         twitter:
@@ -291,6 +313,14 @@ components:
           type: string
         photoUrl:
           type: string
+    InvalidZipError:
+      type: object
+      properties:
+        error:
+          type: string
+          default: >-
+            Invalid zip code format, valid examples are 84054-6013 or 84054. The
+            zip code used was {zip code}
     Address:
       type: object
       properties:
@@ -312,40 +342,30 @@ components:
           type: string
         zip:
           type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          default: 'Whoops'
-    InvalidZipError:
-      type: object
-      properties:
-        error:
-          type: string
-          default: 'Invalid zip code format, valid examples are 84054-6013 or 84054. The zip code used was {zip code}'
   requestBodies:
     CreateLetter:
-      description: A JSON object containing information to create a letter to a representative via the <a href="https://docs.lob.com/#operation/letter_create">Lob letter creation API</a>
+      description: >-
+        A JSON object containing information to create a letter to a
+        representative via the <a
+        href="https://docs.lob.com/#operation/letter_create">Lob letter creation
+        API</a>
       required: true
       content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                description:
-                  type: string
-                  maxLength: 255
-                to:
-                  $ref: '#/components/schemas/Address'
-                from:
-                  type: object
-                  properties:
-                    address_id:
-                      type: integer
-                      description: "The address_id returned from /api/createAddress"
-                template_id:
-                  type: string
-                  default: 'The Lob template_id created for this letter'
-                
-      
+        application/json:
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                maxLength: 255
+              to:
+                $ref: '#/components/schemas/Address'
+              from:
+                type: object
+                properties:
+                  address_id:
+                    type: integer
+                    description: The address_id returned from /api/createAddress
+              template_id:
+                type: string
+                default: The Lob template_id created for this letter
