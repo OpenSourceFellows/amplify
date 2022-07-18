@@ -3,3 +3,7 @@
 
 # Ignore all Markdown files
 *.md
+
+# Ignore OpenAPI-related files
+openapi.yml
+/docs/bundled_api_docs/
