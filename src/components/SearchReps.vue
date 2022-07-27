@@ -21,8 +21,7 @@
                 dark
                 :style="{
                   backgroundColor:
-                    currentFilter === 'country' ? 'blue !important' : 'white',
-                  color: currentFilter === 'country' ? 'white' : 'black'
+                    currentFilter === 'country' && isActive ? 'blue' : 'gray'
                 }"
                 v-on:click="FilterList('country')"
               >
@@ -32,10 +31,10 @@
               <v-btn
                 rounded
                 dark
+                class="ui button toggle"
                 :style="{
                   backgroundColor:
-                    currentFilter === 'locality' ? 'blue !important' : 'white',
-                  color: currentFilter === 'locality' ? 'white' : 'black'
+                    currentFilter === 'locality' && isActive ? 'blue' : 'gray'
                 }"
                 v-on:click="FilterList('locality')"
               >
@@ -44,13 +43,12 @@
               <v-btn
                 rounded
                 dark
+                :class="{ active: isActive }"
                 :style="{
                   backgroundColor:
-                    currentFilter === 'administrativeArea1'
-                      ? 'blue !important'
-                      : 'white',
-                  color:
-                    currentFilter === 'administrativeArea1' ? 'white' : 'black'
+                    currentFilter === 'administrativeArea1' && isActive
+                      ? 'blue'
+                      : 'gray'
                 }"
                 v-on:click="FilterList('administrativeArea1')"
               >
@@ -59,13 +57,12 @@
               <v-btn
                 rounded
                 dark
+                :class="{ active: isActive }"
                 :style="{
                   backgroundColor:
-                    currentFilter === 'administrativeArea2'
-                      ? 'blue !important'
-                      : 'white',
-                  color:
-                    currentFilter === 'administrativeArea2' ? 'white' : 'black'
+                    currentFilter === 'administrativeArea2' && isActive
+                      ? 'blue'
+                      : 'gray'
                 }"
                 v-on:click="FilterList('administrativeArea2')"
               >
@@ -144,6 +141,8 @@ export default {
             hasContent: true,
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
+            isActive: false,
+
         }
     },
     methods: {
@@ -164,6 +163,7 @@ export default {
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
+                this.isActive = false
 
 
                 this.congressMembers = res.data
@@ -175,16 +175,17 @@ export default {
             }
         },
          async FilterList(level) {
-            this.currentFilter = level;
             try {
-                const params = {};
-                if (this.currentFilter != null) {
-                  params.filter = this.currentFilter
-                }
-                console.log(params)
+              this.currentFilter = level;
 
+                if (!this.isActive) {
+                  this.isActive = true;
+                  const params = {};
+                  if (this.currentFilter != null) {
+                    params.filter = this.currentFilter
+                  }
 
-                const res = await axios.get(
+                     const res = await axios.get(
                     '/api/representatives/' + this.postalCode,
                     {
                       params
@@ -193,6 +194,17 @@ export default {
 
              console.log(res)
                 this.congressMembers = res.data
+                } else {
+                  this.isActive = false;
+                   const res = await axios.get(
+                    '/api/representatives/' + this.postalCode
+                )
+
+
+                this.congressMembers = res.data }
+
+
+
 
 
                 } catch (e) {
