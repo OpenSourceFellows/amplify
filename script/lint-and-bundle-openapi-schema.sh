@@ -1,6 +1,6 @@
-echo "Bundling OpenAPI schema from docs/bundled_api_docs"
+echo "Bundling OpenAPI schema from docs/api_docs"
 
-redocly bundle docs/bundled_api_docs/openapi.yaml --output openapi.yml
+redocly bundle docs/api_docs/openapi.yaml --output openapi.yml
 
 echo "Linting OpenAPI schema"
 
