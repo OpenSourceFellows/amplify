@@ -104,3 +104,4 @@ Make sure to lint and bundle the API schema locally by running `script/lint-and-
 
 You can also explore the components of an OpenAPI spec [using this map](http://openapi-map.apihandyman.io/)
 
+The UI spec is viewable [here](tbd)
