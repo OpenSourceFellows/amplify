@@ -1,0 +1,26 @@
+name: Lint OpenAPI Spec
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'openapi.yml'
+      - docs/api_docs/
+
+jobs:
+  lint-spec:
+    runs-on: ubuntu-latest
+    name: Lint OpenAPI Spec
+    steps:
+      - uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            Looks like you've updated the OpenAPI spec! Make sure to:
+              - check the output of the `Lint OpenAPI Spec` action 
+              - run `script/lint-and-bundle-openapi-schema.sh` and commit any resulting changes.
+      - uses: actions/checkout@v2
+      - name: Lint OpenAPI Spec
+        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        with:
+          args: 'lint openapi.yml --extends=minimal --skip-rule=no-empty-servers'

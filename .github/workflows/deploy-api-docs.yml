@@ -1,29 +1,14 @@
-name: Generate OpenAPI Documentation
+name: Deploy OpenAPI Documentation to GitHub Pages
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
+    branches:
+      - 'main'
     paths:
       - 'openapi.yml'
-      - docs/bundled_api_docs/
 
 jobs:
-  bundle-and-lint-spec:
-    runs-on: ubuntu-latest
-    name: Lint OpenAPI Spec
-    steps:
-      - uses: actions/checkout@v2
-      - name: Lint OpenAPI Spec
-        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
-        with:
-          args: 'lint openapi.yml --extends=minimal --skip-rule=no-empty-servers'
-      - uses: mshick/add-pr-comment@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: |
-            Looks like you've updated the OpenAPI spec! Make sure to:
-              - check the output of the `Lint Open API Spec` action 
-              - run `script/lint-and-bundle-openapi-schema.sh` and commit any resulting changes.
   upload-openapi-spec:
     runs-on: windows-latest
     steps:

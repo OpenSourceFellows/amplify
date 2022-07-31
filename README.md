@@ -91,12 +91,12 @@ Our API is documented using the [OpenAPI 3.1.0 Specification](https://spec.opena
 
 ### Schema Specification Updates
 
-Updates to the schema itself should be made in the appropriate subsection `.yaml` file in the `docs/bundled_api_docs/` directory. Try not to update the top level `openapi.yml` file; when our automated workflow runs, it will combine all of the files in the `docs/bundled_api_docs/` into the root-level `openapi.yml` file. See [here](https://redocly.com/docs/openapi-visual-reference/) for more about the file structure.
+Updates to the schema itself should be made in the appropriate component `.yaml` file in the `docs/api_docs/` directory. Try not to update the top level `openapi.yml` file; when our automated workflow runs, it will combine all of the files in the `docs/api_docs/` into the root-level `openapi.yml` file. See [here](https://redocly.com/docs/openapi-visual-reference/) for more about the file structure.
 
 Make sure to lint and bundle the API schema locally by running `script/lint-and-bundle-openapi-schema.sh`.  Commit any changes to `openapi.yml` generated from this command.
 
 ### UI Generation
 
-We use a [workflow action](tbd) to generate a [Swagger UI](https://swagger.io/tools/swagger-ui/) based on the API schema that exists in the `openapi.yml` file in the root directory.
+We use a [workflow action](tbd) to generate and deploy a [Swagger UI](https://swagger.io/tools/swagger-ui/) based on the API schema that exists in the `openapi.yml` file in the root directory to GitHub Pages.  This occurs when changes to `openapi.yml` are pushed to the main branch in this repository.
 
 The UI spec is viewable [here](tbd)
