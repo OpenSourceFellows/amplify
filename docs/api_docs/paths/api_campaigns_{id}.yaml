@@ -1,0 +1,22 @@
+get:
+  summary: Returns a campaign based on its id
+  responses:
+    '200':
+      description: Campaign response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Campaign.yaml
+    '500':
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: ../components/schemas/Error.yaml
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer

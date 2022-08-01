@@ -1,0 +1,27 @@
+summary: Create a letter to a representative
+post:
+  description: ''
+  externalDocs: 
+    url: https://docs.lob.com/#operation/letter_create
+  requestBody:
+    $ref: ../components/requestBodies/CreateLetter.yaml
+  responses:
+    '200':
+      description: Letter sent successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              expected_delivery_date:
+                type: string
+    '500':
+      description: Letter creation failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Something failed!
