@@ -19,10 +19,10 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Check out repo
-        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
 
       - name: Setup node
-        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236
+        uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854
         with:
           node-version-file: '.node-version'
           cache: npm
@@ -37,6 +37,8 @@ jobs:
           CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
           # Test environment Lob API key
           LOB_API_KEY: ${{ secrets.TEST_LOB_API_KEY }}
+          # Stripe test secret key
+          STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
           # Auth0 authentication parameters with nonsensical sample values
           SERVER_PORT: 8080
           CLIENT_ORIGIN_URL: http://localhost:8080
