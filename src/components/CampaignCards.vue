@@ -9,7 +9,7 @@
             height="200px"
           ></v-img>
 
-          <v-card-title v-text="campaign.name"></v-card-title>
+          <h5 v-text="campaign.name" class="text-h5"></h5>
 
           <v-card-subtitle
             v-text="campaign.organization"
