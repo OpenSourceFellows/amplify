@@ -1,5 +1,6 @@
 get:
   summary: Returns a campaign based on its id
+  operationId: ''
   responses:
     '200':
       description: Campaign response
@@ -14,6 +15,7 @@ get:
           schema:
             type: object
             $ref: ../components/schemas/Error.yaml
+    '400':
   parameters:
     - name: id
       in: path

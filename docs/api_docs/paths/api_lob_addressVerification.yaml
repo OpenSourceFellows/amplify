@@ -1,6 +1,8 @@
 description: ''
 post:
   description: ''
+  summary: ''
+  operationId: ''
   requestBody:
     required: true
     content:

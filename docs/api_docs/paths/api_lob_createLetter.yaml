@@ -1,6 +1,8 @@
 summary: Create a letter to a representative
 post:
   description: ''
+  summary: ''
+  operationId: ''
   externalDocs: 
     url: https://docs.lob.com/#operation/letter_create
   requestBody:
@@ -25,3 +27,4 @@ post:
               error:
                 type: string
                 default: Something failed!
+    '400':

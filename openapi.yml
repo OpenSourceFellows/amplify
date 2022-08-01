@@ -1,4 +1,6 @@
-openapi: 3.1.0
+openapi: 3.0.0
+servers:
+  - url: ''
 info:
   title: Amplify API
   description: ''
@@ -10,6 +12,7 @@ paths:
   /api/campaigns:
     get:
       summary: Returns a JSON array of campaigns
+      operationId: ''
       responses:
         '200':
           description: Campaigns response
@@ -20,6 +23,7 @@ paths:
                 properties:
                   Campaigns:
                     $ref: '#/components/schemas/Campaign'
+        '400': null
         '500':
           description: Error
           content:
@@ -30,6 +34,7 @@ paths:
   /api/campaigns/{id}:
     get:
       summary: Returns a campaign based on its id
+      operationId: ''
       responses:
         '200':
           description: Campaign response
@@ -37,6 +42,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Campaign'
+        '400': null
         '500':
           description: Error
           content:
@@ -64,6 +70,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LetterVersion'
+        '400': null
         '500':
           description: Error
           content:
@@ -81,6 +88,7 @@ paths:
   /api/representatives/{zipCode}:
     get:
       summary: Returns representatives based on zip code
+      operationId: ''
       description: >-
         Returns Representatives based on zip code utilizing <a
         href="https://developers.google.com/civic-information">Google's Civic
@@ -127,6 +135,8 @@ paths:
     summary: Create a letter to a representative
     post:
       description: ''
+      summary: ''
+      operationId: ''
       externalDocs:
         url: https://docs.lob.com/#operation/letter_create
       requestBody:
@@ -141,6 +151,7 @@ paths:
                 properties:
                   expected_delivery_date:
                     type: string
+        '400': null
         '500':
           description: Letter creation failed
           content:
@@ -155,6 +166,8 @@ paths:
     description: ''
     post:
       description: ''
+      summary: ''
+      operationId: ''
       requestBody:
         required: true
         content:
@@ -169,6 +182,8 @@ paths:
     description: ''
     post:
       description: ''
+      summary: ''
+      operationId: ''
       requestBody:
         required: true
         content:
@@ -182,6 +197,7 @@ paths:
   /api/lob/templates/{templateId}:
     get:
       summary: Returns a Lob letter template ID
+      operationId: ''
       description: >-
         Returns a Lob letter template ID from the the <a
         href="https://docs.lob.com/#operation/template_retrieve">Lob's template
@@ -195,6 +211,7 @@ paths:
           required: true
           schema:
             type: integer
+      responses: null
 components:
   schemas:
     Campaign:

@@ -1,5 +1,6 @@
 get:
   summary: Returns representatives based on zip code
+  operationId: ''
   description: >-
     Returns Representatives based on zip code utilizing <a
     href="https://developers.google.com/civic-information">Google's Civic

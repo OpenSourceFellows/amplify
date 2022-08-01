@@ -18,6 +18,7 @@ get:
           schema:
             type: object
             $ref: ../components/schemas/Error.yaml
+    '400':
   parameters:
     - name: campaignId
       description: ID of campaign to return letter versions for
