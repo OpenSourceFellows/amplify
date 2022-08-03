@@ -2,16 +2,16 @@ require('dotenv').config()
 
 const express = require('express')
 const axios = require('axios')
+const qs = require('qs')
 
 const router = express.Router()
 
-const CIVIC_API_KEY = getCivicApiKey()
+const { CICERO_API_KEY } = process.env
 
 // Endpoints
 
 // Get
 router.get('/:zipCode', async (req, res) => {
-  const congressMembers = []
   const { zipCode } = req.params
 
   if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
@@ -23,94 +23,137 @@ router.get('/:zipCode', async (req, res) => {
     return
   }
   try {
-    const response = await axios.get(
-      'https://www.googleapis.com/civicinfo/v2/representatives',
-      {
-        params: {
-          key: CIVIC_API_KEY,
-          address: zipCode
+    const {
+      data: { response }
+    } = await axios.get('https://cicero.azavea.com/v3.1/official', {
+      params: {
+        search_postal: zipCode,
+        search_country: 'US',
+        district_type: [
+          'NATIONAL_UPPER',
+          'NATIONAL_LOWER',
+          'STATE_EXEC',
+          'STATE_UPPER',
+          'STATE_LOWER',
+          'LOCAL_EXEC',
+          'LOCAL'
+        ],
+        order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
+        sort: 'asc',
+        max: 200,
+        format: 'json',
+        key: CICERO_API_KEY
+      },
+      paramsSerializer: (params) =>
+        qs.stringify(params, { arrayFormat: 'repeat' })
+    })
+
+    const { errors, results } = response
+    if (errors.length > 0) {
+      throw new Error(errors.join(','))
+    }
+    if (
+      !results ||
+      !Array.isArray(results.candidates) ||
+      results.candidates.length === 0
+    ) {
+      throw new Error('No matches found for the search criteria')
+    }
+
+    const officials = results.candidates[0].officials || []
+
+    const representatives = officials
+      .filter((rep) => {
+        // skip President and VP
+        return !(
+          rep.office.district.ocd_id === 'ocd-division/country:us' &&
+          /^(Vice )?President$/.test(rep.office.title)
+        )
+      })
+      .map((rep) => {
+        const mainAddr =
+          (Array.isArray(rep.addresses) && rep.addresses[0]) || {}
+
+        const repInfo = {
+          id: rep.sk || rep.id || '',
+          name: formatName(rep),
+          title:
+            rep.office.title ||
+            rep.office.chamber.name_formal ||
+            rep.office.chamber.name ||
+            '',
+          address_line1: mainAddr.address_1 || '',
+          address_line2:
+            mainAddr.address_2 +
+              (mainAddr.address_3 ? ', ' + mainAddr.address_3 : '') || '',
+          address_city: mainAddr.city || '',
+          address_state: mainAddr.state || '',
+          address_zip: mainAddr.postal_code || '',
+          address_country: 'US',
+          email:
+            (Array.isArray(rep.email_addresses) && rep.email_addresses[0]) ||
+            'Not Made Public',
+          twitter:
+            (
+              rep.identifiers.find((id) => id.identifier_type === 'TWITTER') ||
+              {}
+            ).identifier_value || 'Not Made Public',
+          facebook:
+            (
+              rep.identifiers.find(
+                (id) => id.identifier_type === 'FACEBOOK-OFFICIAL'
+              ) ||
+              rep.identifiers.find((id) => id.identifier_type === 'FACEBOOK') ||
+              rep.identifiers.find(
+                (id) => id.identifier_type === 'FACEBOOK-CAMPAIGN'
+              ) || { identifier_value: '' }
+            ).identifier_value.replace(
+              /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
+              '$1'
+            ) || 'Not Made Public',
+          contactPage:
+            rep.web_form_url || (Array.isArray(rep.urls) && rep.urls[0]) || '',
+          photoUrl:
+            rep.photo_origin_url ||
+            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
         }
-      }
-    )
 
-    const { offices, officials } = response.data
-    offices
-      .slice(2) // skip President and VP
-      .forEach((officeType) => {
-        officeType.officialIndices.forEach((position) => {
-          const rep = officials[position]
-          const repInfo = {
-            name: rep.name || '',
-            title: officeType.name || '',
-            address_line1: '',
-            address_line2: '',
-            address_city: '',
-            address_state: '',
-            address_zip: '',
-            address_country: 'US',
-            email:
-              (Array.isArray(rep.emails) && rep.emails[0]) || 'Not Made Public',
-            twitter: 'Not Made Public',
-            facebook: 'Not Made Public',
-            contactPage: (Array.isArray(rep.urls) && rep.urls[0]) || '',
-            photoUrl:
-              rep.photoUrl ||
-              'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
-          }
-
-          if (Array.isArray(rep.address) && rep.address[0]) {
-            repInfo.address_line1 = rep.address[0].line1
-            repInfo.address_city = rep.address[0].city
-            repInfo.address_state = rep.address[0].state
-            repInfo.address_zip = rep.address[0].zip
-          }
-
-          if (Array.isArray(rep.channels) && rep.channels.length > 0) {
-            const facebook = rep.channels.find(
-              ({ type }) => type === 'Facebook'
-            )
-            if (facebook) {
-              repInfo.facebook = facebook.id
-            }
-            const twitter = rep.channels.find(({ type }) => type === 'Twitter')
-            if (twitter) {
-              repInfo.twitter = twitter.id
-            }
-          }
-          congressMembers.push(repInfo)
-        })
+        return repInfo
       })
 
-    res.send(congressMembers)
+    res.send(representatives)
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Whoops' })
   }
 })
 
-module.exports = router
+function formatName(rep) {
+  const nameParts = []
 
-// Temporary implementation for fallback with deprecation warnings
-function getCivicApiKey() {
-  const { CIVIC_API_KEY, CivicAPI } = process.env
-  const civicApiKey = CIVIC_API_KEY || CivicAPI
-
-  if (CivicAPI) {
-    if (CIVIC_API_KEY) {
-      console.warn('Using "CIVIC_API_KEY" environment variable.')
-      console.warn(
-        'Please remove your deprecated "CivicAPI" environment variable!'
-      )
-    } else {
-      console.warn(
-        'Expected "CIVIC_API_KEY" environment variable was not found.'
-      )
-      console.warn(
-        'Falling back to deprecated "CivicAPI" environment variable....'
-      )
-      console.warn('Please update your environment to use the expected key!')
-    }
+  // Only include salutations that are not "The Honorable", e.g. "Dr."
+  if (rep.salutation && !/^(?:The )?Honorable$/.test(rep.salutation)) {
+    nameParts.push(rep.salutation)
   }
 
-  return civicApiKey
+  if (rep.preferred_name) {
+    nameParts.push(rep.preferred_name)
+  } else if (rep.first_name) {
+    nameParts.push(rep.first_name)
+  }
+
+  // Ignore `middle_initial` (which is often a full name, for the record, NOT an initial)
+  // Ignore `nickname`
+
+  if (rep.last_name) {
+    nameParts.push(rep.last_name)
+  }
+
+  if (rep.name_suffix) {
+    nameParts.push(rep.name_suffix)
+  }
+
+  return nameParts.join(' ')
 }
+
+module.exports = router
