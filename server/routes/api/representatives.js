@@ -7,13 +7,13 @@ const router = express.Router()
 
 const CIVIC_API_KEY = getCivicApiKey()
 
-const DISTRICT_FILTER_MAP = {
+const JURISDICTION_FILTER_MAP = {
   federal: 'country',
   state: 'administrativeArea1',
   county: 'administrativeArea2',
   municipality: 'locality'
 }
-const ALLOWED_DISTRICT_FILTERS = Object.keys(DISTRICT_FILTER_MAP)
+const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
 
 const EXCLUDED_OFFICE_NAMES = [
   'President of the United States',
@@ -37,9 +37,9 @@ router.get('/:zipCode', async (req, res) => {
     return
   }
 
-  if (filter != null && !ALLOWED_DISTRICT_FILTERS.includes(filter)) {
+  if (filter != null && !ALLOWED_JURISDICTION_FILTERS.includes(filter)) {
     res.status(400).send({
-      error: 'Invalid district filter. The filter used was ' + filter
+      error: 'Invalid jurisdiction filter. The filter used was ' + filter
     })
     return
   }
@@ -51,7 +51,7 @@ router.get('/:zipCode', async (req, res) => {
     }
 
     if (filter != null) {
-      params.levels = DISTRICT_FILTER_MAP[filter]
+      params.levels = JURISDICTION_FILTER_MAP[filter]
     }
 
     const response = await axios.get(
