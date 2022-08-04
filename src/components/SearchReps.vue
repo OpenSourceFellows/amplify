@@ -21,11 +21,37 @@
                 dark
                 :style="{
                   backgroundColor:
-                    currentFilter === 'country' && isActive ? 'blue' : 'gray'
+                    currentFilter === 'federal' && isActive ? 'blue' : 'gray'
                 }"
-                v-on:click="FilterList('country')"
+                v-on:click="FilterList('federal')"
               >
                 Federal
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :class="{ active: isActive }"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'state' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('state')"
+              >
+                State
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :class="{ active: isActive }"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'county' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('county')"
+              >
+                County
               </v-btn>
 
               <v-btn
@@ -34,39 +60,13 @@
                 class="ui button toggle"
                 :style="{
                   backgroundColor:
-                    currentFilter === 'locality' && isActive ? 'blue' : 'gray'
+                    currentFilter === 'municipality' && isActive
+                      ? 'blue'
+                      : 'gray'
                 }"
-                v-on:click="FilterList('locality')"
+                v-on:click="FilterList('municipality')"
               >
                 Local
-              </v-btn>
-              <v-btn
-                rounded
-                dark
-                :class="{ active: isActive }"
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'administrativeArea1' && isActive
-                      ? 'blue'
-                      : 'gray'
-                }"
-                v-on:click="FilterList('administrativeArea1')"
-              >
-                State
-              </v-btn>
-              <v-btn
-                rounded
-                dark
-                :class="{ active: isActive }"
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'administrativeArea2' && isActive
-                      ? 'blue'
-                      : 'gray'
-                }"
-                v-on:click="FilterList('administrativeArea2')"
-              >
-                County
               </v-btn>
             </v-row>
 
@@ -174,44 +174,38 @@ export default {
                 console.error(e)
             }
         },
-         async FilterList(level) {
+        async FilterList (level) {
             try {
-              this.currentFilter = level;
+                this.currentFilter = level
 
                 if (!this.isActive) {
-                  this.isActive = true;
-                  const params = {};
-                  if (this.currentFilter != null) {
-                    params.filter = this.currentFilter
-                  }
+                    this.isActive = true
+                    const params = {}
+                    if (this.currentFilter != null) {
+                        params.filter = this.currentFilter
+                    }
 
-                     const res = await axios.get(
-                    '/api/representatives/' + this.postalCode,
-                    {
-                      params
-                      }
-                )
+                    const res = await axios.get(
+                        '/api/representatives/' + this.postalCode,
+                        {
+                          params
+                        }
+                    )
 
-             console.log(res)
-                this.congressMembers = res.data
+                    console.log(res)
+                    this.congressMembers = res.data
                 } else {
-                  this.isActive = false;
-                   const res = await axios.get(
-                    '/api/representatives/' + this.postalCode
-                )
+                    this.isActive = false;
+                    const res = await axios.get(
+                        '/api/representatives/' + this.postalCode
+                    )
 
-
-                this.congressMembers = res.data }
-
-
-
-
-
-                } catch (e) {
+                    this.congressMembers = res.data
+                }
+            } catch (e) {
                 console.error(e)
             }
-         }
-
+        }
     }
 }
 </script>
