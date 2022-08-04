@@ -7,6 +7,14 @@ const router = express.Router()
 
 const CIVIC_API_KEY = getCivicApiKey()
 
+const DISTRICT_FILTER_MAP = {
+  federal: 'country',
+  state: 'administrativeArea1',
+  county: 'administrativeArea2',
+  municipality: 'locality'
+}
+const ALLOWED_DISTRICT_FILTERS = Object.keys(DISTRICT_FILTER_MAP)
+
 // Endpoints
 
 // Get
@@ -23,6 +31,14 @@ router.get('/:zipCode', async (req, res) => {
     })
     return
   }
+
+  if (filter != null && !ALLOWED_DISTRICT_FILTERS.includes(filter)) {
+    res.status(400).send({
+      error: 'Invalid district filter. The filter used was ' + filter
+    })
+    return
+  }
+
   try {
     const params = {
       key: CIVIC_API_KEY,
@@ -30,7 +46,7 @@ router.get('/:zipCode', async (req, res) => {
     }
 
     if (filter != null) {
-      params.levels = filter
+      params.levels = DISTRICT_FILTER_MAP[filter]
     }
 
     const response = await axios.get(
