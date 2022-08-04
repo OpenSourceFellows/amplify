@@ -169,8 +169,8 @@ export default {
                 this.congressMembers = res.data
                 this.hasContent = true
                 // console.log(res.data)
-                this.listVisible=true
-                } catch (e) {
+                this.listVisible = true
+            } catch (e) {
                 console.error(e)
             }
         },
