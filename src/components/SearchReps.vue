@@ -137,12 +137,11 @@ export default {
             letterBody: '',
             selectedRep: {},
             congressMembers: [],
-            currentFilter: String,
+            currentFilter: '',
             hasContent: true,
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
             isActive: false,
-
         }
     },
     methods: {
@@ -164,7 +163,6 @@ export default {
                     '/api/representatives/' + this.postalCode
                 )
                 this.isActive = false
-
 
                 this.congressMembers = res.data
                 this.hasContent = true
