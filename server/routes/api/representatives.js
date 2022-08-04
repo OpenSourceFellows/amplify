@@ -15,6 +15,11 @@ const DISTRICT_FILTER_MAP = {
 }
 const ALLOWED_DISTRICT_FILTERS = Object.keys(DISTRICT_FILTER_MAP)
 
+const EXCLUDED_OFFICE_NAMES = [
+  'President of the United States',
+  'Vice President of the United States'
+]
+
 // Endpoints
 
 // Get
@@ -58,7 +63,8 @@ router.get('/:zipCode', async (req, res) => {
 
     const { offices, officials } = response.data
     offices
-      .slice(2) // skip President and VP
+      // skip President and VP
+      .filter((officeType) => !EXCLUDED_OFFICE_NAMES.includes(officeType.name))
       .forEach((officeType) => {
         officeType.officialIndices.forEach((position) => {
           const rep = officials[position]
