@@ -47,7 +47,7 @@
     "axios": "^0.27.2",
     "cli-plugin-eslint": "^0.1.0",
     "connect-history-api-fallback": "^1.6.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-jwt": "^6.1.1",
     "express-rate-limit": "^6.4.0",
