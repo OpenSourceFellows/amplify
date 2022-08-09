@@ -57,7 +57,7 @@
     "objection": "^3.0.1",
     "pg": "^8.7.3",
     "register-service-worker": "^1.7.1",
-    "stripe": "^8.219.0",
+    "stripe": "^10.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.4",
     "vuetify": "^2.6.8",
