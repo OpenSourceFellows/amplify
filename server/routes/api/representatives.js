@@ -8,11 +8,20 @@ const router = express.Router()
 
 const { CICERO_API_KEY } = process.env
 
+const JURISDICTION_FILTER_MAP = {
+  federal: 'country',
+  state: 'administrativeArea1',
+  county: 'administrativeArea2',
+  municipality: 'locality'
+}
+const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
+
 // Endpoints
 
 // Get
 router.get('/:zipCode', async (req, res) => {
   const { zipCode } = req.params
+  const { filter } = req.query
 
   if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
     res.status(400).send({
@@ -22,6 +31,14 @@ router.get('/:zipCode', async (req, res) => {
     })
     return
   }
+
+  if (filter != null && !ALLOWED_JURISDICTION_FILTERS.includes(filter)) {
+    res.status(400).send({
+      error: 'Invalid jurisdiction filter. The filter used was ' + filter
+    })
+    return
+  }
+
   try {
     const {
       data: { response }
