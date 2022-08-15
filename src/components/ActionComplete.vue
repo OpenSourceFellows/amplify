@@ -1,6 +1,15 @@
 <template lang="html">
-  <div class="d-flex flex-column align-center">
+  <div class="d-flex flex-column items-center">
+    <section v-if="loading">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+        :size="100"
+        class="my-6"
+      />
+    </section>
     <section
+      v-else
       class="d-flex flex-column flex-md-row justify-center align-center my-6 action-complete"
     >
       <img
@@ -26,7 +35,6 @@
 
       <!-- Area for progress bar? -->
     </section>
-
     <!-- TODO: Fill with rep info later on
     <section
       class="d-flex flex-column justify-center align-center my-6 action-complete"
@@ -60,53 +68,54 @@
 
 <script lang="js">
 import axios from 'axios'
-
-const cards = [
-  {
-    name: 'Rep 1',
-    imgSrc: require('../assets/images/cardimage.jpeg')
-  },
-  {
-    name: 'Rep 2',
-    imgSrc: require('../assets/images/cardimage.jpeg')
-  },
-  {
-    name: 'Rep 3',
-    imgSrc: require('../assets/images/cardimage.jpeg')
-  },
-]
+// import RepresentativeCard from './RepresentativeCard.vue'
 
 export default {
     name: 'ActionComplete',
+    // components: { RepresentativeCard },
     props: [],
     data () {
       return {
+        loading: true,
         email: '',
         amount: 0,    // Will be in cents
-        expectedDeliveryDate: '6/31/22 '
+        expectedDeliveryDate: '',
+        congressMembers: [],
       }
     },
     computed: {
       donationAmount () {
         return this.amount * 0.01
       },
-      cards() {
-        return cards
+      selectedRep() {
+        return this.$store.state.selectedRep
+      },
+      userData () {
+        return this.$store.state.userData
+      },
+      letterId () {
+        return this.$store.state.letterId
+      },
+      lobReturnAddressId () {
+        return this.$store.state.lobReturnAddressId
       }
     },
     created () {
-      // Write transaction record into database.
       const sessionId = this.$route.query.session_id
-      console.log(sessionId)
 
+      // Retrieve letter details from state
+      this.$store.dispatch('retrieveStateFromLocalStorage', sessionId)
+        .catch((e) => {
+          console.error(e.message)
+          this.$router.push({ path: '/' })
+        })
+
+
+      // Write transaction record into database.
       this.createTransactionRecord(sessionId)
-      // Get Address details to create letter.
-      // const letterDetails = { sessionId }
 
-      // Create letter with lob api.
-      // this.createCampaignLetter(letterDetails)
-
-      // Display success details in template.
+      // Create letter with lob api and kill loading spinner.
+      this.createCampaignLetter(sessionId)
 
     },
     methods: {
@@ -121,15 +130,22 @@ export default {
         })
         .catch(function (error) {
           // TODO: Needs error handling
-          console.log(error)
+          console.error(error)
         })
       },
-      createCampaignLetter(letterDetails) {
+      createCampaignLetter(sessionId) {
         // Creates campaign letter with lob api.
-
-        axios.post('/api/lob/createLetter', letterDetails)
+        axios.post('/api/lob/createLetter',
+          {
+            description: '',
+            to: this.selectedRep,
+            from: this.lobReturnAddressId,
+            template_id: this.letterId,
+            sessionId,
+          })
           .then((res) => {
-            console.log(res)
+            this.expectedDeliveryDate = res.data.expected_delivery_date
+            this.loading = false
           })
           .catch((err) => {
             // TODO: Needs error handling

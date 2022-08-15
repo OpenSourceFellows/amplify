@@ -7,6 +7,7 @@
     }"
     @click="handleRepClick"
   >
+<<<<<<< HEAD
     <v-card-title class="justify-center" v-text="member.name" />
     <v-card-subtitle
       class="text-center padding-y-0 margin-top-10"
@@ -40,6 +41,11 @@
       :position="member.photoCroppingCSS"
     />
     <v-card-subtitle class="text-center rep-img" v-text="member.address_city" />
+=======
+    <v-card-title v-text="member.name" />
+    <v-card-subtitle style="text-align: left" v-text="member.title" />
+    <v-card-subtitle style="text-align: left" v-text="member.city" />
+>>>>>>> finished base completion page, added vuex to manage letter details, created generic campaign card component
   </v-card>
 </template>
 
@@ -57,7 +63,11 @@ export default {
     }
   },
   emits: ['handleRepSelected'],
+<<<<<<< HEAD
   data() {
+=======
+  data () {
+>>>>>>> finished base completion page, added vuex to manage letter details, created generic campaign card component
     return {
     }
   },
@@ -70,6 +80,10 @@ export default {
           '/api/Letter_Versions/' + campaignId
         )
         const latestVersion = versions.data[versions.data.length - 1].template_id
+
+        // Set letterId in state
+        console.log(typeof latestVersion)
+        this.$store.commit('setGenericValue', { key: 'letterId', value: latestVersion })
 
         const letter = await axios.get(
           '/api/lob/templates/' + latestVersion

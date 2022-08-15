@@ -7,13 +7,11 @@ const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 router.post('/create-transaction', async (req, res) => {
-  console.log(req.body)
-  const { sessionId, email /*, campaignId, donationId */ } = req.body || {}
+  const { sessionId /*, email /*, campaignId, donationId */ } = req.body || {}
   if (!sessionId /*|| !email*/) {
     return res.status(400).send({ error: 'No session ID' })
   }
   const session = await stripe.checkout.sessions.retrieve(sessionId)
-  const customer = await stripe.customers.retrieve(session.customer)
 
   const formattedTransaction = {
     stripe_transaction_id: sessionId,
@@ -32,6 +30,8 @@ router.post('/create-transaction', async (req, res) => {
     console.log({ error })
     res.status(400).send()
   }
+
+  return res.status(200).end()
 })
 
 // 1. send a request to `/create-payment-intent`
@@ -72,7 +72,7 @@ router.post('/create-checkout-session', async (req, res) => {
       cancel_url: origin
     })
 
-    res.json({ url: session.url })
+    res.json({ url: session.url, sessionId: session.id })
   } catch (error) {
     console.log({ error })
   }
