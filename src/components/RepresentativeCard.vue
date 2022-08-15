@@ -1,19 +1,15 @@
 <template lang="html">
   <v-card
     flat
-    v-on:click="handleRepClick"
     :to="{
       name: 'RepClick',
       params: { member: member.name }
     }"
+    @click="handleRepClick"
   >
-    <v-card-title v-text="member.name"></v-card-title>
-    <v-card-subtitle v-text="member.title" style="text-align: left">
-    </v-card-subtitle>
-    <v-card-subtitle
-      v-text="member.city"
-      style="text-align: left"
-    ></v-card-subtitle>
+    <v-card-title v-text="member.name" />
+    <v-card-subtitle style="text-align: left" v-text="member.title" />
+    <v-card-subtitle style="text-align: left" v-text="member.city" />
   </v-card>
 </template>
 
@@ -21,17 +17,17 @@
 import axios from 'axios'
 
 export default {
-  name: 'representative-card',
+  name: 'RepresentativeCard',
   components: {
   },
   props: {
     member: Object
   },
+  emits: ['handleRepSelected'],
   data () {
     return {
     }
   },
-  emits: ['handleRepSelected'],
   methods: {
     async handleRepClick () {
       try {
@@ -41,6 +37,10 @@ export default {
           '/api/Letter_Versions/' + campaignId
         )
         const latestVersion = versions.data[versions.data.length - 1].template_id
+
+        // Set letterId in state
+        console.log(typeof latestVersion)
+        this.$store.commit('setGenericValue', { key: 'letterId', value: latestVersion })
 
         const letter = await axios.get(
           '/api/lob/templates/' + latestVersion

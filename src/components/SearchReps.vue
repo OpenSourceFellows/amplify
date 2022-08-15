@@ -8,11 +8,11 @@
 
             <v-form ref="form">
               <v-text-field
+                v-model="postalCode"
                 label="Postal Code"
                 required
-                v-on:keyup="CheckInputContent"
-                v-model="postalCode"
-              ></v-text-field>
+                @keyup="CheckInputContent"
+              />
             </v-form>
 
             <v-btn
@@ -20,25 +20,27 @@
                 name: 'Reps',
                 params: { postalCode: postalCode }
               }"
-              v-on:click="CreateRepList()"
               clickclass="mr-4"
-              >Submit
+              @click="CreateRepList()"
+            >
+              Submit
             </v-btn>
           </v-card-text>
         </v-card>
-        <div id="reprenstatives-list" v-show="hasContent">
+
+        <div v-show="hasContent" id="reprenstatives-list">
           <div>
-            <v-card flat v-for="member in congressMembers" :key="member.name">
+            <v-card v-for="member in congressMembers" :key="member.name" flat>
               <representative-card
-                @handleRepSelected="handleRepSelected"
                 :member="member"
-              ></representative-card>
-              <v-divider></v-divider>
+                @handleRepSelected="handleRepSelected"
+              />
+              <v-divider />
             </v-card>
           </div>
         </div>
       </v-col>
-      <v-divider vertical></v-divider>
+      <v-divider vertical />
       <v-col>
         <div v-if="!listVisible">
           <div>
@@ -53,14 +55,11 @@
             emissions to at least 50% below 2005 levels by 2030 as well as a
             national goal to achieve net-zero greenhouse gas emissions by 2050.
           </p>
-          <p></p>
+          <p />
         </div>
 
         <div v-else>
-          <take-action
-            :letterBody="letterBody"
-            :selectedRep="selectedRep"
-          ></take-action>
+          <take-action :letter-body="letterBody" :selected-rep="selectedRep" />
         </div>
       </v-col>
     </v-row>
@@ -75,45 +74,47 @@ import axios from 'axios'
 export default {
     name: 'SearchReps',
     components: {
-        RepresentativeCard,
-        TakeAction
+      RepresentativeCard,
+      TakeAction
     },
-
     data () {
-        return {
-            letterBody: '',
-            selectedRep: {},
-            congressMembers: [],
-            hasContent: true,
-            postalCode: this.$route.params.postalCode || '',
-            listVisible: false,
-        }
+      return {
+        letterBody: '',
+        selectedRep: {},
+        congressMembers: [],
+        hasContent: true,
+        postalCode: this.$route.params.postalCode || '',
+        listVisible: false,
+      }
     },
     methods: {
         handleRepSelected (letterBody, selectedRep, step2) {
-            this.letterBody = letterBody
-            this.selectedRep = selectedRep
-            this.step2 = step2
+          this.letterBody = letterBody
+          this.selectedRep = selectedRep
+          this.step2 = step2
         },
         CheckInputContent: function () {
-            if (this.postalCode !== '') {
-                this.hasContent = true
-            } else {
-                this.hasContent = false
-            }
+          if (this.postalCode !== '') {
+              this.hasContent = true
+          } else {
+              this.hasContent = false
+          }
         },
         async CreateRepList () {
-            try {
-                const res = await axios.get(
-                    '/api/representatives/' + this.postalCode
-                )
-                this.congressMembers = res.data
-                this.hasContent = true
-                console.log(res.data)
-                this.listVisible=true
-                } catch (e) {
-                console.error(e)
-            }
+          try {
+            // Commit user's zipcode to app state
+            this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
+
+            const res = await axios.get(
+              '/api/representatives/' + this.postalCode
+            )
+            this.congressMembers = res.data
+            this.hasContent = true
+            console.log(res.data)
+            this.listVisible=true
+          } catch (e) {
+            console.error(e)
+          }
         }
     }
 }

@@ -6,9 +6,9 @@
       :alt="`campaign image for ${campaign.name}`"
       width="100%"
     />
-    <h4 class="text-h6 px-7">
+    <h5 class="text-h5 px-7">
       {{ campaign.name }}
-    </h4>
+    </h5>
     <v-card-subtitle class="text-p py-1">
       {{ campaign.organization }}
     </v-card-subtitle>
