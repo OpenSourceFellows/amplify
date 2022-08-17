@@ -355,7 +355,7 @@ describe('POST /api/lob/createLetter', () => {
     const template_id = 'tmpl_1057bb6f50f81fb'
 
     // A test checkout session id that should return status of 'succeeded'
-    const sessionId = 'pi_3L7VXGFqipIA40A31qbflVvO'
+    const sessionId = 'cs_test_b1vdPbK35BuuANm2i4hd2BQqPcG7vymJRSRc4wMtQSprqiyYDBRgkN8Tn9'
 
     const response = await request(app)
       .post(route)
