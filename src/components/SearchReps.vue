@@ -15,6 +15,61 @@
               />
             </v-form>
 
+            <v-row>
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'federal' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('federal')"
+              >
+                Federal
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :class="{ active: isActive }"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'state' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('state')"
+              >
+                State
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :class="{ active: isActive }"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'county' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('county')"
+              >
+                County
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                class="ui button toggle"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'municipality' && isActive
+                      ? 'blue'
+                      : 'gray'
+                }"
+                v-on:click="FilterList('municipality')"
+              >
+                Local
+              </v-btn>
+            </v-row>
+
             <v-btn
               :to="{
                 name: 'Reps',
@@ -70,7 +125,6 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-
 export default {
     name: 'SearchReps',
     components: {

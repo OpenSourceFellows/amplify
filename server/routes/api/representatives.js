@@ -7,12 +7,26 @@ const router = express.Router()
 
 const CIVIC_API_KEY = getCivicApiKey()
 
+const JURISDICTION_FILTER_MAP = {
+  federal: 'country',
+  state: 'administrativeArea1',
+  county: 'administrativeArea2',
+  municipality: 'locality'
+}
+const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
+
+const EXCLUDED_OFFICE_NAMES = [
+  'President of the United States',
+  'Vice President of the United States'
+]
+
 // Endpoints
 
 // Get
 router.get('/:zipCode', async (req, res) => {
   const congressMembers = []
   const { zipCode } = req.params
+  const { filter } = req.query
 
   if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
     res.status(400).send({
@@ -22,20 +36,35 @@ router.get('/:zipCode', async (req, res) => {
     })
     return
   }
+
+  if (filter != null && !ALLOWED_JURISDICTION_FILTERS.includes(filter)) {
+    res.status(400).send({
+      error: 'Invalid jurisdiction filter. The filter used was ' + filter
+    })
+    return
+  }
+
   try {
+    const params = {
+      key: CIVIC_API_KEY,
+      address: zipCode
+    }
+
+    if (filter != null) {
+      params.levels = JURISDICTION_FILTER_MAP[filter]
+    }
+
     const response = await axios.get(
       'https://www.googleapis.com/civicinfo/v2/representatives',
       {
-        params: {
-          key: CIVIC_API_KEY,
-          address: zipCode
-        }
+        params
       }
     )
 
     const { offices, officials } = response.data
     offices
-      .slice(2) // skip President and VP
+      // skip President and VP
+      .filter((officeType) => !EXCLUDED_OFFICE_NAMES.includes(officeType.name))
       .forEach((officeType) => {
         officeType.officialIndices.forEach((position) => {
           const rep = officials[position]
