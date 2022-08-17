@@ -7,15 +7,20 @@
     }"
     @click="handleRepClick"
   >
-<<<<<<< HEAD
-    <v-card-title class="justify-center" v-text="member.name" />
+    <v-card-title
+      class="justify-center"
+      v-text="member.name"
+    />
     <v-card-subtitle
       class="text-center padding-y-0 margin-top-10"
       v-text="member.title"
     />
 
     <!-- social media icons -->
-    <div id="social-media-channel" class="text-center social-media-channel-box">
+    <div
+      id="social-media-channel"
+      class="text-center social-media-channel-box"
+    >
       <a
         v-for="socialMedia in member.socialMediaPages"
         :key="socialMedia.type"
@@ -40,12 +45,10 @@
       width="75"
       :position="member.photoCroppingCSS"
     />
-    <v-card-subtitle class="text-center rep-img" v-text="member.address_city" />
-=======
-    <v-card-title v-text="member.name" />
-    <v-card-subtitle style="text-align: left" v-text="member.title" />
-    <v-card-subtitle style="text-align: left" v-text="member.city" />
->>>>>>> finished base completion page, added vuex to manage letter details, created generic campaign card component
+    <v-card-subtitle
+      class="text-center rep-img"
+      v-text="member.address_city"
+    />
   </v-card>
 </template>
 
@@ -63,11 +66,7 @@ export default {
     }
   },
   emits: ['handleRepSelected'],
-<<<<<<< HEAD
   data() {
-=======
-  data () {
->>>>>>> finished base completion page, added vuex to manage letter details, created generic campaign card component
     return {
     }
   },
