@@ -1,13 +1,14 @@
 const path = require('path')
-const apiRouter = require('./server/api')
 
 module.exports = {
   outputDir: path.resolve(__dirname, './dist'),
 
   devServer: {
-    host: 'localhost',
-    before: (expressApp) => {
-      expressApp.use('/api', apiRouter)
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
+      }
     }
   },
 
