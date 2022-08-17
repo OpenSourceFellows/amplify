@@ -4,7 +4,9 @@
       <v-col>
         <v-card flat>
           <v-card-text>
-            <v-subheader class="pa-0"> Where do you live? </v-subheader>
+            <v-subheader class="pa-0">
+              Where do you live?
+            </v-subheader>
 
             <v-form ref="form">
               <v-text-field
@@ -28,9 +30,16 @@
           </v-card-text>
         </v-card>
 
-        <div v-show="hasContent" id="reprenstatives-list">
+        <div
+          v-show="hasContent"
+          id="reprenstatives-list"
+        >
           <div>
-            <v-card v-for="member in congressMembers" :key="member.name" flat>
+            <v-card
+              v-for="member in congressMembers"
+              :key="member.name"
+              flat
+            >
               <representative-card
                 :member="member"
                 @handleRepSelected="handleRepSelected"
@@ -48,7 +57,7 @@
               alt="Vue logo"
               src="../assets/images/StepsGraphic.png"
               width="70%"
-            />
+            >
           </div>
           <p class="text-h6 pa-10">
             The bill establishes an interim goal to reduce greenhouse gas
@@ -59,7 +68,10 @@
         </div>
 
         <div v-else>
-          <take-action :letter-body="letterBody" :selected-rep="selectedRep" />
+          <take-action
+            :letter-body="letterBody"
+            :selected-rep="selectedRep"
+          />
         </div>
       </v-col>
     </v-row>
