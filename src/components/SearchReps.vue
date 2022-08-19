@@ -23,7 +23,7 @@
                   backgroundColor:
                     currentFilter === 'federal' && isActive ? 'blue' : 'gray'
                 }"
-                v-on:click="FilterList('federal')"
+                @click="FilterList('federal')"
               >
                 Federal
               </v-btn>
@@ -36,7 +36,7 @@
                   backgroundColor:
                     currentFilter === 'state' && isActive ? 'blue' : 'gray'
                 }"
-                v-on:click="FilterList('state')"
+                @click="FilterList('state')"
               >
                 State
               </v-btn>
@@ -49,7 +49,7 @@
                   backgroundColor:
                     currentFilter === 'county' && isActive ? 'blue' : 'gray'
                 }"
-                v-on:click="FilterList('county')"
+                @click="FilterList('county')"
               >
                 County
               </v-btn>
@@ -64,7 +64,7 @@
                       ? 'blue'
                       : 'gray'
                 }"
-                v-on:click="FilterList('municipality')"
+                @click="FilterList('municipality')"
               >
                 Local
               </v-btn>
