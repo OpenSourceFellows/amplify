@@ -7,20 +7,19 @@
       params: { member: member.name }
     }"
   >
-    <v-card-title v-text="member.name"></v-card-title>
-    <v-card-subtitle v-text="member.title" style="text-align: left">
-    </v-card-subtitle>
-    <v-img
-      style="text-align: left; border-radius: 50%; margin-left: 10px"
-      v-bind:src="member.photoUrl"
-      height="75"
-      width="75"
-    >
-    </v-img>
-    <v-card-subtitle
-      v-text="member.address_city"
-      style="text-align: left"
-    ></v-card-subtitle>
+    <v-list-item>
+      <v-avatar style="margin-bottom: 0px">
+        <v-img class="float-lg-left" v-bind:src="member.photoUrl"> </v-img>
+      </v-avatar>
+
+      <v-list-item-content>
+        <v-card-title class="pb-0" v-text="member.name"></v-card-title>
+        <div class="text-left" style="margin-left: 15px">
+          <p v-text="member.title"></p>
+          <p v-text="member.address_city"></p>
+        </div>
+      </v-list-item-content>
+    </v-list-item>
   </v-card>
 </template>
 

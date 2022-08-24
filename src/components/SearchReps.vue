@@ -83,7 +83,7 @@
         </v-card>
         <div id="reprenstatives-list" v-show="hasContent">
           <div>
-            <v-card flat v-for="member in congressMembers" :key="member.name">
+            <v-card flat v-for="member in representatives" :key="member.name">
               <representative-card
                 @handleRepSelected="handleRepSelected"
                 :member="member"
@@ -164,7 +164,7 @@ export default {
                 )
                 this.isActive = false
 
-                this.congressMembers = res.data
+                this.representatives = res.data
                 this.hasContent = true
                 // console.log(res.data)
                 this.listVisible = true
@@ -191,14 +191,14 @@ export default {
                     )
 
                     console.log(res)
-                    this.congressMembers = res.data
+                    this.representatives = res.data
                 } else {
                     this.isActive = false;
                     const res = await axios.get(
                         '/api/representatives/' + this.postalCode
                     )
 
-                    this.congressMembers = res.data
+                    this.representatives = res.data
                 }
             } catch (e) {
                 console.error(e)
