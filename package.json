@@ -54,7 +54,7 @@
     "express-rate-limit": "^6.4.0",
     "jwks-rsa": "^2.1.4",
     "knex": "^2.2.0",
-    "lob": "^6.6.2",
+    "lob": "^6.6.3",
     "objection": "^3.0.1",
     "pg": "^8.7.3",
     "register-service-worker": "^1.7.1",
