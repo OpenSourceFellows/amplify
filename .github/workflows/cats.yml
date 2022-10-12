@@ -8,9 +8,9 @@ permissions:
 
 jobs:
   cats:
+    name: Cat
     runs-on: ubuntu-latest
     steps:
-      - name: Action Cats
-        uses: ruairidhwm/action-cats@master
+      - uses: ruairidhwm/action-cats@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
