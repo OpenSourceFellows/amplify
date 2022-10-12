@@ -15,6 +15,9 @@ jobs:
     name: A cat for your effort!
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Action Cats
       - uses: ruairidhwm/action-cats@1.0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
