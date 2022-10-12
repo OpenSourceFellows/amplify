@@ -15,7 +15,7 @@
   "homepage": "https://www.programequity.com/",
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "npx husky install",
     "start": "node server/server.js",
     "dev": "concurrently -n frontend,backend \"npm run serve\" \"npm:dev:backend\"",
     "dev:backend": "PORT=5000 nodemon -w ./server server/server.js",
