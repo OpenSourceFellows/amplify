@@ -7,6 +7,12 @@ command -v brew >/dev/null 2>&1 || {
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
+if [[ -z "${CODESPACES}" ]]; then
+  echo "==> Adding Homebrew to the PATH..."
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/node/.profile
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 echo "==> Updating Homebrew..."
 brew update
 
