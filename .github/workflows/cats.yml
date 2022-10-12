@@ -4,13 +4,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   cats:
     name: Cat
     runs-on: ubuntu-latest
     steps:
-      - uses: ruairidhwm/action-cats@master
+      - uses: actions/checkout@v2
+
+      - name: Action Cats
+        uses: ruairidhwm/action-cats@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
