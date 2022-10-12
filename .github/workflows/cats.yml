@@ -1,4 +1,4 @@
-name: Cats 😺
+name: Cats
 
 on:
   workflow_dispatch:
