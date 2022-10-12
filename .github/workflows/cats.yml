@@ -3,6 +3,9 @@ name: Cats
 on: 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   cats:
     runs-on: ubuntu-latest
