@@ -41,7 +41,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.21.0",
+    "@auth0/auth0-spa-js": "^1.22.5",
     "@babel/polyfill": "^7.4.4",
     "@stripe/stripe-js": "^1.35.0",
     "@vue-stripe/vue-stripe": "^4.4.2",
