@@ -15,6 +15,61 @@
               ></v-text-field>
             </v-form>
 
+            <v-row>
+              <v-btn
+                rounded
+                dark
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'federal' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('federal')"
+              >
+                Federal
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :class="{ active: isActive }"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'state' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('state')"
+              >
+                State
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                :class="{ active: isActive }"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'county' && isActive ? 'blue' : 'gray'
+                }"
+                v-on:click="FilterList('county')"
+              >
+                County
+              </v-btn>
+
+              <v-btn
+                rounded
+                dark
+                class="ui button toggle"
+                :style="{
+                  backgroundColor:
+                    currentFilter === 'municipality' && isActive
+                      ? 'blue'
+                      : 'gray'
+                }"
+                v-on:click="FilterList('municipality')"
+              >
+                Local
+              </v-btn>
+            </v-row>
+
             <v-btn
               :to="{
                 name: 'Reps',
@@ -71,22 +126,22 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-
 export default {
     name: 'SearchReps',
     components: {
         RepresentativeCard,
         TakeAction
     },
-
     data () {
         return {
             letterBody: '',
             selectedRep: {},
             congressMembers: [],
+            currentFilter: '',
             hasContent: true,
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
+            isActive: false,
         }
     },
     methods: {
@@ -107,11 +162,45 @@ export default {
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
+                this.isActive = false
+
                 this.congressMembers = res.data
                 this.hasContent = true
-                console.log(res.data)
-                this.listVisible=true
-                } catch (e) {
+                // console.log(res.data)
+                this.listVisible = true
+            } catch (e) {
+                console.error(e)
+            }
+        },
+        async FilterList (level) {
+            try {
+                this.currentFilter = level
+
+                if (!this.isActive) {
+                    this.isActive = true
+                    const params = {}
+                    if (this.currentFilter != null) {
+                        params.filter = this.currentFilter
+                    }
+
+                    const res = await axios.get(
+                        '/api/representatives/' + this.postalCode,
+                        {
+                          params
+                        }
+                    )
+
+                    console.log(res)
+                    this.congressMembers = res.data
+                } else {
+                    this.isActive = false;
+                    const res = await axios.get(
+                        '/api/representatives/' + this.postalCode
+                    )
+
+                    this.congressMembers = res.data
+                }
+            } catch (e) {
                 console.error(e)
             }
         }

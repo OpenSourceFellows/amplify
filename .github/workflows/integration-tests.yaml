@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
 
       - name: Setup node
-        uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854
+        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b
         with:
           node-version-file: '.node-version'
           cache: npm
@@ -33,10 +33,12 @@ jobs:
       - name: Run tests
         run: npm test -- server/__tests__/integration/
         env:
-          # Google Civic API key
-          CIVIC_API_KEY: ${{ secrets.TEST_CIVIC_API_KEY }}
+          # Cicero API key
+          CICERO_API_KEY: ${{ secrets.TEST_CICERO_API_KEY }}
           # Test environment Lob API key
           LOB_API_KEY: ${{ secrets.TEST_LOB_API_KEY }}
+          # Stripe test secret key
+          STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
           # Auth0 authentication parameters with nonsensical sample values
           SERVER_PORT: 8080
           CLIENT_ORIGIN_URL: http://localhost:8080
