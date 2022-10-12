@@ -1,19 +1,16 @@
 name: Cats
-
-on: 
+on:
   workflow_dispatch:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
 
 permissions:
   contents: read
 
 jobs:
-  cats:
-    name: Cat
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Action Cats
-        uses: ruairidhwm/action-cats@master
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "Hello World"
