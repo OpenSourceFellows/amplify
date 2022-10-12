@@ -15,7 +15,7 @@ brew bundle check >/dev/null 2>&1 || {
   brew bundle
 }
 
-echo "installing Node"
+echo "==> Installing Node"
 nodenv install -s
 
 echo "==> Starting PostgreSQL service..."
