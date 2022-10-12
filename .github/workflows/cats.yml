@@ -1,4 +1,4 @@
-name: Cats
+name: Add a cat gif on pr push
 
 on: 
   workflow_dispatch:
