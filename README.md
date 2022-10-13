@@ -31,6 +31,7 @@ The backend (API) code is stored in the `server/` directory.
 
 https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
 
+## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 ```shell
