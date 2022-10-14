@@ -7,9 +7,6 @@
   * [Customize configuration](#customize-configuration)
   * [App Walkthrough](#app-walkthrough)
   
-  
-  
-  
 ## Getting Started
 
 This repo contains both the frontend and backend portions of the Amplify application.
