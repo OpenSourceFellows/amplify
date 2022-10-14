@@ -1,4 +1,4 @@
-# amplify
+# Amplify
 
 ## Getting Started
 
