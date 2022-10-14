@@ -8,10 +8,10 @@
     }"
   >
     <v-card-title v-text="member.name"></v-card-title>
-    <v-card-subtitle v-text="member.title" style="text-align: left">
+    <v-card-subtitle v-text="member.title" class="text-align-left">
     </v-card-subtitle>
     <v-img
-      style="text-align: left; border-radius: 50%; margin-left: 10px"
+      class="text-align-left rep-img"
       v-bind:src="member.photoUrl"
       height="75"
       width="75"
@@ -19,7 +19,7 @@
     </v-img>
     <v-card-subtitle
       v-text="member.address_city"
-      style="text-align: left"
+      class="text-align-left rep-img"
     ></v-card-subtitle>
   </v-card>
 </template>
@@ -64,4 +64,12 @@ export default {
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.text-align-left {
+  text-align: left;
+}
+.rep-img {
+  border-radius: 50%;
+  margin-left: 10px;
+}
+</style>
