@@ -1,7 +1,6 @@
 # amplify
 
-Table of Contents
-==================
+## Table of Contents
 
   * [Getting Started](#getting-started)
   * [Project Setup](#project-setup)
