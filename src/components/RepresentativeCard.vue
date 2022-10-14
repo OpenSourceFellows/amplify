@@ -10,6 +10,12 @@
     <v-card-title v-text="member.name"></v-card-title>
     <v-card-subtitle v-text="member.title" class="text-align-left">
     </v-card-subtitle>
+
+    <!-- social media icons -->
+    <div id="social-media-channel" class="text-align-left">
+      <font-awesome-icon icon="fa-solid fa-user-secret" />
+    </div>
+
     <v-img
       class="text-align-left rep-img"
       v-bind:src="member.photoUrl"
