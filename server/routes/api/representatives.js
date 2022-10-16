@@ -132,7 +132,9 @@ router.get('/:zipCode', async (req, res) => {
             rep.web_form_url || (Array.isArray(rep.urls) && rep.urls[0]) || '',
           photoUrl:
             rep.photo_origin_url ||
-            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
+
+          socialMediaPages: getOfficialSocialMediaPages(rep.identifiers) // call
         }
 
         return repInfo
@@ -144,6 +146,57 @@ router.get('/:zipCode', async (req, res) => {
     res.status(500).send({ error: 'Whoops' })
   }
 })
+
+function getOfficialSocialMediaPages(identifiers) {
+  var social_media_pages = []
+
+  // loop through all the identifiers
+  for (var i = 0; i < identifiers.length; i++) {
+    var identifier = identifiers[i]
+
+    // switch on the identifier type and value to get the social media page and the corresponding icon
+    switch (identifier.identifier_type) {
+      case 'TWITTER':
+        social_media_pages.push({
+          type: 'twitter',
+          url: 'https://twitter.com/' + identifier.identifier_value,
+          icon: 'fa-solid fa-twitter'
+        })
+        break
+
+      case 'FACEBOOK-OFFICIAL':
+        var new_identifier_value = identifier.identifier_value.replace(
+          /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
+          '$1'
+        )
+
+        social_media_pages.push({
+          type: 'facebook',
+          url: 'https://facebook.com/' + new_identifier_value,
+          icon: 'fa-brands fa-facebook-f'
+        })
+        break
+
+      case 'YOUTUBE':
+        social_media_pages.push({
+          type: 'youtube',
+          url: 'https://youtube.com/' + identifier.identifier_value,
+          icon: 'fa-brands fa-youtube'
+        })
+        break
+
+      case 'INSTAGRAM':
+        social_media_pages.push({
+          type: 'instagram',
+          url: 'https://instagram.com/' + identifier.identifier_value,
+          icon: 'fa-brands fa-instagram'
+        })
+        break
+    }
+  }
+
+  return social_media_pages
+}
 
 function formatName(rep) {
   const nameParts = []

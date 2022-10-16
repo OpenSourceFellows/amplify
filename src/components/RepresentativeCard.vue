@@ -12,8 +12,18 @@
     </v-card-subtitle>
 
     <!-- social media icons -->
-    <div id="social-media-channel" class="text-align-left">
-      <font-awesome-icon icon="fa-solid fa-user-secret" />
+    <li v-for="{ item } in member.socialMediaPages" v-bind:key="item.icon">
+      {{ item.url }} hi
+    </li>
+
+    <div id="social-media-channel" class="text-align-left margin-left-16">
+      <!-- loop over each item -->
+      <a href="#">
+        <font-awesome-icon icon="fa-solid fa-user-secret" />
+      </a>
+      <a href="#">
+        <font-awesome-icon icon="fa-solid fa-user-secret" />
+      </a>
     </div>
 
     <v-img
@@ -73,6 +83,9 @@ export default {
 <style scoped lang="less">
 .text-align-left {
   text-align: left;
+}
+.margin-left-16 {
+  margin-left: 16px;
 }
 .rep-img {
   border-radius: 50%;
