@@ -137,10 +137,6 @@ router.get('/:zipCode', async (req, res) => {
           socialMediaPages: getOfficialSocialMediaPages(rep.identifiers) // call
         }
 
-        console.log(repInfo)
-        console.log('repinfo:')
-        console.log(repInfo.socialMediaPages)
-
         return repInfo
       })
 
@@ -156,6 +152,7 @@ function getOfficialSocialMediaPages(identifiers) {
 
   // loop through all the identifiers
   for (var i = 0; i < identifiers.length; i++) {
+    // social media item with data
     var identifier = identifiers[i]
 
     // switch on the identifier type and value to get the social media page and the corresponding icon
@@ -164,7 +161,7 @@ function getOfficialSocialMediaPages(identifiers) {
         social_media_pages.push({
           type: 'twitter',
           url: 'https://twitter.com/' + identifier.identifier_value,
-          icon: 'fa-solid fa-twitter'
+          icon: 'fa-brands fa-twitter'
         })
         break
 

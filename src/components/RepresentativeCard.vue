@@ -7,27 +7,27 @@
       params: { member: member.name }
     }"
   >
-    <v-card-title v-text="member.name"></v-card-title>
-    <v-card-subtitle v-text="member.title" class="text-align-left">
+    <v-card-title v-text="member.name" class="padding-y-0"></v-card-title>
+    <v-card-subtitle
+      v-text="member.title"
+      class="text-align-left padding-y-0 margin-top-10"
+    >
     </v-card-subtitle>
 
     <!-- social media icons -->
-    <a
-      v-for="socialMedia in member.socialMediaPages"
-      :key="socialMedia.type"
-      :href="socialMedia.url"
-      target="_blank"
+    <div
+      id="social-media-channel"
+      class="text-align-left social-media-channel-box"
     >
-      {{ socialMedia.icon }}
-    </a>
-
-    <div id="social-media-channel" class="text-align-left margin-left-16">
-      <!-- loop over each item -->
-      <a href="#">
-        <font-awesome-icon icon="fa-solid fa-instagram" />
-      </a>
-      <a href="#">
-        <font-awesome-icon icon="fa-solid fa-user-secret" />
+      <a
+        v-for="socialMedia in member.socialMediaPages"
+        :key="socialMedia.type"
+        :href="socialMedia.url"
+        target="_blank"
+        class="social-media-icon"
+        onclick="window.open(this.href, '_blank'); return false;"
+      >
+        <font-awesome-icon :icon="socialMedia.icon" />
       </a>
     </div>
 
@@ -86,11 +86,16 @@ export default {
 </script>
 
 <style scoped lang="less">
+.social-media-icon {
+  margin-right: 5px;
+}
 .text-align-left {
   text-align: left;
 }
-.margin-left-16 {
+.social-media-channel-box {
   margin-left: 16px;
+  margin-top: -10px;
+  margin-bottom: 16px;
 }
 .rep-img {
   border-radius: 50%;
