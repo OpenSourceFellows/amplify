@@ -137,6 +137,10 @@ router.get('/:zipCode', async (req, res) => {
           socialMediaPages: getOfficialSocialMediaPages(rep.identifiers) // call
         }
 
+        console.log(repInfo)
+        console.log('repinfo:')
+        console.log(repInfo.socialMediaPages)
+
         return repInfo
       })
 

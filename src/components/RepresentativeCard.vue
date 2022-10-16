@@ -12,14 +12,19 @@
     </v-card-subtitle>
 
     <!-- social media icons -->
-    <li v-for="{ item } in member.socialMediaPages" v-bind:key="item.icon">
-      {{ item.url }} hi
-    </li>
+    <a
+      v-for="socialMedia in member.socialMediaPages"
+      :key="socialMedia.type"
+      :href="socialMedia.url"
+      target="_blank"
+    >
+      {{ socialMedia.icon }}
+    </a>
 
     <div id="social-media-channel" class="text-align-left margin-left-16">
       <!-- loop over each item -->
       <a href="#">
-        <font-awesome-icon icon="fa-solid fa-user-secret" />
+        <font-awesome-icon icon="fa-solid fa-instagram" />
       </a>
       <a href="#">
         <font-awesome-icon icon="fa-solid fa-user-secret" />
