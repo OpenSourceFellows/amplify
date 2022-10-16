@@ -161,7 +161,8 @@ function getOfficialSocialMediaPages(identifiers) {
         social_media_pages.push({
           type: 'twitter',
           url: 'https://twitter.com/' + identifier.identifier_value,
-          icon: 'fa-brands fa-twitter'
+          icon: 'fa-brands fa-twitter',
+          color: '#1DA1F2' // offiial twitter color
         })
         break
 
@@ -174,7 +175,8 @@ function getOfficialSocialMediaPages(identifiers) {
         social_media_pages.push({
           type: 'facebook',
           url: 'https://facebook.com/' + new_identifier_value,
-          icon: 'fa-brands fa-facebook-f'
+          icon: 'fa-brands fa-facebook-f',
+          color: '#4267B2' // official facebook color
         })
         break
 
@@ -182,7 +184,8 @@ function getOfficialSocialMediaPages(identifiers) {
         social_media_pages.push({
           type: 'youtube',
           url: 'https://youtube.com/' + identifier.identifier_value,
-          icon: 'fa-brands fa-youtube'
+          icon: 'fa-brands fa-youtube',
+          color: '#FF0000' // official youtube color
         })
         break
 
@@ -190,7 +193,8 @@ function getOfficialSocialMediaPages(identifiers) {
         social_media_pages.push({
           type: 'instagram',
           url: 'https://instagram.com/' + identifier.identifier_value,
-          icon: 'fa-brands fa-instagram'
+          icon: 'fa-brands fa-instagram',
+          color: '#C13584' // one of the official instagram colors
         })
         break
     }

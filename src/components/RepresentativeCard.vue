@@ -27,7 +27,11 @@
         class="social-media-icon"
         onclick="window.open(this.href, '_blank'); return false;"
       >
-        <font-awesome-icon :icon="socialMedia.icon" />
+        <font-awesome-icon
+          v-bind="socialMedia"
+          :icon="socialMedia.icon"
+          style="color: socialMedia.color"
+        />
       </a>
     </div>
 
