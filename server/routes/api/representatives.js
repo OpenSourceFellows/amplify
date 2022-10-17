@@ -110,24 +110,6 @@ router.get('/:zipCode', async (req, res) => {
           email:
             (Array.isArray(rep.email_addresses) && rep.email_addresses[0]) ||
             'Not Made Public',
-          twitter:
-            (
-              rep.identifiers.find((id) => id.identifier_type === 'TWITTER') ||
-              {}
-            ).identifier_value || 'Not Made Public',
-          facebook:
-            (
-              rep.identifiers.find(
-                (id) => id.identifier_type === 'FACEBOOK-OFFICIAL'
-              ) ||
-              rep.identifiers.find((id) => id.identifier_type === 'FACEBOOK') ||
-              rep.identifiers.find(
-                (id) => id.identifier_type === 'FACEBOOK-CAMPAIGN'
-              ) || { identifier_value: '' }
-            ).identifier_value.replace(
-              /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
-              '$1'
-            ) || 'Not Made Public',
           contactPage:
             rep.web_form_url || (Array.isArray(rep.urls) && rep.urls[0]) || '',
           photoUrl:
