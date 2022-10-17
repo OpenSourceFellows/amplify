@@ -110,29 +110,13 @@ router.get('/:zipCode', async (req, res) => {
           email:
             (Array.isArray(rep.email_addresses) && rep.email_addresses[0]) ||
             'Not Made Public',
-          twitter:
-            (
-              rep.identifiers.find((id) => id.identifier_type === 'TWITTER') ||
-              {}
-            ).identifier_value || 'Not Made Public',
-          facebook:
-            (
-              rep.identifiers.find(
-                (id) => id.identifier_type === 'FACEBOOK-OFFICIAL'
-              ) ||
-              rep.identifiers.find((id) => id.identifier_type === 'FACEBOOK') ||
-              rep.identifiers.find(
-                (id) => id.identifier_type === 'FACEBOOK-CAMPAIGN'
-              ) || { identifier_value: '' }
-            ).identifier_value.replace(
-              /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
-              '$1'
-            ) || 'Not Made Public',
           contactPage:
             rep.web_form_url || (Array.isArray(rep.urls) && rep.urls[0]) || '',
           photoUrl:
             rep.photo_origin_url ||
-            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
+
+          socialMediaPages: getOfficialSocialMediaPages(rep.identifiers) // call
         }
 
         return repInfo
@@ -144,6 +128,62 @@ router.get('/:zipCode', async (req, res) => {
     res.status(500).send({ error: 'Whoops' })
   }
 })
+
+function getOfficialSocialMediaPages(identifiers) {
+  var social_media_pages = []
+
+  // loop through all the identifiers
+  for (var i = 0; i < identifiers.length; i++) {
+    // social media item with data
+    var identifier = identifiers[i]
+
+    // switch on the identifier type and value to get the social media page and the corresponding icon
+    switch (identifier.identifier_type) {
+      case 'TWITTER':
+        social_media_pages.push({
+          type: 'twitter',
+          url: 'https://twitter.com/' + identifier.identifier_value,
+          icon: 'fa-brands fa-twitter',
+          color: '#1DA1F2' // offiial twitter color
+        })
+        break
+
+      case 'FACEBOOK-OFFICIAL':
+        var new_identifier_value = identifier.identifier_value.replace(
+          /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
+          '$1'
+        )
+
+        social_media_pages.push({
+          type: 'facebook',
+          url: 'https://facebook.com/' + new_identifier_value,
+          icon: 'fa-brands fa-facebook-f',
+          color: '#4267B2' // official facebook color
+        })
+        break
+
+      case 'YOUTUBE':
+        social_media_pages.push({
+          type: 'youtube',
+          url: 'https://youtube.com/' + identifier.identifier_value,
+          icon: 'fa-brands fa-youtube',
+          color: '#FF0000' // official youtube color
+        })
+        break
+
+      case 'INSTAGRAM':
+        social_media_pages.push({
+          type: 'instagram',
+          url: 'https://instagram.com/' + identifier.identifier_value,
+          icon: 'fa-brands fa-instagram',
+          color: '#C13584' // one of the official instagram colors
+        })
+        break
+    }
+  }
+
+  return social_media_pages
+}
 
 function formatName(rep) {
   const nameParts = []
