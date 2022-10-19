@@ -16,71 +16,81 @@
             </v-form>
 
             <v-row>
-              <v-btn
-                rounded
-                dark
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'federal' && isActive ? 'blue' : 'gray'
-                }"
-                v-on:click="FilterList('federal')"
-              >
-                Federal
-              </v-btn>
+              <v-col>
+                <v-btn
+                  class="search-reps-button"
+                  rounded
+                  dark
+                  :style="{
+                    backgroundColor:
+                      currentFilter === 'federal' && isActive ? 'blue' : 'gray'
+                  }"
+                  v-on:click="FilterList('federal')"
+                >
+                  Federal
+                </v-btn>
 
-              <v-btn
-                rounded
-                dark
-                :class="{ active: isActive }"
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'state' && isActive ? 'blue' : 'gray'
-                }"
-                v-on:click="FilterList('state')"
-              >
-                State
-              </v-btn>
+                <v-btn
+                  class="search-reps-button"
+                  rounded
+                  dark
+                  :class="{ active: isActive }"
+                  :style="{
+                    backgroundColor:
+                      currentFilter === 'state' && isActive ? 'blue' : 'gray'
+                  }"
+                  v-on:click="FilterList('state')"
+                >
+                  State
+                </v-btn>
 
-              <v-btn
-                rounded
-                dark
-                :class="{ active: isActive }"
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'county' && isActive ? 'blue' : 'gray'
-                }"
-                v-on:click="FilterList('county')"
-              >
-                County
-              </v-btn>
+                <v-btn
+                  class="search-reps-button"
+                  rounded
+                  dark
+                  :class="{ active: isActive }"
+                  :style="{
+                    backgroundColor:
+                      currentFilter === 'county' && isActive ? 'blue' : 'gray'
+                  }"
+                  v-on:click="FilterList('county')"
+                >
+                  County
+                </v-btn>
 
-              <v-btn
-                rounded
-                dark
-                class="ui button toggle"
-                :style="{
-                  backgroundColor:
-                    currentFilter === 'municipality' && isActive
-                      ? 'blue'
-                      : 'gray'
-                }"
-                v-on:click="FilterList('municipality')"
-              >
-                Local
-              </v-btn>
+                <v-btn
+                  rounded
+                  dark
+                  class="ui button toggle search-reps-button"
+                  :style="{
+                    backgroundColor:
+                      currentFilter === 'municipality' && isActive
+                        ? 'blue'
+                        : 'gray'
+                  }"
+                  v-on:click="FilterList('municipality')"
+                >
+                  Local
+                </v-btn>
+              </v-col>
             </v-row>
 
-            <v-btn
-              :to="{
-                name: 'Reps',
-                params: { postalCode: postalCode }
-              }"
-              v-on:click="CreateRepList()"
-              clickclass="mr-4"
-              >Submit
-            </v-btn>
+            <v-row>
+              <v-col>
+                <v-btn
+                  :to="{
+                    name: 'Reps',
+                    params: { postalCode: postalCode }
+                  }"
+                  v-on:click="CreateRepList()"
+                  clickclass="mr-4"
+                  >Submit
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-card-text>
         </v-card>
+
         <div id="reprenstatives-list" v-show="hasContent">
           <div>
             <v-card flat v-for="member in congressMembers" :key="member.name">
@@ -210,5 +220,9 @@ export default {
 
 <style scoped lang="less">
 .search-reps {
+}
+
+.search-reps-button {
+  margin: 5px 10px;
 }
 </style>
