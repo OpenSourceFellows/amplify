@@ -18,6 +18,7 @@
             <v-row>
               <v-col>
                 <v-btn
+                  class="search-reps-button"
                   rounded
                   dark
                   :style="{
@@ -28,10 +29,9 @@
                 >
                   Federal
                 </v-btn>
-              </v-col>
 
-              <v-col>
                 <v-btn
+                  class="search-reps-button"
                   rounded
                   dark
                   :class="{ active: isActive }"
@@ -43,10 +43,9 @@
                 >
                   State
                 </v-btn>
-              </v-col>
 
-              <v-col>
                 <v-btn
+                  class="search-reps-button"
                   rounded
                   dark
                   :class="{ active: isActive }"
@@ -58,13 +57,11 @@
                 >
                   County
                 </v-btn>
-              </v-col>
 
-              <v-col>
                 <v-btn
                   rounded
                   dark
-                  class="ui button toggle"
+                  class="ui button toggle search-reps-button"
                   :style="{
                     backgroundColor:
                       currentFilter === 'municipality' && isActive
@@ -223,5 +220,9 @@ export default {
 
 <style scoped lang="less">
 .search-reps {
+}
+
+.search-reps-button {
+  margin: 5px 10px;
 }
 </style>
