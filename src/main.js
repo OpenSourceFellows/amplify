@@ -23,6 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 library.add(faUserSecret, faInstagram, faFacebookF, faTwitter, faYoutube)
+
 /* add font awesome icon component */
 Vue.component('FontAwesomeIcon', FontAwesomeIcon)
 
