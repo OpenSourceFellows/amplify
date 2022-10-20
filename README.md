@@ -1,4 +1,4 @@
-# amplify
+# Amplify
 
 ## Table of Contents
 

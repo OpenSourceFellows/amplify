@@ -43,6 +43,11 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.22.5",
     "@babel/polyfill": "^7.4.4",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/vue-fontawesome": "^2.0.8",
     "@stripe/stripe-js": "^1.35.0",
     "@vue-stripe/vue-stripe": "^4.4.2",
     "axios": "^0.27.2",
