@@ -1,24 +1,20 @@
 <template lang="html">
   <v-card
     flat
-    v-on:click="handleRepClick"
     :to="{
       name: 'RepClick',
       params: { member: member.name }
     }"
+    @click="handleRepClick"
   >
-    <v-card-title v-text="member.name" class="padding-y-0"></v-card-title>
+    <v-card-title class="justify-center" v-text="member.name" />
     <v-card-subtitle
+      class="text-center padding-y-0 margin-top-10"
       v-text="member.title"
-      class="text-align-left padding-y-0 margin-top-10"
-    >
-    </v-card-subtitle>
+    />
 
     <!-- social media icons -->
-    <div
-      id="social-media-channel"
-      class="text-align-left social-media-channel-box"
-    >
+    <div id="social-media-channel" class="text-center social-media-channel-box">
       <a
         v-for="socialMedia in member.socialMediaPages"
         :key="socialMedia.type"
@@ -36,16 +32,12 @@
     </div>
 
     <v-img
-      class="text-align-left rep-img"
-      v-bind:src="member.photoUrl"
+      class="mx-auto rep-img"
+      :src="member.photoUrl"
       height="75"
       width="75"
-    >
-    </v-img>
-    <v-card-subtitle
-      v-text="member.address_city"
-      class="text-align-left rep-img"
-    ></v-card-subtitle>
+    />
+    <v-card-subtitle class="text-center rep-img" v-text="member.address_city" />
   </v-card>
 </template>
 
@@ -53,17 +45,17 @@
 import axios from 'axios'
 
 export default {
-  name: 'representative-card',
+  name: 'RepresentativeCard',
   components: {
   },
   props: {
     member: Object
   },
+  emits: ['handleRepSelected'],
   data() {
     return {
     }
   },
-  emits: ['handleRepSelected'],
   methods: {
     async handleRepClick() {
       try {
