@@ -23,7 +23,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 library.add(faUserSecret, faInstagram, faFacebookF, faTwitter, faYoutube)
+
 /* add font awesome icon component */
+// eslint-disable-next-line vue/component-definition-name-casing
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Vuetify)
