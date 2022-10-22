@@ -50,11 +50,11 @@
                   class="ui button toggle search-reps-button"
                   :style="{
                     backgroundColor:
-                      currentFilter === 'municipality' && isActive
+                      currentFilter === 'local' && isActive
                         ? 'blue'
                         : 'gray'
                   }"
-                  v-on:click="FilterList('municipality')"
+                  v-on:click="FilterList('local')"
                 >
                   Local
                 </v-btn>

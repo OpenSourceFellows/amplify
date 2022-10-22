@@ -12,7 +12,7 @@ const JURISDICTION_FILTER_MAP = {
   federal: ['NATIONAL_UPPER', 'NATIONAL_LOWER'],
   state: ['STATE_EXEC', 'STATE_UPPER', 'STATE_LOWER'],
   county: ['COUNTY'],
-  municipality: ['LOCAL_EXEC','LOCAL'],
+  local: ['LOCAL_EXEC','LOCAL'],
   school: ['SCHOOL']
 }
 const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
