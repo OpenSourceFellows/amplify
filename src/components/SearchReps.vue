@@ -45,20 +45,6 @@
                 </v-btn>
 
                 <v-btn
-                  class="search-reps-button"
-                  rounded
-                  dark
-                  :class="{ active: isActive }"
-                  :style="{
-                    backgroundColor:
-                      currentFilter === 'county' && isActive ? 'blue' : 'gray'
-                  }"
-                  v-on:click="FilterList('county')"
-                >
-                  County
-                </v-btn>
-
-                <v-btn
                   rounded
                   dark
                   class="ui button toggle search-reps-button"
@@ -72,6 +58,21 @@
                 >
                   Local
                 </v-btn>
+
+                <v-btn
+                  class="search-reps-button"
+                  rounded
+                  dark
+                  :class="{ active: isActive }"
+                  :style="{
+                    backgroundColor:
+                      currentFilter === 'county' && isActive ? 'blue' : 'gray'
+                  }"
+                  v-on:click="FilterList('county')"
+                >
+                  County
+                </v-btn>
+
               </v-col>
             </v-row>
 
