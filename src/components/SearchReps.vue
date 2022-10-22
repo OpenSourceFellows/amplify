@@ -73,6 +73,20 @@
                   County
                 </v-btn>
 
+                <v-btn
+                  class="search-reps-button"
+                  rounded
+                  dark
+                  :class="{ active: isActive }"
+                  :style="{
+                    backgroundColor:
+                      currentFilter === 'school' && isActive ? 'blue' : 'gray'
+                  }"
+                  v-on:click="FilterList('school')"
+                >
+                  School
+                </v-btn>
+
               </v-col>
             </v-row>
 
