@@ -116,10 +116,10 @@ router.get('/:zipCode', async (req, res) => {
             rep.photo_origin_url ||
             'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
           socialMediaPages: getOfficialSocialMediaPages(rep.identifiers),
-          photoCroppingCSS:
-            rep.photo_cropping || getPhotoCroppingValues(rep.photo_cropping)
+          photoCroppingCSS: getPhotoCroppingValues(rep.photo_cropping)
         }
-
+        console.log(repInfo)
+        console.log(repInfo.photo_cropping)
         return repInfo
       })
 
@@ -143,10 +143,16 @@ router.get('/:zipCode', async (req, res) => {
  *
  */
 function getPhotoCroppingValues(photo_cropping_object) {
+  // If the photo cropping object is not defined, return default value
+  if (!photo_cropping_object) {
+    return 'center center'
+  }
+
+  // args
   let x = photo_cropping_object.x
   let y = photo_cropping_object.y
-  let oriH = photo_cropping_object.priHeight
-  let oriW = photo_cropping_object.oriWidth
+  let oriH = photo_cropping_object.original_height
+  let oriW = photo_cropping_object.original_width
 
   // 1. calculate threeshold for the x space
   // we check if the coordinate starts on the left side of the image (the first half of the left side)

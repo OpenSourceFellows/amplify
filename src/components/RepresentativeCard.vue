@@ -40,6 +40,7 @@
       v-bind:src="member.photoUrl"
       height="75"
       width="75"
+      style="border: 1px solid #ccc"
     >
     </v-img>
     <v-card-subtitle
