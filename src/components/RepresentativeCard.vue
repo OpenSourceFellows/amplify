@@ -37,10 +37,11 @@
 
     <v-img
       class="text-align-left rep-img"
-      v-bind:src="member.photoUrl"
+      v-bind="member"
+      :src="member.photoUrl"
       height="75"
       width="75"
-      style="border: 1px solid #ccc"
+      :position="member.photoCroppingCSS"
     >
     </v-img>
     <v-card-subtitle
