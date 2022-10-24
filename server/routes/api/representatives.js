@@ -152,19 +152,21 @@ function getPhotoCroppingValues(photo_cropping_object) {
   console.log(photo_cropping_object)
   let x = photo_cropping_object.x
   let y = photo_cropping_object.y
-  let oriH = photo_cropping_object.oriHeight
-  let oriW = photo_cropping_object.origWidth
+  let oriHeight = photo_cropping_object.oriHeight
+  let origWidth = photo_cropping_object.origWidth
 
   // 1. calculate threshold for the x space
   // we check if the coordinate starts on the left side of the image (the first half of the left side)
-  let x_left_threeshold = oriW / 4
+  let x_left_threeshold = origWidth / 4
   // we check if the coordinate starts on the right side of the image (the first half of the right side) and we reduce a margin of 5% to be flexible
-  let x_right_threeshold = oriW / 2 - (5 / 100) * (oriW / 2)
+  let substract_percentage = 0.05
+  let x_right_threeshold =
+    origWidth / 2 - substract_percentage * (origWidth / 2)
   // 2. calculate threeshold for the y space
   // we check if the coordinate starts on the top side of the image (the first half of the top side)
-  let y_top_threeshold = oriH / 4
+  let y_top_threeshold = oriHeight / 4
   // we check if the coordinate starts on the bottom side of the image (the first half of the bottom side) and we reduce a margin of 5% to be flexible
-  let y_bottom_threeshold = oriH / 2 - (5 / 100) * (oriH / 2)
+  let y_bottom_threeshold = oriHeight / 2 - (5 / 100) * (oriHeight / 2)
 
   // 3. determine the css values for the cropping
   let x_value =
