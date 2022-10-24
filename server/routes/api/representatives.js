@@ -155,7 +155,7 @@ function getPhotoCroppingValues(photo_cropping_object) {
   let oriH = photo_cropping_object.oriHeight
   let oriW = photo_cropping_object.origWidth
 
-  // 1. calculate threeshold for the x space
+  // 1. calculate threshold for the x space
   // we check if the coordinate starts on the left side of the image (the first half of the left side)
   let x_left_threeshold = oriW / 2 / 2
   // we check if the coordinate starts on the right side of the image (the first half of the right side) and we reduce a margin of 5% to be flexible
