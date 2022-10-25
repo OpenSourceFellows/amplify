@@ -118,8 +118,7 @@ router.get('/:zipCode', async (req, res) => {
           socialMediaPages: getOfficialSocialMediaPages(rep.identifiers),
           photoCroppingCSS: getPhotoCroppingValues(rep.photo_cropping)
         }
-        console.log('rep name:' + repInfo.name)
-        console.log('rep cropping:' + repInfo.photoCroppingCSS)
+
         return repInfo
       })
 
@@ -149,7 +148,6 @@ function getPhotoCroppingValues(photo_cropping_object) {
   }
 
   // args
-  console.log(photo_cropping_object)
   let x = photo_cropping_object.x
   let y = photo_cropping_object.y
   let oriHeight = photo_cropping_object.oriHeight
