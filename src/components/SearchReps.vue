@@ -136,6 +136,7 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
+import { setupCache } from 'axios-cache-interceptor';
 export default {
     name: 'SearchReps',
     components: {
@@ -169,14 +170,18 @@ export default {
         },
         async CreateRepList () {
             try {
+                // setting up axios with axios-cache-interceptor
+                const axios = setupCache(axios);
+
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
                 this.isActive = false
-
+                // TODO: delete this as soon as you are confident about the changes
+                console.log(res)
+                console.log(res.cached);
                 this.congressMembers = res.data
                 this.hasContent = true
-                // console.log(res.data)
                 this.listVisible = true
             } catch (e) {
                 console.error(e)
