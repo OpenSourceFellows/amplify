@@ -169,18 +169,26 @@ function getPhotoCroppingValues(photo_cropping_object) {
   let y_bottom_threeshold = oriHeight / 2 - (5 / 100) * (oriHeight / 2)
 
   // 3. determine the css values for the cropping
-  let x_value =
-    x <= x_left_threeshold
-      ? 'left'
-      : x >= x_right_threeshold
-      ? 'right'
-      : 'center'
-  let y_value =
-    y <= y_top_threeshold
-      ? 'top'
-      : y >= y_bottom_threeshold
-      ? 'bottom'
-      : 'center'
+  // if the coordinate does not reach any of the threesholds, we set the value to center
+  let x_value = 'center'
+  // left threshold met
+  if (x <= x_left_threeshold) {
+    x_value = 'left'
+  }
+  // right threshold met
+  if (x >= x_right_threeshold) {
+    x_value = 'right'
+  }
+  // we apply the same logic for the y or vertical direction
+  let y_value = 'center'
+  // top threshold met
+  if (y <= y_top_threeshold) {
+    y_value = 'top'
+  }
+  // bottom threshold met
+  if (y >= y_bottom_threeshold) {
+    y_value = 'bottom'
+  }
 
   // final css value with background position
   let css_value = x_value + ' ' + y_value
