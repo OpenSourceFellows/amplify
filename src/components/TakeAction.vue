@@ -9,7 +9,7 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title> Review the letter </v-list-item-title>
-              <v-list-item-subtitle>
+              <v-list-item-subtitle class="text-wrap">
                 Add any additional details to organizer requests.
               </v-list-item-subtitle>
             </v-list-item-content>
@@ -63,7 +63,7 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Send the letter</v-list-item-title>
-              <v-list-item-subtitle>
+              <v-list-item-subtitle class="text-wrap">
                 Postage is $1.50 to send your letter.Learn more about what how
                 this fee is used.
               </v-list-item-subtitle>
