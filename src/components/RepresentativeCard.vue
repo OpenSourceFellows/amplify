@@ -49,7 +49,10 @@ export default {
   components: {
   },
   props: {
-    member: Object
+    member: {
+      type: Object,
+      required: true
+    }
   },
   emits: ['handleRepSelected'],
   data() {

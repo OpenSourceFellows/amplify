@@ -2,18 +2,18 @@
   <section class="search-reps">
     <v-container fluid>
       <v-row class="justify-center">
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6" md="4">
           <v-card flat>
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
               <v-form ref="form">
                 <v-text-field
+                  v-model="postalCode"
                   label="Postal Code"
                   required
-                  v-on:keyup="CheckInputContent"
-                  v-model="postalCode"
-                ></v-text-field>
+                  @keyup="CheckInputContent"
+                />
               </v-form>
 
               <v-row>
@@ -28,7 +28,7 @@
                           ? 'blue'
                           : 'gray'
                     }"
-                    v-on:click="FilterList('federal')"
+                    @click="FilterList('federal')"
                   >
                     Federal
                   </v-btn>
@@ -42,7 +42,7 @@
                       backgroundColor:
                         currentFilter === 'state' && isActive ? 'blue' : 'gray'
                     }"
-                    v-on:click="FilterList('state')"
+                    @click="FilterList('state')"
                   >
                     State
                   </v-btn>
@@ -56,7 +56,7 @@
                       backgroundColor:
                         currentFilter === 'county' && isActive ? 'blue' : 'gray'
                     }"
-                    v-on:click="FilterList('county')"
+                    @click="FilterList('county')"
                   >
                     County
                   </v-btn>
@@ -71,7 +71,7 @@
                           ? 'blue'
                           : 'gray'
                     }"
-                    v-on:click="FilterList('municipality')"
+                    @click="FilterList('municipality')"
                   >
                     Local
                   </v-btn>
@@ -85,38 +85,38 @@
                       name: 'Reps',
                       params: { postalCode: postalCode }
                     }"
-                    v-on:click="CreateRepList()"
                     clickclass="mr-4"
-                    >Submit
+                    @click="CreateRepList()"
+                  >
+                    Submit
                   </v-btn>
                 </v-col>
               </v-row>
             </v-card-text>
           </v-card>
 
-          <div id="reprenstatives-list" v-show="hasContent">
+          <div v-show="hasContent" id="reprenstatives-list">
             <div>
-              <v-card flat v-for="member in congressMembers" :key="member.name">
+              <v-card v-for="member in congressMembers" :key="member.name" flat>
                 <representative-card
-                  @handleRepSelected="handleRepSelected"
                   :member="member"
-                >
-                </representative-card>
-                <v-divider></v-divider>
+                  @handle-rep-selected="handleRepSelected"
+                />
+                <v-divider />
               </v-card>
             </div>
           </div>
         </v-col>
 
-        <v-divider vertical class="hidden-sm-and-down"></v-divider>
+        <v-divider vertical class="hidden-sm-and-down" />
 
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6" md="8">
           <div v-if="!listVisible">
             <div>
               <img
                 alt="Vue logo"
                 src="../assets/images/StepsGraphic.png"
-                width="80%"
+                width="70%"
               />
             </div>
             <p class="text-h6 pa-4">
@@ -125,14 +125,14 @@
               national goal to achieve net-zero greenhouse gas emissions by
               2050.
             </p>
-            <p></p>
+            <p />
           </div>
 
           <div v-else>
             <take-action
-              :letterBody="letterBody"
-              :selectedRep="selectedRep"
-            ></take-action>
+              :letter-body="letterBody"
+              :selected-rep="selectedRep"
+            />
           </div>
         </v-col>
       </v-row>
@@ -227,9 +227,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-.search-reps {
-}
-
 .search-reps-button {
   margin: 5px 10px;
 }
