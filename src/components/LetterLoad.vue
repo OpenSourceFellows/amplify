@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <v-card-actions>
+      <v-card-actions class="justify-center">
         <v-btn>
           <AuthNav />
         </v-btn>
