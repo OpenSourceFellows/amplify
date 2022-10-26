@@ -129,10 +129,16 @@
           </div>
 
           <div v-else>
-            <take-action
-              :letter-body="letterBody"
-              :selected-rep="selectedRep"
-            />
+            <v-container fluid>
+              <v-row class="justify-center">
+                <v-col cols="12" md="8">
+                  <take-action
+                    :letter-body="letterBody"
+                    :selected-rep="selectedRep"
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
           </div>
         </v-col>
       </v-row>
