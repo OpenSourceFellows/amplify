@@ -31,7 +31,7 @@ const STORAGE = buildStorage({
     CACHE.delete(key)
   }
 })
-// set up caxios-cache-interceptor with redis storage as a persistent storage
+// set up caxios-cache-interceptor with the map as a persistent storage
 const axios = setupCache(Axios, { storage: STORAGE })
 
 const router = express.Router()
@@ -71,8 +71,8 @@ router.get('/:zipCode', async (req, res) => {
 
   try {
     const {
-      data: { response },
-      cached
+      data: { response }
+      //cached
     } = await axios.get('https://cicero.azavea.com/v3.1/official', {
       params: {
         search_postal: zipCode,
@@ -100,8 +100,8 @@ router.get('/:zipCode', async (req, res) => {
       }
     })
 
-    // check if response was cached
-    console.log('isCached:', cached)
+    // if you want to check if response was cached, uncomment: this is a way to track the issue
+    // console.log('isCached:', cached)
 
     const { errors, results } = response
     if (errors.length > 0) {
