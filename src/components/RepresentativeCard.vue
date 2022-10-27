@@ -35,10 +35,12 @@
     </div>
 
     <v-img
-      class="text-align-left rep-img"
-      v-bind:src="member.photoUrl"
+      class="mx-auto text-align-left rep-img"
+      v-bind="member"
+      :src="member.photoUrl"
       height="75"
       width="75"
+      :position="member.photoCroppingCSS"
     />
     <v-card-subtitle
       v-text="member.address_city"
