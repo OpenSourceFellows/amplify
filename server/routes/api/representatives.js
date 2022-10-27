@@ -113,8 +113,8 @@ router.get('/:zipCode', async (req, res) => {
           photoUrl:
             rep.photo_origin_url ||
             'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
-
-          socialMediaPages: getOfficialSocialMediaPages(rep.identifiers) // call
+          socialMediaPages: getOfficialSocialMediaPages(rep.identifiers),
+          photoCroppingCSS: getPhotoCroppingValues(rep.photo_cropping)
         }
 
         return repInfo
@@ -126,6 +126,77 @@ router.get('/:zipCode', async (req, res) => {
     res.status(500).send({ error: 'Whoops' })
   }
 })
+
+/*
+ * Returns string with the following properties:
+ *  - x-value: right or left. Indicates whether the photo should be cropped/positioned from the left or right side.
+ *  - y-value: top or bottom. Indicates whether the photo should be cropped/psoitioned from the top or bottom side.
+ *
+ * Example: "top left"
+ *
+ * @param {string} photoCropping - The photo cropping object from the CICERO API
+ * @returns {string} - The photo cropping CSS value
+ *
+ *
+ */
+function getPhotoCroppingValues(photo_cropping_object) {
+  // If the photo cropping object is not defined, return default value
+  if (!photo_cropping_object) {
+    return 'center center'
+  }
+
+  // args
+  let x = photo_cropping_object.x
+  let y = photo_cropping_object.y
+  let oriHeight = photo_cropping_object.oriHeight
+  let origWidth = photo_cropping_object.origWidth
+
+  // 1. calculate threshold for the x space
+  // we check if the coordinate starts on the left side of the image (the first half of the left side)
+  let x_left_threeshold = origWidth / 4
+  // we check if the coordinate starts on the right side of the image (the first half of the right side) and we reduce a margin of 5% to be flexible
+  let substract_percentage = 0.05
+  let x_right_threeshold =
+    origWidth / 2 - substract_percentage * (origWidth / 2)
+  // 2. calculate threeshold for the y space
+  // we check if the coordinate starts on the top side of the image (the first half of the top side)
+  let y_top_threeshold = oriHeight / 4
+  // we check if the coordinate starts on the bottom side of the image (the first half of the bottom side) and we reduce a margin of 5% to be flexible
+  let y_bottom_threeshold = oriHeight / 2 - (5 / 100) * (oriHeight / 2)
+
+  // 3. determine the css values for the cropping
+  // if the coordinate does not reach any of the threesholds, we set the value to center
+  let x_value = 'center'
+  // left threshold met
+  if (x <= x_left_threeshold) {
+    x_value = 'left'
+  }
+  // right threshold met
+  if (x >= x_right_threeshold) {
+    x_value = 'right'
+  }
+  // we apply the same logic for the y or vertical direction
+  let y_value = 'center'
+  // top threshold met
+  if (y <= y_top_threeshold) {
+    y_value = 'top'
+  }
+  // bottom threshold met
+  if (y >= y_bottom_threeshold) {
+    y_value = 'bottom'
+  }
+
+  // final css value with background position
+  let css_value = x_value + ' ' + y_value
+
+  return css_value
+}
+
+/*
+ *  Function used to extract social media pages and format them as JSON objects by using an array from another JSON object.
+ *  @param  {array} identifiers - array of identifiers from the JSON object.
+ *  @return {array} socialMediaPages - array of social media pages.
+ */
 
 function getOfficialSocialMediaPages(identifiers) {
   var social_media_pages = []
