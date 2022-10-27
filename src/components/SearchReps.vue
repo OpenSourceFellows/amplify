@@ -1,6 +1,5 @@
 <template lang="html">
   <section class="search-reps">
-
     <v-container fluid>
       <v-row class="justify-center">
         <v-col cols="12" sm="6" md="4">
@@ -47,22 +46,20 @@
                   >
                     State
                   </v-btn>
-                  
+
                   <v-btn
                     rounded
                     dark
                     class="ui button toggle search-reps-button"
                     :style="{
                       backgroundColor:
-                        currentFilter === 'local' && isActive
-                          ? 'blue'
-                          : 'gray'
+                        currentFilter === 'local' && isActive ? 'blue' : 'gray'
                     }"
                     @click="FilterList('local')"
                   >
                     Local
                   </v-btn>
-                  
+
                   <v-btn
                     class="search-reps-button"
                     rounded
@@ -76,21 +73,20 @@
                   >
                     County
                   </v-btn>
-                  
+
                   <v-btn
-                  class="search-reps-button"
-                  rounded
-                  dark
-                  :class="{ active: isActive }"
-                  :style="{
-                    backgroundColor:
-                      currentFilter === 'school' && isActive ? 'blue' : 'gray'
-                  }"
-                  v-on:click="FilterList('school')"
-                >
-                  School
-                </v-btn>
-                  
+                    class="search-reps-button"
+                    rounded
+                    dark
+                    :class="{ active: isActive }"
+                    :style="{
+                      backgroundColor:
+                        currentFilter === 'school' && isActive ? 'blue' : 'gray'
+                    }"
+                    v-on:click="FilterList('school')"
+                  >
+                    School
+                  </v-btn>
                 </v-col>
               </v-row>
 

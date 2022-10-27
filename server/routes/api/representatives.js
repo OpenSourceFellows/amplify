@@ -12,7 +12,7 @@ const JURISDICTION_FILTER_MAP = {
   federal: ['NATIONAL_UPPER', 'NATIONAL_LOWER'],
   state: ['STATE_EXEC', 'STATE_UPPER', 'STATE_LOWER'],
   county: ['COUNTY'],
-  local: ['LOCAL_EXEC','LOCAL'],
+  local: ['LOCAL_EXEC', 'LOCAL'],
   school: ['SCHOOL']
 }
 const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
@@ -41,7 +41,7 @@ router.get('/:zipCode', async (req, res) => {
   }
 
   try {
-    const params =  {
+    const params = {
       search_postal: zipCode,
       search_country: 'US',
       order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
@@ -52,7 +52,7 @@ router.get('/:zipCode', async (req, res) => {
     }
 
     if (filter != null) {
-      params.district_type =  JURISDICTION_FILTER_MAP[filter]
+      params.district_type = JURISDICTION_FILTER_MAP[filter]
     }
 
     const {
