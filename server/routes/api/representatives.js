@@ -93,7 +93,11 @@ router.get('/:zipCode', async (req, res) => {
         key: CICERO_API_KEY
       },
       paramsSerializer: (params) =>
-        qs.stringify(params, { arrayFormat: 'repeat' })
+        qs.stringify(params, { arrayFormat: 'repeat' }),
+
+      cache: {
+        ttl: 1000 * 60 * 10080 // the time until the cached value is expired in milliseconds: set to 1 week
+      }
     })
 
     // check if response was cached
