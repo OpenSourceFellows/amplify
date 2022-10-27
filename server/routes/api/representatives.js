@@ -1,8 +1,38 @@
 require('dotenv').config()
 
 const express = require('express')
-const axios = require('axios')
+const Axios = require('axios')
 const qs = require('qs')
+
+// cache interceptor
+const { buildStorage, setupCache } = require('axios-cache-interceptor')
+// set up persistent storage
+const CACHE = new Map()
+const STORAGE = buildStorage({
+  find: (key) => {
+    const found = CACHE.get(key)
+    if (found?.data) {
+      return { ...found, data: JSON.parse(JSON.stringify(found.data)) }
+    }
+    return found
+  },
+  set: (key, value) => {
+    console.log(value)
+    if (value?.data) {
+      CACHE.set(key, {
+        ...value,
+        data: JSON.parse(JSON.stringify(value.data))
+      })
+    } else {
+      CACHE.set(key, value)
+    }
+  },
+  remove: (key) => {
+    CACHE.delete(key)
+  }
+})
+// set up caxios-cache-interceptor with redis storage as a persistent storage
+const axios = setupCache(Axios, { storage: STORAGE })
 
 const router = express.Router()
 
@@ -41,7 +71,8 @@ router.get('/:zipCode', async (req, res) => {
 
   try {
     const {
-      data: { response }
+      data: { response },
+      cached
     } = await axios.get('https://cicero.azavea.com/v3.1/official', {
       params: {
         search_postal: zipCode,
@@ -64,6 +95,9 @@ router.get('/:zipCode', async (req, res) => {
       paramsSerializer: (params) =>
         qs.stringify(params, { arrayFormat: 'repeat' })
     })
+
+    // check if response was cached
+    console.log('isCached:', cached)
 
     const { errors, results } = response
     if (errors.length > 0) {
