@@ -96,7 +96,7 @@ router.get('/:zipCode', async (req, res) => {
         qs.stringify(params, { arrayFormat: 'repeat' }),
 
       cache: {
-        ttl: 1000 * 60 * 10080 // the time until the cached value is expired in milliseconds: set to 1 week
+        ttl: 1000 * 60 * 60 * 24 * 7 // the time until the cached value is expired in milliseconds: set to 1 week
       }
     })
 
