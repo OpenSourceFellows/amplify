@@ -150,12 +150,7 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-//import { setupCache, buildWebStorage } from 'axios-cache-interceptor';
 
-// setting up axios with axios-cache-interceptor
-// set persistent storage to localStorage
-//const myStorage = buildWebStorage(localStorage, 'axios-cache:');
-//const axios = setupCache(Axios, {storage: myStorage, maxAge: 15 * 60 * 1000});
 export default {
     name: 'SearchReps',
     components: {
