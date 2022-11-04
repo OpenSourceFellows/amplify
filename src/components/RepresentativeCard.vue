@@ -16,8 +16,8 @@
     <!-- social media icons -->
     <div id="social-media-channel" class="text-center social-media-channel-box">
       <a
-        v-for="socialMedia in member.socialMediaPages"
-        :key="socialMedia.type"
+        v-for="(socialMedia, i) in member.socialMediaPages"
+        :key="i"
         :href="socialMedia.url"
         target="_blank"
         class="social-media-icon"
