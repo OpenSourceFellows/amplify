@@ -162,6 +162,7 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
+
 export default {
     name: 'SearchReps',
     components: {
@@ -199,10 +200,8 @@ export default {
                     '/api/representatives/' + this.postalCode
                 )
                 this.isActive = false
-
                 this.congressMembers = res.data
                 this.hasContent = true
-                // console.log(res.data)
                 this.listVisible = true
             } catch (e) {
                 console.error(e)
