@@ -18,15 +18,16 @@ describe('test Axios configuration', () => {
 })
 
 // 2. we test that the cache is working as expected with concurrent requests
-describe('test Axios cache with concurrent requests', () => {
+describe('test Axios cache with two requests', () => {
   test('tests cache', async () => {
     const axios = Axios.create()
     const cache_interceptor = setupCache(axios)
 
-    // we make two concurrent requests to the same endpoint
+    // we make two sequential requests to the same api endpoint
     const req1 = cache_interceptor.get('https://api.publicapis.org/entries')
     const req2 = cache_interceptor.get('https://api.publicapis.org/entries/')
-    const [res1, res2] = await Promise.all([req1, req2])
+    const res1 = await req1
+    const res2 = await req2
 
     // assertions: we expect the second response to be cached
     expect(res1.cached).toBe(false)
@@ -40,18 +41,13 @@ describe('test Axios cache invalidation option', () => {
     // we set the ttl to 10 seconds
     const axios = Axios.create()
     const cache_interceptor = setupCache(axios, { ttl: 10000 })
-    // we make two concurrent requests
-    const req1 = cache_interceptor.get('https://api.publicapis.org/entries')
-    const req2 = cache_interceptor.get('https://api.publicapis.org/entries/')
-    const [res1, res2] = await Promise.all([req1, req2])
-    // assertions: the first is never cached, we expect the second to be cached
-    expect(res1.cached).toBe(false)
-    expect(res2.cached).toBe(true)
-    // we wait for 10.1 seconds and make another call
+    // we make a simple request
+    cache_interceptor.get('https://api.publicapis.org/entries')
+    // we wait for 11 seconds and make another call
     await new Promise((resolve) => setTimeout(() => resolve(), 11000))
     const req3 = cache_interceptor.get('https://api.publicapis.org/entries')
     const res3 = await req3
-    // assertions: the third is expected not to be cached, due to the ttl
+    // assertions: the second request is expected not to be cached, due to the ttl
     expect(res3.cached).toBe(false)
   }, 70000)
 })
