@@ -47,7 +47,7 @@ describe('test Axios cache invalidation option', () => {
     // assertions: the first is never cached, we expect the second to be cached
     expect(res1.cached).toBe(false)
     expect(res2.cached).toBe(true)
-    // we wait for 10.1 seconds and make another call
+    // we wait for 11 seconds and make another call
     await new Promise((resolve) => setTimeout(() => resolve(), 11000))
     const req3 = cache_interceptor.get('https://api.publicapis.org/entries')
     const res3 = await req3
