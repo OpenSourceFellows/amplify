@@ -19,8 +19,8 @@
       class="text-align-left social-media-channel-box"
     >
       <a
-        v-for="socialMedia in member.socialMediaPages"
-        :key="socialMedia.url"
+        v-for="(socialMedia, i) in member.socialMediaPages"
+        :key="i"
         :href="socialMedia.url"
         target="_blank"
         class="social-media-icon"

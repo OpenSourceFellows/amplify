@@ -48,6 +48,19 @@
                   </v-btn>
 
                   <v-btn
+                    rounded
+                    dark
+                    class="ui button toggle search-reps-button"
+                    :style="{
+                      backgroundColor:
+                        currentFilter === 'local' && isActive ? 'blue' : 'gray'
+                    }"
+                    @click="FilterList('local')"
+                  >
+                    Local
+                  </v-btn>
+
+                  <v-btn
                     class="search-reps-button"
                     rounded
                     dark
@@ -62,18 +75,17 @@
                   </v-btn>
 
                   <v-btn
+                    class="search-reps-button"
                     rounded
                     dark
-                    class="ui button toggle search-reps-button"
+                    :class="{ active: isActive }"
                     :style="{
                       backgroundColor:
-                        currentFilter === 'municipality' && isActive
-                          ? 'blue'
-                          : 'gray'
+                        currentFilter === 'school' && isActive ? 'blue' : 'gray'
                     }"
-                    @click="FilterList('municipality')"
+                    v-on:click="FilterList('school')"
                   >
-                    Local
+                    School
                   </v-btn>
                 </v-col>
               </v-row>
