@@ -1,8 +1,38 @@
 require('dotenv').config()
 
 const express = require('express')
-const axios = require('axios')
+const Axios = require('axios')
 const qs = require('qs')
+
+// cache interceptor
+const { buildStorage, setupCache } = require('axios-cache-interceptor')
+// set up persistent storage
+const CACHE = new Map()
+const STORAGE = buildStorage({
+  find: (key) => {
+    const found = CACHE.get(key)
+    if (found?.data) {
+      return { ...found, data: JSON.parse(JSON.stringify(found.data)) }
+    }
+    return found
+  },
+  set: (key, value) => {
+    console.log(value)
+    if (value?.data) {
+      CACHE.set(key, {
+        ...value,
+        data: JSON.parse(JSON.stringify(value.data))
+      })
+    } else {
+      CACHE.set(key, value)
+    }
+  },
+  remove: (key) => {
+    CACHE.delete(key)
+  }
+})
+// set up caxios-cache-interceptor with the map as a persistent storage
+const axios = setupCache(Axios, { storage: STORAGE })
 
 const router = express.Router()
 
@@ -57,11 +87,19 @@ router.get('/:zipCode', async (req, res) => {
 
     const {
       data: { response }
+      //cached
     } = await axios.get('https://cicero.azavea.com/v3.1/official', {
       params,
       paramsSerializer: (params) =>
-        qs.stringify(params, { arrayFormat: 'repeat' })
+        qs.stringify(params, { arrayFormat: 'repeat' }),
+
+      cache: {
+        ttl: 1000 * 60 * 60 * 24 * 7 // the time until the cached value is expired in milliseconds: set to 1 week
+      }
     })
+
+    // if you want to check if response was cached, uncomment: this is a way to track the issue
+    // console.log('isCached:', cached)
 
     const { errors, results } = response
     if (errors.length > 0) {
