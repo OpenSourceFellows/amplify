@@ -7,7 +7,7 @@
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
-              <v-form ref="form">
+              <v-form @submit.prevent="CreateRepList()" ref="form">
                 <v-text-field
                   v-model="postalCode"
                   label="Postal Code"
