@@ -1,8 +1,14 @@
 <template lang="html">
   <section class="search-reps">
-    <v-container fluid>
+    <v-container>
       <v-row class="justify-center">
-        <v-col cols="12" sm="6" md="4">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          v-bind:class="{ 'overflow-auto': !$vuetify.breakpoint.mobile }"
+          v-bind:style="{ height: myHeight }"
+        >
           <v-card flat>
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
@@ -179,8 +185,9 @@ export default {
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
             isActive: false,
+            myHeight: this.$vuetify.breakpoint.mobile?false:"100vh"
         }
-    },
+      },
     methods: {
         handleRepSelected(letterBody, selectedRep, step2) {
             this.letterBody = letterBody
@@ -239,7 +246,7 @@ export default {
                 console.error(e)
             }
         }
-    }
+    },
 }
 </script>
 
