@@ -13,7 +13,9 @@ export default new Vuex.Store({
   },
   mutations: {
     setGenericValue: (state, { key, value }) => {
-      state[key] = value
+      if (key in state) {
+        state[key] = value
+      }
     }
   },
   actions: {
@@ -21,9 +23,7 @@ export default new Vuex.Store({
       // Updates state, given an object
       // Will only commit change if key is already in state so no junk will be added.
       for (const [k, v] of Object.entries(payload)) {
-        if (k in store.state) {
-          store.commit('setGenericValue', { key: k, value: v })
-        }
+        store.commit('setGenericValue', { key: k, value: v })
       }
     },
     dumpStateToLocalStorage: ({ state }, sessionId) => {
