@@ -27,7 +27,6 @@ export default {
     },
     methods: {
         getSession() {
-            axios.defaults.baseURL = '//localhost:6000/';
             const session_id = {'session_id': this.$route.query.session_id }
             axios.post( '/api/checkout/create-transaction', session_id )
                 .then((response) => {

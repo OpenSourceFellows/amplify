@@ -158,9 +158,13 @@ router.post('/createLetter', async (req, res) => {
     )
 
     if (paymentVerification.status !== 'succeeded') {
+      const { status } = paymentVerification
       return res
         .status(500)
-        .json({ msg: 'Payment is still pending or has failed.' })
+        .json({
+          msg: 'Payment is still pending or has failed.',
+          status
+        })
         .end()
     }
 
