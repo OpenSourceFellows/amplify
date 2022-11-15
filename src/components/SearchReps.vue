@@ -185,7 +185,7 @@ export default {
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
             isActive: false,
-            myHeight: this.$vuetify.breakpoint.mobile?false:"100vh"
+            myHeight: this.$vuetify.breakpoint.mobile ? false : "100vh"
         }
       },
     methods: {
