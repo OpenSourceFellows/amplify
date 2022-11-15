@@ -218,6 +218,7 @@ export default {
         },
         async CreateRepList() {
             try {
+                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
