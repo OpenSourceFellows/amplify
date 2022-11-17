@@ -129,6 +129,17 @@ router.get('/:zipCode', async (req, res) => {
   }
 })
 
+router.post('/districts', async (req, res) => {
+  const { address } = req.body
+
+  try {
+    console.log('address', address)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ error: 'Whoops' })
+  }
+})
+
 function getOfficialSocialMediaPages(identifiers) {
   var social_media_pages = []
 

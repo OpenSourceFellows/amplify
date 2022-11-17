@@ -183,14 +183,31 @@ export default {
         },
         async CreateRepList() {
             try {
-                const res = await axios.get(
+
+                // check postal code is valid with regex
+                let res = ''
+                let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.postalCode);
+                if(!isPostalCodeValid) {
+                  res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
-                this.isActive = false
+                }else{
+                  // check if street address is valid with a flexible regex. This validation is not perfect, but caches common cases
+                  // [a-zA-Z0-9\s]	Any single character in the range a-z or A-Z or 0-9 or whitespace
+                  // '-	Matches the characters - (case sensitive)
+                  // * 0 or more times
+                  // $  end of string
+                  let streetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.postalCode);
+                  if(streetAddressValid){
+                  res = await axios.post(
+                    '/api/representatives/districts', {address: this.postalCode}
+                  )
+                  }
+                }
 
+                this.isActive = false
                 this.congressMembers = res.data
                 this.hasContent = true
-                // console.log(res.data)
                 this.listVisible = true
             } catch (e) {
                 console.error(e)
