@@ -167,9 +167,47 @@ router.get('/:zipCode', async (req, res) => {
 
 router.post('/districts', async (req, res) => {
   const { address } = req.body
+  // TODO: delete this line after making PR
+  console.log('address', address)
 
   try {
-    console.log('address', address)
+    // prepare request params
+    const params = {
+      search_loc: address,
+      sort: 'asc',
+      max: 200,
+      format: 'json',
+      key: CICERO_API_KEY
+    }
+
+    // prepare request call
+    const {
+      data: { response }
+    } = await axios.get('https://cicero.azavea.com/v3.1/legislative_district', {
+      params,
+      paramsSerializer: (params) =>
+        qs.stringify(params, { arrayFormat: 'repeat' })
+    })
+
+    // process errors
+    const { errors, results } = response
+    if (errors.length > 0) {
+      throw new Error(errors.join(','))
+    }
+    if (
+      !results ||
+      !Array.isArray(results.candidates) ||
+      results.candidates.length === 0
+    ) {
+      throw new Error('No matches found for the search criteria')
+    }
+
+    // if no errors, process the rest of the response and get the districts ids from each object
+    const districts = results.candidates[0].districts || []
+    const districts_ids = districts.map((district) => district.id)
+    console.log('districts_ids', districts_ids)
+
+    // final HTTP response
     res.send({ message: 'working fine' })
   } catch (error) {
     console.log(error)
