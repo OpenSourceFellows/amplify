@@ -9,8 +9,8 @@
 
               <v-form ref="form">
                 <v-text-field
-                  v-model="postalCode"
-                  label="Postal Code"
+                  v-model="searchText"
+                  label="Search text"
                   required
                   @keyup="CheckInputContent"
                 />
@@ -163,7 +163,7 @@ export default {
             congressMembers: [],
             currentFilter: '',
             hasContent: true,
-            postalCode: this.$route.params.postalCode || '',
+            searchText: this.$route.params.searchText|| '',
             listVisible: false,
             isActive: false,
         }
@@ -175,7 +175,7 @@ export default {
             this.step2 = step2
         },
         CheckInputContent: function () {
-            if (this.postalCode !== '') {
+            if (this.searchText !== '') {
                 this.hasContent = true
             } else {
                 this.hasContent = false
@@ -186,10 +186,10 @@ export default {
 
                 // check postal code is valid with regex
                 let res = ''
-                let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.postalCode);
+                let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
                 if(!isPostalCodeValid) {
                   res = await axios.get(
-                    '/api/representatives/' + this.postalCode
+                    '/api/representatives/' + this.searchText
                 )
                 }else{
                   // check if street address is valid with a flexible regex. This validation is not perfect, but caches common cases
@@ -197,10 +197,10 @@ export default {
                   // '-	Matches the characters - (case sensitive)
                   // * 0 or more times
                   // $  end of string
-                  let streetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.postalCode);
-                  if(streetAddressValid){
+                  let isStreetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.searchText);
+                  if(isStreetAddressValid){
                   res = await axios.post(
-                    '/api/representatives/districts', {address: this.postalCode}
+                    '/api/representatives/districts', {address: this.searchText}
                   )
                   }
                 }
@@ -225,7 +225,7 @@ export default {
                     }
 
                     const res = await axios.get(
-                        '/api/representatives/' + this.postalCode,
+                        '/api/representatives/' + this.searchText,
                         {
                             params
                         }
@@ -236,7 +236,7 @@ export default {
                 } else {
                     this.isActive = false;
                     const res = await axios.get(
-                        '/api/representatives/' + this.postalCode
+                        '/api/representatives/' + this.searchText
                     )
 
                     this.congressMembers = res.data
