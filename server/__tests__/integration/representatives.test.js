@@ -7,9 +7,9 @@ const apiRouter = require('../../api')
 // Create a test application
 const app = express()
 app.use('/api', apiRouter)
-
+const { CICERO_API_KEY } = process.env
 const CICERO_API_HOST = 'https://cicero.azavea.com/v3.1/official'
-
+const zipCode = '84054'
 afterEach(() => {
   jest.clearAllMocks()
 })
@@ -18,127 +18,199 @@ afterAll(async () => {
   await new Promise((resolve) => setTimeout(() => resolve(), 500)) // avoid jest open handle error
 })
 
-describe('GET  api/representatives/:zipCode', () => {
-  const zipCode = '20510-1234'
-  const route = `/api/representatives/${zipCode}`
-
-  const exampleZipResponse = {
-    errors: [],
-    messages: [],
-    results: {
-      candidates: [
+jest.mock('axios')
+axios.get.mockResolvedValue({
+  data: {
+    response: {
+      results: [
         {
-          count: {},
-          officials: [],
-          locator: 'World',
-          score: 100,
-          match_addr: ` ${zipCode}, Philadelphia, Pennsylvania`,
-          x: -75.15263499999998,
-          y: 39.93611000000004,
-          wkid: 4326,
-          locator_type: 'Postal',
-          geoservice: 'EsriWGS',
-          match_city: 'Philadelphia',
-          match_subregion: 'Philadelphia County',
-          match_region: 'PA',
-          match_postal: zipCode,
-          match_country: 'US',
-          match_streetaddr: ''
+          mockCiceroResponse: {
+            results: {
+              candidates: [
+                {
+                  count: { from: 0, to: 37, total: 38 },
+                  officials: [],
+                  locator: 'World',
+                  score: 100,
+                  match_addr: ` ${zipCode}, Philadelphia, Pennsylvania`,
+                  x: -75.15263499999998,
+                  y: 39.93611000000004,
+                  wkid: 4326,
+                  locator_type: 'Postal',
+                  geoservice: 'EsriWGS',
+                  match_city: 'Philadelphia',
+                  match_subregion: 'Philadelphia County',
+                  match_region: 'PA',
+                  match_postal: zipCode,
+                  match_country: 'US',
+                  match_streetaddr: ''
+                }
+              ]
+            }
+          },
+          params: {
+            search_postal: zipCode,
+            search_country: 'US',
+            order: 'district_type',
+            sort: 'asc',
+            max: 200,
+            format: 'json',
+            key: process.env.CICERO_API_KEY
+          }
         }
       ]
     }
   }
-  test('returns 200 status for a a successful mock enpoint', async () => {
-    const spy = jest.spyOn(axios, 'get')
-    spy.mockImplementation((url) => {
-      if (url === `${CICERO_API_HOST}?search_postal=${zipCode.slice(0, 5)}`) {
-        return {
-          status: 200,
+})
+//mock axios get request to cicero api to return a valid response with a single representative object in the response
 
-          data: { exampleZipResponse }
-        }
-      }
-    })
-    const response = await request(app).get(route)
+describe('GET /api/representatives/:zipCode', () => {
+  //test that the api returns a 200 status code and a single representative object in the response
+  it('should return a 200 status code and a single representative object in the response', async () => {
+    const response = await request(app).get('/api/representatives/84054')
     expect(response.status).toBe(200)
-
-    expect(spy).toHaveBeenCalled()
-    spy.mockRestore()
+    expect(response.body).toEqual({
+      response: [
+        {
+          mockCiceroResponse: {
+            results: {
+              candidates: [
+                {
+                  count: { from: 0, to: 37, total: 38 },
+                  officials: [],
+                  locator: 'World',
+                  score: 100,
+                  match_addr: ` ${zipCode}, Philadelphia, Pennsylvania`,
+                  x: -75.15263499999998,
+                  y: 39.93611000000004,
+                  wkid: 4326,
+                  locator_type: 'Postal',
+                  geoservice: 'EsriWGS',
+                  match_city: 'Philadelphia',
+                  match_subregion: 'Philadelphia County',
+                  match_region: 'PA',
+                  match_postal: zipCode,
+                  match_country: 'US',
+                  match_streetaddr: ''
+                }
+              ]
+            }
+          },
+          params: {
+            search_postal: zipCode,
+            search_country: 'US',
+            order: 'district_type',
+            sort: 'asc',
+            max: 200,
+            format: 'json',
+            key: process.env.CICERO_API_KEY
+          }
+        }
+      ]
+    })
   })
 })
 
-// describe('GET api/representatives/:zipcode', () => {
-//   const zipcode = '20510-1234'
-//   const route = `/api/representatives/${zipcode}`
-
-//   const exampleZipResponse = {
-//     id: '',
-//     name: 'Maria Cantwell',
-//     title: 'U.S. Senator',
-//     address_line1: '511 Hart Senate Office Building',
-//     address_line2: '',
-//     address_city: 'Washington',
-//     address_state: 'DC',
-//     address_zip: zipcode,
-//     address_country: 'US',
-//     email: 'Not Made Public',
-//     contactPage: '',
-//     photoUrl:
-//       'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
-//     socialMediaPages: 'SenatorCantwell',
-//     photoCroppingCSS: 'center center'
-//   }
-
-//   test('returns 200 status for a a successful mock enpoint', async () => {
-//     const spy = jest.spyOn(axios, 'get')
-//     spy.mockImplementation((url) => {
-//       if (
-//         url === `${CICERO_API_HOST}/api/representatives/${zipcode.slice(0, 5)}`
-//       ) {
-//         return {
-//           status: 200,
-
-//           data: { exampleZipResponse }
-//         }
-//       }
-//     })
-//     const response = await request(app).get(route)
-//     expect(response.status).toBe(200)
-
-//     expect(spy).toHaveBeenCalled()
-//     spy.mockRestore()
-//   })
-//  test('returns 200 status for a a successful mock enpoint', async () => {
-//     const spy = jest.spyOn(axios, 'get')
-//     spy.mockImplementation((url) => {
-//       if (url === `/api/representatives/${zipcode}`) {
-//         return {
-//         status: 200,
-//         data: exampleZipResponse
-//       }
-//       }
-//     })
-//     const response = await request(app).get(route)
-//     expect(response.status).toBe(200)
-
-//     expect(spy).toHaveBeenCalled()
-//     spy.mockRestore()
-//   })
-//  test('returns 200 status for a failed mock enpoint', async () => {
-//     const spy = jest.spyOn(axios, 'get')
-//     spy.mockImplementation((url) => {
-//       if (url !== `/api/representatives/${zipcode}`) {
-//         throw new Error(`Invalid zip code format, valid examples are 84054-6013 or 84054. The zipcode used was ${zipcode}` )
-//       }
-//       return {
-//         status: 400,
-//       }
-//     })
-
-//     const response = await request(app).get(route)
-//     expect(response.status).toBe(400)
-
-//     expect(spy).toHaveBeenCalled()
-//     spy.mockRestore()
-//   })
-//})
+test('returns 200 status for a a successful mock endpoint', async () => {
+  const spy = jest.spyOn(axios, 'get')
+  spy.mockImplementation(
+    (
+      url,
+      params = {
+        search_postal: zipCode,
+        search_country: 'US',
+        order: 'district_type',
+        sort: 'asc',
+        max: 200,
+        format: 'json',
+        key: process.env.CICERO_API_KEY
+      }
+    ) => {
+      if (
+        url ===
+        `${CICERO_API_HOST}?search_postal=${zipCode.slice(
+          0,
+          5
+        )}&search_country=US&order=district_type&sort=asc&max=200&format=json&key=${CICERO_API_KEY}`
+      ) {
+        return Promise.resolve({
+          data: {
+            response: [
+              {
+                mockCiceroResponse: {
+                  results: {
+                    candidates: [
+                      {
+                        count: { from: 0, to: 37, total: 38 },
+                        officials: [],
+                        locator: 'World',
+                        score: 100,
+                        match_addr: ` ${zipCode}, Philadelphia, Pennsylvania`,
+                        x: -75.15263499999998,
+                        y: 39.93611000000004,
+                        wkid: 4326,
+                        locator_type: 'Postal',
+                        geoservice: 'EsriWGS',
+                        match_city: 'Philadelphia',
+                        match_subregion: 'Philadelphia County',
+                        match_region: 'PA',
+                        match_postal: zipCode,
+                        match_country: 'US',
+                        match_streetaddr: ''
+                      }
+                    ]
+                  }
+                },
+                params
+              }
+            ]
+          }
+        })
+      }
+    }
+    //mocks the axios.get call to return a successful response with a single representative object in the response body
+  )
+  const response = await request(app).get('/api/representatives/84054')
+  expect(response.status).toBe(200)
+  expect(response.body).toEqual({
+    response: [
+      {
+        mockCiceroResponse: {
+          results: {
+            candidates: [
+              {
+                count: { from: 0, to: 37, total: 38 },
+                officials: [],
+                locator: 'World',
+                score: 100,
+                match_addr: ` ${zipCode}, Philadelphia, Pennsylvania`,
+                x: -75.15263499999998,
+                y: 39.93611000000004,
+                wkid: 4326,
+                locator_type: 'Postal',
+                geoservice: 'EsriWGS',
+                match_city: 'Philadelphia',
+                match_subregion: 'Philadelphia County',
+                match_region: 'PA',
+                match_postal: zipCode,
+                match_country: 'US',
+                match_streetaddr: ''
+              }
+            ]
+          }
+        },
+        params: {
+          search_postal: zipCode,
+          search_country: 'US',
+          order: 'district_type',
+          sort: 'asc',
+          max: 200,
+          format: 'json',
+          key: process.env.CICERO_API_KEY
+        }
+      }
+    ]
+  })
+  expect(spy).toHaveBeenCalled()
+  spy.mockRestore()
+})
