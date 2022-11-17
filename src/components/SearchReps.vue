@@ -7,7 +7,7 @@
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
-              <v-form ref="form">
+              <v-form @submit.prevent="CreateRepList()" ref="form">
                 <v-text-field
                   v-model="searchText"
                   label="Search text"
@@ -48,6 +48,19 @@
                   </v-btn>
 
                   <v-btn
+                    rounded
+                    dark
+                    class="ui button toggle search-reps-button"
+                    :style="{
+                      backgroundColor:
+                        currentFilter === 'local' && isActive ? 'blue' : 'gray'
+                    }"
+                    @click="FilterList('local')"
+                  >
+                    Local
+                  </v-btn>
+
+                  <v-btn
                     class="search-reps-button"
                     rounded
                     dark
@@ -62,18 +75,17 @@
                   </v-btn>
 
                   <v-btn
+                    class="search-reps-button"
                     rounded
                     dark
-                    class="ui button toggle search-reps-button"
+                    :class="{ active: isActive }"
                     :style="{
                       backgroundColor:
-                        currentFilter === 'municipality' && isActive
-                          ? 'blue'
-                          : 'gray'
+                        currentFilter === 'school' && isActive ? 'blue' : 'gray'
                     }"
-                    @click="FilterList('municipality')"
+                    v-on:click="FilterList('school')"
                   >
-                    Local
+                    School
                   </v-btn>
                 </v-col>
               </v-row>
@@ -150,6 +162,7 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
+
 export default {
     name: 'SearchReps',
     components: {
@@ -191,6 +204,7 @@ export default {
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
                 )
+
                 }else{
                   // check if street address is valid with a flexible regex. This validation is not perfect, but caches common cases
                   // [a-zA-Z0-9\s]	Any single character in the range a-z or A-Z or 0-9 or whitespace
