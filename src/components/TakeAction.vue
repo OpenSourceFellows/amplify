@@ -166,7 +166,6 @@ export default {
 
     },
     methods: {
-        checkComplete() {},
         nextPage () {
             const previousPanel = this.panel
             const nextPanel = this.panel + 1
@@ -179,12 +178,12 @@ export default {
             this.panel = this.panel += 1
         },
         isActive(panelNumber) {
-            return this.panelStatus[panelNumber] === 'inProgress'
+            return this.panelStatus[panelNumber] === 'inProgress' || this.panelStatus[panelNumber] === 'completed'
         },
         determineStyles(element, status) {
-          if(element === 'icon') {
-            if (status === 'inProgress') return 'theme_darkBlue'
-            else return 'grey lighten-1'
+          if (element === 'icon') {
+            if (status === 'default') return 'grey lighten-1'
+            else return 'theme_darkBlue'
           }
           else if (element === 'avatar') {
             if (status === 'completed') return 'green lighten-1'
