@@ -7,10 +7,10 @@
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
-              <v-form @submit.prevent="CreateRepList()" ref="form">
+              <v-form ref="form">
                 <v-text-field
                   v-model="searchText"
-                  label="Search text"
+                  label="Postal Code"
                   required
                   @keyup="CheckInputContent"
                 />
@@ -48,19 +48,6 @@
                   </v-btn>
 
                   <v-btn
-                    rounded
-                    dark
-                    class="ui button toggle search-reps-button"
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'local' && isActive ? 'blue' : 'gray'
-                    }"
-                    @click="FilterList('local')"
-                  >
-                    Local
-                  </v-btn>
-
-                  <v-btn
                     class="search-reps-button"
                     rounded
                     dark
@@ -75,17 +62,18 @@
                   </v-btn>
 
                   <v-btn
-                    class="search-reps-button"
                     rounded
                     dark
-                    :class="{ active: isActive }"
+                    class="ui button toggle search-reps-button"
                     :style="{
                       backgroundColor:
-                        currentFilter === 'school' && isActive ? 'blue' : 'gray'
+                        currentFilter === 'municipality' && isActive
+                          ? 'blue'
+                          : 'gray'
                     }"
-                    v-on:click="FilterList('school')"
+                    @click="FilterList('municipality')"
                   >
-                    School
+                    Local
                   </v-btn>
                 </v-col>
               </v-row>
@@ -95,7 +83,7 @@
                   <v-btn
                     :to="{
                       name: 'Reps',
-                      params: { postalCode: postalCode }
+                      params: { searchText: searchText }
                     }"
                     clickclass="mr-4"
                     @click="CreateRepList()"
@@ -162,7 +150,6 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-
 export default {
     name: 'SearchReps',
     components: {
@@ -176,7 +163,7 @@ export default {
             congressMembers: [],
             currentFilter: '',
             hasContent: true,
-            searchText: this.$route.params.searchText|| '',
+            searchText: this.$route.params.searchText || '',
             listVisible: false,
             isActive: false,
         }
@@ -200,25 +187,24 @@ export default {
                 // check postal code is valid with regex
                 let res = ''
                 let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
-                if(!isPostalCodeValid) {
+                if(isPostalCodeValid) {
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
                 )
-
                 }else{
                   // check if street address is valid with a flexible regex. This validation is not perfect, but caches common cases
                   // [a-zA-Z0-9\s]	Any single character in the range a-z or A-Z or 0-9 or whitespace
                   // '-	Matches the characters - (case sensitive)
                   // * 0 or more times
                   // $  end of string
-                  let isStreetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.searchText);
-                  if(isStreetAddressValid){
+                  let streetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.searchText);
+                  if(streetAddressValid){
                   res = await axios.post(
                     '/api/representatives/districts', {address: this.searchText}
                   )
+                  console.log(res)
                   }
                 }
-
                 this.isActive = false
                 this.congressMembers = res.data
                 this.hasContent = true

@@ -170,6 +170,7 @@ router.post('/districts', async (req, res) => {
 
   try {
     console.log('address', address)
+    res.send({ message: 'working fine' })
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Whoops' })
@@ -246,7 +247,6 @@ function getPhotoCroppingValues(photo_cropping_object) {
  *  @param  {array} identifiers - array of identifiers from the JSON object.
  *  @return {array} socialMediaPages - array of social media pages.
  */
-
 
 function getOfficialSocialMediaPages(identifiers) {
   var social_media_pages = []
