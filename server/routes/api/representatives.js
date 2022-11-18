@@ -50,15 +50,20 @@ const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
 // Endpoints
 
 // Get
-router.get('/:zipCode', async (req, res) => {
-  const { zipCode } = req.params
+router.get('/:searchText', async (req, res) => {
+  const { searchText } = req.params
   const { filter } = req.query
 
-  if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
+  // check if valid ZIP code
+  let isValidZIPcode = /^\d{5}(-\d{4})?$/.test(searchText)
+  // check if valid street address
+  let isValidAddress = /^[a-zA-Z0-9\s,'-]*$/.test(searchText)
+
+  if (!isValidZIPcode && !isValidAddress) {
     res.status(400).send({
       error:
-        'Invalid zip code format, valid examples are 84054-6013 or 84054. The zipcode used was ' +
-        zipCode
+        'Invalid zip code or street address format, valid examples of a ZIP code are 84054-6013 or 84054. The zipcode/street address used was ' +
+        searchText
     })
     return
   }
@@ -72,13 +77,20 @@ router.get('/:zipCode', async (req, res) => {
 
   try {
     const params = {
-      search_postal: zipCode,
-      search_country: 'US',
       order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
       sort: 'asc',
       max: 200,
       format: 'json',
       key: CICERO_API_KEY
+    }
+    // add ZIP code search as parameter.
+    // NOTE: we check it first, because, as of now, the regex use to validate ZIP codes is stricter and more accurate
+    if (isValidZIPcode) {
+      params.search_postal = searchText
+    }
+    // add street address search as parameter
+    else if (isValidAddress) {
+      params.search_address = searchText
     }
 
     if (filter != null) {
@@ -94,6 +106,7 @@ router.get('/:zipCode', async (req, res) => {
         qs.stringify(params, { arrayFormat: 'repeat' }),
 
       cache: {
+        // TODO: we are disabling the cache to test results first
         ttl: 1000 * 60 * 60 * 24 * 7 // the time until the cached value is expired in milliseconds: set to 1 week
       }
     })
@@ -159,56 +172,6 @@ router.get('/:zipCode', async (req, res) => {
       })
 
     res.send(representatives)
-  } catch (error) {
-    console.log(error)
-    res.status(500).send({ error: 'Whoops' })
-  }
-})
-
-router.post('/districts', async (req, res) => {
-  const { address } = req.body
-  // TODO: delete this line after making PR
-  console.log('address', address)
-
-  try {
-    // prepare request params
-    const params = {
-      search_loc: address,
-      sort: 'asc',
-      max: 200,
-      format: 'json',
-      key: CICERO_API_KEY
-    }
-
-    // prepare request call
-    const {
-      data: { response }
-    } = await axios.get('https://cicero.azavea.com/v3.1/legislative_district', {
-      params,
-      paramsSerializer: (params) =>
-        qs.stringify(params, { arrayFormat: 'repeat' })
-    })
-
-    // process errors
-    const { errors, results } = response
-    if (errors.length > 0) {
-      throw new Error(errors.join(','))
-    }
-    if (
-      !results ||
-      !Array.isArray(results.candidates) ||
-      results.candidates.length === 0
-    ) {
-      throw new Error('No matches found for the search criteria')
-    }
-
-    // if no errors, process the rest of the response and get the districts ids from each object
-    const districts = results.candidates[0].districts || []
-    const districts_ids = districts.map((district) => district.id)
-    console.log('districts_ids', districts_ids)
-
-    // final HTTP response
-    res.send({ message: 'working fine' })
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Whoops' })

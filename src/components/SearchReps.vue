@@ -187,11 +187,16 @@ export default {
                 // check postal code is valid with regex
                 let res = ''
                 let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
-                if(isPostalCodeValid) {
+                let streetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.searchText);
+                if(isPostalCodeValid || streetAddressValid) {
+                  console.log('valid input to get representatives')
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
                 )
-                }else{
+                }
+
+                /*
+                else{
                   // check if street address is valid with a flexible regex. This validation is not perfect, but caches common cases
                   // [a-zA-Z0-9\s]	Any single character in the range a-z or A-Z or 0-9 or whitespace
                   // '-	Matches the characters - (case sensitive)
@@ -205,6 +210,8 @@ export default {
                   console.log(res)
                   }
                 }
+                */
+
                 this.isActive = false
                 this.congressMembers = res.data
                 this.hasContent = true
