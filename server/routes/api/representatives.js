@@ -54,10 +54,22 @@ router.get('/:searchText', async (req, res) => {
   const { searchText } = req.params
   const { filter } = req.query
 
-  // check if valid ZIP code
+  /* check if valid ZIP code 
+    ^\d{5} - the start of the line has 5 digits
+    (-\d{4})?$ the end of the line has 4 digits preceded by a dash (optionally)
+  */
   let isValidZIPcode = /^\d{5}(-\d{4})?$/.test(searchText)
-  // check if valid street address
-  let isValidAddress = /^[a-zA-Z0-9\s,'-]*$/.test(searchText)
+  /* check if valid street address
+     ^(\d{3,})\s? the start of the line can have 3 or more digits followed by a space
+     (\w{0,})\s the next part can have 2 or more letters followed by a space
+     ([a-zA-Z]{2,30})\s the next part must be an alphanetical string with 2-30 characters followed by a space
+     ([a-zA-Z]{2,15})\.?\s?  the next part must be an alphabetical string with 2-15 characters followed by a any digit (optionally) and/or space (optionally)
+     (\w{0,5})$ the end of the line can have 0-5 letters
+  */
+  let isValidAddress =
+    /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(
+      searchText
+    )
 
   if (!isValidZIPcode && !isValidAddress) {
     res.status(400).send({

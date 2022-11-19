@@ -187,7 +187,7 @@ export default {
                 // check postal code is valid with regex
                 let res = ''
                 let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
-                let streetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.searchText);
+                let streetAddressValid = /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(this.searchText);
                 if(isPostalCodeValid || streetAddressValid) {
                   console.log('valid input to get representatives')
                   res = await axios.get(
