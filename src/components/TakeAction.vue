@@ -175,7 +175,7 @@ export default {
             //update next panel's status
             this.panelStatus[nextPanel] = 'inProgress'
             //move to next panel
-            this.panel = this.panel += 1
+            this.panel += 1
         },
         isActive(panelNumber) {
             return this.panelStatus[panelNumber] === 'inProgress' || this.panelStatus[panelNumber] === 'completed'
