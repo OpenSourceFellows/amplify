@@ -2,16 +2,10 @@
   <section class="search-reps">
     <v-container fluid>
       <v-row class="justify-center">
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
+        <v-col cols="12" sm="6" md="4">
           <v-card flat>
             <v-card-text>
-              <v-subheader class="pa-0">
-                Where do you live?
-              </v-subheader>
+              <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
               <v-form @submit.prevent="CreateRepList()" ref="form">
                 <v-text-field
@@ -113,16 +107,9 @@
             </v-card-text>
           </v-card>
 
-          <div
-            v-show="hasContent"
-            id="reprenstatives-list"
-          >
+          <div v-show="hasContent" id="reprenstatives-list">
             <div>
-              <v-card
-                v-for="member in congressMembers"
-                :key="member.name"
-                flat
-              >
+              <v-card v-for="member in congressMembers" :key="member.name" flat>
                 <representative-card
                   :member="member"
                   @handle-rep-selected="handleRepSelected"
@@ -133,23 +120,16 @@
           </div>
         </v-col>
 
-        <v-divider
-          vertical
-          class="hidden-sm-and-down"
-        />
+        <v-divider vertical class="hidden-sm-and-down" />
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="8"
-        >
+        <v-col cols="12" sm="6" md="8">
           <div v-if="!listVisible">
             <div>
               <img
                 alt="Vue logo"
                 src="../assets/images/StepsGraphic.png"
                 width="70%"
-              >
+              />
             </div>
             <p class="text-h6 pa-4">
               The bill establishes an interim goal to reduce greenhouse gas
@@ -163,10 +143,7 @@
           <div v-else>
             <v-container fluid>
               <v-row class="justify-center">
-                <v-col
-                  cols="12"
-                  md="8"
-                >
+                <v-col cols="12" md="8">
                   <take-action
                     :letter-body="letterBody"
                     :selected-rep="selectedRep"
