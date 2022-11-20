@@ -13,7 +13,7 @@
                 Where do you live?
               </v-subheader>
 
-              <v-form ref="form">
+              <v-form @submit.prevent="CreateRepList()" ref="form">
                 <v-text-field
                   v-model="postalCode"
                   label="Postal Code"
@@ -185,6 +185,7 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
+
 export default {
     name: 'SearchReps',
     components: {
@@ -223,10 +224,8 @@ export default {
                     '/api/representatives/' + this.postalCode
                 )
                 this.isActive = false
-
                 this.congressMembers = res.data
                 this.hasContent = true
-                // console.log(res.data)
                 this.listVisible = true
             } catch (e) {
                 console.error(e)

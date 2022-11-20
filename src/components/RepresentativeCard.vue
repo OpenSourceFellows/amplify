@@ -7,23 +7,20 @@
     }"
     @click="handleRepClick"
   >
-    <v-card-title
-      class="justify-center"
-      v-text="member.name"
-    />
+    <v-card-title class="padding-y-0" v-text="member.name" />
     <v-card-subtitle
-      class="text-center padding-y-0 margin-top-10"
+      class="text-align-left padding-y-0 margin-top-10"
       v-text="member.title"
     />
 
     <!-- social media icons -->
     <div
       id="social-media-channel"
-      class="text-center social-media-channel-box"
+      class="text-align-left social-media-channel-box"
     >
       <a
-        v-for="socialMedia in member.socialMediaPages"
-        :key="socialMedia.type"
+        v-for="(socialMedia, i) in member.socialMediaPages"
+        :key="i"
         :href="socialMedia.url"
         target="_blank"
         class="social-media-icon"
@@ -46,8 +43,8 @@
       :position="member.photoCroppingCSS"
     />
     <v-card-subtitle
-      class="text-center rep-img"
       v-text="member.address_city"
+      class="text-align-left rep-img"
     />
   </v-card>
 </template>
@@ -56,20 +53,17 @@
 import axios from 'axios'
 
 export default {
-  name: 'RepresentativeCard',
+  name: 'representative-card',
   components: {
   },
   props: {
-    member: {
-      type: Object,
-      required: true
-    }
+    member: Object
   },
-  emits: ['handleRepSelected'],
   data() {
     return {
     }
   },
+  emits: ['handleRepSelected'],
   methods: {
     async handleRepClick() {
       try {
