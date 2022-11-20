@@ -83,7 +83,7 @@
                       backgroundColor:
                         currentFilter === 'school' && isActive ? 'blue' : 'gray'
                     }"
-                    v-on:click="FilterList('school')"
+                    @click="FilterList('school')"
                   >
                     School
                   </v-btn>
@@ -166,8 +166,8 @@ import axios from 'axios'
 export default {
     name: 'SearchReps',
     components: {
-        RepresentativeCard,
-        TakeAction
+      RepresentativeCard,
+      TakeAction
     },
     data() {
         return {
@@ -188,14 +188,15 @@ export default {
             this.step2 = step2
         },
         CheckInputContent: function () {
-            if (this.postalCode !== '') {
-                this.hasContent = true
-            } else {
-                this.hasContent = false
-            }
+          if (this.postalCode !== '') {
+              this.hasContent = true
+          } else {
+              this.hasContent = false
+          }
         },
         async CreateRepList() {
             try {
+                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )

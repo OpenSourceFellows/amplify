@@ -89,6 +89,8 @@ router.post('/createAddress', async (req, res) => {
     })
 
     const {
+      id,
+      recipient,
       deliverability,
       primary_line: revisedLine1,
       secondary_line: revisedLine2,
@@ -101,6 +103,16 @@ router.post('/createAddress', async (req, res) => {
         record_type: recordType
       }
     } = response
+
+    // For testing/dev environment, lob will not verify address.
+    // To get around this, mark primary_line as 'deliverable' and zip as '11111'
+    if (recipient === 'TEST KEYS DO NOT VERIFY ADDRESSES') {
+      // Return test verification and skip lob address creation for testing.
+      return res
+        .status(200)
+        .json({ address_id: `test_${id}` })
+        .end()
+    }
 
     const isUndeliverable =
       !deliverability || deliverability === 'undeliverable'
@@ -145,16 +157,20 @@ router.post('/createAddress', async (req, res) => {
 })
 
 router.post('/createLetter', async (req, res) => {
-  // Get description, to, and template_id, and paymentIntent id from request body
-  const { description, to, from, template_id, paymentIntentId } = req.body || {}
+  // Get description, to, and template_id, and Stripe session id from request body
+
+  const { description, to, from, template_id, sessionId } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
+
   try {
     // Check for completed payment before creating letter. Status can be succeeded, failed, or pending. Return server error if failure or pending.
+
     const paymentVerification = await stripe.paymentIntents.retrieve(
-      paymentIntentId
+      checkoutSession.payment_intent
     )
 
     if (paymentVerification.status !== 'succeeded') {
@@ -164,35 +180,53 @@ router.post('/createLetter', async (req, res) => {
         .end()
     }
 
+    // For development only, check for test_ prefix on 'from' parameter and
+    // return a dummy datebefore using lob api.
+    const isTest = from.includes('test_')
+    if (isTest) {
+      const fakeDeliveryDate = Intl.DateTimeFormat('en-US').format(Date.now())
+
+      return res
+        .status(200)
+        .json({ expected_delivery_date: fakeDeliveryDate })
+        .end()
+    }
+
     // Create Lob address using variables passed into route via post body
     const letter = await lob.letters.create({
       description: description,
       to: {
         name: to.name,
-        address_line1: to.line1,
-        address_line2: to.line2,
-        address_city: to.city,
-        address_state: to.state,
-        address_zip: to.zip
+        address_line1: to.address_line1,
+        address_line2: to.address_line2,
+        address_city: to.address_city,
+        address_state: to.address_state,
+        address_zip: to.address_zip
       },
-      from: from.address_id,
+      from: from,
       file: template_id,
       color: false
     })
 
-    res
+    return res
       .status(200)
       .send({ expected_delivery_date: letter.expected_delivery_date })
+      .end()
   } catch (error) {
+    console.error(error)
+
     // We'll need a stripe test env key to test this in our integration tests
     const refund = await stripe.refunds.create({
-      payment_intent: paymentIntentId
+      payment_intent: checkoutSession.payment_intent
     })
     // TODO handle error for refund error. Not doing this currently because chance of
     // user making it this far in the process and both LOB API and Stripe failing is very small.
-    res.status(500).send({
-      error: `Something failed! A refund of ${refund.amount} ${refund.currency} has been issued`
-    })
+    return res
+      .status(500)
+      .send({
+        error: `Something failed! A refund of ${refund.amount} ${refund.currency} has been issued`
+      })
+      .end()
   }
 })
 

@@ -20,7 +20,7 @@
         <v-card-title> {{ selectedRep.name }} </v-card-title>
 
         <v-card-text>
-          <span v-html="letterBody"></span>
+          <span v-html="letterBody" />
         </v-card-text>
       </div>
       <div v-show="!isSubmitted">
@@ -48,11 +48,10 @@ export default {
   name: 'LetterLoad',
   components: { AuthNav },
   props: {
-    repName: String,
-    letterBody: String,
-    selectedRep: Object
+    repName: { type: String, default: '' },
+    letterBody: { type: String, default: '' },
+    selectedRep: { type: Object, default: new Object() }
   },
-
   data () {
     return {
       date: new Date().toLocaleString(),
