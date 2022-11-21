@@ -184,7 +184,7 @@ export default {
         },
         async CreateRepList() {
             try {
-
+                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
                 // check postal code is valid with regex
                 let res = ''
                 let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
@@ -193,38 +193,8 @@ export default {
                   console.log('valid input to get representatives')
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
-
-          if (this.postalCode !== '') {
-              this.hasContent = true
-          } else {
-              this.hasContent = false
-          }
-        },
-        async CreateRepList() {
-            try {
-                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
-                const res = await axios.get(
-                    '/api/representatives/' + this.postalCode
-
                 )
                 }
-
-                /*
-                else{
-                  // check if street address is valid with a flexible regex. This validation is not perfect, but caches common cases
-                  // [a-zA-Z0-9\s]	Any single character in the range a-z or A-Z or 0-9 or whitespace
-                  // '-	Matches the characters - (case sensitive)
-                  // * 0 or more times
-                  // $  end of string
-                  let streetAddressValid = /^[a-zA-Z0-9\s,'-]*$/.test(this.searchText);
-                  if(streetAddressValid){
-                  res = await axios.post(
-                    '/api/representatives/districts', {address: this.searchText}
-                  )
-                  console.log(res)
-                  }
-                }
-                */
 
                 this.isActive = false
                 this.congressMembers = res.data
