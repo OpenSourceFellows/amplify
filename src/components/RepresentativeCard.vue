@@ -74,6 +74,10 @@ export default {
         )
         const latestVersion = versions.data[versions.data.length - 1].template_id
 
+        // Set letterId in state
+        console.log(typeof latestVersion)
+        this.$store.commit('setGenericValue', { key: 'letterId', value: latestVersion })
+
         const letter = await axios.get(
           '/api/lob/templates/' + latestVersion
         )

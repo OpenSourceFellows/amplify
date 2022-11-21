@@ -71,7 +71,7 @@
                           ? 'blue'
                           : 'gray'
                     }"
-                    @click="FilterList('municipality')"
+                    @click="FilterList('school')"
                   >
                     Local
                   </v-btn>
@@ -153,8 +153,8 @@ import axios from 'axios'
 export default {
     name: 'SearchReps',
     components: {
-        RepresentativeCard,
-        TakeAction
+      RepresentativeCard,
+      TakeAction
     },
     data() {
         return {
@@ -175,6 +175,7 @@ export default {
             this.step2 = step2
         },
         CheckInputContent: function () {
+
             if (this.searchText !== '') {
                 this.hasContent = true
             } else {
@@ -192,6 +193,19 @@ export default {
                   console.log('valid input to get representatives')
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
+
+          if (this.postalCode !== '') {
+              this.hasContent = true
+          } else {
+              this.hasContent = false
+          }
+        },
+        async CreateRepList() {
+            try {
+                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
+                const res = await axios.get(
+                    '/api/representatives/' + this.postalCode
+
                 )
                 }
 
