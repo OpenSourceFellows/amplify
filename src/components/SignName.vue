@@ -81,7 +81,7 @@
               </template>
             </v-tooltip>
           </v-slide-x-reverse-transition>
-          <v-btn color="primary" text @click="submit"> Submit </v-btn>
+          <v-btn color="primary" text @click="submit"> Verify Address </v-btn>
         </v-card-actions>
       </v-card>
     </template>
@@ -94,75 +94,78 @@ import axios from 'axios'
 export default {
 
     name: 'SignName',
-
+    emits: ['address-created'],
     data: () => ({
-        errorMessages: '',
-        name: null,
-        line1: null,
-        line2: null,
-        city: null,
-        state: null,
-        zip: null,
-        country: null,
-        formHasErrors: false,
-        JSONstring: '',
-        message: ''
+      errorMessages: '',
+      name: null,
+      line1: null,
+      line2: null,
+      city: null,
+      state: null,
+      zip: null,
+      country: null,
+      formHasErrors: false,
+      JSONstring: '',
+      message: ''
     }),
 
     computed: {
-        form () {
-            return {
-                line1: this.line1,
-                line2: this.line2,
-                city: this.city,
-                state: this.state,
-                zip: this.zip
-            }
+      form () {
+        return {
+          line1: this.line1,
+          line2: this.line2,
+          city: this.city,
+          state: this.state,
+          zip: this.zip
         }
+      }
     },
 
     watch: {
-        name () {
-            this.errorMessages = ''
-        }
+      name () {
+        this.errorMessages = ''
+      }
     },
 
     methods: {
-
         addressCheck () {
-            this.errorMessages = this.address && !this.name
-                ? "Hey! I'm required"
-                : ''
+          this.errorMessages = this.address && !this.name
+            ? "Hey! I'm required"
+            : ''
 
-            return true
+          return true
         },
         resetForm () {
-            this.errorMessages = []
-            this.formHasErrors = false
+          this.errorMessages = []
+          this.formHasErrors = false
 
-            Object.keys(this.form).forEach(f => {
-                this.$refs[f].reset()
-            })
+          Object.keys(this.form).forEach(f => {
+            this.$refs[f].reset()
+          })
         },
         submit () {
-            this.formHasErrors = false
+          this.formHasErrors = false
 
-            Object.keys(this.form).forEach(f => {
-                if (!this.form[f]) this.formHasErrors = true
+          Object.keys(this.form).forEach(f => {
+            if (!this.form[f]) this.formHasErrors = true
 
-                this.$refs[f].validate(true)
+            this.$refs[f].validate(true)
+          })
+
+          axios.post('/api/lob/createAddress', this.form)
+            .then((response) => {
+                console.log(response)
+                console.log(this.form)
+                this.message = 'Address verified!'
+
+              this.$store.commit('setGenericValue', { key: 'lobReturnAddressId', value: response.data.address_id })
+            })
+            .catch(function (error) {
+                console.log(error)
             })
 
-            axios.post('/api/lob/createAddress', this.form)
-                .then((response) => {
-                    console.log(response)
-                    console.log(this.form)
-                    this.message = 'Address verified!'
-
-                })
-                .catch(function (error) {
-                    console.log(error)
-                })
+          // TODO: Move into /createAddress.then()
+          this.$emit('address-created', { name: this.name, ...this.form })
         }
 
     }
