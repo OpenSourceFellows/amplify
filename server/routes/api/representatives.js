@@ -52,13 +52,15 @@ const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
 // Get
 router.get('/:searchText', async (req, res) => {
   const { searchText } = req.params
-  const { filter } = req.query
+  const filter = req.query.filter
+  const streetAddress = req.query.streetAddress
 
   /* check if valid ZIP code 
     ^\d{5} - the start of the line has 5 digits
     (-\d{4})?$ the end of the line has 4 digits preceded by a dash (optionally)
   */
   let isValidZIPcode = /^\d{5}(-\d{4})?$/.test(searchText)
+
   /* check if valid street address
      ^(\d{3,})\s? the start of the line can have 3 or more digits followed by a space
      (\w{0,})\s the next part can have 2 or more letters followed by a space
@@ -68,7 +70,7 @@ router.get('/:searchText', async (req, res) => {
   */
   let isValidAddress =
     /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(
-      searchText
+      streetAddress
     )
 
   if (!isValidZIPcode && !isValidAddress) {
@@ -102,7 +104,7 @@ router.get('/:searchText', async (req, res) => {
     }
     // add street address search as parameter
     else if (isValidAddress) {
-      params.search_address = searchText
+      params.search_address = streetAddress
     }
 
     if (filter != null) {

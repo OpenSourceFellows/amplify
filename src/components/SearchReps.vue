@@ -184,15 +184,27 @@ export default {
         },
         async CreateRepList() {
             try {
-                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
+                this.$store.commit('setGenericValue', { key: 'searchText', value: this.searchText })
                 // check postal code is valid with regex
                 let res = ''
+                let params = {streetAddress: this.searchText}
                 let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
                 let streetAddressValid = /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(this.searchText);
-                if(isPostalCodeValid || streetAddressValid) {
-                  console.log('valid input to get representatives')
+
+
+                if(isPostalCodeValid) {
+                 // console.log('valid input to get representatives with postal code')
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
+                )
+                }
+
+                else if(streetAddressValid) {
+                  // console.log('valid input to get representatives with street address')
+                  res = await axios.get(
+                    '/api/representatives/' + ' ', {
+                        params
+                    }
                 )
                 }
 
@@ -200,7 +212,10 @@ export default {
                 this.congressMembers = res.data
                 this.hasContent = true
                 this.listVisible = true
-            } catch (e) {
+            }
+
+
+            catch (e) {
                 console.error(e)
             }
         },
@@ -215,6 +230,8 @@ export default {
                         params.filter = this.currentFilter
                     }
 
+                    // testing
+                    params.streetAddress = this.searchText
                     const res = await axios.get(
                         '/api/representatives/' + this.searchText,
                         {
