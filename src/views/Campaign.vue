@@ -1,9 +1,9 @@
 <template>
   <div class="campaign">
     <div class="d-block pa-6 theme_blue accent-4 white--text">
-      <h1>This is the campaign page.</h1>
-      <p>Campaign ID is {{ $route.params.campaignId }}</p>
-      <v-btn @click="goHome"> Back to campaigns page </v-btn>
+      <h1>{{ campaignHeader }}</h1>
+      <h2>{{ campaignSubHeader }}</h2>
+      <v-btn class="mt-4 mb-2" @click="goHome"> Back to campaigns page </v-btn>
     </div>
     <search-reps />
   </div>
@@ -17,9 +17,12 @@ export default {
   components: {
     SearchReps
   },
-  props: {
-    campaign: { type: Object, default: new Object() },
-    test: { type: String, default: '' }
+  data() {
+    return {
+      campaignHeader: 'Sogorea Te Land Trust',
+      campaignSubHeader:
+        'Facilitating the return of Indigenous land to Indigenous people.'
+    }
   },
   methods: {
     goHome() {
@@ -28,3 +31,5 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped></style>

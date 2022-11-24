@@ -20,7 +20,7 @@
             params: { campaignId }
           }"
         >
-          Donate to {{ campaignName }}
+          Take Action Now
         </v-btn>
       </div>
     </div>
@@ -35,7 +35,7 @@ export default {
       campaignName: "Sogorea 'Te Land Trust",
       campaignUrl: 'https://sogoreate-landtrust.org/',
       campaignId: 5,
-      imgPath: require('@/assets/images/sogorea-te-hero.jpg'),
+      imgPath: require('@/assets/images/ohlone.jpg'),
       gifPath: require('@/assets/images/native.gif')
     }
   }

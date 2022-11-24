@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="letter-load">
     <v-card flat>
       <div v-show="isSubmitted">
@@ -13,11 +13,17 @@
             {{ selectedRep.address_zip }}
           </div>
           <br />
-          <div>Your Name</div>
-          <div>Address</div>
-          <div>City, S.C. Zip Code</div>
+          <div>{{ user.name }}</div>
+          <div>
+            {{ user.line1 }}
+            <br />
+            {{ user.line2 }}
+          </div>
+          <div>{{ `${user.city}, ${user.state} ${user.zip}` }}</div>
         </v-card-subtitle>
-        <v-card-title> {{ selectedRep.name }} </v-card-title>
+        <v-card-title class="salutation">
+          Dear {{ selectedRep.name }},
+        </v-card-title>
 
         <v-card-text>
           <span v-html="letterBody" />
@@ -48,9 +54,7 @@ export default {
   name: 'LetterLoad',
   components: { AuthNav },
   props: {
-    repName: { type: String, default: '' },
     letterBody: { type: String, default: '' },
-    selectedRep: { type: Object, default: new Object() }
   },
   data () {
     return {
@@ -59,11 +63,12 @@ export default {
     }
   },
   computed: {
-
-  },
-
-  mounted () {
-
+    selectedRep() {
+      return this.$store.state.selectedRep
+    },
+    user() {
+      return this.$store.state.userData
+    }
   },
   methods: {
     currentDate () {
@@ -77,5 +82,9 @@ export default {
 
 <style scoped lang="less">
 .letter-load {
+}
+
+.salutation {
+  font-size: 18px;
 }
 </style>

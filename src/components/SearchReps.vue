@@ -1,118 +1,131 @@
-<template lang="html">
+<template>
   <section class="search-reps">
     <v-container fluid>
       <v-row class="justify-center">
         <v-col cols="12" sm="6" md="4">
-          <v-card flat>
-            <v-card-text>
-              <v-subheader class="pa-0"> Where do you live? </v-subheader>
+          <!--TODO: Create component(s) to reduce template size.-->
+          <!-- This could be RepresentativeSearcher.vue or something-->
+          <div v-if="!congressMembers">
+            <v-card flat>
+              <v-card-text>
+                <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
-              <v-form @submit.prevent="CreateRepList()" ref="form">
-                <v-text-field
-                  v-model="postalCode"
-                  label="Postal Code"
-                  required
-                  @keyup="CheckInputContent"
-                />
-              </v-form>
+                <v-form ref="form" @submit.prevent="CreateRepList()">
+                  <v-text-field
+                    v-model="postalCode"
+                    label="Postal Code"
+                    required
+                    disabled
+                    @keyup="CheckInputContent"
+                  />
+                </v-form>
 
-              <v-row>
-                <v-col>
-                  <v-btn
-                    class="search-reps-button"
-                    rounded
-                    dark
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'federal' && isActive
-                          ? 'blue'
-                          : 'gray'
-                    }"
-                    @click="FilterList('federal')"
-                  >
-                    Federal
-                  </v-btn>
+                <v-row>
+                  <v-col>
+                    <v-btn
+                      class="search-reps-button"
+                      rounded
+                      dark
+                      :style="{
+                        backgroundColor:
+                          currentFilter === 'federal' && isActive
+                            ? 'blue'
+                            : 'gray'
+                      }"
+                      @click="FilterList('federal')"
+                    >
+                      Federal
+                    </v-btn>
 
-                  <v-btn
-                    class="search-reps-button"
-                    rounded
-                    dark
-                    :class="{ active: isActive }"
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'state' && isActive ? 'blue' : 'gray'
-                    }"
-                    @click="FilterList('state')"
-                  >
-                    State
-                  </v-btn>
+                    <v-btn
+                      class="search-reps-button"
+                      rounded
+                      dark
+                      :class="{ active: isActive }"
+                      :style="{
+                        backgroundColor:
+                          currentFilter === 'state' && isActive
+                            ? 'blue'
+                            : 'gray'
+                      }"
+                      @click="FilterList('state')"
+                    >
+                      State
+                    </v-btn>
 
-                  <v-btn
-                    rounded
-                    dark
-                    class="ui button toggle search-reps-button"
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'local' && isActive ? 'blue' : 'gray'
-                    }"
-                    @click="FilterList('local')"
-                  >
-                    Local
-                  </v-btn>
+                    <v-btn
+                      rounded
+                      dark
+                      class="ui button toggle search-reps-button"
+                      :style="{
+                        backgroundColor:
+                          currentFilter === 'local' && isActive
+                            ? 'blue'
+                            : 'gray'
+                      }"
+                      @click="FilterList('local')"
+                    >
+                      Local
+                    </v-btn>
 
-                  <v-btn
-                    class="search-reps-button"
-                    rounded
-                    dark
-                    :class="{ active: isActive }"
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'county' && isActive ? 'blue' : 'gray'
-                    }"
-                    @click="FilterList('county')"
-                  >
-                    County
-                  </v-btn>
+                    <v-btn
+                      class="search-reps-button"
+                      rounded
+                      dark
+                      :class="{ active: isActive }"
+                      :style="{
+                        backgroundColor:
+                          currentFilter === 'county' && isActive
+                            ? 'blue'
+                            : 'gray'
+                      }"
+                      @click="FilterList('county')"
+                    >
+                      County
+                    </v-btn>
 
-                  <v-btn
-                    class="search-reps-button"
-                    rounded
-                    dark
-                    :class="{ active: isActive }"
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'school' && isActive ? 'blue' : 'gray'
-                    }"
-                    @click="FilterList('school')"
-                  >
-                    School
-                  </v-btn>
-                </v-col>
-              </v-row>
+                    <v-btn
+                      class="search-reps-button"
+                      rounded
+                      dark
+                      :class="{ active: isActive }"
+                      :style="{
+                        backgroundColor:
+                          currentFilter === 'school' && isActive
+                            ? 'blue'
+                            : 'gray'
+                      }"
+                      @click="FilterList('school')"
+                    >
+                      School
+                    </v-btn>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col>
-                  <v-btn
-                    :to="{
-                      name: 'Reps',
-                      params: { postalCode: postalCode }
-                    }"
-                    clickclass="mr-4"
-                    @click="CreateRepList()"
-                  >
-                    Submit
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
+                <v-row>
+                  <v-col>
+                    <v-btn
+                      :to="{
+                        name: 'Reps',
+                        params: { postalCode: postalCode }
+                      }"
+                      clickclass="mr-4"
+                      @click="CreateRepList()"
+                    >
+                      Submit
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </div>
 
-          <div v-show="hasContent" id="reprenstatives-list">
+          <div v-if="hasContent" id="representatives-list">
             <div>
               <v-card v-for="member in congressMembers" :key="member.name" flat>
                 <representative-card
                   :member="member"
-                  @handle-rep-selected="handleRepSelected"
+                  @handle-rep-selected="loadLetterWorkflow"
                 />
                 <v-divider />
               </v-card>
@@ -122,7 +135,21 @@
 
         <v-divider vertical class="hidden-sm-and-down" />
 
+        <!-- TODO: Break into another set of components. -->
         <v-col cols="12" sm="6" md="8">
+          <div v-if="listVisible">
+            <v-container fluid>
+              <v-row class="justify-center">
+                <v-col cols="12" md="8">
+                  <take-action
+                    :letter-body="letterBody"
+                    :selected-rep="selectedRep"
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </div>
+
           <div v-if="!listVisible">
             <div>
               <img
@@ -137,20 +164,6 @@
               national goal to achieve net-zero greenhouse gas emissions by
               2050.
             </p>
-            <p />
-          </div>
-
-          <div v-else>
-            <v-container fluid>
-              <v-row class="justify-center">
-                <v-col cols="12" md="8">
-                  <take-action
-                    :letter-body="letterBody"
-                    :selected-rep="selectedRep"
-                  />
-                </v-col>
-              </v-row>
-            </v-container>
           </div>
         </v-col>
       </v-row>
@@ -158,42 +171,207 @@
   </section>
 </template>
 
-<script lang="js">
+<script>
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
 
 export default {
-    name: 'SearchReps',
-    components: {
-      RepresentativeCard,
-      TakeAction
-    },
-    data() {
-        return {
-            letterBody: '',
-            selectedRep: {},
-            congressMembers: [],
-            currentFilter: '',
-            hasContent: true,
-            postalCode: this.$route.params.postalCode || '',
-            listVisible: false,
-            isActive: false,
-        }
-    },
-    methods: {
-        handleRepSelected(letterBody, selectedRep, step2) {
-            this.letterBody = letterBody
-            this.selectedRep = selectedRep
-            this.step2 = step2
+  name: 'SearchReps',
+  components: {
+    RepresentativeCard,
+    TakeAction
+  },
+  data() {
+    return {
+      letterBody: '<h1>Test</h1>',
+      congressMembers: [
+        {
+          name: 'Rashi Kesarwani',
+          title: 'Berkeley Councilmember, District 1',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '# 5',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'rkesarwani@cityofberkeley.info',
+          twitter: 'RashiKesarwani',
+          facebook: 'CouncilwomanRashi',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/kesarwani.jpg'
         },
-        CheckInputContent: function () {
-          if (this.postalCode !== '') {
-              this.hasContent = true
-          } else {
-              this.hasContent = false
+        {
+          name: 'Terry Taplin',
+          title: 'Berkeley Councilmember, District 2',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'ttaplin@cityofberkeley.info',
+          twitter: 'taplinterry',
+          facebook: 'D2TerryTaplin2020',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Terry%20Taplin.jpg'
+        },
+        {
+          name: 'Ben Bartlett',
+          title: 'Berkeley Councilmember, District 3',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'bbartlett@cityofberkeley.info',
+          twitter: 'benbartlettberk',
+          facebook: 'CouncilmemberBartlett',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Ben-Bartlet.jpg'
+        },
+        {
+          name: 'Kate Harrison',
+          title: 'Berkeley Councilmember, District 4',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'kharrison@cityofberkeley.info',
+          twitter: 'kateharrisond4',
+          facebook: 'KateHarrisonD4',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Kate-Harrison_1.jpg'
+        },
+        {
+          name: 'Sophie Hahn',
+          title: 'Berkeley Councilmember, District 5',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'shahn@cityofberkeley.info',
+          twitter: 'SophieHahnBerk',
+          facebook: 'sophie.hahn.583',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Sophie-Hahn_2.jpg'
+        },
+        {
+          name: 'Susan Wengraf',
+          title: 'Berkeley Councilmember, District 6',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'swengraf@cityofberkeley.info',
+          twitter: '',
+          facebook: '',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Susan-Wengraf_0.jpg'
+        },
+        {
+          name: 'Rigel Robinson',
+          title: 'Berkeley Councilmember, District 7',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'RRobinson@cityofberkeley.info',
+          twitter: 'rigelrobinson',
+          facebook: 'CouncilmemberRigelRobinson',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Rigel-Robinson.jpg'
+        },
+        {
+          name: 'Lori Droste',
+          title: 'Berkeley Councilmember, District 8',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'ldroste@cityofberkeley.info',
+          twitter: 'loridroste',
+          facebook: 'LoriDrosteD8',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/lori-droste.jpg'
+        }
+      ],
+      currentFilter: '',
+      hasContent: true,
+      postalCode: 94701, //this.$route.params.postalCode || '',
+      listVisible: false,
+      isActive: false
+    }
+  },
+  computed: {
+    letterId() {
+      return this.$store.state.letterId
+    },
+    selectedRep() {
+      return this.$store.state.selectedRep
+    }
+  },
+  methods: {
+    async loadLetterWorkflow() {
+      console.log('executing handleRepSelected')
+      const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
+
+      this.letterBody = letter.data.versions[0].html
+
+      this.listVisible = true
+      // this.step2 = step2
+    },
+    /*
+        async handleRepClick() {
+          try {
+            const campaignId = this.$route.params.campaignId
+
+            const versions = await axios.get(
+              '/api/Letter_Versions/' + campaignId
+            )
+            const latestVersion = versions.data[versions.data.length - 1].template_id
+
+            // Set letterId in state
+            console.log(typeof latestVersion)
+            this.$store.commit('setGenericValue', { key: 'letterId', value: latestVersion })
+
+            const letter = await axios.get(
+              '/api/lob/templates/' + latestVersion
+            )
+
+            const letterBody = letter.data.versions[0].html
+            const selectedRep = this.member
+          } catch (e) {
+            console.error(e)
           }
         },
+        */
+    CheckInputContent: function () {
+      if (this.postalCode !== '') {
+        this.hasContent = true
+      } else {
+        this.hasContent = false
+      }
+    }
+    /*
+        createRepList() {
+          this.isActive = false
+          this.hasContent = true
+          this.listVisible = true
+        },
+        */
+    /*
         async CreateRepList() {
             try {
                 this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
@@ -208,6 +386,8 @@ export default {
                 console.error(e)
             }
         },
+        */
+    /*
         async FilterList(level) {
             try {
                 this.currentFilter = level
@@ -240,7 +420,8 @@ export default {
                 console.error(e)
             }
         }
-    }
+        */
+  }
 }
 </script>
 

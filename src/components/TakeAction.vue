@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="take-action">
     <v-expansion-panels v-model="panel" flat>
       <!-- Review the letter -->
@@ -17,18 +17,14 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <letter-load
-            :selected-rep="selectedRep"
-            :rep-name="repName"
-            :letter-body="letterBody"
-          />
+          <letter-load :selected-rep="selectedRep" :letter-body="letterBody" />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
             width="160"
             dark
             color="theme_darkBlue"
-            @click="nextPage({ selectedRep, letterBody, repName })"
+            @click="nextPage({ selectedRep, letterBody })"
           >
             Next
           </v-btn>
@@ -52,7 +48,7 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name @address-created="handleAddress" />
+          <sign-name />
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
@@ -93,49 +89,38 @@
   </section>
 </template>
 
-<script lang="js">
+<script>
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
-    name: 'TakeAction',
-    components: { LetterLoad, SignName, DonateMoney },
-    props: {
-      repName: {
-        type: String,
-        required: true
-      },
-      letterBody: {
-        type: String,
-        required: true
-      },
-      selectedRep: {
-        type: Object,
-        required: true
-      }
+  name: 'TakeAction',
+  components: { LetterLoad, SignName, DonateMoney },
+  props: {
+    letterBody: {
+      type: String,
+      required: true
     },
-    data () {
-      return {
-        panel: 0,
-        userData: {}
-      }
-    },
-    computed: {
-
-    },
-    mounted () {
-
-    },
-    methods: {
-      nextPage (attrs) {
-        this.$store.dispatch('setLetterAttrs', attrs)
-        this.panel += 1
-      },
-      handleAddress (address) {
-        this.userData = address
-      }
+    selectedRep: {
+      type: Object,
+      required: true
     }
+  },
+  data() {
+    return {
+      panel: 0,
+      userData: {}
+    }
+  },
+  computed: {},
+  mounted() {},
+  methods: {
+    nextPage() {
+      // this.$store.dispatch('setLetterAttrs', attrs)
+      this.panel += 1
+    }
+  }
 }
 </script>
 
