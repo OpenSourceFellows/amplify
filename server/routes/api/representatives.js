@@ -69,7 +69,7 @@ router.get('/:searchText', async (req, res) => {
      (\w{0,5})$ the end of the line can have 0-5 letters
   */
   let isValidAddress =
-    /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(
+    /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s?([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(
       streetAddress
     )
 
