@@ -6,21 +6,21 @@
 
     <v-toolbar-title
       class="white--text text-h6"
-      @click="$router.push('/')"
       style="cursor: pointer"
+      @click="$router.push('/')"
     >
-      AMPLIFY</v-toolbar-title
-    >
+      AMPLIFY
+    </v-toolbar-title>
 
-    <v-spacer></v-spacer>
+    <v-spacer />
 
     <v-toolbar-items>
       <v-btn
+        v-for="item in menuItems"
+        :key="item.title"
         class="white--text text-capitalize font-weight-bold"
         color="theme_darkBlue"
         elevation="0"
-        v-for="item in menuItems"
-        :key="item.title"
         :to="item.path"
       >
         {{ item.title }}
@@ -36,8 +36,8 @@ export default {
     return {
       dialog: false,
       menuItems: [
-        { title: 'Home', path: '/' },
-        { title: 'About', path: '/about' }
+        { title: 'Home', path: '/' }
+        // { title: 'About', path: '/about' }
       ]
     }
   }

@@ -29,7 +29,7 @@ export default {
     props: [],
     data () {
       return {
-        donation:1
+        donation: 1.50
       }
     },
     computed: {

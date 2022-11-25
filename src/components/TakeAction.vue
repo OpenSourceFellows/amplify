@@ -11,7 +11,7 @@
             <v-list-item-content>
               <v-list-item-title> Review the letter </v-list-item-title>
               <v-list-item-subtitle class="text-wrap">
-                Add any additional details to organizer requests.
+                Tell your Representatives why this matters.
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>

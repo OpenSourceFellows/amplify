@@ -151,6 +151,7 @@
           </div>
 
           <div v-if="!listVisible">
+            <!--
             <div>
               <img
                 alt="Vue logo"
@@ -158,11 +159,13 @@
                 width="70%"
               />
             </div>
+          -->
             <p class="text-h6 pa-4">
-              The bill establishes an interim goal to reduce greenhouse gas
-              emissions to at least 50% below 2005 levels by 2030 as well as a
-              national goal to achieve net-zero greenhouse gas emissions by
-              2050.
+              Indigenous communities steward more than 80% of the world's
+              biodiversity. Returning Shellmounds means endangered species like
+              the Condor and Salmon can return, trees like the Madrone and
+              Mugwort can return. Our strongest strategy towards lowering carbon
+              emissions is Indigenous led conservation of biodiversity.
             </p>
           </div>
         </v-col>

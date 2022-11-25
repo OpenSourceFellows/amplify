@@ -4,7 +4,7 @@
       <div v-show="isSubmitted">
         <v-card-subtitle align="left">
           <div class="text-left">
-            {{ currentDate() }}
+            {{ currentDate }}
           </div>
           <div>{{ selectedRep.name }}</div>
           <div>{{ selectedRep.address_line1 }}</div>
@@ -19,7 +19,9 @@
             <br />
             {{ user.line2 }}
           </div>
-          <div>{{ `${user.city}, ${user.state} ${user.zip}` }}</div>
+          <div>
+            {{ formattedCityState }}
+          </div>
         </v-card-subtitle>
         <v-card-title class="salutation">
           Dear {{ selectedRep.name }},
@@ -68,14 +70,17 @@ export default {
     },
     user() {
       return this.$store.state.userData
-    }
-  },
-  methods: {
+    },
     currentDate () {
-      const current = new Date()
-      const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`; return date
-    }
+      return new Intl.DateTimeFormat('en-US').format(new Date())
+    },
+    formattedCityState() {
+      if (this.user.city) {
+        return `${this.user.city}, ${this.user.state} ${this.user.zip}`
+      }
 
+      return ''
+    }
   }
 }
 </script>

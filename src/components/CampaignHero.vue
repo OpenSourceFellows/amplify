@@ -11,6 +11,8 @@
           class="pa-4 campaign-feature-image"
         />
       </a>
+      <h1>Protect Our Sacred Shellmounds</h1>
+      <h2>Make Your Voice Count</h2>
       <div class="d-flex justify-center align-center">
         <v-btn
           elevation="2"
@@ -20,7 +22,7 @@
             params: { campaignId }
           }"
         >
-          Take Action Now
+          Write Your Representatives
         </v-btn>
       </div>
     </div>
@@ -58,13 +60,17 @@ export default {
   background-color: rgba(83, 197, 196, 0.85);
   border-radius: 5px;
   box-shadow: 2px 2px 5px 1px rgba(92, 92, 92, 0.75);
+  padding: 0 1.5rem;
+  max-width: 100%;
 }
 
 .action-btn {
-  background-color: @st-red !important;
-  color: #fff !important;
-  font-size: 16px !important;
+  background-color: @amp-orange !important;
+  color: #000 !important;
+  font-size: 1.25rem !important;
+  font-weight: bold;
   text-transform: none !important;
+  padding: 2rem !important;
 }
 
 .campaign-feature-image {
