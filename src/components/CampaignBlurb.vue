@@ -60,7 +60,14 @@
       />
     </div>
 
-    <v-btn elevated class="my-4 action-btn">
+    <v-btn
+      elevated
+      class="my-4 action-btn"
+      :to="{
+        name: 'Campaign',
+        params: { campaignId }
+      }"
+    >
       Write Your Representatives Now
     </v-btn>
   </div>
@@ -75,7 +82,7 @@ export default {
 <style lang="less" scoped>
 @import '@/styles/sogorea-te.less';
 .blurb {
-  background-color: @st-green;
+  background-color: #fff;
 }
 .text-content {
   width: 100%;
