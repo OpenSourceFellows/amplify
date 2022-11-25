@@ -30,6 +30,8 @@
         <v-card-text>
           <span v-html="letterBody" />
         </v-card-text>
+
+        <p>{{ user.name }}</p>
       </div>
       <div v-show="!isSubmitted">
         <v-card-text> clicked</v-card-text>
@@ -39,28 +41,28 @@
                     { JSON.stringify($auth.user, null, 2) }} -->
         </div>
       </div>
-
+      <!--
       <v-card-actions class="justify-center">
         <v-btn>
           <AuthNav />
         </v-btn>
       </v-card-actions>
+    -->
     </v-card>
   </section>
 </template>
 
 <script lang="js">
-import AuthNav from '@/components/AuthNav'
+// import AuthNav from '@/components/AuthNav'
 
 export default {
   name: 'LetterLoad',
-  components: { AuthNav },
+  components: { /* AuthNav */ },
   props: {
     letterBody: { type: String, default: '' },
   },
   data () {
     return {
-      date: new Date().toLocaleString(),
       isSubmitted: true
     }
   },

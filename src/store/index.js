@@ -15,7 +15,8 @@ export default new Vuex.Store({
       line2: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      email: ''
     }
   },
   mutations: {

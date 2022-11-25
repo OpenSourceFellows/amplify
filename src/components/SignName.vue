@@ -59,6 +59,15 @@
           required
           placeholder="79938"
         />
+        <v-text-field
+          ref="email"
+          v-model="email"
+          :rules="[
+            () => validateEmail() || 'Please enter a valid email address.'
+          ]"
+          label="Email"
+          placeholder="condor@shellmound.com"
+        />
       </v-card-text>
       <v-card-text> {{ message }} </v-card-text>
       <v-divider class="mt-12" />
@@ -101,6 +110,7 @@ export default {
       state: null,
       zip: null,
       country: null,
+      email: null,
       formHasErrors: false,
       JSONstring: '',
       message: ''
@@ -114,7 +124,8 @@ export default {
           line2: this.line2,
           city: this.city,
           state: this.state,
-          zip: this.zip
+          zip: this.zip,
+          email: this.email
         }
       }
     },
@@ -132,6 +143,15 @@ export default {
             : ''
 
           return true
+        },
+        validateEmail() {
+          if (!this.email) {
+            return true
+          }
+
+          let regex = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)
+
+          return regex.test(this.email)
         },
         resetForm () {
           this.errorMessages = []

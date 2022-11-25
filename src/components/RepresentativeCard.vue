@@ -5,6 +5,7 @@
       name: 'RepClick',
       params: { member: member.name }
     }"
+    class="rep-card"
     @click="handleRepClick"
   >
     <v-card-title class="padding-y-0" v-text="member.name" />
@@ -80,6 +81,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+.rep-card:hover {
+  background-color: rgba(254, 94, 65, 0.75) // amplify orange
+;
+}
 .social-media-icon {
   margin-right: 5px;
 }

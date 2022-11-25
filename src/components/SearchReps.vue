@@ -121,6 +121,7 @@
           </div>
 
           <div v-if="hasContent" id="representatives-list">
+            <h3>Click or tap a Representative to get started.</h3>
             <div>
               <v-card v-for="member in congressMembers" :key="member.name" flat>
                 <representative-card

@@ -74,6 +74,6 @@ export default {
 }
 
 .campaign-feature-image {
-  max-width: 500px; // Needs to be changed later
+  max-width: 100%; // Needs to be changed later
 }
 </style>

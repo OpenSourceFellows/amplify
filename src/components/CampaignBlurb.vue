@@ -53,7 +53,11 @@
     </div>
 
     <div class="amplify-banner">
-      <img src="@/assets/images/amplify-web-3.png" alt="how amplify works" />
+      <img
+        src="@/assets/images/amplify-web-3.png"
+        alt="how amplify works"
+        class="banner-img"
+      />
     </div>
 
     <v-btn elevated class="my-4 action-btn">
@@ -85,6 +89,10 @@ export default {
 .amplify-banner {
   background-color: @amp-blue;
   padding: 1rem;
+}
+
+.banner-img {
+  max-width: 100%;
 }
 
 .action-btn {
