@@ -211,9 +211,7 @@ router.post('/createLetter', async (req, res) => {
     return res
       .status(200)
       .send({
-        expected_delivery_date: Intl.DateTimeFormat('en-US').format(
-          letter.expected_delivery_date
-        )
+        expected_delivery_date: letter.expected_delivery_date
       })
       .end()
   } catch (error) {
