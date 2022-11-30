@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 require('dotenv').config()
 const request = require('supertest')
 const axios = require('axios')
@@ -1055,8 +1056,8 @@ const apiResponse = [
 // Create a test application and get the application id and secret key for the test application from the test application page.
 const app = express()
 app.use('/api', apiRouter)
-const { CICERO_API_KEY } = process.env
-const CICERO_API_HOST = 'https://cicero.azavea.com/v3.1/official'
+// const { CICERO_API_KEY } = process.env
+// const CICERO_API_HOST = 'https://cicero.azavea.com/v3.1/official'
 const zipCode = '84054'
 afterEach(() => {
   jest.clearAllMocks()
