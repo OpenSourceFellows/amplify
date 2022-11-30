@@ -95,8 +95,5 @@ Updates to the schema itself should be made in the appropriate component `.yaml`
 
 Make sure to lint and bundle the API schema locally by running `script/lint-and-bundle-openapi-schema.sh`.  Commit any changes to `openapi.yml` generated from this command.
 
-### UI Generation
+You can also explore the components of an OpenAPI spec [using this map](http://openapi-map.apihandyman.io/)
 
-We use a [workflow action](tbd) to generate and deploy a [Swagger UI](https://swagger.io/tools/swagger-ui/) based on the API schema that exists in the `openapi.yml` file in the root directory to GitHub Pages.  This occurs when changes to `openapi.yml` are pushed to the main branch in this repository.
-
-The UI spec is viewable [here](tbd)
