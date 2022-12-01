@@ -65,11 +65,11 @@ router.get('/:searchText', async (req, res) => {
      ^(\d{3,})\s? the start of the line can have 3 or more digits followed by a space
      (\w{0,})\s the next part can have 2 or more letters followed by a space
      ([a-zA-Z]{2,30})\s the next part must be an alphanetical string with 2-30 characters followed by a space
-     ([a-zA-Z]{2,15})\.?\s?  the next part must be an alphabetical string with 2-15 characters followed by a any digit (optionally) and/or space (optionally)
+     ([a-zA-Z]{2,15}).?\s?  the next part must be an alphabetical string with 2-15 characters followed by a any digit (optionally) and/or space (optionally)
      (\w{0,5})$ the end of the line can have 0-5 letters
   */
   let isValidAddress =
-    /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s?([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(
+    /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s?([a-zA-Z]{2,15}).?\s?(\w{0,5})$/.test(
       streetAddress
     )
 
