@@ -18,37 +18,8 @@
       />
     </div>
     <div class="px-6 text-content">
-      <p>
-        Sogorea Te' calls on us all to heal and to do the work our ancestors and
-        future generations are calling us to do. The West Berkeley Shellmound
-        sacred site is more at risk than ever now that the property owner, a
-        commercial real estate developer, holds an SB-35 permit and has taken
-        additional steps towards development on the property.
-      </p>
-
-      <p>
-        While the Shellmound hasn't been making headlines over the past year
-        since the California Supreme Court denied our appeal, forcing Berkeley
-        to issue a development permit, work has continued steadily to advocate
-        for the sacred Ohlone heritage site.
-      </p>
-
-      <p>
-        Small Ohlone ceremonies and semi-public gatherings have been regularly
-        held at the Shellmound, and a constant stream of messages of support,
-        prayer ribbons and other offerings from community members have been
-        affixed to the chain link fence surrounding the land. Conversations
-        between local organizations, community leaders and elected officials are
-        ongoing, regarding the fate of the Shellmound and what can be done.
-      </p>
-
-      <p>
-        While there are various paths forward to achieving protection of the
-        land, continued support from Berkeley City Councilmembers is critical at
-        this moment. If you live in Berkeley, or elsewhere in the Bay Area, we
-        ask that you please consider writing an email to, or otherwise reaching
-        out to Berkeley Councilmembers (especially the representative of your
-        district, if you live in Berkeley).
+      <p class="flavor-text">
+        {{ flavorText }}
       </p>
     </div>
 
@@ -74,8 +45,14 @@
 </template>
 
 <script>
+import campaignData from '@/assets/text/text.json'
 export default {
-  name: 'CampaignBlurb'
+  name: 'CampaignBlurb',
+  computed: {
+    flavorText() {
+      return campaignData.campaign_text
+    }
+  }
 }
 </script>
 
@@ -84,8 +61,11 @@ export default {
 .blurb {
   background-color: #fff;
 }
+
 .text-content {
   width: 100%;
+  text-align: left;
+  white-space: break-spaces;
 }
 
 .supplemental-img {
