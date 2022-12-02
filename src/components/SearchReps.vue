@@ -203,16 +203,14 @@ export default {
                  // console.log('valid input to get representatives with postal code')
                   res = await axios.get(
                     '/api/representatives/' + this.searchText
-                )
+                  )
                 }
 
                 else if(streetAddressValid) {
                   // console.log('valid input to get representatives with street address')
                   res = await axios.get(
-                    '/api/representatives/' + ' ', {
-                        params
-                    }
-                )
+                    '/api/representatives/ ', { params }
+                  )
                 }
 
                 this.isActive = false
