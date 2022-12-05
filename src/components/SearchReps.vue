@@ -231,11 +231,11 @@ export default {
                 if (!this.isActive) {
                     this.isActive = true
                     const params = {}
+
                     if (this.currentFilter != null) {
                         params.filter = this.currentFilter
-                    }
 
-                    // testing
+
                     params.streetAddress = this.searchText
                     const res = await axios.get(
                         '/api/representatives/' + this.searchText,
@@ -246,6 +246,7 @@ export default {
 
                     console.log(res)
                     this.congressMembers = res.data
+
                 } else {
                     this.isActive = false;
                     const res = await axios.get(
@@ -254,6 +255,7 @@ export default {
 
                     this.congressMembers = res.data
                 }
+              }
             } catch (e) {
                 console.error(e)
             }
