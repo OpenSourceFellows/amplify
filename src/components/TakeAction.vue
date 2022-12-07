@@ -17,7 +17,6 @@
               mdi-check-bold
             </v-icon>
             <span v-else class="text-h5 font-weight-bold white--text"> 1</span>
-
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
@@ -187,7 +186,7 @@ export default {
 
         nextPage (attrs) {
             this.$store.dispatch('setLetterAttrs', attrs)
-            
+
             const previousPanel = this.panel
             const nextPanel = this.panel + 1
 
