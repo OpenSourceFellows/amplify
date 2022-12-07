@@ -141,6 +141,7 @@
                   <take-action
                     :letter-body="letterBody"
                     :selected-rep="selectedRep"
+                    :rep-name="selectedRepName"
                   />
                 </v-col>
               </v-row>
@@ -166,6 +167,7 @@ export default {
         return {
             letterBody: '',
             selectedRep: {},
+            selectedRepName: '',
             congressMembers: [],
             currentFilter: '',
             hasContent: true,
@@ -179,6 +181,7 @@ export default {
         handleRepSelected(letterBody, selectedRep, step2) {
             this.letterBody = letterBody
             this.selectedRep = selectedRep
+            this.selectedRepName = selectedRep.name
             this.step2 = step2
         },
         CheckInputContent: function () {
