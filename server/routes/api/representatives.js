@@ -101,6 +101,7 @@ router.get('/:searchText', async (req, res) => {
     // NOTE: we check it first, because, as of now, the regex use to validate ZIP codes is stricter and more accurate
     if (isValidZIPcode) {
       params.search_postal = searchText
+      params.search_country = 'US'
     }
     // add street address search as parameter
     else if (isValidAddress) {
