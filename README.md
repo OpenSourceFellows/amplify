@@ -1,5 +1,12 @@
-# amplify
+# Amplify
 
+## Table of Contents
+
+  * [Getting Started](#getting-started)
+  * [Project Setup](#project-setup)
+  * [Customize configuration](#customize-configuration)
+  * [App Walkthrough](#app-walkthrough)
+  
 ## Getting Started
 
 This repo contains both the frontend and backend portions of the Amplify application.
@@ -31,6 +38,7 @@ The backend (API) code is stored in the `server/` directory.
 
 https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
 
+## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 ```shell
