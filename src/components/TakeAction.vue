@@ -1,6 +1,7 @@
 <template lang="html">
   <section class="take-action">
     <v-expansion-panels v-model="panel" flat>
+      <!-- Review the letter -->
       <v-expansion-panel :key="0" v-model="panel">
         <v-expansion-panel-header :disabled="!isActive(0)">
           <template v-slot:actions>
@@ -16,6 +17,7 @@
               mdi-check-bold
             </v-icon>
             <span v-else class="text-h5 font-weight-bold white--text"> 1</span>
+
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
@@ -39,12 +41,18 @@
           />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
-          <v-btn width="160" dark color="theme_darkBlue" @click="nextPage">
+          <v-btn
+            width="160"
+            dark
+            color="theme_darkBlue"
+            @click="nextPage({ selectedRep, letterBody, repName })"
+          >
             Next
           </v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
 
+      <!-- Fill out user information -->
       <v-expansion-panel :key="1">
         <v-divider />
 
@@ -79,14 +87,22 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name />
+          <sign-name @address-created="handleAddress" />
         </v-expansion-panel-content>
+
         <v-expansion-panel-content>
-          <v-btn width="160" dark color="theme_darkBlue" @click="nextPage">
+          <v-btn
+            width="160"
+            dark
+            color="theme_darkBlue"
+            @click="nextPage({ userData })"
+          >
             Next
           </v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
+
+      <!-- Send letter -->
       <v-expansion-panel :key="2">
         <v-divider />
 
@@ -136,18 +152,18 @@ export default {
     name: 'TakeAction',
     components: { LetterLoad, SignName, DonateMoney },
     props: {
-        repName: {
-          type: String,
-          required: true
-        },
-        letterBody: {
-          type: String,
-          required: true
-        },
-        selectedRep: {
-          type: Object,
-          required: true
-        }
+      repName: {
+        type: String,
+        required: true
+      },
+      letterBody: {
+        type: String,
+        required: true
+      },
+      selectedRep: {
+        type: Object,
+        required: true
+      }
     },
     data () {
         return {
@@ -156,8 +172,10 @@ export default {
               0: 'inProgress',
               1: 'default',
               2: 'default'
-            }
+            },
+            userData: {}
         }
+
     },
     computed: {
 
@@ -166,7 +184,10 @@ export default {
 
     },
     methods: {
-        nextPage () {
+
+        nextPage (attrs) {
+            this.$store.dispatch('setLetterAttrs', attrs)
+            
             const previousPanel = this.panel
             const nextPanel = this.panel + 1
 
@@ -195,6 +216,9 @@ export default {
             else return 'grey--text text--darken-1'
 
           }
+        },
+        handleAddress (address) {
+        this.userData = address
         }
       },
 }

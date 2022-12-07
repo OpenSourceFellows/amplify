@@ -1,8 +1,14 @@
 <template lang="html">
   <section class="search-reps">
-    <v-container fluid>
+    <v-container>
       <v-row class="justify-center">
-        <v-col cols="12" sm="6" md="4">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          v-bind:class="{ 'overflow-auto': !$vuetify.breakpoint.mobile }"
+          v-bind:style="{ height: myHeight }"
+        >
           <v-card flat>
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
@@ -83,7 +89,7 @@
                       backgroundColor:
                         currentFilter === 'school' && isActive ? 'blue' : 'gray'
                     }"
-                    v-on:click="FilterList('school')"
+                    @click="FilterList('school')"
                   >
                     School
                   </v-btn>
@@ -166,8 +172,8 @@ import axios from 'axios'
 export default {
     name: 'SearchReps',
     components: {
-        RepresentativeCard,
-        TakeAction
+      RepresentativeCard,
+      TakeAction
     },
     data() {
         return {
@@ -179,8 +185,9 @@ export default {
             postalCode: this.$route.params.postalCode || '',
             listVisible: false,
             isActive: false,
+            myHeight: this.$vuetify.breakpoint.mobile ? false : "100vh"
         }
-    },
+      },
     methods: {
         handleRepSelected(letterBody, selectedRep, step2) {
             this.letterBody = letterBody
@@ -188,14 +195,15 @@ export default {
             this.step2 = step2
         },
         CheckInputContent: function () {
-            if (this.postalCode !== '') {
-                this.hasContent = true
-            } else {
-                this.hasContent = false
-            }
+          if (this.postalCode !== '') {
+              this.hasContent = true
+          } else {
+              this.hasContent = false
+          }
         },
         async CreateRepList() {
             try {
+                this.$store.commit('setGenericValue', { key: 'zipcode', value: this.postalCode })
                 const res = await axios.get(
                     '/api/representatives/' + this.postalCode
                 )
@@ -239,7 +247,7 @@ export default {
                 console.error(e)
             }
         }
-    }
+    },
 }
 </script>
 
