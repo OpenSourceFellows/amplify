@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     zipcode: '',
     letterId: 'tmpl_187d2bbba140cd8',
+    campaignId: '5',
     lobReturnAddressId: '',
     selectedRep: {},
     userData: {

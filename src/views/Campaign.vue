@@ -1,9 +1,11 @@
 <template>
   <div class="campaign">
-    <div class="d-block pa-6 theme_blue accent-4 white--text">
+    <div class="d-block pa-6 primary-alt accent-4 white--text">
       <h1>{{ campaignHeader }}</h1>
       <h2>{{ campaignSubHeader }}</h2>
-      <v-btn class="mt-4 mb-2" @click="goHome"> Back to campaigns page </v-btn>
+      <v-btn class="mt-4 mb-2 action-btn" color="secondary" @click="goHome">
+        Back to campaigns page
+      </v-btn>
     </div>
     <search-reps />
   </div>
@@ -32,4 +34,11 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.action-btn {
+  font-size: 1.25rem !important;
+  font-weight: bold;
+  text-transform: none !important;
+  padding: 2rem !important;
+}
+</style>

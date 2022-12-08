@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="theme_darkBlue">
+  <v-toolbar color="primary">
     <v-app-bar-nav-icon to="/">
       <img alt="Vue logo" src="../assets/logo/Amplify-Email.png" height="40" />
     </v-app-bar-nav-icon>
@@ -19,7 +19,7 @@
         v-for="item in menuItems"
         :key="item.title"
         class="white--text text-capitalize font-weight-bold"
-        color="theme_darkBlue"
+        color="primary"
         elevation="0"
         :to="item.path"
       >

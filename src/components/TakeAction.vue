@@ -23,7 +23,7 @@
           <v-btn
             width="160"
             dark
-            color="theme_darkBlue"
+            color="primary"
             @click="nextPage({ selectedRep, letterBody })"
           >
             Next
@@ -55,7 +55,7 @@
           <v-btn
             width="160"
             dark
-            color="theme_darkBlue"
+            color="primary"
             @click="nextPage({ userData })"
           >
             Next

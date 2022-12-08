@@ -2,17 +2,17 @@
   <div class="d-flex flex-column align-center blurb">
     <div>
       <img
-        src="@/assets/images/sogorea-te-8.png"
+        src="@/assets/scm/images/campaign-img-1.webp"
         alt="supplemental image one"
         class="mx-2 my-4 supplemental-img"
       />
       <img
-        src="@/assets/images/sogorea-te-7.png"
+        src="@/assets/scm/images/campaign-img-2.webp"
         alt="supplemental image two"
         class="mx-2 my-4 supplemental-img"
       />
       <img
-        src="@/assets/images/sogorea-te-3.jpg"
+        src="@/assets/scm/images/campaign-img-3.webp"
         alt="supplemental image three"
         class="mx-2 my-4 supplemental-img"
       />
@@ -34,6 +34,7 @@
     <v-btn
       elevated
       class="my-4 action-btn"
+      color="secondary"
       :to="{
         name: 'Campaign',
         params: { campaignId }
@@ -45,19 +46,21 @@
 </template>
 
 <script>
-import campaignData from '@/assets/text/text.json'
+import campaignData from '@/assets/scm/text/text.json'
 export default {
   name: 'CampaignBlurb',
   computed: {
     flavorText() {
       return campaignData.campaign_text
+    },
+    campaignId() {
+      return this.$store.state.campaignId
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import '@/styles/sogorea-te.less';
 .blurb {
   background-color: #fff;
 }
@@ -74,7 +77,7 @@ export default {
 }
 
 .amplify-banner {
-  background-color: @amp-blue;
+  background-color: @primary;
   padding: 1rem;
 }
 
@@ -83,8 +86,6 @@ export default {
 }
 
 .action-btn {
-  background-color: @amp-orange !important;
-  color: #000 !important;
   font-size: 18px !important;
   font-weight: bold;
   text-transform: none !important;
