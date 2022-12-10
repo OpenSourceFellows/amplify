@@ -26,34 +26,38 @@ export default {
   },
   data() {
     return {
-      mode: '',
-      campaignId: '',
-      templateId: '',
-      campaign: {}
+      mode: ''
+    }
+  },
+  computed: {
+    campaign() {
+      return this.$store.state.campaign
     }
   },
   created() {
     this.mode = process.env.VUE_APP_CAMPAIGN_MODE
 
-    if (this.mode === 'single') {
-      this.campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
-      this.templateId = process.env.VUE_APP_LETTER_TEMPLATE
-
+    if (this.mode === 'single' && !this.campaign.id) {
+      const campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
       this.$store.commit('setGenericValue', {
         key: 'letterId',
-        value: this.templateId
+        value: process.env.VUE_APP_LETTER_TEMPLATE
       })
-      this.loadSingleCampaign()
+
+      this.loadSingleCampaign(campaignId)
     }
   },
   methods: {
-    async loadSingleCampaign() {
-      const campaignUrl = `api/campaigns/${this.campaignId}`
+    async loadSingleCampaign(id) {
+      const campaignUrl = `api/campaigns/${id}`
 
       axios
         .get(campaignUrl)
         .then((res) => {
-          this.campaign = res.data
+          this.$store.commit('setObjectValue', {
+            key: 'campaign',
+            data: res.data
+          })
         })
         .catch((e) => alert(e.message))
     }

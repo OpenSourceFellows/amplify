@@ -6,8 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     zipcode: '',
-    letterId: 'tmpl_187d2bbba140cd8',
-    campaignId: '5',
+    letterId: '',
+    campaign: {
+      id: null,
+      organization: '',
+      name: '',
+      cause: '',
+      type: '',
+      page_url: ''
+    },
     lobReturnAddressId: '',
     selectedRep: {},
     userData: {

@@ -12,14 +12,16 @@
       }"
       class="call-to-action"
     >
-      <a :href="campaignUrl" target="_blank">
+      <a :href="campaign.page_url" target="_blank">
         <img
           src="@/assets/scm/images/campaign-logo.webp"
           alt="sogorea te land trust"
           class="pa-4 campaign-feature-image"
         />
       </a>
-      <h1 class="white--text">Protect Our Sacred Shellmounds</h1>
+      <h1 class="white--text">
+        {{ campaignTagline }}
+      </h1>
       <h2 class="white--text">Make Your Voice Count</h2>
       <div class="d-flex justify-center align-center">
         <v-btn
@@ -28,7 +30,7 @@
           color="secondary"
           :to="{
             name: 'Campaign',
-            params: { campaignId }
+            params: { campaignId: campaign.id || 0 }
           }"
         >
           Write Your Representatives
@@ -40,24 +42,28 @@
 
 <script>
 import { lightTheme } from '@/configs/theme.js'
+import campaignData from '@/assets/scm/text/text.json'
 
 export default {
   name: 'CampaignHero',
   data() {
     return {
-      campaignName: "Sogorea Te' Land Trust",
-      campaignUrl: 'https://sogoreate-landtrust.org/',
-      campaignId: 5,
       imgPath: require('@/assets/scm/images/campaign-background.webp')
     }
   },
   computed: {
     lightTheme() {
       return lightTheme
+    },
+    campaignTagline() {
+      return campaignData.campaign_tagline
+    },
+    campaign() {
+      return this.$store.state.campaign
     }
   },
   methods: {
-    // Found on stack overflow, and modified to add alpha value.
+    // Modified to add alpha value.
     // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     hexToRgba(hex, alpha) {
       hex = hex.replace('#', '')
@@ -75,7 +81,6 @@ export default {
 
 <style lang="less" scoped>
 .main-content {
-  background-color: @tertiary;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -87,7 +92,6 @@ export default {
   border-radius: 5px;
   box-shadow: 2px 2px 5px 1px rgba(92, 92, 92, 0.75);
   padding: 0 1.5rem;
-  max-width: 100%;
 }
 
 .action-btn {
@@ -98,6 +102,6 @@ export default {
 }
 
 .campaign-feature-image {
-  max-width: 100%; // Needs to be changed later
+  max-width: 400px; // Needs to be changed later
 }
 </style>

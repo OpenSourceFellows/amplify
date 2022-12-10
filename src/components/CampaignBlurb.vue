@@ -37,7 +37,7 @@
       color="secondary"
       :to="{
         name: 'Campaign',
-        params: { campaignId }
+        params: { campaignId: campaignId || 0 }
       }"
     >
       Write Your Representatives Now
@@ -54,7 +54,7 @@ export default {
       return campaignData.campaign_text
     },
     campaignId() {
-      return this.$store.state.campaignId
+      return this.$store.state.campaign.id
     }
   }
 }
@@ -62,7 +62,7 @@ export default {
 
 <style lang="less" scoped>
 .blurb {
-  background-color: #fff;
+  background-color: @white;
 }
 
 .text-content {
