@@ -18,7 +18,7 @@ export default {
     SearchReps
   },
   props: {
-    campaign: { type: Object, default: new Object() },
+    campaign: { type: Object, default: () => new Object() },
     test: { type: String, default: '' }
   },
   methods: {
