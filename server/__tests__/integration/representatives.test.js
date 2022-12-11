@@ -46,7 +46,7 @@ describe('GET /api/representatives/:zipCode', () => {
     expect(response.body).toEqual(apiResponse)
     expect(spy).toHaveBeenCalled()
     spy.mockRestore()
-  })
+  }, 50000)
 })
 
 // Mock the axios request to the Cicero API and return the mock data for the test.
@@ -65,7 +65,7 @@ describe('GET /api/representatives/:zipCode', () => {
     expect(response.body).toEqual(apiResponse)
     expect(spy).toHaveBeenCalled()
     spy.mockRestore()
-  })
+  }, 50000)
 })
 
 // mock implementation with an invalid zip code which return 400 status code
@@ -78,7 +78,7 @@ it('should return a 400 status code and an error message in the response', async
     error: `Invalid zip code format, valid examples are 84054-6013 or 84054. The zipcode used was invalid`
   })
   spy.mockRestore()
-})
+}, 50000)
 
 // //mock test that gives a 500 status code and an error message in the response when the cicero api is down or not responding to the request from the application server
 // it('should return a 500 status code and an error message in the response when the cicero api is down or not responding to the request from the application server', async () => {
