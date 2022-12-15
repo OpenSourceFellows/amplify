@@ -9,7 +9,8 @@ export default new Vuex.Store({
     letterId: '',
     lobReturnAddressId: '',
     selectedRep: {},
-    userData: {}
+    userData: {},
+    userCustomization: ''
   },
   mutations: {
     setGenericValue: (state, { key, value }) => {

@@ -135,6 +135,7 @@ export default {
       },
       createCampaignLetter(sessionId) {
         // Creates campaign letter with lob api.
+        let userCustomization = this.$store.state.userCustomization
         axios.post('/api/lob/createLetter',
           {
             description: '',
@@ -142,6 +143,7 @@ export default {
             from: this.lobReturnAddressId,
             template_id: this.letterId,
             sessionId,
+            userCustomization
           })
           .then((res) => {
             this.expectedDeliveryDate = res.data.expected_delivery_date

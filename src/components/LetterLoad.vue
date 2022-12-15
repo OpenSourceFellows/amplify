@@ -22,6 +22,13 @@
         <v-card-text>
           <span v-html="letterBody" />
         </v-card-text>
+
+        <v-textarea
+          filled
+          auto-grow
+          value="Optional Customization"
+          v-on:input="persistCustomization"
+        ></v-textarea>
       </div>
       <div v-show="!isSubmitted">
         <v-card-text> clicked</v-card-text>
@@ -69,6 +76,10 @@ export default {
     currentDate () {
       const current = new Date()
       const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`; return date
+    },
+    persistCustomization(e){
+      let customText = e.target.value
+      this.$store.dispatch('setLetterAttrs', {userCustomization:customText})
     }
 
   }
