@@ -26,7 +26,7 @@
         <v-textarea
           filled
           auto-grow
-          value="Optional Customization"
+          placeholder="Additional message (optional)"
           v-on:input="persistCustomization"
         ></v-textarea>
       </div>
