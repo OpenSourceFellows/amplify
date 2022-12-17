@@ -27,7 +27,7 @@
           filled
           auto-grow
           placeholder="Additional message (optional)"
-          v-on:input="persistCustomization"
+          v-model="persistCustomization"
         ></v-textarea>
       </div>
       <div v-show="!isSubmitted">
@@ -62,11 +62,20 @@ export default {
   data () {
     return {
       date: new Date().toLocaleString(),
-      isSubmitted: true
+      isSubmitted: true,
+      additionalMessage: ""
     }
   },
   computed: {
-
+    persistCustomization : {
+      get: function(){
+        return this.additionalMessage
+      },
+      set: function(newValue){
+         this.additionalMessage = newValue;
+         this.$store.commit('setGenericValue', { key: 'userCustomization', value: newValue })
+      }
+    }
   },
 
   mounted () {
@@ -75,14 +84,12 @@ export default {
   methods: {
     currentDate () {
       const current = new Date()
-      const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`; return date
-    },
-    persistCustomization(e){
-      let customText = e.target.value
-      this.$store.dispatch('setLetterAttrs', {userCustomization:customText})
+      const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+      return date
     }
 
-  }
+ },
+
 }
 </script>
 

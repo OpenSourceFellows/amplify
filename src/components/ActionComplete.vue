@@ -135,7 +135,7 @@ export default {
       },
       createCampaignLetter(sessionId) {
         // Creates campaign letter with lob api.
-        let userCustomization = this.$store.state.userCustomization
+        let userCustomization = this.$store.getters.userCustomization
         axios.post('/api/lob/createLetter',
           {
             description: '',
