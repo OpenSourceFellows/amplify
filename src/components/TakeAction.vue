@@ -37,6 +37,7 @@
             :selected-rep="selectedRep"
             :rep-name="repName"
             :letter-body="letterBody"
+            ref="letterLoad"
           />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
@@ -185,6 +186,7 @@ export default {
     methods: {
 
         nextPage (attrs) {
+            this.$refs.letterLoad.persistCustomization()
             this.$store.dispatch('setLetterAttrs', attrs)
 
             const previousPanel = this.panel
