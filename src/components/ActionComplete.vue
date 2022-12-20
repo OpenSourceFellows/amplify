@@ -98,7 +98,10 @@ export default {
       },
       lobReturnAddressId () {
         return this.$store.state.lobReturnAddressId
-      }
+      },
+      userCustomization(){
+       return this.$store.getters.userCustomization
+         }
     },
     created () {
       const sessionId = this.$route.query.session_id
@@ -135,7 +138,6 @@ export default {
       },
       createCampaignLetter(sessionId) {
         // Creates campaign letter with lob api.
-        let userCustomization = this.$store.getters.userCustomization
         axios.post('/api/lob/createLetter',
           {
             description: '',
@@ -143,7 +145,7 @@ export default {
             from: this.lobReturnAddressId,
             template_id: this.letterId,
             sessionId,
-            userCustomization
+            userCustomization : this.userCustomization
           })
           .then((res) => {
             this.expectedDeliveryDate = res.data.expected_delivery_date
