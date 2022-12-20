@@ -1,7 +1,8 @@
 <template>
   <section class="search-reps">
-    <v-container fluid>
+    <v-container>
       <v-row class="justify-center">
+
         <v-col cols="12" sm="6" md="4">
           <!--TODO: Create component(s) to reduce template size.-->
           <!-- This could be RepresentativeSearcher.vue or something-->
@@ -145,6 +146,7 @@
                   <take-action
                     :letter-body="letterBody"
                     :selected-rep="selectedRep"
+                    :rep-name="selectedRepName"
                   />
                 </v-col>
               </v-row>
@@ -174,7 +176,6 @@ import campaignData from '@/assets/scm/text/text.json'
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-
 export default {
   name: 'SearchReps',
   components: {
