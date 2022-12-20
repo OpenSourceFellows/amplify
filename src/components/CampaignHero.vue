@@ -30,7 +30,7 @@
           color="secondary"
           :to="{
             name: 'Campaign',
-            params: { campaignId: campaign.id || 0 }
+            params: { campaignId: campaign.id || 'undefined' }
           }"
         >
           Write Your Representatives

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -5,10 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    mode: 'default',
     zipcode: '',
     letterId: '',
     campaign: {
-      id: null,
+      id: '',
       organization: '',
       name: '',
       cause: '',
@@ -28,6 +30,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    // TODO: Do we really need two setters here?
+    // It's good for clarity, but they can really be combined to dry things up.
     setGenericValue: (state, { key, value }) => {
       if (key in state) {
         state[key] = value
@@ -77,6 +81,17 @@ export default new Vuex.Store({
           reject(error)
         }
       })
+    },
+    async loadSingleCampaign({ commit }, id) {
+      const campaignUrl = `api/campaigns/${id}`
+
+      try {
+        const res = await axios.get(campaignUrl)
+
+        commit('setObjectValue', { key: 'campaign', data: res.data })
+      } catch (e) {
+        alert(e.message)
+      }
     }
   },
   modules: {}

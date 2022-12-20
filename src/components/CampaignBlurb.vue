@@ -37,7 +37,7 @@
       color="secondary"
       :to="{
         name: 'Campaign',
-        params: { campaignId: campaignId || 0 }
+        params: { campaignId: campaignId || 'undefined' }
       }"
     >
       Write Your Representatives Now
@@ -54,7 +54,7 @@ export default {
       return campaignData.campaign_text
     },
     campaignId() {
-      return this.$store.state.campaign.id
+      return `${this.$store.state.campaign.id}`
     }
   }
 }

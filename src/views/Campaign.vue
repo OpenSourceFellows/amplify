@@ -31,12 +31,7 @@ export default {
       return this.$store.state.campaign.Id
     }
   },
-  created() {
-    if (!this.campaignId) {
-      // TODO: save user's state to browser on page nav so if they refresh, the site doesn't break.
-      this.goHome()
-    }
-  },
+  created() {},
   methods: {
     goHome() {
       this.$router.push('/')

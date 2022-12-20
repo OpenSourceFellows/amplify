@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import CampaignHero from '@/components/CampaignHero.vue'
 import HomeHero from '@/components/HomeHero.vue'
 import CampaignBlurb from '@/components/CampaignBlurb.vue'
@@ -38,28 +37,16 @@ export default {
     this.mode = process.env.VUE_APP_CAMPAIGN_MODE
 
     if (this.mode === 'single' && !this.campaign.id) {
-      const campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
+      this.campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
+
       this.$store.commit('setGenericValue', {
         key: 'letterId',
         value: process.env.VUE_APP_LETTER_TEMPLATE
       })
 
-      this.loadSingleCampaign(campaignId)
-    }
-  },
-  methods: {
-    async loadSingleCampaign(id) {
-      const campaignUrl = `api/campaigns/${id}`
+      this.$store.commit('setGenericValue', { key: 'mode', value: 'single' })
 
-      axios
-        .get(campaignUrl)
-        .then((res) => {
-          this.$store.commit('setObjectValue', {
-            key: 'campaign',
-            data: res.data
-          })
-        })
-        .catch((e) => alert(e.message))
+      this.$store.dispatch('loadSingleCampaign', this.campaignId)
     }
   }
 }
