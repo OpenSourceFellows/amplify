@@ -1,5 +1,11 @@
 name: Timezone Checks
-on: [issues, pull_request, workflow_dispatch]
+on:
+  issues:
+  issue_comment:
+    types: [created, edited]
+  pull_request:
+  pull_request_review_comment:
+    types: [created, edited]
 jobs:
   check-timezone:
     runs-on: ubuntu-latest
