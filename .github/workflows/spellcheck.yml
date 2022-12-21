@@ -1,0 +1,21 @@
+name: Spellcheck
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+
+    name: Spellcheck
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: tbroadley/spellchecker-cli-action@v1
+        with:
+          files: '**/*.md'
+          quiet: true
