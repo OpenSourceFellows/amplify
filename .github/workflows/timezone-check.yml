@@ -1,5 +1,5 @@
 name: Timezone Check
-on: [issues, pull_request]
+on: [issues, pull_request, workflow_dispatch]
 jobs:
   check-timezone:
     runs-on: ubuntu-latest
