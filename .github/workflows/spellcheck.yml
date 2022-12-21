@@ -15,7 +15,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: tbroadley/spellchecker-cli-action@v1
+      - name: Lint Vue Filenames
+        uses: batista/lint-filenames@v1
+        with:
+          path: 'src/**/*.vue'
+          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*$'
+      - name: Spellcheck Text Files
+        uses: tbroadley/spellchecker-cli-action@v1
         with:
           files: '**/*.md **/*.txt .github/**/*.md'
           quiet: false
