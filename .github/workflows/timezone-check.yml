@@ -10,5 +10,4 @@ jobs:
       # this action to post a comment either with the requested user's date and location in their
       # location or letting you know that they do not specify a location in their profile
     env:
-      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       GOOGLE_API_KEY: "${{ secrets.GOOGLE_MAP }}"
