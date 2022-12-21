@@ -1,10 +1,10 @@
 https://user-images.githubusercontent.com/9143339/149375273-ce0f0b9f-1c07-417f-b2a7-cea488e552d6.mp4
 
-ProgramEquity Hacks brings the community informed design to an open source workflow. When designing for marginalized communities, we found that past attempts at civic engagement were found to have created insignificant changes because research focused on the constituent and forgot to consider the community the constituent was a part of. As a result, this open source initiative addresses solutions as ecosystems including the constituent, Advocacy experts, DevSecOps architects, and OSS maintainership lens as part of a Community Informed Design framework which extends beyond Human Centered design - the missing inigredient specified by [MIT Studies](https://mitgovlab.org/news/is-civic-tech-fulfilling-its-promise/)  
+ProgramEquity Hacks brings the community informed design to an open source workflow. When designing for marginalized communities, we found that past attempts at civic engagement were found to have created insignificant changes because research focused on the constituent and forgot to consider the community the constituent was a part of. As a result, this open source initiative addresses solutions as ecosystems including the constituent, Advocacy experts, DevSecOps architects, and OSS maintainership lens as part of a Community Informed Design framework which extends beyond Human Centered design - the missing ingredient specified by [MIT Studies](https://mitgovlab.org/news/is-civic-tech-fulfilling-its-promise/)  
 
 ### [Try it out in our Invision](https://manishapriyadarshini245795.invisionapp.com/console/Amplify-cknropnaf0s0901873w3z29g8/ckwvw736t00ll01996u9d2ih2/play)
 
-The MIT study astutley observed that tech solutions must engage with the ecosystem before designing for solutions. Goals between CivTech, understanding of bureaucratic processes and leading by the impacted group leads to results that fall short of the vision is often due a lack of communication. [MIT GOVLAB]() 
+The MIT study astutely observed that tech solutions must engage with the ecosystem before designing for solutions. Goals between CivTech, understanding of bureaucratic processes and leading by the impacted group leads to results that fall short of the vision is often due a lack of communication. [MIT GOVLAB]() 
    
 
 ### Community Informed Design Explained 

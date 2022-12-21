@@ -17,5 +17,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: tbroadley/spellchecker-cli-action@v1
         with:
-          files: '**/*.md'
+          files: '**/*.md **/*.txt .github/**/*.md'
           quiet: true
+          dictionaries: '.github/spellcheck-dictionary.txt'
