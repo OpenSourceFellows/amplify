@@ -1,0 +1,14 @@
+name: Are They Awake Yet
+on: [issues, pull_request]
+jobs:
+  are-they-awake-yet:
+    runs-on: ubuntu-latest
+    steps:
+    - name: are-they-awake-yet
+      uses: benhayehudi/awake-yet-action@master
+      # Any opened, reopened, created or edited event action will trigger 
+      # this action to post a comment either with the requested user's date and location in their
+      # location or letting you know that they do not specify a location in their profile
+    env:
+      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      GOOGLE_API_KEY: "${{ secrets.GOOGLE_MAP }}"
