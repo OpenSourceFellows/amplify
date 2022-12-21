@@ -4,10 +4,10 @@ jobs:
   check-timezone:
     runs-on: ubuntu-latest
     steps:
-    - name: are-they-awake-yet
-      uses: benhayehudi/awake-yet-action@v0.1.0
-      # Any opened, reopened, created or edited event action will trigger 
-      # this action to post a comment either with the requested user's date and location in their
-      # location or letting you know that they do not specify a location in their profile
+      - name: are-they-awake-yet
+        uses: benhayehudi/awake-yet-action@v0.1.0
+        # Any opened, reopened, created or edited event action will trigger
+        # this action to post a comment either with the requested user's date and location in their
+        # location or letting you know that they do not specify a location in their profile
     env:
-      GOOGLE_API_KEY: "${{ secrets.GOOGLE_MAP }}"
+      GOOGLE_API_KEY: '${{ secrets.GOOGLE_MAP }}'
