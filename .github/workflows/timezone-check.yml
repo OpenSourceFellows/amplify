@@ -1,11 +1,11 @@
-name: Are They Awake Yet
+name: Timezone Check
 on: [issues, pull_request]
 jobs:
-  are-they-awake-yet:
+  check-timezone:
     runs-on: ubuntu-latest
     steps:
     - name: are-they-awake-yet
-      uses: benhayehudi/awake-yet-action@master
+      uses: benhayehudi/awake-yet-action@v0.1.0
       # Any opened, reopened, created or edited event action will trigger 
       # this action to post a comment either with the requested user's date and location in their
       # location or letting you know that they do not specify a location in their profile
