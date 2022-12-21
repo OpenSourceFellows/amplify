@@ -19,12 +19,12 @@ jobs:
         uses: batista/lint-filenames@v1
         with:
           path: './src/views'
-          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*\\.vue'
+          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*\.vue'
       - name: Lint Components Filenames
         uses: batista/lint-filenames@v1
         with:
           path: './src/components'
-          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*\\.vue'
+          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*\.vue'
       - name: Spellcheck Text Files
         uses: tbroadley/spellchecker-cli-action@v1
         with:
