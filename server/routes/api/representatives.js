@@ -50,15 +50,34 @@ const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
 // Endpoints
 
 // Get
-router.get('/:zipCode', async (req, res) => {
-  const { zipCode } = req.params
-  const { filter } = req.query
+router.get('/:searchText', async (req, res) => {
+  const { searchText } = req.params
+  const filter = req.query.filter
+  const streetAddress = req.query.streetAddress
 
-  if (!zipCode.match(/^\d{5}(-\d{4})?$/)) {
+  /* check if valid ZIP code 
+    ^\d{5} - the start of the line has 5 digits
+    (-\d{4})?$ the end of the line has 4 digits preceded by a dash (optionally)
+  */
+  let isValidZIPcode = /^\d{5}(-\d{4})?$/.test(searchText)
+
+  /* check if valid street address
+     ^(\d{3,})\s? the start of the line can have 3 or more digits followed by a space
+     (\w{0,})\s the next part can have 2 or more letters followed by a space
+     ([a-zA-Z]{2,30})\s the next part must be an alphanetical string with 2-30 characters followed by a space
+     ([a-zA-Z]{2,15}).?\s?  the next part must be an alphabetical string with 2-15 characters followed by a any digit (optionally) and/or space (optionally)
+     (\w{0,5})$ the end of the line can have 0-5 letters
+  */
+  let isValidAddress =
+    /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s?([a-zA-Z]{2,15}).?\s?(\w{0,5})$/.test(
+      streetAddress
+    )
+
+  if (!isValidZIPcode && !isValidAddress) {
     res.status(400).send({
       error:
-        'Invalid zip code format, valid examples are 84054-6013 or 84054. The zipcode used was ' +
-        zipCode
+        'Invalid zip code or street address format, valid examples of a ZIP code are 84054-6013 or 84054. The zipcode/street address used was ' +
+        searchText
     })
     return
   }
@@ -72,13 +91,21 @@ router.get('/:zipCode', async (req, res) => {
 
   try {
     const params = {
-      search_postal: zipCode,
-      search_country: 'US',
       order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
       sort: 'asc',
       max: 200,
       format: 'json',
       key: CICERO_API_KEY
+    }
+    // add ZIP code search as parameter.
+    // NOTE: we check it first, because, as of now, the regex use to validate ZIP codes is stricter and more accurate
+    if (isValidZIPcode) {
+      params.search_postal = searchText
+      params.search_country = 'US'
+    }
+    // add street address search as parameter
+    else if (isValidAddress) {
+      params.search_address = streetAddress
     }
 
     if (filter != null) {
@@ -94,6 +121,7 @@ router.get('/:zipCode', async (req, res) => {
         qs.stringify(params, { arrayFormat: 'repeat' }),
 
       cache: {
+        // TODO: we are disabling the cache to test results first
         ttl: 1000 * 60 * 60 * 24 * 7 // the time until the cached value is expired in milliseconds: set to 1 week
       }
     })

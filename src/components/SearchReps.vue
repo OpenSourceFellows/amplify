@@ -1,15 +1,21 @@
 <template lang="html">
   <section class="search-reps">
-    <v-container fluid>
+    <v-container>
       <v-row class="justify-center">
-        <v-col cols="12" sm="6" md="4">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          v-bind:class="{ 'overflow-auto': !$vuetify.breakpoint.mobile }"
+          v-bind:style="{ height: myHeight }"
+        >
           <v-card flat>
             <v-card-text>
               <v-subheader class="pa-0"> Where do you live? </v-subheader>
 
               <v-form ref="form">
                 <v-text-field
-                  v-model="postalCode"
+                  v-model="searchText"
                   label="Postal Code"
                   required
                   @keyup="CheckInputContent"
@@ -48,19 +54,6 @@
                   </v-btn>
 
                   <v-btn
-                    rounded
-                    dark
-                    class="ui button toggle search-reps-button"
-                    :style="{
-                      backgroundColor:
-                        currentFilter === 'local' && isActive ? 'blue' : 'gray'
-                    }"
-                    @click="FilterList('local')"
-                  >
-                    Local
-                  </v-btn>
-
-                  <v-btn
                     class="search-reps-button"
                     rounded
                     dark
@@ -75,17 +68,18 @@
                   </v-btn>
 
                   <v-btn
-                    class="search-reps-button"
                     rounded
                     dark
-                    :class="{ active: isActive }"
+                    class="ui button toggle search-reps-button"
                     :style="{
                       backgroundColor:
-                        currentFilter === 'school' && isActive ? 'blue' : 'gray'
+                        currentFilter === 'municipality' && isActive
+                          ? 'blue'
+                          : 'gray'
                     }"
-                    v-on:click="FilterList('school')"
+                    @click="FilterList('school')"
                   >
-                    School
+                    Local
                   </v-btn>
                 </v-col>
               </v-row>
@@ -95,7 +89,7 @@
                   <v-btn
                     :to="{
                       name: 'Reps',
-                      params: { postalCode: postalCode }
+                      params: { searchText: searchText }
                     }"
                     clickclass="mr-4"
                     @click="CreateRepList()"
@@ -147,6 +141,7 @@
                   <take-action
                     :letter-body="letterBody"
                     :selected-rep="selectedRep"
+                    :rep-name="selectedRepName"
                   />
                 </v-col>
               </v-row>
@@ -162,33 +157,36 @@
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
-
 export default {
     name: 'SearchReps',
     components: {
-        RepresentativeCard,
-        TakeAction
+      RepresentativeCard,
+      TakeAction
     },
     data() {
         return {
             letterBody: '',
             selectedRep: {},
+            selectedRepName: '',
             congressMembers: [],
             currentFilter: '',
             hasContent: true,
-            postalCode: this.$route.params.postalCode || '',
+            searchText: this.$route.params.searchText || '',
             listVisible: false,
             isActive: false,
+            myHeight: this.$vuetify.breakpoint.mobile ? false : "100vh"
         }
-    },
+      },
     methods: {
         handleRepSelected(letterBody, selectedRep, step2) {
             this.letterBody = letterBody
             this.selectedRep = selectedRep
+            this.selectedRepName = selectedRep.name
             this.step2 = step2
         },
         CheckInputContent: function () {
-            if (this.postalCode !== '') {
+
+            if (this.searchText !== '') {
                 this.hasContent = true
             } else {
                 this.hasContent = false
@@ -196,14 +194,36 @@ export default {
         },
         async CreateRepList() {
             try {
-                const res = await axios.get(
-                    '/api/representatives/' + this.postalCode
-                )
+                this.$store.commit('setGenericValue', { key: 'searchText', value: this.searchText })
+                // check postal code is valid with regex
+                let res = ''
+                let params = {streetAddress: this.searchText}
+                let isPostalCodeValid =  /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.searchText);
+                let streetAddressValid = /^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/.test(this.searchText);
+
+
+                if(isPostalCodeValid) {
+                 // console.log('valid input to get representatives with postal code')
+                  res = await axios.get(
+                    '/api/representatives/' + this.searchText
+                  )
+                }
+
+                else if(streetAddressValid) {
+                  // console.log('valid input to get representatives with street address')
+                  res = await axios.get(
+                    '/api/representatives/ ', { params }
+                  )
+                }
+
                 this.isActive = false
                 this.congressMembers = res.data
                 this.hasContent = true
                 this.listVisible = true
-            } catch (e) {
+            }
+
+
+            catch (e) {
                 console.error(e)
             }
         },
@@ -214,12 +234,14 @@ export default {
                 if (!this.isActive) {
                     this.isActive = true
                     const params = {}
+
                     if (this.currentFilter != null) {
                         params.filter = this.currentFilter
-                    }
 
+
+                    params.streetAddress = this.searchText
                     const res = await axios.get(
-                        '/api/representatives/' + this.postalCode,
+                        '/api/representatives/' + this.searchText,
                         {
                             params
                         }
@@ -227,19 +249,21 @@ export default {
 
                     console.log(res)
                     this.congressMembers = res.data
+
                 } else {
                     this.isActive = false;
                     const res = await axios.get(
-                        '/api/representatives/' + this.postalCode
+                        '/api/representatives/' + this.searchText
                     )
 
                     this.congressMembers = res.data
                 }
+              }
             } catch (e) {
                 console.error(e)
             }
         }
-    }
+    },
 }
 </script>
 

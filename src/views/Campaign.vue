@@ -3,9 +3,9 @@
     <div class="d-block pa-6 theme_blue accent-4 white--text">
       <h1>This is the campaign page.</h1>
       <p>Campaign ID is {{ $route.params.campaignId }}</p>
-      <v-btn @click="goHome">Back to campaigns page</v-btn>
+      <v-btn @click="goHome"> Back to campaigns page </v-btn>
     </div>
-    <search-reps></search-reps>
+    <search-reps />
   </div>
 </template>
 
@@ -13,17 +13,18 @@
 import SearchReps from '@/components/SearchReps.vue'
 
 export default {
-  methods: {
-    goHome() {
-      this.$router.push('/')
-    }
-  },
+  name: 'Campaign',
   components: {
     SearchReps
   },
   props: {
-    campaign: Object,
-    test: String
+    campaign: { type: Object, default: () => new Object() },
+    test: { type: String, default: '' }
+  },
+  methods: {
+    goHome() {
+      this.$router.push('/')
+    }
   }
 }
 </script>
