@@ -2,7 +2,6 @@
   <section class="search-reps">
     <v-container>
       <v-row class="justify-center">
-
         <v-col cols="12" sm="6" md="4">
           <!--TODO: Create component(s) to reduce template size.-->
           <!-- This could be RepresentativeSearcher.vue or something-->
@@ -143,11 +142,7 @@
             <v-container fluid>
               <v-row class="justify-center">
                 <v-col cols="12" md="8">
-                  <take-action
-                    :letter-body="letterBody"
-                    :selected-rep="selectedRep"
-                    :rep-name="selectedRepName"
-                  />
+                  <take-action :letter-body="letterBody" />
                 </v-col>
               </v-row>
             </v-container>
