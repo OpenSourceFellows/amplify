@@ -100,7 +100,7 @@ export default {
         return this.$store.state.lobReturnAddressId
       },
       userCustomization(){
-       return this.$store.getters.userCustomization
+       return this.$store.state.userCustomization
          }
     },
     created () {

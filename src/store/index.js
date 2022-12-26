@@ -50,10 +50,5 @@ export default new Vuex.Store({
       })
     }
   },
-  getters: {
-    userCustomization: (state) => {
-      return state.userCustomization
-    }
-  },
   modules: {}
 })
