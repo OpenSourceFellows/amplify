@@ -1,10 +1,10 @@
-<template lang="html">
+<template>
   <section class="take-action">
     <v-expansion-panels v-model="panel" flat>
       <!-- Review the letter -->
       <v-expansion-panel :key="0" v-model="panel">
         <v-expansion-panel-header :disabled="!isActive(0)">
-          <template v-slot:actions>
+          <template #actions>
             <v-icon :color="determineStyles('icon', panelStatus[0])" size="45">
               $expand
             </v-icon>
@@ -20,31 +20,22 @@
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title
-                class="text-h6"
-                :class="determineStyles('title', panelStatus[0])"
-              >
-                Review the letter
-              </v-list-item-title>
+              <v-list-item-title> Review the letter </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
-                Add any additional details to organizer requests.
+                Tell your Representatives why this matters.
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <letter-load
-            :selected-rep="selectedRep"
-            :rep-name="repName"
-            :letter-body="letterBody"
-          />
+          <letter-load :selected-rep="selectedRep" :letter-body="letterBody" />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
             width="160"
             dark
-            color="theme_darkBlue"
-            @click="nextPage({ selectedRep, letterBody, repName })"
+            color="primary"
+            @click="nextPage({ selectedRep, letterBody })"
           >
             Next
           </v-btn>
@@ -56,7 +47,7 @@
         <v-divider />
 
         <v-expansion-panel-header class="flex-nowrap" :disabled="!isActive(1)">
-          <template v-slot:actions>
+          <template #actions>
             <v-icon :color="determineStyles('icon', panelStatus[1])" size="45">
               $expand
             </v-icon>
@@ -76,24 +67,25 @@
               <v-list-item-title
                 class="text-h6"
                 :class="determineStyles('title', panelStatus[1])"
-                >Sign your name</v-list-item-title
               >
-              <v-list-item-subtitle class="font-weight-medium"
-                >Use your legal name.</v-list-item-subtitle
-              >
+                Sign your name
+              </v-list-item-title>
+              <v-list-item-subtitle class="font-weight-medium">
+                Use your legal name.
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name @address-created="handleAddress" />
+          <sign-name />
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
           <v-btn
             width="160"
             dark
-            color="theme_darkBlue"
+            color="primary"
             @click="nextPage({ userData })"
           >
             Next
@@ -106,7 +98,7 @@
         <v-divider />
 
         <v-expansion-panel-header :disabled="!isActive(2)">
-          <template v-slot:actions>
+          <template #actions>
             <v-icon :color="determineStyles('icon', panelStatus[2])" size="45">
               $expand
             </v-icon>
@@ -125,8 +117,9 @@
               <v-list-item-title
                 class="text-h6"
                 :class="determineStyles('title', panelStatus[2])"
-                >Send the letter</v-list-item-title
               >
+                Send the letter
+              </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
                 Postage is $1.50 to send your letter.Learn more about what how
                 this fee is used.
@@ -142,84 +135,73 @@
   </section>
 </template>
 
-<script lang="js">
+<script>
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
-    name: 'TakeAction',
-    components: { LetterLoad, SignName, DonateMoney },
-    props: {
-      repName: {
-        type: String,
-        required: true
+  name: 'TakeAction',
+  components: { LetterLoad, SignName, DonateMoney },
+  props: {
+    letterBody: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      panel: 0,
+      panelStatus: {
+        0: 'inProgress',
+        1: 'default',
+        2: 'default'
       },
-      letterBody: {
-        type: String,
-        required: true
-      },
-      selectedRep: {
-        type: Object,
-        required: true
+      userData: {}
+    }
+  },
+  computed: {
+    selectedRep() {
+      return this.$store.state.selectedRep
+    }
+  },
+  methods: {
+    nextPage(attrs) {
+      this.$store.dispatch('setLetterAttrs', attrs)
+
+      const previousPanel = this.panel
+      const nextPanel = this.panel + 1
+
+      //update previous panel's status
+      this.panelStatus[previousPanel] = 'completed'
+      //update next panel's status
+      this.panelStatus[nextPanel] = 'inProgress'
+      //move to next panel
+      this.panel += 1
+    },
+    isActive(panelNumber) {
+      return (
+        this.panelStatus[panelNumber] === 'inProgress' ||
+        this.panelStatus[panelNumber] === 'completed'
+      )
+    },
+    determineStyles(element, status) {
+      if (element === 'icon') {
+        if (status === 'default') return 'primary lighten-1'
+        else return 'primary'
+      } else if (element === 'avatar') {
+        if (status === 'completed') return 'green lighten-1'
+        else if (status === 'inProgress') return 'primary'
+        else return 'light-grey'
+      } else if (element === 'title') {
+        if (status === 'inProgress') return 'primary--text'
+        else return 'dark--text'
       }
     },
-    data () {
-        return {
-            panel: 0,
-            panelStatus: {
-              0: 'inProgress',
-              1: 'default',
-              2: 'default'
-            },
-            userData: {}
-        }
-
-    },
-    computed: {
-
-    },
-    mounted () {
-
-    },
-    methods: {
-
-        nextPage (attrs) {
-            this.$store.dispatch('setLetterAttrs', attrs)
-
-            const previousPanel = this.panel
-            const nextPanel = this.panel + 1
-
-            //update previous panel's status
-            this.panelStatus[previousPanel] = 'completed'
-            //update next panel's status
-            this.panelStatus[nextPanel] = 'inProgress'
-            //move to next panel
-            this.panel += 1
-        },
-        isActive(panelNumber) {
-            return this.panelStatus[panelNumber] === 'inProgress' || this.panelStatus[panelNumber] === 'completed'
-        },
-        determineStyles(element, status) {
-          if (element === 'icon') {
-            if (status === 'default') return 'grey lighten-1'
-            else return 'theme_darkBlue'
-          }
-          else if (element === 'avatar') {
-            if (status === 'completed') return 'green lighten-1'
-            else if (status === 'inProgress') return 'theme_darkBlue'
-            else return 'grey lighten-2'
-          }
-          else if (element === 'title') {
-            if (status === 'inProgress') return 'theme_darkBlue--text'
-            else return 'grey--text text--darken-1'
-
-          }
-        },
-        handleAddress (address) {
-        this.userData = address
-        }
-      },
+    handleAddress(address) {
+      this.userData = address
+    }
+  }
 }
 </script>
 
@@ -227,9 +209,6 @@ export default {
 .take-action {
   .v-list-item {
     padding: 0px;
-  }
-  .theme_darkBlue--text {
-    color: @theme_darkBlue;
   }
 }
 </style>

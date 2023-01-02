@@ -1,27 +1,26 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="campaign in campaigns" :key="campaign.id">
+      <v-col v-for="(campaign, index) in campaigns" :key="index">
         <v-card class="mx-auto" max-width="344">
           <v-img
             :src="getCampaignLogo(campaign)"
             :alt="'Campaign logo for ' + campaign.name"
             height="200px"
-          ></v-img>
+          />
 
-          <h5 v-text="campaign.name" class="text-h5"></h5>
+          <h5 class="text-h5" v-text="campaign.name" />
 
           <v-card-subtitle
-            v-text="campaign.organization"
             style="text-align: left"
-          >
-          </v-card-subtitle>
+            v-text="campaign.organization"
+          />
           <v-card-actions>
             <a :href="'//' + campaign.page_url" target="_blank">
               {{ campaign.page_url }}
             </a>
 
-            <v-spacer></v-spacer>
+            <v-spacer />
           </v-card-actions>
           <v-card-actions>
             <v-btn
@@ -31,11 +30,12 @@
                 name: 'Campaign',
                 params: { campaignId: campaign.id }
               }"
+              @click="setCampaign(index)"
             >
               View Campaign
             </v-btn>
 
-            <v-spacer></v-spacer>
+            <v-spacer />
           </v-card-actions>
         </v-card>
       </v-col>
@@ -72,6 +72,12 @@ export default {
         return `${this.publicPath}${campaign.logo_url.slice(1)}`
       }
       return campaign.logo_url
+    },
+    setCampaign(index) {
+      this.$store.commit('setObjectValue', {
+        key: 'campaign',
+        data: this.campaigns[index]
+      })
     }
   }
 }
