@@ -1,0 +1,33 @@
+name: Spellcheck
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+
+    name: Spellcheck
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint Views Filenames
+        uses: batista/lint-filenames@v1
+        with:
+          path: './src/views'
+          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*\.vue'
+      - name: Lint Components Filenames
+        uses: batista/lint-filenames@v1
+        with:
+          path: './src/components'
+          pattern: '^[A-Z][a-z]+([A-Z][a-z]*)*\.vue'
+      - name: Spellcheck Text Files
+        uses: tbroadley/spellchecker-cli-action@v1
+        with:
+          files: '**/*.md **/*.txt .github/**/*.md'
+          quiet: false
+          dictionaries: '.github/spellcheck-dictionary.txt'

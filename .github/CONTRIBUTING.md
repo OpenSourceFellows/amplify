@@ -91,7 +91,7 @@ pkcon install -y postgresql-server
 npm install
 ```
 
-  ℹ️ This should should not be necessary if you successfully ran `script/bootstrap`.
+  ℹ️ This should not be necessary if you successfully ran `script/bootstrap`.
 
 4. Create and seed the local PostgreSQL databases:
 
@@ -103,7 +103,7 @@ npm run db:create
 npm run db:seed
 ```
 
-  ℹ️ This should should not be necessary if you successfully ran `script/bootstrap`.
+  ℹ️ This should not be necessary if you successfully ran `script/bootstrap`.
 
 5. Ensure you have [configured your environment](#configuration).
 

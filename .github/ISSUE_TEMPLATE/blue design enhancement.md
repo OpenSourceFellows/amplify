@@ -11,22 +11,21 @@ assignees: '@evelynluu2'
 
 **Which component?**
 
-**What is the change propoosed? (add a figma screenshot, follow the workflow here)**
+**What is the change proposed? (add a figma screenshot, follow the workflow here)**
 
 **Which constituent accessibility concern does this address?**
-- [ ] UI/UX acessibiility 
-- [ ] better mobile design 
 
-**What are frontend tasks?** (if theres any tasks needed outside of frontend, pick a different color) 
+- [ ] UI/UX accessibility
+- [ ] better mobile design
+
+**What are frontend tasks?** (if theres any tasks needed outside of frontend, pick a different color)
 
 _List files that need to be changed next to task_
 
 **CC:** @frontend-team member, @frontend-coordinator
 
-
 --------------------------
 For Coordinator
-- [ ] add appropriate labels: "good-first-issue", "frontend", "screen label" 
-- [ ] assign time label 
 
-
+- [ ] add appropriate labels: "good-first-issue", "frontend", "screen label"
+- [ ] assign time label
