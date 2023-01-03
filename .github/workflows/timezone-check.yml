@@ -15,5 +15,5 @@ jobs:
         id: are-they-asleep
         uses: shundor/are-they-asleep@v1.0.1
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          GOOGLE_API_KEY: "${{ secrets.GOOGLE_MAP }}"
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GOOGLE_API_KEY: '${{ secrets.GOOGLE_MAP }}'
