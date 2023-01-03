@@ -47,6 +47,15 @@ router.post('/create-checkout-session', async (req, res) => {
     const { donationAmount } = req.body || {}
     const parsedDonationAmount = parseInt(donationAmount, 10)
 
+    let donation
+
+    if (parsedDonationAmount < 2) {
+      // TODO: Change to something better later.
+      donation = 150
+    } else {
+      donation = parsedDonationAmount * 100
+    }
+
     if (!acceptableCharges.includes(parsedDonationAmount)) {
       return res.status(400).send({ error: 'Invalid Amount' })
     }
@@ -61,7 +70,7 @@ router.post('/create-checkout-session', async (req, res) => {
             product_data: {
               name: 'Donation'
             },
-            unit_amount: parsedDonationAmount * 100
+            unit_amount: donation
           },
           quantity: 1
         }

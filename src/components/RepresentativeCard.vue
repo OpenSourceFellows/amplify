@@ -1,10 +1,11 @@
-<template lang="html">
+<template>
   <v-card
     flat
     :to="{
       name: 'RepClick',
       params: { member: member.name }
     }"
+    class="rep-card"
     @click="handleRepClick"
   >
     <v-card-title class="padding-y-0" v-text="member.name" />
@@ -14,6 +15,8 @@
     />
 
     <!-- social media icons -->
+    <!-- TODO: This is out of spec with the Representative model and needs to be fixed or model changed. -->
+    <!--
     <div
       id="social-media-channel"
       class="text-align-left social-media-channel-box"
@@ -33,67 +36,55 @@
         />
       </a>
     </div>
+    -->
 
     <v-img
       class="mx-auto text-align-left rep-img"
       v-bind="member"
       :src="member.photoUrl"
-      height="75"
-      width="75"
+      height="125"
+      width="125"
       :position="member.photoCroppingCSS"
     />
     <v-card-subtitle
-      v-text="member.address_city"
       class="text-align-left rep-img"
+      v-text="member.address_city"
     />
   </v-card>
 </template>
 
 <script lang="js">
-import axios from 'axios'
 
 export default {
-  name: 'representative-card',
+  name: 'RepresentativeCard',
   components: {
   },
   props: {
-    member: Object
+    member: {
+      type: Object,
+      default: new Object()
+    }
   },
+  emits: ['handle-rep-selected'],
   data() {
     return {
     }
   },
-  emits: ['handleRepSelected'],
   methods: {
-    async handleRepClick() {
-      try {
-        const campaignId = this.$route.params.campaignId
-
-        const versions = await axios.get(
-          '/api/Letter_Versions/' + campaignId
-        )
-        const latestVersion = versions.data[versions.data.length - 1].template_id
-
-        // Set letterId in state
-        console.log(typeof latestVersion)
-        this.$store.commit('setGenericValue', { key: 'letterId', value: latestVersion })
-
-        const letter = await axios.get(
-          '/api/lob/templates/' + latestVersion
-        )
-
-        const letterBody = letter.data.versions[0].html
-        const selectedRep = this.member
-        this.$emit('handleRepSelected', letterBody, selectedRep, true)
-      } catch (e) {
-        console.error(e)
-      }
+    handleRepClick() {
+      console.log('emitting handleRepSelected')
+      this.$store.commit('setGenericValue', { key: 'selectedRep', value: this.member })
+      this.$emit('handle-rep-selected')
     }
   }
 }
 </script>
 
 <style scoped lang="less">
+.rep-card:hover {
+  background-color: rgba(254, 94, 65, 0.75) // amplify orange
+;
+}
 .social-media-icon {
   margin-right: 5px;
 }
