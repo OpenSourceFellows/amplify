@@ -1,10 +1,9 @@
 ---
-name: New Frontend Volunteer
-about: An onboarding guide for new volunteers working on frontend
-title: 'New Frontend Volunteer'
+name: AppSec Onboarding
+about: An onboarding guide for new volunteers working on backend
+title: 'AppSec Onboarding'
 labels: ramping, needs buddy
-assignees: '@dietbepsi'
-
+assignees: '@paramsiddharth'
 
 Hi and welcome to being one of the AdvoCats! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 
 
