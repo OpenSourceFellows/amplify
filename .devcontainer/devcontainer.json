@@ -38,7 +38,8 @@
   "extensions": [
     "dbaeumer.vscode-eslint",
     "mtxr.sqltools",
-    "mtxr.sqltools-driver-pg"
+    "mtxr.sqltools-driver-pg",
+    "Vue.volar"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
