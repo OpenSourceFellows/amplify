@@ -41,6 +41,10 @@ https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b
 ## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
+TODO: add steps for setting up .env file
+
+Run this command in your terminal.
+
 ```shell
 script/bootstrap
 ```
