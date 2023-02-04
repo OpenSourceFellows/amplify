@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import SearchReps from '../components/SearchReps'
 import RepresentativeCard from '../components/RepresentativeCard'
 import scrollBehavior from './scroll-behavior'
-import App from '/src/App.vue'
 // import Reps from '../components/Reps'
 
 Vue.use(VueRouter)
@@ -54,10 +53,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
-new Vue({
-  router,
-  render: (h) => h(App)
-}).$mount('#app')
 
 export default router
