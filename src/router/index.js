@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import SearchReps from '../components/SearchReps'
 import RepresentativeCard from '../components/RepresentativeCard'
 import scrollBehavior from './scroll-behavior'
-import App from '/workspace/src/App.vue'
+import App from '/src/App.vue'
 // import Reps from '../components/Reps'
 
 Vue.use(VueRouter)
