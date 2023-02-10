@@ -68,7 +68,8 @@
     "vue": "^2.6.11",
     "vue-router": "^3.5.4",
     "vuetify": "^2.6.8",
-    "vuex": "^3.4.0"
+    "vuex": "^3.4.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.4",
