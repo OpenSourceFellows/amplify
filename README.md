@@ -41,10 +41,15 @@ https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b
 ## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
+Run the following script first:
 ```shell
 script/bootstrap
 ```
-You will need to copy the `.env.example` file to a `.env` file in this repo.
+
+You will need to copy the `.env.example` file to a `.env` file in this repo. You can use the following command in your terminal:
+```shell
+cp .env.example .env
+```
 
 ### Compiles and hot-reloads full app for development
 ```shell
