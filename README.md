@@ -61,6 +61,12 @@ npm run build
 npm run lint
 ```
 
+### Runs Prettier and fixes files
+```shell
+npm run format
+```
+
+
 ### Build and run as if in prod
 ```shell
 npm start
