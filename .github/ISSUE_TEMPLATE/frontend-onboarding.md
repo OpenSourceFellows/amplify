@@ -3,7 +3,7 @@ name: New Frontend Volunteer
 about: An onboarding guide for new volunteers working on frontend
 title: 'New Frontend Volunteer'
 labels: ramping, needs buddy
-assignees: '@mahrsbar'
+assignees: '@dietbepsi'
 
 
 Hi and welcome to being one of the AdvoCats! Here is a self paced guide to get familiar with the projects stack as well as how to use available resources. 

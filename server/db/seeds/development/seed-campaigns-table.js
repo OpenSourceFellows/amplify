@@ -37,6 +37,14 @@ module.exports = {
         cause: 'Climate Justice',
         type: 'Grant',
         page_url: 'climatecantwait.org'
+      },
+      {
+        id: 5,
+        organization: "Sogorea 'Te Land Trust",
+        name: "Sogorea 'Te Land Trust",
+        cause: 'Civic Rights',
+        type: 'Grant',
+        page_url: 'https://sogoreate-landtrust.org/'
       }
     ])
   }

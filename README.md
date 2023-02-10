@@ -1,5 +1,12 @@
-# amplify
+# Amplify
 
+## Table of Contents
+
+  * [Getting Started](#getting-started)
+  * [Project Setup](#project-setup)
+  * [Customize configuration](#customize-configuration)
+  * [App Walkthrough](#app-walkthrough)
+  
 ## Getting Started
 
 This repo contains both the frontend and backend portions of the Amplify application.
@@ -22,16 +29,16 @@ The backend (API) code is stored in the `server/` directory.
 - [Wiki](https://github.com/ProgramEquity/amplify/wiki): API methods, Data Structures
 
 **Resources:**
-- We meet every: 
--  - [Tuesday from 2:00-3:00pm PT](https://calendar.google.com/event?action=TEMPLATE&tmeid=NWh1NzdqYmRncXJsbzVlMTVocXBkMXFkZ2JfMjAyMTExMjNUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) to pair program
-  - [Thursday from 2:00-2:30pm PT](https://calendar.google.com/event?action=TEMPLATE&tmeid=dDBvbWYxNDcyMjgyZ3E5M2FqcWU4aWExYWNfMjAyMTExMThUMjIwMDAwWiBjX2FpcHRzdTR0djNlZnRrbzEwZWNodDd2cmIwQGc&tmsrc=c_aiptsu4tv3eftko10echt7vrb0%40group.calendar.google.com&scp=ALL) for [product standup](https://github.com/ProgramEquity/amplify/discussions/63)
-  - Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
+- We meet every **Wednesday from 12-1 pm pt and Thursdays from 8-8:30 pm pt**. Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
+- Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653) or review [App Research](https://www.notion.so/programequity/Dare-to-Dream-Civic-Engagement-is-key-to-change-595ca4db3a2948c6b44569b58d530c8c)
+
 
 
 ## Project setup
 
 https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
 
+## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
 ```shell
@@ -96,3 +103,4 @@ Updates to the OpenAPI schema itself should be made in the appropriate component
 Make sure to lint and bundle the API schema locally by running `script/lint-and-bundle-openapi-schema.sh`.  Commit any changes to `openapi.yml` generated from this command.
 
 You can also explore the components of an OpenAPI spec [using this map](http://openapi-map.apihandyman.io/)
+

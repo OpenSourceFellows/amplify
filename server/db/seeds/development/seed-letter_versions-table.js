@@ -40,6 +40,15 @@ module.exports = {
         state: 'NY',
         county: null,
         municipality: null
+      },
+      {
+        id: 5,
+        template_id: 'tmpl_7aaf42aada49f44',
+        campaign_id: 5,
+        office_division: 'State',
+        state: 'CA',
+        county: null,
+        municipality: null
       }
     ])
   }

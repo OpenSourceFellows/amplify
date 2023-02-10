@@ -1,10 +1,10 @@
-<template lang="html">
+<template>
   <section class="letter-load">
     <v-card flat>
       <div v-show="isSubmitted">
         <v-card-subtitle align="left">
           <div class="text-left">
-            {{ currentDate() }}
+            {{ currentDate }}
           </div>
           <div>{{ selectedRep.name }}</div>
           <div>{{ selectedRep.address_line1 }}</div>
@@ -13,15 +13,25 @@
             {{ selectedRep.address_zip }}
           </div>
           <br />
-          <div>Your Name</div>
-          <div>Address</div>
-          <div>City, S.C. Zip Code</div>
+          <div>{{ user.name }}</div>
+          <div>
+            {{ user.line1 }}
+            <br />
+            {{ user.line2 }}
+          </div>
+          <div>
+            {{ formattedCityState }}
+          </div>
         </v-card-subtitle>
-        <v-card-title> {{ selectedRep.name }} </v-card-title>
+        <v-card-title class="salutation">
+          Dear {{ selectedRep.name }},
+        </v-card-title>
 
         <v-card-text>
-          <span v-html="letterBody"></span>
+          <span v-html="letterBody" />
         </v-card-text>
+
+        <p>{{ user.name }}</p>
       </div>
       <div v-show="!isSubmitted">
         <v-card-text> clicked</v-card-text>
@@ -31,52 +41,57 @@
                     { JSON.stringify($auth.user, null, 2) }} -->
         </div>
       </div>
-
-      <v-card-actions>
+      <!--
+      <v-card-actions class="justify-center">
         <v-btn>
           <AuthNav />
         </v-btn>
       </v-card-actions>
+    -->
     </v-card>
   </section>
 </template>
 
 <script lang="js">
-import AuthNav from '@/components/AuthNav'
+// import AuthNav from '@/components/AuthNav'
 
 export default {
   name: 'LetterLoad',
-  components: { AuthNav },
+  components: { /* AuthNav */ },
   props: {
-    repName: String,
-    letterBody: String,
-    selectedRep: Object
+    letterBody: { type: String, default: '' },
   },
-
   data () {
     return {
-      date: new Date().toLocaleString(),
       isSubmitted: true
     }
   },
   computed: {
-
-  },
-
-  mounted () {
-
-  },
-  methods: {
+    selectedRep() {
+      return this.$store.state.selectedRep
+    },
+    user() {
+      return this.$store.state.userData
+    },
     currentDate () {
-      const current = new Date()
-      const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`; return date
-    }
+      return new Intl.DateTimeFormat('en-US').format(new Date())
+    },
+    formattedCityState() {
+      if (this.user.city) {
+        return `${this.user.city}, ${this.user.state} ${this.user.zip}`
+      }
 
+      return ''
+    }
   }
 }
 </script>
 
 <style scoped lang="less">
 .letter-load {
+}
+
+.salutation {
+  font-size: 18px;
 }
 </style>

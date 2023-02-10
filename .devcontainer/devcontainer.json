@@ -9,9 +9,9 @@
 
   // Set minimum specificiations for Codespaces machine types
   "hostRequirements": {
-    "cpus": 2,
-    "memory": "2gb",
-    "storage": "4gb"
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
   },
 
   // Set *default* container specific settings.json values on container create.
@@ -38,7 +38,8 @@
   "extensions": [
     "dbaeumer.vscode-eslint",
     "mtxr.sqltools",
-    "mtxr.sqltools-driver-pg"
+    "mtxr.sqltools-driver-pg",
+    "Vue.volar"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.

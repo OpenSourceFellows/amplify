@@ -28,26 +28,28 @@ export default {
     name: 'DonateMoney',
     props: [],
     data () {
-        return {
-          donation:1
-        }
+      return {
+        donation: 1.50
+      }
     },
     computed: {
     },
     mounted () {
     },
     methods: {
-        submit () {
-          axios.post('/api/checkout/create-checkout-session',
-          {donationAmount: this.donation})
-                .then((response) => {
-                  console.log(response);
-                  location.href = response.data.url
-                })
-                .catch(function (error) {
-                    console.log(error)
-                })
-        }
+      submit () {
+        axios.post('/api/checkout/create-checkout-session', {donationAmount: this.donation})
+        .then((response) => {
+          console.log(response);
+          // Dump state to local storage before redirect
+          this.$store.dispatch('dumpStateToLocalStorage', response.data.sessionId)
+          // Redirect to stripe
+          location.href = response.data.url
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      }
     }
 }
 </script>

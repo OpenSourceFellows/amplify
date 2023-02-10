@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import SearchReps from '../components/SearchReps'
 import RepresentativeCard from '../components/RepresentativeCard'
+import scrollBehavior from './scroll-behavior'
 // import Reps from '../components/Reps'
 
 Vue.use(VueRouter)
@@ -48,6 +49,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
+  scrollBehavior,
   base: process.env.BASE_URL,
   routes
 })

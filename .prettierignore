@@ -1,6 +1,6 @@
 # Ignore build artifacts
 /dist/
-
+/.vscode/
 # Ignore all Markdown files
 *.md
 
