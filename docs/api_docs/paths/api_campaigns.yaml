@@ -10,7 +10,9 @@ get:
             type: object
             properties:
               Campaigns:
-                $ref: ../components/schemas/Campaign.yaml
+                type: array
+                items:
+                  $ref: ../components/schemas/Campaign.yaml
     '500':
       description: Error
       content:
