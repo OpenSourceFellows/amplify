@@ -23,7 +23,6 @@ paths:
                 properties:
                   Campaigns:
                     $ref: '#/components/schemas/Campaign'
-        '400': null
         '500':
           description: Error
           content:
@@ -70,7 +69,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LetterVersion'
-        '400': null
         '500':
           description: Error
           content:
@@ -151,17 +149,19 @@ paths:
                 properties:
                   expected_delivery_date:
                     type: string
-        '400': null
         '500':
-          description: Letter creation failed
+          description: >-
+            Something went wrong with payment, message will be "Payment is still
+            pending or has failed" or "Something failed! A refund of
+            ${refund.amount} ${refund.currency} has been issued"
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  msg:
                     type: string
-                    default: Something failed!
+                    default: Payment is still pending or has failed
   /api/lob/createAddress:
     description: ''
     post:
@@ -169,15 +169,30 @@ paths:
       summary: ''
       operationId: ''
       requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Address'
+        $ref: '#/components/requestBodies/CreateAddress'
       responses:
-        '200': null
-        '400': null
-        '500': null
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address_id:
+                    type: string
+                    description: id from the addressResponse recieved from Lob
+        '400':
+          description: Address is not deliverable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /api/lob/addressVerification:
     description: ''
     post:
@@ -251,9 +266,6 @@ components:
         logo_url:
           type: string
           minLength: 1
-        letters_counter:
-          type: integer
-          minimum: 0
         letters_goal:
           type: integer
           minimum: 0
@@ -265,7 +277,6 @@ components:
       properties:
         error:
           type: string
-          default: Whoops
     LetterVersion:
       type: object
       required:
@@ -292,14 +303,28 @@ components:
             - Municipality
         state:
           type: string
+          nullable: true
           minLength: 2
           maxLength: 2
         county:
           type: string
+          nullable: true
           minLength: 1
         municipality:
           type: string
+          nullable: true
           minLength: 1
+    SocialMediaPage:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
     Representative:
       type: object
       properties:
@@ -329,6 +354,12 @@ components:
         contactPage:
           type: string
         photoUrl:
+          type: string
+        socialMediaPages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SocialMediaPage'
+        photoCroppingCSS:
           type: string
     InvalidZipError:
       type: object
@@ -386,3 +417,9 @@ components:
               template_id:
                 type: string
                 default: The Lob template_id created for this letter
+    CreateAddress:
+      description: Create an address to verify with lob
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Address'

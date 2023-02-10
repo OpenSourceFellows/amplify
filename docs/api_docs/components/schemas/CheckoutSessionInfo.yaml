@@ -1,4 +1,6 @@
 type: object
 properties:
-  error:
+  url:
+    type: string
+  sessionId:
     type: string

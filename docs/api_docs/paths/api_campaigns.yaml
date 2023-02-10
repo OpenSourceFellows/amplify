@@ -18,4 +18,3 @@ get:
           schema:
             type: object
             $ref: ../components/schemas/Error.yaml
-    '400':

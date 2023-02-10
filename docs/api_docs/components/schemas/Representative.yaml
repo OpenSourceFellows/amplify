@@ -27,3 +27,9 @@ properties:
     type: string
   photoUrl:
     type: string
+  socialMediaPages:
+    type: array
+    items:
+      $ref: SocialMediaPage.yaml
+  photoCroppingCSS:
+    type: string

@@ -34,9 +34,6 @@ properties:
   logo_url:
     type: string
     minLength: 1
-  letters_counter:
-    type: integer
-    minimum: 0
   letters_goal:
     type: integer
     minimum: 0
