@@ -45,20 +45,10 @@
 
 <script>
 import axios from 'axios'
-import * as winston from 'winston'
-import BrowserConsole from 'winston-transport-browserconsole'
+import Vue from 'vue'
 
-const level = 'debug'
-winston.configure({
-  transports: [
-    new BrowserConsole({
-      format: winston.format.simple(),
-      level
-    })
-  ]
-})
-
-winston.debug('DEBUG ', { a: 1, b: 'two' })
+console.log(Vue)
+Vue.$log.debug('Test message')
 
 export default {
   name: 'CampaignCards',

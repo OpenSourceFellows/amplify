@@ -10,9 +10,12 @@ import { domain, clientId, audience } from '../auth_config.json'
 import { Auth0Plugin } from '@/auth/auth0-plugin'
 import 'vuetify/dist/vuetify.min.css'
 
+// for vue-logger-plugin logging
+import logger from './logger'
+
 // for Winston logging
-console.log('here is setimmediate:')
-import 'setimmediate'
+// console.log('here is setimmediate:')
+// import 'setimmediate'
 
 // fontawesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -46,6 +49,11 @@ Vue.use(Auth0Plugin, {
     )
   }
 })
+
+// for using vue-logger-plugin
+Vue.use(logger)
+Vue.prototype.$log = Vue.$log
+Vue.prototype.$logger = Vue.$logger
 
 Vue.config.productionTip = false
 
