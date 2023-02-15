@@ -8,7 +8,12 @@
         representatives, from the comfort of your home or on the go.
       </p>
 
-      <v-btn-toggle v-model="donation" tile color="deep-purple accent-3" group>
+      <v-btn-toggle
+        v-model="donationAmount"
+        tile
+        color="deep-purple accent-3"
+        group
+      >
         <v-btn elevation="2" raised :value="2"> 2 </v-btn>
 
         <v-btn elevation="2" raised :value="20"> 20 </v-btn>
@@ -29,7 +34,7 @@ export default {
     props: [],
     data () {
       return {
-        donation: 1.50
+        donationAmount: 1.50
       }
     },
     computed: {
@@ -38,7 +43,7 @@ export default {
     },
     methods: {
       submit () {
-        axios.post('/api/checkout/create-checkout-session', {donationAmount: this.donation})
+        axios.post('/api/checkout/create-checkout-session', {donationAmount: this.donationAmount})
         .then((response) => {
           console.log(response);
           // Dump state to local storage before redirect
@@ -54,4 +59,8 @@ export default {
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.custom-donation-amount-textfield {
+  width: 150px;
+}
+</style>
