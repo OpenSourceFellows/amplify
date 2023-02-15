@@ -45,10 +45,8 @@
 
 <script>
 import axios from 'axios'
-import Vue from 'vue'
 
-console.log(Vue)
-Vue.$log.debug('Test message')
+// this.$log.debug('Test Message')
 
 export default {
   name: 'CampaignCards',

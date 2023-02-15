@@ -52,8 +52,6 @@ Vue.use(Auth0Plugin, {
 
 // for using vue-logger-plugin
 Vue.use(logger)
-Vue.prototype.$log = Vue.$log
-Vue.prototype.$logger = Vue.$logger
 
 Vue.config.productionTip = false
 
@@ -62,5 +60,17 @@ new Vue({
   store,
   vuetify,
   components: { FontAwesomeIcon },
+  // testing logging
+  created: function () {
+    const testObject = {
+      name: 'test',
+      value: 'this is a test object'
+    }
+    console.log('Hello World')
+    this.$log.debug('Log Test Message', testObject)
+    this.$logger.debug('Logger Test Message', testObject)
+    this.$log.error(new Error('this.$log.error: something went wrong'))
+    this.$logger.error(new Error('this.$logger.error: something went wrong'))
+  },
   render: (h) => h(App)
 }).$mount('#app')
