@@ -10,6 +10,7 @@
 
       <v-btn-toggle
         v-model="donationAmount"
+        class="d-flex flex-wrap justify-center"
         tile
         color="deep-purple accent-3"
         group
@@ -166,14 +167,15 @@ export default {
 
 <style scoped lang="less">
 .custom-donation-amount-textfield {
-  width: 150px;
+  margin-top: 1em;
+  min-width: 10em;
 }
 .message {
   background-color: #fff8e6;
   border-radius: 0.25em;
   border: 1px solid #e6a700;
   color: #4d3800;
-  margin-top: 2em;
+  // margin-top: 1em;
   padding: 0.25em;
 }
 </style>
