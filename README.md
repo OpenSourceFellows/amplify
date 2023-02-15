@@ -1,5 +1,7 @@
 # Amplify
- Amplify is an open-source app created for users to take the initiative in being part of an actionable step in the efforts to protect against climate change. The user is able to choose a climate campaign, then using their zip code, they will be able to select a representative of their choice. The user then donates to have their letter sent out by Amplify.
+
+Amplify is an open-source app created for users to take the initiative in being part of an actionable step in the efforts to protect against climate change. The user is able to choose a climate campaign, then using their zip code, they will be able to select a representative of their choice. The user then donates to have their letter sent out by Amplify.
+
 ## Table of Contents
 
   * [Getting Started](#getting-started)
@@ -37,7 +39,7 @@ In order to get started, you can clone, download a ZIP, or fork this repository 
 
 https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
 
-<figcaption align = "center"><b>Codespaces Set Up</b></figcaption>
+<b>Codespaces Set Up</b>
 
 ## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
