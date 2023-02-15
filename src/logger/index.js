@@ -1,11 +1,18 @@
 import VueLogger from 'vue-logger-plugin'
+import axios from 'axios'
+
+const ServerLogHook = {
+  run: (event) => {
+    console.log('ServerLogHook is working')
+    axios.post('/log', { severity: event.level, data: event.argumentArray })
+  }
+}
 
 // define options
 const options = {
   enabled: true,
-  level: 'debug'
-  //   beforeHooks: [ ... ],
-  //   afterHooks: [ ... ]
+  level: 'debug',
+  afterHooks: ServerLogHook
 }
 
 // export logger with applied options
