@@ -38,7 +38,7 @@ What Epic is this issue part of?
 Please do not leave this blank 
 This PR [adds/removes/fixes/replaces] the [feature/bug/etc]. 
 -->
-## What does Issue Fix?
+## What Does This Issue Fix?
 <!--What does it change? What does it fix? How has it been tested? Did anything break? --> 
 
 ## View Related Issues & Documents
@@ -53,7 +53,7 @@ https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-git
 <!-- Visual changes require screenshots -->
 
 
-## Added tests?
+## Added Tests?
 
 - [ ] 👍 yes
 - [ ] 🙅 no, because they aren't needed
@@ -62,17 +62,20 @@ https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-git
 
 ## Added Dependencies?
 
-- [ ] 👍 yes, If so what dependencies did you add?
+- [ ] 👍 yes
 - [ ] 🙅 no
+
+### If yes, What Dependencies Did You Add?
+<!-- Please elaborate on added dependencies purpose -->
 
 ## Added to documentation?
 
 - [ ] 📓 [Repo Amplify](https://github.com/ProgramEquity/amplify)
-- [ ] 🍕 [Discussion Board](https://github.com/ProgramEquity/amplify/discussions)
+- [ ] 📝 [Discussion Board](https://github.com/ProgramEquity/amplify/discussions)
 <!-- - [ ] 📕 [Documentation] -->
-- [ ] 🙅 [Amplify's Mission](https://github.com/ProgramEquity/amplify/blob/main/AmplifyApp.md)
-- [ ] [Wiki Pages](https://github.com/ProgramEquity/amplify/wiki)
-- [ ] [Amplify Issues](https://github.com/ProgramEquity/amplify/issues)
+- [ ] 📖 [Amplify's Mission](https://github.com/ProgramEquity/amplify/blob/main/AmplifyApp.md)
+- [ ] 🧑‍💻 [Wiki Pages](https://github.com/ProgramEquity/amplify/wiki)
+- [ ] 👷‍♀️ [Amplify Issues](https://github.com/ProgramEquity/amplify/issues)
 
 ## [optional] Are there any post-deployment tasks we need to perform?
 
