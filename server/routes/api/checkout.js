@@ -61,6 +61,7 @@ router.post('/create-checkout-session', async (req, res) => {
     }
 
     const origin = req.get('origin')
+    const previousPage = req.header('referer')
 
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -78,7 +79,7 @@ router.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       allow_promotion_codes: true,
       success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: origin
+      cancel_url: previousPage
     })
 
     res.json({ url: session.url, sessionId: session.id })
