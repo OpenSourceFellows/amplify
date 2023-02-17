@@ -110,7 +110,6 @@ export default {
       value = parseFloat(value); // outputs: number
       value = value.toFixed(2); // outputs: string
       value = parseFloat(value); // outputs: number
-      console.log(`🚀 -> file: DonateMoney.vue:112 -> validateDonationAmount -> value`, value, this.customAmountSelected);
       // separating parameter assignment and parseFloat operation for consistent outcome on change
 
       // if an existing donation amount button was chosen
