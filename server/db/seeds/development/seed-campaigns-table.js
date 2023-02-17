@@ -45,6 +45,14 @@ module.exports = {
         cause: 'Civic Rights',
         type: 'Grant',
         page_url: 'https://sogoreate-landtrust.org/'
+      },
+      {
+        id: 6,
+        organization: 'Equality Labs',
+        name: 'Equality Labs',
+        cause: 'Civic Rights',
+        type: 'Grant',
+        page_url: 'https://www.equalitylabs.org/'
       }
     ])
   }

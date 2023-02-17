@@ -53,19 +53,19 @@ export default {
     icons: [
       {
         logo: 'mdi-facebook',
-        url: 'https://www.facebook.com/savetheshellmound'
+        url: 'https://www.facebook.com/EqualityLabs1'
       },
       {
         logo: 'mdi-twitter',
-        url: 'https://twitter.com/programequity'
-      },
-      {
-        logo: 'mdi-linkedin',
-        url: 'http://www.linkedin.com/company/programequity/'
+        url: 'https://twitter.com/equalitylabs'
       },
       {
         logo: 'mdi-instagram',
-        url: 'https://www.instagram.com/passthepolicy/'
+        url: 'https://www.instagram.com/equalitylabs/'
+      },
+      {
+        logo: 'mdi-cart',
+        url: 'https://www.redbubble.com/people/EqualityLabs/explore?asc=u&page=1&sortOrder=recent'
       }
     ]
   })

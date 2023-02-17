@@ -82,12 +82,7 @@
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
-          <v-btn
-            width="160"
-            dark
-            color="primary"
-            @click="nextPage({ userData })"
-          >
+          <v-btn width="160" dark color="primary" @click="nextPage()">
             Next
           </v-btn>
         </v-expansion-panel-content>
@@ -167,7 +162,9 @@ export default {
   },
   methods: {
     nextPage(attrs) {
-      this.$store.dispatch('setLetterAttrs', attrs)
+      if (attrs) {
+        this.$store.dispatch('setLetterAttrs', attrs)
+      }
 
       const previousPanel = this.panel
       const nextPanel = this.panel + 1

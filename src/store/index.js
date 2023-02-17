@@ -6,16 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    mode: 'default',
+    mode: 'single',
     zipcode: '',
-    letterId: '',
+    letterId: 'tmpl_827a50ffb23b7d5',
     campaign: {
-      id: '',
-      organization: '',
-      name: '',
-      cause: '',
-      type: '',
-      page_url: ''
+      id: '6',
+      organization: 'Equality Labs',
+      name: 'Equality Labs',
+      cause: 'Civic Rights',
+      type: 'Grant',
+      page_url: 'https://www.equalitylabs.org/'
     },
     lobReturnAddressId: '',
     selectedRep: {},

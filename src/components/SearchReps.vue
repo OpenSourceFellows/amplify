@@ -207,14 +207,17 @@ export default {
   },
   methods: {
     async loadLetterWorkflow() {
+      /*
       const letterVersions = await axios.get(
         `/api/letter_versions/${this.campaignId}`
       )
       const latest =
         letterVersions.data[letterVersions.data.length - 1].template_id
-      const letter = await axios.get(`/api/lob/templates/${latest}`)
+      */
 
-      this.$store.commit('setGenericValue', { key: 'letterId', value: latest })
+      const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
+
+      // this.$store.commit('setGenericValue', { key: 'letterId', value: latest })
 
       this.letterBody = letter.data.versions[0].html
 

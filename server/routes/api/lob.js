@@ -159,16 +159,16 @@ router.post('/createAddress', async (req, res) => {
 router.post('/createLetter', async (req, res) => {
   // Get description, to, and template_id, and Stripe session id from request body
 
-  const { description, to, from, template_id, sessionId } = req.body || {}
+  const { description, to, from, template_id /* sessionId */ } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
-  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+  // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
-  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
+  //const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
 
   try {
     // Check for completed payment before creating letter. Status can be succeeded, failed, or pending. Return server error if failure or pending.
-
+    /*
     const paymentVerification = await stripe.paymentIntents.retrieve(
       checkoutSession.payment_intent
     )
@@ -179,7 +179,7 @@ router.post('/createLetter', async (req, res) => {
         .json({ msg: 'Payment is still pending or has failed.' })
         .end()
     }
-
+    */
     // For development only, check for test_ prefix on 'from' parameter and
     // return a dummy datebefore using lob api.
     const isTest = from.includes('test_')
@@ -218,15 +218,17 @@ router.post('/createLetter', async (req, res) => {
     console.error(error)
 
     // We'll need a stripe test env key to test this in our integration tests
+    /*
     const refund = await stripe.refunds.create({
       payment_intent: checkoutSession.payment_intent
     })
+    */
     // TODO handle error for refund error. Not doing this currently because chance of
     // user making it this far in the process and both LOB API and Stripe failing is very small.
     return res
       .status(500)
       .send({
-        error: `Something failed! A refund of ${refund.amount} ${refund.currency} has been issued`
+        error: 'Something failed. Sorry!'
       })
       .end()
   }
