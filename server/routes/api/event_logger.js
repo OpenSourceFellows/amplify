@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const logger = require('../../../utilities/logger')
+const logger = require('../../utilities/logger')
 
 router.post('/log', (req, res) => {
   const { data } = req.body
