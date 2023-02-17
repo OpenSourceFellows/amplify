@@ -11,7 +11,7 @@ import { Auth0Plugin } from '@/auth/auth0-plugin'
 import 'vuetify/dist/vuetify.min.css'
 
 // for vue-logger-plugin logging
-import logger from './logger'
+import vueLogger from './utilities/vue_logger'
 
 // for Winston logging
 // console.log('here is setimmediate:')
@@ -51,7 +51,7 @@ Vue.use(Auth0Plugin, {
 })
 
 // for using vue-logger-plugin
-Vue.use(logger)
+Vue.use(vueLogger)
 
 Vue.config.productionTip = false
 
