@@ -67,8 +67,8 @@ new Vue({
       value: 'this is a test object'
     }
     console.log('Hello World')
-    this.$log.debug('Log Test Message', testObject)
-    this.$logger.debug('Logger Test Message', testObject)
+    this.$log.info('Log Test Message', testObject)
+    this.$logger.info('Logger Test Message', testObject)
     this.$log.error(new Error('this.$log.error: something went wrong'))
     this.$logger.error(new Error('this.$logger.error: something went wrong'))
   },

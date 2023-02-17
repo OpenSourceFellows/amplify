@@ -46,8 +46,6 @@
 <script>
 import axios from 'axios'
 
-// this.$log.debug('Test Message')
-
 export default {
   name: 'CampaignCards',
   data() {

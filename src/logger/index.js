@@ -4,7 +4,10 @@ import axios from 'axios'
 const ServerLogHook = {
   run: (event) => {
     console.log('ServerLogHook is working')
-    axios.post('/log', { severity: event.level, data: event.argumentArray })
+    axios.post('/event-logger', {
+      severity: event.level,
+      data: event.argumentArray
+    })
   }
 }
 
