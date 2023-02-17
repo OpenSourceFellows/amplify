@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="donate-money">
     <h1>Donate to the cause.</h1>
 

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="d-flex flex-column items-center">
     <section v-if="loading">
       <v-progress-circular

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="d-flex flex-column align-center my-6">
     <h4 class="text-h4">Other Bills that Need Your Help</h4>
     <p class="text-h6">
