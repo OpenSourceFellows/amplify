@@ -189,14 +189,16 @@ router.get('/:searchText', async (req, res) => {
     res.send(representatives)
   } catch (error) {
     console.log(error)
-    res.status(500).send({ error: 'Whoops' })
+    res.status(500).send({
+      error: `Whoops, likely the axios.get req for getting representatives from 'https://cicero.azavea.com/v3.1/official' failed.`
+    })
   }
 })
 
 /*
  * Returns string with the following properties:
  *  - x-value: right or left. Indicates whether the photo should be cropped/positioned from the left or right side.
- *  - y-value: top or bottom. Indicates whether the photo should be cropped/psoitioned from the top or bottom side.
+ *  - y-value: top or bottom. Indicates whether the photo should be cropped/positioned from the top or bottom side.
  *
  * Example: "top left"
  *
