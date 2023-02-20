@@ -30,7 +30,10 @@
                 name: 'Campaign',
                 params: { campaignId: campaign.id }
               }"
-              @click="setCampaign(index)"
+              @click="
+                setCampaign(index)
+                test()
+              "
             >
               View Campaign
             </v-btn>
@@ -48,6 +51,7 @@ import axios from 'axios'
 
 export default {
   name: 'CampaignCards',
+  props: ['test'],
   data() {
     return {
       campaigns: [],

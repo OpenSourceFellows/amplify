@@ -57,16 +57,13 @@ new Vue({
   vuetify,
   components: { FontAwesomeIcon },
   // testing logging
-  created: function () {
-    const testObject = {
-      name: 'test',
-      value: 'this is a test object'
-    }
-    console.log('Hello World')
-    this.$log.info('Log Test Message', testObject)
-    this.$logger.info('Logger Test Message', testObject)
-    this.$log.error(new Error('this.$log.error: something went wrong'))
-    this.$logger.error(new Error('this.$logger.error: something went wrong'))
-  },
+  // created: function () {
+  //   const testObject = {
+  //     name: 'test',
+  //     value: 'this is a test object'
+  //   }
+  //   this.$log.info('Log Test Message', testObject)
+  //   this.$log.error(new Error('something went wrong'))
+  // },
   render: (h) => h(App)
 }).$mount('#app')
