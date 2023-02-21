@@ -1,0 +1,35 @@
+type: object
+properties:
+  name:
+    type: string
+  title:
+    type: string
+  address_line1:
+    type: string
+  address_line2:
+    type: string
+  address_city:
+    type: string
+  address_state:
+    type: string
+  address_zip:
+    type: string
+  address_country:
+    type: string
+    default: US
+  email:
+    type: string
+  twitter:
+    type: string
+  facebook:
+    type: string
+  contactPage:
+    type: string
+  photoUrl:
+    type: string
+  socialMediaPages:
+    type: array
+    items:
+      $ref: SocialMediaPage.yaml
+  photoCroppingCSS:
+    type: string

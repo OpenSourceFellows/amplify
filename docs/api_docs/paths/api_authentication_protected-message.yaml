@@ -1,0 +1,12 @@
+get:
+  summary:
+  responses:
+    '200':
+      description:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string

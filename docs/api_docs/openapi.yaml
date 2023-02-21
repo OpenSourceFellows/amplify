@@ -1,0 +1,27 @@
+openapi: 3.0.0
+servers: 
+  - url: ''
+info:
+  title: Amplify API
+  description: ''
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/ProgramEquity/amplify/blob/main/LICENSE
+paths:
+  /api/campaigns:
+    $ref: paths/api_campaigns.yaml
+  /api/campaigns/{id}:
+    $ref: paths/api_campaigns_{id}.yaml
+  /api/letter_versions/{campaignId}:
+    $ref: paths/api_letter_versions_{campaignId}.yaml
+  /api/representatives/{zipCode}:
+    $ref: paths/api_representatives_{zipCode}.yaml
+  /api/lob/createLetter:
+    $ref: paths/api_lob_createLetter.yaml
+  /api/lob/createAddress:
+    $ref: paths/api_lob_createAddress.yaml
+  /api/lob/addressVerification:
+    $ref: paths/api_lob_addressVerification.yaml
+  /api/lob/templates/{templateId}:
+    $ref: paths/api_lob_templates_{templateId}.yaml

@@ -1,0 +1,5 @@
+description: Create an address to verify with lob
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Address.yaml

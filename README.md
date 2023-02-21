@@ -99,3 +99,18 @@ https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b
 <img width="1561" alt="Screen Shot 2021-11-11 at 1 51 44 PM" src="https://user-images.githubusercontent.com/9143339/141374196-a32d140f-885c-4e45-8bba-99696f81ee80.png">
 
 
+Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653) or review [App Research](https://www.notion.so/programequity/Dare-to-Dream-Civic-Engagement-is-key-to-change-595ca4db3a2948c6b44569b58d530c8c)
+
+## Documenting the API with OpenAPI Schema and Swagger UI
+
+Our API is documented using the [OpenAPI 3.1.0 Specification](https://spec.openapis.org/oas/v3.1.0), using a [multi-file structure](https://redocly.com/docs/resources/multi-file-definitions/).  Linting is enforced by [Redocly](https://redocly.com/docs/cli/); you might find it useful to use the [Redocly OpenAPI VSCode extension](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code) if you are iterating on the schema. See also [here](https://redocly.com/docs/openapi-visual-reference/) for a visual specification reference.
+
+### Schema Specification Updates
+
+Updates to the OpenAPI schema itself should be made in the appropriate component `.yaml` file in the `docs/api_docs/` directory. Do **not** update the top level `openapi.yml` file; when our automated workflow runs, it will combine all of the files in the `docs/api_docs/` into the root-level `openapi.yml` file. See [here](https://redocly.com/docs/openapi-visual-reference/) for more about the file structure.
+
+Make sure to lint and bundle the API schema locally by running `script/lint-and-bundle-openapi-schema.sh`.  Commit any changes to `openapi.yml` generated from this command.
+
+You can also explore the components of an OpenAPI spec [using this map](http://openapi-map.apihandyman.io/)
+
+The UI spec is viewable [here](tbd)
