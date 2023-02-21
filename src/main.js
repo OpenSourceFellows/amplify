@@ -56,14 +56,5 @@ new Vue({
   store,
   vuetify,
   components: { FontAwesomeIcon },
-  // testing logging
-  // created: function () {
-  //   const testObject = {
-  //     name: 'test',
-  //     value: 'this is a test object'
-  //   }
-  //   this.$log.info('Log Test Message', testObject)
-  //   this.$log.error(new Error('something went wrong'))
-  // },
   render: (h) => h(App)
 }).$mount('#app')
