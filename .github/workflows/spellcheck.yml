@@ -1,0 +1,14 @@
+name: Spell Check Dictionary Add
+on:
+  workflow_dispatch:
+    inputs:
+      words:
+        type: string
+        description: Words to add to the dictionary
+        required: true
+
+jobs:
+  spellcheck:
+    uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck-dictionary-add.yml@main
+    with:
+      words: ${{ inputs.words }}
