@@ -45,6 +45,7 @@ const JURISDICTION_FILTER_MAP = {
   local: ['LOCAL_EXEC', 'LOCAL'],
   school: ['SCHOOL']
 }
+
 const ALLOWED_JURISDICTION_FILTERS = Object.keys(JURISDICTION_FILTER_MAP)
 
 // Endpoints
@@ -76,7 +77,7 @@ router.get('/:searchText', async (req, res) => {
   if (!isValidZIPcode && !isValidAddress) {
     res.status(400).send({
       error:
-        'Invalid zip code or street address format, valid examples of a ZIP code are 84054-6013 or 84054. The zipcode/street address used was ' +
+        'Invalid zip code or street address format, valid examples of a ZIP code are 84054-6013 or 84054. The zip-code/street address used was ' +
         searchText
     })
     return
@@ -89,110 +90,157 @@ router.get('/:searchText', async (req, res) => {
     return
   }
 
-  try {
-    const params = {
-      order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
-      sort: 'asc',
-      max: 200,
-      format: 'json',
-      key: CICERO_API_KEY
-    }
-    // add ZIP code search as parameter.
-    // NOTE: we check it first, because, as of now, the regex use to validate ZIP codes is stricter and more accurate
-    if (isValidZIPcode) {
-      params.search_postal = searchText
-      params.search_country = 'US'
-    }
-    // add street address search as parameter
-    else if (isValidAddress) {
-      params.search_address = streetAddress
-    }
+  const params = {
+    order: 'district_type', // https://cicero.azavea.com/docs/#order-by-district-type
+    sort: 'asc',
+    max: 200,
+    format: 'json',
+    key: CICERO_API_KEY
+  }
 
-    if (filter != null) {
-      params.district_type = JURISDICTION_FILTER_MAP[filter]
-    }
+  // add ZIP code search as parameter.
+  // NOTE: we check it first, because, as of now, the regex use to validate ZIP codes is stricter and more accurate
+  if (isValidZIPcode) {
+    params.search_postal = searchText
+    params.search_country = 'US'
+  }
+  // add street address search as parameter
+  else if (isValidAddress) {
+    params.search_address = streetAddress
+  }
 
-    const {
-      data: { response }
-      //cached
-    } = await axios.get('https://cicero.azavea.com/v3.1/official', {
+  const [received, error] = await getData(
+    'https://cicero.azavea.com/v3.1/official', // url
+    {
       params,
       paramsSerializer: (params) =>
         qs.stringify(params, { arrayFormat: 'repeat' }),
-
       cache: {
         // TODO: we are disabling the cache to test results first
         ttl: 1000 * 60 * 60 * 24 * 7 // the time until the cached value is expired in milliseconds: set to 1 week
       }
-    })
+    } // config
+  )
 
-    // if you want to check if response was cached, uncomment: this is a way to track the issue
-    // console.log('isCached:', cached)
-
-    const { errors, results } = response
-    if (errors.length > 0) {
-      throw new Error(errors.join(','))
-    }
-    if (
-      !results ||
-      !Array.isArray(results.candidates) ||
-      results.candidates.length === 0
-    ) {
-      throw new Error('No matches found for the search criteria')
-    }
-
-    const officials = results.candidates[0].officials || []
-
-    const representatives = officials
-      .filter((rep) => {
-        // skip President and VP
-        return !(
-          rep.office.district.ocd_id === 'ocd-division/country:us' &&
-          /^(Vice )?President$/.test(rep.office.title)
-        )
-      })
-      .map((rep) => {
-        const mainAddr =
-          (Array.isArray(rep.addresses) && rep.addresses[0]) || {}
-
-        const repInfo = {
-          id: rep.sk || rep.id || '',
-          name: formatName(rep),
-          title:
-            rep.office.title ||
-            rep.office.chamber.name_formal ||
-            rep.office.chamber.name ||
-            '',
-          address_line1: mainAddr.address_1 || '',
-          address_line2:
-            mainAddr.address_2 +
-              (mainAddr.address_3 ? ', ' + mainAddr.address_3 : '') || '',
-          address_city: mainAddr.city || '',
-          address_state: mainAddr.state || '',
-          address_zip: mainAddr.postal_code || '',
-          address_country: 'US',
-          email:
-            (Array.isArray(rep.email_addresses) && rep.email_addresses[0]) ||
-            'Not Made Public',
-          contactPage:
-            rep.web_form_url || (Array.isArray(rep.urls) && rep.urls[0]) || '',
-          photoUrl:
-            rep.photo_origin_url ||
-            'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
-          socialMediaPages: getOfficialSocialMediaPages(rep.identifiers),
-          photoCroppingCSS: getPhotoCroppingValues(rep.photo_cropping)
-        }
-
-        return repInfo
-      })
-
-    res.send(representatives)
-  } catch (error) {
-    console.log(error)
-    res.status(500).send({
-      error: `Whoops, likely the axios.get req for getting representatives from 'https://cicero.azavea.com/v3.1/official' failed.`
-    })
+  if (filter != null) {
+    params.district_type = JURISDICTION_FILTER_MAP[filter]
   }
+
+  let response
+
+  if (error) {
+    const test_response = {
+      errors: [],
+      results: {
+        candidates: [
+          {
+            officials: [
+              // rep:
+              {
+                office: {
+                  district: {
+                    ocd_id: 1234
+                  },
+                  title: 'Office Title'
+                },
+                chamber: {
+                  name_formal: 'Chamber Formal Name',
+                  name: 'Name of Chamber'
+                },
+                addresses: [
+                  // mainAddr:
+                  {
+                    address_1: '123 Main',
+                    address_2: 'Apt 321',
+                    city: 'City',
+                    postal_code: '00000',
+                    state: 'California'
+                  }
+                ],
+                web_form_url: 'https://fake_web_form_url.com',
+                email_addresses: 'fake_email@failed_request.com',
+                photo_origin_url: 'https://fake_photo_origin_url.com',
+                identifiers: [],
+                photo_cropping: {}
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+    response = test_response
+
+    // http://127.0.0.1:8080/api/representatives/91765 get request failed
+    // console.error(error) // uncomment only when debugging
+    res.status(500).send({
+      error: `Whoops, the request for getting representatives from 'https://cicero.azavea.com/v3.1/official' failed. A test response is generated.`
+    })
+  } else {
+    response = received.data // axios' way of handling returned data
+  }
+
+  // if you want to check if response was cached, uncomment: this is a way to track the issue
+  // console.log('isCached:', cached)
+
+  const { errors, results } = response
+
+  if (errors.length > 0) {
+    throw new Error(errors.join(','))
+  }
+  if (
+    !results ||
+    !Array.isArray(results.candidates) ||
+    results.candidates.length === 0
+  ) {
+    throw new Error('No matches found for the search criteria')
+  }
+
+  const officials = results.candidates[0].officials || []
+
+  const representatives = officials
+    .filter((rep) => {
+      // skip President and VP
+      return !(
+        rep.office.district.ocd_id === 'ocd-division/country:us' &&
+        /^(Vice )?President$/.test(rep.office.title)
+      )
+    })
+    .map((rep) => {
+      const mainAddr = (Array.isArray(rep.addresses) && rep.addresses[0]) || {}
+
+      const repInfo = {
+        id: rep.sk || rep.id || '',
+        name: formatName(rep),
+        title:
+          rep.office.title ||
+          rep.office.chamber.name_formal ||
+          rep.office.chamber.name ||
+          '',
+        address_line1: mainAddr.address_1 || '',
+        address_line2:
+          mainAddr.address_2 +
+            (mainAddr.address_3 ? ', ' + mainAddr.address_3 : '') || '',
+        address_city: mainAddr.city || '',
+        address_state: mainAddr.state || '',
+        address_zip: mainAddr.postal_code || '',
+        address_country: 'US',
+        email:
+          (Array.isArray(rep.email_addresses) && rep.email_addresses[0]) ||
+          'Not Made Public',
+        contactPage:
+          rep.web_form_url || (Array.isArray(rep.urls) && rep.urls[0]) || '',
+        photoUrl:
+          rep.photo_origin_url ||
+          'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
+        socialMediaPages: getOfficialSocialMediaPages(rep.identifiers),
+        photoCroppingCSS: getPhotoCroppingValues(rep.photo_cropping)
+      }
+
+      return repInfo
+    })
+
+  res.send(representatives)
 })
 
 /*
@@ -348,6 +396,16 @@ function formatName(rep) {
   }
 
   return nameParts.join(' ')
+}
+
+async function getData(url, config) {
+  try {
+    const response = await axios.get(url, config)
+    return [response, null]
+  } catch (error) {
+    // console.error(error);
+    return [null, error]
+  }
 }
 
 module.exports = router
