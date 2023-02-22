@@ -13,7 +13,7 @@ body:
         Examples of poor documentation include:
         * Typos, grammatical errors or nonsensical wording
         * Outdated information
-        * Nonexistent or insufficient examples when there are
+        * Nonexistent or insufficient examples where appropriate
 
         **If possible, provide a link to the documentation in question.**
   - type: textarea
