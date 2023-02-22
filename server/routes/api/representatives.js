@@ -129,53 +129,59 @@ router.get('/:searchText', async (req, res) => {
   let response
 
   if (error) {
-    const test_response = {
-      errors: [],
-      results: {
-        candidates: [
-          {
-            officials: [
-              // rep:
-              {
-                office: {
-                  district: {
-                    ocd_id: 1234
-                  },
-                  title: 'Office Title'
-                },
-                chamber: {
-                  name_formal: 'Chamber Formal Name',
-                  name: 'Name of Chamber'
-                },
-                addresses: [
-                  // mainAddr:
-                  {
-                    address_1: '123 Main',
-                    address_2: 'Apt 321',
-                    city: 'City',
-                    postal_code: '00000',
-                    state: 'California'
-                  }
-                ],
-                web_form_url: 'https://fake_web_form_url.com',
-                email_addresses: 'fake_email@failed_request.com',
-                photo_origin_url: 'https://fake_photo_origin_url.com',
-                identifiers: [],
-                photo_cropping: {}
-              }
-            ]
-          }
-        ]
-      }
-    }
-
-    response = test_response
-
     // http://127.0.0.1:8080/api/representatives/91765 get request failed
-    // console.error(error) // uncomment only when debugging
-    res.status(500).send({
-      error: `Whoops, the request for getting representatives from 'https://cicero.azavea.com/v3.1/official' failed. A test response is generated.`
-    })
+    // uncomment only when debugging
+    // console.error(error)
+
+    // to avoid server crashing so front-end work can continue, add NODE_ENV='development' to your .env
+    if (process.env.NODE_ENV === 'development') {
+      // a test_response helpful for front-end work when axios requests are not working
+      const test_response = {
+        errors: [],
+        results: {
+          candidates: [
+            {
+              officials: [
+                // rep:
+                {
+                  office: {
+                    district: {
+                      ocd_id: 1234
+                    },
+                    title: 'Office Title'
+                  },
+                  chamber: {
+                    name_formal: 'Chamber Formal Name',
+                    name: 'Name of Chamber'
+                  },
+                  addresses: [
+                    // mainAddr:
+                    {
+                      address_1: '123 Main',
+                      address_2: 'Apt 321',
+                      city: 'City',
+                      postal_code: '00000',
+                      state: 'California'
+                    }
+                  ],
+                  web_form_url: 'https://fake_web_form_url.com',
+                  email_addresses: 'fake_email@failed_request.com',
+                  photo_origin_url: 'https://fake_photo_origin_url.com',
+                  identifiers: [],
+                  photo_cropping: {}
+                }
+              ]
+            }
+          ]
+        }
+      }
+
+      response = test_response
+    } else {
+      res.status(500).send({
+        error: `Whoops, the request for getting representatives from 'https://cicero.azavea.com/v3.1/official' failed. A test response is generated.`
+      })
+    }
   } else {
     response = received.data // axios' way of handling returned data
   }
