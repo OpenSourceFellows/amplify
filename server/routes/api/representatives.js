@@ -31,7 +31,7 @@ const STORAGE = buildStorage({
     CACHE.delete(key)
   }
 })
-// set up caxios-cache-interceptor with the map as a persistent storage
+// set up axios-cache-interceptor with the map as a persistent storage
 const axios = setupCache(Axios, { storage: STORAGE })
 
 const router = express.Router()
@@ -65,7 +65,7 @@ router.get('/:searchText', async (req, res) => {
   /* check if valid street address
      ^(\d{3,})\s? the start of the line can have 3 or more digits followed by a space
      (\w{0,})\s the next part can have 2 or more letters followed by a space
-     ([a-zA-Z]{2,30})\s the next part must be an alphanetical string with 2-30 characters followed by a space
+     ([a-zA-Z]{2,30})\s the next part must be an alphabetical string with 2-30 characters followed by a space
      ([a-zA-Z]{2,15}).?\s?  the next part must be an alphabetical string with 2-15 characters followed by a any digit (optionally) and/or space (optionally)
      (\w{0,5})$ the end of the line can have 0-5 letters
   */
@@ -269,36 +269,35 @@ function getPhotoCroppingValues(photo_cropping_object) {
 
   // 1. calculate threshold for the x space
   // we check if the coordinate starts on the left side of the image (the first half of the left side)
-  let x_left_threeshold = origWidth / 4
+  let x_left_threshold = origWidth / 4
   // we check if the coordinate starts on the right side of the image (the first half of the right side) and we reduce a margin of 5% to be flexible
-  let substract_percentage = 0.05
-  let x_right_threeshold =
-    origWidth / 2 - substract_percentage * (origWidth / 2)
-  // 2. calculate threeshold for the y space
+  let subtract_percentage = 0.05
+  let x_right_threshold = origWidth / 2 - subtract_percentage * (origWidth / 2)
+  // 2. calculate threshold for the y space
   // we check if the coordinate starts on the top side of the image (the first half of the top side)
-  let y_top_threeshold = oriHeight / 4
+  let y_top_threshold = oriHeight / 4
   // we check if the coordinate starts on the bottom side of the image (the first half of the bottom side) and we reduce a margin of 5% to be flexible
-  let y_bottom_threeshold = oriHeight / 2 - (5 / 100) * (oriHeight / 2)
+  let y_bottom_threshold = oriHeight / 2 - (5 / 100) * (oriHeight / 2)
 
   // 3. determine the css values for the cropping
-  // if the coordinate does not reach any of the threesholds, we set the value to center
+  // if the coordinate does not reach any of the thresholds, we set the value to center
   let x_value = 'center'
   // left threshold met
-  if (x <= x_left_threeshold) {
+  if (x <= x_left_threshold) {
     x_value = 'left'
   }
   // right threshold met
-  if (x >= x_right_threeshold) {
+  if (x >= x_right_threshold) {
     x_value = 'right'
   }
   // we apply the same logic for the y or vertical direction
   let y_value = 'center'
   // top threshold met
-  if (y <= y_top_threeshold) {
+  if (y <= y_top_threshold) {
     y_value = 'top'
   }
   // bottom threshold met
-  if (y >= y_bottom_threeshold) {
+  if (y >= y_bottom_threshold) {
     y_value = 'bottom'
   }
 
@@ -329,7 +328,7 @@ function getOfficialSocialMediaPages(identifiers) {
           type: 'twitter',
           url: 'https://twitter.com/' + identifier.identifier_value,
           icon: 'fa-brands fa-twitter',
-          color: '#1DA1F2' // offiial twitter color
+          color: '#1DA1F2' // official twitter color
         })
         break
 
