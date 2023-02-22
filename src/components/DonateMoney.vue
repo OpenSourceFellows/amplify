@@ -64,6 +64,7 @@
           :min="1.5"
           label="Donation Amount"
           :value="customDonationAmount"
+          inputmode="numeric"
           @input="validateDonationAmount"
           required
         />
