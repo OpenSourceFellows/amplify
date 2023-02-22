@@ -32,7 +32,7 @@
               }"
               @click="
                 setCampaign(index)
-                test()
+                testLog()
               "
             >
               View Campaign
@@ -51,7 +51,7 @@ import axios from 'axios'
 
 export default {
   name: 'CampaignCards',
-  props: ['test'],
+  props: ['testLog'],
   data() {
     return {
       campaigns: [],

@@ -2,7 +2,7 @@
   <v-app>
     <div id="app">
       <app-header />
-      <router-view :test="test" />
+      <router-view :test-log="testLog" />
       <app-footer />
     </div>
   </v-app>
@@ -18,7 +18,7 @@ export default {
     AppFooter
   },
   methods: {
-    test() {
+    testLog() {
       console.log('test logs are working')
       const testObject = {
         name: 'test',

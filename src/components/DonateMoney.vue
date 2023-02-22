@@ -26,7 +26,7 @@
 import axios from 'axios'
 export default {
     name: 'DonateMoney',
-    props: [],
+    props: ['testLog'],
     data () {
       return {
         donation: 1.50
