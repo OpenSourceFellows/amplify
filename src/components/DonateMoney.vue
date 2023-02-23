@@ -17,7 +17,17 @@
       </v-btn-toggle>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit"> Submit </v-btn>
+      <v-btn
+        outlined
+        color="primary"
+        text
+        @click="
+          submit()
+          testLog()
+        "
+      >
+        Submit
+      </v-btn>
     </div>
   </section>
 </template>
@@ -26,7 +36,12 @@
 import axios from 'axios'
 export default {
     name: 'DonateMoney',
-    props: ['testLog'],
+    props: {
+    testLog: {
+      type: Function,
+      required: true
+    }
+  },
     data () {
       return {
         donation: 1.50

@@ -51,7 +51,12 @@ import axios from 'axios'
 
 export default {
   name: 'CampaignCards',
-  props: ['testLog'],
+  props: {
+    testLog: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return {
       campaigns: [],

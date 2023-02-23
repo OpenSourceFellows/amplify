@@ -128,7 +128,7 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <donate-money />
+          <donate-money :test-log="testLog" />
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -146,6 +146,10 @@ export default {
   props: {
     letterBody: {
       type: String,
+      required: true
+    },
+    testLog: {
+      type: Function,
       required: true
     }
   },
