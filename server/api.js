@@ -1,5 +1,6 @@
 // We need to require this here (AGAIN) to ensure it works with the Vue CLI loader
 require('dotenv').config()
+const jsonServer = require('json-server')
 
 const express = require('express')
 const rateLimit = require('express-rate-limit')
@@ -33,5 +34,11 @@ apiRouter.use('/letter_versions', letterVersions)
 apiRouter.use('/lob', lob)
 apiRouter.use('/checkout', checkout)
 //apiRouter.use('/twilio', twilio)
+
+// Add the mock Cicero API if we're in development
+if (process.env.NODE_ENV === 'development') {
+  const mockRouter = jsonServer.router('db.json')
+  apiRouter.use(mockRouter)
+}
 
 module.exports = apiRouter
