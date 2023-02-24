@@ -36,7 +36,7 @@ const axios = setupCache(Axios, { storage: STORAGE })
 
 const router = express.Router()
 
-const { CICERO_API_KEY } = process.env
+const { CICERO_API_KEY, CICERO_API_URL } = process.env
 
 const JURISDICTION_FILTER_MAP = {
   federal: ['NATIONAL_UPPER', 'NATIONAL_LOWER'],
@@ -115,7 +115,7 @@ router.get('/:searchText', async (req, res) => {
     const {
       data: { response }
       //cached
-    } = await axios.get('https://cicero.azavea.com/v3.1/official', {
+    } = await axios.get(CICERO_API_URL, {
       params,
       paramsSerializer: (params) =>
         qs.stringify(params, { arrayFormat: 'repeat' }),
