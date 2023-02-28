@@ -79,7 +79,7 @@ router.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       allow_promotion_codes: true,
       success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: previousPage
+      cancel_url: `${previousPage}?cancelled-session={CHECKOUT_SESSION_ID}`
     })
 
     res.json({ url: session.url, sessionId: session.id })
