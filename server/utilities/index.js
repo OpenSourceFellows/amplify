@@ -1,4 +1,4 @@
-const logger = require('./logger')
+const logger = require('./winston_logger')
 
 logger.info('text info', { meta: 1 })
 logger.warn('text warn')

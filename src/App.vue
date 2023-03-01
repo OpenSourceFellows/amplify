@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     testLog() {
-      console.log('test logs are working')
+      // console.log('test logs are working')
       const testObject = {
         name: 'test',
         value: 'this is a test object'
