@@ -167,13 +167,13 @@ export default {
       return this.$store.state.selectedRep
     },
     isFormFilled() {
-      return this.formIsFilled === false;
+      return this.formIsFilled === false
     }
   },
   created() {
     bus.$on('formFilled', (data) => {
-      this.formIsFilled = data;
-    });
+      this.formIsFilled = data
+    })
   },
   methods: {
     nextPage(attrs) {
