@@ -1,8 +1,19 @@
-name: Spell Check .md
+name: Spell Check 
 on:
-  schedule:
-    - cron: "0 0 1 * *"
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  spellcheck:
-    uses: actions/checkout@v3
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Spell check
+        uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
+
+        with:
+          node-version-file: '.node-version'
+          cache: npm
