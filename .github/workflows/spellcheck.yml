@@ -5,4 +5,5 @@ on:
 
 jobs:
   spellcheck:
-    using: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
+    uses: actions/checkout@v3
+    uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
