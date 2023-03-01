@@ -5,4 +5,4 @@ on:
 
 jobs:
   spellcheck:
-    uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
+    using: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
