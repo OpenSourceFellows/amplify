@@ -1,16 +1,13 @@
-name: Spell Check 
+name: Spell Check
 on:
-  workflow_dispatch:
-  pull_request:
-
+  workflow_dispatch: null
+  pull_request: null
 permissions:
   contents: read
-
 jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
       - name: Spell check
-      - uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
-
+      - uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main\
