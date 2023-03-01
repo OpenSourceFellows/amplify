@@ -10,6 +10,7 @@
           label="Full Name"
           placeholder="John Doe"
           required
+          @keyup="checkFormFilled"
         />
         <v-text-field
           ref="line1"
@@ -25,6 +26,7 @@
           placeholder="Snowy Rock Pl"
           counter="25"
           required
+          @keyup="checkFormFilled"
         />
         <v-text-field
           ref="line2"
@@ -32,7 +34,7 @@
           label="Address Line"
           placeholder="Snowy Rock Pl"
           counter="25"
-          required
+          @keyup="checkFormFilled"
         />
 
         <v-text-field
@@ -42,6 +44,7 @@
           label="City"
           placeholder="El Paso"
           required
+          @keyup="checkFormFilled"
         />
         <v-text-field
           ref="state"
@@ -50,6 +53,7 @@
           label="State"
           required
           placeholder="TX"
+          @keyup="checkFormFilled"
         />
         <v-text-field
           ref="zip"
@@ -58,6 +62,7 @@
           label="ZIP / Postal Code"
           required
           placeholder="79938"
+          @keyup="checkFormFilled"
         />
         <v-text-field
           ref="email"
@@ -67,6 +72,8 @@
           ]"
           label="Email"
           placeholder="condor@shellmound.com"
+          required
+          @keyup="checkFormFilled"
         />
       </v-card-text>
       <v-card-text> {{ message }} </v-card-text>
@@ -97,6 +104,7 @@
 
 <script lang="js">
 import axios from 'axios'
+import { bus } from '../main'
 
 export default {
 
@@ -115,6 +123,7 @@ export default {
       JSONstring: '',
       message: ''
     }),
+    isFormFilled: false,
 
     computed: {
       form () {
@@ -137,6 +146,16 @@ export default {
     },
 
     methods: {
+      checkForm() {
+      const requiredFields = document.querySelectorAll('input[required], textarea[required]');
+      let isValid = true;
+      requiredFields.forEach(f => {
+        if (!f.value || !this.validateEmail(f.value)) {
+          isValid = false;
+        }
+      });
+      return isValid;
+    },
         addressCheck () {
           this.errorMessages = this.address && !this.name
             ? "Hey! I'm required"
@@ -182,7 +201,12 @@ export default {
             .catch(function (error) {
                 console.log(error)
             })
-        }
+        },
+        checkFormFilled() {
+      // check if the form is fully filled here
+      this.isFormFilled = !!this.checkForm()
+      bus.$emit('formFilled', this.isFormFilled);
+    },
 
     }
 }

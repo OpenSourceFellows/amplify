@@ -84,8 +84,8 @@
         <v-expansion-panel-content>
           <v-btn
             width="160"
-            dark
             color="primary"
+            :disabled="!formIsFilled"
             @click="nextPage({ userData })"
           >
             Next
@@ -139,6 +139,7 @@
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
+import { bus } from '../main'
 
 export default {
   name: 'TakeAction',
@@ -157,13 +158,22 @@ export default {
         1: 'default',
         2: 'default'
       },
+      formIsFilled: false,
       userData: {}
     }
   },
   computed: {
     selectedRep() {
       return this.$store.state.selectedRep
+    },
+    isFormFilled() {
+      return this.formIsFilled === false;
     }
+  },
+  created() {
+    bus.$on('formFilled', (data) => {
+      this.formIsFilled = data;
+    });
   },
   methods: {
     nextPage(attrs) {
