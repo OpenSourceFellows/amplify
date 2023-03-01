@@ -12,5 +12,5 @@ jobs:
     timeout-minutes: 2
     steps:
       - name: Spell check
-        uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
+      - uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
 
