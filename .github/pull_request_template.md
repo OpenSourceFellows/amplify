@@ -30,9 +30,9 @@
 
 ## Description
 What Epic is this issue part of?
-- [ ] Epic 1- Onboarding Flow :  @glenn @param
-- [ ] Epic 2- User Profile : @nawaz @traviskopp
-- [ ] Epic 3- OSS Workflow : @manishapriya94 @cristian @eprice555
+- [ ] Epic 1- Onboarding Flow : @DietBepis1 @paramsiddharth
+- [ ] Epic 2- User Profile : @nawazkhan @traviskopp
+- [ ] Epic 3- OSS Workflow :@manishapriya94 @rcmtcristian @eprice555
 
 <!-- 
 Please do not leave this blank 
