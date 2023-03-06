@@ -12,8 +12,8 @@ router.post('/log', async (req, res) => {
 
   // database migration to Postgres here:
   try {
-    console.log(typeof severity, severity)
-    console.log(typeof data, data)
+    // console.log(typeof severity, severity)
+    // console.log(typeof data, data)
     const error_log = await ErrorLog.query().insert({
       level: severity,
       data: JSON.stringify(data)
