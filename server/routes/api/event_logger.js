@@ -5,11 +5,12 @@ const ErrorLog = require('../../db/models/error_log')
 
 router.post('/log', async (req, res) => {
   const { severity, data } = req.body
-  res.send(JSON.stringify({ severity, data }))
+  res.json({ severity, data })
+
   // send data to Winston
   logger.info(JSON.stringify({ severity, data }))
-  // database migration to Postgres here:
 
+  // database migration to Postgres here:
   try {
     console.log(typeof severity, severity)
     console.log(typeof data, data)
@@ -19,7 +20,6 @@ router.post('/log', async (req, res) => {
     })
     console.log(error_log)
   } catch (error) {
-    console.log(error)
     res
       .status(500)
       .send({ error: 'an error happened with the ErrorLog query insert' })
