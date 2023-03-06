@@ -1,5 +1,7 @@
 # Amplify
 
+Amplify is an open-source app created for users to take the initiative in being part of an actionable step in the efforts to protect against climate change. The user is able to choose a climate campaign, then using their zip code, they will be able to select a representative of their choice. The user then donates to have their letter sent out by Amplify.
+
 ## Table of Contents
 
   * [Getting Started](#getting-started)
@@ -15,8 +17,6 @@ The frontend code is stored in the `src/` directory.
 
 The backend (API) code is stored in the `server/` directory.
 
-
-
 **Project Workflow:**
 
 [Enablement Deck](https://docs.google.com/presentation/d/1llJgeTU1EzRSYB8kL-IQeAdoq7p6xb4ApEac5E3M8Qo/edit?usp=sharing)
@@ -29,22 +29,30 @@ The backend (API) code is stored in the `server/` directory.
 - [Wiki](https://github.com/ProgramEquity/amplify/wiki): API methods, Data Structures
 
 **Resources:**
-- We meet every **Wednesday from 12-1 pm pt and Thursdays from 8-8:30 pm pt**. Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
+- We meet every **Wednesday from 12-1 p.m. PT and Thursdays from 8-8:30 p.m. PT**. Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 - Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653) or review [App Research](https://www.notion.so/programequity/Dare-to-Dream-Civic-Engagement-is-key-to-change-595ca4db3a2948c6b44569b58d530c8c)
 
 
 
-## Project setup
+# Project setup
+In order to get started, you can clone, download a ZIP, or fork this repository to work on your local machine. If you would like to get started with Codespaces instead, the video below will walk you through setting up your Codespace.
 
 https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b08b-a6378d988e4b.mov
+
+<b>Codespaces Set Up</b>
 
 ## Contributing
 Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
 
+Run the following script first:
 ```shell
 script/bootstrap
 ```
-You will need to copy the `.env.example` file to a `.env` file in this repo.
+
+You will need to copy the `.env.example` file to a `.env` file in this repo. You can use the following command in your terminal:
+```shell
+cp .env.example .env
+```
 
 ### Compiles and hot-reloads full app for development
 ```shell
@@ -75,7 +83,7 @@ npm start
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## App Walkthrough
+# App Walkthrough
 
 **App Structure**
 
@@ -91,6 +99,7 @@ Goal Structure:
 **User Journey:**
 
 https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b691-81491830001a.mp4
+
 
 
 <img width="1561" alt="Screen Shot 2021-11-11 at 1 51 44 PM" src="https://user-images.githubusercontent.com/9143339/141374196-a32d140f-885c-4e45-8bba-99696f81ee80.png">
