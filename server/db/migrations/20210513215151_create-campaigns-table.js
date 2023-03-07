@@ -8,11 +8,15 @@ module.exports = {
       table.increments()
 
       // Simple fields
-      table.string('name').notNullable()
       table.string('organization').notNullable()
+      table.string('name').notNullable()
+      table.string('cause').notNullable()
+      table.string('type').notNullabel()
       table.text('page_url').notNullable()
-      table.integer('letters_sent').notNullable()
-
+      table.string('campaign_tagline').notNullable()
+      table.string('campaign_text').notNullable()
+      table.string('supplemental_text').nullable()
+      table.integer('letters_sent').nullable()
       // Fields using native enum types
       table
         .enum('cause', ['Civic Rights', 'Education', 'Climate Justice'], {
