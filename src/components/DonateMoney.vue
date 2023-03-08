@@ -70,7 +70,7 @@
         />
       </div>
 
-      <p v-if="message !== ''" class="message">
+      <p v-if="message" class="message">
         {{ message }}
       </p>
     </v-col>
