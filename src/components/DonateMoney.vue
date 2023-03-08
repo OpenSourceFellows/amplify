@@ -89,7 +89,7 @@ export default {
     return {
       donationAmount: 2,
       customAmountSelected: false,
-      customDonationAmount: undefined, // set min value to be 1.5
+      customDonationAmount: undefined,
       message: ''
     }
   },
