@@ -26,12 +26,12 @@ class Campaign extends BaseModel {
         campaign_tagline: { type: 'string', minLength: 1 },
         campaign_text: { type: 'string', minLength: 1 },
         supplemental_text: { type: 'string' },
-        logo_url: { type: 'string' },
+        logo_url: { type: 'string'},
         letters_goal: {
-          anyOf: [{ type: 'integer' }, { type: 'null' }]
+          anyOf: [{ type: 'integer'}, { type: 'null' }]
         },
         donation_goal: {
-          anyOf: [{ type: 'integer' }, { type: 'null' }]
+          anyOf: [{ type: 'integer'}, { type: 'null' }]
         }
       }
     }
