@@ -2,7 +2,7 @@ const tableName = 'campaigns'
 
 module.exports = {
   async up(knex) {
-    await knex.schema.createTable(tableName, (table) => {
+    await knex.schema.alterTable(tableName, (table) => {
       // Auto-incrementing non-nullable unsigned integer primary key "id" field
       table.increments()
 
