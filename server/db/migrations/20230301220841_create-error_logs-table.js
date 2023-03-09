@@ -7,24 +7,23 @@ module.exports = {
       // Auto-incrementing non-nullable unsigned integer primary key "id" field
       table.increments()
 
-      // Simple fields
-      table.string('level')
-      table.string('data')
-
       // Fields using native enum types
-      // table
-      //   .enum('level', ['debug', 'info', 'warn', 'error'], {
-      //     useNative: true,
-      //     enumName: 'level_type'
-      //   })
-      //   .notNullable()
+      table
+        .enum('level', ['log', 'error', 'warn', 'info', 'debug'], {
+          useNative: true,
+          enumName: 'level_type'
+        })
+        .notNullable()
+
+      // Simple fields
+      table.string('data').notNullable()
+      table.timestamps(true, true)
 
       // Indexes
-      // table.index(['name'])
-      // table.index(['organization'])
+      table.index(['level'])
 
       // Unique indexes
-      // table.unique(['name', 'organization'])
+      table.unique(['level'])
     })
   },
 
@@ -33,6 +32,6 @@ module.exports = {
     await knex.schema.dropTable(tableName)
 
     // Manually remove the native enum types
-    // await knex.raw(`DROP TYPE IF EXISTS level_type;`)
+    await knex.raw(`DROP TYPE IF EXISTS level_type;`)
   }
 }
