@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.22.5",
+    "@auth0/auth0-vue": "^2.1.0",
     "@babel/polyfill": "^7.4.4",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
@@ -66,7 +67,6 @@
     "register-service-worker": "^1.7.1",
     "stripe": "^11.1.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.4",
     "vuetify": "^2.6.8",
     "vuex": "^3.4.0"
   },
