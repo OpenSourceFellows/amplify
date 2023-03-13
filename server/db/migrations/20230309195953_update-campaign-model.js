@@ -8,10 +8,5 @@ module.exports = {
       table.string('campaign_text').nullable()
       table.string('supplemental_text').nullable()
     })
-  },
-
-  async down(knex) {
-    // Drop the table
-    await knex.schema.dropTable(tableName)
   }
 }
