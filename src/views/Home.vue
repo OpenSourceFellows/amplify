@@ -5,7 +5,7 @@
   </div>
   <div v-else>
     <home-hero />
-    <campaign-cards :test-log="testLog" />
+    <campaign-cards />
   </div>
 </template>
 
@@ -17,7 +17,6 @@ import CampaignCards from '@/components/CampaignCards'
 
 export default {
   name: 'Home',
-  props: ['testLog'],
   components: {
     CampaignBlurb,
     CampaignCards,

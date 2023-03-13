@@ -7,7 +7,7 @@
         Back to campaigns page
       </v-btn>
     </div>
-    <search-reps :test-log="testLog" />
+    <search-reps />
   </div>
 </template>
 
@@ -18,12 +18,6 @@ export default {
   name: 'Campaign',
   components: {
     SearchReps
-  },
-  props: {
-    testLog: {
-      type: Function,
-      required: true
-    }
   },
   computed: {
     campaignId() {

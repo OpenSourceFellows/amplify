@@ -142,7 +142,7 @@
             <v-container fluid>
               <v-row class="justify-center">
                 <v-col cols="12" md="8">
-                  <take-action :letter-body="letterBody" :test-log="testLog" />
+                  <take-action :letter-body="letterBody" />
                 </v-col>
               </v-row>
             </v-container>
@@ -176,12 +176,6 @@ export default {
   components: {
     RepresentativeCard,
     TakeAction
-  },
-  props: {
-    testLog: {
-      type: Function,
-      required: true
-    }
   },
   data() {
     return {

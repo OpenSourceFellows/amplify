@@ -5,9 +5,6 @@ const ErrorLog = require('../../db/models/error_log')
 
 router.post('/log', async (req, res) => {
   const { severity, data } = req.body
-  // send log messages to browser console
-  res.json({ severity, data })
-
   // send log messages to Winston
   logger.info(JSON.stringify({ severity, data }))
 
