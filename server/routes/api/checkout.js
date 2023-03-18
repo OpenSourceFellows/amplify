@@ -41,27 +41,54 @@ router.post('/create-transaction', async (req, res) => {
 // 3. Once user completes payment, will redirect back to `success_url` with
 //  a Stripe session_id included in the URL.
 
-router.post('/create-checkout-session', async (req, res) => {
+router.post('/create-checkout-session', async (req, res) => {  
+  const { donationAmount } = req.body || {}
+  const origin = req.get('origin')
+
+  const input = format(donationAmount);
+  const [inputIsValid, message] = validate(input);
+  const donationAmountForStripe = input * 100; // Stripe accepts values in cents
+
+  if (inputIsValid) {
+    const session = checkout(donationAmountForStripe, origin);
+    // console.log('session:', session)
+
+    if (session.error) {
+      console.log({ error: session.error, message: 'An error occurred with Stripe checkout' });
+      return res.json(session);
+    }
+
+    return res.json({ url: session.url, sessionId: session.id })
+  } else {
+    return res.status(400).send({ error: 'Invalid Amount; did not create Stripe checkout session', message })
+  }
+})
+
+// format input value
+function format(value) {
+  // separating parameter assignment and parseFloat operation for consistent outcome on change
+  value = parseFloat(value); // outputs: number
+  value = value.toFixed(2); // outputs: string
+  value = parseFloat(value); // outputs: number
+  return value;
+}
+
+// validate input value
+function validate(value = this.customDonationAmount) {
+  let inputIsValid = true, message = "";
+
+  if (value > 1.49 && value < 10000.01) return [inputIsValid, message];
+  
+  if (isNaN(value)) message = "Please select or enter a valid amount.";
+  if (value < 1.5) message = "Please enter a donation amount higher than $1.50.";
+  if (value > 10000) message = "Amplify currently only accept donation amounts less than $10,000."
+
+  inputIsValid = false;
+  return [inputIsValid, message]; // i.e. [ false, "Please select or enter a valid amount." ]
+}
+
+async function checkout(donationAmount, origin) {
   try {
-    const acceptableCharges = [1, 2, 20, 50]
-    const { donationAmount } = req.body || {}
-    const parsedDonationAmount = parseInt(donationAmount, 10)
-
-    let donation
-
-    if (parsedDonationAmount < 2) {
-      // TODO: Change to something better later.
-      donation = 150
-    } else {
-      donation = parsedDonationAmount * 100
-    }
-
-    if (!acceptableCharges.includes(parsedDonationAmount)) {
-      return res.status(400).send({ error: 'Invalid Amount' })
-    }
-
-    const origin = req.get('origin')
-
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -70,7 +97,7 @@ router.post('/create-checkout-session', async (req, res) => {
             product_data: {
               name: 'Donation'
             },
-            unit_amount: donation
+            unit_amount: donationAmount
           },
           quantity: 1
         }
@@ -80,11 +107,12 @@ router.post('/create-checkout-session', async (req, res) => {
       success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: origin
     })
-
-    res.json({ url: session.url, sessionId: session.id })
+    
+    return session;
   } catch (error) {
     console.log({ error })
+    return { error }
   }
-})
+}
 
 module.exports = router
