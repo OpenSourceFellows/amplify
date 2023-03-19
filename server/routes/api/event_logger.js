@@ -14,6 +14,7 @@ router.post('/log', async (req, res) => {
       level: severity,
       data: JSON.stringify(data)
     })
+    res.sendStatus(200)
   } catch (error) {
     res
       .status(500)
