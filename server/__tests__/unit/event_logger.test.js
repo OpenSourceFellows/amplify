@@ -5,17 +5,17 @@ const app = require('../../app')
 
 // Mock the ErrorLog model
 jest.mock('../../db/models/error_log', () => {
-  let resQuery = jest.fn()
-  let resInsert = jest.fn()
-  let res = {
-    query: resQuery,
-    insert: resInsert
+  let elQuery = jest.fn()
+  let elInsert = jest.fn()
+  let mockErrorLog = {
+    query: elQuery,
+    insert: elInsert
   }
-  // in order to chain class methods, this is required
-  resQuery.mockImplementation(() => res)
-  resInsert.mockImplementation(() => res)
+  // in order to chain class methods, we return the class that called the method
+  elQuery.mockImplementation(() => mockErrorLog)
+  elInsert.mockImplementation(() => mockErrorLog)
 
-  return res
+  return mockErrorLog
 })
 
 beforeAll(() => {
