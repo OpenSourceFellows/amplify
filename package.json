@@ -89,7 +89,7 @@
     "style-resources-loader": "^1.4.1",
     "supertest": "^6.3.0",
     "vue-cli-plugin-style-resources-loader": "~0.1.5",
-    "vue-eslint-parser": "^8.3.0",
+    "vue-eslint-parser": "^9.1.0",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
   },
