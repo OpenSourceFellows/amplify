@@ -7,14 +7,14 @@ router.post('/log', async (req, res) => {
   const { severity, data } = req.body
   // send log messages to Winston
   logger.info(JSON.stringify({ severity, data }))
+  res.sendStatus(200)
 
-  // database migration to Postgres
+  // save log messages to database
   try {
     await ErrorLog.query().insert({
       level: severity,
       data: JSON.stringify(data)
     })
-    res.sendStatus(200)
   } catch (error) {
     res
       .status(500)

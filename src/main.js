@@ -56,5 +56,6 @@ new Vue({
   store,
   vuetify,
   components: { FontAwesomeIcon },
+
   render: (h) => h(App)
 }).$mount('#app')
