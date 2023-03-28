@@ -1,4 +1,3 @@
-require('dotenv').config()
 const ErrorLog = require('../../db/models/error_log')
 const request = require('supertest')
 const app = require('../../app')

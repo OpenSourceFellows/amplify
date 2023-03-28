@@ -151,13 +151,13 @@ export default {
             this.expectedDeliveryDate = res.data.expected_delivery_date
             this.loading = false
             // log response status
-            this.$log.debug('Status at /api/lob/createLetter:', res.status)
+            // this.$log.debug('Status at /api/lob/createLetter:', res.status)
           })
           .catch((err) => {
             // TODO: Needs error handling
             console.error(err)
             // log error
-            this.$log.error('An error occured at /lob/checkout/createLetter:', err.message, err.name, err.code)
+            // this.$log.error('An error occured at /lob/checkout/createLetter:', err.message, err.name, err.code)
           })
       }
     }
