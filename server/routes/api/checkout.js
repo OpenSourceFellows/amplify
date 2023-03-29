@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
-
 const express = require('express')
 const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const format = require('../../../util/format')
+const validate = require('../../../util/validate')
 
 router.post('/create-transaction', async (req, res) => {
   const { sessionId /*, email /*, campaignId, donationId */ } = req.body || {}
@@ -94,31 +94,5 @@ router.post('/create-checkout-session', async (req, res) => {
     })
   }
 })
-
-// format input value
-function format(value) {
-  // separating parameter assignment and parseFloat operation for consistent outcome on change
-  value = parseFloat(value) // outputs: number
-  value = value.toFixed(2) // outputs: string
-  value = parseFloat(value) // outputs: number
-  return value
-}
-
-// validate input value
-function validate(value = this.customDonationAmount) {
-  let inputIsValid = true,
-    message = ''
-
-  if (value > 1.49 && value < 10000.01) return [inputIsValid, message]
-
-  if (isNaN(value)) message = 'Please select or enter a valid amount.'
-  if (value < 1.5) message = 'Please enter a donation amount higher than $1.50.'
-  if (value > 10000)
-    message =
-      'Amplify currently only accept donation amounts less than $10,000.'
-
-  inputIsValid = false
-  return [inputIsValid, message] // i.e. [ false, "Please select or enter a valid amount." ]
-}
 
 module.exports = router
