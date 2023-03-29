@@ -7,4 +7,4 @@ function format(value) {
   return value // number
 }
 
-module.exports = format;
+module.exports = format
