@@ -90,7 +90,7 @@ export default {
       customAmountSelected: false,
       customDonationAmount: undefined,
       inputRule: [
-        (val) => validate(format(val))[0] || 'Invalid amount: acceptable value ranges between $1.50 and $10,000.00'
+        (val) => validate(format(val)) || 'Invalid amount: acceptable value ranges between $1.50 and $10,000.00'
       ]
     }
   },
@@ -110,7 +110,7 @@ export default {
       if (this.customAmountSelected) value = this.customDonationAmount;
       const input = format(value);
 
-      // user feedback provided on input, actual validation occurs on submit
+      // provides user feedback on input, actual validation occurs on submit
       if (this.$refs.input.validate()) this.createCheckoutSession(input);
       return;
     },
