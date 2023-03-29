@@ -55,24 +55,21 @@
       <div class="d-flex justify-center flex-column align-center :width=100%">
         <v-text-field
           v-if="customAmountSelected"
+          ref="input"
           v-model="customDonationAmount"
+          :rules="inputRule"
           class="custom-donation-amount-textfield"
+          inputmode="numeric"
+          label="Donation Amount"
           type="number"
-          :precision="2"
-          :step="0.01"
           :max="10000"
           :min="1.5"
-          label="Donation Amount"
+          :precision="2"
+          :step="0.01"
           :value="customDonationAmount"
-          inputmode="numeric"
-          @input="validateDonationAmount"
           required
         />
       </div>
-
-      <p v-if="message" class="message">
-        {{ message }}
-      </p>
     </v-col>
     <div>
       <v-btn outlined color="primary" text @click="submit"> Submit </v-btn>
@@ -82,6 +79,8 @@
 
 <script lang="js">
 import axios from 'axios'
+import format from '../../util/format.js'
+import validate from '../../util/validate.js'
 export default {
   name: 'DonateMoney',
   props: [],
@@ -90,7 +89,9 @@ export default {
       donationAmount: 2,
       customAmountSelected: false,
       customDonationAmount: undefined,
-      message: ''
+      inputRule: [
+        (val) => validate(format(val))[0] || 'Invalid amount: acceptable value ranges between $1.50 and $10,000.00'
+      ]
     }
   },
   computed: {
@@ -100,65 +101,30 @@ export default {
   methods: {
     unsetCustomAmountSelection() {
       this.customAmountSelected = false;
-      this.message = "";
     },
     handleCustomAmountSelection() {
       this.customAmountSelected = !this.customAmountSelected;
-      this.message = "";
-    },
-    validateDonationAmount(value = this.customDonationAmount) {
-      let isValid = true;
-      value = parseFloat(value); // outputs: number
-      value = value.toFixed(2); // outputs: string
-      value = parseFloat(value); // outputs: number
-      // separating parameter assignment and parseFloat operation for consistent outcome on change
-
-      // if an existing donation amount button was chosen
-      if (!this.customAmountSelected) {
-        value = this.donationAmount;
-        return { value, isValid } // i.e. { 2 || 20 || 50, true }
-      }
-
-      if (value > 1.49 && value < 10000.01) {
-        this.message = "";
-        return { value, isValid }; // { 1.50, true }
-      }
-
-      if (isNaN(value)) { // undefined || NaN
-        this.message = "Please select or enter a valid amount.";
-      }
-      if (value < 1.5) {
-        this.message = "Please enter a donation amount higher than $1.50.";
-      }
-      if (value > 10000) {
-        this.message = "Amplify currently only accept donation amounts less than $10,000."
-      }
-
-      isValid = false;
-      return { value, isValid }; // i.e. { undefined, false }
     },
     submit() {
-      const { value, isValid } = this.validateDonationAmount();
-      // console.log(`the value: ${value} is ${isValid ? 'valid' : 'NOT valid'}`);
+      let value = this.donationAmount;
+      if (this.customAmountSelected) value = this.customDonationAmount;
+      const input = format(value);
 
-      if (isValid) {
-        this.createCheckoutSession(value);
-        this.message = ""; // only refreshes message after input value becomes valid
-      } else {
-        this.message = "The donation amount is not valid."; // edge case?
-        return;
-      }
+      if (this.$refs.input.validate()) this.createCheckoutSession(input);
+      return;
     },
-    createCheckoutSession (donationAmount) {
+    createCheckoutSession(donationAmount) {
       axios.post('/api/checkout/create-checkout-session', {donationAmount})
         .then((response) => {
           // Dump state to local storage before redirect
           this.$store.dispatch('dumpStateToLocalStorage', response.data.sessionId)
-          // Redirect to stripe
+          // Redirect to Stripe
           location.href = response.data.url
         })
-        .catch(function (error) {
-          console.log(error)
+        .catch((error) => {
+          // Bring custom error message to top-level for ease of debugging
+          const { data } = error.response;
+          console.log(data, error)
         })
     }
   }
@@ -168,14 +134,6 @@ export default {
 <style scoped lang="less">
 .custom-donation-amount-textfield {
   margin-top: 1em;
-  min-width: 10em;
-}
-.message {
-  background-color: #fff8e6;
-  border-radius: 0.25em;
-  border: 1px solid #e6a700;
-  color: #4d3800;
-  // margin-top: 1em;
-  padding: 0.25em;
+  width: 10em;
 }
 </style>
