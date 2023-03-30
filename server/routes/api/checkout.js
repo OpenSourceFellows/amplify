@@ -46,7 +46,7 @@ router.post('/create-checkout-session', async (req, res) => {
   const origin = req.get('origin')
 
   const input = format(donationAmount)
-  const [inputIsValid, message] = validate(input)
+  const inputIsValid = validate(input)
   const donationAmountForStripe = input * 100 // Stripe accepts values in cents
 
   if (inputIsValid) {
@@ -89,8 +89,8 @@ router.post('/create-checkout-session', async (req, res) => {
     return res.status(200).json({ url: session.url, sessionId: session.id })
   } else {
     return res.status(400).send({
-      error: 'Bad request: Did not create Stripe checkout session',
-      message
+      error: 'Bad request: did not create Stripe checkout session',
+      message: 'Check backend console for possible failing reasons'
     })
   }
 })
