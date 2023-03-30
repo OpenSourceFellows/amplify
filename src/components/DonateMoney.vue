@@ -107,11 +107,16 @@ export default {
     },
     submit() {
       let value = this.donationAmount;
-      if (this.customAmountSelected) value = this.customDonationAmount;
       const input = format(value);
 
-      // provides user feedback on input, actual validation occurs on submit
-      if (this.$refs.input.validate()) this.createCheckoutSession(input);
+      if (this.customAmountSelected) {
+        value = this.customDonationAmount;
+        // provides user feedback on input, actual validation occurs on submit
+        if (this.$refs.input.validate()) this.createCheckoutSession(input);
+      }
+
+      if (validate(input)) this.createCheckoutSession(input);
+
       return;
     },
     createCheckoutSession(donationAmount) {
