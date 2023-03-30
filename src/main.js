@@ -20,7 +20,6 @@ import {
   faYoutube
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-export const bus = new Vue()
 
 /* import specific icons */
 library.add(faUserSecret, faInstagram, faFacebookF, faTwitter, faYoutube)

@@ -78,17 +78,17 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name />
+          <sign-name @form-filled="handleFormFilled" />
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
           <v-btn
             width="160"
             color="primary"
-            :disabled="!formIsFilled"
+            :disabled="!formFilled"
             @click="nextPage({ userData })"
           >
-            Next
+            {{ formFilled ? 'Next' : 'Please Fill Form!' }}
           </v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -139,7 +139,6 @@
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
-import { bus } from '../main'
 
 export default {
   name: 'TakeAction',
@@ -158,23 +157,16 @@ export default {
         1: 'default',
         2: 'default'
       },
-      formIsFilled: false,
+      formFilled: false,
       userData: {}
     }
   },
   computed: {
     selectedRep() {
       return this.$store.state.selectedRep
-    },
-    isFormFilled() {
-      return this.formIsFilled === false
     }
   },
-  created() {
-    bus.$on('formFilled', (data) => {
-      this.formIsFilled = data
-    })
-  },
+
   methods: {
     nextPage(attrs) {
       this.$store.dispatch('setLetterAttrs', attrs)
@@ -210,6 +202,9 @@ export default {
     },
     handleAddress(address) {
       this.userData = address
+    },
+    handleFormFilled(value) {
+      this.formFilled = value
     }
   }
 }

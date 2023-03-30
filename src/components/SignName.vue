@@ -104,7 +104,6 @@
 
 <script lang="js">
 import axios from 'axios'
-import { bus } from '../main'
 
 export default {
 
@@ -203,9 +202,9 @@ export default {
             })
         },
         checkFormFilled() {
-      // check if the form is fully filled here
-      this.isFormFilled = !!this.checkForm()
-      bus.$emit('formFilled', this.isFormFilled);
+      // checking if the form is filled and emitting
+      this.isFormFilled = this.checkForm()
+      this.$emit('form-filled', this.isFormFilled);
     },
 
     }
