@@ -42,8 +42,6 @@ jest.mock('../../db/models/error_log', () => {
 
 describe('Saving a log message to the database', () => {
   test('should call ErrorLog.query().insert()', async () => {
-    const route = '/api/event_logger/log'
-
     // call a function that should call ErrorLog.query().insert()
     await request(app).post(route).send(logMessage)
 
