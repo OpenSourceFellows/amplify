@@ -79,8 +79,8 @@
 
 <script lang="js">
 import axios from 'axios'
-import format from '../../util/format.js'
-import validate from '../../util/validate.js'
+import { formatDonationAmount } from '../../util/format.js'
+import { validateDonationAmount } from '../../util/validate.js'
 export default {
   name: 'DonateMoney',
   props: [],
@@ -90,7 +90,7 @@ export default {
       customAmountSelected: false,
       customDonationAmount: undefined,
       inputRule: [
-        (val) => validate(format(val)) || 'Invalid amount: acceptable value ranges between $1.50 and $10,000.00'
+        (val) => validateDonationAmount(formatDonationAmount(val)) || 'Invalid amount: acceptable value ranges between $1.50 and $10,000.00'
       ]
     }
   },
@@ -108,14 +108,14 @@ export default {
     submit() {
       const value = this.customAmountSelected ?
         this.customDonationAmount : this.donationAmount;
-      const input = format(value);
+      const input = formatDonationAmount(value);
 
       if (this.customAmountSelected) {
         // inputRule provides user feedback on input, but actual validation occurs on submit
         if (this.$refs.input.validate()) this.createCheckoutSession(input);
       }
 
-      if (validate(input)) this.createCheckoutSession(input);
+      if (validateDonationAmount(input)) this.createCheckoutSession(input);
 
       return;
     },

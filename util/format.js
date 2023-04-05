@@ -1,5 +1,5 @@
 // format input value
-function format(value) {
+function formatDonationAmount(value) {
   // separating parameter assignment and parseFloat operation for consistent outcome
   value = parseFloat(value) // outputs: number
   value = value.toFixed(2) // outputs: string
@@ -7,4 +7,4 @@ function format(value) {
   return value // number
 }
 
-module.exports = format
+module.exports = { formatDonationAmount }

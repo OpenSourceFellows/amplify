@@ -3,8 +3,8 @@ const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-const format = require('../../../util/format')
-const validate = require('../../../util/validate')
+const { formatDonationAmount } = require('../../../util/format')
+const { validateDonationAmount } = require('../../../util/validate')
 
 router.post('/create-transaction', async (req, res) => {
   const { sessionId /*, email /*, campaignId, donationId */ } = req.body || {}
@@ -45,8 +45,8 @@ router.post('/create-checkout-session', async (req, res) => {
   const { donationAmount } = req.body || {}
   const origin = req.get('origin')
 
-  const input = format(donationAmount)
-  const inputIsValid = validate(input)
+  const input = formatDonationAmount(donationAmount)
+  const inputIsValid = validateDonationAmount(input)
   const donationAmountForStripe = input * 100 // Stripe accepts values in cents
 
   if (inputIsValid) {

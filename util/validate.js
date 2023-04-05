@@ -1,5 +1,5 @@
 // validate input value, expects a number as parameter
-function validate(value) {
+function validateDonationAmount(value) {
   let message = ''
 
   if (value > 1.49 && value < 10000.01) return true
@@ -16,4 +16,4 @@ function validate(value) {
   return false
 }
 
-module.exports = validate
+module.exports = { validateDonationAmount }
