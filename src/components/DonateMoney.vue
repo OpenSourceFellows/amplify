@@ -72,7 +72,7 @@
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit"> Submit </v-btn>
+      <v-btn outlined color="primary" text @click="submit()"> Submit </v-btn>
     </div>
   </section>
 </template>
