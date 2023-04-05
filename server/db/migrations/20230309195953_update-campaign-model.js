@@ -3,7 +3,7 @@ const tableName = 'campaigns'
 module.exports = {
   async up(knex) {
     await knex.schema.alterTable(tableName, (table) => {
-      // Simple fields
+      // Add nullable columns
       table.string('campaign_tagline').nullable()
       table.string('campaign_text').nullable()
       table.string('supplemental_text').nullable()
@@ -11,7 +11,11 @@ module.exports = {
   },
 
   async down(knex) {
-    // Drop the table
-    await knex.schema.dropTable(tableName)
+    await knex.schema.alterTable(tableName, (table) => {
+      // Drop columns
+      table.dropColumn('supplemental_text')
+      table.dropColumn('campaign_text')
+      table.dropColumn('campaign_tagline')
+    })
   }
 }
