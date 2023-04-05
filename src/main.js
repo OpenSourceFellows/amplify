@@ -10,6 +10,9 @@ import { domain, clientId, audience } from '../auth_config.json'
 import { Auth0Plugin } from '@/auth/auth0-plugin'
 import 'vuetify/dist/vuetify.min.css'
 
+// for front-end logging
+import vueLogger from './utilities/vue_logger'
+
 // fontawesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
@@ -43,6 +46,9 @@ Vue.use(Auth0Plugin, {
   }
 })
 
+// for using front-end logger
+Vue.use(vueLogger)
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -50,5 +56,6 @@ new Vue({
   store,
   vuetify,
   components: { FontAwesomeIcon },
+
   render: (h) => h(App)
 }).$mount('#app')
