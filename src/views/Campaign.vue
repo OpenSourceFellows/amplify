@@ -24,7 +24,14 @@ export default {
       return this.$store.state.campaign.Id
     }
   },
-  created() {},
+  created() {
+    const cancelledSessionId = this.$route.query['cancelled-session']
+    if (cancelledSessionId) {
+      this.$store
+        .dispatch('retrieveStateFromLocalStorage', cancelledSessionId)
+        .catch((err) => console.error(err.message))
+    }
+  },
   methods: {
     goHome() {
       this.$router.push('/')
