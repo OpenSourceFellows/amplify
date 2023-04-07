@@ -47,9 +47,9 @@ router.post('/create-checkout-session', async (req, res) => {
 
   const input = formatDonationAmount(donationAmount)
   const inputIsValid = validateDonationAmount(input)
-  const donationAmountForStripe = input * 100 // Stripe accepts values in cents
 
   if (inputIsValid) {
+    const donationAmountForStripe = input * 100 // Stripe accepts values in cents
     let session
 
     try {
