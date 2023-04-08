@@ -55,8 +55,8 @@ pkcon install -y nodejs
 Ensure a modern version of [Node.js (and npm)](https://nodejs.org/en/download/) are installed.
 
 Currently used versions in production:
-- Node.js @ `14.x`
-- npm @ `6.x`
+- Node.js @ `16.x`
+- npm @ `8.x`
 
 ###### PostgreSQL server
 

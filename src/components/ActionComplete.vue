@@ -130,10 +130,14 @@ export default {
           const { email, amount } = res.data
           this.email = email
           this.amount = amount
+          // log response status
+          this.$log.debug('Status at /api/checkout/create-transaction:', res.status)
         })
         .catch(function (error) {
           // TODO: Needs error handling
           console.error(error)
+          // log error
+          this.$log.error('An error occured at /api/checkout/create-transaction:', error.message, error.name, error.code)
         })
       },
       createCampaignLetter(sessionId) {
@@ -150,10 +154,14 @@ export default {
           .then((res) => {
             this.expectedDeliveryDate = res.data.expected_delivery_date
             this.loading = false
+            // log response status
+            // this.$log.debug('Status at /api/lob/createLetter:', res.status)
           })
           .catch((err) => {
             // TODO: Needs error handling
             console.error(err)
+            // log error
+            // this.$log.error('An error occured at /lob/checkout/createLetter:', err.message, err.name, err.code)
           })
       }
     }
