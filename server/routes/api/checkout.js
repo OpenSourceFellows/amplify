@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
-
 const express = require('express')
 const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const { formatDonationAmount } = require('../../../util/format')
+const { validateDonationAmount } = require('../../../util/validate')
 
 router.post('/create-transaction', async (req, res) => {
   const { sessionId /*, email /*, campaignId, donationId */ } = req.body || {}
@@ -42,48 +42,56 @@ router.post('/create-transaction', async (req, res) => {
 //  a Stripe session_id included in the URL.
 
 router.post('/create-checkout-session', async (req, res) => {
-  try {
-    const acceptableCharges = [1, 2, 20, 50]
-    const { donationAmount } = req.body || {}
-    const parsedDonationAmount = parseInt(donationAmount, 10)
+  const { donationAmount } = req.body || {}
+  const origin = req.get('origin')
 
-    let donation
+  const input = formatDonationAmount(donationAmount)
+  const inputIsValid = validateDonationAmount(input)
 
-    if (parsedDonationAmount < 2) {
-      // TODO: Change to something better later.
-      donation = 150
-    } else {
-      donation = parsedDonationAmount * 100
-    }
+  if (inputIsValid) {
+    const donationAmountForStripe = input * 100 // Stripe accepts values in cents
+    let session
 
-    if (!acceptableCharges.includes(parsedDonationAmount)) {
-      return res.status(400).send({ error: 'Invalid Amount' })
-    }
-
-    const origin = req.get('origin')
-
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Donation'
+    try {
+      session = await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'Donation'
+              },
+              unit_amount: donationAmountForStripe
             },
-            unit_amount: donation
-          },
-          quantity: 1
-        }
-      ],
-      mode: 'payment',
-      allow_promotion_codes: true,
-      success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: origin
-    })
+            quantity: 1
+          }
+        ],
+        mode: 'payment',
+        allow_promotion_codes: true,
+        success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: origin
+      })
+    } catch (error) {
+      const data = {
+        type: error.type,
+        code: error.raw.code,
+        url: error.raw.doc_url,
+        message: 'An error occurred with Stripe checkout',
+        entire_error_object: error
+      }
 
-    res.json({ url: session.url, sessionId: session.id })
-  } catch (error) {
-    console.log({ error })
+      console.log(data)
+      return res.status(500).json(data)
+    }
+    // console.log('session:', session)
+
+    // the redirection happens within `DonateMoney.vue`
+    return res.status(200).json({ url: session.url, sessionId: session.id })
+  } else {
+    return res.status(400).send({
+      error: 'Bad request: did not create Stripe checkout session',
+      message: 'Check backend console for possible failing reasons'
+    })
   }
 })
 
