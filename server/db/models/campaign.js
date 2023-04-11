@@ -23,7 +23,7 @@ class Campaign extends BaseModel {
         },
         type: { type: 'string', enum: ['Starter', 'Accelerator', 'Grant'] },
         page_url: { type: 'string', minLength: 1 },
-        campaign_tagline: { type: 'string', minLength: 1 },
+        campaign_tagline: { type: 'string', minLength: 0 },
         campaign_text: { type: 'string', minLength: 1 },
         supplemental_text: { type: 'string' }
       }
