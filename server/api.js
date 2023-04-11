@@ -11,6 +11,7 @@ const letterVersions = require('./routes/api/letter_versions')
 const lob = require('./routes/api/lob')
 const checkout = require('./routes/api/checkout')
 //const twilio = require('./routes/api/twilio')
+const eventLogger = require('./routes/api/event_logger')
 
 // Created a nested router
 const apiRouter = express.Router()
@@ -33,5 +34,6 @@ apiRouter.use('/letter_versions', letterVersions)
 apiRouter.use('/lob', lob)
 apiRouter.use('/checkout', checkout)
 //apiRouter.use('/twilio', twilio)
+apiRouter.use('/event_logger', eventLogger)
 
 module.exports = apiRouter
