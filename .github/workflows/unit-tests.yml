@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@83b7061638ee4956cf7545a6f7efe594e5ad0247
       - name: Setup node
         uses: actions/setup-node@v3
         with:
