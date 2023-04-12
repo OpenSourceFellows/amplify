@@ -70,7 +70,7 @@ export default {
   },
   data () {
     return {
-      date: new Date().toLocaleString(),
+      date: new Intl.DateTimeFormat('en-US').format(new Date()),
       isSubmitted: true,
       customMessage: ""
     }
@@ -93,8 +93,14 @@ export default {
       return ''
     }
   },
+  watch: {
+    customMessage(newMessage) {
+      console.log(newMessage)
+      this.$store.commit('setGenericValue', { key: 'userCustomMessage', value: newMessage })
+    }
+  },
   persistCustomization(){
-    this.$store.commit('setGenericValue', { key: 'userCustomization', value: this.customMessage })
+    this.$store.commit('setGenericValue', { key: 'userCustomMessage', value: this.customMessage })
   }
 }
 </script>

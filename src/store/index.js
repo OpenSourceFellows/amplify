@@ -28,7 +28,7 @@ export default new Vuex.Store({
       zip: '',
       email: ''
     },
-    userCustomization: ''
+    userCustomMessage: ''
   },
   mutations: {
     // TODO: Do we really need two setters here?

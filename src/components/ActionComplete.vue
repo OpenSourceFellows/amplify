@@ -100,7 +100,7 @@ export default {
         return this.$store.state.lobReturnAddressId
       },
       userCustomization(){
-       return this.$store.state.userCustomization
+       return this.$store.state.userCustomMessage
          }
     },
     created () {
@@ -149,7 +149,7 @@ export default {
             from: this.lobReturnAddressId,
             template_id: this.letterId,
             sessionId,
-            userCustomization : this.userCustomization
+            userCustomMessage : this.userCustomMessage
           })
           .then((res) => {
             this.expectedDeliveryDate = res.data.expected_delivery_date
