@@ -5,6 +5,9 @@ const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
 // // need to `npm install --save twilio` first
-const twilio = require('twilio')(process.env.TWILIO_ID, process.env.TWILIO_SECRET_KEY)
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilio = require('twilio')(accountSid, authToken);
+
 
 module.exports = router
