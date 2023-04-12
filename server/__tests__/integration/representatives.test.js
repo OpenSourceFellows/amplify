@@ -71,11 +71,12 @@ describe('GET /api/representatives/:zipCode', () => {
 // mock implementation with an invalid zip code which return 400 status code
 it('should return a 400 status code and an error message in the response', async () => {
   const spy = jest.spyOn(axios, 'get')
+  const invalidZip = 'someInvalidZip'
   // Make a request to the API
-  const response = await request(app).get(`/api/representatives/invalid`)
+  const response = await request(app).get(`/api/representatives/${invalidZip}`)
   expect(response.status).toBe(400)
   expect(response.body).toEqual({
-    error: `Invalid zip code format, valid examples are 84054-6013 or 84054. The zipcode used was invalid`
+    error: `Invalid zip code or street address format, valid examples of a ZIP code are 84054-6013 or 84054. The zipcode/street address used was ${invalidZip}`
   })
   spy.mockRestore()
 }, 50000)

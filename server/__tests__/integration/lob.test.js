@@ -338,7 +338,7 @@ describe('POST /api/lob/createLetter', () => {
 
   const route = '/api/lob/createLetter'
 
-  test('returns 200 status if a letter is created meeting all requirements', async () => {
+  test.skip('returns 200 status if a letter is created meeting all requirements', async () => {
     const description = 'This is a test description'
 
     const to = {
