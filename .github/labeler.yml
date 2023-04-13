@@ -52,3 +52,16 @@ Review Letter:
 # Add 'Validate Address' label to any change to the file SignName.vue within the components directory
 Validate Address:
   - src/components/SignName.vue
+
+# Add 'Select Donation' label to any change to the file DonateMoney.vue within the components directory
+Select Donation:
+  - src/components/DonateMoney.vue
+
+# Add 'Finalize Checkout & Send Letter' label to any change to the file checkout.js in the api directory
+Finalize Checkout & Send Letter:
+  - server/routes/api/checkout.js
+
+# Add 'Action Complete' label to any changes to the files ActionComplete.vue and CauseCarousel.vue in the components directory
+Action Complete:
+  - src/components/ActionComplete.vue
+    src/components/CauseCarousel.vue
