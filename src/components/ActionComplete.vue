@@ -99,9 +99,9 @@ export default {
       lobReturnAddressId () {
         return this.$store.state.lobReturnAddressId
       },
-      userCustomization(){
+      userCustomMessage(){
        return this.$store.state.userCustomMessage
-         }
+      }
     },
     created () {
       const sessionId = this.$route.query.session_id

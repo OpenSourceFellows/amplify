@@ -177,7 +177,7 @@ export default {
   mounted() {},
   methods: {
     nextPage(attrs) {
-      this.$refs.letterLoad.persistCustomization()
+
       this.$store.dispatch('setLetterAttrs', attrs)
 
       const previousPanel = this.panel

@@ -98,9 +98,6 @@ export default {
       console.log(newMessage)
       this.$store.commit('setGenericValue', { key: 'userCustomMessage', value: newMessage })
     }
-  },
-  persistCustomization(){
-    this.$store.commit('setGenericValue', { key: 'userCustomMessage', value: this.customMessage })
   }
 }
 </script>
