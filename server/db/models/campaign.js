@@ -23,13 +23,9 @@ class Campaign extends BaseModel {
         },
         type: { type: 'string', enum: ['Starter', 'Accelerator', 'Grant'] },
         page_url: { type: 'string', minLength: 1 },
-        logo_url: { type: 'string', minLength: 1 },
-        letters_goal: {
-          anyOf: [{ type: 'integer', minimum: 0 }, { type: 'null' }]
-        },
-        donation_goal: {
-          anyOf: [{ type: 'integer', minimum: 0 }, { type: 'null' }]
-        }
+        campaign_tagline: { type: 'string' },
+        campaign_text: { type: 'string' },
+        supplemental_text: { type: 'string' }
       }
     }
   }
