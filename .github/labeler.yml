@@ -12,7 +12,7 @@ dependencies:
   - package*.json
 
 # Add '⚙️ Dev' label to any change to *.js files within the server directory
-⚙️ Dev:
+⚙️ Back-end:
   - server/**/*.js
 
 # Add 'test' label to any change to *.test.js files within the __tests__ directory
