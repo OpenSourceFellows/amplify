@@ -9,7 +9,7 @@ architecture:
 
 # Add 'dependencies' label to any change to package.json
 dependencies:
-  - package.json
+  - package*.json
 
 # Add '⚙️ Dev' label to any change to *.js files within the server directory
 ⚙️ Dev:
