@@ -80,16 +80,13 @@
         <v-expansion-panel-content>
           <sign-name @form-filled="handleFormFilled" />
         </v-expansion-panel-content>
-
         <v-expansion-panel-content>
           <v-btn
             width="160"
             color="primary"
             :disabled="!formFilled"
             @click="nextPage({ userData })"
-          >
-            {{ formFilled ? 'Next' : 'Please Fill Form!' }}
-          </v-btn>
+          >{{ formFilled ? 'Next' : 'Next' }}</v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
 
@@ -215,5 +212,11 @@ export default {
   .v-list-item {
     padding: 0px;
   }
+  .v-btn--disabled {
+    pointer-events: visible;
+}
+  button[disabled] {
+    cursor: not-allowed;
+}
 }
 </style>
