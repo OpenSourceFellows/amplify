@@ -86,7 +86,9 @@
             color="primary"
             :disabled="!formFilled"
             @click="nextPage({ userData })"
-          >{{ formFilled ? 'Next' : 'Next' }}</v-btn>
+          >
+            {{ formFilled ? 'Next' : 'Next' }}
+          </v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
 
@@ -214,9 +216,9 @@ export default {
   }
   .v-btn--disabled {
     pointer-events: visible;
-}
+  }
   button[disabled] {
     cursor: not-allowed;
-}
+  }
 }
 </style>
