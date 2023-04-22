@@ -140,11 +140,10 @@ export default {
         Object.keys(this.form).forEach(f => {
           if (!this.form[f] || !this.validateEmail(f)) {
             this.isFormFilled = false
-            this.formCheck()
           } else {
             this.isFormFilled = true
-            this.formCheck()
           }
+          this.formCheck()
         })
       },
       deep: true
