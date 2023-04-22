@@ -87,7 +87,7 @@
             :disabled="!formFilled"
             @click="nextPage({ userData })"
           >
-            {{ formFilled ? 'Next' : 'Next' }}
+            Next
           </v-btn>
         </v-expansion-panel-content>
       </v-expansion-panel>
