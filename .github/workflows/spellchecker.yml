@@ -1,0 +1,11 @@
+name: Spell Check .md
+on:
+  pull_request:
+  schedule:
+    - cron: "0 0 1 * *"
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    uses: austenstone/spellchecker-cli-action-summary/.github/workflows/spellcheck.yml@main
