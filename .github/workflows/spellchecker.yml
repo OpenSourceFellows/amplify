@@ -8,6 +8,7 @@ permissions:
   pull-requests: write
   actions: write
   checks: write
+  issues: write
 
 jobs:
   spellcheck:
