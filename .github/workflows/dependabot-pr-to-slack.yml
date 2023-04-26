@@ -1,0 +1,26 @@
+name: Notify team/reviewers of dependabot updates via Slack
+
+on: 
+  pull_request:
+    branches: ["main"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  slackNotification:
+    name: Slack Notification
+    if: startsWith(github.head_ref, 'dependabot/') # This step only runs when PR has dependabot/ HEAD
+    runs-on: ubuntu-latest
+
+    steps:
+    # Latest version available at: https://github.com/actions/checkout/releases
+
+    - uses: actions/checkout@v2.5.0
+    - name: Slack Notification
+      # Latest version available at: https://github.com/kv109/action-ready-for-review/releases
+      uses: kv109/action-ready-for-review@0.2
+      env:
+        SLACK_CHANNEL: dependabot-notifications  # to be worked on
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }} # to be worked on
+
+# ref: https://www.teracloud.io/single-post/dependabot-get-slack-notifications-using-github-actions
