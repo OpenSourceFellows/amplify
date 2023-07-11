@@ -42,7 +42,7 @@ https://user-images.githubusercontent.com/9143339/159093687-6fc90733-0599-445c-b
 <b>Codespaces Set Up</b>
 
 ## Contributing
-Would you like to become a contributor? Please check out our [contributors guide](.github/CONTRIBUTING.md)! 💝
+Would you like to become a contributor? Please check out our [contributors guide](./CONTRIBUTING.md)! 💝
 
 Run the following script first:
 ```shell
