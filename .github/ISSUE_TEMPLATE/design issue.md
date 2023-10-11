@@ -1,10 +1,12 @@
 ---
-name: "Frontend or Design bug"
-about: 'template to submit design changes or accessibility bugs'
-title: 'Frontend or Design bug'
-labels: 'bug'
+name: Frontend or Design bug
+about: template to submit design changes or accessibility bugs
+title: Frontend or Design bug
+labels: bug
 assignees: ''
+
 ---
+
 Thank you for taking the time to file an issue. Please make sure you have completed the relevant items from the checklist below. After doing so, you may delete the checklist.
 
 ## What screen is this?
