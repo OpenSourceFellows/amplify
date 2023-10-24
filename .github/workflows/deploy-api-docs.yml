@@ -1,0 +1,42 @@
+name: Deploy OpenAPI Documentation to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'openapi.yml'
+
+jobs:
+  upload-openapi-spec:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload openapi.yml
+        uses: actions/upload-artifact@v2
+        with:
+          name: spec-file
+          path: openapi.yml
+  generate-openapi-ui:
+    name: Generate Swagger UI and Deploy to Pages
+    needs: upload-openapi-spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download openapi.yml
+        uses: actions/download-artifact@v2
+        with:
+          name: spec-file
+
+      - name: Generate Swagger UI
+        uses: Legion2/swagger-ui-action@v1
+        with:
+          output: api-docs
+          spec-file: openapi.yml
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: api-docs

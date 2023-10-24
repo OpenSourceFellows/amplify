@@ -1,0 +1,24 @@
+description: >-
+  A JSON object containing information to create a letter to a representative
+  via the <a href="https://docs.lob.com/#operation/letter_create">Lob letter
+  creation API</a>
+required: true
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 255
+        to:
+          $ref: ../schemas/Address.yaml
+        from:
+          type: object
+          properties:
+            address_id:
+              type: integer
+              description: The address_id returned from /api/createAddress
+        template_id:
+          type: string
+          default: The Lob template_id created for this letter

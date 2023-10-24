@@ -1,0 +1,427 @@
+openapi: 3.0.0
+servers:
+  - url: ''
+info:
+  title: Amplify API
+  description: ''
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/ProgramEquity/amplify/blob/main/LICENSE
+paths:
+  /api/campaigns:
+    get:
+      summary: Returns a JSON array of campaigns
+      operationId: ''
+      responses:
+        '200':
+          description: Campaigns response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Campaigns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Campaign'
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+  /api/campaigns/{id}:
+    get:
+      summary: Returns a campaign based on its id
+      operationId: ''
+      responses:
+        '200':
+          description: Campaign response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400': null
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+  /api/letter_versions/{campaignId}:
+    get:
+      summary: >-
+        Returns all versions of each letter, including the template id, sent out
+        for a campaign based on campaign ID
+      responses:
+        '200':
+          description: Letter Versions response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LetterVersion'
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - name: campaignId
+          description: ID of campaign to return letter versions for
+          in: path
+          required: true
+          schema:
+            type: integer
+  /api/representatives/{zipCode}:
+    get:
+      summary: Returns representatives based on zip code
+      operationId: ''
+      description: >-
+        Returns Representatives based on zip code utilizing <a
+        href="https://developers.google.com/civic-information">Google's Civic
+        Information API</a>
+      externalDocs:
+        url: https://developers.google.com/civic-information
+      responses:
+        '200':
+          description: >-
+            Array of representatives, info found via <a
+            href="https://developers.google.com/civic-information">Google's
+            Civic Information API</a>
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Representative'
+        '400':
+          description: Invalid Zip Code Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/InvalidZipError'
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - name: zipCode
+          description: >-
+            Zip code around which to search for representatives.  Must be in the
+            form of a valid 5-digit or Zip+4 9-digit format.
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+  /api/lob/createLetter:
+    summary: Create a letter to a representative
+    post:
+      description: ''
+      summary: ''
+      operationId: ''
+      externalDocs:
+        url: https://docs.lob.com/#operation/letter_create
+      requestBody:
+        $ref: '#/components/requestBodies/CreateLetter'
+      responses:
+        '200':
+          description: Letter sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expected_delivery_date:
+                    type: string
+        '500':
+          description: >-
+            Something went wrong with payment, message will be "Payment is still
+            pending or has failed" or "Something failed! A refund of
+            ${refund.amount} ${refund.currency} has been issued"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: Payment is still pending or has failed
+  /api/lob/createAddress:
+    description: ''
+    post:
+      description: ''
+      summary: ''
+      operationId: ''
+      requestBody:
+        $ref: '#/components/requestBodies/CreateAddress'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address_id:
+                    type: string
+                    description: id from the addressResponse recieved from Lob
+        '400':
+          description: Address is not deliverable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/lob/addressVerification:
+    description: ''
+    post:
+      description: ''
+      summary: ''
+      operationId: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '200': null
+        '400': null
+        '500': null
+  /api/lob/templates/{templateId}:
+    get:
+      summary: Returns a Lob letter template ID
+      operationId: ''
+      description: >-
+        Returns a Lob letter template ID from the the <a
+        href="https://docs.lob.com/#operation/template_retrieve">Lob's template
+        API</a>
+      externalDocs:
+        url: https://docs.lob.com/#operation/template_retrieve
+      parameters:
+        - name: templateId
+          description: ID of the Lob letter template
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses: null
+components:
+  schemas:
+    Campaign:
+      type: object
+      required:
+        - organization
+        - name
+        - cause
+        - type
+        - page_url
+      properties:
+        id:
+          type: integer
+        organization:
+          type: string
+          minLength: 1
+          maxLength: 255
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        cause:
+          type: string
+          enum:
+            - Civic Rights
+            - Education
+            - Climate Justice
+        type:
+          type: string
+          enum:
+            - Starter
+            - Accelerator
+            - Grant
+        page_url:
+          type: string
+          minLength: 1
+        logo_url:
+          type: string
+          minLength: 1
+        letters_goal:
+          type: integer
+          minimum: 0
+        donation_goal:
+          type: integer
+          minimum: 0
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    LetterVersion:
+      type: object
+      required:
+        - campaign_id
+        - template_id
+        - office_division
+      properties:
+        id:
+          type: integer
+        campaign_id:
+          type: integer
+          minimum: 1
+        template_id:
+          type: string
+          minLength: 1
+          maxLength: 255
+        office_division:
+          type: string
+          default: Federal
+          enum:
+            - Federal
+            - State
+            - County
+            - Municipality
+        state:
+          type: string
+          nullable: true
+          minLength: 2
+          maxLength: 2
+        county:
+          type: string
+          nullable: true
+          minLength: 1
+        municipality:
+          type: string
+          nullable: true
+          minLength: 1
+    SocialMediaPage:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
+    Representative:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        address_city:
+          type: string
+        address_state:
+          type: string
+        address_zip:
+          type: string
+        address_country:
+          type: string
+          default: US
+        email:
+          type: string
+        twitter:
+          type: string
+        facebook:
+          type: string
+        contactPage:
+          type: string
+        photoUrl:
+          type: string
+        socialMediaPages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SocialMediaPage'
+        photoCroppingCSS:
+          type: string
+    InvalidZipError:
+      type: object
+      properties:
+        error:
+          type: string
+          default: >-
+            Invalid zip code format, valid examples are 84054-6013 or 84054. The
+            zip code used was {zip code}
+    Address:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        description:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+  requestBodies:
+    CreateLetter:
+      description: >-
+        A JSON object containing information to create a letter to a
+        representative via the <a
+        href="https://docs.lob.com/#operation/letter_create">Lob letter creation
+        API</a>
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                maxLength: 255
+              to:
+                $ref: '#/components/schemas/Address'
+              from:
+                type: object
+                properties:
+                  address_id:
+                    type: integer
+                    description: The address_id returned from /api/createAddress
+              template_id:
+                type: string
+                default: The Lob template_id created for this letter
+    CreateAddress:
+      description: Create an address to verify with lob
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Address'

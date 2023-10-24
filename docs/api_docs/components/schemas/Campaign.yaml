@@ -1,0 +1,42 @@
+type: object
+required:
+  - organization
+  - name
+  - cause
+  - type
+  - page_url
+properties:
+  id:
+    type: integer
+  organization:
+    type: string
+    minLength: 1
+    maxLength: 255
+  name:
+    type: string
+    minLength: 1
+    maxLength: 255
+  cause:
+    type: string
+    enum:
+      - Civic Rights
+      - Education
+      - Climate Justice
+  type:
+    type: string
+    enum:
+      - Starter
+      - Accelerator
+      - Grant
+  page_url:
+    type: string
+    minLength: 1
+  logo_url:
+    type: string
+    minLength: 1
+  letters_goal:
+    type: integer
+    minimum: 0
+  donation_goal:
+    type: integer
+    minimum: 0

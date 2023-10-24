@@ -1,0 +1,18 @@
+get:
+  summary: Returns a Lob letter template ID
+  operationId: ''
+  description: >-
+    Returns a Lob letter template ID from the the <a
+    href="https://docs.lob.com/#operation/template_retrieve">Lob's template
+    API</a>
+  externalDocs:
+    url: https://docs.lob.com/#operation/template_retrieve
+  parameters:
+    - name: templateId
+      description: ID of the Lob letter template
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses: 
+    
