@@ -30,9 +30,11 @@ jest.mock('axios')
 
 // Mock the axios request to the Cicero API and return the mock data for the test.
 describe('GET /api/representatives/:zipCode', () => {
-  //test that the api returns a 200 status code and a single representative object in the response
+  // Test that the API returns a 200 status code and a single representative object in the response.
   it('should return a 200 status code and a single representative object in the response', async () => {
+    // Spy on the axios get method.
     const spy = jest.spyOn(axios, 'get')
+    // Mock the implementation of the axios get method to return the ciceroResponse.
     spy.mockImplementation(async (url, { params }) => {
       return {
         data: ciceroResponse
@@ -42,42 +44,57 @@ describe('GET /api/representatives/:zipCode', () => {
     const response = await request(app).get(
       `/api/representatives/${zipCode.slice(0, 5)}`
     )
+    // Expect the response status to be 200.
     expect(response.status).toBe(200)
+    // Expect the response body to equal the apiResponse.
     expect(response.body).toEqual(apiResponse)
+    // Expect the axios get method to have been called.
     expect(spy).toHaveBeenCalled()
+    // Restore the original implementation of the axios get method.
     spy.mockRestore()
   }, 50000)
 })
 
 // Mock the axios request to the Cicero API and return the mock data for the test.
 describe('GET /api/representatives/:zipCode', () => {
-  //test that the api returns a 200 status code and a single representative object in the response
+  // Test that the API returns a 200 status code and a single representative object in the response.
   it('should return a 200 status code and a single representative object in the response', async () => {
+    // Spy on the axios get method.
     const spy = jest.spyOn(axios, 'get')
+    // Mock the implementation of the axios get method to return the ciceroResponse.
     spy.mockImplementation(async (url, { params }) => {
       return {
         data: ciceroResponse
       }
     })
-    // Make a request to the API
+    // Make a request to the API with the zipCode parameter.
     const response = await request(app).get(`/api/representatives/${zipCode}`)
+    // Expect the response status to be 200.
     expect(response.status).toBe(200)
+    // Expect the response body to equal the apiResponse.
     expect(response.body).toEqual(apiResponse)
+    // Expect the axios get method to have been called.
     expect(spy).toHaveBeenCalled()
+    // Restore the original implementation of the axios get method.
     spy.mockRestore()
   }, 50000)
 })
 
-// mock implementation with an invalid zip code which return 400 status code
+// Test that the API returns a 400 status code and an error message in the response for an invalid zip code.
 it('should return a 400 status code and an error message in the response', async () => {
+  // Spy on the axios get method.
   const spy = jest.spyOn(axios, 'get')
+  // Set an invalid zip code.
   const invalidZip = 'someInvalidZip'
-  // Make a request to the API
+  // Make a request to the API with the invalid zip code.
   const response = await request(app).get(`/api/representatives/${invalidZip}`)
+  // Expect the response status to be 400.
   expect(response.status).toBe(400)
+  // Expect the response body to contain an error message with the invalid zip code.
   expect(response.body).toEqual({
     error: `Invalid zip code or street address format, valid examples of a ZIP code are 84054-6013 or 84054. The zipcode/street address used was ${invalidZip}`
   })
+  // Restore the original implementation of the axios get method.
   spy.mockRestore()
 }, 50000)
 
