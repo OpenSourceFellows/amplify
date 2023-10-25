@@ -157,31 +157,32 @@ router.post('/createAddress', async (req, res) => {
 })
 
 router.post('/createLetter', async (req, res) => {
-  // Get description, to, and template_id, and Stripe session id from request body
-
+  // Extract relevant properties from request body
   const { description, to, from, template_id, sessionId } = req.body || {}
+
+  // Initialize Lob and Stripe APIs
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+  // Retrieve Stripe checkout session
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
 
   try {
-    // Check for completed payment before creating letter. Status can be succeeded, failed, or pending. Return server error if failure or pending.
-
+    // Verify that payment has succeeded before creating letter
     const paymentVerification = await stripe.paymentIntents.retrieve(
       checkoutSession.payment_intent
     )
 
     if (paymentVerification.status !== 'succeeded') {
+      // Return error if payment has failed or is still pending
       return res
         .status(500)
         .json({ msg: 'Payment is still pending or has failed.' })
         .end()
     }
 
-    // For development only, check for test_ prefix on 'from' parameter and
-    // return a dummy datebefore using lob api.
+    // For development only, return a fake delivery date if 'from' parameter contains 'test_'
     const isTest = from.includes('test_')
     if (isTest) {
       const fakeDeliveryDate = Intl.DateTimeFormat('en-US').format(Date.now())
@@ -192,7 +193,7 @@ router.post('/createLetter', async (req, res) => {
         .end()
     }
 
-    // Create Lob address using variables passed into route via post body
+    // Create Lob letter using provided information
     const letter = await lob.letters.create({
       description: description,
       to: {
@@ -208,6 +209,7 @@ router.post('/createLetter', async (req, res) => {
       color: false
     })
 
+    // Return expected delivery date of letter
     return res
       .status(200)
       .send({
@@ -217,12 +219,12 @@ router.post('/createLetter', async (req, res) => {
   } catch (error) {
     console.error(error)
 
-    // We'll need a stripe test env key to test this in our integration tests
+    // Issue refund if an error occurs
     const refund = await stripe.refunds.create({
       payment_intent: checkoutSession.payment_intent
     })
-    // TODO handle error for refund error. Not doing this currently because chance of
-    // user making it this far in the process and both LOB API and Stripe failing is very small.
+
+    // Return error message with refund information
     return res
       .status(500)
       .send({
