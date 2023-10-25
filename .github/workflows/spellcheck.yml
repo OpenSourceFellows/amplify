@@ -8,21 +8,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with: 
           node-version: '14.x'
+
       - name: Spellcheck
         uses: lingeorge88/amplify-ghActions-tests
         with:
           path: '.'
+
       - name: Post spellcheck results
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
+            const fs = require('fs')
             const context = github.context
-            const octokit = github.getOctokit(core.getInput('token'))
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
 
             const results = fs.readFileSync('spellcheck-results.txt', 'utf8')
             const lines = results.split('\n')
@@ -37,9 +41,13 @@ jobs:
 
             ${misspelledWords.join('\n')}`
 
-            await octokit.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body            })
-
+            try {
+              await octokit.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              })
+            } catch (error) {
+              console.error('An error occurred:', error)
+            }
