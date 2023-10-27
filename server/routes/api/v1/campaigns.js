@@ -7,11 +7,10 @@ router.post('/v1/campaigns', async (req, res) => {
     const addCampaign = new Campaign(req.body)
     await addCampaign.save()
     res.status(201).json(addCampaign)
-  } catch (error){
+  } catch (error) {
     console.error(error)
-    res.status(500).json({error: 'Internal Server Error'})
+    res.status(500).json({ error: 'Internal Server Error' })
   }
-  })
-
+})
 
 module.exports = router

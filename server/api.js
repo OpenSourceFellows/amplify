@@ -30,7 +30,7 @@ apiRouter.use(apiLimiter)
 // Routes
 apiRouter.use('/representatives', representatives)
 apiRouter.use('/campaigns', campaigns)
-apiRouter.use('/v1/campaigns', v1 )
+apiRouter.use('/v1/campaigns', v1)
 apiRouter.use('/authentication', authentication)
 apiRouter.use('/letter_versions', letterVersions)
 apiRouter.use('/lob', lob)
