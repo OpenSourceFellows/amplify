@@ -15,14 +15,14 @@ jobs:
           node-version: '14.x'
 
       - name: Spellcheck
-        uses: lingeorge88/amplify-ghActions-tests
+        uses: lingeorge88/amplify-ghActions-tests/.github/workflows/spellcheck@main
         with:
           path: '.'
 
       - name: Post spellcheck results
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs')
             const context = github.context
