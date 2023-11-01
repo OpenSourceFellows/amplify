@@ -3,8 +3,8 @@ name: ROI pull request metrics
 on:
   issues:
     types: [assigned, unlabeled]
-    repository:
-      - ProgramEquity/amplify
+    # repository:
+    #   - ProgramEquity/amplify
   pull_request:
     types: [opened]
     branches:
