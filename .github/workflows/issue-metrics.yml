@@ -20,5 +20,6 @@ jobs:
     - name: Issue Metrics
       uses: github/issue-metrics@v2
       with:
-        entryPoint: ${{ github.workspace }}/issue-metrics.js
+        entryPoint: ./issue-metrics.js
+        # entryPoint: ${{ github.workspace }}/issue-metrics.js
         args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
