@@ -284,6 +284,7 @@ function getOfficialSocialMediaPages(identifiers) {
         break
 
       case 'FACEBOOK-OFFICIAL':
+        // remove any leading/trailing slashes and the "facebook.com" domain from the URL
         var new_identifier_value = identifier.identifier_value.replace(
           /^(?:https?:\/\/(?:www\.)?facebook\.com\/)?(.+)\/?$/,
           '$1'
@@ -320,6 +321,11 @@ function getOfficialSocialMediaPages(identifiers) {
   return social_media_pages
 }
 
+/**
+ * Formats the name of a representative based on their properties.
+ * @param {Object} rep - The representative object
+ * @returns {string} - The formatted name
+ */
 function formatName(rep) {
   const nameParts = []
 
@@ -328,6 +334,7 @@ function formatName(rep) {
     nameParts.push(rep.salutation)
   }
 
+  // Add the preferred name if it exists, otherwise add the first name
   if (rep.preferred_name) {
     nameParts.push(rep.preferred_name)
   } else if (rep.first_name) {
@@ -337,14 +344,17 @@ function formatName(rep) {
   // Ignore `middle_initial` (which is often a full name, for the record, NOT an initial)
   // Ignore `nickname`
 
+  // Add the last name if it exists
   if (rep.last_name) {
     nameParts.push(rep.last_name)
   }
 
+  // Add the name suffix if it exists
   if (rep.name_suffix) {
     nameParts.push(rep.name_suffix)
   }
 
+  // Join the name parts with a space and return the formatted name
   return nameParts.join(' ')
 }
 
