@@ -18,12 +18,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set execute permissions
-      # run: chmod +x ./issue-metrics.js
-      run: chmod +x ${{ github.workspace }}/issue-metrics.js
+      run: chmod +x ./issue-metrics.js
+      # run: chmod +x ${{ github.workspace }}/issue-metrics.js
 
     - name: Issue Metrics
       uses: github/issue-metrics@v2
       with:
-        # entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
-        entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
+        entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
+        # entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
         args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
