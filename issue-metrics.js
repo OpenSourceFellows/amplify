@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node // /usr/bin/env: ‘node’: No such file or directory
 
 const core = require('@actions/core');
 const github = require('@actions/github');
