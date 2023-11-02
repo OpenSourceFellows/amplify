@@ -17,6 +17,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set execute permissions
+      run: chmod +x ./issue-metrics.js
+      # run: chmod +x ${{ github.workspace }}/issue-metrics.js
+
     - name: Issue Metrics
       uses: github/issue-metrics@v2
       with:
