@@ -22,6 +22,10 @@ jobs:
       with:
         node-version: 14
 
+    # TODO: learn the path to node to run the script from the sh file
+    - name: Print Node.js path
+      run: which node
+
     - name: Set execute permissions for run-metrics.sh
       run: chmod +x ./run-metrics.sh
 
