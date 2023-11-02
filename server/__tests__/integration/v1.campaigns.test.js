@@ -13,12 +13,12 @@
 //         // { name: 'Campaign 3', description: 'Description 3' },
 //       ])
 //     })
-  
+
 //     afterEach(async () => {
 //       // Delete test data from the database
 //       await Campaign.query().delete()
 //     })
-  
+
 //     describe('GET /v1/campaigns/:id', () => {
 //       test('returns a campaign by ID', async () => {
 //         const campaign = await Campaign.query().first()
@@ -26,7 +26,7 @@
 //         expect(response.status).toBe(200)
 //         expect(response.body).toEqual(campaign)
 //       })
-  
+
 //       test('returns a 404 error for non-existent campaign', async () => {
 //         const response = await request(app).get('/v1/campaigns/999')
 //         expect(response.status).toBe(404)
