@@ -25,7 +25,13 @@ jobs:
     # TODO: learn the path to node to run the script from the sh file
     - name: Print Node.js path
       run: which node
+
+    - name: Change directory
+      run: cd roiScript
       
+    - name: Install
+      run: npm install  
+
     - name: Run
       run: node ./issue-metrics.js
     # - name: Set execute permissions for run-metrics.sh
