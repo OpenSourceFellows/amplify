@@ -8,35 +8,35 @@ on:
   pull_request:
     types: [opened]
     branches:
-      - main 
+      - main
 
 jobs:
   metric:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-    # TODO: learn the path to node to run the script from the sh file
-    - name: Print Node.js path
-      run: which node
+      # TODO: learn the path to node to run the script from the sh file
+      - name: Print Node.js path
+        run: which node
 
-    - name: Set execute permissions for run-metrics.sh
-      run: chmod +x ./run-metrics.sh
+      - name: Set execute permissions for run-metrics.sh
+        run: chmod +x ./run-metrics.sh
 
-    # - name: Set execute permissions
-    #   run: chmod +x ./issue-metrics.js
+      # - name: Set execute permissions
+      #   run: chmod +x ./issue-metrics.js
       # run: chmod +x ${{ github.workspace }}/issue-metrics.js
 
-    - name: Issue Metrics
-      uses: github/issue-metrics@v2
-      with:
-        entryPoint: ./run-metrics.sh # TODO: configure values passed to the config
-        # entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
-        # entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
-        args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
+      - name: Issue Metrics
+        uses: github/issue-metrics@v2
+        with:
+          entryPoint: ./run-metrics.sh # TODO: configure values passed to the config
+          # entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
+          # entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
+          args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'
