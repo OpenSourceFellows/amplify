@@ -25,7 +25,7 @@ jobs:
     # TODO: learn the path to node to run the script from the sh file
     - name: Print Node.js path
       run: which node
-
+      
     - name: Run
       run: node ./issue-metrics.js
     # - name: Set execute permissions for run-metrics.sh
@@ -41,4 +41,4 @@ jobs:
     #     entryPoint: ./run-metrics.sh # TODO: configure values passed to the config
         # entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
         # entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
-        args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
+        # args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
