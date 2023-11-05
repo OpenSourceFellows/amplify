@@ -28,7 +28,12 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <letter-load :selected-rep="selectedRep" :letter-body="letterBody" />
+          <letter-load
+            ref="letterLoad"
+            :selected-rep="selectedRep"
+            :rep-name="repName"
+            :letter-body="letterBody"
+          />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
@@ -144,6 +149,10 @@ export default {
   name: 'TakeAction',
   components: { LetterLoad, SignName, DonateMoney },
   props: {
+    repName: {
+      type: String,
+      required: true
+    },
     letterBody: {
       type: String,
       required: true
@@ -165,8 +174,10 @@ export default {
       return this.$store.state.selectedRep
     }
   },
+  mounted() {},
   methods: {
     nextPage(attrs) {
+      this.$refs.letterLoad.persistCustomization()
       this.$store.dispatch('setLetterAttrs', attrs)
 
       const previousPanel = this.panel
