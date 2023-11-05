@@ -6,8 +6,6 @@ module.exports = {
       table.renameColumn('address_two', 'address_line_2')
     })
 
-    // TODO: payment status id table
-
     await knex.schema.alterTable('transactions', (table) => {
       table.integer('constituent_id')
       table.foreign('constituent_id').references('constituents.id')
