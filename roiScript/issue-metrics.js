@@ -1,5 +1,7 @@
 // #!/usr/bin/env node // /usr/bin/env: ‘node’: No such file or directory
 
+console.log('test');
+
 const core = require('@actions/core');
 const github = require('@actions/github');
 
