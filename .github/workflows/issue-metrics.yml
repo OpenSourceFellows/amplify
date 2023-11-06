@@ -33,7 +33,7 @@ jobs:
       run: npm install  
 
     - name: Run
-      run: node ./issue-metrics.js
+      run: node ./roiScript/issue-metrics.js
     # - name: Set execute permissions for run-metrics.sh
     #   run: chmod +x ./run-metrics.sh
 
