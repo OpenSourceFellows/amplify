@@ -1,9 +1,12 @@
 // #!/usr/bin/env node // /usr/bin/env: ‘node’: No such file or directory
 
-console.log('test');
+console.log('test'); // works
 
-const core = require('@actions/core');
-const github = require('@actions/github');
+import core from '@actions/core';
+import github from '@actions/github';
+
+// const core = require('@actions/core');
+// const github = require('@actions/github');
 
 const assignedIssues = {};
 
