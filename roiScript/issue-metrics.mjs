@@ -2,7 +2,7 @@
 
 console.log('test'); // works
 
-import core from '@actions/core';
+import * as core from '@actions/core';
 import github from '@actions/github';
 
 // const core = require('@actions/core');
