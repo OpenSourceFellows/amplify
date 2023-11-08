@@ -27,6 +27,10 @@ jobs:
         with:
           path: '.'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+        
       # This step builds the Docker image
       - name: Build Docker image
         run: docker build -t my-cspell-image .
