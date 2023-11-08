@@ -27,7 +27,8 @@ jobs:
         with:
           path: '.'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          
+      # Install dependencies for the Docker image
       - name: Install dependencies
         run: npm install @actions/core@1.10.1 @actions/github@6.0.0
         
