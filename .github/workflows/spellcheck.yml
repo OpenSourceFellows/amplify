@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '18'
       - name: Spellcheck
         uses: christan87/programequity-spellcheck-action@main          
         # In case of errors, continue to the next step
