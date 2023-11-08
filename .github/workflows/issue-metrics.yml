@@ -1,14 +1,15 @@
 name: ROI pull request metrics
 
 on:
-  issues:
-    types: [assigned, unlabeled]
-    # repository:
-    #   - ProgramEquity/amplify
   pull_request:
-    types: [opened, edited]
-    branches:
-      - main 
+    types: [review_requested] # it triggers here and then in the js file the time is measured
+  # test trigger that fires on change of the PR name 
+  # issues:
+  #   types: [assigned, unlabeled]
+  # pull_request:
+  #   types: [opened, edited]
+  #   branches:
+  #     - main 
 
 jobs:
   metric:
