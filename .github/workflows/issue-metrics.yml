@@ -46,6 +46,13 @@ jobs:
         echo "Pull Request Payload: $pullRequestPayload"
         echo "::set-output name=pr_payload::$pullRequestPayload"
 
+    # TODO: pass these results to the script 
+    - name: Run issue-metrics tool
+      uses: github/issue-metrics@v2
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SEARCH_QUERY: 'repo:ProgramEquity/amplify is:issue created:${{ env.last_month }} -reason:"not planned"'
+
     - name: Run
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
