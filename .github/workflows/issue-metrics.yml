@@ -47,16 +47,18 @@ jobs:
         echo "::set-output name=pr_payload::$pullRequestPayload"
 
     # logs out 699
-    - name: Log PR Number
+    - name: Set PR Number
+      id: log-pr-number
       run: |
         echo "PR Number: ${{ github.event.pull_request.number }}"
+        echo "::set-output name=pr_number::${{ github.event.pull_request.number }}"
 
     # TODO: pass these results to the Run script after running the action step 
     - name: Run issue-metrics tool
       uses: github/issue-metrics@v2
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
+        SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ steps.log-pr-number.outputs.pr_number }}'
 
     - name: Run
       env:
