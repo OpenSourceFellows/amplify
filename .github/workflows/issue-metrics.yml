@@ -46,7 +46,7 @@ jobs:
         echo "Pull Request Payload: $pullRequestPayload"
         echo "::set-output name=pr_payload::$pullRequestPayload"
 
-    # TODO: test PR logging
+    # logs out 699
     - name: Log PR Number
       run: |
         echo "PR Number: ${{ github.event.pull_request.number }}"
