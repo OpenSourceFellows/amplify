@@ -46,6 +46,11 @@ jobs:
         echo "Pull Request Payload: $pullRequestPayload"
         echo "::set-output name=pr_payload::$pullRequestPayload"
 
+    # TODO: test PR logging
+    - name: Log PR Number
+      run: |
+        echo "PR Number: ${{ github.event.pull_request.number }}"
+
     # TODO: pass these results to the Run script after running the action step 
     - name: Run issue-metrics tool
       uses: github/issue-metrics@v2
