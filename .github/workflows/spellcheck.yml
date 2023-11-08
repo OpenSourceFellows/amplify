@@ -1,0 +1,80 @@
+# This workflow is named "Spellcheck"
+name: Spellcheck
+
+# This workflow runs on every pull request
+on: 
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  spellcheck:
+    # This job runs on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      # This step checks out the code using the checkout action
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # This step sets up Node.js using the setup-node action
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Spellcheck
+        uses: christan87/programequity-spellcheck-action@main          
+        # In case of errors, continue to the next step
+        continue-on-error: true
+        with:
+          path: '.'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # This step builds the Docker image
+      - name: Build Docker image
+        run: docker build -t my-cspell-image .
+
+      # This step runs the Docker container
+      # The GitHub workspace is mounted as a volume in the container
+      - name: Run Docker container
+        run: docker run -v ${{ github.workspace }}:/workdir -w /workdir -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} -e GITHUB_EVENT_NAME=${{ github.event_name }} -e GITHUB_SHA=${{ github.sha }} -e GITHUB_REF=${{ github.ref }} -e GITHUB_REPOSITORY=${{ github.repository }} -e GITHUB_ACTOR=${{ github.actor }} -e GITHUB_ISSUE_NUMBER=${{ github.event.pull_request.number }} my-cspell-image cspell "**/*"
+        continue-on-error: true
+
+      - name: List files in working directory
+        run: |
+          ls -l
+          cat spellcheck-results.txt
+      # This step posts the spellcheck results as a comment on the pull request
+      # The GitHub token is read from the secrets
+      - name: Post spellcheck results
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Import the required module
+            const fs = require('fs');
+
+            // Read the spellcheck results
+            const results = fs.readFileSync('spellcheck-results.txt', 'utf8');
+            const lines = results.split('\n');
+            const misspelledWords = lines.map(line => line.trim());
+
+            console.log("====================> lines: ", lines);
+
+            console.log("====================> misspelledWords: ", misspelledWords);
+
+            // If no misspelled words are found, log a message and return
+            if (misspelledWords.length === 0) {
+              console.log('No misspelled words found.');
+              return;
+            }
+
+            // Format the misspelled words as a comment body
+            const body = `**Spellcheck Results:**
+
+            ${misspelledWords.join('\n')}`;
+            console.log("====================> repo: " , context.repo);
+            // Post the comment to the pull request
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
