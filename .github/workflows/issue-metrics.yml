@@ -34,8 +34,8 @@ jobs:
       working-directory: ./roiScript
 
     - name: Run
-      run: node ./roiScript/issue-metrics.js
-      # run: node ./roiScript/issue-metrics.mjs
+      run: node ./roiScript/issue-metrics.mjs
+      # run: node ./roiScript/issue-metrics.js
     # - name: Set execute permissions for run-metrics.sh
     #   run: chmod +x ./run-metrics.sh
 
