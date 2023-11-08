@@ -46,12 +46,12 @@ jobs:
         echo "Pull Request Payload: $pullRequestPayload"
         echo "::set-output name=pr_payload::$pullRequestPayload"
 
-    # TODO: pass these results to the script 
+    # TODO: pass these results to the Run script after running the action step 
     - name: Run issue-metrics tool
       uses: github/issue-metrics@v2
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SEARCH_QUERY: 'repo:ProgramEquity/amplify is:issue created:${{ env.last_month }} -reason:"not planned"'
+        SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
 
     - name: Run
       env:
