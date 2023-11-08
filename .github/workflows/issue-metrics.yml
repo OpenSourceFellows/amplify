@@ -30,7 +30,8 @@ jobs:
       run: cd roiScript
       
     - name: Install
-      run: npm install --prefix .  
+      run: npm install
+      working-directory: ./roiScript
 
     - name: Run
       run: node ./roiScript/issue-metrics.mjs
