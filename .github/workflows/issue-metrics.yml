@@ -20,7 +20,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 18
+        node-version: 18 # TODO: pick the node version that's compatible with libraries
 
     # TODO: learn the path to node to run the script from the sh file
     - name: Print Node.js path
