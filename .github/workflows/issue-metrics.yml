@@ -34,9 +34,17 @@ jobs:
       run: npm install
       working-directory: ./roiScript
 
+    - name: Access PR Payload
+      id: pr-payload
+      run: |
+        pullRequestPayload=$(cat $GITHUB_EVENT_PATH)
+        echo "Pull Request Payload: $pullRequestPayload"
+        echo "::set-output name=pr_payload::$pullRequestPayload"
+
     - name: Run
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
       run: node ./roiScript/issue-metrics.mjs
       # run: node ./roiScript/issue-metrics.js
     # - name: Set execute permissions for run-metrics.sh
