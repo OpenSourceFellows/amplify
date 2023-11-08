@@ -57,7 +57,7 @@ jobs:
     - name: Run issue-metrics tool
       uses: github/issue-metrics@v2
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
         SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
 
     - name: Run
