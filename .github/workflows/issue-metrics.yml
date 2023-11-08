@@ -1,18 +1,45 @@
 name: ROI pull request metrics
 
 on:
+  issues: 
+    types: [assigned]
   pull_request:
-    types: [review_requested] # it triggers here and then in the js file the time is measured
-  # test trigger that fires on change of the PR name 
-  # issues:
-  #   types: [assigned, unlabeled]
-  # pull_request:
-  #   types: [opened, edited]
-  #   branches:
-  #     - main 
+    types: [review_requested] 
 
 jobs:
+  record_timestamps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Current Timestamp
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+      - name: Set Issue Timestamp
+        id: issue_timestamp
+        if: github.event_name == 'issues'
+        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> issue_timestamp.log
+
+      - name: Set PR Timestamp
+        id: pr_timestamp
+        if: github.event_name == 'pull_request'
+        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> pr_timestamp.log
+
+  calculate_time_difference:
+    needs: record_timestamps
+    runs-on: ubuntu-latest
+    steps:
+    - name: Calculate Time Difference
+      id: time_difference
+      run: |
+        issue_timestamp=$(cat ${{ github.workspace }}/issue_timestamp.log)
+        pr_timestamp=$(cat ${{ github.workspace }}/pr_timestamp.log)
+        issue_time=$(date -d "${issue_timestamp}" +%s)
+        pr_time=$(date -d "${pr_timestamp}" +%s)
+        time_diff=$((pr_time - issue_time))
+        echo "::set-output name=time_diff::${time_diff}"
+
   metric:
+    needs: calculate_time_difference
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -21,62 +48,26 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 18 # TODO: pick the node version that's compatible with libraries 
+        node-version: 18 # pick the node version that's compatible with libraries 
 
-    # TODO: learn the path to node to run the script from the sh file
     - name: Print Node.js path
       run: which node
-
-    # - name: Change directory # not needed since we specify the working directory for the npm install
-    #   run: cd roiScript
       
     - name: Install
       run: npm install
       working-directory: ./roiScript
 
-    - name: Log Pull Request Payload
-      run: |
-        pullRequestPayload=$(cat $GITHUB_EVENT_PATH)
-        echo "Pull Request Payload: $pullRequestPayload"
-
-    - name: Access PR Payload
-      id: pr-payload
-      run: |
-        pullRequestPayload=$(cat $GITHUB_EVENT_PATH)
-        echo "Pull Request Payload: $pullRequestPayload"
-        echo "::set-output name=pr_payload::$pullRequestPayload"
-
-    # logs out 699 -- setting this doesn't make a difference: issue-metrics doesn't read this
-    # - name: Set PR Number
-    #   id: log-pr-number
-    #   run: |
-    #     echo "PR Number: ${{ github.event.pull_request.number }}"
-    #     echo "::set-output name=pr_number::${{ github.event.pull_request.number }}"
-
     # TODO: pass these results to the Run script after running the action step 
-    - name: Run issue-metrics tool
-      uses: github/issue-metrics@v2
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
+    # TODO: for now find a workaround for this library 
+    # - name: Run issue-metrics tool
+    #   uses: github/issue-metrics@v2
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    #     SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
 
     - name: Run
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
+        TIME_DIFF: ${{ steps.calculate_time_difference.outputs.time_diff }}
       run: node ./roiScript/issue-metrics.mjs
-      # run: node ./roiScript/issue-metrics.js
-    # - name: Set execute permissions for run-metrics.sh
-    #   run: chmod +x ./run-metrics.sh
-
-    # - name: Set execute permissions
-    #   run: chmod +x ./issue-metrics.js
-      # run: chmod +x ${{ github.workspace }}/issue-metrics.js
-
-    # - name: Issue Metrics
-    #   uses: github/issue-metrics@v2
-    #   with:
-    #     entryPoint: ./run-metrics.sh # TODO: configure values passed to the config
-        # entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
-        # entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
-        # args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
