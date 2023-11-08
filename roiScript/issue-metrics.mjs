@@ -18,6 +18,7 @@ if (prPayload) {
   try {
     // const payload = JSON.parse(prPayload); // TODO: it is already parsed? 
     const payload = prPayload;
+    console.log('payload: ', payload);
     const pullRequestCreatedAt = payload.pull_request.created_at;
     console.log(`Pull Request Creation Time: ${pullRequestCreatedAt}`);
   } catch (error) {
