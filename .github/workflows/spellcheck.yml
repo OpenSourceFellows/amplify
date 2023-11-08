@@ -19,7 +19,28 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '18.x'
+
+      # (Begin) This replaces the Dockerfile
+      - name: Update package list
+        run: sudo apt-get update
+
+      - name: Install cspell
+        run: npm install -g cspell
+        
+      # (Begin) This replaces the entrypoint.sh
+      - name: Run cspell and Node.js script
+        run: |
+          mkdir -p workdir
+          cspell . > workdir/spellcheck-results.txt
+          node index.js
+        continue-on-error: true
+      # (Begin) This replaces the entrypoint.sh
+
+      - name: Clean up APT cache
+        run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+      # (End) This replaces the Dockerfile
 
       - name: Spellcheck
         uses: christan87/programequity-spellcheck-action@main          
