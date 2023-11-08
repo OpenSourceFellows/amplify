@@ -1,17 +1,11 @@
-// #!/usr/bin/env node // /usr/bin/env: ‘node’: No such file or directory
-
 console.log('test'); // works
 
-import * as core from '@actions/core';
-import github from '@actions/github';
-
-// const core = require('@actions/core');
-// const github = require('@actions/github');
+const github = require('@actions/github');
 
 const assignedIssues = {};
 
 const main = async () => {
-  const payload = JSON.parse(core.getInput('payload'));
+  const payload = JSON.parse(process.env.INPUT_PAYLOAD);
 
   if (payload.action === 'assigned') {
     const issue = payload.issue;
@@ -31,11 +25,11 @@ const main = async () => {
 
       const comment = `Time from assignment to PR for #${issueNumber}: ${timeDelta} ms`;
 
-      const octokit = github.getOctokit(core.getInput('github-token'));
+      const octokit = new github.getOctokit(process.env.INPUT_GITHUB_TOKEN);
 
       await octokit.issues.createComment({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
+        owner: process.env.GITHUB_REPOSITORY_OWNER,
+        repo: process.env.GITHUB_REPOSITORY,
         issue_number: pull.number,
         body: comment,
       });
@@ -44,5 +38,6 @@ const main = async () => {
 };
 
 main().catch((error) => {
-  core.setFailed(error.message);
+  console.error(error.message); // Log the error message
+  process.exit(1); // Set a non-zero exit code to indicate failure
 });
