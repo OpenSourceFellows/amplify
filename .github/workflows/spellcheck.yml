@@ -82,7 +82,7 @@ jobs:
             // Read the spellcheck results
             const results = fs.readFileSync('spellcheck-results.txt', 'utf8');
             const lines = results.split('\n');
-            const misspelledWords = lines.map(line => line.trim());
+            const misspelledWords = lines.map(line => line.trim()).filter(line => !line.startsWith("./workdir/spellcheck-results.txt"));
 
             console.log("====================> lines: ", lines);
 
