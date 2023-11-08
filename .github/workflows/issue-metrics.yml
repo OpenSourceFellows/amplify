@@ -26,8 +26,8 @@ jobs:
     - name: Print Node.js path
       run: which node
 
-    - name: Change directory
-      run: cd roiScript
+    # - name: Change directory # not needed since we specify the working directory for the npm install
+    #   run: cd roiScript
       
     - name: Install
       run: npm install
