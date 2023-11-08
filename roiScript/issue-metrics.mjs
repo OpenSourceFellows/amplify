@@ -7,7 +7,7 @@ import github from '@actions/github';
 
 // TODO: test this and debug the issue 
 // --- (testing)
-const issueNumber = 1;
+const pullNumber = 699; // TODO: automate this later on 
 const timeDelta = 20;
 const comment = `Time from assignment to PR for #${issueNumber}: ${timeDelta} ms`;
 
@@ -18,7 +18,7 @@ const octokit = github.getOctokit(process.env.GH_TOKEN); // works
 await octokit.rest.issues.createComment({
   owner: github.context.repo.owner,
   repo: github.context.repo.repo,
-  issue_number: pull.number,
+  issue_number: pullNumber,
   body: comment,
 });
 
