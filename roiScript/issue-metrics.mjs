@@ -11,6 +11,23 @@ const pullNumber = 699; // TODO: automate this later on
 const timeDelta = 20;
 const comment = `Time from assignment to PR for #${pullNumber}: ${timeDelta} ms`;
 
+// TODO: test prPayload logging
+const prPayload = process.env.PR_PAYLOAD;
+
+if (prPayload) {
+  try {
+    const payload = JSON.parse(prPayload);
+    const pullRequestCreatedAt = payload.pull_request.created_at;
+    console.log(`Pull Request Creation Time: ${pullRequestCreatedAt}`);
+  } catch (error) {
+    console.error('Error parsing PR_PAYLOAD:', error);
+  }
+} else {
+  console.error('PR_PAYLOAD environment variable is not set or empty');
+}
+
+// ---
+
 // const octokit = github.getOctokit(core.getInput('GH_TOKEN'));
 const octokit = github.getOctokit(process.env.GH_TOKEN); // works 
 
