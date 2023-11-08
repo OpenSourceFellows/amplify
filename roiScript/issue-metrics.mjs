@@ -16,7 +16,8 @@ const prPayload = process.env.PR_PAYLOAD;
 
 if (prPayload) {
   try {
-    const payload = JSON.parse(prPayload);
+    // const payload = JSON.parse(prPayload); // TODO: it is already parsed? 
+    const payload = prPayload;
     const pullRequestCreatedAt = payload.pull_request.created_at;
     console.log(`Pull Request Creation Time: ${pullRequestCreatedAt}`);
   } catch (error) {
