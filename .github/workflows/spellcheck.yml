@@ -30,8 +30,7 @@ jobs:
       # This step builds the Docker image
       - name: Build Docker image
         run: docker build -t my-cspell-image .
-        continue-on-error: true
-        
+
       # This step runs the Docker container
       # The GitHub workspace is mounted as a volume in the container
       - name: Run Docker container
