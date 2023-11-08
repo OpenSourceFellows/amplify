@@ -11,7 +11,8 @@ const issueNumber = 1;
 const timeDelta = 20;
 const comment = `Time from assignment to PR for #${issueNumber}: ${timeDelta} ms`;
 
-const octokit = github.getOctokit(core.getInput('GH_TOKEN'));
+// const octokit = github.getOctokit(core.getInput('GH_TOKEN'));
+const octokit = github.getOctokit(process.env.GH_TOKEN);
 
 await octokit.issues.createComment({
   owner: github.context.repo.owner,
