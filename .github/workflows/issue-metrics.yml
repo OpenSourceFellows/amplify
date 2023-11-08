@@ -34,6 +34,11 @@ jobs:
       run: npm install
       working-directory: ./roiScript
 
+    - name: Log Pull Request Payload
+      run: |
+        pullRequestPayload=$(cat $GITHUB_EVENT_PATH)
+        echo "Pull Request Payload: $pullRequestPayload"
+
     - name: Access PR Payload
       id: pr-payload
       run: |
