@@ -1,5 +1,5 @@
 # This Dockerfile sets up a Node.js environment and installs the cspell package globally
-FROM node:16
+FROM node:18
 
 # Update the package list in the base image
 # This is necessary to ensure all subsequent apt-get commands run without issue
