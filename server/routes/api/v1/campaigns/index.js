@@ -47,7 +47,6 @@ router.put('/:id', async (req, res) => {
       campaignId,
       req.body.campaign
     )
-
     if (!updatedCampaign)
       return res.status(404).json({ msg: 'Campaign not found' }).end()
 
