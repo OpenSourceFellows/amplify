@@ -17,12 +17,14 @@ jobs:
       - name: Set Issue Timestamp
         id: issue_timestamp
         if: github.event_name == 'issues'
-        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./roiScript/issue_timestamp.log
+        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> issue_timestamp.log
+        working-directory: ./roiScript
 
       - name: Set PR Timestamp
         id: pr_timestamp
         if: github.event_name == 'pull_request'
         run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./roiScript/pr_timestamp.log
+        working-directory: ./roiScript
 
   calculate_time_difference:
     needs: record_timestamps
