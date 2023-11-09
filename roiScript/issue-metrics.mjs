@@ -8,8 +8,8 @@ import github from '@actions/github';
 // TODO: test this and debug the issue 
 // --- (testing)
 const pullNumber = 699; // TODO: automate this later on 
-const timeDelta = 20;
-const comment = `Time from assignment to PR for #${pullNumber}: ${timeDelta} ms`;
+const timeDiff = process.env.TIME_DIFF; 
+const comment = `Time from assignment to PR for #${pullNumber}: ${timeDiff} ms`;
 
 // TODO: test prPayload logging
 const prPayload = process.env.PR_PAYLOAD;
