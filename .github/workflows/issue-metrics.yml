@@ -14,25 +14,27 @@ jobs:
         id: timestamp
         run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
-      - name: Debug Directory Contents # TODO: debug this issue
-        # shell: sh
-        # run: ls -la # logs out 
-        # run: ls -l 
-        run: ls 
+      # - name: Debug Directory Contents # TODO: debug this issue
+      #   # shell: sh
+      #   # run: ls -la # logs out 
+      #   # run: ls -l 
+      #   run: ls 
 
       - name: Set Issue Timestamp
         id: issue_timestamp
         if: github.event_name == 'issues'
-        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./issue_timestamp.log
+        run: echo "::set-output name=issue_timestamp::${{ steps.timestamp.outputs.timestamp }}"
+        # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./issue_timestamp.log
         # shell: sh # TODO: test new shell to fix the issue 
-        working-directory: roiScript
+        # working-directory: roiScript
 
       - name: Set PR Timestamp
         id: pr_timestamp
         if: github.event_name == 'pull_request'
-        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./pr_timestamp.log
+        run: echo "::set-output name=pr_timestamp::${{ steps.timestamp.outputs.timestamp }}"
+        # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./pr_timestamp.log
         # shell: sh # TODO: test new shell to fix the issue 
-        working-directory: roiScript
+        # working-directory: roiScript
 
   calculate_time_difference:
     needs: record_timestamps
@@ -41,8 +43,8 @@ jobs:
     - name: Calculate Time Difference
       id: time_difference
       run: |
-        issue_timestamp=$(cat ${{ github.workspace }}/issue_timestamp.log)
-        pr_timestamp=$(cat ${{ github.workspace }}/pr_timestamp.log)
+        issue_timestamp=${{ needs.record_timestamps.outputs.issue_timestamp }}
+        pr_timestamp=${{ needs.record_timestamps.outputs.pr_timestamp }}
         issue_time=$(date -d "${issue_timestamp}" +%s)
         pr_time=$(date -d "${pr_timestamp}" +%s)
         time_diff=$((pr_time - issue_time))
@@ -79,5 +81,5 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
-        TIME_DIFF: ${{ steps.calculate_time_difference.outputs.time_diff }}
+        TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
       run: node ./roiScript/issue-metrics.mjs
