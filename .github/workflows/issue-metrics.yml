@@ -48,6 +48,7 @@ jobs:
         issue_time=$(date -d "${issue_timestamp}" +%s)
         pr_time=$(date -d "${pr_timestamp}" +%s)
         time_diff=$((pr_time - issue_time))
+        echo "Time Difference: ${time_diff}"
         echo "::set-output name=time_diff::${time_diff}"
 
   metric:
