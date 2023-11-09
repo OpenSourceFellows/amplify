@@ -7,44 +7,62 @@ on:
     types: [review_requested] 
 
 jobs:
-  record_timestamps:
+  record_issue_timestamp:
     runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
     steps:
-      - name: Get Current Timestamp
-        id: timestamp
-        run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-
-      # - name: Debug Directory Contents # TODO: debug this issue
-      #   # shell: sh
-      #   # run: ls -la # logs out 
-      #   # run: ls -l 
-      #   run: ls 
-
-      - name: Set Issue Timestamp
+      - name: Get Current Timestamp for Issue
         id: issue_timestamp
-        if: github.event_name == 'issues'
-        run: echo "::set-output name=issue_timestamp::${{ steps.timestamp.outputs.timestamp }}"
-        # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./issue_timestamp.log
-        # shell: sh # TODO: test new shell to fix the issue 
-        # working-directory: roiScript
+        run: echo "::set-output name=issue_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
-      - name: Set PR Timestamp
+  record_pr_timestamp:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Get Current Timestamp for PR
         id: pr_timestamp
-        if: github.event_name == 'pull_request'
-        run: echo "::set-output name=pr_timestamp::${{ steps.timestamp.outputs.timestamp }}"
-        # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./pr_timestamp.log
-        # shell: sh # TODO: test new shell to fix the issue 
-        # working-directory: roiScript
+        run: echo "::set-output name=pr_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+  # record_timestamps:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Current Timestamp
+  #       id: timestamp
+  #       run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+  #     # - name: Debug Directory Contents # TODO: debug this issue
+  #     #   # shell: sh
+  #     #   # run: ls -la # logs out 
+  #     #   # run: ls -l 
+  #     #   run: ls 
+
+  #     - name: Set Issue Timestamp
+  #       id: issue_timestamp
+  #       if: github.event_name == 'issues'
+  #       run: echo "::set-output name=issue_timestamp::${{ steps.timestamp.outputs.timestamp }}"
+  #       # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./issue_timestamp.log
+  #       # shell: sh # TODO: test new shell to fix the issue 
+  #       # working-directory: roiScript
+
+  #     - name: Set PR Timestamp
+  #       id: pr_timestamp
+  #       if: github.event_name == 'pull_request'
+  #       run: echo "::set-output name=pr_timestamp::${{ steps.timestamp.outputs.timestamp }}"
+  #       # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./pr_timestamp.log
+  #       # shell: sh # TODO: test new shell to fix the issue 
+  #       # working-directory: roiScript
 
   calculate_time_difference:
-    needs: record_timestamps
+    needs: 
+      - record_issue_timestamp
+      - record_pr_timestamp
     runs-on: ubuntu-latest
     steps:
     - name: Calculate Time Difference
       id: time_difference
       run: |
-        issue_timestamp=${{ needs.record_timestamps.outputs.issue_timestamp }}
-        pr_timestamp=${{ needs.record_timestamps.outputs.pr_timestamp }}
+        issue_timestamp=${{ needs.record_issue_timestamp.outputs.issue_timestamp }}
+        pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
         issue_time=$(date -d "${issue_timestamp}" +%s)
         pr_time=$(date -d "${pr_timestamp}" +%s)
         time_diff=$((pr_time - issue_time))
