@@ -14,6 +14,9 @@ jobs:
         id: timestamp
         run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
+      - name: Debug Directory Contents # TODO: debug this issue
+        run: ls -l
+
       - name: Set Issue Timestamp
         id: issue_timestamp
         if: github.event_name == 'issues'
