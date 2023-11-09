@@ -17,7 +17,8 @@ jobs:
       - name: Debug Directory Contents # TODO: debug this issue
         # shell: sh
         # run: ls -la # logs out 
-        run: ls -l 
+        # run: ls -l 
+        run: ls 
 
       - name: Set Issue Timestamp
         id: issue_timestamp
