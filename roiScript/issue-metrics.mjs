@@ -8,7 +8,7 @@ import github from '@actions/github';
 // TODO: test this and debug the issue 
 // --- (testing)
 const pullNumber = 699; // TODO: automate this later on 
-const timeDiff = process.env.TIME_DIFF; 
+const timeDiff = process.env.TIME_DIFF ? process.env.TIME_DIFF : 1; // testing for undefined  
 const comment = `Time from assignment to PR for #${pullNumber}: ${timeDiff} ms`;
 
 // TODO: test prPayload logging
