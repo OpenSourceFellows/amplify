@@ -18,6 +18,7 @@ jobs:
         id: issue_timestamp
         if: github.event_name == 'issues'
         run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./issue_timestamp.log
+        shell: sh # TODO: test new shell to fix the issue 
         working-directory: ./roiScript
 
       - name: Set PR Timestamp
