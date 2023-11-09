@@ -15,7 +15,8 @@ jobs:
         run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
       - name: Debug Directory Contents # TODO: debug this issue
-        run: ls -l
+        # shell: sh
+        run: ls -la
 
       - name: Set Issue Timestamp
         id: issue_timestamp
