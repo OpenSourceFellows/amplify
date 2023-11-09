@@ -23,7 +23,7 @@ jobs:
       - name: Set PR Timestamp
         id: pr_timestamp
         if: github.event_name == 'pull_request'
-        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./roiScript/pr_timestamp.log
+        run: echo "${{ steps.timestamp.outputs.timestamp }}" >> pr_timestamp.log
         working-directory: roiScript
 
   calculate_time_difference:
