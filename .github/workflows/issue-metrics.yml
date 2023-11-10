@@ -18,10 +18,11 @@ jobs:
            timestamp=$(date +"%Y-%m-%d %H:%M:%S")
            echo "Timestamp: $timestamp" >> issue_timestamp.log
 
+      # git add issue_timestamp.log
       # the commit will probaly be blocked by the checks 
       - name: Commit Issue Timestamp # without specifying the username in the commit the commit will be done by the user 
         run: | 
-          git add issue_timestamp.log
+          git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push 
 
