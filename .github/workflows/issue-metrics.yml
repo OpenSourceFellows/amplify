@@ -13,5 +13,11 @@ jobs:
         id: issue_timestamp
         run: echo "::set-output name=issue_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
+      - name: Upload Timestamp as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: issue-timestamp
+          path: ${{ steps.issue_timestamp.outputs.issue_timestamp }}
+
   # TODO: write a step to send the data between the workflows -- https://stackoverflow.com/questions/60355925/share-artifacts-between-workflows-github-actions
   
