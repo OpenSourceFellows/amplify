@@ -20,14 +20,14 @@ jobs:
 
       # git add issue_timestamp.log
       # the commit will probaly be blocked by the checks 
-      # TODO: figure out how to replace the email and the name with the actual author of the issue 
+      # TODO: figure out how to replace the email and the name with the actual author of the PR created from the issue  
       - name: Commit Issue Timestamp # without specifying the username in the commit the commit will be done by the user 
         run: | 
           git config --global user.email "Polinka7max@gmail.com"
           git config --global user.name "Dunridge"
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
-          git push 
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
 
       # artifacts are used to pass data between workflow jobs, comitting would pass the data between workflows  
       # - name: Upload Timestamp as Artifact
