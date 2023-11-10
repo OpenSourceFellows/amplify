@@ -9,15 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'issues'
     steps:
-      - name: Get Current Timestamp for Issue
-        id: issue_timestamp
-        run: echo "::set-output name=issue_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+      - name: Add Issue Timestamp To File
+        working-directory: ./roiScript
+        run: | 
+           timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+           echo "Timestamp: $timestamp" >> issue_timestamp.log
 
-      - name: Upload Timestamp as Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: issue-timestamp
-          path: ${{ steps.issue_timestamp.outputs.issue_timestamp }}
+      # the commit will probaly be blocked by the checks 
+      - name: Commit Issue Timestamp # without specifying the username in the commit the commit will be done by the user 
+        run: | 
+          git add issue_timestamp.log
+          git commit -m "Add issue timestamp by $GITHUB_ACTOR"
+          git push 
+
+      # artifacts are used to pass data between workflow jobs, comitting would pass the data between workflows  
+      # - name: Upload Timestamp as Artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: issue-timestamp
+      #     path: ./roiScript/issue_timestamp.log 
 
   # TODO: write a step to send the data between the workflows -- https://stackoverflow.com/questions/60355925/share-artifacts-between-workflows-github-actions
   
