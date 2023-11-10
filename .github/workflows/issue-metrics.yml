@@ -31,11 +31,17 @@ jobs:
            timestamp=$(date +"%Y-%m-%d %H:%M:%S")
            echo "Timestamp: $timestamp" >> issue_timestamp.log
 
+      # TODO: if mentioning it here won't work then pass the variable through the previous step 
+      # TODO: here add git checkout of the created branch 
+      # HEAD:${{ github.ref }}
       - name: Commit Issue Timestamp 
         run: | 
           git config --global user.email "Polinka7max@gmail.com"
           git config --global user.name "Dunridge"
+          git checkout ${{steps.create_branch.outputs.issue_branch}}
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+
+
 
