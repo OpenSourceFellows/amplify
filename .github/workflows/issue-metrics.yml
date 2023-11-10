@@ -46,5 +46,7 @@ jobs:
           git stash 
           git pull origin ${{ steps.create_branch.outputs.issue_branch }} --rebase
           git stash apply 
+          git checkout --ours .
+          git rebase --continue
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
