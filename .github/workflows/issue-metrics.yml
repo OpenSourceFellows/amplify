@@ -15,9 +15,16 @@ jobs:
       # TODO: figure out how to track this issue branch in the next pr workflow 
       # 1 - create branch linked to the issue 
       - name: Create branch linked to the issue 
+        id: create_branch
         run: |
           issue_number=$(echo "${{ github.event.issue.number }}")
           git checkout -b "issue-${issue_number}"
+          echo "::set-output name=issue_branch::issue-${issue_number}"
+
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.create_branch.outputs.issue_branch }}
     
       - name: Add Issue Timestamp To File
         working-directory: roiScript
@@ -25,9 +32,6 @@ jobs:
            timestamp=$(date +"%Y-%m-%d %H:%M:%S")
            echo "Timestamp: $timestamp" >> issue_timestamp.log
 
-      # git add issue_timestamp.log
-      # the commit will probaly be blocked by the checks 
-      # TODO: figure out how to replace the email and the name with the actual author of the PR created from the issue  
       - name: Commit Issue Timestamp # without specifying the username in the commit the commit will be done by the user 
         run: | 
           git config --global user.email "Polinka7max@gmail.com"
@@ -36,12 +40,3 @@ jobs:
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
 
-      # artifacts are used to pass data between workflow jobs, comitting would pass the data between workflows  
-      # - name: Upload Timestamp as Artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: issue-timestamp
-      #     path: ./roiScript/issue_timestamp.log 
-
-  # TODO: write a step to send the data between the workflows -- https://stackoverflow.com/questions/60355925/share-artifacts-between-workflows-github-actions
-  
