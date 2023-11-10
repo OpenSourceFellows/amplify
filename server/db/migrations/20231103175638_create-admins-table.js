@@ -10,10 +10,11 @@ module.exports = {
       // table fields
       table.string('first_name').notNullable()
       table.string('last_name').notNullable()
-      table.string('email').notNullable()
+      table.string('email').notNullable().unique()
       table.string('password').notNullable()
       table.boolean('active').notNullable()
-      table.timestamp('last_login', { precision: 6 }).defaultTo(knex.fn.now(6))
+      table.timestamp('last_login', { precision: 6, useTz:true }).defaultTo(knex.fn.now(6))
+      table.timestamps()
 
       // unique field(s)
       table.unique('email')
