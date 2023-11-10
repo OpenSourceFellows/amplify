@@ -1,4 +1,4 @@
-name: ROI pull request metrics
+name: Measure issue timestamp
 
 on:
   issues: 
