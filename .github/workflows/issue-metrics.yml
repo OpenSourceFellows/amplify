@@ -42,7 +42,7 @@ jobs:
         run: | 
           git config --global user.email "Polinka7max@gmail.com"
           git config --global user.name "Dunridge"
-          git pull origin ${{ steps.create_branch.outputs.issue_branch }} --rebase
           git add .
+          git pull origin ${{ steps.create_branch.outputs.issue_branch }} --rebase
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
