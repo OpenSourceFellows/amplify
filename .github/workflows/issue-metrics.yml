@@ -10,7 +10,7 @@ jobs:
     if: github.event_name == 'issues'
     steps:
       - name: Add Issue Timestamp To File
-        working-directory: ./roiScript
+        working-directory: roiScript
         run: | 
            timestamp=$(date +"%Y-%m-%d %H:%M:%S")
            echo "Timestamp: $timestamp" >> issue_timestamp.log
