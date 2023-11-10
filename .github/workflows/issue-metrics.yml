@@ -1,10 +1,8 @@
-name: ROI pull request metrics
+name: Measure issue timestamp
 
 on:
   issues: 
     types: [assigned]
-  pull_request:
-    types: [review_requested] 
 
 jobs:
   record_issue_timestamp:
@@ -15,90 +13,11 @@ jobs:
         id: issue_timestamp
         run: echo "::set-output name=issue_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
-  record_pr_timestamp:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Get Current Timestamp for PR
-        id: pr_timestamp
-        run: echo "::set-output name=pr_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+      - name: Upload Timestamp as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: issue-timestamp
+          path: ${{ steps.issue_timestamp.outputs.issue_timestamp }}
 
-  # record_timestamps:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Get Current Timestamp
-  #       id: timestamp
-  #       run: echo "::set-output name=timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-
-  #     # - name: Debug Directory Contents # TODO: debug this issue
-  #     #   # shell: sh
-  #     #   # run: ls -la # logs out 
-  #     #   # run: ls -l 
-  #     #   run: ls 
-
-  #     - name: Set Issue Timestamp
-  #       id: issue_timestamp
-  #       if: github.event_name == 'issues'
-  #       run: echo "::set-output name=issue_timestamp::${{ steps.timestamp.outputs.timestamp }}"
-  #       # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./issue_timestamp.log
-  #       # shell: sh # TODO: test new shell to fix the issue 
-  #       # working-directory: roiScript
-
-  #     - name: Set PR Timestamp
-  #       id: pr_timestamp
-  #       if: github.event_name == 'pull_request'
-  #       run: echo "::set-output name=pr_timestamp::${{ steps.timestamp.outputs.timestamp }}"
-  #       # run: echo "${{ steps.timestamp.outputs.timestamp }}" >> ./pr_timestamp.log
-  #       # shell: sh # TODO: test new shell to fix the issue 
-  #       # working-directory: roiScript
-
-  calculate_time_difference:
-    needs: 
-      - record_issue_timestamp
-      - record_pr_timestamp
-    runs-on: ubuntu-latest
-    steps:
-    - name: Calculate Time Difference
-      id: time_difference
-      run: |
-        issue_timestamp=${{ needs.record_issue_timestamp.outputs.issue_timestamp }}
-        pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
-        issue_time=$(date -d "${issue_timestamp}" +%s)
-        pr_time=$(date -d "${pr_timestamp}" +%s)
-        time_diff=$((pr_time - issue_time))
-        echo "Time Difference: ${time_diff}"
-        echo "::set-output name=time_diff::${time_diff}"
-
-  metric:
-    needs: calculate_time_difference
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18 # pick the node version that's compatible with libraries 
-
-    - name: Print Node.js path
-      run: which node
-      
-    - name: Install
-      run: npm install
-      working-directory: ./roiScript
-
-    # TODO: pass these results to the Run script after running the action step 
-    # TODO: for now find a workaround for this library 
-    # - name: Run issue-metrics tool
-    #   uses: github/issue-metrics@v2
-    #   env:
-    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    #     SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
-
-    - name: Run
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
-        TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
-      run: node ./roiScript/issue-metrics.mjs
+  # TODO: write a step to send the data between the workflows -- https://stackoverflow.com/questions/60355925/share-artifacts-between-workflows-github-actions
+  
