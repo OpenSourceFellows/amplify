@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v3
+
+      # TODO: figure out how to track this issue branch in the next pr workflow 
+      # 1 - create branch linked to the issue 
+      - name: Create branch linked to the issue 
+        run: |
+          issue_number=$(echo "${{ github.event.issue.number }}")
+          git checkout -b "issue-${issue_number}"
     
       - name: Add Issue Timestamp To File
         working-directory: roiScript
