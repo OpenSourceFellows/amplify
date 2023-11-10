@@ -36,7 +36,7 @@ jobs:
     - name: Calculate Time Difference
       id: time_difference
       run: |
-        issue_timestamp=${{ needs.record_issue_timestamp.outputs.issue_timestamp }}
+        issue_timestamp=${{ needs.download_issue_timestamp.outputs.issue_timestamp }}
         pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
         issue_time=$(date -d "${issue_timestamp}" +%s)
         pr_time=$(date -d "${pr_timestamp}" +%s)
