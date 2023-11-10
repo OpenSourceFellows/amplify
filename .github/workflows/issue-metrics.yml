@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'issues'
     steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v3
+    
       - name: Add Issue Timestamp To File
         working-directory: roiScript
         run: | 
