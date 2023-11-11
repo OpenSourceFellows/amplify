@@ -44,9 +44,10 @@ jobs:
           git config --global user.name "Dunridge"
           git add .
           git stash 
-          git pull origin ${{ steps.create_branch.outputs.issue_branch }} --rebase -X theirs
+          git pull origin ${{ steps.create_branch.outputs.issue_branch }} --rebase -X ours
           git stash apply 
           git checkout --ours .
           git rebase --continue
+          git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
