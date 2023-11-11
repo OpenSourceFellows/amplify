@@ -16,7 +16,7 @@ module.exports = {
       table
         .timestamp('last_login', { precision: 6, useTz: true })
         .defaultTo(knex.fn.now(6))
-      table.timestamps()
+      table.timestamps({ useTimestamps: true, defaultToNow: true })
 
       // unique field(s)
       table.unique('email')

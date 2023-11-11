@@ -1,13 +1,8 @@
 const { timestamps } = require('../../models/error_log')
-const bcrypt = require('bcryptjs')
-
 const table_name = 'admin'
 
-const password = process.env.USER
-// generate salt rounds
-const salt = bcrypt.genSaltSync(10)
-// generate hash with salt rounds
-const hash = bcrypt.hashSync(password, salt)
+// placeholder password
+const password = 'password'
 
 module.exports = {
   //todo do stuff
@@ -21,8 +16,8 @@ module.exports = {
         id: 1,
         first_name: 'Ethan',
         last_name: 'Garcia',
-        email: 'testing@test.com',
-        password: hash,
+        email: 'email_1@test.com',
+        password: password,
         active: true,
         last_login: timestamps
       },
@@ -30,8 +25,8 @@ module.exports = {
         id: 2,
         first_name: 'William',
         last_name: 'Smith',
-        email: 'testing1@test.com',
-        password: hash,
+        email: 'email_2@test.com',
+        password: password,
         active: false,
         last_login: timestamps
       },
@@ -39,8 +34,8 @@ module.exports = {
         id: 3,
         first_name: 'Sophia',
         last_name: 'Taylor',
-        email: 'testing2@test.com',
-        password: hash,
+        email: 'email_3@test.com',
+        password: password,
         active: true,
         last_login: timestamps
       }

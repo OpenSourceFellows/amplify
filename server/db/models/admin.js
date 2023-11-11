@@ -17,8 +17,8 @@ class Admin extends BaseModel {
 
       properties: {
         id: { type: 'integer' },
-        first_name: { type: 'string', minLength: 1, maxLength: 255 },
-        last_name: { type: 'string', minLength: 1, maxLength: 255 },
+        first_name: { type: 'string', minLength: 1, maxLength: 50 },
+        last_name: { type: 'string', minLength: 1, maxLength: 50 },
         email: {
           type: 'string',
           format: 'email',
