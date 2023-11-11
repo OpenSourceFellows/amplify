@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -e
+
+command -v brew >/dev/null 2>&1 || {
+  echo "==> Installing Homebrew..."
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+if [[ -z "${CODESPACES}" ]]; then
+  echo "==> Adding Homebrew to the PATH..."
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/node/.profile
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+echo "==> Updating Homebrew..."
+brew update
+
+brew bundle check >/dev/null 2>&1 || {
+  echo "==> Installing Homebrew dependencies..."
+  brew bundle
+}
+
+echo "==> Installing Node"
+nodenv install -s
+
+echo "==> Starting PostgreSQL service..."
+brew services restart postgres
+
+echo "==> Installing Node dependencies..."
+npm install
+
+echo "==> Creating and setting up databases..."
+npm run db:create
+
+echo ""
+echo '‼️ Create a ".env" file based on the ".env.example" file, then enter all of your environment variables.'
