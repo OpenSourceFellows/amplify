@@ -1,0 +1,46 @@
+name: Integration Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  test:
+    if: ${{ github.repository == 'ProgramEquity/amplify' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+
+      - name: Setup node
+        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- server/__tests__/integration/
+        env:
+          # Cicero API key
+          CICERO_API_KEY: ${{ secrets.TEST_CICERO_API_KEY }}
+          # Test environment Lob API key
+          LOB_API_KEY: ${{ secrets.TEST_LOB_API_KEY }}
+          # Stripe test secret key
+          STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
+          # Auth0 authentication parameters with nonsensical sample values
+          SERVER_PORT: 8080
+          CLIENT_ORIGIN_URL: http://localhost:8080
+          AUTH0_AUDIENCE: your_Auth0_identifier_value
+          AUTH0_DOMAIN: your_Auth0_domain

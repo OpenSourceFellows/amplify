@@ -1,0 +1,63 @@
+name: Scorecards supply-chain security
+
+on:
+  # Only the default branch is supported.
+  branch_protection_rule:
+  schedule:
+    - cron: '43 10 * * 6'
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+      # Used to receive a badge.
+      id-token: write
+      # Needed to upload the results to code-scanning dashboard.
+      security-events: write
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          persist-credentials: false
+
+      - name: Run analysis
+        uses: ossf/scorecard-action@e363bfca00e752f91de7b7d2a77340e2e523cb18
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          # Read-only PAT token. To create it,
+          # follow the steps in https://github.com/ossf/scorecard-action#pat-token-creation.
+          repo_token: ${{ secrets.SCORECARD_READ_TOKEN }}
+          # Publish the results to enable scorecard badges. For more details, see
+          # https://github.com/ossf/scorecard-action#publishing-results.
+          # For private repositories, `publish_results` will automatically be set to `false`,
+          # regardless of the value entered here.
+          publish_results: true
+
+      # Upload the results as artifacts (optional).
+      - name: Upload artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: SARIF file
+          path: results.sarif
+          retention-days: 5
+
+      # Upload the results to GitHub's code scanning dashboard.
+      - name: Upload to code-scanning
+        uses: github/codeql-action/upload-sarif@f3feb00acb00f31a6f60280e6ace9ca31d91c76a
+        with:
+          sarif_file: results.sarif
+
+      # Create a job summary with the OSSF badge.
+      - name: Output custom summary
+        run: echo "["'!'"[OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/$GITHUB_REPOSITORY/badge)](https://api.securityscorecards.dev/projects/github.com/$GITHUB_REPOSITORY)" >> $GITHUB_STEP_SUMMARY

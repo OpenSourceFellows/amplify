@@ -1,0 +1,15 @@
+{
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "parser": "@babel/eslint-parser"
+  },
+  "rules": {},
+  "ignorePatterns": ["/dist/**/*.js"]
+}

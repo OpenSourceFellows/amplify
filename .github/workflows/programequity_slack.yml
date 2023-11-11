@@ -1,0 +1,31 @@
+name: Notify mentioned users via Slack
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+  pull_request_target:
+    types: [opened, edited, review_requested]
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created, edited]
+
+permissions:
+  issues: read
+  pull-requests: read
+
+jobs:
+  mention-to-slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        uses: abeyuya/actions-mention-to-slack@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          # Send messages to the 'devs' channel in the ProgramEquity Slack workspace
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          icon-url: https://img.icons8.com/color/256/000000/github-2.png
+          bot-name: 'Mentioned on GitHub: ${{ github.event_name }}'
+          run-id: ${{ github.run_id }}
