@@ -2,7 +2,7 @@ name: ROI PR metrics
 
 on:
   pull_request:
-    types: [review_requested] 
+    types: [review_requested]
 
 jobs:
   record_pr_timestamp:
@@ -28,52 +28,52 @@ jobs:
         run: |
           echo "${GITHUB_WORKSPACE}/artifacts/issue-timestamp" > ${GITHUB_WORKSPACE}/issue-timestamp.txt
           ISSUE_TIMESTAMP=$(cat ${GITHUB_WORKSPACE}/issue-timestamp.txt)
-  
+
   calculate_time_difference:
     needs: download_issue_timestamp
     runs-on: ubuntu-latest
     steps:
-    - name: Calculate Time Difference
-      id: time_difference
-      run: |
-        issue_timestamp=${{ needs.download_issue_timestamp.outputs.issue_timestamp }}
-        pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
-        issue_time=$(date -d "${issue_timestamp}" +%s)
-        pr_time=$(date -d "${pr_timestamp}" +%s)
-        time_diff=$((pr_time - issue_time))
-        echo "Time Difference: ${time_diff}"
-        echo "::set-output name=time_diff::${time_diff}"
+      - name: Calculate Time Difference
+        id: time_difference
+        run: |
+          issue_timestamp=${{ needs.download_issue_timestamp.outputs.issue_timestamp }}
+          pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
+          issue_time=$(date -d "${issue_timestamp}" +%s)
+          pr_time=$(date -d "${pr_timestamp}" +%s)
+          time_diff=$((pr_time - issue_time))
+          echo "Time Difference: ${time_diff}"
+          echo "::set-output name=time_diff::${time_diff}"
 
   metric:
     needs: calculate_time_difference
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18 # pick the node version that's compatible with libraries 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18 # pick the node version that's compatible with libraries
 
-    - name: Print Node.js path
-      run: which node
-      
-    - name: Install
-      run: npm install
-      working-directory: ./roiScript
+      - name: Print Node.js path
+        run: which node
 
-    # TODO: pass these results to the Run script after running the action step 
-    # TODO: for now find a workaround for this library 
-    # - name: Run issue-metrics tool
-    #   uses: github/issue-metrics@v2
-    #   env:
-    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    #     SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
 
-    - name: Run
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
-        TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
-      run: node ./roiScript/issue-metrics.mjs
+      # TODO: pass these results to the Run script after running the action step
+      # TODO: for now find a workaround for this library
+      # - name: Run issue-metrics tool
+      #   uses: github/issue-metrics@v2
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
+
+      - name: Run
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
+          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
+        run: node ./roiScript/issue-metrics.mjs
