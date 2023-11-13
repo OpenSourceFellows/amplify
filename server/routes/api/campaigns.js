@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Campaign = require('../../db/models/campaign')
+// const Campaign = require('../../../db/models/campaign')
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id
@@ -19,6 +20,18 @@ router.get('/', async (req, res) => {
     const campaigns = await Campaign.query()
     // console.log(campaigns)
     res.send(campaigns)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ error: 'Whoops' })
+  }
+})
+
+// Delete endpoint
+router.delete('/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    await Campaign.query().deleteById(id)
+    res.send({ message: 'Campaign deleted successfully' })
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Whoops' })
