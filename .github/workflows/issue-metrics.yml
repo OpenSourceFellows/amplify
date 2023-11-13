@@ -1,42 +1,51 @@
-name: ROI pull request metrics
+name: Measure issue timestamp
 
 on:
   issues:
-    types: [assigned, unlabeled]
-    # repository:
-    #   - ProgramEquity/amplify
-  pull_request:
-    types: [opened, edited]
-    branches:
-      - main 
+    types: [assigned]
 
 jobs:
-  metric:
+  record_issue_timestamp:
     runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout the repo
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
+      - name: Create branch linked to the issue
+        id: create_branch
+        run: |
+          issue_number=$(echo "${{ github.event.issue.number }}")
+          git checkout -b "issue-${issue_number}"
+          echo "::set-output name=issue_branch::issue-${issue_number}"
 
-    # TODO: learn the path to node to run the script from the sh file
-    - name: Print Node.js path
-      run: which node
+      # TODO: debug the issue with the created branc here (it should be check out but on the last step it returns to main)
+      # - name: Checkout branch
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: ${{ steps.create_branch.outputs.issue_branch }}
 
-    - name: Set execute permissions for run-metrics.sh
-      run: chmod +x ./run-metrics.sh
+      # TODO: try pulling in a separate step here
 
-    # - name: Set execute permissions
-    #   run: chmod +x ./issue-metrics.js
-      # run: chmod +x ${{ github.workspace }}/issue-metrics.js
+      - name: Add Issue Timestamp To File
+        working-directory: roiScript
+        run: |
+          timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+          echo "Timestamp: $timestamp" >> issue_timestamp.log
 
-    - name: Issue Metrics
-      uses: github/issue-metrics@v2
-      with:
-        entryPoint: ./run-metrics.sh # TODO: configure values passed to the config
-        # entryPoint: ./issue-metrics.js # error: exec ./issue-metrics.js: exec format error
-        # entryPoint: ${{ github.workspace }}/issue-metrics.js # error: docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/home/runner/work/amplify/amplify/issue-metrics.js": stat /home/runner/work/amplify/amplify/issue-metrics.js: no such file or directory: unknown.
-        args: '{"github-token": "${{ secrets.GH_TOKEN }}", "payload": ${{ toJson(github) }}}'  
+      # TODO: if mentioning it here won't work then pass the variable through the previous step
+      # TODO: here add git checkout of the created branch
+      # TODO: removed git pull ${{steps.create_branch.outputs.issue_branch}} because of an error
+      # HEAD:${{ github.ref }}
+      # don't need this: git checkout ${{steps.create_branch.outputs.issue_branch}}
+      - name: Commit Issue Timestamp
+        run: |
+          git stash
+          git pull --rebase origin ${{ steps.create_branch.outputs.issue_branch }}
+          git rebase -X ours
+          git stash apply
+          git checkout --ours .
+          git rebase --continue
+          git add .
+          git commit -m "Add issue timestamp by $GITHUB_ACTOR"
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
