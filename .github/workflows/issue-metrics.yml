@@ -40,6 +40,8 @@ jobs:
       # don't need this: git checkout ${{steps.create_branch.outputs.issue_branch}}
       - name: Commit Issue Timestamp
         run: |
+          git config --global user.email "Polinka7max@gmail.com"
+          git config --global user.name "Dunridge"
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push --force-with-lease https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ steps.create_branch.outputs.issue_branch }}
