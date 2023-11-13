@@ -1,7 +1,7 @@
 name: Measure issue timestamp
 
 on:
-  issues: 
+  issues:
     types: [assigned]
 
 jobs:
@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'issues'
     steps:
-      - name: Checkout the repo 
+      - name: Checkout the repo
         uses: actions/checkout@v3
 
-      - name: Create branch linked to the issue 
+      - name: Create branch linked to the issue
         id: create_branch
         run: |
           issue_number=$(echo "${{ github.event.issue.number }}")
@@ -25,29 +25,21 @@ jobs:
       #   with:
       #     ref: ${{ steps.create_branch.outputs.issue_branch }}
 
-      # TODO: try pulling in a separate step here 
-    
+      # TODO: try pulling in a separate step here
+
       - name: Add Issue Timestamp To File
         working-directory: roiScript
-        run: | 
-           timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-           echo "Timestamp: $timestamp" >> issue_timestamp.log
+        run: |
+          timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+          echo "Timestamp: $timestamp" >> issue_timestamp.log
 
-      # TODO: if mentioning it here won't work then pass the variable through the previous step 
-      # TODO: here add git checkout of the created branch 
-      # TODO: removed git pull ${{steps.create_branch.outputs.issue_branch}} because of an error 
+      # TODO: if mentioning it here won't work then pass the variable through the previous step
+      # TODO: here add git checkout of the created branch
+      # TODO: removed git pull ${{steps.create_branch.outputs.issue_branch}} because of an error
       # HEAD:${{ github.ref }}
       # don't need this: git checkout ${{steps.create_branch.outputs.issue_branch}}
-      - name: Commit Issue Timestamp 
-        run: | 
-          git config --global user.email "Polinka7max@gmail.com"
-          git config --global user.name "Dunridge"
-          git stash 
-          git pull --rebase origin ${{ steps.create_branch.outputs.issue_branch }}
-          git rebase -X ours
-          git stash apply 
-          git checkout --ours .
-          git rebase --continue
+      - name: Commit Issue Timestamp
+        run: |
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git push --force-with-lease https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ steps.create_branch.outputs.issue_branch }}

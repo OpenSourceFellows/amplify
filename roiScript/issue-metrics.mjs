@@ -1,46 +1,46 @@
-console.log('test'); // works
+console.log('test') // works
 
-import * as core from '@actions/core';
-import github from '@actions/github';
+import * as core from '@actions/core'
+import github from '@actions/github'
 // const core = require('@actions/core');
 // const github = require('@actions/github');
 
-// TODO: test this and debug the issue 
+// TODO: test this and debug the issue
 // --- (testing)
-const pullNumber = 699; // TODO: automate this later on 
-const timeDiff = process.env.TIME_DIFF ? process.env.TIME_DIFF : 1; // testing for undefined  
-const comment = `Time from assignment to PR for #${pullNumber}: ${timeDiff} ms`;
+const pullNumber = 699 // TODO: automate this later on
+const timeDiff = process.env.TIME_DIFF ? process.env.TIME_DIFF : 1 // testing for undefined
+const comment = `Time from assignment to PR for #${pullNumber}: ${timeDiff} ms`
 
 // TODO: test prPayload logging
-const prPayload = process.env.PR_PAYLOAD;
+const prPayload = process.env.PR_PAYLOAD
 
 if (prPayload) {
   try {
-    // const payload = JSON.parse(prPayload); // TODO: it is already parsed? 
-    const payload = prPayload;
-    console.log('payload.pull_request: ', payload.pull_request);
-    // TODO: comment out temporarily 
+    // const payload = JSON.parse(prPayload); // TODO: it is already parsed?
+    const payload = prPayload
+    console.log('payload.pull_request: ', payload.pull_request)
+    // TODO: comment out temporarily
     // const pullRequestCreatedAt = payload.pull_request.created_at;
     // console.log(`Pull Request Creation Time: ${pullRequestCreatedAt}`);
   } catch (error) {
-    console.error('Error parsing PR_PAYLOAD:', error);
+    console.error('Error parsing PR_PAYLOAD:', error)
   }
 } else {
-  console.error('PR_PAYLOAD environment variable is not set or empty');
+  console.error('PR_PAYLOAD environment variable is not set or empty')
 }
 
 // ---
 
 // const octokit = github.getOctokit(core.getInput('GH_TOKEN'));
-const octokit = github.getOctokit(process.env.GH_TOKEN); // works 
+const octokit = github.getOctokit(process.env.GH_TOKEN) // works
 
 // TODO: research how to create comments with Octokit
 await octokit.rest.issues.createComment({
   owner: github.context.repo.owner,
   repo: github.context.repo.repo,
   issue_number: pullNumber,
-  body: comment,
-});
+  body: comment
+})
 
 // ---
 
