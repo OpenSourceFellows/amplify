@@ -32,7 +32,7 @@ jobs:
     needs: get_issue_timestamp
     runs-on: ubuntu-latest
     steps:
-      - name: Calculate Time Difference # TODO: test this 
+      - name: Calculate Time Difference # TODO: debug this 
         id: time_difference
         run: |
           issue_timestamp=${{ needs.get_issue_timestamp.outputs.issue_timestamp }}
@@ -43,7 +43,7 @@ jobs:
           echo "Time Difference: ${time_diff}"
           echo "::set-output name=time_diff::${time_diff}"
 
-  metric: # TODO: debug this job 
+  metric:
     needs: calculate_time_difference
     runs-on: ubuntu-latest
     steps:
@@ -62,17 +62,9 @@ jobs:
         run: npm install
         working-directory: ./roiScript
 
-      # TODO: pass these results to the Run script after running the action step
-      # TODO: for now find a workaround for this library
-      # - name: Run issue-metrics tool
-      #   uses: github/issue-metrics@v2
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      #     SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
-
+      #  PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
           TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
         run: node ./roiScript/issue-metrics.mjs
