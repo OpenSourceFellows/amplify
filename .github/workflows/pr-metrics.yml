@@ -31,28 +31,22 @@ jobs:
         run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: specify all of the conditions in this cat command for telling apart the users 
           issue_timestamp=$(cat issue_timestamp.log | awk -F ': ' '{print $2}')
           seconds_since_epoch=$(date -d "${issue_timestamp}" +"%s")
-          
           echo "Issue timestamp from the first step: ${issue_timestamp}"
           echo "Issue timestamp in seconds: ${seconds_since_epoch}"
-        
           echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
 
   calculate_time_difference:
     needs: get_issue_timestamp
     runs-on: ubuntu-latest
     steps:
-      - name: Calculate Time Difference # TODO: debug this 
+      - name: Calculate Time Difference # TODO: debug this ...
         id: time_difference
         run: |
           issue_timestamp=${{ needs.get_issue_timestamp.outputs.issue_timestamp }}
-          echo "Issue timestamp: ${issue_timestamp}"
+          echo "Issue timestamp (seconds): ${issue_timestamp}"
           pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
-          echo "PR timestamp: ${pr_timestamp}"
-          issue_time=$(date -d "${issue_timestamp}" +%s)
-          echo "Issue time: ${issue_time}"
-          pr_time=$(date -d "${pr_timestamp}" +%s)
-          echo "PR time: ${pr_time}"
-          time_diff=$((pr_time - issue_time))
+          echo "PR timestamp (seconds): ${pr_timestamp}"
+          time_diff=$((pr_timestamp - issue_timestamp))
           echo "Time Difference: ${time_diff}"
           echo "::set-output name=time_diff::${time_diff}"
 
