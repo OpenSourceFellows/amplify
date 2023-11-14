@@ -13,31 +13,36 @@ jobs:
         id: pr_timestamp
         run: echo "::set-output name=pr_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
-  # TODO: for now just log it out (to test first trigger the initial workflow)
-  # echo "::set-output name=issue_timestamp::${ISSUE_TIMESTAMP}"
-  # TODO: tell them apart as individual users and find corresponding records in the issue log file
   get_issue_timestamp:
     needs: record_pr_timestamp
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        
       - name: Get Issue Timestamp
         id: get_issue_timestamp
-        run: |
-          issue_timestamp=$(cat ${GITHUB_WORKSPACE}/roiScript/issue_timestamp.log)
+        working-directory: roiScript
+        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: specify all of the conditions in this cat command for telling apart the users 
+          issue_timestamp=$(cat issue_timestamp.log | awk -F ': ' '{print $2}')
           echo "Issue timestamp from the first step: ${issue_timestamp}"
+          echo "::set-output name=issue_timestamp::${issue_timestamp}"
 
-  # TODO: change needs.download_issue_timestamp.outputs.issue_timestamp to needs.get_issue_timestamp.outputs.issue_timestamp
   calculate_time_difference:
     needs: get_issue_timestamp
     runs-on: ubuntu-latest
     steps:
-      - name: Calculate Time Difference
+      - name: Calculate Time Difference # TODO: debug this 
         id: time_difference
         run: |
-          issue_timestamp=${{ needs.download_issue_timestamp.outputs.issue_timestamp }}
+          issue_timestamp=${{ needs.get_issue_timestamp.outputs.issue_timestamp }}
+          echo "Issue timestamp: ${issue_timestamp}"
           pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
+          echo "PR timestamp: ${pr_timestamp}"
           issue_time=$(date -d "${issue_timestamp}" +%s)
+          echo "Issue time: ${issue_time}"
           pr_time=$(date -d "${pr_timestamp}" +%s)
+          echo "PR time: ${pr_time}"
           time_diff=$((pr_time - issue_time))
           echo "Time Difference: ${time_diff}"
           echo "::set-output name=time_diff::${time_diff}"
@@ -61,17 +66,9 @@ jobs:
         run: npm install
         working-directory: ./roiScript
 
-      # TODO: pass these results to the Run script after running the action step
-      # TODO: for now find a workaround for this library
-      # - name: Run issue-metrics tool
-      #   uses: github/issue-metrics@v2
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      #     SEARCH_QUERY: 'repo:ProgramEquity/amplify is:pr number:${{ github.event.pull_request.number }}'
-
+      #  PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
           TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
         run: node ./roiScript/issue-metrics.mjs
