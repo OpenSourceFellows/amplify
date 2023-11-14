@@ -19,35 +19,18 @@ jobs:
           git checkout -b "issue-${issue_number}"
           echo "::set-output name=issue_branch::issue-${issue_number}"
 
-      # TODO: debug the issue with the created branc here (it should be check out but on the last step it returns to main)
-      # - name: Checkout branch
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: ${{ steps.create_branch.outputs.issue_branch }}
-
       - name: Log Current Branch (debugging)
         run: |
           current_branch=$(git rev-parse --abbrev-ref HEAD)
           echo "Currently checked out branch: $current_branch"
   
-      # TODO: try pulling in a separate step here
-
       - name: Add Issue Timestamp To File
         working-directory: roiScript
         run: |
+          issue_num=$(echo "${{ github.event.issue.number }}")
           timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-          echo "Timestamp: $timestamp" >> issue_timestamp.log
+          echo "$GITHUB_ACTOR, issue #${issue_num}: $timestamp" >> issue_timestamp.log
 
-      # TODO: if mentioning it here won't work then pass the variable through the previous step
-      # TODO: here add git checkout of the created branch
-      # TODO: removed git pull ${{steps.create_branch.outputs.issue_branch}} because of an error
-      # HEAD:${{ github.ref }}
-      # don't need this: git checkout ${{steps.create_branch.outputs.issue_branch}}
-      # temporarily removed git fetch origin ${{ steps.create_branch.outputs.issue_branch }}
-      # rebase will reapply your local commits on top of the remote branch’s commits
-      # was at the end of the push line: HEAD:${{ steps.create_branch.outputs.issue_branch }}
-      # TODO: temporarily remove this and test whether it works with the new issue: git pull --rebase origin ${{ steps.create_branch.outputs.issue_branch }}
-      #   - if the workflow is triggered the 2d time don't run this? 
       - name: Commit Issue Timestamp
         run: |
           git config --global user.email "Polinka7max@gmail.com"
