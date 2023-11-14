@@ -36,9 +36,13 @@ jobs:
         id: time_difference
         run: |
           issue_timestamp=${{ needs.get_issue_timestamp.outputs.issue_timestamp }}
+          echo "Issue timestamp: ${issue_timestamp}"
           pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
+          echo "PR timestamp: ${pr_timestamp}"
           issue_time=$(date -d "${issue_timestamp}" +%s)
+          echo "Issue time: ${issue_time}"
           pr_time=$(date -d "${pr_timestamp}" +%s)
+          echo "PR time: ${pr_time}"
           time_diff=$((pr_time - issue_time))
           echo "Time Difference: ${time_diff}"
           echo "::set-output name=time_diff::${time_diff}"
