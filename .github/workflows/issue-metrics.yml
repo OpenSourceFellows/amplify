@@ -25,6 +25,11 @@ jobs:
       #   with:
       #     ref: ${{ steps.create_branch.outputs.issue_branch }}
 
+      - name: Log Current Branch (debugging)
+        run: |
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
+          echo "Currently checked out branch: $current_branch"
+  
       # TODO: try pulling in a separate step here
 
       - name: Add Issue Timestamp To File
