@@ -20,6 +20,9 @@ jobs:
     needs: record_pr_timestamp
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        
       - name: Get Issue Timestamp
         id: get_issue_timestamp
         working-directory: roiScript
