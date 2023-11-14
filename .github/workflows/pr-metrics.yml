@@ -13,9 +13,6 @@ jobs:
         id: pr_timestamp
         run: echo "::set-output name=pr_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
-  # TODO: for now just log it out (to test first trigger the initial workflow)
-  # echo "::set-output name=issue_timestamp::${ISSUE_TIMESTAMP}"
-  # TODO: tell them apart as individual users and find corresponding records in the issue log file
   get_issue_timestamp:
     needs: record_pr_timestamp
     runs-on: ubuntu-latest
@@ -23,18 +20,19 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
         
-      - name: Get Issue Timestamp # return after testing echo "::set-output name=issue_timestamp::${issue_timestamp}"
+      - name: Get Issue Timestamp
         id: get_issue_timestamp
-        working-directory: roiScript # TODO: specify all of the conditions in this string 
-        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: transform this string into 2023-11-14 16:06:02
+        working-directory: roiScript
+        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: specify all of the conditions in this cat command for telling apart the users 
           issue_timestamp=$(cat issue_timestamp.log | awk -F ': ' '{print $2}')
           echo "Issue timestamp from the first step: ${issue_timestamp}"
+          echo "::set-output name=issue_timestamp::${issue_timestamp}"
 
   calculate_time_difference:
     needs: get_issue_timestamp
     runs-on: ubuntu-latest
     steps:
-      - name: Calculate Time Difference
+      - name: Calculate Time Difference # TODO: test this 
         id: time_difference
         run: |
           issue_timestamp=${{ needs.get_issue_timestamp.outputs.issue_timestamp }}
@@ -45,7 +43,7 @@ jobs:
           echo "Time Difference: ${time_diff}"
           echo "::set-output name=time_diff::${time_diff}"
 
-  metric:
+  metric: # TODO: debug this job 
     needs: calculate_time_difference
     runs-on: ubuntu-latest
     steps:
