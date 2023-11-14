@@ -12,8 +12,11 @@ jobs:
       - name: Get Current Timestamp for PR
         id: pr_timestamp
         run: | 
-          echo "PR timestamp: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          echo "::set-output name=pr_timestamp::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          current_timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          seconds_since_epoch=$(date -d "${current_timestamp}" +%s)
+          echo "PR timestamp: ${current_timestamp}"
+          echo "PR timestamp in seconds: ${seconds_since_epoch}"
+          echo "::set-output name=pr_timestamp::${seconds_since_epoch}"
 
   get_issue_timestamp:
     needs: record_pr_timestamp
