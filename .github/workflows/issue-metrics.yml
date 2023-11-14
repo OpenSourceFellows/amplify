@@ -44,11 +44,12 @@ jobs:
       # HEAD:${{ github.ref }}
       # don't need this: git checkout ${{steps.create_branch.outputs.issue_branch}}
       # temporarily removed git fetch origin ${{ steps.create_branch.outputs.issue_branch }}
+      # rebase will reapply your local commits on top of the remote branch’s commits
       - name: Commit Issue Timestamp
         run: |
           git config --global user.email "Polinka7max@gmail.com"
           git config --global user.name "Dunridge"
-          git pull origin ${{ steps.create_branch.outputs.issue_branch }}
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
-          git push --force-with-lease https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ steps.create_branch.outputs.issue_branch }}
+          git pull --rebase origin ${{ steps.create_branch.outputs.issue_branch }} 
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ steps.create_branch.outputs.issue_branch }}
