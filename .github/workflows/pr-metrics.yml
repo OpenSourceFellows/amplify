@@ -7,9 +7,9 @@ on:
 jobs:
   record_pr_timestamp:
     runs-on: ubuntu-latest
-    outputs: # TODO: test the change of the output 
-      pr_timestamp: ${{ steps.pr_timestamp.outputs.pr_timestamp }} # echo "::set-output name=pr_timestamp::${seconds_since_epoch}" #  echo "pr_timestamp=${seconds_since_epoch}"
     if: github.event_name == 'pull_request' # TODO: switched places with outputs
+    outputs: # TODO: test the change of the output 
+      pr_timestamp: ${{ steps.record_pr_timestamp.outputs.pr_timestamp }} # echo "::set-output name=pr_timestamp::${seconds_since_epoch}" #  echo "pr_timestamp=${seconds_since_epoch}"
     steps:
       - name: Get Current Timestamp for PR
         id: pr_timestamp
