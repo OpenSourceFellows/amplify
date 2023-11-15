@@ -23,7 +23,7 @@ jobs:
         run: |
           current_branch=$(git rev-parse --abbrev-ref HEAD)
           echo "Currently checked out branch: $current_branch"
-  
+
       - name: Add Issue Timestamp To File
         working-directory: roiScript
         run: |
@@ -37,4 +37,4 @@ jobs:
           git config --global user.name "Dunridge"
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git 
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
