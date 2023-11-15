@@ -40,7 +40,10 @@ jobs:
           echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
 
   calculate_time_difference:
-    needs: get_issue_timestamp
+    # needs: get_issue_timestamp # adding these two will make the calc job wait 
+    needs: 
+      - record_pr_timestamp
+      - get_issue_timestamp
     runs-on: ubuntu-latest
     env: 
       pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
