@@ -156,6 +156,27 @@ CIVIC_API_KEY=<YOUR_API_KEY>
 
 7. Save the changes to the `.env` file.
 
+### Setting up Twilio API locally.
+
+Change the secret token to
+Set up account ID
+Go to the Twilio website (https://www.twilio.com/) and click on the "Sign Up" button in the top right corner.
+Follow the prompts to create a new account. You will need to provide your email address, phone number, and a password.
+
+Once you have created your account, you will be taken to the Twilio Console. Click on the "Create a Project" button to create a new project.
+
+Follow the prompts to create a new project. You will need to provide a name for your project and select the type of project you want to create (e.g. SMS, Voice, etc.).
+
+Once you have created your project, you will be taken to the project dashboard. Here you will find your Account SID, which is a unique identifier for your Twilio account.
+
+You can use this Account SID to authenticate your requests to the Twilio API. You will also need to generate an API key and secret to use with the Twilio API. You can do this by going to the "API Keys" section of the Twilio Console and clicking on the "Create API Key" button.
+
+Follow the prompts to create a new API key. You will need to provide a friendly name for your API key and select the permissions you want to grant to the key.
+
+Once you have created your API key, you will be given an API key SID and secret. You can use these values to authenticate your requests to the Twilio API.
+
+Note that you will need to keep your Account SID and API key secret, as they are used to authenticate your requests to the Twilio API.
+
 #### Using the Lob API locally
 
 1. Login to your personal [Heroku dashboard](https://dashboard.heroku.com/).
