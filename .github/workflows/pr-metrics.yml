@@ -23,11 +23,13 @@ jobs:
   get_issue_timestamp:
     needs: record_pr_timestamp
     runs-on: ubuntu-latest
+    outputs: 
+      issue_timestamp: ${{ steps.get_issue_timestamp.outputs.issue_timestamp } 
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
         
-      - name: Get Issue Timestamp
+      - name: Get Issue Timestamp # echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
         id: get_issue_timestamp
         working-directory: roiScript
         run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: specify all of the conditions in this cat command for telling apart the users 
@@ -35,18 +37,22 @@ jobs:
           seconds_since_epoch=$(date -d "${issue_timestamp}" +"%s")
           echo "Issue timestamp from the first step: ${issue_timestamp}"
           echo "Issue timestamp in seconds: ${seconds_since_epoch}"
-          echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
+          echo "issue_timestamp=${seconds_since_epoch}"
 
   calculate_time_difference:
     needs: get_issue_timestamp
     runs-on: ubuntu-latest
     steps:
-      - name: Calculate Time Difference # TODO: debug this ...
+      - env: 
+          pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
+          issue_timestamp_input: ${{needs.get_issue_timestamp.outputs.issue_timestamp}}
+          
+      - name: Calculate Time Difference # TODO: debug this ... # TODO: do the same thing with outputs here if this works
         id: time_difference
         run: |
-          issue_timestamp=${{ needs.get_issue_timestamp.outputs.issue_timestamp }}
+          issue_timestamp=${{ issue_timestamp_input }}
           echo "Issue timestamp (seconds): ${issue_timestamp}"
-          pr_timestamp=${{ needs.record_pr_timestamp.outputs.pr_timestamp }}
+          pr_timestamp=${{ pr_timestamp_input }}
           echo "PR timestamp (seconds): ${pr_timestamp}"
           time_diff=$((pr_timestamp - issue_timestamp))
           echo "Time Difference: ${time_diff}"
