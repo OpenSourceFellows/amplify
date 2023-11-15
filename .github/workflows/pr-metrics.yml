@@ -7,13 +7,13 @@ on:
 jobs:
   record_pr_timestamp:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' 
-    outputs: 
-      pr_timestamp: ${{ steps.get_pr_timestamp.outputs.pr_timestamp }} 
+    if: github.event_name == 'pull_request'
+    outputs:
+      pr_timestamp: ${{ steps.get_pr_timestamp.outputs.pr_timestamp }}
     steps:
       - name: Get Current Timestamp for PR
         id: get_pr_timestamp
-        run: | 
+        run: |
           current_timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           seconds_since_epoch=$(date -d "${current_timestamp}" +%s)
           echo "PR timestamp: ${current_timestamp}"
@@ -23,8 +23,8 @@ jobs:
   get_issue_timestamp:
     needs: record_pr_timestamp
     runs-on: ubuntu-latest
-    outputs: 
-      issue_timestamp: ${{ steps.get_issue_timestamp.outputs.issue_timestamp }} 
+    outputs:
+      issue_timestamp: ${{ steps.get_issue_timestamp.outputs.issue_timestamp }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -34,38 +34,38 @@ jobs:
           git fetch
           echo "Current Branch: $(git branch)"
           git checkout ${{github.event.pull_request.head.ref}}
-        
-      - name: Get Issue Timestamp 
-        id: get_issue_timestamp 
+
+      - name: Get Issue Timestamp
+        id: get_issue_timestamp
         working-directory: roiScript
-        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 
+        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02
           issue_timestamp=$(cat issue_timestamp.log | awk -F ': ' '{print $2}')
           seconds_since_epoch=$(date -d "${issue_timestamp}" +"%s")
           echo "Issue timestamp from the first step: ${issue_timestamp}"
           echo "Issue timestamp in seconds: ${seconds_since_epoch}"
           echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
           echo "" > issue_timestamp.log
-          
-      - name: Commit Timestamp Removal # step + echo "" > issue_timestamp.log -- for clearing the issue_timestamp.log file so that this doesn't run on second reviewer assignment 
+
+      - name: Commit Timestamp Removal # step + echo "" > issue_timestamp.log -- for clearing the issue_timestamp.log file so that this doesn't run on second reviewer assignment
         run: |
           git config --global user.email "Polinka7max@gmail.com"
           git config --global user.name "Dunridge"
           git add .
           git commit -m "Remove issue timestamp by $GITHUB_ACTOR"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git 
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
 
   calculate_time_difference:
-    needs: 
+    needs:
       - record_pr_timestamp
       - get_issue_timestamp
     runs-on: ubuntu-latest
-    outputs: 
+    outputs:
       time_diff: ${{ steps.time_difference.outputs.time_diff }}
-    env: 
+    env:
       pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
       issue_timestamp_input: ${{needs.get_issue_timestamp.outputs.issue_timestamp}}
     steps:
-      - name: Calculate Time Difference 
+      - name: Calculate Time Difference
         id: time_difference
         run: |
           issue_timestamp=$issue_timestamp_input
@@ -79,7 +79,7 @@ jobs:
   metric:
     needs: calculate_time_difference
     runs-on: ubuntu-latest
-    env: 
+    env:
       time_diff_input: ${{needs.calculate_time_difference.outputs.time_diff}}
     steps:
       - name: Checkout code
@@ -101,6 +101,6 @@ jobs:
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }} 
+          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
           PR_NUMBER: ${{ github.event.number }}
         run: node ./roiScript/issue-metrics.mjs
