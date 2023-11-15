@@ -45,6 +45,8 @@ jobs:
       - record_pr_timestamp
       - get_issue_timestamp
     runs-on: ubuntu-latest
+    outputs: 
+      time_diff: ${{ steps.time_difference.outputs.time_diff }}
     env: 
       pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
       issue_timestamp_input: ${{needs.get_issue_timestamp.outputs.issue_timestamp}}
@@ -63,6 +65,8 @@ jobs:
   metric:
     needs: calculate_time_difference
     runs-on: ubuntu-latest
+    env: 
+      time_diff_input: ${{needs.calculate_time_difference.outputs.time_diff}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -72,8 +76,9 @@ jobs:
         with:
           node-version: 18 # pick the node version that's compatible with libraries
 
-      - name: Print Node.js path
-        run: which node
+      - name: Output Time Diff
+        run: |
+          echo "Time Diff For Output: $time_diff_input"
 
       - name: Install
         run: npm install
@@ -83,5 +88,5 @@ jobs:
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
+          TIME_DIFF: $time_diff_input # ${{ needs.calculate_time_difference.outputs.time_diff }} # TODO: test this diff input 
         run: node ./roiScript/issue-metrics.mjs
