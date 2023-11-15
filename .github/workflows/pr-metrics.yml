@@ -24,7 +24,7 @@ jobs:
     needs: record_pr_timestamp
     runs-on: ubuntu-latest
     outputs: 
-      issue_timestamp: ${{ steps.get_issue_timestamp.outputs.issue_timestamp } 
+      issue_timestamp: ${{ steps.get_issue_timestamp.outputs.issue_timestamp }} 
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
