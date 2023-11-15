@@ -4,6 +4,7 @@ import * as core from '@actions/core'
 import github from '@actions/github'
 
 const pullNumber = process.env.PR_NUMBER; //779; // TODO: pass the PR number from the workflow file
+console.log('pullNumber', pullNumber);
 const timeDiff = process.env.TIME_DIFF ? process.env.TIME_DIFF : 1;
 const comment = `Time from assignment to PR for #${pullNumber}: ${timeDiff} ms`;
 
