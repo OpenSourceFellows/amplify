@@ -21,4 +21,4 @@ jobs:
       with:
         subject: 'Review pull request'
         body: 'A new PR has been submitted on ${{ github.repository }} from ${{ github.actor }}. Please review it.'
-        emailaddress: 'user@contoso.onmicrosoft.com''
+        emailaddress: 'user@contoso.onmicrosoft.com'
