@@ -38,6 +38,15 @@ jobs:
           echo "Issue timestamp from the first step: ${issue_timestamp}"
           echo "Issue timestamp in seconds: ${seconds_since_epoch}"
           echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
+          echo "" > issue_timestamp.log
+          
+      - name: Commit Timestamp Removal # step + echo "" > issue_timestamp.log -- for clearing the issue_timestamp.log file so that this doesn't run on second reviewer assignment 
+        run: |
+          git config --global user.email "Polinka7max@gmail.com"
+          git config --global user.name "Dunridge"
+          git add .
+          git commit -m "Remove issue timestamp by $GITHUB_ACTOR"
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git 
 
   calculate_time_difference:
     needs: 
