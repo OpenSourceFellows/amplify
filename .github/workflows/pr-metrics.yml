@@ -42,11 +42,10 @@ jobs:
   calculate_time_difference:
     needs: get_issue_timestamp
     runs-on: ubuntu-latest
+    env: 
+      pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
+      issue_timestamp_input: ${{needs.get_issue_timestamp.outputs.issue_timestamp}}
     steps:
-      - env: 
-          pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
-          issue_timestamp_input: ${{needs.get_issue_timestamp.outputs.issue_timestamp}}
-          
       - name: Calculate Time Difference # TODO: debug this ... # TODO: do the same thing with outputs here if this works
         id: time_difference
         run: |
