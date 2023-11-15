@@ -88,5 +88,5 @@ jobs:
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIME_DIFF: ${{ $time_diff_input }} # ${{ needs.calculate_time_difference.outputs.time_diff }} # TODO: test this diff input 
+          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }} # ${{ $time_diff_input }} - this is invalid syntaxes # ${{ needs.calculate_time_difference.outputs.time_diff }} # TODO: test this diff input 
         run: node ./roiScript/issue-metrics.mjs
