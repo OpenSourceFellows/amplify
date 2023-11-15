@@ -1,24 +1,27 @@
 name: Create Calendar Event
 
-on: 
-    pull_request:
-        branches: [master]
+on:
+  pull_request:
+    branches: [master]
 
 jobs:
   create-event:
     runs-on: ubuntu-latest
     name: Create Event using Ms. Graph
     steps:
-    - name: Print a message
-      run: echo About to call a Github Action
+      - name: Print a message
+        run: echo About to call a Github Action
 
-    - name: Create event on the next day
-      uses: anoopt/ms-graph-create-event-msal@v1
-      env:
-        TENANT_NAME: ${{secrets.TENANT_NAME}}
-        APP_ID: ${{secrets.APP_ID}}
-        APP_SECRET: ${{secrets.APP_SECRET}}
-      with:
-        subject: 'Review pull request'
-        body: 'A new PR has been submitted on ${{ github.repository }} from ${{ github.actor }}. Please review it.'
-        emailaddress: 'user@contoso.onmicrosoft.com'
+      - name: Create event on the next day
+        uses: anoopt/ms-graph-create-event-msal@v1
+        env:
+          TENANT_NAME: ${{secrets.TENANT_NAME}}
+          APP_ID: ${{secrets.APP_ID}}
+          APP_SECRET: ${{secrets.APP_SECRET}}
+        with:
+          subject: 'Review pull request'
+          body: 'A new PR has been submitted on ${{ github.repository }} from ${{ github.actor }}. Please review it.'
+          emailaddress: 'user@contoso.onmicrosoft.com'
+        runs:
+          using: 'node16'
+          main: 'dist/index.js'

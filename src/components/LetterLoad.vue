@@ -57,11 +57,13 @@
 
 export default {
   name: 'LetterLoad',
-  components: { /* AuthNav */ },
-  props: {
-    letterBody: { type: String, default: '' },
+  components: {
+    /* AuthNav */
   },
-  data () {
+  props: {
+    letterBody: { type: String, default: '' }
+  },
+  data() {
     return {
       isSubmitted: true
     }
@@ -73,7 +75,7 @@ export default {
     user() {
       return this.$store.state.userData
     },
-    currentDate () {
+    currentDate() {
       return new Intl.DateTimeFormat('en-US').format(new Date())
     },
     formattedCityState() {
