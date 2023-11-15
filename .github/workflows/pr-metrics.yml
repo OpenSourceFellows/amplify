@@ -7,12 +7,12 @@ on:
 jobs:
   record_pr_timestamp:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' # TODO: switched places with outputs
-    outputs: # TODO: test the change of the output 
-      pr_timestamp: ${{ steps.get_pr_timestamp.outputs.pr_timestamp }} # pr_timestamp -> get_pr_timestamp # TODO: rename the steps so that there are no name duplicates # echo "::set-output name=pr_timestamp::${seconds_since_epoch}" #  echo "pr_timestamp=${seconds_since_epoch}"
+    if: github.event_name == 'pull_request' 
+    outputs: 
+      pr_timestamp: ${{ steps.get_pr_timestamp.outputs.pr_timestamp }} 
     steps:
       - name: Get Current Timestamp for PR
-        id: get_pr_timestamp # pr_timestamp -> get_pr_timestamp
+        id: get_pr_timestamp
         run: | 
           current_timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           seconds_since_epoch=$(date -d "${current_timestamp}" +%s)
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
         
-      - name: Get Issue Timestamp # echo "::set-output name=issue_timestamp::${seconds_since_epoch}" # echo "issue_timestamp=${seconds_since_epoch}"
+      - name: Get Issue Timestamp 
         id: get_issue_timestamp 
         working-directory: roiScript
         run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: specify all of the conditions in this cat command for telling apart the users 
@@ -40,7 +40,6 @@ jobs:
           echo "::set-output name=issue_timestamp::${seconds_since_epoch}"
 
   calculate_time_difference:
-    # needs: get_issue_timestamp # adding these two will make the calc job wait 
     needs: 
       - record_pr_timestamp
       - get_issue_timestamp
@@ -51,7 +50,7 @@ jobs:
       pr_timestamp_input: ${{needs.record_pr_timestamp.outputs.pr_timestamp}}
       issue_timestamp_input: ${{needs.get_issue_timestamp.outputs.issue_timestamp}}
     steps:
-      - name: Calculate Time Difference # TODO: debug this ... # TODO: do the same thing with outputs here if this works
+      - name: Calculate Time Difference 
         id: time_difference
         run: |
           issue_timestamp=$issue_timestamp_input
@@ -84,9 +83,9 @@ jobs:
         run: npm install
         working-directory: ./roiScript
 
-      #  PR_PAYLOAD: ${{ steps.pr-payload.outputs.pr_payload }}
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }} # ${{ $time_diff_input }} - this is invalid syntaxes # ${{ needs.calculate_time_difference.outputs.time_diff }} # TODO: test this diff input 
+          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }} 
+          PR_NUMBER: ${{ github.event.number }}
         run: node ./roiScript/issue-metrics.mjs
