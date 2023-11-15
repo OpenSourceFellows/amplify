@@ -31,7 +31,6 @@ jobs:
 
       - name: Checkout Source Branch
         run: |
-          echo "Branch with changes: ${github.event.pull_request.head.ref}"
           git checkout ${{ github.event.pull_request.head.ref }}
         
       - name: Get Issue Timestamp 
