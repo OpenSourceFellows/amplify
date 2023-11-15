@@ -7,7 +7,7 @@ on:
       - opened
 
 jobs:
-    # This is the job definition for 'gitemote', which will run as part of the GitHub Actions workflow.
+  # This is the job definition for 'gitemote', which will run as part of the GitHub Actions workflow.
   gitemote:
     # This job will run on the latest version of Ubuntu
     runs-on: ubuntu-latest
@@ -15,13 +15,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-     # Step 2: Run PR emote generator.
+      # Step 2: Run PR emote generator.
       # This custom action is used to generate emotes for pull requests.
       # It's referencing to the main branch of an action that I created based off of the original PR Emote Generator action created by @rcmtcristian.
       - name: PR emote generator
         uses: lingeorge88/gitemotePR_GL@main
         with:
-    # The GITHUB_TOKEN is a special type of secret that is automatically created by GitHub.
+          # The GITHUB_TOKEN is a special type of secret that is automatically created by GitHub.
           # It is used to authenticate in the workflow and perform actions on the repository.
           # Here it is passed to the custom action, which uses it to interact with GitHub API.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
