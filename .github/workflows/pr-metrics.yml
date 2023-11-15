@@ -49,9 +49,9 @@ jobs:
       - name: Calculate Time Difference # TODO: debug this ... # TODO: do the same thing with outputs here if this works
         id: time_difference
         run: |
-          issue_timestamp=${{ issue_timestamp_input }}
+          issue_timestamp=$issue_timestamp_input
           echo "Issue timestamp (seconds): ${issue_timestamp}"
-          pr_timestamp=${{ pr_timestamp_input }}
+          pr_timestamp=$pr_timestamp_input
           echo "PR timestamp (seconds): ${pr_timestamp}"
           time_diff=$((pr_timestamp - issue_timestamp))
           echo "Time Difference: ${time_diff}"
