@@ -28,11 +28,16 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+
+      - name: Checkout Source Branch
+        run: |
+          echo "Branch with changes: ${github.event.pull_request.head.ref}"
+          git checkout ${{ github.event.pull_request.head.ref }}
         
       - name: Get Issue Timestamp 
         id: get_issue_timestamp 
         working-directory: roiScript
-        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 # TODO: specify all of the conditions in this cat command for telling apart the users 
+        run: | # timestamp: Dunridge, issue #767: 2023-11-14 16:06:02 
           issue_timestamp=$(cat issue_timestamp.log | awk -F ': ' '{print $2}')
           seconds_since_epoch=$(date -d "${issue_timestamp}" +"%s")
           echo "Issue timestamp from the first step: ${issue_timestamp}"
