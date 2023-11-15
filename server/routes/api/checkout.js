@@ -3,8 +3,10 @@ const { createClient } = require('../../db')
 const router = express.Router()
 const db = createClient()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-const { formatDonationAmount } = require('../../../util/format')
-const { validateDonationAmount } = require('../../../util/validate')
+const { formatDonationAmount } = require('../../../presenters/format')
+const { validateDonationAmount } = require('../../../presenters/validate')
+const { Stripe } = require('../../lib/stripe')
+const { PaymentPresenter } = require('../../../presenters')
 
 router.post('/create-transaction', async (req, res) => {
   const { sessionId /*, email /*, campaignId, donationId */ } = req.body || {}
@@ -45,32 +47,17 @@ router.post('/create-checkout-session', async (req, res) => {
   const { donationAmount } = req.body || {}
   const origin = req.get('origin')
 
-  const input = formatDonationAmount(donationAmount)
-  const inputIsValid = validateDonationAmount(input)
+  const formattedDonation = PaymentPresenter.formatPaymentAmount(donationAmount)
+  const donationValid =
+    PaymentPresenter.validatePaymentAmount(formattedDonation)
 
-  if (inputIsValid) {
-    const donationAmountForStripe = input * 100 // Stripe accepts values in cents
-    let session
+  if (donationValid) {
+    const stripe = new Stripe()
 
     try {
-      session = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: 'Donation'
-              },
-              unit_amount: donationAmountForStripe
-            },
-            quantity: 1
-          }
-        ],
-        mode: 'payment',
-        allow_promotion_codes: true,
-        success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url: origin
-      })
+      const session = await stripe.createCheckoutSession(donationAmount)
+
+      // TODO: Move redirect logic here
     } catch (error) {
       const data = {
         type: error.type,
