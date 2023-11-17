@@ -31,6 +31,13 @@
           <span v-html="letterBody" />
         </v-card-text>
 
+        <v-textarea
+          filled
+          auto-grow
+          placeholder="Additional message (optional)"
+          v-model="customMessage"
+        ></v-textarea>
+
         <p>{{ user.name }}</p>
       </div>
       <div v-show="!isSubmitted">
@@ -63,7 +70,9 @@ export default {
   },
   data () {
     return {
-      isSubmitted: true
+      date: new Intl.DateTimeFormat('en-US').format(new Date()),
+      isSubmitted: true,
+      customMessage: ""
     }
   },
   computed: {
@@ -83,6 +92,15 @@ export default {
 
       return ''
     }
+  },
+  watch: {
+    customMessage(newMessage) {
+      console.log(newMessage)
+      this.$store.commit('setGenericValue', { key: 'userCustomMessage', value: newMessage })
+    }
+  },
+  persistCustomization(){
+    this.$store.commit('setGenericValue', { key: 'userCustomMessage', value: this.customMessage })
   }
 }
 </script>

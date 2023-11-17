@@ -98,7 +98,10 @@ export default {
       },
       lobReturnAddressId () {
         return this.$store.state.lobReturnAddressId
-      }
+      },
+      userCustomization(){
+       return this.$store.state.userCustomMessage
+         }
     },
     created () {
       const sessionId = this.$route.query.session_id
@@ -146,6 +149,7 @@ export default {
             from: this.lobReturnAddressId,
             template_id: this.letterId,
             sessionId,
+            userCustomMessage : this.userCustomMessage
           })
           .then((res) => {
             this.expectedDeliveryDate = res.data.expected_delivery_date
