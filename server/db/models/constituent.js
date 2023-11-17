@@ -1,4 +1,4 @@
-const BaseModel = require('./base')
+const BaseModel = require('./_base')
 
 class Constituent extends BaseModel {
   static get tableName() {
@@ -10,9 +10,9 @@ class Constituent extends BaseModel {
       type: 'object',
       required: [
         'email',
-        'first_name',
-        'last_name',
-        'address_line_1',
+        'firstName',
+        'lastName',
+        'addressLine_1',
         'city',
         'state',
         'zip'

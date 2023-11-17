@@ -1,6 +1,5 @@
-// const BaseModel = require('./_base')
+const BaseModel = require('./_base')
 
-/*
 class Transaction extends BaseModel {
   static get tableName() {
     return 'transactions'
@@ -10,18 +9,24 @@ class Transaction extends BaseModel {
     return {
       type: 'object',
       required: [
-        'stripe_transaction_id', 'amount', 'currency', 'email', 'payment_method', 'payment_method_type'
+        'stripeTransactionId',
+        'constituentId',
+        'amount',
+        'currency',
+        'paymentMethod'
       ],
       properties: {
         stripe_transaction_id: { type: 'string' },
+        constituent_id: { type: 'number' },
         amount: { type: 'number' },
         currency: { type: 'string' },
-        email: { type: 'string' },
+        payment_method: { type: 'string' },
         status: { type: 'string' }
       }
     }
   }
 
+  /*
   static get relationMappings() {
     const Constituent = require('./constituent')
 
@@ -36,5 +41,7 @@ class Transaction extends BaseModel {
       }
     }
   }
+  */
 }
-*/
+
+module.exports = Transaction

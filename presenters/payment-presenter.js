@@ -18,16 +18,14 @@ class PaymentPresenter {
    * Validates that payments aren't something weird, like NaN or a very large number.
    * @param {number} payment
    */
-  static validatePaymentAmount(payment) {
+  validatePaymentAmount(payment) {
     if (typeof payment !== 'number') {
-      return false
+      throw new PaymentPresenterError('Payment is not a number')
     }
 
     if (payment < this.minimumPayment || payment > this.maximumPayment) {
-      return false
+      throw new PaymentPresenterError('Payment amount is out of range')
     }
-
-    return true
   }
 
   /**
@@ -42,15 +40,17 @@ class PaymentPresenter {
       payment = payment.replace(nonNumerics, '')
       payment = Number(payment)
 
-      if (isNaN(payment))
+      if (isNaN(payment)) {
         throw new PaymentPresenterError('Amount is in unexpected format')
+      }
     }
 
-    if (typeof payment == 'object')
+    if (typeof payment == 'object') {
       throw new PaymentPresenterError('Unparsable argument')
+    }
 
-    return payment * 100
+    return payment
   }
 }
 
-module.exports = { PaymentPresenter }
+module.exports = { PaymentPresenter, PaymentPresenterError }

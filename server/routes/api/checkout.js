@@ -1,13 +1,13 @@
 const express = require('express')
-const router = express.Router()
-
-const { Stripe } = require('../../lib/stripe')
+const { Stripe, StripeError } = require('../../lib/stripe')
 const {
   PaymentPresenter,
   PaymentPresenterError
 } = require('../../../presenters/payment-presenter')
 const Constituent = require('../../db/models/constituent')
 const Transaction = require('../../db/models/transaction')
+
+const router = express.Router()
 
 router.post('/create-checkout-session', async (req, res) => {
   const { donationAmount, user } = req.body
@@ -19,6 +19,7 @@ router.post('/create-checkout-session', async (req, res) => {
     const presenter = new PaymentPresenter()
 
     const formattedDonation = presenter.formatPaymentAmount(donationAmount)
+    console.log(formattedDonation)
 
     // Will throw error if invalid amount is given.
     presenter.validatePaymentAmount(formattedDonation)
@@ -36,16 +37,14 @@ router.post('/create-checkout-session', async (req, res) => {
 
     // TODO: Move Constituent insert to earlier in the cycle.
     const constituent = await Constituent.query().insert(user)
-    console.log(constituent)
 
-    const transaction = await Transaction.query().insert({
-      stripeTransactionId: session.id,
+    await Transaction.query().insert({
+      stripeTransactionId: session.payment_intent,
       constituentId: constituent.id,
       amount: formattedDonation,
       currency: 'USD',
       paymentMethod: 'credit_card'
     })
-    console.log(transaction)
 
     return res
       .status(200)
@@ -60,6 +59,45 @@ router.post('/create-checkout-session', async (req, res) => {
 
     // TODO: error logging
     return res.status(statusCode).json({ error: error.message }).end()
+  }
+})
+
+router.post('/process-transaction', async (req, res) => {
+  try {
+    // TODO: Implement webhook secret
+    const stripe = new Stripe()
+
+    const signature = req.headers['stripe-signature']
+
+    console.log(signature)
+
+    const event = stripe.validateEvent(signature, req.rawBody)
+
+    const data = event.data
+    const { id: paymentIntent, amount } = data.object
+    const [eventType, eventOutcome] = req.body.type.split('.')
+
+    // We are not going to send letters from this endpoint just yet
+    // so we will record the transaction no matter the outcome.
+    if (eventType !== 'payment_intent') {
+      throw new Error('Unexpected event!')
+    }
+
+    await Transaction.query()
+      .patch({ amount, status: eventOutcome })
+      .where({ stripe_transaction_id: paymentIntent })
+
+    return res.status(200).end()
+  } catch (error) {
+    let statusCode = 500
+
+    if (error instanceof StripeError) {
+      // Don't leak Stripe logging.
+      console.error(error.message)
+      error.message = 'Payment processing error'
+    }
+
+    return res.status(statusCode).json({ error: error.message })
   }
 })
 
