@@ -30,28 +30,24 @@
         <v-card-text>
           <span v-html="letterBody" />
           <v-select
-            v-model="selectedReason"
+            v-model="reason_input"
             :items="reasons"
             label="Reasons why this campaign is important to you"
-            class="small-dropdown custom-select"
           />
           <v-select
-            v-model="selectedAffects"
+            v-model="community_input"
             :items="affects"
             label="How this affects your community"
-            class="small-dropdown custom-select"
           />
           <v-select
-            v-model="selectedBenefit"
+            v-model="benefit_input"
             :items="benefits"
             label="What is the benefit of supporting this"
-            class="small-dropdown custom-select"
           />
           <v-select
-            v-model="selectedGreaterImpact"
+            v-model="impact_input"
             :items="greaterImpacts"
             label="What is the greater impact of supporting this"
-            class="small-dropdown custom-select"
           />
         </v-card-text>
 
@@ -88,10 +84,10 @@ export default {
   data() {
     return {
       isSubmitted: true,
-      selectedReason: null,
-      selectedAffects: null,
-      selectedBenefit: null,
-      selectedGreaterImpact: null,
+      reason_input: null,
+      community_input: null,
+      benefit_input: null,
+      impact_input: null,
       reasons: [
         'I live here',
         'My family lives here',
@@ -139,11 +135,10 @@ export default {
 </script>
 
 <style scoped lang="less">
-.letter-load {}
+.letter-load {
+}
 
 .salutation {
   font-size: 18px;
 }
-
-
 </style>
