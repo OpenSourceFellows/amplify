@@ -11,6 +11,7 @@ class StripeError extends Error {
 class Stripe {
   constructor() {
     this.stripeSecret = process.env.STRIPE_SECRET_KEY
+    this.stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET
     this.stripe = require('stripe')(this.stripeSecret)
   }
 
@@ -36,7 +37,7 @@ class Stripe {
    * @param {number} donationAmount - Donation amount (in cents).
    * @param {string} customerEmail - For (optionally) pre-filling customer email on checkout page.
    */
-  async createCheckoutSession(donationAmount, customerEmail = '') {
+  async createCheckoutSession(donationAmount, redirectUrl, cancelUrl) {
     try {
       const session = await this.stripe.checkout.sessions.create({
         line_items: [
@@ -48,17 +49,21 @@ class Stripe {
               },
               unit_amount: donationAmount
             },
-            quantity: 1,
-            customer_email: customerEmail
+            quantity: 1
           }
         ],
         mode: 'payment',
         allow_promotion_codes: true,
-        success_url: '',
-        cancel_url: ''
+        success_url: redirectUrl,
+        cancel_url: cancelUrl
       })
+      console.log(session)
 
-      return { url: session.url, id: session.id }
+      return {
+        url: session.url,
+        id: session.id,
+        paymentIntent: session.payment_intent
+      }
     } catch (error) {
       throw new StripeError(error.message)
     }
