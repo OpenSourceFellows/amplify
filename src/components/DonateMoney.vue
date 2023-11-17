@@ -96,8 +96,13 @@ export default {
       ]
     }
   },
-  computed: {},
-  mounted() {},
+  computed: {
+    userData() {
+      return this.$store.userData
+    }
+  },
+  mounted () {
+  },
   methods: {
     unsetCustomAmountSelection() {
       this.customAmountSelected = false
@@ -121,8 +126,8 @@ export default {
       return
     },
     createCheckoutSession(donationAmount) {
-      axios
-        .post('/api/checkout/create-checkout-session', { donationAmount })
+      axios.post('/api/checkout/create-checkout-session', { donationAmount, user: this.userData })
+        // TODO: Investigate whether we need to dump user state still. With the new stripe webhook it may not be necessary.
         .then((response) => {
           // Dump state to local storage before redirect
           this.$store.dispatch(
