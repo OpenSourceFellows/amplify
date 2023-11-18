@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     mode: 'default',
     zipcode: '',
-    letterId: '',
+    letterId: 'tmpl_187d2bbba140cd8',
     campaign: {
       id: '',
       organization: '',

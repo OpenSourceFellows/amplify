@@ -36,7 +36,7 @@ export default {
   created() {
     this.mode = process.env.VUE_APP_CAMPAIGN_MODE
 
-    if (this.mode === 'single' && !this.campaign.id) {
+    if (this.mode === 'single') {
       this.campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
 
       this.$store.commit('setGenericValue', {

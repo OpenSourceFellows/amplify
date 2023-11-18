@@ -180,7 +180,128 @@ export default {
   data() {
     return {
       letterBody: '<h1>Test</h1>',
-      congressMembers: [],
+      congressMembers: [
+        {
+          name: 'Rashi Kesarwani',
+          title: 'Berkeley Councilmember, District 1',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '# 5',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'rkesarwani@cityofberkeley.info',
+          twitter: 'RashiKesarwani',
+          facebook: 'CouncilwomanRashi',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/kesarwani.jpg'
+        },
+        {
+          name: 'Terry Taplin',
+          title: 'Berkeley Councilmember, District 2',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'ttaplin@cityofberkeley.info',
+          twitter: 'taplinterry',
+          facebook: 'D2TerryTaplin2020',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Terry%20Taplin.jpg'
+        },
+        {
+          name: 'Ben Bartlett',
+          title: 'Berkeley Councilmember, District 3',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'bbartlett@cityofberkeley.info',
+          twitter: 'benbartlettberk',
+          facebook: 'CouncilmemberBartlett',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Ben-Bartlet.jpg'
+        },
+        {
+          name: 'Kate Harrison',
+          title: 'Berkeley Councilmember, District 4',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'kharrison@cityofberkeley.info',
+          twitter: 'kateharrisond4',
+          facebook: 'KateHarrisonD4',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Kate-Harrison_1.jpg'
+        },
+        {
+          name: 'Sophie Hahn',
+          title: 'Berkeley Councilmember, District 5',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'shahn@cityofberkeley.info',
+          twitter: 'SophieHahnBerk',
+          facebook: 'sophie.hahn.583',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Sophie-Hahn_2.jpg'
+        },
+        {
+          name: 'Susan Wengraf',
+          title: 'Berkeley Councilmember, District 6',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'swengraf@cityofberkeley.info',
+          twitter: '',
+          facebook: '',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Susan-Wengraf_0.jpg'
+        },
+        {
+          name: 'Rigel Robinson',
+          title: 'Berkeley Councilmember, District 7',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'RRobinson@cityofberkeley.info',
+          twitter: 'rigelrobinson',
+          facebook: 'CouncilmemberRigelRobinson',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Rigel-Robinson.jpg'
+        },
+        {
+          name: 'Mark Humbert',
+          title: 'Berkeley Councilmember, District 8',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '5th Floor',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'mhumbert@cityofberkeley.info',
+          twitter: 'MarkHumbert',
+          facebook: '',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Mark-Humbert-300px.jpg'
+        }
+      ],
       currentFilter: '',
       hasContent: true,
       postalCode: this.$route.params.postalCode || '',
@@ -207,14 +328,12 @@ export default {
   },
   methods: {
     async loadLetterWorkflow() {
-      const letterVersions = await axios.get(
-        `/api/letter_versions/${this.campaignId}`
-      )
-      const latest =
-        letterVersions.data[letterVersions.data.length - 1].template_id
-      const letter = await axios.get(`/api/lob/templates/${latest}`)
+      const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
 
-      this.$store.commit('setGenericValue', { key: 'letterId', value: latest })
+      this.$store.commit('setGenericValue', {
+        key: 'letterId',
+        value: this.letterId
+      })
 
       this.letterBody = letter.data.versions[0].html
 

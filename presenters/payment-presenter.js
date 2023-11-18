@@ -49,7 +49,7 @@ class PaymentPresenter {
       throw new PaymentPresenterError('Unparsable argument')
     }
 
-    return payment
+    return payment * 100
   }
 }
 

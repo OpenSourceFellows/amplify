@@ -233,8 +233,11 @@ router.post('/createLetter', async (req, res) => {
 })
 
 router.get('/templates/:templateId', async (req, res) => {
+  console.log(req.params)
   const { templateId } = req.params
   var templateInfo = {}
+
+  console.log(templateId)
 
   try {
     // We must use `axios` here as the `lob` package does not yet support

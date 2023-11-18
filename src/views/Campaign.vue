@@ -19,9 +19,11 @@ export default {
   components: {
     SearchReps
   },
-  computed: {
-    campaignId() {
-      return this.$store.state.campaign.Id
+  data() {
+    return {
+      campaignHeader: 'Sogorea Te Land Trust',
+      campaignSubHeader:
+        'Facilitating the return of Indigenous land to Indigenous people.'
     }
   },
   created() {},
