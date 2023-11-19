@@ -3,7 +3,7 @@ const { Stripe, StripeError } = require('../../lib/stripe')
 const {
   PaymentPresenter,
   PaymentPresenterError
-} = require('../../../presenters/payment-presenter')
+} = require('../../../shared/presenters/payment-presenter')
 const Constituent = require('../../db/models/constituent')
 const Transaction = require('../../db/models/transaction')
 
@@ -18,11 +18,8 @@ router.post('/create-checkout-session', async (req, res) => {
   try {
     const presenter = new PaymentPresenter()
 
-    const formattedDonation = presenter.formatPaymentAmount(donationAmount)
-    console.log(formattedDonation)
-
     // Will throw error if invalid amount is given.
-    presenter.validatePaymentAmount(formattedDonation)
+    presenter.validatePaymentAmount(donationAmount)
 
     // TODO: Should be strict https but we need to do some deployment fixes first.
     const redirectUrl = `http://${origin}/complete?session_id={CHECKOUT_SESSION_ID}`
@@ -30,7 +27,7 @@ router.post('/create-checkout-session', async (req, res) => {
 
     const stripe = new Stripe()
     const session = await stripe.createCheckoutSession(
-      formattedDonation,
+      donationAmount,
       redirectUrl,
       cancelUrl
     )
@@ -41,7 +38,7 @@ router.post('/create-checkout-session', async (req, res) => {
     await Transaction.query().insert({
       stripeTransactionId: session.payment_intent,
       constituentId: constituent.id,
-      amount: formattedDonation,
+      amount: donationAmount,
       currency: 'USD',
       paymentMethod: 'credit_card'
     })

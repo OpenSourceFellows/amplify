@@ -22,6 +22,7 @@ class Constituent extends BaseModel {
         first_name: { type: 'string', minLength: 1, maxLength: 255 },
         last_name: { type: 'string', minLength: 1, maxLength: 255 },
         address_line_1: { type: 'string', minLength: 1, maxLength: 255 },
+        address_line_2: { type: 'string', minLength: 1, maxLength: 255 },
         city: { type: 'string', minLength: 1, maxLength: 255 },
         state: { type: 'string', minLength: 1, maxLength: 255 },
         zip: { type: 'string', minLength: 1, maxLength: 255 }
