@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="donate-money">
     <h1>Donate to the cause.</h1>
 
@@ -18,7 +18,7 @@
         <v-btn
           elevation="2"
           raised
-          :value="2"
+          :value="200"
           @click="unsetCustomAmountSelection"
         >
           2
@@ -27,7 +27,7 @@
         <v-btn
           elevation="2"
           raised
-          :value="20"
+          :value="2000"
           @click="unsetCustomAmountSelection"
         >
           20
@@ -36,18 +36,13 @@
         <v-btn
           elevation="2"
           raised
-          :value="50"
+          :value="5000"
           @click="unsetCustomAmountSelection"
         >
           50
         </v-btn>
 
-        <v-btn
-          elevation="2"
-          raised
-          :value="customDonationAmount"
-          @click="handleCustomAmountSelection"
-        >
+        <v-btn elevation="2" raised @click="toggleCustomDonation">
           Custom Amount
         </v-btn>
       </v-btn-toggle>
@@ -57,18 +52,15 @@
           v-if="customAmountSelected"
           ref="input"
           v-model="customDonationAmount"
-          :rules="inputRule"
           class="custom-donation-amount-textfield"
           inputmode="numeric"
           label="Donation Amount"
           type="number"
-          :max="10000"
-          :min="1.5"
-          :precision="2"
-          :step="0.01"
-          :value="customDonationAmount"
           required
-        />
+        >
+          <v-icon slot="prepend"> mdi-currency-usd </v-icon>
+          {{ styledCustomDonation }}
+        </v-text-field>
       </div>
     </v-col>
     <div>
@@ -79,54 +71,47 @@
 
 <script lang="js">
 import axios from 'axios'
-import { formatDonationAmount } from '../../util/format.js'
-import { validateDonationAmount } from '../../util/validate.js'
+import { PaymentPresenter } from '../../shared/presenters/payment-presenter'
+
 export default {
   name: 'DonateMoney',
   props: [],
   data() {
     return {
-      donationAmount: 2,
+      donationAmount: 2000,
       customAmountSelected: false,
-      customDonationAmount: undefined,
-      inputRule: [
-        (val) =>
-          validateDonationAmount(formatDonationAmount(val)) ||
-          'Invalid amount: acceptable value ranges between $1.50 and $10,000.00'
-      ]
+      customDonationAmount: null,
     }
   },
   computed: {
     userData() {
-      return this.$store.userData
+      return this.$store.state.userData
+    },
+    styledCustomDonation() {
+      // TODO: Get this working and always formatting input to be x,xxx.yy
+      // We won't use currency here because the $ symbol will be added in Vuetify component.
+      return new Intl.NumberFormat('en-US', { minimumSignificantDigits: 2, maximumSignificantDigits: 2 })
+        .format(this.customDonationAmount)
     }
-  },
-  mounted () {
   },
   methods: {
     unsetCustomAmountSelection() {
       this.customAmountSelected = false
     },
-    handleCustomAmountSelection() {
+    toggleCustomDonation() {
       this.customAmountSelected = !this.customAmountSelected
     },
     submit() {
-      const value = this.customAmountSelected
-        ? this.customDonationAmount
-        : this.donationAmount
-      const input = formatDonationAmount(value)
+      let donation = this.customAmountSelected ? this.customDonationAmount : this.donationAmount
+      const presenter = new PaymentPresenter()
 
-      if (this.customAmountSelected) {
-        // inputRule provides user feedback on input, but actual validation occurs on submit
-        if (this.$refs.input.validate()) this.createCheckoutSession(input)
-      }
-
-      if (validateDonationAmount(input)) this.createCheckoutSession(input)
-
-      return
+      donation = presenter.formatPaymentAmount(donation)
+      console.log(donation)
+      this.createCheckoutSession(donation, this.userData)
     },
-    createCheckoutSession(donationAmount) {
-      axios.post('/api/checkout/create-checkout-session', { donationAmount, user: this.userData })
+    createCheckoutSession(donationAmount, user) {
+      console.log(donationAmount, user)
+      axios.post('/api/checkout/create-checkout-session', { donationAmount, user })
         // TODO: Investigate whether we need to dump user state still. With the new stripe webhook it may not be necessary.
         .then((response) => {
           // Dump state to local storage before redirect
