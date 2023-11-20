@@ -19,6 +19,10 @@ jobs:
           git checkout -b "issue-${issue_number}"
           echo "::set-output name=issue_branch::issue-${issue_number}"
 
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
+
       - name: Run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
