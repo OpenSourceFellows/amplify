@@ -329,8 +329,7 @@ export default {
   methods: {
     async loadLetterWorkflow() {
       const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
-      const letterVersion =
-        letter.data.versions[letter.data.versions.length - 1]
+      const letterVersion = letter.data.published_version
 
       this.$store.commit('setGenericValue', {
         key: 'letterVersion',
