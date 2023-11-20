@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="d-flex flex-column items-center">
     <section
       class="d-flex flex-column flex-md-row justify-center align-center my-6 action-complete"
@@ -11,7 +11,7 @@
       />
       <div class="text-xs-center text-md-left mx-4">
         <h2 class="text-h3 text-md-h2 font-weight-bold mb-2">
-          Thank you for your letter to {{ selectedRep }}!
+          Thank you for your letter to {{ selectedRep.name }}!
         </h2>
         <h5 class="text-h5 font-weight-regular">
           Your donation and letter are appreciated.

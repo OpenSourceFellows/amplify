@@ -9,6 +9,7 @@ export default new Vuex.Store({
     mode: 'default',
     zipcode: '',
     letterId: '',
+    letterVersion: 'latest',
     campaign: {
       id: '',
       organization: '',

@@ -156,11 +156,13 @@ export default {
         0: 'inProgress',
         1: 'default',
         2: 'default'
-      },
-      userData: {}
+      }
     }
   },
   computed: {
+    userData() {
+      return this.$store.state.userData
+    },
     selectedRep() {
       return this.$store.state.selectedRep
     }

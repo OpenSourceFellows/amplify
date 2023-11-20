@@ -25,7 +25,7 @@ class Stripe {
       return this.stripe.webhooks.constructEvent(
         rawBody,
         signature,
-        this.stripeSecret
+        this.stripeWebhookSecret
       )
     } catch (error) {
       throw new StripeError(error.message)
