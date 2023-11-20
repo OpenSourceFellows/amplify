@@ -19,6 +19,12 @@ jobs:
           git checkout -b "issue-${issue_number}"
           echo "::set-output name=issue_branch::issue-${issue_number}"
 
+      - name: Run
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node ./roiScript/log-branch.mjs
+
       - name: Log Current Branch (debugging)
         run: |
           current_branch=$(git rev-parse --abbrev-ref HEAD)
