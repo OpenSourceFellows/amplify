@@ -6,11 +6,12 @@ const {
 } = require('../../../shared/presenters/payment-presenter')
 const Constituent = require('../../db/models/constituent')
 const Transaction = require('../../db/models/transaction')
+const Letter = require('../../db/models/letter')
 
 const router = express.Router()
 
 router.post('/create-checkout-session', async (req, res) => {
-  const { donationAmount, user } = req.body
+  const { donation, user, letter } = req.body
   const origin = req.get('origin')
 
   console.log(`origin: ${origin}`)
@@ -19,28 +20,45 @@ router.post('/create-checkout-session', async (req, res) => {
     const presenter = new PaymentPresenter()
 
     // Will throw error if invalid amount is given.
-    presenter.validatePaymentAmount(donationAmount)
+    presenter.validatePaymentAmount(donation)
 
     // TODO: Should be strict https but we need to do some deployment fixes first.
-    const redirectUrl = `http://${origin}/complete?session_id={CHECKOUT_SESSION_ID}`
-    const cancelUrl = `http://${origin}`
+    const redirectUrl = `${origin}/complete?session_id={CHECKOUT_SESSION_ID}`
+    const cancelUrl = origin
 
     const stripe = new Stripe()
     const session = await stripe.createCheckoutSession(
-      donationAmount,
+      donation,
       redirectUrl,
       cancelUrl
     )
 
-    // TODO: Move Constituent insert to earlier in the cycle.
-    const constituent = await Constituent.query().insert(user)
+    // These objects must be recorded in a specific order:
+    // constituent, then transaction, then letter
+    // This is because letter needs id from constituent and transaction!
 
-    await Transaction.query().insert({
-      stripeTransactionId: session.payment_intent,
+    // TODO: Move Constituent insert to earlier in the cycle.
+    let constituent
+    ;[constituent] = await Constituent.query().where('email', user.email)
+    if (!constituent) {
+      constituent = await Constituent.query().insert(user)
+    }
+
+    console.log(constituent.id)
+
+    const transaction = await Transaction.query().insert({
+      stripeTransactionId: session.paymentIntent,
       constituentId: constituent.id,
-      amount: donationAmount,
+      amount: donation,
       currency: 'USD',
       paymentMethod: 'credit_card'
+    })
+
+    // Using a temporary mapping here also
+    await Letter.query().insert({
+      transactionId: transaction.id,
+      constituentId: constituent.id,
+      ...letter
     })
 
     return res

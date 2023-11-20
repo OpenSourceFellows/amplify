@@ -84,8 +84,38 @@ export default {
     }
   },
   computed: {
-    userData() {
-      return this.$store.state.userData
+    // These are temporary structures until we can reorganize the frontend.
+    user() {
+      const user = this.$store.state.userData
+
+      return {
+        firstName: user.name.split(' ')[0],
+        lastName: user.name.split(' ')[1] || '',
+        addressLine_1: user.line1,
+        addressLine_2: user.line2,
+        city: user.city,
+        state: user.state,
+        zip: user.zip,
+        email: user.email
+      }
+    },
+    letter() {
+      const rep = this.$store.state.selectedRep
+      const letterId = this.$store.state.letterId
+      const letterVersion = this.$store.state.letterVersion
+      const returnAddressId = this.$store.state.lobReturnAddressId
+
+      return {
+        letterTemplate: letterId,
+        letterVersion: letterVersion,
+        addressee: rep.name,
+        addressLine_1: rep.address_line1,
+        addressLine_2: rep.address_Line2,
+        state: rep.address_state,
+        city: rep.address_city,
+        zip: rep.address_zip,
+        returnAddress: returnAddressId
+      }
     },
     styledCustomDonation() {
       // TODO: Get this working and always formatting input to be x,xxx.yy
@@ -106,12 +136,12 @@ export default {
       const presenter = new PaymentPresenter()
 
       donation = presenter.formatPaymentAmount(donation)
-      console.log(donation)
-      this.createCheckoutSession(donation, this.userData)
+
+      this.createCheckoutSession(donation, this.user, this.letter)
     },
-    createCheckoutSession(donationAmount, user) {
-      console.log(donationAmount, user)
-      axios.post('/api/checkout/create-checkout-session', { donationAmount, user })
+    createCheckoutSession(donation, user, letter) {
+      console.log(donation, user, letter)
+      axios.post('/api/checkout/create-checkout-session', { donation, user, letter })
         // TODO: Investigate whether we need to dump user state still. With the new stripe webhook it may not be necessary.
         .then((response) => {
           // Dump state to local storage before redirect
