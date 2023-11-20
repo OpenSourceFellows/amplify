@@ -121,8 +121,7 @@
                 Send the letter
               </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
-                Postage is $1.50 to send your letter.Learn more about what how
-                this fee is used.
+                Postage is $1.50 to send your letter.
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>

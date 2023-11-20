@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     mode: 'default',
     zipcode: '',
-    letterId: '',
+    letterId: process.env.VUE_APP_LETTER_TEMPLATE,
     letterVersion: 'latest',
     campaign: {
       id: '',
