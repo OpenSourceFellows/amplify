@@ -22,9 +22,11 @@ jobs:
       - name: Create event on the next day
         uses: JulieGunawan/ms-graph-create-event-msal@main      
         with:
-          clientId: ${{secrets.CLIENT_ID}}
-          clientSecret: ${{secrets.CLIENT_SECRET}}
-          tenantId: ${{secrets.TENANT_ID}}
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          tenantId: ${{ secrets.TENANT_ID }}
           subject: 'Review pull request'
-          body: 'A new PR has been submitted on ${{ github.repository }} from ${{ github.actor }}. Please review it.'
-          userEmail: 'h4m_h4m17@yahoo.com'
+          body: 'Some files have been pushed on ${{ github.repository }} from ${{ github.actor }}. Please find the details here ${{ github.event.compare }}.'
+          userEmail: 'yetty.gunawan@edu.sait.ca'
+          start: '2023-11-25T14:30:00'
+          end: '2023-11-25T15:00:00'
