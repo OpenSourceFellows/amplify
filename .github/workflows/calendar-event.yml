@@ -1,9 +1,6 @@
 name: Create Calendar Event
 
-on:
-  pull_request:
-    branches: 
-      - main
+on: [push]
 
 jobs:   
   create-event:
@@ -18,6 +15,9 @@ jobs:
 
       - name: Message dump
         run: echo '${{ toJSON(github.event) }}' | jq
+
+      - name: Checkout
+        uses: actions/checkout@v4
         
       - name: Create event on the next day
         uses: JulieGunawan/ms-graph-create-event-msal@main      
