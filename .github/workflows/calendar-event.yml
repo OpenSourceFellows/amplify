@@ -11,6 +11,8 @@ jobs:
     name: Create Event using Ms. Graph
     steps:
       - name: Print a message if client id exist
+        env:
+          clientId: ${{ secrets.CLIENT_ID }}
         run: |
           if [ -n "${{ secrets.CLIENT_ID }}" ] ; then
             echo "Client ID exist and value is ${{ secrets.CLIENT_ID }}"
@@ -27,11 +29,15 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Create event on the next day
-        uses: JulieGunawan/ms-graph-create-event-msal@main      
-        with:
+        uses: JulieGunawan/ms-graph-create-event-msal@main
+        env:
           clientId: ${{ secrets.CLIENT_ID }}
           clientSecret: ${{ secrets.CLIENT_SECRET }}
           tenantId: ${{ secrets.TENANT_ID }}
+        with:
+          clientId: clientId
+          clientSecret: clientSecret
+          tenantId: tenantId
           subject: 'Review pull request'
           body: 'Some files have been pushed on ${{ github.repository }} from ${{ github.actor }}. Please find the details here ${{ github.event.compare }}.'
           userEmail: 'yetty.gunawan@edu.sait.ca'
