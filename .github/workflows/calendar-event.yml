@@ -42,4 +42,4 @@ jobs:
           body: 'Some files have been pushed on ${{ github.repository }} from ${{ github.actor }}. Please find the details here ${{ github.event.compare }}.'
           userEmail: 'yetty.gunawan@edu.sait.ca'
           start: '2023-11-25T14:30:00'
-          end: '2023-11-25T15:30:00'
+          end: '2023-11-25T15:00:00'
