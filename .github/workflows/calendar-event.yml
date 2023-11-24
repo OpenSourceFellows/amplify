@@ -17,6 +17,8 @@ jobs:
           else
             echo "Client ID is not found"
           fi
+      - name: Print Secret Value
+        run: echo "CLIENT_ID is present"
 
       - name: Message dump
         run: echo '${{ toJSON(github.event) }}' | jq
