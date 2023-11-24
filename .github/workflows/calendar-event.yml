@@ -10,8 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Create Event using Ms. Graph
     steps:
-      - name: Print a message
-        run: echo About to call a Github Action, also find secret= ${{ secrets.CLIENT_ID }}
+      - name: Print a message if client id exist
+        run: |
+          if [ -n "${{ secrets.CLIENT_ID }}" ] ; then
+            echo "Client ID exist and value is ${{ secrets.CLIENT_ID }}"
+          else
+            echo "Client ID is not found"
+          fi
 
       - name: Message dump
         run: echo '${{ toJSON(github.event) }}' | jq
