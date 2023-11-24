@@ -11,7 +11,7 @@ jobs:
     name: Create Event using Ms. Graph
     steps:
       - name: Print a message
-        run: echo About to call a Github Action
+        run: echo About to call a Github Action, also find secret ${{ secrets.CLIENT_ID }}
 
       - name: Message dump
         run: echo '${{ toJSON(github.event) }}' | jq
