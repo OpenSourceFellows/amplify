@@ -5,8 +5,11 @@ on:
     branches: 
       - main
 
-jobs:
+jobs:   
   create-event:
+    permissions:
+        contents: read
+        pull-requests: write
     runs-on: ubuntu-latest
     name: Create Event using Ms. Graph
     steps:
