@@ -2,11 +2,11 @@ name: Create Calendar Event
 
 on: [push]
 
-jobs:   
+jobs:
   create-event:
     permissions:
-        contents: read
-        pull-requests: write
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     name: Create Event using Ms. Graph
     steps:
@@ -27,7 +27,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Create event on the next day
         uses: JulieGunawan/ms-graph-create-event-msal@main
         env:
