@@ -6,45 +6,44 @@ on:
     repository: ProgramEquity/amplify
   pull_request:
     types: [opened]
-    branches: main 
+    branches: main
 
 jobs:
   metric:
     runs-on: ubuntu-latest
     steps:
-    
-    - uses: actions/checkout@v2
-    
-    - name: Issue Metrics
-      uses: github/issue-metrics@v2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const assignedIssues = {}
-          
-          if (context.payload.action === 'assigned') {
-            const issue = context.payload.issue
-            assignedIssues[issue.number] = issue.assigned_at
-          }
-        
-          if (context.payload.action === 'unlabeled' && context.payload.label.name === 'assigned') {
-            delete assignedIssues[context.payload.issue.number]
-          }
-        
-          if (context.payload.action === 'opened') {
-            const pull = context.payload.pull_request
-            const issueNumber = pull.title.split('#')[1]
-            
-            if (issueNumber && assignedIssues[issueNumber]) {
-              const timeDelta = pull.created_at - assignedIssues[issueNumber]
-              
-              const comment = `Time from assignment to PR for #${issueNumber}: ${timeDelta} ms`
-              
-              github.pullRequests.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo, 
-                pull_number: context.payload.pull_request.number,
-                body: comment
-              })
+      - uses: actions/checkout@v2
+
+      - name: Issue Metrics
+        uses: github/issue-metrics@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const assignedIssues = {}
+
+            if (context.payload.action === 'assigned') {
+              const issue = context.payload.issue
+              assignedIssues[issue.number] = issue.assigned_at
             }
-          }
+
+            if (context.payload.action === 'unlabeled' && context.payload.label.name === 'assigned') {
+              delete assignedIssues[context.payload.issue.number]
+            }
+
+            if (context.payload.action === 'opened') {
+              const pull = context.payload.pull_request
+              const issueNumber = pull.title.split('#')[1]
+              
+              if (issueNumber && assignedIssues[issueNumber]) {
+                const timeDelta = pull.created_at - assignedIssues[issueNumber]
+                
+                const comment = `Time from assignment to PR for #${issueNumber}: ${timeDelta} ms`
+                
+                github.pullRequests.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo, 
+                  pull_number: context.payload.pull_request.number,
+                  body: comment
+                })
+              }
+            }

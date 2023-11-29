@@ -10,7 +10,7 @@
  - The user is able to choose a climate campaign, then using their zip code, they will be able to select a representative of their choice. The user then donates to have their letter sent out by Amplify.
 
 #### 👥 Who uses Amplify
-- Anyone who wants to make a difference
+- Anyone who wants to make a difference, mainly elders
 
 #### ⛳️ What is Amplify's Goal
 - Make it more assessable for anyone who wants to make a difference and protect against Climate Change
