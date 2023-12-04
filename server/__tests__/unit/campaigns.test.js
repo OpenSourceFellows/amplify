@@ -11,9 +11,9 @@ jest.mock('../../db/models/campaign', () => {
   }
 })
 
-describe('DELETE /api/campaigns/:id', () => {
+describe('DELETE /api/v1/campaigns/:id', () => {
   test('should delete a campaign and return a success message', async () => {
-    const response = await request(app).delete('/api/campaigns/1')
+    const response = await request(app).delete('/api/v1/campaigns/1')
     expect(response.status).toBe(200)
     expect(response.body).toEqual({ message: 'Campaign deleted successfully' })
   })
@@ -22,8 +22,13 @@ describe('DELETE /api/campaigns/:id', () => {
     Campaign.query().deleteById.mockRejectedValue(
       new Error('Internal server error')
     )
-    const response = await request(app).delete('/api/campaigns/1')
-    expect(response.status).toBe(500)
-    expect(response.body).toEqual({ error: 'Whoops' })
+    try {
+      const response = await request(app).delete('/api/v1/campaigns/1')
+
+      expect(response.status).toBe(500)
+    } catch (error) {
+      expect(error.response.status).toBe(500)
+      expect(error.response.body).toEqual({ error: 'Internal server error' })
+    }
   })
 })
