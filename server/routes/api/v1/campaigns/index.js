@@ -36,4 +36,22 @@ router.get('/', async (req, res) => {
   }
 })
 
+// Delete endpoint
+router.delete('/:id', async (req, res) => {
+  const id = req.params.id
+
+  try {
+    await Campaign.query().deleteById(id)
+
+    return res
+      .status(200)
+      .json({ message: 'Campaign deleted successfully' })
+      .end()
+  } catch (error) {
+    console.log(error)
+
+    return res.status(500).json({ error: error.message }).end()
+  }
+})
+
 module.exports = router
