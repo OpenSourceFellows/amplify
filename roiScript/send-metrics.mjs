@@ -4,9 +4,9 @@ import { Client } from '@notionhq/client';
 console.log('entered the file');
 // TODO: test and move to the secrets in the repo
 // integration key 
-const NOTION_TOKEN=secret_KFNUHq8rmiuo5mQqcGlYsUCIaOdHt6rYuGkkPnflwqZ
+const NOTION_TOKEN='secret_KFNUHq8rmiuo5mQqcGlYsUCIaOdHt6rYuGkkPnflwqZ';
 // database id 
-const NOTION_DATABASE_ID=cbfc4e41617b4216b9c307222233e316
+const NOTION_DATABASE_ID='cbfc4e41617b4216b9c307222233e316';
 
 const notion = new Client({
   auth: NOTION_TOKEN,
