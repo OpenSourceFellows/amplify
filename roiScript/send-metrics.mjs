@@ -1,4 +1,5 @@
-const { Client } = require('@notionhq/client');
+import { Client } from '@notionhq/client';
+// const { Client } = require('@notionhq/client');
 
 console.log('entered the file');
 // TODO: test and move to the secrets in the repo
