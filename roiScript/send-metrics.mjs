@@ -16,9 +16,18 @@ const databaseId = NOTION_DATABASE_ID;
 
 // mock data to test the connection 
 const newData = {
-  issue_id: 2,
-  gh_handle: 'Dunridge',
-  duration: 15
+  issue_id: '2', // (~)
+  // gh_handle: 'Dunridge', // TODO: in the Notion db this is of type title, see what format to use in the code  
+  gh_handle: {
+    title: [
+      {
+        text: {
+          content: 'Dunridge',
+        },
+      },
+    ],
+  }, 
+  duration: 15 // (~)
 };
 
 async function addToNotionDatabase() {
