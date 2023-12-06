@@ -19,7 +19,7 @@ const newData = {
   issue_id: '2', // (~)
   // gh_handle: 'Dunridge', // TODO: in the Notion db this is of type title, see what format to use in the code  
   gh_handle: {
-    id: '1', // TODO: try a temporary fix, DELETE afterwards
+    // id: '1', // TODO: try a temporary fix, DELETE afterwards (didn't work)
     title: [
       {
         text: {
