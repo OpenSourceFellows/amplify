@@ -35,13 +35,7 @@ const newData = { // properties:
     ],
   }, 
   duration: {
-    number: [
-      {
-        text: {
-          content: '15'
-        }
-      }
-    ] 
+    number: 15
   }
 };
 
