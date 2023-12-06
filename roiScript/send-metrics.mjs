@@ -17,7 +17,7 @@ const databaseId = NOTION_DATABASE_ID;
 // mock data to test the connection 
 const newData = { // properties: 
   issue_id: {
-    title: [
+    rich_text: [
       {
         text: {
           content: '2'
@@ -26,7 +26,7 @@ const newData = { // properties:
     ] 
   }, 
   gh_handle: {
-    rich_text: [
+    title: [
       {
         text: {
           content: 'Dunridge',
@@ -35,7 +35,7 @@ const newData = { // properties:
     ],
   }, 
   duration: {
-    rich_text: [
+    number: [
       {
         text: {
           content: '15'
