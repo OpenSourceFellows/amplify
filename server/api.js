@@ -14,7 +14,6 @@ const checkout = require('./routes/api/checkout')
 const eventLogger = require('./routes/api/event_logger')
 // ADD V1 AND ADMIN PATH
 const v1 = require('./routes/api/v1/v1')
-const admin = require('./routes/api/admin/')
 // Created a nested router
 const apiRouter = express.Router()
 
@@ -38,7 +37,6 @@ apiRouter.use('/checkout', checkout)
 //apiRouter.use('/twilio', twilio)
 apiRouter.use('/event_logger', eventLogger)
 // ADD V1 AND ADMIN ROUTES
-apiRouter.use('/v1', v1)  
-apiRouter.use('/admin', admin)
+apiRouter.use('/v1', v1)
 
 module.exports = apiRouter
