@@ -78,14 +78,13 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name />
+          <sign-name @form-filled="handleFormFilled" />
         </v-expansion-panel-content>
-
         <v-expansion-panel-content>
           <v-btn
             width="160"
-            dark
             color="primary"
+            :disabled="!formFilled"
             @click="nextPage({ userData })"
           >
             Next
@@ -157,6 +156,7 @@ export default {
         1: 'default',
         2: 'default'
       },
+      formFilled: false,
       userData: {}
     }
   },
@@ -165,6 +165,7 @@ export default {
       return this.$store.state.selectedRep
     }
   },
+
   methods: {
     nextPage(attrs) {
       this.$store.dispatch('setLetterAttrs', attrs)
@@ -200,6 +201,9 @@ export default {
     },
     handleAddress(address) {
       this.userData = address
+    },
+    handleFormFilled(value) {
+      this.formFilled = value
     }
   }
 }
@@ -209,6 +213,12 @@ export default {
 .take-action {
   .v-list-item {
     padding: 0px;
+  }
+  .v-btn--disabled {
+    pointer-events: visible;
+  }
+  button[disabled] {
+    cursor: not-allowed;
   }
 }
 </style>

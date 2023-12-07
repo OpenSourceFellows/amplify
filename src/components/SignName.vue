@@ -32,7 +32,6 @@
           label="Address Line"
           placeholder="Snowy Rock Pl"
           counter="25"
-          required
         />
 
         <v-text-field
@@ -67,6 +66,7 @@
           ]"
           label="Email"
           placeholder="condor@shellmound.com"
+          required
         />
       </v-card-text>
       <v-card-text> {{ message }} </v-card-text>
@@ -100,91 +100,108 @@ import axios from 'axios'
 
 export default {
 
-    name: 'SignName',
-    data: () => ({
-      errorMessages: '',
-      name: null,
-      line1: null,
-      line2: null,
-      city: null,
-      state: null,
-      zip: null,
-      country: null,
-      email: null,
-      formHasErrors: false,
-      JSONstring: '',
-      message: ''
-    }),
+  name: 'SignName',
+  data: () => ({
+    errorMessages: '',
+    name: null,
+    line1: null,
+    line2: null,
+    city: null,
+    state: null,
+    zip: null,
+    country: null,
+    email: null,
+    formHasErrors: false,
+    JSONstring: '',
+    message: ''
+  }),
+  isFormFilled: false,
 
-    computed: {
-      form () {
-        return {
-          name: this.name,
-          line1: this.line1,
-          line2: this.line2,
-          city: this.city,
-          state: this.state,
-          zip: this.zip,
-          email: this.email
-        }
+  computed: {
+    form() {
+      return {
+        name: this.name,
+        line1: this.line1,
+        line2: this.line2,
+        city: this.city,
+        state: this.state,
+        zip: this.zip,
+        email: this.email
       }
-    },
-
-    watch: {
-      name () {
-        this.errorMessages = ''
-      }
-    },
-
-    methods: {
-        addressCheck () {
-          this.errorMessages = this.address && !this.name
-            ? "Hey! I'm required"
-            : ''
-
-          return true
-        },
-        validateEmail() {
-          if (!this.email) {
-            return true
-          }
-
-          let regex = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)
-
-          return regex.test(this.email)
-        },
-        resetForm () {
-          this.errorMessages = []
-          this.formHasErrors = false
-
-          Object.keys(this.form).forEach(f => {
-            this.$refs[f].reset()
-          })
-        },
-        submit () {
-          this.formHasErrors = false
-
-          Object.keys(this.form).forEach(f => {
-            if (!this.form[f]) this.formHasErrors = true
-
-            this.$refs[f].validate(true)
-          })
-
-          axios.post('/api/lob/createAddress', this.form)
-            .then((response) => {
-                console.log(response)
-                console.log(this.form)
-                this.message = 'Address verified!'
-
-              this.$store.commit('setGenericValue', { key: 'lobReturnAddressId', value: response.data.address_id })
-              this.$store.commit('setObjectValue', { key: 'userData', data: this.form})
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        }
-
     }
+  },
+
+  watch: {
+    name() {
+      this.errorMessages = ''
+    },
+    form: {
+      handler() {
+        Object.keys(this.form).forEach(f => {
+          if (!this.form[f] || !this.validateEmail(f)) {
+            this.isFormFilled = false
+          } else {
+            this.isFormFilled = true
+          }
+          this.formCheck()
+        })
+      },
+      deep: true
+    }
+  },
+
+  methods: {
+    addressCheck() {
+      this.errorMessages = this.address && !this.name
+        ? "Hey! I'm required"
+        : ''
+
+      return true
+    },
+    validateEmail() {
+      if (!this.email) {
+        return true
+      }
+
+      let regex = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)
+
+      return regex.test(this.email)
+    },
+    resetForm() {
+      this.errorMessages = []
+      this.formHasErrors = false
+
+      Object.keys(this.form).forEach(f => {
+        this.$refs[f].reset()
+      })
+    },
+    submit() {
+      this.formHasErrors = false
+
+      Object.keys(this.form).forEach(f => {
+        if (!this.form[f]) this.formHasErrors = true
+
+        this.$refs[f].validate(true)
+      })
+
+      axios.post('/api/lob/createAddress', this.form)
+        .then((response) => {
+          console.log(response)
+          console.log(this.form)
+          this.message = 'Address verified!'
+
+          this.$store.commit('setGenericValue', { key: 'lobReturnAddressId', value: response.data.address_id })
+          this.$store.commit('setObjectValue', { key: 'userData', data: this.form })
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+    formCheck() {
+      this.$emit('form-filled', this.isFormFilled);
+    },
+
+  }
 }
 </script>
 
