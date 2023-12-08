@@ -19,33 +19,32 @@ jobs:
           git checkout -b "issue-${issue_number}"
           echo "::set-output name=issue_branch::issue-${issue_number}"
 
-      # TODO: debug the issue with the created branc here (it should be check out but on the last step it returns to main)
-      # - name: Checkout branch
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: ${{ steps.create_branch.outputs.issue_branch }}
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
 
-      # TODO: try pulling in a separate step here
+      - name: Run
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node ./roiScript/log-branch.mjs
+
+      - name: Log Current Branch (debugging)
+        run: |
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
+          echo "Currently checked out branch: $current_branch"
 
       - name: Add Issue Timestamp To File
         working-directory: roiScript
         run: |
+          issue_num=$(echo "${{ github.event.issue.number }}")
           timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-          echo "Timestamp: $timestamp" >> issue_timestamp.log
+          echo "$GITHUB_ACTOR, issue #${issue_num}: $timestamp" >> issue_timestamp.log
 
-      # TODO: if mentioning it here won't work then pass the variable through the previous step
-      # TODO: here add git checkout of the created branch
-      # TODO: removed git pull ${{steps.create_branch.outputs.issue_branch}} because of an error
-      # HEAD:${{ github.ref }}
-      # don't need this: git checkout ${{steps.create_branch.outputs.issue_branch}}
       - name: Commit Issue Timestamp
         run: |
-          git stash
-          git pull --rebase origin ${{ steps.create_branch.outputs.issue_branch }}
-          git rebase -X ours
-          git stash apply
-          git checkout --ours .
-          git rebase --continue
+          git config --global user.email "Polinka7max@gmail.com"
+          git config --global user.name "Dunridge"
           git add .
           git commit -m "Add issue timestamp by $GITHUB_ACTOR"
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
