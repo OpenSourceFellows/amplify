@@ -98,7 +98,15 @@ jobs:
         run: npm install
         working-directory: ./roiScript
 
-      - name: Run
+      # TODO: make sure to clear this log file at the end
+      - name: Write difference to log file
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
+          PR_NUMBER: ${{ github.event.number }}
+        run: node ./roiScript/log-difference.mjs
+
+      - name: Write difference to PR 
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
