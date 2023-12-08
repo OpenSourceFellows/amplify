@@ -99,12 +99,18 @@ jobs:
         working-directory: ./roiScript
 
       # TODO: make sure to clear this log file at the end
-      - name: Write difference to log file
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIME_DIFF: ${{ needs.calculate_time_difference.outputs.time_diff }}
-          PR_NUMBER: ${{ github.event.number }}
-        run: node ./roiScript/log-difference.mjs
+      - name: Add duration to log file
+        working-directory: roiScript
+        run: | 
+          echo "$GITHUB_ACTOR, time: $time_diff_input" >> difference.log
+        
+      - name: Commit Difference
+        run: |
+          git config --global user.email "Polinka7max@gmail.com"
+          git config --global user.name "Dunridge"
+          git add .
+          git commit -m "Add difference by $GITHUB_ACTOR"
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Write difference to PR 
         env:
