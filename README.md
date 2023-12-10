@@ -13,7 +13,6 @@ Amplify is an open-source app created for users to take the initiative in being 
 
 This repo contains both the frontend and backend portions of the Amplify application.
 
-
 The frontend code is stored in the `src/` directory.
 
 The backend (API) code is stored in the `server/` directory.
@@ -32,8 +31,6 @@ The backend (API) code is stored in the `server/` directory.
 **Resources:**
 - We meet every **Wednesday from 12-1 p.m. PT and Thursdays from 8-8:30 p.m. PT**. Sign up for an [orientation](https://forms.gle/4miQJ8ccuWdeJha16)
 - Try out our [demo](https://www.figma.com/file/46c9cmuTiCpFA4DHB8OK0H/Amplify-User-Interface-%2B-Design-Guide?node-id=1585%3A653) or review [App Research](https://www.notion.so/programequity/Dare-to-Dream-Civic-Engagement-is-key-to-change-595ca4db3a2948c6b44569b58d530c8c)
-
-
 
 # Project setup
 In order to get started, you can clone, download a ZIP, or fork this repository to work on your local machine. If you would like to get started with Codespaces instead, the video below will walk you through setting up your Codespace.
@@ -75,7 +72,6 @@ npm run lint
 npm run format
 ```
 
-
 ### Build and run as if in prod
 ```shell
 npm start
@@ -90,19 +86,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Current Structure:
 
-<img width="772" alt="Screen Shot 2022-01-26 at 1 31 37 PM" src="https://user-images.githubusercontent.com/9143339/153340605-dd7fd6e6-a5f3-466f-95e2-d941f8c0c2ee.png">
+<img width="772" alt="Current_Structure" src="https://github.com/ProgramEquity/amplify/assets/109990289/e973f2ca-15c4-4c8f-b6de-0de4d02163c0">
 
 Goal Structure:
 
-<img width="739" alt="Screen Shot 2022-01-26 at 1 31 28 PM" src="https://user-images.githubusercontent.com/9143339/153340595-f749e711-2e42-4069-aad6-3e949efda7d9.png">
-
+<img width="739" alt="Goal_Structure" src="https://github.com/ProgramEquity/amplify/assets/109990289/36652da8-51e1-4666-af6b-bea8c9ea5041">
 
 **User Journey:**
 
 https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b691-81491830001a.mp4
 
-
-
-<img width="1561" alt="Screen Shot 2021-11-11 at 1 51 44 PM" src="https://user-images.githubusercontent.com/9143339/141374196-a32d140f-885c-4e45-8bba-99696f81ee80.png">
-
-
+<img width="1561" alt="MVP_Screenshot" src="https://github.com/ProgramEquity/amplify/assets/109990289/3c9e074a-0fad-43af-a08b-1da6c0e7c1d1">
