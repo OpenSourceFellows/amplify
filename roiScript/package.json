@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "name": "amplify-script",
+  "version": "1.0.0",
+  "description": "The script for amplify",
+  "author": "ProgramEquity",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProgramEquity/amplify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ProgramEquity/amplify/issues"
+  },
+  "homepage": "https://www.programequity.com/",
+  "main": "server/server.js",
+  "scripts": {},
+  "engines": {
+    "node": "16.x"
+  },
+  "dependencies": {
+    "@actions/github": "^6.0.0",
+    "@notionhq/client": "^2.2.14"
+  }
+}
