@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Amplify uses Stripe to process donations for non-profit organizations. Use these API endpoints to store and complete transactions.
+Amplify uses Stripe to process donations for non-profit organizations. Amplify uses these API endpoints to store and complete transactions.
 
 ## Implementation
 
