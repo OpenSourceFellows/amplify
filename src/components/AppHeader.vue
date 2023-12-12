@@ -36,7 +36,8 @@ export default {
     return {
       dialog: false,
       menuItems: [
-        { title: 'Home', path: '/' }
+        { title: 'Home', path: '/' },
+        { title: 'Login', path: '/login' }
         // { title: 'About', path: '/about' }
       ]
     }

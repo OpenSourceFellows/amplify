@@ -19,6 +19,12 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue')
   },
+  //add Auth0 route
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../components/AuthenticationButton.vue')
+  },
   {
     path: '/campaign/:campaignId',
     name: 'Campaign',
