@@ -68,7 +68,7 @@
           label="Email"
           placeholder="condor@shellmound.com"
         />
-      <v-checkbox label="Constituent" />
+        <v-checkbox label="Constituent" />
       </v-card-text>
       <v-card-text> {{ message }} </v-card-text>
       <v-divider class="mt-12" />
