@@ -41,8 +41,10 @@ export const useAuth0 = ({
         ...pluginOptions,
         domain: pluginOptions.domain,
         client_id: pluginOptions.clientId,
-        audience: pluginOptions.audience,
-        redirect_uri: redirectUri
+        authorizationParams: {
+          redirect_uri: redirectUri
+          },
+       
       })
 
       try {
