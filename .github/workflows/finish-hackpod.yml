@@ -1,7 +1,7 @@
 name: Run on Label Assignment (finish hackpod)
 
 on:
-  issues:
+  pull_request:
     types:
       - labeled
 
@@ -18,5 +18,7 @@ jobs:
         working-directory: ./roiScript
 
       - name: Run script on label assignment
-        if: contains(github.event.issue.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
+        if: contains(github.event.pull_request.labels.*.name, 'completed hackpod issue')
+        # if: contains(github.event.issue.labels.*.name, 'completed hackpod issue') # TODO: run the workflow on the assignment of the label to an issue 
+        # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
         run: node ./roiScript/send-metrics.mjs
