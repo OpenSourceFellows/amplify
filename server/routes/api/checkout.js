@@ -10,6 +10,13 @@ const Letter = require('../../db/models/letter')
 
 const router = express.Router()
 
+class CheckoutError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'CheckoutError'
+  }
+}
+
 router.post('/create-checkout-session', async (req, res) => {
   const { donation, user, letter } = req.body
   const origin = req.get('origin')
@@ -50,7 +57,7 @@ router.post('/create-checkout-session', async (req, res) => {
       stripeTransactionId: session.paymentIntent,
       constituentId: constituent.id,
       amount: donation,
-      currency: 'USD',
+      currency: 'usd',
       paymentMethod: 'credit_card'
     })
 
@@ -79,23 +86,31 @@ router.post('/create-checkout-session', async (req, res) => {
 
 router.post('/process-transaction', async (req, res) => {
   try {
-    // TODO: Implement webhook secret
     const stripe = new Stripe()
 
-    const signature = req.headers['stripe-signature']
+    // If livemode is false, disable signature checking
+    // and event reconstructionfor ease of testing.
+    let event
+    if (stripe.livemode) {
+      const signature = req.headers['stripe-signature']
+      if (!signature) throw new CheckoutError('No stripe signature on request!')
 
-    console.log(signature)
-
-    const event = stripe.validateEvent(signature, req.rawBody)
+      event = stripe.validateEvent(signature, req.rawBody)
+    } else {
+      event = req.body
+      console.log(event)
+    }
 
     const data = event.data
     const { id: paymentIntent, amount } = data.object
     const [eventType, eventOutcome] = req.body.type.split('.')
 
-    // We are not going to send letters from this endpoint just yet
+    // We are not going to send letters from here just yet
     // so we will record the transaction no matter the outcome.
     if (eventType !== 'payment_intent') {
-      throw new Error('Unexpected event!')
+      throw new CheckoutError(
+        `Unexpected event! Received ${eventType} but it could not be processed.`
+      )
     }
 
     await Transaction.query()
@@ -106,13 +121,18 @@ router.post('/process-transaction', async (req, res) => {
   } catch (error) {
     let statusCode = 500
 
+    if (error instanceof CheckoutError) {
+      statusCode = 400
+      console.error(error.message)
+    }
+
     if (error instanceof StripeError) {
       // Don't leak Stripe logging.
       console.error(error.message)
       error.message = 'Payment processing error'
     }
 
-    return res.status(statusCode).json({ error: error.message })
+    return res.status(statusCode).json({ error: error.message }).end()
   }
 })
 

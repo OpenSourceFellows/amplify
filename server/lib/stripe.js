@@ -1,5 +1,6 @@
 // Wrappers for Stripe's npm package
 require('dotenv').config()
+const stripe = require('stripe')
 
 class StripeError extends Error {
   constructor(message) {
@@ -12,7 +13,17 @@ class Stripe {
   constructor() {
     this.stripeSecret = process.env.STRIPE_SECRET_KEY
     this.stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET
-    this.stripe = require('stripe')(this.stripeSecret)
+    this.livemode = process.env.STRIPE_LIVE_MODE
+    this.stripe = stripe(this.stripeSecret)
+  }
+
+  /**
+   * Checks if Stripe is set to 'live' mode. It should be true in production, but false otherwise.
+   * Think of this as a server-side analog to the 'livemode' attribute on mode Stripe objects. In fact,
+   * an event object's livemode value and this method should always match.
+   */
+  get livemode() {
+    return this.livemode === 'true'
   }
 
   /**
@@ -70,4 +81,4 @@ class Stripe {
   }
 }
 
-module.exports = { Stripe }
+module.exports = { Stripe, StripeError }
