@@ -14,6 +14,9 @@ const notion = new Client({
 
 const databaseId = NOTION_DATABASE_ID
 
+const prData = github.event.pull_request;
+console.log('prData: ', prData)
+
 // mock data to test the connection
 const newData = {
   // properties:
