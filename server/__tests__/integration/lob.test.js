@@ -73,35 +73,55 @@ describe('GET /api/lob/templates/:templateId', () => {
     object: 'template'
   }
 
+  // Define a test case with the description 'returns 200 status for an existing template'
   test('returns 200 status for an existing template', async () => {
+    // Create a spy on axios.get method
     const spy = jest.spyOn(axios, 'get')
+
+    // Mock the implementation of axios.get
     spy.mockImplementation((url) => {
+      // If the URL does not match the expected URL, throw an error
       if (url !== `${LOB_API_HOST}/v1/templates/${templateId}`) {
         throw new Error('unexpected call to `axios.get`')
       }
+
+      // If the URL matches, return a mock response with status 200 and some example data
       return {
         status: 200,
         data: exampleLobResponse
       }
     })
 
+    // Make a GET request to the route using the request function and await the response
     const response = await request(app).get(route)
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
 
+    // Assert that the spy (axios.get) was called
     expect(spy).toHaveBeenCalled()
+
+    // Restore the original (non-mocked) implementation of axios.get
     spy.mockRestore()
   })
 
+  // Define the test
   test('returns 400 status for a non-existent template', async () => {
+    // Define a non-existent template ID and the corresponding route
     const badTemplateId = 'non_existent_template_id'
     const badRoute = `/api/lob/templates/${badTemplateId}`
 
+    // Create a spy on axios.get method
     const spy = jest.spyOn(axios, 'get')
+
+    // Mock the implementation of axios.get
     spy.mockImplementation((url) => {
+      // If the url is not the expected one, throw an error
       if (url !== `${LOB_API_HOST}/v1/templates/${badTemplateId}`) {
         throw new Error('unexpected call to `axios.get`')
       }
 
+      // Define the error to be thrown when the template is not found
       const axiosError = new Error('Not Found')
       axiosError.response = {
         status: 404,
@@ -113,14 +133,24 @@ describe('GET /api/lob/templates/:templateId', () => {
           }
         }
       }
+
+      // Throw the error
       throw axiosError
     })
 
+    // Make a GET request to the bad route
     const response = await request(app).get(badRoute)
+
+    // Check if the response status is 400
     expect(response.status).toBe(400)
+
+    // Check if the error message in the response body is 'template not found'
     expect(response.body.error).toBe('template not found')
 
+    // Check if the spy was called
     expect(spy).toHaveBeenCalled()
+
+    // Restore the original implementation of axios.get
     spy.mockRestore()
   })
 })
@@ -132,11 +162,19 @@ describe('POST /api/lob/addressVerification', () => {
   const route = '/api/lob/addressVerification'
   const zip = '11111' // nonsense
 
+  // Define a test case with the description 'returns 200 status for an address meeting all requirements'
   test('returns 200 status for an address meeting all requirements', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'residential house', zip })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes a deliverable flag, a null warning, and a revisedAddress object
     expect(response.body).toEqual({
       deliverable: true,
       warning: null,
@@ -160,11 +198,19 @@ describe('POST /api/lob/addressVerification', () => {
   // Post-request validation tests
   //
 
+  // Define a test case with the description 'returns 200 status for a residential house'
   test('returns 200 status for a residential house', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'residential house', zip })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes a deliverable flag, a null warning, and a revisedAddress object
     expect(response.body).toEqual({
       deliverable: true,
       warning: null,
@@ -178,11 +224,19 @@ describe('POST /api/lob/addressVerification', () => {
     })
   })
 
+  // Define a test case with the description 'returns 200 status for residential highrise'
   test('returns 200 status for residential highrise', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'residential highrise', zip })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes a deliverable flag, a null warning, and a revisedAddress object
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
@@ -196,11 +250,19 @@ describe('POST /api/lob/addressVerification', () => {
     })
   })
 
+  // Define a test case with the description 'returns 200 status for residential department of state'
   test('returns 200 status for residential department of state', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'department of state', zip })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes a deliverable flag, a null warning, and a revisedAddress object
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
@@ -214,11 +276,19 @@ describe('POST /api/lob/addressVerification', () => {
     })
   })
 
+  // Define a test case with the description 'returns 200 status for residential military'
   test('returns 200 status for residential military', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'military', zip })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes a deliverable flag, a null warning, and a revisedAddress object
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
@@ -232,11 +302,19 @@ describe('POST /api/lob/addressVerification', () => {
     })
   })
 
+  // Define a test case with the description 'returns 200 status with warning for residence with unnecessary unit'
   test('returns 200 status with warning for residence with unnecessary unit', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'unnecessary unit', zip })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes a deliverable flag, a revisedAddress object, and a warning message
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
@@ -251,51 +329,91 @@ describe('POST /api/lob/addressVerification', () => {
     })
   })
 
+  // Define a test case with the description 'returns 400 status for residential post office box'
   test('returns 400 status for residential post office box', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'po box', zip })
+
+    // Assert that the response status is 400
     expect(response.status).toBe(400)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an error message
     expect(response.body).toEqual({
       error: 'Post office boxes are not currently supported'
     })
   })
 
+  // Define a test case with the description 'returns 400 status for residence in Puerto Rico'
   test('returns 400 status for residence in Puerto Rico', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'puerto rico', zip })
+
+    // Assert that the response status is 400
     expect(response.status).toBe(400)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an error message
     expect(response.body).toEqual({
       error: 'Puerto Rico addresses are not currently supported'
     })
   })
 
+  // Define a test case with the description 'returns 400 status for commercial building'
   test('returns 400 status for commercial building', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'deliverable', zip })
+
+    // Assert that the response status is 400
     expect(response.status).toBe(400)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an error message
     expect(response.body).toEqual({
       error: 'Non-residential addresses are not currently supported'
     })
   })
 
+  // Define a test case with the description 'returns 400 status for commercial highrise'
   test('returns 400 status for commercial highrise', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'commercial highrise', zip })
+
+    // Assert that the response status is 400
     expect(response.status).toBe(400)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an error message
     expect(response.body).toEqual({
       error: 'Non-residential addresses are not currently supported'
     })
   })
 
+  // Define a test case with the description 'returns 400 status for undeliverable address'
   test('returns 400 status for undeliverable address', async () => {
+    // Make a POST request to the route with the request function, sending a payload with line1 and zip
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ line1: 'undeliverable block match', zip })
+
+    // Assert that the response status is 400
     expect(response.status).toBe(400)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an error message
     expect(response.body).toEqual({ error: 'Address is undeliverable' })
   })
 })
@@ -311,7 +429,9 @@ describe('POST /api/lob/createAddress', () => {
 
   const route = '/api/lob/createAddress'
 
+  // Define a test case with the description 'returns 200 status for an address meeting all requirements'
   test('returns 200 status for an address meeting all requirements', async () => {
+    // Define an address object with all required properties
     const address = {
       description: 'Jane - Office',
       name: 'Jane Doe',
@@ -323,11 +443,20 @@ describe('POST /api/lob/createAddress', () => {
       zip: '94115-2525'
     }
 
+    // Make a POST request to the route with the request function, sending the address object as payload
+    // Await the response
     const response = await request(app).post(route).send(address)
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an address_id property of any string
     expect(response.body).toEqual({
       address_id: expect.any(String)
     })
+
+    // Return the address_id from the response body and assign it to the 'address_id' property of the 'from' object
     return (from['address_id'] = response.body.address_id)
   })
 })
@@ -338,9 +467,13 @@ describe('POST /api/lob/createLetter', () => {
 
   const route = '/api/lob/createLetter'
 
+  // Define a test case with the description 'returns 200 status if a letter is created meeting all requirements'
+  // This test is currently skipped using test.skip
   test.skip('returns 200 status if a letter is created meeting all requirements', async () => {
+    // Define a description for the test
     const description = 'This is a test description'
 
+    // Define a 'to' object with all required properties
     const to = {
       description: 'Jane - Office',
       name: 'Jane Doe',
@@ -352,16 +485,24 @@ describe('POST /api/lob/createLetter', () => {
       zip: '94115-2525'
     }
 
+    // Define a template_id for the test
     const template_id = 'tmpl_1057bb6f50f81fb'
 
-    // A test checkout session id that should return status of 'succeeded'
+    // Define a test checkout session id that should return status of 'succeeded'
     const sessionId =
       'cs_test_b1vdPbK35BuuANm2i4hd2BQqPcG7vymJRSRc4wMtQSprqiyYDBRgkN8Tn9'
 
+    // Make a POST request to the route with the request function, sending a payload with description, to, from, template_id, and sessionId
+    // Await the response
     const response = await request(app)
       .post(route)
       .send({ description, to, from, template_id, sessionId })
+
+    // Assert that the response status is 200
     expect(response.status).toBe(200)
+
+    // Assert that the response body matches the expected object
+    // The expected object includes an expected_delivery_date property of any string
     expect(response.body).toEqual({
       expected_delivery_date: expect.any(String)
     })

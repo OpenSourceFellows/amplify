@@ -1,7 +1,7 @@
 name: Run on Label Assignment (finish hackpod)
 
 on:
-  issues:
+  pull_request:
     types:
       - labeled
 
@@ -10,13 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Install
-      run: npm install
-      working-directory: ./roiScript
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
 
-    - name: Run script on label assignment
-      if: contains(github.event.issue.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
-      run: node ./roiScript/send-metrics.mjs
+      - name: Run script on label assignment
+        if: contains(github.event.pull_request.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
+        env:
+          PR_PAYLOAD: ${{ toJson(github) }}
+        run: node ./roiScript/send-metrics.mjs
