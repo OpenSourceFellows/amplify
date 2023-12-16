@@ -5,7 +5,9 @@ class Admin extends BaseModel {
     return 'admins'
   }
 
-  static timestamps = true
+  static timestamps() {
+    return true
+  }
 
   static get jsonSchema() {
     return {
@@ -14,16 +16,10 @@ class Admin extends BaseModel {
 
       properties: {
         id: { type: 'integer' },
-        first_name: { type: 'string', minLenth: 1, maxLength: 255 },
-        last_name: { type: 'string', minLenth: 1, maxLength: 255 },
-        email: {
-          type: 'string',
-          pattern: '^\\S+@\\S+\\.\\S+$',
-          format: 'email',
-          minLength: 6,
-          maxLength: 127
-        },
-        password: { type: 'text', minLength: 6, maxLength: 15 },
+        first_name: { type: 'string', minLength: 1, maxLength: 255 },
+        last_name: { type: 'string', minLength: 1, maxLength: 255 },
+        email: { type: 'string', minLength: 6, maxLength: 127 },
+        password: { type: 'string' },
         active: { type: 'boolean' },
         created_at: { type: 'string', minLength: 1, maxLength: 50 },
         updated_at: { type: 'string', minLength: 1, maxLength: 50 }
