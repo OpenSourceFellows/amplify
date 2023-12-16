@@ -12,6 +12,9 @@ const notion = new Client({
   auth: NOTION_TOKEN
 })
 
+const prData = process.env.PR_PAYLOAD
+console.log('prData: ', prData)
+
 const databaseId = NOTION_DATABASE_ID
 
 const prData = github.event.pull_request;
