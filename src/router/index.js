@@ -25,6 +25,12 @@ const routes = [
     name: 'Login',
     component: () => import('../components/AuthenticationButton.vue')
   },
+  // Add the callback route
+  {
+    path: '/callback',
+    name: 'Callback',
+    component: () => import('../views/Callback.vue')
+  },
   {
     path: '/campaign/:campaignId',
     name: 'Campaign',

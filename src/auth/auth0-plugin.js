@@ -20,7 +20,7 @@ export const getInstance = () => instance
 export const useAuth0 = ({
   onRedirectCallback = () =>
     window.history.replaceState({}, document.title, window.location.pathname),
-  redirectUri = 'window.location.origin',
+  redirectUri = window.location.origin,
   // this ...options is for passing domain and client ID that saved in auth_config.json
   ...options
 }) => {
