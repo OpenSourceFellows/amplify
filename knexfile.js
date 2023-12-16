@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { getEnv } = require('./server/db/util')
 
 const targetEnv = getEnv()
