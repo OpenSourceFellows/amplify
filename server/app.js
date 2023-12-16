@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const history = require('connect-history-api-fallback')
+const cors = require('cors')
 const apiRouter = require('./api')
 
 const app = express()
@@ -11,6 +12,9 @@ app.set('trust proxy', true)
 
 // Load the API router
 app.use('/api', apiRouter)
+
+// Use the cors middleware
+app.use(cors()) // Add this line
 
 // Fix for hash URLs in Vue
 // IMPORTANT: MUST be added before the `express.static` middleware for the `dist/` directory

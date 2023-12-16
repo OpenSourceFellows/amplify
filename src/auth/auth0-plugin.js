@@ -20,8 +20,9 @@ export const getInstance = () => instance
 export const useAuth0 = ({
   onRedirectCallback = () =>
     window.history.replaceState({}, document.title, window.location.pathname),
-  redirectUri = window.location.origin,
-  ...pluginOptions
+  redirectUri = 'window.location.origin',
+  // this ...options is for passing domain and client ID that saved in auth_config.json
+  ...options
 }) => {
   if (instance) return instance
 
@@ -38,13 +39,12 @@ export const useAuth0 = ({
 
     async created() {
       this.auth0Client = await createAuth0Client({
-        ...pluginOptions,
-        domain: pluginOptions.domain,
-        client_id: pluginOptions.clientId,
+        ...options,
+        domain: options.domain,
+        client_id: options.clientId,
         authorizationParams: {
           redirect_uri: redirectUri
-          },
-       
+        }
       })
 
       try {
@@ -86,8 +86,8 @@ export const useAuth0 = ({
         return this.auth0Client.logout(options)
       },
 
-      getTokenSilently(o) {
-        return this.auth0Client.getTokenSilently(o)
+      getTokenSilently(options) {
+        return this.auth0Client.getTokenSilently(options)
       }
     }
   })

@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import '@babel/polyfill'
-import { domain, clientId} from '../auth_config.json'
+import { domain, clientId } from '../auth_config.json'
 import { Auth0Plugin } from '@/auth/auth0-plugin'
 import 'vuetify/dist/vuetify.min.css'
 
