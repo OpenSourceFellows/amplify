@@ -20,5 +20,5 @@ jobs:
       - name: Run script on label assignment
         if: contains(github.event.pull_request.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
         env:
-          PR_PAYLOAD: ${{ toJson(github) }}
+          PR_PAYLOAD: ${{ toJson(github.event.pull_request._links.comments.href) }} # was: github # github.event.pull_request._links.comments.href
         run: node ./roiScript/send-metrics.mjs
