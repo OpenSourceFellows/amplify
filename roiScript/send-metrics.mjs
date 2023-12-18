@@ -17,7 +17,8 @@ console.log('prData: ', prData)
 console.log('-------------------')
 console.log('-------------------')
 console.log('-------------------')
-console.log('prData.pull_request._links.comments.href: ', prData?.pull_request?._links?.comments?.href)
+const commentsUrl = prData?.event?.pull_request?._links?.comments?.href
+console.log('commentsUrl: ', commentsUrl)
 
 const databaseId = NOTION_DATABASE_ID
 
