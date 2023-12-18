@@ -67,7 +67,7 @@ const newData = {
     ]
   },
   duration: {
-    number: 15
+    number: durationValue
   }
 }
 
