@@ -16,6 +16,24 @@ const commentsDataJSON = process.env.PR_PAYLOAD
 const commentsUrl = JSON.parse(commentsDataJSON)
 console.log('commentsUrl: ', commentsUrl)
 
+const fetchCommentsJSON = async (commentsUrlStr) => {
+  try {
+    const response = await fetch(commentsUrlStr);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch comments. Status: ${response.status}`);
+    }
+    const commentsData = await response.json();
+    
+    return commentsData;
+  } catch (error) {
+    console.error('Error fetching comments:', error.message);
+    return null;
+  }  
+}
+
+const commentsArr = await fetchCommentsJSON()
+console.log('commentsArr: ', commentsArr);
+
 const databaseId = NOTION_DATABASE_ID
 
 // mock data to test the connection
