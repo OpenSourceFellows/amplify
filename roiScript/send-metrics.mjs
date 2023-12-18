@@ -38,8 +38,9 @@ function extractNumberFromComment(commentBody) {
 
 const commentsArr = await fetchCommentsJSON(commentsUrl)
 const targetComment = commentsArr?.find(comment => comment.body.startsWith("Time from assignment to PR for"))
+const targetCommentBody = targetComment.body;
 console.log('targetComment.body: ', targetComment.body);
-const durationValue = extractNumberFromComment(targetComment)
+const durationValue = extractNumberFromComment(targetCommentBody)
 console.log('durationValue', durationValue)
 
 const databaseId = NOTION_DATABASE_ID
