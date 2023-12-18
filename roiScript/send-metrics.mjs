@@ -12,7 +12,8 @@ const notion = new Client({
   auth: NOTION_TOKEN
 })
 
-const prData = process.env.PR_PAYLOAD
+const prDataJSON = process.env.PR_PAYLOAD
+const prData = JSON.parse(prDataJSON)
 console.log('prData: ', prData)
 console.log('-------------------')
 console.log('-------------------')
