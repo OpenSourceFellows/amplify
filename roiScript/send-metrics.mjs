@@ -32,7 +32,8 @@ const fetchCommentsJSON = async (commentsUrlStr) => {
 }
 
 const commentsArr = await fetchCommentsJSON(commentsUrl)
-console.log('commentsArr: ', commentsArr);
+const targetComment = commentsArray.find(comment => comment.body.startsWith("Time from assignment to PR for"))
+console.log('targetComment: ', targetComment);
 
 const databaseId = NOTION_DATABASE_ID
 
