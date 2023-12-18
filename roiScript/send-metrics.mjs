@@ -13,7 +13,10 @@ const notion = new Client({
 })
 
 const prData = process.env.PR_PAYLOAD
-// console.log('prData: ', prData)
+console.log('prData: ', prData)
+console.log('-------------------')
+console.log('-------------------')
+console.log('-------------------')
 console.log('prData.pull_request._links.comments.href: ', prData?.pull_request?._links?.comments?.href)
 
 const databaseId = NOTION_DATABASE_ID
