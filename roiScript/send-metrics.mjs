@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 // const { Client } = require('@notionhq/client');
 
-console.log('entered the file')
+// console.log('entered the file')
 // TODO: test and move to the secrets in the repo
 // integration key
 const NOTION_TOKEN = 'secret_KFNUHq8rmiuo5mQqcGlYsUCIaOdHt6rYuGkkPnflwqZ'
@@ -13,7 +13,7 @@ const notion = new Client({
 })
 
 const prData = process.env.PR_PAYLOAD
-console.log('prData: ', prData)
+// console.log('prData: ', prData)
 console.log('prData.pull_request._links.comments.href: ', prData?.pull_request?._links?.comments?.href)
 
 const databaseId = NOTION_DATABASE_ID
