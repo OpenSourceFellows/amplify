@@ -18,6 +18,10 @@ console.log('-------------------')
 console.log('-------------------')
 console.log('-------------------')
 const commentsUrl = prData?.event?.pull_request?._links?.comments?.href
+console.log('event:', prData?.event)
+console.log('pull_request:', prData?.event?.pull_request)
+console.log('_links:', prData?.event?.pull_request?._links)
+console.log('commentsUrl:', commentsUrl)
 console.log('commentsUrl: ', commentsUrl)
 
 const databaseId = NOTION_DATABASE_ID
