@@ -31,9 +31,16 @@ const fetchCommentsJSON = async (commentsUrlStr) => {
   }  
 }
 
+function extractNumberFromComment(commentBody) {
+  const match = commentBody.match(/Time from assignment to PR for #\d+: (\d+) seconds/);
+  return match ? parseInt(match[1]) : null;
+}
+
 const commentsArr = await fetchCommentsJSON(commentsUrl)
 const targetComment = commentsArr?.find(comment => comment.body.startsWith("Time from assignment to PR for"))
 console.log('targetComment.body: ', targetComment.body);
+const durationValue = extractNumberFromComment(targetComment)
+console.log('durationValue', durationValue)
 
 const databaseId = NOTION_DATABASE_ID
 
