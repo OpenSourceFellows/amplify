@@ -19,6 +19,7 @@ console.log('-------------------')
 console.log('-------------------')
 const commentsUrl = prData?.event?.pull_request?._links?.comments?.href
 console.log(`prData['event']:`, prData['event'])
+console.log(`prData.event:`, prData.event)
 console.log('pull_request:', prData?.event?.pull_request)
 console.log('_links:', prData?.event?.pull_request?._links)
 console.log('commentsUrl:', commentsUrl)
