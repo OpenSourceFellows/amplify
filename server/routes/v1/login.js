@@ -3,7 +3,7 @@ const router = express.Router()
 const Admin = require('../../db/models/admin')
 const { validatePassword } = require('../../lib/encrypt')
 // TODO: Add express-session - correct route
-const session = require('express-session')
+// const session = require('express-session')
 
 router.post('/', async (req, res) => {
   const { email, password } = req.body
