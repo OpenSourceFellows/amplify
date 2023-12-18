@@ -32,7 +32,6 @@ const fetchCommentsJSON = async (commentsUrlStr) => {
 }
 
 const commentsArr = await fetchCommentsJSON(commentsUrl)
-// console.log('commentsArr', commentsArr)
 const targetComment = commentsArr?.find(comment => comment.body.startsWith("Time from assignment to PR for"))
 console.log('targetComment.body: ', targetComment.body);
 
@@ -72,7 +71,7 @@ async function addToNotionDatabase() {
       },
       properties: newData
     })
-    console.log(response)
+    // console.log(response)
   } catch (error) {
     console.error('Error adding data to Notion:', error)
   }
