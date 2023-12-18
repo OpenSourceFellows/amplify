@@ -12,19 +12,8 @@ const notion = new Client({
   auth: NOTION_TOKEN
 })
 
-const prDataJSON = process.env.PR_PAYLOAD
-const prData = JSON.parse(prDataJSON)
-console.log('prData: ', prData)
-console.log('-------------------')
-console.log('-------------------')
-console.log('-------------------')
-const commentsUrl = prData?.event?.pull_request?._links?.comments?.href
-console.log(`prData.job:`, prData.job)
-console.log(`prData['event']:`, prData['event'])
-console.log(`prData.event:`, prData.event)
-console.log('pull_request:', prData?.event?.pull_request)
-console.log('_links:', prData?.event?.pull_request?._links)
-console.log('commentsUrl:', commentsUrl)
+const commentsDataJSON = process.env.PR_PAYLOAD
+const commentsUrl = JSON.parse(commentsDataJSON)
 console.log('commentsUrl: ', commentsUrl)
 
 const databaseId = NOTION_DATABASE_ID
