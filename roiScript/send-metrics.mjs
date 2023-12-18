@@ -31,7 +31,7 @@ const fetchCommentsJSON = async (commentsUrlStr) => {
   }  
 }
 
-const commentsArr = await fetchCommentsJSON()
+const commentsArr = await fetchCommentsJSON(commentsUrl)
 console.log('commentsArr: ', commentsArr);
 
 const databaseId = NOTION_DATABASE_ID
