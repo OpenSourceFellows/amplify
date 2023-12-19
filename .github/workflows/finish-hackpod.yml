@@ -21,4 +21,6 @@ jobs:
         if: contains(github.event.pull_request.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
         env:
           PR_PAYLOAD: ${{ toJson(github.event.pull_request._links.comments.href) }} # was: github # github.event.pull_request._links.comments.href
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: node ./roiScript/send-metrics.mjs
