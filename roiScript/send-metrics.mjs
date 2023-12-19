@@ -12,9 +12,36 @@ const notion = new Client({
   auth: NOTION_TOKEN
 })
 
-const prData = process.env.PR_PAYLOAD
-// console.log('prData: ', prData)
-console.log('prData.pull_request._links.comments.href: ', prData?.pull_request?._links?.comments?.href)
+const commentsDataJSON = process.env.PR_PAYLOAD
+const commentsUrl = JSON.parse(commentsDataJSON)
+console.log('commentsUrl: ', commentsUrl)
+
+const fetchCommentsJSON = async (commentsUrlStr) => {
+  try {
+    const response = await fetch(commentsUrlStr);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch comments. Status: ${response.status}`);
+    }
+    const commentsData = await response.json();
+    
+    return commentsData;
+  } catch (error) {
+    console.error('Error fetching comments:', error.message);
+    return null;
+  }  
+}
+
+function extractNumberFromComment(commentBody) {
+  const match = commentBody.match(/Time from assignment to PR for #\d+: (\d+) seconds/);
+  return match ? parseInt(match[1]) : null;
+}
+
+const commentsArr = await fetchCommentsJSON(commentsUrl)
+const targetComment = commentsArr?.find(comment => comment.body.startsWith("Time from assignment to PR for"))
+const targetCommentBody = targetComment.body;
+console.log('targetComment.body: ', targetComment.body);
+const durationValue = extractNumberFromComment(targetCommentBody)
+console.log('durationValue', durationValue)
 
 const databaseId = NOTION_DATABASE_ID
 
@@ -40,7 +67,7 @@ const newData = {
     ]
   },
   duration: {
-    number: 15
+    number: durationValue
   }
 }
 
@@ -52,7 +79,7 @@ async function addToNotionDatabase() {
       },
       properties: newData
     })
-    console.log(response)
+    // console.log(response)
   } catch (error) {
     console.error('Error adding data to Notion:', error)
   }
