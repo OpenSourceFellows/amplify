@@ -20,28 +20,32 @@ console.log('commentsUrl: ', commentsUrl)
 
 const fetchCommentsJSON = async (commentsUrlStr) => {
   try {
-    const response = await fetch(commentsUrlStr);
+    const response = await fetch(commentsUrlStr)
     if (!response.ok) {
-      throw new Error(`Failed to fetch comments. Status: ${response.status}`);
+      throw new Error(`Failed to fetch comments. Status: ${response.status}`)
     }
-    const commentsData = await response.json();
-    
-    return commentsData;
+    const commentsData = await response.json()
+
+    return commentsData
   } catch (error) {
-    console.error('Error fetching comments:', error.message);
-    return null;
-  }  
+    console.error('Error fetching comments:', error.message)
+    return null
+  }
 }
 
 function extractNumberFromComment(commentBody) {
-  const match = commentBody.match(/Time from assignment to PR for #\d+: (\d+) seconds/);
-  return match ? parseInt(match[1]) : null;
+  const match = commentBody.match(
+    /Time from assignment to PR for #\d+: (\d+) seconds/
+  )
+  return match ? parseInt(match[1]) : null
 }
 
 const commentsArr = await fetchCommentsJSON(commentsUrl)
-const targetComment = commentsArr?.find(comment => comment.body.startsWith("Time from assignment to PR for"))
-const targetCommentBody = targetComment.body;
-console.log('targetComment.body: ', targetComment.body);
+const targetComment = commentsArr?.find((comment) =>
+  comment.body.startsWith('Time from assignment to PR for')
+)
+const targetCommentBody = targetComment.body
+console.log('targetComment.body: ', targetComment.body)
 const durationValue = extractNumberFromComment(targetCommentBody)
 console.log('durationValue', durationValue)
 
