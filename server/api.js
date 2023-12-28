@@ -13,6 +13,8 @@ const checkout = require('./routes/api/checkout')
 const twilio = require('./routes/api/twilio')
 const eventLogger = require('./routes/api/event_logger')
 
+const v1Router = require('./routes/api/v1/v1')
+
 // Created a nested router
 const apiRouter = express.Router()
 
@@ -28,6 +30,10 @@ apiRouter.use(apiLimiter)
 
 // Routes
 apiRouter.use('/representatives', representatives)
+
+// Create the /v1 portion of the url.
+apiRouter.use('/v1', v1Router)
+
 apiRouter.use('/campaigns', campaigns)
 apiRouter.use('/authentication', authentication)
 apiRouter.use('/letter_versions', letterVersions)
