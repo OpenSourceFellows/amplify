@@ -1,8 +1,8 @@
 const request = require('supertest')
-const app = require('../../app')
-const Campaign = require('../../db/models/campaign')
+const app = require('../../../../../../../app')
+const Campaign = require('../../../../../../../db/models/campaign')
 
-jest.mock('../../db/models/campaign')
+jest.mock('../../../../../../../db/models/campaign')
 
 describe('PUT /api/v1/campaigns/:id', () => {
   it('should return 200 if successfully updated the campaign', async () => {
