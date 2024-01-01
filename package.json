@@ -50,7 +50,7 @@
     "@fortawesome/vue-fontawesome": "^2.0.8",
     "@stripe/stripe-js": "^1.35.0",
     "@vue-stripe/vue-stripe": "^4.4.4",
-    "axios": "^0.27.2",
+    "axios": "^1.6.3",
     "axios-cache-interceptor": "^0.10.7",
     "bcrypt": "^5.1.1",
     "cli-plugin-eslint": "^0.1.0",
