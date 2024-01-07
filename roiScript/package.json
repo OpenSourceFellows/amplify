@@ -19,6 +19,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "@actions/github": "^6.0.0"
+    "@actions/github": "^6.0.0",
+    "@notionhq/client": "^2.2.14"
   }
 }
