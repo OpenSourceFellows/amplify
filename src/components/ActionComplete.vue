@@ -71,96 +71,104 @@ import axios from 'axios'
 // import RepresentativeCard from './RepresentativeCard.vue'
 
 export default {
-    name: 'ActionComplete',
-    // components: { RepresentativeCard },
-    props: [],
-    data () {
-      return {
-        loading: true,
-        email: '',
-        amount: 0,    // Will be in cents
-        expectedDeliveryDate: '',
-        congressMembers: [],
-      }
+  name: 'ActionComplete',
+  // components: { RepresentativeCard },
+  props: [],
+  data() {
+    return {
+      loading: true,
+      email: '',
+      amount: 0, // Will be in cents
+      expectedDeliveryDate: '',
+      congressMembers: []
+    }
+  },
+  computed: {
+    donationAmount() {
+      return this.amount * 0.01
     },
-    computed: {
-      donationAmount () {
-        return this.amount * 0.01
-      },
-      selectedRep() {
-        return this.$store.state.selectedRep
-      },
-      userData () {
-        return this.$store.state.userData
-      },
-      letterId () {
-        return this.$store.state.letterId
-      },
-      lobReturnAddressId () {
-        return this.$store.state.lobReturnAddressId
-      }
+    selectedRep() {
+      return this.$store.state.selectedRep
     },
-    created () {
-      const sessionId = this.$route.query.session_id
-
-      // Retrieve letter details from state
-      this.$store.dispatch('retrieveStateFromLocalStorage', sessionId)
-        .catch((e) => {
-          console.error(e.message)
-          this.$router.push({ path: '/' })
-        })
-
-
-      // Write transaction record into database.
-      this.createTransactionRecord(sessionId)
-
-      // Create letter with lob api and kill loading spinner.
-      this.createCampaignLetter(sessionId)
-
+    userData() {
+      return this.$store.state.userData
     },
-    methods: {
-      createTransactionRecord(sessionId) {
-        // Uses sessionId from Stripe to create db entry about transaction.
+    letterId() {
+      return this.$store.state.letterId
+    },
+    lobReturnAddressId() {
+      return this.$store.state.lobReturnAddressId
+    }
+  },
+  created() {
+    const sessionId = this.$route.query.session_id
 
-        axios.post( '/api/checkout/create-transaction', { sessionId })
+    // Retrieve letter details from state
+    this.$store
+      .dispatch('retrieveStateFromLocalStorage', sessionId)
+      .catch((e) => {
+        console.error(e.message)
+        this.$router.push({ path: '/' })
+      })
+
+    // Write transaction record into database.
+    this.createTransactionRecord(sessionId)
+
+    // Create letter with lob api and kill loading spinner.
+    this.createCampaignLetter(sessionId)
+  },
+  methods: {
+    createTransactionRecord(sessionId) {
+      // Uses sessionId from Stripe to create db entry about transaction.
+
+      axios
+        .post('/api/checkout/create-transaction', { sessionId })
         .then((res) => {
           const { email, amount } = res.data
           this.email = email
           this.amount = amount
           // log response status
-          this.$log.debug('Status at /api/checkout/create-transaction:', res.status)
+          this.$log.debug(
+            'Status at /api/checkout/create-transaction:',
+            res.status
+          )
         })
         .catch(function (error) {
           // TODO: Needs error handling
           console.error(error)
           // log error
-          this.$log.error('An error occured at /api/checkout/create-transaction:', error.message, error.name, error.code)
+          this.$log.error(
+            'An error occured at /api/checkout/create-transaction:',
+            error.message,
+            error.name,
+            error.code
+          )
         })
-      },
-      createCampaignLetter(sessionId) {
-        // Creates campaign letter with lob api.
-        axios.post('/api/lob/createLetter',
-          {
-            description: '',
-            to: this.selectedRep,
-            from: this.lobReturnAddressId,
-            template_id: this.letterId,
-            sessionId,
-          })
-          .then((res) => {
-            this.expectedDeliveryDate = res.data.expected_delivery_date
-            this.loading = false
-            // log response status
-            // this.$log.debug('Status at /api/lob/createLetter:', res.status)
-          })
-          .catch((err) => {
-            // TODO: Needs error handling
-            console.error(err)
-            // log error
-            // this.$log.error('An error occured at /lob/checkout/createLetter:', err.message, err.name, err.code)
-          })
-      }
+    },
+    createCampaignLetter(sessionId) {
+      // Creates campaign letter with lob api.
+      axios
+        .post('/api/lob/createLetter', {
+          description: '',
+          to: this.selectedRep,
+          from: this.lobReturnAddressId,
+          template_id: this.letterId,
+          sessionId
+        })
+        .then((res) => {
+          this.expectedDeliveryDate = res.data.expected_delivery_date
+          this.loading = false
+          // log response status
+          // this.$log.debug('Status at /api/lob/createLetter:', res.status)
+        })
+        .catch((err) => {
+          // TODO: Needs error handling
+          console.error(err)
+          // log error
+          // this.$log.error('An error occured at /lob/checkout/createLetter:', err.message, err.name, err.code)
+        })
     }
+  }
 }
 </script>
 
