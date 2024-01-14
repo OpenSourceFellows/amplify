@@ -69,7 +69,7 @@
     "pg": "^8.11.3",
     "register-service-worker": "^1.7.1",
     "stripe": "^11.1.0",
-    "twilio": "^4.19.3",
+    "twilio": "^4.20.0",
     "vue": "^2.6.11",
     "vue-logger-plugin": "^1.2.3",
     "vue-router": "^3.6.5",
