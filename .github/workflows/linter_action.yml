@@ -19,7 +19,7 @@ jobs:
       - name: Setup node.js 16.x, 180x, 20.x
         uses: actions/setup-node@v4
         with:
-          node-version: 16, 18, 20
+          node-version-file: '.node-version'
 
       - name: Install dependencies
         run: npm ci
