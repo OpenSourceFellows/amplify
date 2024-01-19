@@ -1,4 +1,4 @@
-name: Lint code
+name: Linting on Pull Request
 
 on:
   workflow_dispatch:
