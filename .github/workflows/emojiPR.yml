@@ -14,7 +14,12 @@ jobs:
     # This step checks out a copy of your repository and see if any changes have been made
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
+      #Pre step to install the node specified under .node-version file
+      - name: Setup node.js 16.x, 180x, 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
       # Step 2: Run PR emote generator.
       # This custom action is used to generate emotes for pull requests.
       # It's referencing to the main branch of an action that I created based off of the original PR Emote Generator action created by @rcmtcristian.
