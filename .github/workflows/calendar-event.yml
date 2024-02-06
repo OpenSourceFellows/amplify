@@ -36,7 +36,7 @@ jobs:
           clientId: clientId
           clientSecret: clientSecret
           tenantId: tenantId
-          subject: 'Review pull request'
+          subject: 'Did you get the event?'
           body: 'Some files have been pushed on ${{ github.repository }} from ${{ github.actor }}. Please find the details here ${{ github.event.compare }}.'
           userEmail: 'yetty.gunawan@edu.sait.ca'
           start: '2023-11-25T14:30:00'
