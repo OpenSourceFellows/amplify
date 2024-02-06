@@ -10,8 +10,11 @@ const authentication = require('./routes/api/authentication')
 const letterVersions = require('./routes/api/letter_versions')
 const lob = require('./routes/api/lob')
 const checkout = require('./routes/api/checkout')
-//const twilio = require('./routes/api/twilio')
+const twilio = require('./routes/api/twilio')
 const eventLogger = require('./routes/api/event_logger')
+
+// import the whole collection of v1 routes
+const v1Router = require('./routes/api/v1/v1.js')
 
 // Created a nested router
 const apiRouter = express.Router()
@@ -33,7 +36,10 @@ apiRouter.use('/authentication', authentication)
 apiRouter.use('/letter_versions', letterVersions)
 apiRouter.use('/lob', lob)
 apiRouter.use('/checkout', checkout)
-//apiRouter.use('/twilio', twilio)
+apiRouter.use('/twilio', twilio)
 apiRouter.use('/event_logger', eventLogger)
+
+// Create the /v1 portion of the url.
+apiRouter.use('/v1', v1Router)
 
 module.exports = apiRouter

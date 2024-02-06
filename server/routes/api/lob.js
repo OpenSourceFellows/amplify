@@ -157,9 +157,20 @@ router.post('/createAddress', async (req, res) => {
 })
 
 router.post('/createLetter', async (req, res) => {
-  // Get description, to, and template_id, and Stripe session id from request body
+  // Get description, to, template_id, and merge_variables (reason_input, community_input, benefit_input,and impact_input)
+  // and Stripe session id from request body
 
-  const { description, to, from, template_id, sessionId } = req.body || {}
+  const {
+    description,
+    to,
+    from,
+    template_id,
+    sessionId,
+    reason_input,
+    community_input,
+    benefit_input,
+    impact_input
+  } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -205,7 +216,13 @@ router.post('/createLetter', async (req, res) => {
       },
       from: from,
       file: template_id,
-      color: false
+      color: false,
+      merge_variables: {
+        reason_input: reason_input,
+        community_input: community_input,
+        benefit_input: benefit_input,
+        impact_input: impact_input
+      }
     })
 
     return res
