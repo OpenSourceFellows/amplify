@@ -98,3 +98,99 @@ Goal Structure:
 https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b691-81491830001a.mp4
 
 <img width="1561" alt="MVP_Screenshot" src="https://github.com/ProgramEquity/amplify/assets/109990289/3c9e074a-0fad-43af-a08b-1da6c0e7c1d1">
+
+```mermaid
+flowchart LR 
+    
+    A[.devcontainer] --- A1[Dockerfile]    
+    A --- A2[devcontainer.json]
+    A --- A3[docker-compose.yml]
+    A --- A4[first-run-notice.txt]
+    A --- A5[on-create-command.sh]
+    A --- A6[post-create-command.sh]
+
+    
+
+    B[.github] --- B1[ISSUE_TEMPLATE]    
+    B --- B2[workflows]
+    B --- B3[CODEOWNERS]
+    B --- B4[dependabot.yml]
+    B --- B5[mention-to-slack.yml]
+
+    B1 --- B1A[backend-onboarding.md]
+    B1 --- B1B[batch-templade.md]
+    B1 --- B1C[bug.md]
+    B1 --- B1D[design issue.md]
+    B1 --- B1E[frontend-onboarding.md]
+    B1 --- B1F[new-feature.md]
+    
+    B2 --- B2A[action-cats.yml]
+    B2 --- B2B[build.yml]
+    B2 --- B2C[cats.yml]
+    B2 --- B2D[check-formatting.yml]
+    B2 --- B2E[codeql-analysis.yml]
+    B2 --- B2F[emojiPR.yml]
+    B2 --- B2G[finish-hackpod.yml]
+    B2 --- B2H[integration-tests.yaml]
+    B2 --- B2I[issue-metrics.yml]
+    B2 --- B2J[labeler.yml]
+    B2 --- B2K[lint.yml]
+    B2 --- B2L[pr-metrics.yml]
+    B2 --- B2M[programequity_slack.yml]
+    B2 --- B2O[scorecards-analysis.yml]
+    B2 --- B2P[unit-tests.yml]
+    B2 --- B2Q[welcome_message.yml]
+    B2 --- B2R[workflow-lint.yml]
+
+
+    C[.husky] --- C1[pre-commit]
+
+    D[docs]
+
+    E[public]
+    
+    F[roiScript]
+    
+    G[script]
+    
+    H[server]
+    
+    I[src]
+    
+    J[util]
+
+    K[.env.example]
+
+    L[.eslintrc.json]
+    
+    M[.gitignore]
+    
+    N[.node-version]
+    
+    O[.prettierignore]
+    
+    P[.prettierrc]
+    
+    Q[AmplifyApp.md]
+    
+    R[Brewfile]
+    
+    S[CHECKOUT.MD]
+    
+    T[CODE_OF_CONDUCT.md]
+    
+    U[CONTRIBUTING.md]
+    
+    V[LICENSE]
+    
+    W[README.md]
+    
+    X[Renewable Capitol Act.png]
+    
+    Y[SECURITY.md]
+    
+    Z[auth_config.json]
+
+    AA[babel.config.js]
+    
+```
