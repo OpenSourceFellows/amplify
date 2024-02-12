@@ -21,7 +21,6 @@ body:
     validations:
       required: true
 
-
   - type: checkboxes
     id: documentation-categories
     attributes:
@@ -29,6 +28,6 @@ body:
       description: You may select more than one.
       options:
         - label: onboard campaign
-        - label: Wiki 
+        - label: Wiki
         - label: feature documentation
         - label: discussion
