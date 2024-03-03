@@ -5,6 +5,7 @@ const targetEnv = getEnv()
 const isProduction = targetEnv === 'production'
 const { POSTGRES_USER, POSTGRES_PASSWORD } = process.env
 const POSTGRES_PORT = parseInt(process.env.POSTGRES_PORT, 10) || undefined
+const POSTGRES_HOST = process.env.POSTGRES_HOST || 'localhost'
 
 // Required for Heroku PostgreSQL
 // See: https://stackoverflow.com/questions/66497248/heroku-postgres-not-able-to-connect-error-no-pg-hba-conf-entry-for-host
@@ -50,6 +51,7 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_dev',
+      ...(POSTGRES_HOST && { host: POSTGRES_HOST }),
       ...(POSTGRES_USER && { user: POSTGRES_USER }),
       ...(POSTGRES_PASSWORD && { password: POSTGRES_PASSWORD }),
       ...(POSTGRES_PORT && { port: POSTGRES_PORT })
@@ -64,6 +66,7 @@ module.exports = {
     ...baseConfig,
     connection: {
       database: 'pe_test',
+      ...(POSTGRES_HOST && { host: POSTGRES_HOST }),
       ...(POSTGRES_USER && { user: POSTGRES_USER }),
       ...(POSTGRES_PASSWORD && { password: POSTGRES_PASSWORD }),
       ...(POSTGRES_PORT && { port: POSTGRES_PORT })
