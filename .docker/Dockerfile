@@ -11,5 +11,3 @@ RUN cd ${workdir}
 RUN npm i
 
 EXPOSE 8080
-
-CMD [".docker/docker_entrypoint.sh"]
