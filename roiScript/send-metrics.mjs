@@ -20,8 +20,11 @@ console.log('commentsUrl: ', commentsUrl)
 
 const issueID = process.env.BRANCH_NAME
 const parsedIssueId = issueID.split('-')?.at(1)
-console.log('issueID: ', issueID, parsedIssueId)
+console.log('issueID: ', issueID)
 console.log('parsedIssueId: ', parsedIssueId)
+
+const ghHandle = process.env.GH_HANDLE
+console.log('ghHandle', ghHandle)
 
 const fetchCommentsJSON = async (commentsUrlStr) => {
   try {
@@ -72,7 +75,7 @@ const newData = {
     title: [
       {
         text: {
-          content: 'Dunridge'
+          content: ghHandle
         }
       }
     ]
