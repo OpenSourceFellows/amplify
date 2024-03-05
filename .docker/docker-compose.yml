@@ -2,6 +2,7 @@ version: "2.24"
 
 services:
   amplify:
+    container_name: "amplify_app"
     build:
       context: ../
       dockerfile: .docker/Dockerfile
@@ -20,6 +21,7 @@ services:
       - amplify_db
 
   amplify_db:
+    container_name: "amplify_db"
     image: postgres:latest
     volumes:
       - amplify_pg:/var/lib/postgresql/data
