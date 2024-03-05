@@ -18,6 +18,11 @@ const commentsDataJSON = process.env.PR_PAYLOAD
 const commentsUrl = JSON.parse(commentsDataJSON)
 console.log('commentsUrl: ', commentsUrl)
 
+const issueID = process.env.BRANCH_NAME
+const parsedIssueId = issueID.split('-')?.at(1)
+console.log('issueID: ', issueID, parsedIssueId)
+console.log('parsedIssueId: ', parsedIssueId)
+
 const fetchCommentsJSON = async (commentsUrlStr) => {
   try {
     const response = await fetch(commentsUrlStr)
