@@ -63,7 +63,7 @@ const newData = {
     rich_text: [
       {
         text: {
-          content: '2'
+          content: parsedIssueId
         }
       }
     ]
