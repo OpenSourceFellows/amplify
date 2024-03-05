@@ -21,6 +21,10 @@ jobs:
         id: branch_name
         run: echo "::set-output name=issue_branch::${{ github.head_ref }}"
 
+      - name: Get Current User
+        id: current_user
+        run: echo "::set-output name=gh_handle::${{ github.actor }}"
+
       - name: Run script on label assignment
         if: contains(github.event.pull_request.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
         env:
@@ -28,4 +32,5 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           BRANCH_NAME: ${{ steps.branch_name.outputs.issue_branch }}
+          GH_HANDLE: ${{ steps.current_user.outputs.gh_handle }}
         run: node ./roiScript/send-metrics.mjs
