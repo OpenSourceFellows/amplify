@@ -17,6 +17,7 @@ jobs:
             labels="${{ toJson(github.event.issue.labels) }}"
             echo "All Labels: $labels"
             for label in "${labels[@]}"
-            do 
-              echo "$label"
-            done 
+              do 
+                name=$(echo "$label" | jq -r '.name')
+                echo "$name"
+              done 
