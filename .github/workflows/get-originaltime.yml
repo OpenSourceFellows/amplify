@@ -16,5 +16,5 @@ jobs:
         run: |
           json_labels=("${{ toJson(github.event.issue.labels) }}")
           for label in "${json_labels[@]}"; do
-            echo "$label"
+            echo "$label.name"
           done
