@@ -16,8 +16,6 @@ jobs:
         run: |
             labels="${{ toJson(github.event.issue.labels) }}"
             echo "All Labels: $labels"
-            for label in $(echo "$labels" | jq -r '.[].name'); do
-              if [[ "$label" == "originaltime-"* ]]; then
-                echo "Assigned Label: $label"
-              fi
+            for label in $(echo "$labels" | jq -r 'map(select(has("name") and .name | startswith("originaltime-"))) | .[].name'); do
+              echo "Assigned Label: $label"
             done
