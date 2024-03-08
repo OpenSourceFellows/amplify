@@ -15,7 +15,6 @@ jobs:
       - name: Test print
         run: |
           json_labels=("${{ toJson(github.event.issue.labels) }}")
-          echo "All Labels: ${json_labels[@]}"
           for label in "${json_labels[@]}"; do
             echo "$label"
           done
