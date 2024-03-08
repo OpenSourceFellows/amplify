@@ -15,4 +15,8 @@ jobs:
       - name: Test print
         if: contains(github.event.issue.labels.*.name, 'originaltime-')
         run: |
-            echo "Assigned Label: ${{ github.event.issue.labels.*.name }}"
+            for label in "${{ github.event.issue.labels.*.name }}"; do
+            if [[ "$label" == "originaltime-"* ]]; then
+              echo "Assigned Label: $label"
+            fi
+            done
