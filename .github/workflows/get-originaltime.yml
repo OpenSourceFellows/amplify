@@ -12,9 +12,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Test print
-        run: |
-          json_labels=("${{ toJson(github.event.issue.labels) }}")
-          for label in "${json_labels[@]}"; do
-            echo "$label.name"
-          done
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
+
+      - name: Send time
+        if: contains(github.event.issue.labels.*.name, 'originaltime-')
+        env: 
+          LABELS: ${{ toJson(github.event.issue.labels) }}
+        run: node ./roiScript/send-time.mjs
