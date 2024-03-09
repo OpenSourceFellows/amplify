@@ -18,7 +18,7 @@ jobs:
       #   working-directory: ./roiScript
 
       - name: Send time
-        if: contains(github.event.issue.labels.*.name, 'originaltime-')
+        # if: contains(github.event.issue.labels.*.name, 'originaltime-') # TODO: fix this label filter
         env: 
           LABELS: ${{ toJson(github.event.issue.labels) }}
         run: node ./roiScript/send-time.mjs
