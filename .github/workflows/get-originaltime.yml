@@ -12,9 +12,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install
-        run: npm install
-        working-directory: ./roiScript
+      # TODO: fix the unsupported engine error
+      # - name: Install
+      #   run: npm install
+      #   working-directory: ./roiScript
 
       - name: Send time
         if: contains(github.event.issue.labels.*.name, 'originaltime-')
