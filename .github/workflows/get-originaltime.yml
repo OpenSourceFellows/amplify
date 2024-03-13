@@ -17,18 +17,11 @@ jobs:
       #   run: npm install
       #   working-directory: ./roiScript
 
-      - name: Debug
-        run: echo "github.head_ref -- ${{ github.head_ref }}"
-
-      - name: Set Branch Name
-        id: branch_name
-        run: echo "::set-output name=issue_branch::${{ github.head_ref }}"
-
       - name: Send time
         if: contains(join(github.event.issue.labels.*.name, ','), 'originaltime-')
         env: 
           LABELS: ${{ toJson(github.event.issue.labels) }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          BRANCH_NAME: ${{ steps.branch_name.outputs.issue_branch }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: node ./roiScript/send-time.mjs
