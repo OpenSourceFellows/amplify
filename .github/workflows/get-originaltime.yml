@@ -19,7 +19,8 @@ jobs:
 
       - name: Send time
         if: contains(join(github.event.issue.labels.*.name, ','), 'originaltime-')
-        # if: contains(github.event.issue.labels.*.name, 'originaltime-') # TODO: fix this label filter # it's not working because labels returns an arr of obj
         env: 
           LABELS: ${{ toJson(github.event.issue.labels) }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: node ./roiScript/send-time.mjs
