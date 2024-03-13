@@ -21,7 +21,8 @@ const labelObjects = process.env.LABELS
 const NOTION_TOKEN = process.env.NOTION_TOKEN
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
 
-const targetLabel = labelObjects.find(item => item.name.startsWith('originaltime-'))
+const parsedLabels = JSON.parse(labelObjects)
+const targetLabel = parsedLabels.find(item => item.name.startsWith('originaltime-'))
 const targetLabelName = targetLabel.name
 const labelArr = targetLabelName.split('-')
 const targetDuration = +labelArr[1]
