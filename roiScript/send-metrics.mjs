@@ -57,44 +57,82 @@ console.log('durationValue', durationValue)
 
 const databaseId = NOTION_DATABASE_ID
 
-// mock data to test the connection
-const newData = {
-  // properties:
-  issue_id: {
-    rich_text: [
-      {
-        text: {
-          content: parsedIssueId
-        }
-      }
-    ]
-  },
-  gh_handle: {
-    title: [
-      {
-        text: {
-          content: ghHandle
-        }
-      }
-    ]
-  },
-  duration: {
-    number: durationValue
-  }
-}
+// ---
 
-async function addToNotionDatabase() {
+// current version
+async function updateNotionDatabase() {
   try {
-    const response = await notion.pages.create({
-      parent: {
-        database_id: databaseId
-      },
-      properties: newData
-    })
-    // console.log(response)
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      filter: {
+        property: 'issue_id',
+        rich_text: {
+          equals: parsedIssueId
+        }
+      }
+    });
+
+    const pageId = response.results[0].id;
+    const pageProperties = response.results[0].properties;
+
+    pageProperties.duration = {
+      number: durationValue
+    };
+
+    await notion.pages.update({
+      page_id: pageId,
+      properties: pageProperties
+    });
   } catch (error) {
-    console.error('Error adding data to Notion:', error)
+    console.error('Error updating data in Notion:', error);
   }
 }
 
-addToNotionDatabase()
+updateNotionDatabase();
+
+// --- 
+
+// previous version
+// mock data to test the connection
+// const newData = {
+//   // properties:
+//   issue_id: {
+//     rich_text: [
+//       {
+//         text: {
+//           content: parsedIssueId
+//         }
+//       }
+//     ]
+//   },
+//   gh_handle: {
+//     title: [
+//       {
+//         text: {
+//           content: ghHandle
+//         }
+//       }
+//     ]
+//   },
+//   duration: {
+//     number: durationValue
+//   }
+// }
+
+// async function addToNotionDatabase() {
+//   try {
+//     const response = await notion.pages.create({
+//       parent: {
+//         database_id: databaseId
+//       },
+//       properties: newData
+//     })
+//     // console.log(response)
+//   } catch (error) {
+//     console.error('Error adding data to Notion:', error)
+//   }
+// }
+
+// addToNotionDatabase()
+
+
