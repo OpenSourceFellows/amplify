@@ -26,9 +26,57 @@ const targetLabel = parsedLabels.find(item => item.name.startsWith('originaltime
 const targetLabelName = targetLabel.name
 const labelArr = targetLabelName.split('-')
 const targetDuration = +labelArr[1]
+const branchName = process.env.BRANCH_NAME
 
 console.log('Send time (labels): ', targetDuration)
+console.log('branchName: ', branchName)
 
 console.log('NOTION_TOKEN: ', NOTION_TOKEN)
 console.log('NOTION_DATABASE_ID: ', NOTION_DATABASE_ID)
 
+// ---
+// TODO: rewrite this code from the send-metrics.mjs file
+
+// const databaseId = NOTION_DATABASE_ID
+
+// // mock data to test the connection
+// const newData = {
+//   // properties:
+//   issue_id: {
+//     rich_text: [
+//       {
+//         text: {
+//           content: parsedIssueId
+//         }
+//       }
+//     ]
+//   },
+//   gh_handle: {
+//     title: [
+//       {
+//         text: {
+//           content: ghHandle
+//         }
+//       }
+//     ]
+//   },
+//   duration: {
+//     number: durationValue
+//   }
+// }
+
+// async function addToNotionDatabase() {
+//   try {
+//     const response = await notion.pages.create({
+//       parent: {
+//         database_id: databaseId
+//       },
+//       properties: newData
+//     })
+//     // console.log(response)
+//   } catch (error) {
+//     console.error('Error adding data to Notion:', error)
+//   }
+// }
+
+// addToNotionDatabase()
