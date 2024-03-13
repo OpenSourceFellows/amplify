@@ -15,6 +15,8 @@ labels interface (filtered labels that contain `originaltime-`):
 ]
 */
 
+// TODO: fix the unsupported engine error
+// TODO: send the original time to the Notion DB 
 const labels = process.env.LABELS
 const NOTION_TOKEN = process.env.NOTION_TOKEN
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
