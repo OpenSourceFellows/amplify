@@ -23,4 +23,5 @@ jobs:
           LABELS: ${{ toJson(github.event.issue.labels) }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          BRANCH_NAME: ${{ github.head_ref }}
         run: node ./roiScript/send-time.mjs
