@@ -26,10 +26,12 @@ const targetLabel = parsedLabels.find(item => item.name.startsWith('originaltime
 const targetLabelName = targetLabel.name
 const labelArr = targetLabelName.split('-')
 const targetDuration = +labelArr[1]
-const branchName = process.env.BRANCH_NAME
+const issueNumber = process.env.ISSUE_NUMBER
 
 console.log('Send time (labels): ', targetDuration)
-console.log('branchName: ', branchName)
+console.log('issueNumber: ', issueNumber)
+
+// TODO: using this issue number find and update the notion database
 
 console.log('NOTION_TOKEN: ', NOTION_TOKEN)
 console.log('NOTION_DATABASE_ID: ', NOTION_DATABASE_ID)
