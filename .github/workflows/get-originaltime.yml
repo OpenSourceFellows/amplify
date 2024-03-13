@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v2
 
       # TODO: fix the unsupported engine error
-      # - name: Install
-      #   run: npm install
-      #   working-directory: ./roiScript
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
 
       - name: Send time
         if: contains(join(github.event.issue.labels.*.name, ','), 'originaltime-')
