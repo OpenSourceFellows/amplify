@@ -27,9 +27,11 @@ const targetLabelName = targetLabel.name
 const labelArr = targetLabelName.split('-')
 const targetDuration = +labelArr[1]
 const issueNumber = process.env.ISSUE_NUMBER
+const ghHandle = process.env.GH_HANDLE
 
 console.log('Send time (labels): ', targetDuration)
 console.log('issueNumber: ', issueNumber)
+console.log('ghHandle: ', ghHandle)
 
 // TODO: using this issue number find and update the notion database
 
