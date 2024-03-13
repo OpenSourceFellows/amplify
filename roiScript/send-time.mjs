@@ -19,5 +19,5 @@ const labels = process.env.LABELS
 const NOTION_TOKEN = process.env.NOTION_TOKEN
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
 console.log('Send time (labels): ', labels)
-console.log('NOTION_TOKEN: ', labels)
-console.log('NOTION_DATABASE_ID: ', labels)
+console.log('NOTION_TOKEN: ', NOTION_TOKEN)
+console.log('NOTION_DATABASE_ID: ', NOTION_DATABASE_ID)
