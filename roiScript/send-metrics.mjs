@@ -72,17 +72,19 @@ async function updateNotionDatabase() {
       }
     });
 
-    const pageId = response.results[0].id;
-    const pageProperties = response.results[0].properties;
+    console.log('response', response);
 
-    pageProperties.duration = {
-      number: durationValue
-    };
+    // const pageId = response.results[0].id;
+    // const pageProperties = response.results[0].properties;
 
-    await notion.pages.update({
-      page_id: pageId,
-      properties: pageProperties
-    });
+    // pageProperties.duration = {
+    //   number: durationValue
+    // };
+
+    // await notion.pages.update({
+    //   page_id: pageId,
+    //   properties: pageProperties
+    // });
   } catch (error) {
     console.error('Error updating data in Notion:', error);
   }
