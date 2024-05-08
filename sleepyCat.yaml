@@ -18,4 +18,5 @@ jobs:
         with:
           # GitHub token reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
           # key GITHUB_TOKEN:, expression ${{}}, context secrets.GITHUB_TOKEN - alive for the duration of the workflow
+          # workflow expression reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
           GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
