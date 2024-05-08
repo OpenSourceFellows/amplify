@@ -1,0 +1,21 @@
+name: sleepy-cat
+
+# trigger
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+on:
+  # pull_request_target:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+# operations
+jobs:
+  sleepyCatJob:
+    name: nap time!
+    # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ruairidhwm/action-cats@1.0.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
