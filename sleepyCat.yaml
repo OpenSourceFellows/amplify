@@ -17,6 +17,6 @@ jobs:
       - uses: ruairidhwm/action-cats@1.0.1
         with:
           # GitHub token reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
-          # key GITHUB_TOKEN:, expression ${{}}, context secrets.GITHUB_TOKEN - alive for the duration of the workflow
+          # key GITHUB_TOKEN:, expression ${{}}, context secrets.GITHUB_TOKEN - alive for the duration of the workflow, and enable to copy code to vm
           # workflow expression reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
-          GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
