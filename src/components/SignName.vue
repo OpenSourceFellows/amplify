@@ -100,21 +100,22 @@
 import axios from 'axios'
 
 export default {
-  name: 'SignName',
-  data: () => ({
-    errorMessages: '',
-    name: null,
-    line1: null,
-    line2: null,
-    city: null,
-    state: null,
-    zip: null,
-    country: null,
-    email: null,
-    formHasErrors: false,
-    JSONstring: '',
-    message: ''
-  }),
+
+    name: 'SignName',
+    data: () => ({
+      errorMessages: '',
+      name: '',
+      line1: '',
+      line2: '',
+      city: '',
+      state: '',
+      zip: '',
+      country: '',
+      email: '',
+      formHasErrors: false,
+      JSONstring: '',
+      message: ''
+    }),
 
   computed: {
     form() {

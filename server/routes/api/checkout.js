@@ -1,97 +1,138 @@
 const express = require('express')
-const { createClient } = require('../../db')
+const { Stripe, StripeError } = require('../../lib/stripe')
+const {
+  PaymentPresenter,
+  PaymentPresenterError
+} = require('../../../shared/presenters/payment-presenter')
+const Constituent = require('../../db/models/constituent')
+const Transaction = require('../../db/models/transaction')
+const Letter = require('../../db/models/letter')
+
 const router = express.Router()
-const db = createClient()
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-const { formatDonationAmount } = require('../../../util/format')
-const { validateDonationAmount } = require('../../../util/validate')
 
-router.post('/create-transaction', async (req, res) => {
-  const { sessionId /*, email /*, campaignId, donationId */ } = req.body || {}
-  if (!sessionId /*|| !email*/) {
-    return res.status(400).send({ error: 'No session ID' })
+class CheckoutError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'CheckoutError'
   }
-  const session = await stripe.checkout.sessions.retrieve(sessionId)
-
-  const formattedTransaction = {
-    stripe_transaction_id: sessionId,
-    amount: session.amount_total,
-    currency: session.currency,
-    payment_method: 'something not empty', // Not sure what this is for
-    payment_method_type: session.payment_method_types[0],
-    email: session.customer_details.email // to-do: get user email from the server auth, if possible
-  }
-
-  try {
-    // Expire session?
-    await db('transactions').insert(formattedTransaction)
-    res.status(200).send(formattedTransaction)
-  } catch (error) {
-    console.log({ error })
-    res.status(400).send()
-  }
-
-  return res.status(200).end()
-})
-
-// 1. send a request to `/create-payment-intent`
-// with a `donationAmount` as string or integer
-// If user doesn't select any particular `donationAmount`, send `1` in the donationAmount
-// 2. This API will redirect the client to a Stripe Checkout page
-// 3. Once user completes payment, will redirect back to `success_url` with
-//  a Stripe session_id included in the URL.
+}
 
 router.post('/create-checkout-session', async (req, res) => {
-  const { donationAmount } = req.body || {}
+  const { donation, user, letter } = req.body
   const origin = req.get('origin')
 
-  const input = formatDonationAmount(donationAmount)
-  const inputIsValid = validateDonationAmount(input)
+  console.log(`origin: ${origin}`)
 
-  if (inputIsValid) {
-    const donationAmountForStripe = input * 100 // Stripe accepts values in cents
-    let session
+  try {
+    const presenter = new PaymentPresenter()
 
-    try {
-      session = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: 'Donation'
-              },
-              unit_amount: donationAmountForStripe
-            },
-            quantity: 1
-          }
-        ],
-        mode: 'payment',
-        allow_promotion_codes: true,
-        success_url: origin + '/complete?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url: origin
-      })
-    } catch (error) {
-      const data = {
-        type: error.type,
-        code: error.raw.code,
-        url: error.raw.doc_url,
-        message: 'An error occurred with Stripe checkout',
-        entire_error_object: error
-      }
+    // Will throw error if invalid amount is given.
+    presenter.validatePaymentAmount(donation)
 
-      console.log(data)
-      return res.status(500).json(data)
+    // TODO: Should be strict https but we need to do some deployment fixes first.
+    const redirectUrl = `${origin}/complete?session_id={CHECKOUT_SESSION_ID}`
+    const cancelUrl = origin
+
+    const stripe = new Stripe()
+    const session = await stripe.createCheckoutSession(
+      donation,
+      redirectUrl,
+      cancelUrl
+    )
+
+    // These objects must be recorded in a specific order:
+    // constituent, then transaction, then letter
+    // This is because letter needs id from constituent and transaction!
+
+    // TODO: Move Constituent insert to earlier in the cycle.
+    let constituent
+    ;[constituent] = await Constituent.query().where('email', user.email)
+    if (!constituent) {
+      constituent = await Constituent.query().insert(user)
     }
-    // console.log('session:', session)
 
-    // the redirection happens within `DonateMoney.vue`
-    return res.status(200).json({ url: session.url, sessionId: session.id })
-  } else {
-    return res.status(400).send({
-      error: 'Bad request: did not create Stripe checkout session',
-      message: 'Check backend console for possible failing reasons'
+    console.log(constituent.id)
+
+    const transaction = await Transaction.query().insert({
+      stripeTransactionId: session.paymentIntent,
+      constituentId: constituent.id,
+      amount: donation,
+      currency: 'usd',
+      paymentMethod: 'credit_card'
     })
+
+    // Using a temporary mapping here also
+    await Letter.query().insert({
+      transactionId: transaction.id,
+      constituentId: constituent.id,
+      ...letter
+    })
+
+    return res
+      .status(200)
+      .json({ url: session.url, sessionId: session.id })
+      .end()
+  } catch (error) {
+    let statusCode = 500
+
+    if (error instanceof PaymentPresenterError) {
+      statusCode = 400
+    }
+
+    // TODO: error logging
+    return res.status(statusCode).json({ error: error.message }).end()
+  }
+})
+
+router.post('/process-transaction', async (req, res) => {
+  try {
+    const stripe = new Stripe()
+
+    // If livemode is false, disable signature checking
+    // and event reconstructionfor ease of testing.
+    let event
+    if (stripe.livemode) {
+      const signature = req.headers['stripe-signature']
+      if (!signature) throw new CheckoutError('No stripe signature on request!')
+
+      event = stripe.validateEvent(signature, req.rawBody)
+    } else {
+      event = req.body
+      console.log(event)
+    }
+
+    const data = event.data
+    const { id: paymentIntent, amount } = data.object
+    const [eventType, eventOutcome] = req.body.type.split('.')
+
+    // We are not going to send letters from here just yet
+    // so we will record the transaction no matter the outcome.
+    if (eventType !== 'payment_intent') {
+      throw new CheckoutError(
+        `Unexpected event! Received ${eventType} but it could not be processed.`
+      )
+    }
+
+    await Transaction.query()
+      .patch({ amount, status: eventOutcome })
+      .where({ stripe_transaction_id: paymentIntent })
+
+    return res.status(200).end()
+  } catch (error) {
+    let statusCode = 500
+
+    if (error instanceof CheckoutError) {
+      statusCode = 400
+      console.error(error.message)
+    }
+
+    if (error instanceof StripeError) {
+      // Don't leak Stripe logging.
+      console.error(error.message)
+      error.message = 'Payment processing error'
+    }
+
+    return res.status(statusCode).json({ error: error.message }).end()
   }
 })
 
