@@ -179,7 +179,31 @@ export default {
   },
   data() {
     return {
-      letterBody: '<h1>Test</h1>',
+      letterBody: '''
+        div>
+          <p>
+            As a resident of San Francisco and someone who cares deeply about the Tuolumne River, 
+          </p>
+          <p>
+            I’m extremely concerned about our skyrocketing “water and sewer bills” and the The Design Drought. San Francisco’s combined water and sewer bills are projected to increase by 8% per year.
+          </p>
+          <p>
+            {{affects}}
+          </p>
+          <p>
+            At a time when taxpayer water rates are set to skyrocket for San Franciscans, the SFPUC budget is on the verge of collapse, and low flows along the Tuolumne River contribute to the erosion of health for all species, the economic and ecological tipping point is now.
+          </p>
+          <p>
+            The Design Drought arbitrarily combines two of the worst droughts on record to create a megadrought that might occur once in 25,000 years. It assumes a huge increase in water use, despite the fact that water demand has decreased significantly over the past three decades. </br> The Design Drought has prompted the SFPUC to create an Alternative Water Supply Plan that would cost between $17 billion and $25 billion. This would double the SFPUC budget (and water rates) to produce expensive water we won’t ever need.
+          </p>
+          <p>
+            Thank you for your continued attention.
+          </p>
+          <p>
+            I support not approving the new budget with rate increases and am following this issue closely and with great concern.
+          </p>
+        <div>
+      ''',
       congressMembers: [],
       currentFilter: '',
       hasContent: true,
