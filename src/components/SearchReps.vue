@@ -203,7 +203,13 @@ export default {
     },
     campaignId() {
       return this.$store.state.campaign.id
+    },
+    useHardcodedReps() {
+      return Boolean(process.env.VUE_APP_USE_HARDCODED_REPS)
     }
+  },
+  created() {
+    console.log(this.useHardcodedReps)
   },
   methods: {
     async loadLetterWorkflow() {
