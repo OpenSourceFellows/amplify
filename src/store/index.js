@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    mode: 'default',
+    mode: 'single',
     zipcode: '',
     letterId: '',
     letterVersion: 'latest',
@@ -16,8 +16,13 @@ export default new Vuex.Store({
       name: '',
       cause: '',
       type: '',
-      page_url: ''
+      page_url: '',
+      campaign_text: '',
+      campaign_tag_line: '',
+      supplemental_text: '',
     },
+    representatives: [],
+    assets: {},
     lobReturnAddressId: '',
     selectedRep: {},
     userData: {
@@ -84,12 +89,17 @@ export default new Vuex.Store({
       })
     },
     async loadSingleCampaign({ commit }, id) {
-      const campaignUrl = `api/campaigns/${id}`
+      const campaignUrl = `/api/campaigns/${id}`
 
       try {
         const res = await axios.get(campaignUrl)
 
+        const campaign = res.data
+        const { representatives, assets } = campaign
+
         commit('setObjectValue', { key: 'campaign', data: res.data })
+        commit('setGenericValue', { key: 'representatives', value: representatives})
+        commit('setGenericValue', { key: 'assets', value: assets })
       } catch (e) {
         alert(e.message)
       }

@@ -24,7 +24,15 @@
 
 <script>
 export default {
-  name: 'HomeHero'
+  name: 'HomeHero',
+  computed: {
+    campaign() {
+      return this.$store.state.campaign
+    }
+  },
+  created() {
+    console.log(this.campaign)
+  }
 }
 </script>
 

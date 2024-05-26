@@ -6,8 +6,9 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import '@babel/polyfill'
-import { domain, clientId, audience } from '../auth_config.json'
-import { Auth0Plugin } from '@/auth/auth0-plugin'
+// Auth0 is currently not working. No time to debug
+// import { domain, clientId, audience } from '../auth_config.json'
+// import { Auth0Plugin } from '@/auth/auth0-plugin'
 import 'vuetify/dist/vuetify.min.css'
 
 // for front-end logging
@@ -33,6 +34,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Vuetify)
 
+/*
 Vue.use(Auth0Plugin, {
   domain,
   clientId,
@@ -45,6 +47,7 @@ Vue.use(Auth0Plugin, {
     )
   }
 })
+*/
 
 // for using front-end logger
 Vue.use(vueLogger)

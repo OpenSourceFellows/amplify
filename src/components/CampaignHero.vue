@@ -60,6 +60,9 @@ export default {
     },
     campaign() {
       return this.$store.state.campaign
+    },
+    campaignAssets() {
+      return JSON.parse(this.campaign)
     }
   },
   methods: {
@@ -74,6 +77,10 @@ export default {
       const b = bigint & 255
 
       return `${r}, ${g}, ${b}, ${alpha}`
+    },
+    mounted() {
+      console.log(this.campaign.assets)
+      console.log(this.campaignAssets)
     }
   }
 }
