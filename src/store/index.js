@@ -96,7 +96,17 @@ export default new Vuex.Store({
 
         const campaign = res.data
         console.log(res.data)
-        const { representatives, assets } = campaign
+        let { representatives, assets } = campaign
+
+        if (typeof representatives == 'string') {
+          console.log('had to parse json campaign')
+          representatives = JSON.parse(representatives)
+        }
+
+        if (typeof assets == 'string') {
+          console.log('had to parse json assets')
+          assets = JSON.parse(assets)
+        }
 
         commit('setObjectValue', { key: 'campaign', data: res.data })
         commit('setGenericValue', { key: 'representatives', value: representatives})
