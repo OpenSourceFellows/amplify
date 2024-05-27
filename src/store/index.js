@@ -16,10 +16,10 @@ export default new Vuex.Store({
       name: '',
       cause: '',
       type: '',
-      page_url: '',
-      campaign_text: '',
-      campaign_tag_line: '',
-      supplemental_text: '',
+      pageUrl: '',
+      campaignText: '',
+      campaignTagline: '',
+      supplementalText: '',
     },
     representatives: [],
     assets: {},
@@ -95,6 +95,7 @@ export default new Vuex.Store({
         const res = await axios.get(campaignUrl)
 
         const campaign = res.data
+        console.log(res.data)
         const { representatives, assets } = campaign
 
         commit('setObjectValue', { key: 'campaign', data: res.data })

@@ -123,7 +123,7 @@
 
           <!-- Always enabled -->
           <div v-if="true" id="representatives-list">
-            <h3>Click or tap a Representative to get started.</h3>
+            <h3>Click or tap a Representative, then scroll down to get started.</h3>
             <div>
               <v-card v-for="member in representatives" :key="member.name" flat>
                 <representative-card
@@ -169,7 +169,6 @@
 </template>
 
 <script>
-import campaignData from '@/assets/scm/text/text.json'
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
@@ -201,7 +200,7 @@ export default {
       return this.$store.state.mode
     },
     campaignText() {
-      return campaignData.supplemental_text
+      return this.$store.state.campaign.supplementalText
     },
     campaignId() {
       return this.$store.state.campaign.id
