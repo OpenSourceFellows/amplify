@@ -32,6 +32,9 @@ class LetterVersion extends BaseModel {
         },
         municipality: {
           anyOf: [{ type: 'string', minLength: 1 }, { type: 'null' }]
+        },
+        mergeVariables: {
+
         }
       }
     }

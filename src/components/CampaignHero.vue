@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{ 'background-image': 'url(' + imgPath + ')' }"
+    :style="{ 'background-image': 'url(' + bgPath + ')' }"
     class="d-flex justify-center align-center main-content"
   >
     <div
@@ -14,15 +14,15 @@
     >
       <a :href="campaign.page_url" target="_blank">
         <img
-          src="@/assets/scm/images/campaign-logo.webp"
+          :src="assets.campaign_logo"
           alt="sogorea te land trust"
           class="pa-4 campaign-feature-image"
         />
       </a>
-      <h1 class="white--text">
+      <h2 class="white--text">
         {{ campaignTagline }}
-      </h1>
-      <h2 class="white--text">Make Your Voice Count</h2>
+      </h2>
+      <h3 class="white--text">Make Your Voice Count</h3>
       <div class="d-flex justify-center align-center">
         <v-btn
           elevation="2"
@@ -42,8 +42,6 @@
 
 <script>
 import { lightTheme } from '@/configs/theme.js'
-import campaignData from '@/assets/scm/text/text.json'
-
 export default {
   name: 'CampaignHero',
   data() {
@@ -56,10 +54,16 @@ export default {
       return lightTheme
     },
     campaignTagline() {
-      return campaignData.campaign_tagline
+      return this.campaign.campaignTagline
     },
     campaign() {
       return this.$store.state.campaign
+    },
+    assets() {
+      return this.$store.state.assets
+    },
+    bgPath() {
+      return this.assets.campaign_background
     }
   },
   methods: {
@@ -74,6 +78,10 @@ export default {
       const b = bigint & 255
 
       return `${r}, ${g}, ${b}, ${alpha}`
+    },
+    mounted() {
+      console.log(this.campaign.assets)
+      console.log(this.campaignAssets)
     }
   }
 }
@@ -102,6 +110,6 @@ export default {
 }
 
 .campaign-feature-image {
-  max-width: 400px; // Needs to be changed later
+  max-width: 40%; // Needs to be changed later
 }
 </style>
