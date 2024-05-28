@@ -28,7 +28,8 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <letter-load :selected-rep="selectedRep" :letter-body="letterBody" />
+          <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
+          <TuolumneLetterLoad :selected-rep="selectedRep" :letter-body="letterBody" />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
@@ -136,13 +137,13 @@
 </template>
 
 <script>
-import LetterLoad from '@/components/LetterLoad.vue'
+import TuolumneLetterLoad from '@/components/TuolumneLetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
   name: 'TakeAction',
-  components: { LetterLoad, SignName, DonateMoney },
+  components: { TuolumneLetterLoad, SignName, DonateMoney },
   props: {
     letterBody: {
       type: String,

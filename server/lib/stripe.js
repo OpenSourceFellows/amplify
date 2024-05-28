@@ -22,7 +22,7 @@ class Stripe {
    * Think of this as a server-side analog to the 'livemode' attribute on mode Stripe objects. In fact,
    * an event object's livemode value and this method should always match.
    */
-  get livemode() {
+  livemode() {
     return this.livemode === 'true'
   }
 
@@ -68,7 +68,6 @@ class Stripe {
         success_url: redirectUrl,
         cancel_url: cancelUrl
       })
-      console.log(session)
 
       return {
         url: session.url,
