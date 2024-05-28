@@ -5,7 +5,8 @@
         <v-col cols="12" sm="6" md="4">
           <!--TODO: Create component(s) to reduce template size.-->
           <!-- This could be RepresentativeSearcher.vue or something-->
-          <div v-if="!congressMembers.length">
+          <!-- Disabled -->
+          <div v-if="false">
             <v-card flat>
               <v-card-text>
                 <v-subheader class="pa-0"> Where do you live? </v-subheader>
@@ -120,10 +121,11 @@
             </v-card>
           </div>
 
-          <div v-if="hasContent" id="representatives-list">
-            <h3>Click or tap a Representative to get started.</h3>
+          <!-- Always enabled -->
+          <div v-if="true" id="representatives-list">
+            <h3>Click or tap a Representative, then scroll down to get started.</h3>
             <div>
-              <v-card v-for="member in congressMembers" :key="member.name" flat>
+              <v-card v-for="member in representatives" :key="member.name" flat>
                 <representative-card
                   :member="member"
                   @handle-rep-selected="loadLetterWorkflow"
@@ -167,7 +169,6 @@
 </template>
 
 <script>
-import campaignData from '@/assets/scm/text/text.json'
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
@@ -180,128 +181,7 @@ export default {
   data() {
     return {
       letterBody: '',
-      congressMembers: [
-        {
-          name: 'Rashi Kesarwani',
-          title: 'Berkeley Councilmember, District 1',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '# 5',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'rkesarwani@cityofberkeley.info',
-          twitter: 'RashiKesarwani',
-          facebook: 'CouncilwomanRashi',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/kesarwani.jpg'
-        },
-        {
-          name: 'Terry Taplin',
-          title: 'Berkeley Councilmember, District 2',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'ttaplin@cityofberkeley.info',
-          twitter: 'taplinterry',
-          facebook: 'D2TerryTaplin2020',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Terry%20Taplin.jpg'
-        },
-        {
-          name: 'Ben Bartlett',
-          title: 'Berkeley Councilmember, District 3',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'bbartlett@cityofberkeley.info',
-          twitter: 'benbartlettberk',
-          facebook: 'CouncilmemberBartlett',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Ben-Bartlet.jpg'
-        },
-        {
-          name: 'Kate Harrison',
-          title: 'Berkeley Councilmember, District 4',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'kharrison@cityofberkeley.info',
-          twitter: 'kateharrisond4',
-          facebook: 'KateHarrisonD4',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Kate-Harrison_1.jpg'
-        },
-        {
-          name: 'Sophie Hahn',
-          title: 'Berkeley Councilmember, District 5',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'shahn@cityofberkeley.info',
-          twitter: 'SophieHahnBerk',
-          facebook: 'sophie.hahn.583',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Sophie-Hahn_2.jpg'
-        },
-        {
-          name: 'Susan Wengraf',
-          title: 'Berkeley Councilmember, District 6',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'swengraf@cityofberkeley.info',
-          twitter: '',
-          facebook: '',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Susan-Wengraf_0.jpg'
-        },
-        {
-          name: 'Rigel Robinson',
-          title: 'Berkeley Councilmember, District 7',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'RRobinson@cityofberkeley.info',
-          twitter: 'rigelrobinson',
-          facebook: 'CouncilmemberRigelRobinson',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Rigel-Robinson.jpg'
-        },
-        {
-          name: 'Mark Humbert',
-          title: 'Berkeley Councilmember, District 8',
-          address_line1: '2180 MILVIA ST',
-          address_line2: '5th Floor',
-          address_city: 'Berkeley',
-          address_state: 'CA',
-          address_zip: '94704',
-          address_country: 'US',
-          email: 'mhumbert@cityofberkeley.info',
-          twitter: 'MarkHumbert',
-          facebook: '',
-          photoUrl:
-            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Mark-Humbert-300px.jpg'
-        }
-      ],
+      congressMembers: [],
       currentFilter: '',
       hasContent: true,
       postalCode: this.$route.params.postalCode || '',
@@ -320,24 +200,44 @@ export default {
       return this.$store.state.mode
     },
     campaignText() {
-      return campaignData.supplemental_text
+      return this.$store.state.campaign.supplementalText
     },
     campaignId() {
       return this.$store.state.campaign.id
+    },
+    representatives() {
+      return this.$store.state.representatives
+    }
+  },
+  created() {
+    // Duplicated to ensure that this data stays will be in Vuex if someone happens to
+    // refresh. Should be reworked in the new repo, but needs must \_(-_-)_/
+    if (!this.campaignId) {
+      this.$store.dispatch('loadSingleCampaign', process.env.VUE_APP_FEATURED_CAMPAIGN)
+
+      this.$store.commit('setGenericValue', {
+        key: 'letterId',
+        value: process.env.VUE_APP_LETTER_TEMPLATE
+      })
+
+      this.$store.commit('setGenericValue', { key: 'mode', value: 'single' })
     }
   },
   methods: {
     async loadLetterWorkflow() {
       const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
 
+      const latest = letter.data.versions[letter.data.versions.length - 1]
+
       this.$store.commit('setGenericValue', {
         key: 'letterId',
         value: this.letterId
       })
 
-      this.letterBody = letter.data.versions[0].html
+      this.letterBody = latest.html
 
       this.listVisible = true
+      
     },
     CheckInputContent: function () {
       if (this.postalCode !== '') {
