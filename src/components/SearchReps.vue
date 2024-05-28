@@ -123,7 +123,9 @@
 
           <!-- Always enabled -->
           <div v-if="true" id="representatives-list">
-            <h3>Click or tap a Representative, then scroll down to get started.</h3>
+            <h3>
+              Click or tap a Representative, then scroll down to get started.
+            </h3>
             <div>
               <v-card v-for="member in representatives" :key="member.name" flat>
                 <representative-card
@@ -213,7 +215,10 @@ export default {
     // Duplicated to ensure that this data stays will be in Vuex if someone happens to
     // refresh. Should be reworked in the new repo, but needs must \_(-_-)_/
     if (!this.campaignId) {
-      this.$store.dispatch('loadSingleCampaign', process.env.VUE_APP_FEATURED_CAMPAIGN)
+      this.$store.dispatch(
+        'loadSingleCampaign',
+        process.env.VUE_APP_FEATURED_CAMPAIGN
+      )
 
       this.$store.commit('setGenericValue', {
         key: 'letterId',
@@ -237,7 +242,6 @@ export default {
       this.letterBody = latest.html
 
       this.listVisible = true
-      
     },
     CheckInputContent: function () {
       if (this.postalCode !== '') {

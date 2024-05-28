@@ -19,7 +19,7 @@ export default new Vuex.Store({
       pageUrl: '',
       campaignText: '',
       campaignTagline: '',
-      supplementalText: '',
+      supplementalText: ''
     },
     representatives: [],
     assets: {},
@@ -117,7 +117,10 @@ export default new Vuex.Store({
         }
 
         commit('setObjectValue', { key: 'campaign', data: res.data })
-        commit('setGenericValue', { key: 'representatives', value: representatives})
+        commit('setGenericValue', {
+          key: 'representatives',
+          value: representatives
+        })
         commit('setGenericValue', { key: 'assets', value: assets })
       } catch (e) {
         alert(e.message)
