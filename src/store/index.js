@@ -33,7 +33,8 @@ export default new Vuex.Store({
       state: '',
       zip: '',
       email: ''
-    }
+    },
+    mergeVariables: {}
   },
   mutations: {
     // TODO: Do we really need two setters here?

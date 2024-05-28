@@ -104,6 +104,7 @@ export default {
       const letterId = this.$store.state.letterId
       const letterVersion = this.$store.state.letterVersion
       const returnAddressId = this.$store.state.lobReturnAddressId
+      const mergeVariables = this.$store.state.mergeVariables
 
       return {
         letterTemplate: letterId,
@@ -114,7 +115,8 @@ export default {
         state: rep.address_state,
         city: rep.address_city,
         zip: rep.address_zip,
-        returnAddress: returnAddressId
+        returnAddress: returnAddressId,
+        mergeVariables
       }
     },
     styledCustomDonation() {
