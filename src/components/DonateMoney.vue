@@ -116,7 +116,7 @@ export default {
         city: rep.address_city,
         zip: rep.address_zip,
         returnAddress: returnAddressId,
-        mergeVariables
+        merge_variables: mergeVariables
       }
     },
     styledCustomDonation() {

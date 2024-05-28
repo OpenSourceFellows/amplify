@@ -79,6 +79,8 @@ router.post('/create-checkout-session', async (req, res) => {
       statusCode = 400
     }
 
+    console.error(error)
+
     // TODO: error logging
     return res.status(statusCode).json({ error: error.message }).end()
   }
