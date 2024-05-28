@@ -28,7 +28,7 @@
     "db:create": "npm run db:create:dev && npm run db:create:test",
     "db:create:dev": "node script/create-db.js --env development",
     "db:create:test": "node script/drop-db.js --env test && node script/create-db.js --env test",
-    "db:migrate:create": "knex migrate:make --name",
+    "db:migrate:create": "knex migrate:make",
     "db:migrate": "npm run db:migrate:dev && npm run db:migrate:test",
     "db:migrate:dev": "knex migrate:latest --verbose --env development",
     "db:migrate:test": "knex migrate:latest --verbose --env test",
