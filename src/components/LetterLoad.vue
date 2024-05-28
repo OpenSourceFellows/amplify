@@ -12,11 +12,11 @@
             {{ selectedRep.address_city }}, {{ selectedRep.address_state }},
             {{ selectedRep.address_zip }}
           </div>
-          <br/>
+          <br />
           <div>{{ user.name }}</div>
           <div>
             {{ user.line1 }}
-            <br/>
+            <br />
             {{ user.line2 }}
           </div>
           <div>
@@ -28,11 +28,59 @@
         </v-card-title>
 
         <v-card-text>
-          <div> 
-            <p><span style="color: rgb(0, 0, 0);font-size: 10pt;">As a {{ constituentType }}</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">, &nbsp;</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">I&rsquo;m extremely concerned about our skyrocketing “water and sewer bills” and the The Design Drought.</span><span style="color: rgb(0, 0, 0);font-size: 10pt;"> San Francisco&rsquo;s combined water and sewer bills are projected to increase by 8% per year.&nbsp;</span></p>
-            <p><span style="color: rgb(0, 0, 0);font-size: 10pt;"> {{ communityInput }} At a time when taxpayer water rates are set to skyrocket for San Franciscans, the SFPUC budget is on the verge of collapse, and low flows along the Tuolumne River contribute to the erosion of health for all species, the economic and ecological tipping point is now.</span></p>
-            <p><span style="color: rgb(0, 0, 0);font-size: 10pt;">The Design Drought arbitrarily combines two of the worst droughts on record to create a&nbsp;</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">megadrought that might occur once in 25,000 years. It assumes a huge increase in water use,&nbsp;</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">despite the fact that water demand has decreased significantly over the past three decades.&nbsp;</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">The Design Drought has prompted the SFPUC to create an Alternative Water Supply Plan that &nbsp;</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">would cost between $17 billion and $25 billion. This would double the SFPUC budget (and water rates) to produce expensive water we won&rsquo;t ever need.&nbsp;</span></p>
-            <p><span style="color: rgb(0, 0, 0);font-size: 10pt;">Thank you for your continued attention.&nbsp;</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">I support n</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">ot approving the new budget with rate increases</span><span style="color: rgb(0, 0, 0);font-size: 10pt;">&nbsp;and am following this issue closely and with great concern.</span></p>
+          <div>
+            <p>
+              <span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >As a {{ constituentType }}</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt">, &nbsp;</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >I&rsquo;m extremely concerned about our skyrocketing “water and
+                sewer bills” and the The Design Drought.</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt">
+                San Francisco&rsquo;s combined water and sewer bills are
+                projected to increase by 8% per year.&nbsp;</span
+              >
+            </p>
+            <p>
+              <span style="color: rgb(0, 0, 0); font-size: 10pt">
+                {{ communityInput }} At a time when taxpayer water rates are set
+                to skyrocket for San Franciscans, the SFPUC budget is on the
+                verge of collapse, and low flows along the Tuolumne River
+                contribute to the erosion of health for all species, the
+                economic and ecological tipping point is now.</span
+              >
+            </p>
+            <p>
+              <span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >The Design Drought arbitrarily combines two of the worst
+                droughts on record to create a&nbsp;</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >megadrought that might occur once in 25,000 years. It assumes a
+                huge increase in water use,&nbsp;</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >despite the fact that water demand has decreased significantly
+                over the past three decades.&nbsp;</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >The Design Drought has prompted the SFPUC to create an
+                Alternative Water Supply Plan that &nbsp;</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >would cost between $17 billion and $25 billion. This would
+                double the SFPUC budget (and water rates) to produce expensive
+                water we won&rsquo;t ever need.&nbsp;</span
+              >
+            </p>
+            <p>
+              <span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >Thank you for your continued attention.&nbsp;</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >I support n</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >ot approving the new budget with rate increases</span
+              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
+                >&nbsp;and am following this issue closely and with great
+                concern.</span
+              >
+            </p>
           </div>
         </v-card-text>
 

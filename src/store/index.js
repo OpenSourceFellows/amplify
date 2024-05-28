@@ -51,12 +51,11 @@ export default new Vuex.Store({
       }
     },
     setConstituentType(state, payload) {
-      state.constituentType = payload;
+      state.constituentType = payload
     },
     setCommunityInput(state, payload) {
-      state.communityInput = payload;
-    },
-
+      state.communityInput = payload
+    }
   },
   actions: {
     setLetterAttrs: (store, payload) => {

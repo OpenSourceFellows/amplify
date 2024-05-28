@@ -20,7 +20,9 @@
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title> How this affects your community </v-list-item-title>
+              <v-list-item-title>
+                How this affects your community
+              </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
                 Choose the options that apply to you.
               </v-list-item-subtitle>
@@ -31,12 +33,7 @@
           <merge-variables-dropdowns />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
-          <v-btn
-            width="160"
-            dark
-            color="primary"
-            @click="nextPage"
-          >
+          <v-btn width="160" dark color="primary" @click="nextPage">
             Next
           </v-btn>
         </v-expansion-panel-content>
