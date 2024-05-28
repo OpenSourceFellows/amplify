@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     mode: 'default',
     zipcode: '',
-    letterId: '',
+    letterId: 'tmpl_187d2bbba140cd8',
     letterVersion: 'latest',
     campaign: {
       id: '',
@@ -20,6 +20,8 @@ export default new Vuex.Store({
     },
     lobReturnAddressId: '',
     selectedRep: {},
+    constituentType: null,
+    communityInput: null,
     userData: {
       name: '',
       line1: '',
@@ -47,7 +49,14 @@ export default new Vuex.Store({
           }
         }
       }
-    }
+    },
+    setConstituentType(state, payload) {
+      state.constituentType = payload;
+    },
+    setCommunityInput(state, payload) {
+      state.communityInput = payload;
+    },
+
   },
   actions: {
     setLetterAttrs: (store, payload) => {

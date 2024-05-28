@@ -179,32 +179,129 @@ export default {
   },
   data() {
     return {
-      letterBody: '''
-        <div>
-          <p>
-            As a resident of San Francisco and someone who cares deeply about the Tuolumne River, 
-          </p>
-          <p>
-            I’m extremely concerned about our skyrocketing “water and sewer bills” and the The Design Drought. San Francisco’s combined water and sewer bills are projected to increase by 8% per year.
-          </p>
-          <p>
-            {{affects}}
-          </p>
-          <p>
-            At a time when taxpayer water rates are set to skyrocket for San Franciscans, the SFPUC budget is on the verge of collapse, and low flows along the Tuolumne River contribute to the erosion of health for all species, the economic and ecological tipping point is now.
-          </p>
-          <p>
-            The Design Drought arbitrarily combines two of the worst droughts on record to create a megadrought that might occur once in 25,000 years. It assumes a huge increase in water use, despite the fact that water demand has decreased significantly over the past three decades. </br> The Design Drought has prompted the SFPUC to create an Alternative Water Supply Plan that would cost between $17 billion and $25 billion. This would double the SFPUC budget (and water rates) to produce expensive water we won’t ever need.
-          </p>
-          <p>
-            Thank you for your continued attention.
-          </p>
-          <p>
-            I support not approving the new budget with rate increases and am following this issue closely and with great concern.
-          </p>
-        <div>
-      ''',
-      congressMembers: [],
+      letterBody: '',
+      congressMembers: [
+        {
+          name: 'Rashi Kesarwani',
+          title: 'Berkeley Councilmember, District 1',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '# 5',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'rkesarwani@cityofberkeley.info',
+          twitter: 'RashiKesarwani',
+          facebook: 'CouncilwomanRashi',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/kesarwani.jpg'
+        },
+        {
+          name: 'Terry Taplin',
+          title: 'Berkeley Councilmember, District 2',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'ttaplin@cityofberkeley.info',
+          twitter: 'taplinterry',
+          facebook: 'D2TerryTaplin2020',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Terry%20Taplin.jpg'
+        },
+        {
+          name: 'Ben Bartlett',
+          title: 'Berkeley Councilmember, District 3',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'bbartlett@cityofberkeley.info',
+          twitter: 'benbartlettberk',
+          facebook: 'CouncilmemberBartlett',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Ben-Bartlet.jpg'
+        },
+        {
+          name: 'Kate Harrison',
+          title: 'Berkeley Councilmember, District 4',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'kharrison@cityofberkeley.info',
+          twitter: 'kateharrisond4',
+          facebook: 'KateHarrisonD4',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Kate-Harrison_1.jpg'
+        },
+        {
+          name: 'Sophie Hahn',
+          title: 'Berkeley Councilmember, District 5',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'shahn@cityofberkeley.info',
+          twitter: 'SophieHahnBerk',
+          facebook: 'sophie.hahn.583',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Sophie-Hahn_2.jpg'
+        },
+        {
+          name: 'Susan Wengraf',
+          title: 'Berkeley Councilmember, District 6',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'swengraf@cityofberkeley.info',
+          twitter: '',
+          facebook: '',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Susan-Wengraf_0.jpg'
+        },
+        {
+          name: 'Rigel Robinson',
+          title: 'Berkeley Councilmember, District 7',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'RRobinson@cityofberkeley.info',
+          twitter: 'rigelrobinson',
+          facebook: 'CouncilmemberRigelRobinson',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Rigel-Robinson.jpg'
+        },
+        {
+          name: 'Mark Humbert',
+          title: 'Berkeley Councilmember, District 8',
+          address_line1: '2180 MILVIA ST',
+          address_line2: '5th Floor',
+          address_city: 'Berkeley',
+          address_state: 'CA',
+          address_zip: '94704',
+          address_country: 'US',
+          email: 'mhumbert@cityofberkeley.info',
+          twitter: 'MarkHumbert',
+          facebook: '',
+          photoUrl:
+            'https://berkeleyca.gov/sites/default/files/elected-office-holder/Mark-Humbert-300px.jpg'
+        }
+      ],
       currentFilter: '',
       hasContent: true,
       postalCode: this.$route.params.postalCode || '',
@@ -231,14 +328,9 @@ export default {
   },
   methods: {
     async loadLetterWorkflow() {
-      const letterVersions = await axios.get(
-        `/api/letter_versions/${this.campaignId}`
-      )
-      const latest =
-        letterVersions.data[letterVersions.data.length - 1].template_id
-      const letter = await axios.get(`/api/lob/templates/${latest}`)
+      const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
 
-      this.$store.commit('setGenericValue', { key: 'letterId', value: latest })
+      this.$store.commit('setGenericValue', { key: 'letterId', value: this.letterId })
 
       this.letterBody = letter.data.versions[0].html
 

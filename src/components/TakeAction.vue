@@ -1,7 +1,7 @@
 <template>
   <section class="take-action">
     <v-expansion-panels v-model="panel" flat>
-      <!-- Review the letter -->
+      <!-- Merge variables, in this case How this affects your community -->
       <v-expansion-panel :key="0" v-model="panel">
         <v-expansion-panel-header :disabled="!isActive(0)">
           <template #actions>
@@ -20,7 +20,54 @@
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title> Review the letter </v-list-item-title>
+              <v-list-item-title> How this affects your community </v-list-item-title>
+              <v-list-item-subtitle class="text-wrap font-weight-medium">
+                Choose the options that apply to you.
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <merge-variables-dropdowns />
+        </v-expansion-panel-content>
+        <v-expansion-panel-content>
+          <v-btn
+            width="160"
+            dark
+            color="primary"
+            @click="nextPage"
+          >
+            Next
+          </v-btn>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <!-- Review the letter -->
+      <v-expansion-panel :key="1" v-model="panel">
+        <v-divider />
+        <v-expansion-panel-header class="flex-nowrap" :disabled="!isActive(1)">
+          <template #actions>
+            <v-icon :color="determineStyles('icon', panelStatus[1])" size="45">
+              $expand
+            </v-icon>
+          </template>
+          <v-list-item-avatar
+            :color="determineStyles('avatar', panelStatus[1])"
+            max-width="40px"
+          >
+            <v-icon v-if="panelStatus[1] === 'completed'" class="white--text">
+              mdi-check-bold
+            </v-icon>
+            <span v-else class="text-h5 font-weight-bold white--text"> 2</span>
+          </v-list-item-avatar>
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title
+                class="text-h6"
+                :class="determineStyles('title', panelStatus[1])"
+              >
+                Review the letter
+              </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
                 Tell your Representatives why this matters.
               </v-list-item-subtitle>
@@ -28,6 +75,7 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
+          <!--<letter-load />-->
           <letter-load :selected-rep="selectedRep" :letter-body="letterBody" />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
@@ -43,30 +91,30 @@
       </v-expansion-panel>
 
       <!-- Fill out user information -->
-      <v-expansion-panel :key="1">
+      <v-expansion-panel :key="2">
         <v-divider />
 
-        <v-expansion-panel-header class="flex-nowrap" :disabled="!isActive(1)">
+        <v-expansion-panel-header class="flex-nowrap" :disabled="!isActive(2)">
           <template #actions>
-            <v-icon :color="determineStyles('icon', panelStatus[1])" size="45">
+            <v-icon :color="determineStyles('icon', panelStatus[2])" size="45">
               $expand
             </v-icon>
           </template>
           <v-list-item-avatar
             class="50px"
-            :color="determineStyles('avatar', panelStatus[1])"
+            :color="determineStyles('avatar', panelStatus[2])"
             max-width="40px"
           >
-            <v-icon v-if="panelStatus[1] === 'completed'" class="white--text">
+            <v-icon v-if="panelStatus[2] === 'completed'" class="white--text">
               mdi-check-bold
             </v-icon>
-            <span v-else class="text-h5 font-weight-bold white--text"> 2</span>
+            <span v-else class="text-h5 font-weight-bold white--text"> 3</span>
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title
                 class="text-h6"
-                :class="determineStyles('title', panelStatus[1])"
+                :class="determineStyles('title', panelStatus[2])"
               >
                 Sign your name
               </v-list-item-title>
@@ -94,29 +142,29 @@
       </v-expansion-panel>
 
       <!-- Send letter -->
-      <v-expansion-panel :key="2">
+      <v-expansion-panel :key="3">
         <v-divider />
 
-        <v-expansion-panel-header :disabled="!isActive(2)">
+        <v-expansion-panel-header :disabled="!isActive(3)">
           <template #actions>
-            <v-icon :color="determineStyles('icon', panelStatus[2])" size="45">
+            <v-icon :color="determineStyles('icon', panelStatus[3])" size="45">
               $expand
             </v-icon>
           </template>
           <v-list-item-avatar
-            :color="determineStyles('avatar', panelStatus[2])"
+            :color="determineStyles('avatar', panelStatus[3])"
             max-width="40px"
           >
-            <v-icon v-if="panelStatus[2] === 'completed'" class="white--text">
+            <v-icon v-if="panelStatus[3] === 'completed'" class="white--text">
               mdi-check-bold
             </v-icon>
-            <span v-else class="text-h5 font-weight-bold white--text"> 3</span>
+            <span v-else class="text-h5 font-weight-bold white--text"> 4</span>
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title
                 class="text-h6"
-                :class="determineStyles('title', panelStatus[2])"
+                :class="determineStyles('title', panelStatus[3])"
               >
                 Send the letter
               </v-list-item-title>
@@ -136,13 +184,14 @@
 </template>
 
 <script>
+import MergeVariablesDropdowns from '@/components/MergeVariablesDropdowns.vue'
 import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
   name: 'TakeAction',
-  components: { LetterLoad, SignName, DonateMoney },
+  components: { MergeVariablesDropdowns, LetterLoad, SignName, DonateMoney },
   props: {
     letterBody: {
       type: String,
@@ -155,7 +204,8 @@ export default {
       panelStatus: {
         0: 'inProgress',
         1: 'default',
-        2: 'default'
+        2: 'default',
+        3: 'default'
       }
     }
   },
