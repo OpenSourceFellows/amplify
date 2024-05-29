@@ -3,4 +3,4 @@
       url: https://vault-public-vault-22deb760.8ee49bbe.z1.hashicorp.cloud:8200
       role: demo
       method: jwt
-      namespace: "/admin/user5/"
+      namespace: "admin/user5"
