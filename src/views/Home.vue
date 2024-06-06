@@ -13,10 +13,9 @@ export default {
   name: 'Home',
   components: {
     CampaignBlurb,
-    CampaignHero,
+    CampaignHero
   },
-  computed: {
-  },
+  computed: {},
   async created() {
     const mode = process.env.VUE_APP_CAMPAIGN_MODE
     const campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN

@@ -29,7 +29,10 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
-          <TuolumneLetterLoad :selected-rep="selectedRep" :letter-body="letterBody" />
+          <TuolumneLetterLoad
+            :selected-rep="selectedRep"
+            :letter-body="letterBody"
+          />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn

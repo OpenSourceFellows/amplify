@@ -70,9 +70,9 @@ async function updateNotionDatabase() {
           equals: parsedIssueId
         }
       }
-    });
+    })
 
-    console.log('response', response);
+    console.log('response', response)
 
     // const pageId = response.results[0].id;
     // const pageProperties = response.results[0].properties;
@@ -86,13 +86,13 @@ async function updateNotionDatabase() {
     //   properties: pageProperties
     // });
   } catch (error) {
-    console.error('Error updating data in Notion:', error);
+    console.error('Error updating data in Notion:', error)
   }
 }
 
-updateNotionDatabase();
+updateNotionDatabase()
 
-// --- 
+// ---
 
 // previous version
 // mock data to test the connection
@@ -136,5 +136,3 @@ updateNotionDatabase();
 // }
 
 // addToNotionDatabase()
-
-

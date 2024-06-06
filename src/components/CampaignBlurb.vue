@@ -18,8 +18,7 @@
       />
     </div>
     <div class="px-6 text-content">
-      <p class="flavor-text" v-html="flavorText">
-      </p>
+      <p class="flavor-text" v-html="flavorText"></p>
     </div>
 
     <div class="amplify-banner">

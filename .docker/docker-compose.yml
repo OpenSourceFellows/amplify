@@ -1,27 +1,27 @@
-version: "2.24"
+version: '2.24'
 
 services:
   amplify:
-    container_name: "amplify_app"
+    container_name: 'amplify_app'
     build:
       context: ../
       dockerfile: .docker/Dockerfile
     environment:
       - POSTGRES_HOST=amplify_db
-    ports: 
+    ports:
       - 8080:8080
     volumes:
       - type: bind
-        source: "../"
-        target: "/src/amplify"
+        source: '../'
+        target: '/src/amplify'
     command: sleep infinity
-    networks: 
+    networks:
       - amplify_dev
     depends_on:
       - amplify_db
 
   amplify_db:
-    container_name: "amplify_db"
+    container_name: 'amplify_db'
     image: postgres:latest
     volumes:
       - amplify_pg:/var/lib/postgresql/data
@@ -37,7 +37,7 @@ services:
     networks:
       - amplify_dev
     healthcheck:
-      test: ["CMD", "pg_isready"]
+      test: ['CMD', 'pg_isready']
       interval: 1m30s
       timeout: 30s
       retries: 5

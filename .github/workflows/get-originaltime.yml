@@ -24,7 +24,7 @@ jobs:
 
       - name: Send time
         if: contains(join(github.event.issue.labels.*.name, ','), 'originaltime-')
-        env: 
+        env:
           LABELS: ${{ toJson(github.event.issue.labels) }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
