@@ -30,56 +30,59 @@
         <v-card-text>
           <div>
             <p>
-              <span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >As a <strong>{{ constituentType }}</strong></span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt">, &nbsp;</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >I&rsquo;m extremely concerned about our skyrocketing “water and
-                sewer bills” and the The Design Drought.</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt">
-                San Francisco&rsquo;s combined water and sewer bills are
-                projected to increase by 8% per year.&nbsp;</span
-              >
+              <span style="color: rgb(0, 0, 0); font-size: 10pt">
+                <strong>{{ constituentType }}</strong>
+              </span>
             </p>
+            <br />
             <p>
               <span style="color: rgb(0, 0, 0); font-size: 10pt">
-                <strong>{{ communityInput }}</strong> At a time when taxpayer water rates are set
-                to skyrocket for San Franciscans, the SFPUC budget is on the
-                verge of collapse, and low flows along the Tuolumne River
-                contribute to the erosion of health for all species, the
-                economic and ecological tipping point is now.</span
-              >
+                <strong>{{ communityInput }}</strong>
+                The SFPUC is out of control. “Leaders” have been prosecuted for
+                corruption, the EPA is suing the agency over illegal sewage
+                discharges, toxic algae blooms fueled by wastewater nutrients
+                released into the bay are killing tens of thousands of fish, and
+                the Tuolumne River is on life support due to low river flows.
+              </span>
             </p>
+            <br />
             <p>
-              <span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >The Design Drought arbitrarily combines two of the worst
-                droughts on record to create a&nbsp;</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >megadrought that might occur once in 25,000 years. It assumes a
-                huge increase in water use,&nbsp;</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >despite the fact that water demand has decreased significantly
-                over the past three decades.&nbsp;</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >The Design Drought has prompted the SFPUC to create an
-                Alternative Water Supply Plan that &nbsp;</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >would cost between $17 billion and $25 billion. This would
-                double the SFPUC budget (and water rates) to produce expensive
-                water we won&rsquo;t ever need.&nbsp;</span
-              >
+              Please launch an independent audit of the SFPUC, as proposed by
+              Supervisor Safai last year. The audit should not only look into
+              financial mismanagement, but also SFPUC policies that drive poor
+              decision- making. The SFPUC's “Design Drought” is a prime example.
             </p>
+            <br />
+
             <p>
-              <span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >Thank you for your continued attention.&nbsp;</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >I support n</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >ot approving the new budget with rate increases</span
-              ><span style="color: rgb(0, 0, 0); font-size: 10pt"
-                >&nbsp;and am following this issue closely and with great
-                concern.</span
-              >
+              The Design Drought arbitrarily combines two of the worst droughts
+              on record to create a megadrought that might occur once in 25,000
+              years. It assumes a huge increase in water use, despite the fact
+              that water demand has decreased significantly over the past three
+              decades.
+            </p>
+            <br />
+
+            <p>
+              The Design Drought has prompted the SFPUC to create an Alternative
+              Water Supply Plan that would cost between $17 billion and $25
+              billion. This would double the SFPUC budget (and water rates) to
+              produce expensive water we won't ever need. An objective audit
+              will prove this.
+            </p>
+            <br />
+
+            <p>
+              We can't change past mistakes, like long-deferred maintenance on
+              our water and wastewater systems, that have led to the financial
+              crisis we're in today, but we can avoid a future boondoggle.
+            </p>
+            <br />
+
+            <p>
+              Please audit the SFPUC!
+              <br /><br />
+              Sincerely,
             </p>
           </div>
         </v-card-text>
@@ -136,9 +139,15 @@ export default {
       constituentType: '<fill in the input below>',
       communityInput: '<fill in the input below>',
       reasons: [
-        'a resident of San Francisco and someone who cares deeply about the Tuolumne River',
-        'a person adjacent to Hetch Hetchy and someone who cares deeply about the Tuolumne River',
-        'someone who cares deeply about the Tuolumne River'
+        `As a resident of San Francisco and someone who cares deeply about the Tuolumne River,
+I'm extremely concerned about our skyrocketing water and sewer bills.
+San Francisco's combined water and sewer bills are projected to increase by 8% per year.`,
+        `As a customer of Hetch Hetchy water living outside of SF who cares deeply about the Tuolumne River,
+I'm extremely concerned about our skyrocketing water bills and water rates in Bay Area communities
+ outside of San Francisco will increase by 8.8% in July`,
+        `As someone who cares deeply about the Tuolumne River.
+I'm extremely concerned about our skyrocketing unsustainable water policies that affect the Tuolumne River
+ and increased water rates throughout the Bay Area affect frontline communities throughout the watershed.`
       ],
       affects: [
         'I\'m already struggling to pay my utility bill.',
