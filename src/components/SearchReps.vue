@@ -153,9 +153,8 @@
           </div>
 
           <div v-if="!listVisible">
-            <p v-if="mode === 'single'" class="text-h6 pa-4">
-              {{ campaignText }}
-            </p>
+            <div v-if="mode === 'single'" class="text-h6 pa-4" v-html="campaignText">
+            </div>
             <div v-else>
               <img
                 alt="Vue logo"
