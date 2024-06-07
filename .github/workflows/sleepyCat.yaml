@@ -1,0 +1,22 @@
+name: sleepy-cat
+# on key is triggered when pull request is opened or reopened
+on:
+  pull_request:
+    # Reference: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+    types:
+      - opened
+      - reopened
+# defining what is going to run when the action is triggered
+jobs: 
+  sleepyCat-pull-request:
+    # What shows up when it is triggered
+    name: A sleepy cat with a good happy dream
+    # Reference: https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ruairidhwm/action-cats@1.0.1
+        with:
+          # GitHub token reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+          # key GITHUB_TOKEN:, expression ${{}}, context secrets.GITHUB_TOKEN - alive for the duration of the workflow, and enable to copy code to vm
+          # workflow expression reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
