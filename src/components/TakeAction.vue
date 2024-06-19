@@ -28,11 +28,18 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
           <TuolumneLetterLoad
+            v-if="campaign === 'Tuolumne River Trust'"
             :selected-rep="selectedRep"
             :letter-body="letterBody"
           />
+          <CaliforniaRiversLetterLoad
+            v-if="campaign.name === 'Save California Salmon'"
+            :selected-rep="selectedRep"
+            :letter-body="letterBody"
+          />
+          <!-- v-else this later as fallback-->
+          <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
@@ -141,12 +148,13 @@
 
 <script>
 import TuolumneLetterLoad from '@/components/TuolumneLetterLoad.vue'
+import CaliforniaRiversLetterLoad from '@/components/CaliforniaRiversLetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
   name: 'TakeAction',
-  components: { TuolumneLetterLoad, SignName, DonateMoney },
+  components: { TuolumneLetterLoad, CaliforniaRiversLetterLoad, SignName, DonateMoney },
   props: {
     letterBody: {
       type: String,
@@ -169,6 +177,9 @@ export default {
     },
     selectedRep() {
       return this.$store.state.selectedRep
+    },
+    campaign () {
+      return this.$store.state.campaign
     }
   },
   methods: {

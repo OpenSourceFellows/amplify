@@ -124,16 +124,23 @@
           <!-- Always enabled -->
           <div v-if="true" id="representatives-list">
             <h3>
-              Click or tap a Representative, then scroll down to get started.
+              Click or tap a Representative.
             </h3>
-            <div>
-              <v-card v-for="member in representatives" :key="member.name" flat>
-                <representative-card
-                  :member="member"
-                  @handle-rep-selected="loadLetterWorkflow"
-                />
-                <v-divider />
-              </v-card>
+            <div v-if="Object.keys(selectedRep).length">
+              <v-btn @click="clearSelectedRep" color="secondary" class="my-5">
+                Clear Rep Selection
+              </v-btn>
+            </div>
+            <div v-if="screenWidth >= 600 || !Object.keys(selectedRep).length">
+              <div>
+                <v-card v-for="member in representatives" :key="member.name" flat>
+                  <representative-card
+                    :member="member"
+                    @handle-rep-selected="loadLetterWorkflow"
+                  />
+                  <v-divider />
+                </v-card>
+              </div>
             </div>
           </div>
         </v-col>
@@ -187,7 +194,8 @@ export default {
       hasContent: true,
       postalCode: this.$route.params.postalCode || '',
       listVisible: false,
-      isActive: false
+      isActive: false,
+      screenWidth: window.innerWidth
     }
   },
   computed: {
@@ -227,7 +235,18 @@ export default {
       this.$store.commit('setGenericValue', { key: 'mode', value: 'single' })
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize)
+    })
+  },
+  beforeunMount() {
+    window.removeEventListener('resize', this.onResize)
+  },
   methods: {
+    clearSelectedRep() {
+      this.$store.commit('setGenericValue', { key: 'selectedRep', value: {} })
+    },
     async loadLetterWorkflow() {
       const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
 
@@ -289,6 +308,9 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    onResize() {
+      this.screenWidth = window.innerWidth
     }
   }
 }
