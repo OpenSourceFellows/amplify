@@ -214,6 +214,169 @@ module.exports = {
           'campaign-img-3':
             'https://images.squarespace-cdn.com/content/v1/5eebc0039b04b54b2fb0ce52/1609781359705-Q5YNFL6DET5ORHW62ZU7/IMG_2249_WEBSITE+copy.jpg?format=1500w'
         })
+      },
+      {
+        id: 7,
+        organization: 'Save California Salmon',
+        name: 'Save California Salmon',
+        cause: 'Civic Rights',
+        type: 'Grant',
+        page_url: 'https://www.californiasalmon.org/',
+        campaign_tagline: 'Restoring and Protecting California Salmon and Rivers for Future Generations',
+        campaign_text: '<p><strong>#UNDAMTHEKLAMATH</strong></p><p>Save California Salmon (SCS) is dedicated to policy change and community advocacy for Northern California’s salmon and fish dependent people. We support the fisheries and water protection work of the local communities, and advocate effective policy change for clean water, restored fisheries and vibrant communities. We aim to help to support Tribes and the general public in engaging with public comments related to water pollution, fisheries, and beneficial use issues.</p><p>Restoration of the Klamath River does not stop with dam removal. Salmon populations are continuing to plummet throughout California, leaving Tribal communities without salmon for subsistence, and ocean fishermen without a season. Restoration of the Klamath’s tributaries, which are often dewatered for animal agriculture, is also critical. We continued to support Tribal efforts to establish both permanent and temporary emergency flows in the Scott and Shasta Rivers through the California Water Resources Control Board. In December, the board passed emergency irrigation curtailments for both rivers, and we are still pushing for permanent instream flow requirements.</p><p>We also continued to fight for Trinity River flows, which are critical to the river, and to stop fish kills in the Klamath River. The Trinity is the Klamath’s largest tributary, but it is also an artificial Sacramento River tributary that feeds the Central Valley Water Project. The federal government is working on a new Biological Opinion for Endangered Species (water operations plan) for the Central Valley and State Water Projects. We are calling for a separate, protective Biological Opinion for the Trinity River, and for flows in the Bay Delta watersheds.</p><p>We are deeply dedicated to dam removal and flow restoration in all the North State’s watersheds. We want salmon back for all Northern California Tribes, which is why we are hopeful about Pacific Gas & Electric’s (PGE) December proposal to fully decommission the Eel River Dams.</p>',
+        supplemental_text: '<p>At the end of 2020 California, Oregon and Berkshire Hathaway entered a new agreement to undam the Klamath River. This decision came after almost twenty years of organizing, testifying, actions and planning from the native peoples of the Klamath basin, coastal fishermen and their allies. This year we continue our advocacy to make sure these dams come down.<p>',
+        representatives: JSON.stringify([
+          {
+            name: 'Connie Chan',
+            title: 'District 1 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Connie_Chan_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'chanstaff@sfgov.org'
+          },
+          {
+            name: 'Catherine Stefani',
+            title: 'District 2 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Supervisor_Stefani_2018.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'Catherine.Stefani@sfgov.org'
+          },
+          {
+            name: 'Aaron Peskin',
+            title: 'District 3 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Aaron_Peskin_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'Aaron.Peskin@sfgov.org'
+          },
+          {
+            name: 'Joel Engardio',
+            title: 'District 4 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Joel_Engardio_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: ''
+          },
+          {
+            name: 'Dean Preston',
+            title: 'District 5 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Dean_Preston_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'prestonstaff@sfgov.org'
+          },
+          {
+            name: 'Matt Dorsey',
+            title: 'District 6 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Dorsey_2022_lg.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'DorseyStaff@sfgov.org'
+          },
+          {
+            name: 'Myrna Melgar',
+            title: 'District 7 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Myrna_Melgar_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'melgarstaff@sfgov.org'
+          },
+          {
+            name: 'Rafael Mandelman',
+            title: 'District 8 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Supervisor_Mandelman_2018.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'mandelmanstaff@sfgov.org'
+          },
+          {
+            name: 'Hillary Ronen',
+            title: 'District 9 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Supervisor_Ronen_2019.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'RonenStaff@sfgov.org'
+          },
+          {
+            name: 'Shamann Walton',
+            title: 'District 10 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Shamann_Walton_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'waltonstaff@sfgov.org'
+          },
+          {
+            name: 'Ahsha Safai',
+            title: 'District 11 Supervisor',
+            photoUrl:
+              'https://sfbos.org/sites/default/files/Ahsha_Safai_2023.jpg',
+            address_line1: '1 Dr Carlton B Goodlett Pl',
+            address_line2: '#244',
+            address_city: 'San Francisco',
+            address_state: 'CA',
+            address_zip: '94102',
+            address_country: 'US',
+            email: 'Ahsha.Safai@sfgov.org'
+          }
+        ]),
+        assets: JSON.stringify({
+          campaign_logo: 'https://static.wixstatic.com/media/d97ff6_b61eff2e17cc4511b92752e6af420835~mv2.png/v1/fill/w_96,h_97,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/White%20circle%2C%20Black%20background%20SCS%20Logo.png',
+          campaign_background: 'https://i.imgur.com/4OsValj.png',
+          'campaign-img-1': 'https://i.imgur.com/fGMy8Wz.png',
+          'campaign-img-2': 'https://i.imgur.com/toMnnE0.png',
+          'campaign-img-3': 'https://i.imgur.com/wXRXDCd.png'
+        })
       }
     ])
   }
