@@ -1,0 +1,57 @@
+# This is a Github action that creates a Google Calendar Reminder on Issue Assignment
+name: Create Google Calendar Reminder on Issue Assignment
+
+# Trigger: The workflow runs whenever an issue is assigned to a user
+on:
+  issues:
+    types: [assigned]
+
+# Job definition
+jobs:
+  create-comment:
+    # Specifies the runner, using the latest Ubuntu version
+    runs-on: ubuntu-latest
+
+    # Steps to be executed in the job
+    steps:
+      # Step 1: Calculate the tentative due date which will be 3 weeks from assignment that will be used later
+      - name: Calculate Due Date
+        id: calc-date
+        run: |
+          # Calculate the date 3 weeks from now and format it as YYYYMMDD
+          DUE_DATE=$(date -d "+3 weeks" +%Y%m%d)
+          # Set the calculated date as an environment variable
+          echo "DUE_DATE=$DUE_DATE" >> $GITHUB_ENV
+
+      # Step 2: URL Encode the issue title for use in the Google Calendar Reminder
+      - name: URL Encode Issue Title
+        id: encode-title
+        run: |
+          # Define and URL encode the issue title
+          ISSUE_TITLE="Github issue: ${ISSUE_TITLE} Due"
+          ISSUE_TITLE_ENCODED=$(python -c "import urllib.parse, os; print(urllib.parse.quote('${ISSUE_TITLE}'))")
+          # Set the encoded title as an environment variable
+          echo "ISSUE_TITLE_ENCODED=$ISSUE_TITLE_ENCODED" >> $GITHUB_ENV
+        env:
+          # Retrieve the actual issue title from the GitHub event
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+
+      # Step 3: Create a comment on the issue
+      - name: Create comment
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment'
+          # Use the GitHub token for authentication
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Specify the issue number
+          issue-number: ${{ github.event.issue.number }}
+          # Body of the comment that includes the link to add the reminder to Google Calendar
+          body: |
+            Hello ${{ github.event.issue.user.login }}, thank you for taking on this issue, here is a link to add a reminder to your calendar.
+
+            [Add to Google Calendar](https://www.google.com/calendar/render?action=TEMPLATE&text=${{ env.ISSUE_TITLE_ENCODED }}&dates=${{ env.DUE_DATE }}T120000Z/${{ env.DUE_DATE }}T130000Z&details=This%20is%20the%20tentative%20due%20date%20for%20the%20above%20issue.)
+
+            Feel free to modify the due date and notification times as needed, cheers!
+          
+          emoji: 'hooray'
+        
