@@ -44,6 +44,11 @@ const routes = [
     path: '/complete',
     name: 'CompletePage',
     component: () => import('../views/CompletePage.vue')
+  },
+  {
+    path: '/test',
+    name: 'TestPage',
+    component: () => import('../views/TestPage.vue')
   }
 ]
 
