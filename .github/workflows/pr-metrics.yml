@@ -27,7 +27,7 @@ jobs:
       issue_timestamp: ${{ steps.get_issue_timestamp.outputs.issue_timestamp }}
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Checkout Source Branch
         run: |
@@ -83,7 +83,7 @@ jobs:
       time_diff_input: ${{needs.calculate_time_difference.outputs.time_diff}}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
