@@ -188,7 +188,7 @@ export default {
   },
   data() {
     return {
-      letterBody: '<h1>Test</h1>',
+      letterBody: '<h1>Concering the Tuolemne Tribe, I {{merge_var}}, ...</h1>',
       congressMembers: [],
       currentFilter: '',
       hasContent: true,
@@ -197,6 +197,18 @@ export default {
       isActive: false,
       screenWidth: window.innerWidth
     }
+  },
+  created() {
+    // Do a migration to store as jsonb
+    const mergeVarReasons = JSON.parse(mergeVarReasons)
+
+    // Do a substring replacement
+    letterBody.replace('{{...}}', <some_html_input>)
+
+    // ...
+
+
+    // profit!
   },
   computed: {
     letterId() {
