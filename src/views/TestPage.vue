@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LetterRender :template="template" />
+    <LetterRender :template="template" class="test"/>
   </div>
 </template>
 
@@ -11,12 +11,15 @@ import LetterRender from '../components/LetterRender';
     components: { LetterRender },
     data() {
       return {
-        template: '<div><h1>Hi <vue>merge</vue></h1><p>This is a sentence.</p></div>'
+        template: '<div><h1>Hi <span>merge</span></h1><p>This is a sentence.</p></div>'
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
-
+.test {
+  background-color: rebeccapurple;
+  height: 100px
+}
 </style>

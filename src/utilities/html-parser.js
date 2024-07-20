@@ -38,6 +38,12 @@ class HtmlTree {
     start.children.forEach((child) => this.eachLeaf(child, func))
   }
 
+  onEachLeaf(start, func) {
+    start.children.map((child) => this.onEachLeaf(child, func))
+
+    return func(start)
+  }
+
   mapLeaves(start, func) {
     func(start)
 
@@ -46,6 +52,21 @@ class HtmlTree {
 
   tagName(leaf) {
     console.log(leaf.content.tag)
+  }
+
+  matchingTags(openingTag, closingTag) {
+    // Checks if tags are a pair, as defined by this.symbols; i.e. <h4></h4>
+    if(this.symbols[openingTag] === closingTag) return true
+
+    false
+  }
+  
+  santizeHtmlTag(tag) {
+    // Returns the alphanumeric part of an html tag -- the 'a' in <a> or 'div' in <div>
+    const alphanumeric = new RegExp(/([a-z][0-9]*)*/, 'gi')
+
+    console.log(tag.match(alphanumeric))
+    return tag.match(alphanumeric)[1]
   }
 
   parse() {
@@ -66,16 +87,17 @@ class HtmlTree {
       // If we have a closing tag and an unclosedTag,
       // set the currentLeaf's parent as the new currentLeaf
       if (closingTags.includes(token)) {
-        // TODO: Check for unmatched set before popping
-
         console.log(`A: ${token}, ${unclosedTags}`)
+        // if (!this.matchingTags(unclosedTags[unclosedTags.length - 1], token)) throw new Error ('Malformed html!')
+
         closingTags.pop()
 
-        if (!this.currentLeaf.parent) {
-          break // If the current Lead has no parent, we must be back at the head
-        }
+        // If the current Lead has no parent, we must be back at the head
+        // We are assuming that the html has one top-level node.
+        if (!this.currentLeaf.parent) break
 
         this.currentLeaf = this.currentLeaf.parent
+
         continue
       }
 
@@ -85,7 +107,7 @@ class HtmlTree {
       if (openingTags.includes(token) && unclosedTags.length == 0) {
         console.log(`B: ${token}, ${unclosedTags}`)
         unclosedTags.push(token)
-        this.currentLeaf.content.tag = token
+        this.currentLeaf.content.tag = this.santizeHtmlTag(token)
         continue
       }
 
@@ -93,7 +115,7 @@ class HtmlTree {
       if (openingTags.includes(token) && unclosedTags.length > 0) {
         console.log(`C: ${token}, ${unclosedTags}`)
         unclosedTags.push(token)
-        this.currentLeaf = this.currentLeaf.createChildLeaf(token, this.currentLeaf)
+        this.currentLeaf = this.currentLeaf.createChildLeaf(this.santizeHtmlTag(token), this.currentLeaf)
         continue
       }
 
@@ -112,15 +134,13 @@ class HtmlLeaf {
   }
 
   isHead() {
-    if (!this.parent) {
-      return true
-    }
+    if (!this.parent) return true
 
     return false
   }
 
   siblings() {
-    if (!this.parent) {
+    if (this.isHead()) {
       return null
     }
 

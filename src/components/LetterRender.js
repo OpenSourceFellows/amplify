@@ -10,14 +10,14 @@ const LetterRender = Vue.component('LetterRender', {
     }
   },
   methods: {
-    createElementOnNode(node, createElement) {
-      return createElement(node.content.tag, node.content.text)
+    createElementOnNode(node) {
+      return document.createElement(node.content.tag, node.content.text)
     }
   },
-  render (createElement) {
-    const tree = new HtmlTree(this.text)
+  render () {
+    const tree = new HtmlTree(this.template)
 
-    return tree.eachLeaf(tree.head, this.createElementOnNode(createElement))
+    return tree.onEachLeaf(tree.head, this.createElementOnNode)
     
     /*createElement(
       'h1',
