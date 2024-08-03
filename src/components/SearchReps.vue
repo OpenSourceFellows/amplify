@@ -123,9 +123,7 @@
 
           <!-- Always enabled -->
           <div v-if="true" id="representatives-list">
-            <h3>
-              Click or tap a Representative.
-            </h3>
+            <h3>Click or tap a Representative.</h3>
             <div v-if="Object.keys(selectedRep).length">
               <v-btn @click="clearSelectedRep" color="secondary" class="my-5">
                 Clear Rep Selection
@@ -133,7 +131,11 @@
             </div>
             <div v-if="screenWidth >= 600 || !Object.keys(selectedRep).length">
               <div>
-                <v-card v-for="member in representatives" :key="member.name" flat>
+                <v-card
+                  v-for="member in representatives"
+                  :key="member.name"
+                  flat
+                >
                   <representative-card
                     :member="member"
                     @handle-rep-selected="loadLetterWorkflow"
@@ -160,8 +162,11 @@
           </div>
 
           <div v-if="!listVisible">
-            <div v-if="mode === 'single'" class="text-h6 pa-4" v-html="campaignText">
-            </div>
+            <div
+              v-if="mode === 'single'"
+              class="text-h6 pa-4"
+              v-html="campaignText"
+            ></div>
             <div v-else>
               <img
                 alt="Vue logo"
