@@ -29,15 +29,43 @@
 
         <v-card-text>
           <p>
-            Thank you for your continued interest in building climate resilience across California, I’m a resident of <span style="font-weight: bold;">{{ communityInput }}</span> and I wanted to express why I’m for keeping Phase II of the Bay Delta Water Quality Control Plan and negate the proposed Voluntary Agreements as part of the State Water Boards replacement for 2 reasons. First, there’s higher solvency and return on investment for climate resilience through status quo and second, other states have successfully scaled such a model to increase federal funding.*
+            Thank you for your continued interest in building climate resilience
+            across California, I’m a resident of
+            <span style="font-weight: bold">{{ communityInput }}</span> and I
+            wanted to express why I’m for keeping Phase II of the Bay Delta
+            Water Quality Control Plan and negate the proposed Voluntary
+            Agreements as part of the State Water Boards replacement for 2
+            reasons. First, there’s higher solvency and return on investment for
+            climate resilience through status quo and second, other states have
+            successfully scaled such a model to increase federal funding.*
           </p>
 
           <p>
-            *Climate resilience is forecasted 110 billion dollar problem due to the erosion to our soil, coasts, and flooding. Such a decision can not be taken lightly yet  local water agencies, private companies, and agricultural interests sidestepped the process without listening to voices like mine across local communities - the fish population plummeting is a testament to the approach Voluntary Agreements have taken. The current Phase 2 approach takes into account both science and public based traditional ecological knowledge that include Tribal, Environmental Justice, fishermen, and sustainability  communities.*
+            *Climate resilience is forecasted 110 billion dollar problem due to
+            the erosion to our soil, coasts, and flooding. Such a decision can
+            not be taken lightly yet local water agencies, private companies,
+            and agricultural interests sidestepped the process without listening
+            to voices like mine across local communities - the fish population
+            plummeting is a testament to the approach Voluntary Agreements have
+            taken. The current Phase 2 approach takes into account both science
+            and public based traditional ecological knowledge that include
+            Tribal, Environmental Justice, fishermen, and sustainability
+            communities.*
           </p>
 
           <p>
-            Not only is there precedent for through AB 1284 , traditional ecological knowledge helps protect more than 86% of the world’s biodiversity towards climate resilience. Oregon’s Fish & WildLife program has successfully scaled such partnerships with Burns Paiute to restore trout and salmon since 1997. Not only had the population of fish greatly increase but they also received 300 million in funding federally. Given the Biden administration’s stance on cocreating with Tribal communities - this would be a great opportunity to work with all communities across the North Delta, Sacramento River, and Tribituaries to support flows for fish and fish dependent communities and reject the use of Voluntary Agreements for Phase II of the Bay Delta Plan.
+            Not only is there precedent for through AB 1284 , traditional
+            ecological knowledge helps protect more than 86% of the world’s
+            biodiversity towards climate resilience. Oregon’s Fish & WildLife
+            program has successfully scaled such partnerships with Burns Paiute
+            to restore trout and salmon since 1997. Not only had the population
+            of fish greatly increase but they also received 300 million in
+            funding federally. Given the Biden administration’s stance on
+            cocreating with Tribal communities - this would be a great
+            opportunity to work with all communities across the North Delta,
+            Sacramento River, and Tribituaries to support flows for fish and
+            fish dependent communities and reject the use of Voluntary
+            Agreements for Phase II of the Bay Delta Plan.
           </p>
         </v-card-text>
 

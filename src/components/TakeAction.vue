@@ -154,7 +154,12 @@ import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
   name: 'TakeAction',
-  components: { TuolumneLetterLoad, CaliforniaRiversLetterLoad, SignName, DonateMoney },
+  components: {
+    TuolumneLetterLoad,
+    CaliforniaRiversLetterLoad,
+    SignName,
+    DonateMoney
+  },
   props: {
     letterBody: {
       type: String,
@@ -178,7 +183,7 @@ export default {
     selectedRep() {
       return this.$store.state.selectedRep
     },
-    campaign () {
+    campaign() {
       return this.$store.state.campaign
     }
   },
