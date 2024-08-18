@@ -20,7 +20,9 @@ class Letter extends BaseModel {
         'zip'
       ],
       properties: {
-        letter_template: { type: 'string', minLength: 1, maxLength: 255 },
+        letter_template: { type: 'string', minLength: 1, maxLength: 255 }, // Don't use this field now. Saving it just for compatibility
+        lob_template_id: { type: 'string', maxLength: 255 },
+        sendgrid_template_id: { type: 'string', maxLength: 255 },
         letter_version: { type: 'string', minLength: 1, maxLength: 255 },
         addressee: { type: 'string', minLength: 1, maxLength: 255 },
         address_line_1: { type: 'string', minLength: 1, maxLength: 255 },
