@@ -97,9 +97,9 @@ export default {
       isSubmitted: true,
       communityInput: '<fill in the input below>',
       community: [
-        'local fisherman', 
-        'concerned constituent', 
-        'member of Hoopa Tribe'
+        'Local fisherman', 
+        'Concerned constituent', 
+        'Member of Hoopa Tribe'
       ],
       impactReasonInput: '<fill in the input below>',
       impactReason: [
