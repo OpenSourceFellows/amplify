@@ -1,4 +1,5 @@
 const express = require('express')
+const { v4: uuidv4 } = require('uuid')
 const { Stripe, StripeError } = require('../../lib/stripe')
 const {
   PaymentPresenter,
@@ -28,6 +29,40 @@ router.post('/create-checkout-session', async (req, res) => {
 
     // Will throw error if invalid amount is given.
     presenter.validatePaymentAmount(donation)
+
+    if (donation === 0 && process.env.VUE_APP_EMPTY_TRANSACTIONS === 'on') {
+      const CHECKOUT_SESSION_ID = uuidv4()
+      const redirectUrl = `${origin}/complete?session_id=${CHECKOUT_SESSION_ID}`
+
+      let constituent
+      ;[constituent] = await Constituent.query().where('email', user.email)
+      if (!constituent) {
+        constituent = await Constituent.query().insert(user)
+      }
+
+      console.log(constituent.id)
+
+      const transaction = await Transaction.query().insert({
+        stripeTransactionId: 'no-stripe-' + uuidv4(),
+        constituentId: constituent.id,
+        amount: donation,
+        currency: 'usd',
+        paymentMethod: 'credit_card',
+        status: 'succeeded'
+      })
+
+      // Using a temporary mapping here also
+      await Letter.query().insert({
+        transactionId: transaction.id,
+        constituentId: constituent.id,
+        ...letter
+      })
+
+      return res
+        .status(200)
+        .json({ url: redirectUrl, sessionId: CHECKOUT_SESSION_ID })
+        .end()
+    }
 
     // TODO: Should be strict https but we need to do some deployment fixes first.
     const redirectUrl = `${origin}/complete?session_id={CHECKOUT_SESSION_ID}`

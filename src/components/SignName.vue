@@ -91,12 +91,7 @@
             </template>
           </v-tooltip>
         </v-slide-x-reverse-transition>
-        <v-btn
-          :disabled="formIncomplete"
-          color="primary" 
-          text 
-          @click="submit"
-        >
+        <v-btn :disabled="formIncomplete" color="primary" text @click="submit">
           Verify Address
         </v-btn>
       </v-card-actions>

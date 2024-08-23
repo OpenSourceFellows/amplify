@@ -4,7 +4,9 @@
 
     <v-col cols="12" class="py-2">
       <p v-if="noCostMailEnabled">
-        Your voice is super important - please use this code <strong>{{ couponCode }}</strong> to send email and letter for free! Donations are optional and 100% goes to Save California Salmon 🙂
+        Your voice is super important - please use this code
+        <strong>{{ couponCode }}</strong> to send email and letter for free!
+        Donations are optional and 100% goes to Save California Salmon 🙂
       </p>
 
       <p v-else>
@@ -44,6 +46,16 @@
           @click="unsetCustomAmountSelection"
         >
           50
+        </v-btn>
+
+        <v-btn
+          v-if="emptyTransactionsEnabled"
+          elevation="2"
+          raised
+          :value="0"
+          @click="unsetCustomAmountSelection"
+        >
+          0
         </v-btn>
 
         <v-btn elevation="2" raised @click="toggleCustomDonation">
@@ -94,6 +106,9 @@ export default {
     },
     couponCode() {
       return process.env.VUE_APP_COUPON_CODE
+    },
+    emptyTransactionsEnabled() {
+      return process.env.VUE_APP_EMPTY_TRANSACTIONS === 'on'
     },
     user() {
       const user = this.$store.state.userData
