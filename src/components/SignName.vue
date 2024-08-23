@@ -63,12 +63,13 @@
           ref="email"
           v-model="email"
           :rules="[
-            () => validateEmail() || 'Please enter a valid email address.'
+            () => validateEmail() || 'Please enter a valid email address.',
+            () => !!email || 'This field is required'
           ]"
           label="Email"
           placeholder="condor@shellmound.com"
+          required
         />
-        <v-checkbox label="Constituent" />
       </v-card-text>
       <v-card-text> {{ message }} </v-card-text>
       <v-divider class="mt-12" />
@@ -90,7 +91,14 @@
             </template>
           </v-tooltip>
         </v-slide-x-reverse-transition>
-        <v-btn color="primary" text @click="submit"> Verify Address </v-btn>
+        <v-btn
+          :disabled="formIncomplete"
+          color="primary" 
+          text 
+          @click="submit"
+        >
+          Verify Address
+        </v-btn>
       </v-card-actions>
     </v-card>
   </section>
@@ -100,8 +108,8 @@
 import axios from 'axios'
 
 export default {
-
     name: 'SignName',
+    emits: ['address-validated'],
     data: () => ({
       errorMessages: '',
       name: '',
@@ -128,13 +136,22 @@ export default {
         zip: this.zip,
         email: this.email
       }
+    },
+    formIncomplete() {
+      for (const [key, value] of Object.entries(this.form)) {
+        if (!value && key !== 'line2') {
+          return true
+        }
+      }
+
+      return false
     }
   },
 
   watch: {
     name() {
       this.errorMessages = ''
-    }
+    },
   },
 
   methods: {

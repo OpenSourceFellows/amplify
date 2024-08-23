@@ -3,7 +3,11 @@
     <h1>Donate to the cause.</h1>
 
     <v-col cols="12" class="py-2">
-      <p>
+      <p v-if="noCostMailEnabled">
+        Your voice is super important - please use this code <strong>{{ couponCode }}</strong> to send email and letter for free! Donations are optional and 100% goes to Save California Salmon 🙂
+      </p>
+
+      <p v-else>
         Your donation makes it possible to change our relationship with
         representatives, from the comfort of your home or on the go.
       </p>
@@ -85,6 +89,12 @@ export default {
   },
   computed: {
     // These are temporary structures until we can reorganize the frontend.
+    noCostMailEnabled() {
+      return process.env.VUE_APP_NO_COST_MAIL
+    },
+    couponCode() {
+      return process.env.VUE_APP_COUPON_CODE
+    },
     user() {
       const user = this.$store.state.userData
 
