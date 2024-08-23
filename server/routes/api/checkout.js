@@ -1,5 +1,5 @@
 const express = require('express')
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid')
 const { Stripe, StripeError } = require('../../lib/stripe')
 const {
   PaymentPresenter,
@@ -50,7 +50,7 @@ router.post('/create-checkout-session', async (req, res) => {
         paymentMethod: 'credit_card',
         status: 'succeeded'
       })
-  
+
       // Using a temporary mapping here also
       await Letter.query().insert({
         transactionId: transaction.id,
@@ -59,9 +59,9 @@ router.post('/create-checkout-session', async (req, res) => {
       })
 
       return res
-      .status(200)
-      .json({ url: redirectUrl, sessionId: CHECKOUT_SESSION_ID })
-      .end()
+        .status(200)
+        .json({ url: redirectUrl, sessionId: CHECKOUT_SESSION_ID })
+        .end()
     }
 
     // TODO: Should be strict https but we need to do some deployment fixes first.
