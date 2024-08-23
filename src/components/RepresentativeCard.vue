@@ -42,9 +42,7 @@
       class="mx-auto text-align-left rep-img"
       v-bind="member"
       :src="member.photoUrl"
-      height="125"
-      width="125"
-      :position="member.photoCroppingCSS"
+      max-width="150"
     />
     <v-card-subtitle
       class="text-align-left rep-img"

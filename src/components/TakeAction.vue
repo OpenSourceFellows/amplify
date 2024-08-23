@@ -89,7 +89,7 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name />
+          <sign-name @address-validated="!addressNotValidated" />
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
@@ -173,7 +173,8 @@ export default {
         0: 'inProgress',
         1: 'default',
         2: 'default'
-      }
+      },
+      addressNotValidated: true
     }
   },
   computed: {
