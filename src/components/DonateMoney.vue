@@ -46,6 +46,16 @@
           50
         </v-btn>
 
+        <v-btn
+          v-if="emptyTransactionsEnabled"
+          elevation="2"
+          raised
+          :value="0"
+          @click="unsetCustomAmountSelection"
+        >
+          0
+        </v-btn>
+
         <v-btn elevation="2" raised @click="toggleCustomDonation">
           Custom Amount
         </v-btn>
@@ -94,6 +104,9 @@ export default {
     },
     couponCode() {
       return process.env.VUE_APP_COUPON_CODE
+    },
+    emptyTransactionsEnabled() {
+      return process.env.VUE_APP_EMPTY_TRANSACTIONS === 'on'
     },
     user() {
       const user = this.$store.state.userData
