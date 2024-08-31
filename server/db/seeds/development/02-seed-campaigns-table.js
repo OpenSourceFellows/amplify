@@ -7,51 +7,97 @@ module.exports = {
     await knex('campaigns').insert([
       {
         id: 1,
-        organization: 'M4BL',
-        name: 'The Breathe Act',
+        organization: 'BeaverHalters',
+        name: 'Stopping PNW Beavers',
         cause: 'Civic Rights',
         type: 'Grant',
-        page_url: 'breatheact.org',
-        letter_template_id: 1
+        page_url: 'https://example.com',
+        letter_template_id: 1,
+        campaign_tagline: 'Protecting our Woodlands and Rivers from the Big Beaver Menace',
+        campaign_text: '<p>For years, Beavers in the Pacific Northwest have been getting more aggressive about damming rivers and gentrifying our beautiful rivers.</p><p>In recent years, they have started erecting large beaver shopping centers and abducting human children to use as low wage labor in their beaver malls!</p><p>With your help, we can stop the further encroachment of beavers into human habitats.</p>',
+        supplemental_text: '<p>Did you know that PNW beavers are also all communists? Only with your help can we turn the tide and live in freedom and prosperity.</p>',
+        representatives: JSON.stringify([
+          {
+            name: 'Cloud Strife',
+            title: 'District 1 Supervisor',
+            photoUrl:
+              'https://placehold.co/250',
+            address_line1: '123 Fake St.',
+            address_line2: 'Suite 8B',
+            address_city: 'Portland',
+            address_state: 'OR',
+            address_zip: '12345',
+            address_country: 'US',
+            email: 'noreply@example.com'
+          },
+          {
+            name: 'Bulma',
+            title: 'District 2 Supervisor',
+            photoUrl:
+              'https://placehold.co/250',
+            address_line1: '123 Fake St.',
+            address_line2: 'Suite 9B',
+            address_city: 'Portland',
+            address_state: 'OR',
+            address_zip: '12345',
+            address_country: 'US',
+            email: 'noreply@example.com'
+          },
+          {
+            name: 'Fei Fong Wong',
+            title: 'District 3 Supervisor',
+            photoUrl:
+              'https://placehold.co/250',
+            address_line1: '123 Fake St.',
+            address_line2: 'Suite 8B',
+            address_city: 'Portland',
+            address_state: 'OR',
+            address_zip: '12345',
+            address_country: 'US',
+            email: 'noreply@example.com'
+          },
+          {
+            name: 'Buccee',
+            title: 'District 1 Supervisor',
+            photoUrl:
+              'https://placehold.co/250',
+            address_line1: '123 Fake St.',
+            address_line2: 'Suite 7F',
+            address_city: 'Portland',
+            address_state: 'OR',
+            address_zip: '12345',
+            address_country: 'US',
+            email: 'noreply@example.com'
+          },
+          {
+            name: 'Hatsune Miku',
+            title: 'District 1 Supervisor',
+            photoUrl:
+              'https://preview.redd.it/bucsune-miku-v0-niqz9xavfz3d1.png?auto=webp&s=c7291ff1aa26b98cac36f9a759de823f1d294bc3',
+            address_line1: '123 Fake St.',
+            address_line2: 'Suite 8B',
+            address_city: 'Portland',
+            address_state: 'OR',
+            address_zip: '12345',
+            address_country: 'US',
+            email: 'noreply@example.com'
+          }
+        ]),
+        assets: JSON.stringify({
+          campaign_logo:
+            'https://placehold.co/600x400',
+          campaign_background:
+            'https://placehold.co/1500x600',
+          'campaign-img-1':
+            'https://placehold.co/600x400',
+          'campaign-img-2':
+            'https://placehold.co/600x400',
+          'campaign-img-3':
+            'https://placehold.co/600x400'
+        })
       },
       {
         id: 2,
-        organization: 'Sunrise New York',
-        name: 'Climate and Community Investment Act',
-        cause: 'Climate Justice',
-        type: 'Grant',
-        page_url: 'climatecantwait.org',
-        letter_template_id: 1
-      },
-      {
-        id: 3,
-        organization: 'Sunrise New York',
-        name: 'Energy Efficiency, Equity and Jobs Assembly Bill',
-        cause: 'Climate Justice',
-        type: 'Grant',
-        page_url: 'climatecantwait.org',
-        letter_template_id: 1
-      },
-      {
-        id: 4,
-        organization: 'Sunrise New York',
-        name: 'Proposed Actions on EJ Communities',
-        cause: 'Climate Justice',
-        type: 'Grant',
-        page_url: 'climatecantwait.org',
-        letter_template_id: 1
-      },
-      {
-        id: 5,
-        organization: "Sogorea 'Te Land Trust",
-        name: "Sogorea 'Te Land Trust",
-        cause: 'Civic Rights',
-        type: 'Grant',
-        page_url: 'https://sogoreate-landtrust.org/',
-        letter_template_id: 1
-      },
-      {
-        id: 6,
         organization: 'Tuolumne River Trust',
         name: 'Tuolumne River Trust',
         cause: 'Civic Rights',
@@ -222,7 +268,7 @@ module.exports = {
         })
       },
       {
-        id: 7,
+        id: 3,
         organization: 'Save California Salmon',
         name: 'Save California Salmon',
         cause: 'Civic Rights',
