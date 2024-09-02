@@ -1,7 +1,7 @@
 // Routes for getting letter templates
 const express = require('express')
 const LetterTemplate = require('../../../../db/models/letter-template')
-const { Lob, /*LobError*/ } = require('../../../../lib/lob')
+const Handlebars = require('../../../../lib/handlebars')
 
 const router = express.Router()
 
@@ -12,18 +12,34 @@ router.get('/:id', async (req, res) => {
 
   try {
     const letterTemplate = await LetterTemplate.query().findById(id)
-    console.log(letterTemplate)
-    
-    // Once we get the template, we will need the html from lob and sendgrid
-    const lob = new Lob()
-    const lobTemplate = await lob.template(letterTemplate.lobTemplateId)
-    
-    letterTemplate.lobHtml = lobTemplate.html
-    letterTemplate.lobVersion = lobTemplate.id
+
+    if (!letterTemplate) {
+      return res.status(404).end()
+    }
 
     return res.status(200).json({ letterTemplate }).end()
   } catch (err) {
     console.error(err)
+    return res.status(500).end()
+  }
+})
+
+router.post('/render', async (req, res) => {
+  // Takes mergeVariables payload, letterTemplate id
+
+  const { mergeVariables, templateId } = req.body
+
+  try {
+    const template = await LetterTemplate.query().findById(templateId)
+
+    if (!template) {
+      return res.status(404).json({ error: 'Template id does not exist' })
+    }
+
+    const letter = Handlebars.render(mergeVariables, template.html)
+
+    return res.status(200).json({ letter })
+  } catch (err) {
     return res.status(500).end()
   }
 })

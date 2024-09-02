@@ -15,6 +15,7 @@ class Lob {
   constructor() {
     this.apiKey = process.env.LOB_API_KEY
     this.lobUrl = process.env.LOB_BASE_URL
+    this.env    = process.env.NODE_ENV
   }
 
   // auth headers
@@ -29,7 +30,6 @@ class Lob {
 
   // Merges all headers
   headers() {
-    console.log({...this.authHeaders()})
     return {...this.authHeaders()}
   }
 
