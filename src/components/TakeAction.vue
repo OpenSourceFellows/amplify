@@ -129,11 +129,10 @@
                 class="text-h6"
                 :class="determineStyles('title', panelStatus[2])"
               >
-                Send the letter
+                Send the email
               </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
-                Postage is $1.50 to send your letter.Learn more about what how
-                this fee is used.
+                You can add an optional donation or just send an email.
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>

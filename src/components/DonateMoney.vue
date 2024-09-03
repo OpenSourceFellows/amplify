@@ -80,7 +80,9 @@
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit()"> Submit </v-btn>
+      <v-btn outlined color="primary" text @click="submit()">
+        Send email
+      </v-btn>
     </div>
   </section>
 </template>
