@@ -5,6 +5,9 @@ const Handlebars = require('../../../../lib/handlebars')
 
 const router = express.Router()
 
+/**
+ * Retrieves a letterTemplate, given its as a query param id
+ */
 router.get('/:id', async (req, res) => {
   const id = req.params.id
 
@@ -24,9 +27,12 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+/**
+ * @params mergeVariables - object
+ * @params id             - number, string
+ * Renders a template
+ */
 router.post('/render', async (req, res) => {
-  // Takes mergeVariables payload, letterTemplate id
-
   const { mergeVariables, templateId } = req.body
 
   try {

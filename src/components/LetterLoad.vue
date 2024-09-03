@@ -23,32 +23,17 @@
             {{ formattedCityState }}
           </div>
         </v-card-subtitle>
-        <v-card-title class="salutation">
-          Dear {{ selectedRep.name }},
-        </v-card-title>
 
         <v-card-text>
+          <v-select 
+            v-for="[key, values] of Object.entries(mergeVariables)"
+            :key="key"
+            v-model="userSelections.key"
+            :items="values"
+            :label="key"
+          />
+          <br>
           <span v-html="letterBody" />
-          <v-select
-            v-model="reason_input"
-            :items="reasons"
-            label="Reasons why this campaign is important to you"
-          />
-          <v-select
-            v-model="community_input"
-            :items="affects"
-            label="How this affects your community"
-          />
-          <v-select
-            v-model="benefit_input"
-            :items="benefits"
-            label="What is the benefit of supporting this"
-          />
-          <v-select
-            v-model="impact_input"
-            :items="greaterImpacts"
-            label="What is the greater impact of supporting this"
-          />
         </v-card-text>
 
         <p>{{ user.name }}</p>
@@ -74,6 +59,11 @@
 
 <script lang="js">
 // import AuthNav from '@/components/AuthNav'
+import axios from 'axios'
+
+// These fields will not show up as dropdowns for the user
+// to modify.
+const UNEDITABLE_FIELDS = ['representativeName']
 
 export default {
   name: 'LetterLoad',
@@ -81,40 +71,15 @@ export default {
     /* AuthNav */
   },
   props: {
-    letterBody: { type: String, default: '' }
+    // letterBody: { type: String, default: '' }
   },
   data() {
     return {
       isSubmitted: true,
-      reason_input: null,
-      community_input: null,
-      benefit_input: null,
-      impact_input: null,
-      reasons: [
-        'I live here',
-        'My family lives here',
-        'Communities I care about are affected'
-      ],
-      affects: [
-        'Creates jobs',
-        'Creates better air and water quality',
-        'Creates great sustainability examples',
-        'Increases quality of life and culture'
-      ],
-      benefits: [
-        'Protects endangered animals',
-        'Lessens homelessness',
-        'Prevents environmental harms to water and land'
-      ],
-      greaterImpacts: [
-        'Protecting historical landmarks',
-        'Becoming a beacon example of sustainability for the nation',
-        'Generating eco and sustainability awareness education and tourism',
-        'Increasing biodiversity and lowering carbon emissions'
-      ]
+      userSelections: {},
+      letterBody: 'poopin'
     }
   },
-
   computed: {
     selectedRep() {
       return this.$store.state.selectedRep
@@ -131,7 +96,33 @@ export default {
       }
 
       return ''
+    },
+    letterTemplate() {
+      return this.$store.state.letterTemplate
+    },
+    mergeVariables() {
+      return Object.fromEntries(
+        Object.entries(this.letterTemplate.mergeVariables).filter(([key]) => !UNEDITABLE_FIELDS.includes(key))
+      )
     }
+  },
+  watch: {
+    userSelections: function (oldVal, newVal) {
+      console.log(newVal)
+      axios.post('/api/v1/letter_templates/render', { data: { mergeVariables: this.userSelections, id: this.letterTemplate.id }})
+        .then((res) => {
+          this.letterBody = res.data.letter
+        })
+    }
+  },
+  created() {
+    for(let key of Object.keys(this.letterTemplate.mergeVariables)) {
+      this.userSelections[key] = ''
+    }
+
+    this.userSelections.representativeName = this.selectedRep.name
+
+    this.letterBody = this.letterTemplate.html
   }
 }
 </script>

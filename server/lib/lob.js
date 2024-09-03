@@ -59,6 +59,11 @@ class Lob {
     }
 
     try {
+      if (this.env != 'production') {
+        return { response: 200, payload }
+      }
+
+
       const response = await axios.post({
         url: `${this.lobUrl}/letters}`,
         headers: this.headers(),

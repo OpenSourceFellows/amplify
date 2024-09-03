@@ -28,28 +28,7 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <TuolumneLetterLoad
-            v-if="campaign === 'Tuolumne River Trust'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <CaliforniaRiversLetterLoad
-            v-if="campaign.name === 'Save California Salmon'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <UtahLetterLoad
-            v-if="campaign.name === 'White Mesa Concerned Community'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <HakamweLetterLoad
-            v-if="campaign.name === 'Protect Hakamwe'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <!-- v-else this later as fallback-->
-          <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
+          <letter-load />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
@@ -156,28 +135,18 @@
 </template>
 
 <script>
-import TuolumneLetterLoad from '@/components/TuolumneLetterLoad.vue'
-import CaliforniaRiversLetterLoad from '@/components/CaliforniaRiversLetterLoad.vue'
-import HakamweLetterLoad from './HakamweLetterLoad.vue'
-import UtahLetterLoad from '@/components/UtahLetterLoad.vue'
+import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
   name: 'TakeAction',
   components: {
-    TuolumneLetterLoad,
-    CaliforniaRiversLetterLoad,
-    HakamweLetterLoad,
-    UtahLetterLoad,
+    LetterLoad,
     SignName,
     DonateMoney
   },
   props: {
-    letterBody: {
-      type: String,
-      required: true
-    }
   },
   data() {
     return {

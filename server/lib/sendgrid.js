@@ -7,7 +7,7 @@ const sgClient = require('@sendgrid/client') // For other api endpoints
 class SendgridError extends Error {
   constructor(message) {
     super(message)
-    this.name = SendgridError
+    this.name = 'SendgridError'
   }
 }
 
