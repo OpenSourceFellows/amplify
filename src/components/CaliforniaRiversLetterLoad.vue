@@ -7,11 +7,7 @@
             {{ currentDate }}
           </div>
           <div>{{ selectedRep.name }}</div>
-          <div>{{ selectedRep.address_line1 }}</div>
-          <div>
-            {{ selectedRep.address_city }}, {{ selectedRep.address_state }},
-            {{ selectedRep.address_zip }}
-          </div>
+          <div>{{ selectedRep.email }}</div>
           <br />
           <div>{{ user.name }}</div>
           <div>
@@ -163,7 +159,7 @@ export default {
       community: [
         'Local fisherman',
         'Concerned constituent',
-        'Member of Hoopa Tribe'
+        'Tribal member and/or Indigenous person'
       ],
       impactReasonInput: '<fill in the input below>',
       impactReason: [
