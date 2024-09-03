@@ -82,7 +82,7 @@
                 Sign your name
               </v-list-item-title>
               <v-list-item-subtitle class="font-weight-medium">
-                Use your legal name.
+                Click 'Verify Address' to proceed
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
