@@ -49,7 +49,6 @@
         </v-btn>
 
         <v-btn
-          v-if="emptyTransactionsEnabled"
           elevation="2"
           raised
           :value="0"
