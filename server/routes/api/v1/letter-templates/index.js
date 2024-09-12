@@ -46,6 +46,7 @@ router.post('/render', async (req, res) => {
 
     return res.status(200).json({ letter })
   } catch (err) {
+    console.error(err.message)
     return res.status(500).end()
   }
 })

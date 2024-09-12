@@ -26,11 +26,11 @@
 
         <v-card-text>
           <v-select 
-            v-for="[key, values] of Object.entries(mergeVariables)"
+            v-for="[key, entry] of Object.entries(mergeVariables)"
             :key="key"
-            v-model="userSelections.key"
-            :items="values"
-            :label="key"
+            v-model="userSelections[key]"
+            :items="entry.choices"
+            :label="entry.label"
           />
           <br>
           <span v-html="letterBody" />
@@ -107,12 +107,16 @@ export default {
     }
   },
   watch: {
-    userSelections: function (oldVal, newVal) {
-      console.log(newVal)
-      axios.post('/api/v1/letter_templates/render', { data: { mergeVariables: this.userSelections, id: this.letterTemplate.id }})
-        .then((res) => {
-          this.letterBody = res.data.letter
-        })
+    userSelections: {
+      handler: function (oldVal, newVal) {
+        console.log(`logging new value of watch: ${newVal}`)
+        
+        axios.post('/api/v1/letter_templates/render', { mergeVariables: this.userSelections, templateId: this.letterTemplate.id })
+          .then((res) => {
+            this.letterBody = res.data.letter
+          })
+      },
+      deep: true
     }
   },
   created() {
