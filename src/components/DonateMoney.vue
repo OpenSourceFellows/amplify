@@ -80,7 +80,7 @@
     </v-col>
     <div>
       <v-btn outlined color="primary" text @click="submit()">
-        Send email
+        Send Mail
       </v-btn>
     </div>
   </section>

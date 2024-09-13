@@ -16,7 +16,7 @@ services:
       - POSTGRESS_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5433
+      - POSTGRES_PORT=5432
 
     volumes:
       - ..:/workspace:cached
@@ -39,12 +39,12 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_PORT: 5433
+      POSTGRES_PORT: 5432
     expose:
-      - '5433' # Publishes port to other containers but NOT to host machine
+      - '5432' # Publishes port to other containers but NOT to host machine
     ports:
-      - '5433:5433' # Expose PostgreSQL to the host machine on port 5433
-    command: '-p 5433' # Run the container's PostgreSQL server on non-standard port 5433 as well
+      - '5432:5432' # Expose PostgreSQL to the host machine on port 5433
+    command: '-p 5432' # Run the container's PostgreSQL server on non-standard port 5433 as well
 
 volumes:
   postgres-data: null
