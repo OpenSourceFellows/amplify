@@ -31,40 +31,59 @@
           <p class="text-left">
             Hello,
           </p>
-
           <p class="text-left">
-            We, the undersigned members of the Hualapai Nation and allies, respectfully request an urgent meeting with representatives of the Navajo Nation company, NTEC, to discuss our grave concerns regarding the ongoing drilling activities in Sandy Valley, northern Arizona.
+            Hello,	We,	the	undersigned	members	of	the	Hualapai	Nation	and	allies,	respectfully	request
+            an	urgent	meeting	with	representatives	of	the	Navajo	Nation	to	discuss	our	grave	concerns
+            regarding	the	ongoing	drilling	activities	in	Sandy	Valley,	northern	Arizona.
           </p>
-
           <p class="text-left">
             From the Hualapai Nation Perspective:
           </p>
-
           <p class="text-left">
-            Ha'Kamwe' is part of the ancient Salt Song Trail and features prominently in tribal songs and stories about the Hualapai people's history, traditions, and deep connection to the natural world. The ongoing drilling threatens to irrevocably damage this sacred land for how the Hualapai and other tribes have used the spring for centuries for healing, prayer, and rites of passage, including childbirth and coming-of-age ceremonies for young women.
+            Ha'Kamwe'	is	part	of	the	ancient	Salt	Song	Trail	and	features	prominently	in	tribal
+            songs	and	stories	about	the	Hualapai	peopleâ€™s	history,	traditions,	and	deep	connection
+            to	the	natural	world.	The	ongoing	drilling	threatens	to	irrevocably	damage	this	sacred	land
+            for	how	the	Hualapai	and	other	tribes	have	used	the	spring	for	centuries	for	healing,
+            prayer,	and	rites	of	passage,	including	childbirth	and	coming-of-age	ceremonies	for	young
+            women.
           </p>
-
           <p class="text-left">
-            We are particularly concerned about the potential impacts of drilling on the region's water resources, air quality, and wildlife habitats. the drilling will irreversibly damage the spiritual integrity of the area, causing trauma to the land, that will impact the connection and experience people/tribal members have with the area and our animal relatives. Importantly a threatened species of desert tortoise's burrowing and foraging grounds are being destroyed in the area.  The drilling further endangers the ecology of the saguaro cactus whose roots are easily damaged and are a keystone plant for birds and insects in the region.
+            We	are	particularly	concerned	about	the	potential	impacts	of	drilling	on	the	region's	water
+            resources,	air	quality,	and	wildlife	habitats.	the	drilling	will	irreversibly	damage	the
+            spiritual	integrity	of	the	area,	causing	trauma	to	the	land,	that	will	impact	the	connection
+            and	experience	people/tribal	members	have	with	the	area	and	our	animal	relatives.
+            Importantly	a	threatened	species	of	desert	tortoise's	burrowing	and	foraging	grounds
+            are	being	destroyed	in	the	area.	The	drilling	further	endangers	the	ecology	of	the	saguaro
+            cactus	whose	roots	are	easily	damaged	and	are	a	keystone	plant	for	birds	and	insects	in	the
+            region.
           </p>
-
           <p class="text-left">
             Call for Collaboration and Respect:
           </p>
           <p class="text-left">
-            We appeal to the shared values of environmental stewardship and respect for Indigenous knowledge that both the Hualapai and Navajo Nations hold dear. We believe that by working together, we can find solutions that honor the cultural heritage of both our peoples while ensuring sustainable economic development. I urge you to take immediate action to approve the injunction to extend the pause until the end of the legal case.
+            We	appeal	to	the	shared	values	of	environmental	stewardship	and	respect	for	Indigenous
+            knowledge	that	both	the	Hualapai	and	Navajo	Nations	hold	dear.	We	believe	that	by
+            working	together,	we	can	find	solutions	that	honor	the	cultural	heritage	of	both	our	peoples
+            while	ensuring	sustainable	economic	development.	I	urge	you	to	take	immediate	action	to
+            withdraw	NTEC	from	partnership	with	Arizona	Lithium.
           </p>
           <p class="text-left">
-            We recognize and respect the Navajo Nation's sovereignty and economic interests, as well as NTEC's role in contributing to the Navajo economy. However, we firmly believe that responsible resource development must prioritize the protection of Indigenous lands, cultures, and communities.
+            We	recognize	and	respect	the	Navajo	Nation's	sovereignty	and	economic	interests,	as	well
+            as	NTEC's	role	in	contributing	to	the	Navajo	economy.	However,	we	firmly	believe	that
+            responsible	resource	development	must	prioritize	the	protection	of	Indigenous	lands,
+            cultures,	and	communities
           </p>
           <p class="text-left">
-            We believe that by working together, we can find solutions that honor the cultural heritage of both our peoples while ensuring sustainable economic development.
+            We	believe	that	by	working	together,	we	can	find	solutions	that	honor	the	cultural	heritage
+            of	both	our	peoples	while	ensuring	sustainable	economic	development.
           </p>
           <p class="text-left">
-            On August 22, a federal judge granted a temporary restraining order to pause drilling activities until a court hearing scheduled for September 17. The Hualapai Tribe is seeking a preliminary injunction to pause all drilling activities in Sandy Valley until the case with the BLM is settled and meaningful consultation with the Hualapai Nation can take place.
-          </p>
-          <p class="text-left">
-            We await your prompt response and look forward to scheduling a meeting at your earliest convenience.
+            On	August	22,	a	federal	judge	granted	a	temporary	restraining	order	to	pause	drilling
+            activities	until	a	court	hearing	scheduled	for	September	17.	The	Hualapai	Tribe	is	seeking	a
+            preliminary	injunction	to	pause	all	drilling	activities	in	Sandy	Valley	until	the	case	with	the
+            BLM	is	settled	and	meaningful	consultation	with	the	Hualapai	Nation	can	take	place.	
+            We	await	your	prompt	response	and	look	forward	to	scheduling	a	meeting	at	your	earliest
+            convenience.          
           </p>
           <p class="text-left">
             Sincerely,
