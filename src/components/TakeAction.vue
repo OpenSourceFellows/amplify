@@ -43,6 +43,11 @@
             :selected-rep="selectedRep"
             :letter-body="letterBody"
           />
+          <HakamweLetterLoad
+            v-if="campaign.name === 'Protect Hakamwe'"
+            :selected-rep="selectedRep"
+            :letter-body="letterBody"
+          />
           <!-- v-else this later as fallback-->
           <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
         </v-expansion-panel-content>
@@ -153,6 +158,7 @@
 <script>
 import TuolumneLetterLoad from '@/components/TuolumneLetterLoad.vue'
 import CaliforniaRiversLetterLoad from '@/components/CaliforniaRiversLetterLoad.vue'
+import HakamweLetterLoad from './HakamweLetterLoad.vue'
 import UtahLetterLoad from '@/components/UtahLetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
@@ -162,6 +168,7 @@ export default {
   components: {
     TuolumneLetterLoad,
     CaliforniaRiversLetterLoad,
+    HakamweLetterLoad,
     UtahLetterLoad,
     SignName,
     DonateMoney

@@ -53,6 +53,53 @@ module.exports = {
       },
       {
         id: 2,
+        organization: 'Hualapai Nation',
+        name: 'Protect Hakamwe',
+        cause: 'Civic Rights',
+        type: 'Grant',
+        page_url: 'http://instagram.com/protecthakamwe',
+        campaign_tagline: 'Protect Ha\'kamwe\' - No Lithium Mine',
+        campaign_text: '<h2>What is Ha’Kamwe’?</h2><p>Ha’Kamwe’ means warm spring in the language of the Hualapai people.</p><p>Ha’Kamwe’ is fed by water naturally stored underground in volcanic rocks that seal it off from the land surface above (aka a confined volcanic aquifer). Under pressure, water flows underground along a geologic fault and emerges from the spring.</p><p>This sacred spring is a place for healing. In the words of a Hualapai elder: this is holy ground.</p><h2>Where is Ha’Kamwe’?</h2><p>Ha’Kamwe’ is part of Cholla Canyon Ranch in Wikieup, Arizona, where the Mojave and Sonoran deserts meet within the Big Sandy River basin. The ranch is managed by the Hualapai Tribe, while the ancestral homelands of the Hualapai people surrounding the site are currently managed by the Bureau of Land Management (BLM).</p>',
+        supplemental_text: '<p>Hualapai tribal members, local community members, and allies are working to prevent further exploration drilling for the Big Sandy Lithium Project that would desecrate Ha’Kamwe’ and the ancestral homelands of the Hualapai people.</p>',
+        representatives: JSON.stringify([
+          {
+            name: 'Dr. Buu Nygren',
+            title: 'President of the Navajo Nation',
+            photoUrl:
+              'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_P_Nygren.jpg?resize=1080%2C1080&ssl=1',
+            address_line1: 'PO Box 7440',
+            address_line2: '',
+            address_city: 'Window Rock',
+            address_state: 'AZ',
+            address_zip: '86515',
+            address_country: 'US',
+            email: 'alray.nelson@navajo-nsn.gov'
+          },
+          {
+            name: 'Richelle Montoya',
+            title: 'Vice President of the Navajo Nation',
+            photoUrl:
+              'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_P_Nygren.jpg?resize=1080%2C1080&ssl=1',
+            address_line1: 'PO Box 7440',
+            address_line2: '',
+            address_city: 'Window Rock',
+            address_state: 'AZ',
+            address_zip: '86515',
+            address_country: 'US',
+            email: 'josie.bowman@navajo-nsn.gov'
+          }
+        ]),
+        assets: JSON.stringify({
+            campaign_logo: 'https://i.imgur.com/o3lxGJD.png',
+            campaign_background: 'https://i.imgur.com/qGOHdiP.jpeg',
+            'campaign-img-1': 'https://i.imgur.com/h88GBNC.jpeg',
+            'campaign-img-2': 'https://i.imgur.com/lcQWK6p.jpeg',
+            'campaign-img-3': 'https://i.imgur.com/bnPQVOR.jpeg',
+            'infographic': 'https://i.imgur.com/BJCPDCR.jpeg'
+          })
+      },
+      {
+        id: 3,
         organization: 'Save California Salmon',
         name: 'Save California Salmon',
         cause: 'Civic Rights',

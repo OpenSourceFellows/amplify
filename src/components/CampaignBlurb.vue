@@ -20,6 +20,12 @@
     <div class="px-6 text-content">
       <p class="flavor-text" v-html="flavorText"></p>
     </div>
+    <img
+      v-if="assets['infographic']"
+      :src="assets['infographic']"
+      alt="infographic for campaign"
+      class="mx-2 my-4 infographic-img"
+    />
 
     <div class="amplify-banner">
       <img
@@ -83,6 +89,10 @@ export default {
 
 .banner-img {
   max-width: 100%;
+}
+
+.infographic-img {
+  max-width: 700px;
 }
 
 .action-btn {
