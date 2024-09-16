@@ -16,7 +16,7 @@ const reps = JSON.stringify([
     name: 'Richelle Montoya',
     title: 'Vice President of the Navajo Nation',
     photoUrl:
-      'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_P_Nygren.jpg?resize=1080%2C1080&ssl=1',
+      'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_VP_Montoya.jpg?resize=1080%2C1080&ssl=1',
     address_line1: 'PO Box 7440',
     address_line2: '',
     address_city: 'Window Rock',
