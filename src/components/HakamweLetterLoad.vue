@@ -28,63 +28,25 @@
         </v-card-title>
 
         <v-card-text class="text-left">
-          <p class="text-left">
-            Hello,
-          </p>
-          <p class="text-left">
-            Hello,	We,	the	undersigned	members	of	the	Hualapai	Nation	and	allies,	respectfully	request
-            an	urgent	meeting	with	representatives	of	the	Navajo	Nation	to	discuss	our	grave	concerns
-            regarding	the	ongoing	drilling	activities	in	Sandy	Valley,	northern	Arizona.
-          </p>
-          <p class="text-left">
-            From the Hualapai Nation Perspective:
-          </p>
-          <p class="text-left">
-            Ha'Kamwe'	is	part	of	the	ancient	Salt	Song	Trail	and	features	prominently	in	tribal
-            songs	and	stories	about	the	Hualapai	peopleâ€™s	history,	traditions,	and	deep	connection
-            to	the	natural	world.	The	ongoing	drilling	threatens	to	irrevocably	damage	this	sacred	land
-            for	how	the	Hualapai	and	other	tribes	have	used	the	spring	for	centuries	for	healing,
-            prayer,	and	rites	of	passage,	including	childbirth	and	coming-of-age	ceremonies	for	young
-            women.
-          </p>
-          <p class="text-left">
-            We	are	particularly	concerned	about	the	potential	impacts	of	drilling	on	the	region's	water
-            resources,	air	quality,	and	wildlife	habitats.	the	drilling	will	irreversibly	damage	the
-            spiritual	integrity	of	the	area,	causing	trauma	to	the	land,	that	will	impact	the	connection
-            and	experience	people/tribal	members	have	with	the	area	and	our	animal	relatives.
-            Importantly	a	threatened	species	of	desert	tortoise's	burrowing	and	foraging	grounds
-            are	being	destroyed	in	the	area.	The	drilling	further	endangers	the	ecology	of	the	saguaro
-            cactus	whose	roots	are	easily	damaged	and	are	a	keystone	plant	for	birds	and	insects	in	the
-            region.
-          </p>
-          <p class="text-left">
-            Call for Collaboration and Respect:
-          </p>
-          <p class="text-left">
-            We	appeal	to	the	shared	values	of	environmental	stewardship	and	respect	for	Indigenous
-            knowledge	that	both	the	Hualapai	and	Navajo	Nations	hold	dear.	We	believe	that	by
-            working	together,	we	can	find	solutions	that	honor	the	cultural	heritage	of	both	our	peoples
-            while	ensuring	sustainable	economic	development.	I	urge	you	to	take	immediate	action	to
-            withdraw	NTEC	from	partnership	with	Arizona	Lithium.
-          </p>
-          <p class="text-left">
-            We	recognize	and	respect	the	Navajo	Nation's	sovereignty	and	economic	interests,	as	well
-            as	NTEC's	role	in	contributing	to	the	Navajo	economy.	However,	we	firmly	believe	that
-            responsible	resource	development	must	prioritize	the	protection	of	Indigenous	lands,
-            cultures,	and	communities
-          </p>
-          <p class="text-left">
-            We	believe	that	by	working	together,	we	can	find	solutions	that	honor	the	cultural	heritage
-            of	both	our	peoples	while	ensuring	sustainable	economic	development.
-          </p>
-          <p class="text-left">
-            On	August	22,	a	federal	judge	granted	a	temporary	restraining	order	to	pause	drilling
-            activities	until	a	court	hearing	scheduled	for	September	17.	The	Hualapai	Tribe	is	seeking	a
-            preliminary	injunction	to	pause	all	drilling	activities	in	Sandy	Valley	until	the	case	with	the
-            BLM	is	settled	and	meaningful	consultation	with	the	Hualapai	Nation	can	take	place.	
-            We	await	your	prompt	response	and	look	forward	to	scheduling	a	meeting	at	your	earliest
-            convenience.          
-          </p>
+          <p class="text-left">Hello,</p>
+          <p class="text-left"> am an Arizona constituent writing in to discuss my grave concerns regarding the ongoing drilling activities in Sandy Valley, northern Arizona.</p>
+          <p class="text-left"><strong>1. Threats to Hualapai Cultural Heritage and Religious Freedoms</strong></p>
+          <p class="text-left">The mining exploration, authorized by the Bureau of Land Management (BLM), directly impacts Ha’Kamwe’ (Cofer Hot Spring), a sacred site that holds profound spiritual significance for the Hualapai Tribe and other Indigenous communities.</p>
+          <ul>
+            <li><strong>Religious Freedom Restoration Act (42 U.S.C. § 2000bb et seq.):</strong> The ongoing drilling undermines how the Hualapai and other tribes have used the spring for centuries for healing, prayer, and rites of passage, including childbirth and coming-of-age ceremonies for young women. Ha’Kamwe’ is integral to the spiritual practices of the Hualapai people.</li>
+            <li><strong>National Historic Preservation Act (54 U.S.C. § 300101 et seq.):</strong> Ha’Kamwe’ is part of the ancient Salt Song Trail and features prominently in tribal songs and stories about the Hualapai people’s history and connection to their land. BLM’s approval of exploratory drilling without fully considering the cultural importance of Ha’Kamwe’ disregards this statute and disrespects the rights of the Hualapai Tribe.</li>
+          </ul>
+          <br>
+          <p class="text-left"><strong>2. Environmental Violations and the Rights of Nature</strong></p>
+          <p class="text-left">The drilling project threatens to cause irreversible damage to the local ecosystem, including the depletion of water sources that sustain Ha’Kamwe’. The proposed 131 exploration holes, reaching depths of up to 360 feet, could alter the temperature and flow of the aquifer feeding the spring, endangering the surrounding plants and wildlife.</p>
+          <ul>
+            <li><strong>Clean Water Act (33 U.S.C. § 1251 et seq.)</strong> The drilling activities risk contaminating the aquifer, which could lead to ecological degradation, violating federal regulations designed to protect water quality.</li>
+            <li><strong>Rights of Nature Doctrine:</strong> The concept of the Rights of Nature recognizes natural entities, such as springs, as rights-bearing entities with the right to exist, thrive, and regenerate. The drilling endangers Ha’Kamwe’, infringing on its right to exist and maintain its natural state.</li>
+          </ul>
+          <br>
+          <p><strong>Call for Collaboration and Respect:</strong></p>
+          <p class="text-left">We request a precautionary pause as an injunction on all drilling activities in Sandy Valley until a thorough assessment of the environmental and cultural impacts can be conducted, and meaningful consultation with the Hualapai Nation can take place.</p>
+          <p class="text-left">We await your prompt response and look forward to scheduling a meeting at your earliest convenience.</p>
           <p class="text-left">
             Sincerely,
           </p>
