@@ -48,6 +48,11 @@
             :selected-rep="selectedRep"
             :letter-body="letterBody"
           />
+          <KaimichiLetterLoad
+            v-if="campaign.name === 'Save the Kaimichi River'"
+            :selected-rep="selectedRep"
+            :letter-body="letterBody"
+          />
           <!-- v-else this later as fallback-->
           <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
         </v-expansion-panel-content>
@@ -139,10 +144,10 @@
                 class="text-h6"
                 :class="determineStyles('title', panelStatus[2])"
               >
-                Send the email
+                Send the mail
               </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
-                You can add an optional donation or just send an email.
+                You can add an optional donation or just send a letter.
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -160,6 +165,7 @@ import TuolumneLetterLoad from '@/components/TuolumneLetterLoad.vue'
 import CaliforniaRiversLetterLoad from '@/components/CaliforniaRiversLetterLoad.vue'
 import HakamweLetterLoad from './HakamweLetterLoad.vue'
 import UtahLetterLoad from '@/components/UtahLetterLoad.vue'
+import KaimichiLetterLoad from '@/components/KaimichiLetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
@@ -170,6 +176,7 @@ export default {
     CaliforniaRiversLetterLoad,
     HakamweLetterLoad,
     UtahLetterLoad,
+    KaimichiLetterLoad,
     SignName,
     DonateMoney
   },
