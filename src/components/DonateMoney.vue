@@ -4,9 +4,8 @@
 
     <v-col cols="12" class="py-2">
       <p v-if="noCostMailEnabled">
-        Your voice is super important - please use this code
-        <strong>{{ couponCode }}</strong> to send email and letter for free!
-        Donations are optional and 100% goes to Save California Salmon 🙂
+        Your voice is super important - send a letter for free ! Donations are
+        optional and 100% goes to Kaimichi River Legacy Alliance 🙂
       </p>
 
       <p v-else>
@@ -79,9 +78,7 @@
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit()">
-        Send Mail
-      </v-btn>
+      <v-btn outlined color="primary" text @click="submit()"> Send Mail </v-btn>
     </div>
   </section>
 </template>
