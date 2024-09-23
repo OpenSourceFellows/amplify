@@ -1,9 +1,0 @@
-👋 Welcome to developing ProgramEquity/amplify in GitHub Codespaces!
-
-👢 Your environment is all set up.
-
-🚀 To get started, start the server by running `npm run dev`.
-
-🧪 Verify the app at http://localhost:8080/
-
-❓ Having troubles? Visit #devs in Slack for support!
