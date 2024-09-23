@@ -1,3 +1,4 @@
+/*
 const reps = JSON.stringify([
   {
     name: 'Debbie-Anne A. Reese',
@@ -13,8 +14,8 @@ const reps = JSON.stringify([
     email: ''
   }
 ])
+  */
 
-/*
 const assets = JSON.stringify({
     campaign_logo:
       'https://www.guidestar.org/ViewEdoc.aspx?eDocId=10693593&approved=True',
@@ -27,7 +28,6 @@ const assets = JSON.stringify({
     'campaign-img-3':
       'http://www.kiamichiriver.org/wp/wp-content/gallery/river/26991598_552853938382258_3151811306988112886_n.jpg'
 })
-  */
 
-console.log(reps)
-//console.log(assets)
+//console.log(reps)
+console.log(assets)
