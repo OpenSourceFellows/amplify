@@ -144,7 +144,7 @@
                 class="text-h6"
                 :class="determineStyles('title', panelStatus[2])"
               >
-                Send the mail
+                Send a letter
               </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
                 You can add an optional donation or just send a letter.

@@ -8,6 +8,7 @@
           </div>
           <div>{{ selectedRep.name }}</div>
           <div>{{ selectedRep.address_line1 }}</div>
+          <div>{{ selectedRep.address_line2 }}</div>
           <div>
             {{ selectedRep.address_city }}, {{ selectedRep.address_state }},
             {{ selectedRep.address_zip }}
