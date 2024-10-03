@@ -1,15 +1,18 @@
 <template>
   <section class="take-action">
     <v-expansion-panels v-model="panel" flat>
-      <!-- Review the letter -->
-      <v-expansion-panel :key="0" v-model="panel">
-        <v-expansion-panel-header :disabled="!isActive(0)">
+      <!-- Fill out user information -->
+      <v-expansion-panel :key="0">
+        <v-divider />
+
+        <v-expansion-panel-header class="flex-nowrap" :disabled="!isActive(0)">
           <template #actions>
             <v-icon :color="determineStyles('icon', panelStatus[0])" size="45">
               $expand
             </v-icon>
           </template>
           <v-list-item-avatar
+            class="50px"
             :color="determineStyles('avatar', panelStatus[0])"
             max-width="40px"
           >
@@ -20,7 +23,60 @@
           </v-list-item-avatar>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title> Review the letter </v-list-item-title>
+              <v-list-item-title
+                class="text-h6"
+                :class="determineStyles('title', panelStatus[0])"
+              >
+                Add your name
+              </v-list-item-title>
+              <v-list-item-subtitle class="font-weight-bold">
+                Click 'Verify Address' to proceed
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-expansion-panel-header>
+
+        <v-expansion-panel-content>
+          <sign-name @address-validated="!addressNotValidated" />
+        </v-expansion-panel-content>
+
+        <v-expansion-panel-content>
+          <v-btn
+            width="160"
+            dark
+            color="primary"
+            @click="nextPage({ userData })"
+          >
+            Next
+          </v-btn>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <!-- Review the letter -->
+      <v-expansion-panel :key="1" v-model="panel">
+        <v-expansion-panel-header :disabled="!isActive(1)">
+          <template #actions>
+            <v-icon :color="determineStyles('icon', panelStatus[1])" size="45">
+              $expand
+            </v-icon>
+          </template>
+          <v-list-item-avatar
+            :color="determineStyles('avatar', panelStatus[1])"
+            max-width="40px"
+          >
+            <v-icon v-if="panelStatus[1] === 'completed'" class="white--text">
+              mdi-check-bold
+            </v-icon>
+            <span v-else class="text-h5 font-weight-bold white--text"> 2</span>
+          </v-list-item-avatar>
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title
+                class="text-h6"
+                :class="determineStyles('title', panelStatus[0])"
+              > 
+                Review the letter 
+              </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
                 Tell your Representatives why this matters.
               </v-list-item-subtitle>
@@ -62,57 +118,6 @@
             dark
             color="primary"
             @click="nextPage({ selectedRep, letterBody })"
-          >
-            Next
-          </v-btn>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-
-      <!-- Fill out user information -->
-      <v-expansion-panel :key="1">
-        <v-divider />
-
-        <v-expansion-panel-header class="flex-nowrap" :disabled="!isActive(1)">
-          <template #actions>
-            <v-icon :color="determineStyles('icon', panelStatus[1])" size="45">
-              $expand
-            </v-icon>
-          </template>
-          <v-list-item-avatar
-            class="50px"
-            :color="determineStyles('avatar', panelStatus[1])"
-            max-width="40px"
-          >
-            <v-icon v-if="panelStatus[1] === 'completed'" class="white--text">
-              mdi-check-bold
-            </v-icon>
-            <span v-else class="text-h5 font-weight-bold white--text"> 2</span>
-          </v-list-item-avatar>
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title
-                class="text-h6"
-                :class="determineStyles('title', panelStatus[1])"
-              >
-                Sign your name
-              </v-list-item-title>
-              <v-list-item-subtitle class="font-weight-medium">
-                Click 'Verify Address' to proceed
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-expansion-panel-header>
-
-        <v-expansion-panel-content>
-          <sign-name @address-validated="!addressNotValidated" />
-        </v-expansion-panel-content>
-
-        <v-expansion-panel-content>
-          <v-btn
-            width="160"
-            dark
-            color="primary"
-            @click="nextPage({ userData })"
           >
             Next
           </v-btn>

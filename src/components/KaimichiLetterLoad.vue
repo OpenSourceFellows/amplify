@@ -13,7 +13,7 @@
             {{ selectedRep.address_city }}, {{ selectedRep.address_state }},
             {{ selectedRep.address_zip }}
           </div>
-
+          <br />
           <div>{{ user.name }}</div>
           <div>
             {{ user.line1 }}
@@ -25,12 +25,10 @@
           </div>
         </v-card-subtitle>
         <v-card-title class="salutation">
-          Dear {{ selectedRep.name }},
+          Dear Acting Secretary Reese:
         </v-card-title>
 
         <v-card-text class="text-left">
-          <p class="text-left">Dear Acting Secretary Reese:</p>
-
           <p class="text-left">
             I understand that the Federal Energy Regulatory Commission (FERC)
             has received a Notice of Intent and Pre-Application Document from
