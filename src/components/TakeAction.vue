@@ -73,9 +73,9 @@
             <v-list-item-content>
               <v-list-item-title
                 class="text-h6"
-                :class="determineStyles('title', panelStatus[0])"
-              > 
-                Review the letter 
+                :class="determineStyles('title', panelStatus[1])"
+              >
+                Review the letter
               </v-list-item-title>
               <v-list-item-subtitle class="text-wrap font-weight-medium">
                 Tell your Representatives why this matters.

@@ -14,15 +14,6 @@
             {{ selectedRep.address_zip }}
           </div>
           <br />
-          <div>{{ user.name }}</div>
-          <div>
-            {{ user.line1 }}
-            <br />
-            {{ user.line2 }}
-          </div>
-          <div>
-            {{ formattedCityState }}
-          </div>
         </v-card-subtitle>
         <v-card-title class="salutation">
           Dear Acting Secretary Reese:
@@ -735,8 +726,17 @@
           <p class="text-left">Respectfully submitted,</p>
 
           <p>{{ user.name }}</p>
+          <div>
+            {{ user.line1 }}
+            <br />
+            {{ user.line2 }}
+          </div>
+          <div>
+            {{ formattedCityState }}
+          </div>
         </v-card-text>
 
+        <!--
         <v-card-text v-if="mergeVariablesEnabled">
           <v-select
             v-model="communityInput"
@@ -749,7 +749,7 @@
             label="How this Legislation Impacts You"
           />
         </v-card-text>
-      </div>
+      --></div>
       <div v-show="!isSubmitted">
         <v-card-text> clicked</v-card-text>
 
@@ -783,6 +783,7 @@ export default {
   },
   data() {
     return {
+      mergeVariablesEnabled: true,
       isSubmitted: true,
       communityInput: '<fill in the input below>',
       community: [
@@ -818,11 +819,11 @@ export default {
       return ''
     },
     mergeVariables() {
-      return { community: this.communityInput, impactReason: this.impactReasonInput }
+      return { name: this.user.name, addressLine1: this.user.line1, addressLine2: this.user.line2, city: this.user.city, state: this.user.state, zip: this.user.zip }
     },
     mergeVariablesEnabled() {
       const keys = Object.keys(this.$store.state.mergeVariables)
-      return keys.count > 1
+      return keys.length > 1
     }
   },
   watch: {
