@@ -4,9 +4,12 @@
 
     <v-col cols="12" class="py-2">
       <p v-if="noCostMailEnabled">
-        Your voice is super important - please use this code
-        <strong>{{ couponCode }}</strong> to send email and letter for free!
-        Donations are optional and 100% goes to Save California Salmon 🙂
+        Your voice is super important!
+        <span v-if="couponCode">
+          Please use this code <strong>{{ couponCode }}</strong> to send email
+          and letter for free!
+        </span>
+        Donations are optional and 100% goes to {{ campaign.name }} 🙂
       </p>
 
       <p v-else>
@@ -79,9 +82,7 @@
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit()">
-        Send Mail
-      </v-btn>
+      <v-btn outlined color="primary" text @click="submit()"> Send Mail </v-btn>
     </div>
   </section>
 </template>
@@ -103,7 +104,10 @@ export default {
   computed: {
     // These are temporary structures until we can reorganize the frontend.
     noCostMailEnabled() {
-      return process.env.VUE_APP_NO_COST_MAIL
+      return Boolean(process.env.VUE_APP_NO_COST_MAIL)
+    },
+    campaign() {
+      return this.$store.state.campaign
     },
     couponCode() {
       return process.env.VUE_APP_COUPON_CODE
