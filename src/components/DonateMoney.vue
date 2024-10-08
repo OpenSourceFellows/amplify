@@ -17,68 +17,79 @@
         representatives, from the comfort of your home or on the go.
       </p>
 
-      <v-btn-toggle
-        v-model="donationAmount"
-        class="d-flex flex-wrap justify-center"
-        tile
-        color="deep-purple accent-3"
-        group
-      >
-        <v-btn
-          elevation="2"
-          raised
-          :value="200"
-          @click="unsetCustomAmountSelection"
+      <!-- We can show an alternative link to donate money, if the showAltDonation env variable is true-->
+      <!-- Otherwise, show the donation amount buttons. This should be use in conjunction with VUE_APP_EMPTY_TRANSACTIONS -->
+      <div v-if="showExtDonation">
+        <p>
+          If you'd like to make a donation, please do so
+          <a :href="extDonationUrl" target="_blank">here.</a>
+        </p>
+      </div>
+      <div v-else>
+        <v-btn-toggle
+          v-model="donationAmount"
+          class="d-flex flex-wrap justify-center"
+          tile
+          color="deep-purple accent-3"
+          group
         >
-          2
-        </v-btn>
+          <v-btn
+            elevation="2"
+            raised
+            :value="200"
+            @click="unsetCustomAmountSelection"
+          >
+            2
+          </v-btn>
 
-        <v-btn
-          elevation="2"
-          raised
-          :value="2000"
-          @click="unsetCustomAmountSelection"
-        >
-          20
-        </v-btn>
+          <v-btn
+            elevation="2"
+            raised
+            :value="2000"
+            @click="unsetCustomAmountSelection"
+          >
+            20
+          </v-btn>
 
-        <v-btn
-          elevation="2"
-          raised
-          :value="5000"
-          @click="unsetCustomAmountSelection"
-        >
-          50
-        </v-btn>
+          <v-btn
+            elevation="2"
+            raised
+            :value="5000"
+            @click="unsetCustomAmountSelection"
+          >
+            50
+          </v-btn>
 
-        <v-btn
-          elevation="2"
-          raised
-          :value="0"
-          @click="unsetCustomAmountSelection"
-        >
-          0
-        </v-btn>
+          <v-btn
+            v-if="emptyTransactionsEnabled"
+            elevation="2"
+            raised
+            :value="0"
+            @click="unsetCustomAmountSelection"
+          >
+            0
+          </v-btn>
 
-        <v-btn elevation="2" raised @click="toggleCustomDonation">
-          Custom Amount
-        </v-btn>
-      </v-btn-toggle>
+          <v-btn elevation="2" raised @click="toggleCustomDonation">
+            Custom Amount
+          </v-btn>
+        </v-btn-toggle>
 
-      <div class="d-flex justify-center flex-column align-center :width=100%">
-        <v-text-field
-          v-if="customAmountSelected"
-          ref="input"
-          v-model="customDonationAmount"
-          class="custom-donation-amount-textfield"
-          inputmode="numeric"
-          label="Donation Amount"
-          type="number"
-          required
-        >
-          <v-icon slot="prepend"> mdi-currency-usd </v-icon>
-          {{ styledCustomDonation }}
-        </v-text-field>
+        <div class="d-flex justify-center flex-column align-center :width=100%">
+          <v-text-field
+            v-if="customAmountSelected"
+            ref="input"
+            v-model="customDonationAmount"
+            class="custom-donation-amount-textfield"
+            inputmode="numeric"
+            label="Donation Amount"
+            type="number"
+            required
+          >
+            <v-icon slot="prepend"> mdi-currency-usd </v-icon>
+            {{ styledCustomDonation }}
+          </v-text-field>
+        </div>
       </div>
     </v-col>
     <div>
@@ -96,7 +107,7 @@ export default {
   props: [],
   data() {
     return {
-      donationAmount: 2000,
+      donationAmount: 0,
       customAmountSelected: false,
       customDonationAmount: null,
     }
@@ -114,6 +125,12 @@ export default {
     },
     emptyTransactionsEnabled() {
       return process.env.VUE_APP_EMPTY_TRANSACTIONS === 'on'
+    },
+    showExtDonation() {
+      return process.env.VUE_APP_SHOW_EXT_DONATION == 'true'
+    },
+    extDonationUrl() {
+      return process.env.VUE_APP_EXT_DONATION_URL
     },
     user() {
       const user = this.$store.state.userData
@@ -189,7 +206,7 @@ export default {
           const { data } = error.response
           console.log(data, error)
         })
-    }
+    },
   }
 }
 </script>
