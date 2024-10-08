@@ -1,0 +1,20 @@
+type: object
+properties:
+  stripe_transaction_id:
+    type: string
+    description: Stripe transaction ID
+  amount:
+    type: number
+    description: Amount of donation
+  currency:
+    type: string
+    description: Currency of donation
+  payment_method:
+    type: string
+    description: Payment method of donation
+  payment_method_type:
+    type: string
+    description: Payment method type of donation
+  email:
+    type: string
+    description: Email of donor

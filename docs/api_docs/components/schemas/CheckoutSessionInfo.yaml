@@ -1,0 +1,6 @@
+type: object
+properties:
+  url:
+    type: string
+  sessionId:
+    type: string

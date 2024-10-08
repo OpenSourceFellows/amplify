@@ -1,0 +1,22 @@
+get:
+  summary: Returns a JSON array of campaigns
+  operationId: ''
+  responses:
+    '200':
+      description: Campaigns response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Campaigns:
+                type: array
+                items:
+                  $ref: ../components/schemas/Campaign.yaml
+    '500':
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: ../components/schemas/Error.yaml

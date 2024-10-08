@@ -1,0 +1,19 @@
+post:
+  summary: Create a new stripe transaction with the donation amount
+  requestBody:
+    $ref: ../components/requestBodies/CreateTransaction.yaml
+  responses:
+    '200':
+      $ref: ../components/schemas/StripeTransaction.yaml
+    '400':
+      description: No session ID passed in request body
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '400':
+      description: Error creating formatted transaction
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml

@@ -1,0 +1,16 @@
+post:
+  summary: Create a checkout session and return session URL and id
+  responses:
+    '200':
+      description: Checkout session response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CheckoutSessionInfo.yaml
+    '400':
+      description: Invalid donation amount.  Donation amount must be 1, 2, 20, or 50 dollars.
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: ../components/schemas/Error.yaml

@@ -3,3 +3,7 @@
 /.vscode/
 # Ignore all Markdown files
 *.md
+
+# Ignore OpenAPI-related files
+openapi.yml
+/docs/api_docs/
