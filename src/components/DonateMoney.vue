@@ -24,6 +24,7 @@
           If you'd like to make a donation, please do so
           <a :href="extDonationUrl" target="_blank">here.</a>
         </p>
+        <p>Donors should add a note saying its for {{ campaign.name }}.</p>
       </div>
       <div v-else>
         <v-btn-toggle
