@@ -2,7 +2,7 @@
 name: Batch
 about: An item of work inside an Epic that represents 1-2 weeks of effort.
 title: ''
-labels: Batch, Medium
+labels: ''
 assignees: ''
 
 ---

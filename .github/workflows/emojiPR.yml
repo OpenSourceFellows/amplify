@@ -1,0 +1,27 @@
+# this is an action that will look for keywords in the title of a pull request and add a corresponding emoji to the comment section of the Pull Request so users can quickly identify the intention of a commit by the emoji generated
+name: An Emoji for Your Hard Work!
+# this action will trigger on every new pull request opened
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  # This is the job definition for 'gitemote', which will run as part of the GitHub Actions workflow.
+  gitemote:
+    # This job will run on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    # This step checks out a copy of your repository and see if any changes have been made
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      # Step 2: Run PR emote generator.
+      # This custom action is used to generate emotes for pull requests.
+      # It's referencing to the main branch of an action that I created based off of the original PR Emote Generator action created by @rcmtcristian.
+      - name: PR emote generator
+        uses: lingeorge88/gitemotePR_GL@main
+        with:
+          # The GITHUB_TOKEN is a special type of secret that is automatically created by GitHub.
+          # It is used to authenticate in the workflow and perform actions on the repository.
+          # Here it is passed to the custom action, which uses it to interact with GitHub API.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

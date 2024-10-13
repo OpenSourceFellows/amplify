@@ -1,0 +1,33 @@
+name: Detect Original Time Label
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  run_on_label_assignment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      # TODO: fix the unsupported engine error
+      - name: Install
+        run: npm install # because of amplify-script@1.0.0 only able to install node: '16.x'
+        working-directory: ./roiScript
+
+      - name: Send time
+        if: contains(join(github.event.issue.labels.*.name, ','), 'originaltime-')
+        env:
+          LABELS: ${{ toJson(github.event.issue.labels) }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_HANDLE: ${{ github.actor }}
+        run: node ./roiScript/send-time.mjs

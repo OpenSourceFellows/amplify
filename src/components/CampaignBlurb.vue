@@ -2,26 +2,30 @@
   <div class="d-flex flex-column align-center blurb">
     <div>
       <img
-        src="@/assets/scm/images/campaign-img-1.webp"
+        :src="assets['campaign-img-1']"
         alt="supplemental image one"
         class="mx-2 my-4 supplemental-img"
       />
       <img
-        src="@/assets/scm/images/campaign-img-2.webp"
+        :src="assets['campaign-img-2']"
         alt="supplemental image two"
         class="mx-2 my-4 supplemental-img"
       />
       <img
-        src="@/assets/scm/images/campaign-img-3.webp"
+        :src="assets['campaign-img-3']"
         alt="supplemental image three"
         class="mx-2 my-4 supplemental-img"
       />
     </div>
     <div class="px-6 text-content">
-      <p class="flavor-text">
-        {{ flavorText }}
-      </p>
+      <p class="flavor-text" v-html="flavorText"></p>
     </div>
+    <img
+      v-if="assets['infographic']"
+      :src="assets['infographic']"
+      alt="infographic for campaign"
+      class="mx-2 my-4 infographic-img"
+    />
 
     <div class="amplify-banner">
       <img
@@ -46,15 +50,17 @@
 </template>
 
 <script>
-import campaignData from '@/assets/scm/text/text.json'
 export default {
   name: 'CampaignBlurb',
   computed: {
     flavorText() {
-      return campaignData.campaign_text
+      return this.$store.state.campaign.campaignText
     },
     campaignId() {
       return `${this.$store.state.campaign.id}`
+    },
+    assets() {
+      return this.$store.state.assets
     }
   }
 }
@@ -83,6 +89,10 @@ export default {
 
 .banner-img {
   max-width: 100%;
+}
+
+.infographic-img {
+  max-width: 700px;
 }
 
 .action-btn {

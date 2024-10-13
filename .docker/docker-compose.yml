@@ -1,0 +1,50 @@
+version: '2.24'
+
+services:
+  amplify:
+    container_name: 'amplify_app'
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile
+    environment:
+      - POSTGRES_HOST=amplify_db
+    ports:
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: '../'
+        target: '/src/amplify'
+    command: sleep infinity
+    networks:
+      - amplify_dev
+    depends_on:
+      - amplify_db
+
+  amplify_db:
+    container_name: 'amplify_db'
+    image: postgres:latest
+    volumes:
+      - amplify_pg:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - PGUSER=postgres # Needed for healthcheck command
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    networks:
+      - amplify_dev
+    healthcheck:
+      test: ['CMD', 'pg_isready']
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  amplify_pg:
+
+networks:
+  amplify_dev:

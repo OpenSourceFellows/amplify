@@ -42,9 +42,7 @@
       class="mx-auto text-align-left rep-img"
       v-bind="member"
       :src="member.photoUrl"
-      height="125"
-      width="125"
-      :position="member.photoCroppingCSS"
+      max-width="150"
     />
     <v-card-subtitle
       class="text-align-left rep-img"
@@ -54,11 +52,9 @@
 </template>
 
 <script lang="js">
-
 export default {
   name: 'RepresentativeCard',
-  components: {
-  },
+  components: {},
   props: {
     member: {
       type: Object,
@@ -67,13 +63,15 @@ export default {
   },
   emits: ['handle-rep-selected'],
   data() {
-    return {
-    }
+    return {}
   },
   methods: {
     handleRepClick() {
       console.log('emitting handleRepSelected')
-      this.$store.commit('setGenericValue', { key: 'selectedRep', value: this.member })
+      this.$store.commit('setGenericValue', {
+        key: 'selectedRep',
+        value: this.member
+      })
       this.$emit('handle-rep-selected')
     }
   }

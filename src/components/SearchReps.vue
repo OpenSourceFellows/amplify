@@ -5,7 +5,8 @@
         <v-col cols="12" sm="6" md="4">
           <!--TODO: Create component(s) to reduce template size.-->
           <!-- This could be RepresentativeSearcher.vue or something-->
-          <div v-if="!congressMembers.length">
+          <!-- Disabled -->
+          <div v-if="false">
             <v-card flat>
               <v-card-text>
                 <v-subheader class="pa-0"> Where do you live? </v-subheader>
@@ -120,16 +121,28 @@
             </v-card>
           </div>
 
-          <div v-if="hasContent" id="representatives-list">
-            <h3>Click or tap a Representative to get started.</h3>
-            <div>
-              <v-card v-for="member in congressMembers" :key="member.name" flat>
-                <representative-card
-                  :member="member"
-                  @handle-rep-selected="loadLetterWorkflow"
-                />
-                <v-divider />
-              </v-card>
+          <!-- Always enabled -->
+          <div v-if="true" id="representatives-list">
+            <h3>Click or tap a Representative.</h3>
+            <div v-if="Object.keys(selectedRep).length">
+              <v-btn @click="clearSelectedRep" color="secondary" class="my-5">
+                Clear Rep Selection
+              </v-btn>
+            </div>
+            <div v-if="screenWidth >= 600 || !Object.keys(selectedRep).length">
+              <div>
+                <v-card
+                  v-for="member in representatives"
+                  :key="member.name"
+                  flat
+                >
+                  <representative-card
+                    :member="member"
+                    @handle-rep-selected="loadLetterWorkflow"
+                  />
+                  <v-divider />
+                </v-card>
+              </div>
             </div>
           </div>
         </v-col>
@@ -149,9 +162,11 @@
           </div>
 
           <div v-if="!listVisible">
-            <p v-if="mode === 'single'" class="text-h6 pa-4">
-              {{ campaignText }}
-            </p>
+            <div
+              v-if="mode === 'single'"
+              class="text-h6 pa-4"
+              v-html="campaignText"
+            ></div>
             <div v-else>
               <img
                 alt="Vue logo"
@@ -167,7 +182,6 @@
 </template>
 
 <script>
-import campaignData from '@/assets/scm/text/text.json'
 import RepresentativeCard from '@/components/RepresentativeCard.vue'
 import TakeAction from '@/components/TakeAction.vue'
 import axios from 'axios'
@@ -185,7 +199,8 @@ export default {
       hasContent: true,
       postalCode: this.$route.params.postalCode || '',
       listVisible: false,
-      isActive: false
+      isActive: false,
+      screenWidth: window.innerWidth
     }
   },
   computed: {
@@ -199,24 +214,52 @@ export default {
       return this.$store.state.mode
     },
     campaignText() {
-      return campaignData.supplemental_text
+      return this.$store.state.campaign.supplementalText
     },
     campaignId() {
       return this.$store.state.campaign.id
+    },
+    representatives() {
+      return this.$store.state.representatives
     }
   },
-  methods: {
-    async loadLetterWorkflow() {
-      const letterVersions = await axios.get(
-        `/api/letter_versions/${this.campaignId}`
+  created() {
+    // Duplicated to ensure that this data stays will be in Vuex if someone happens to
+    // refresh. Should be reworked in the new repo, but needs must \_(-_-)_/
+    if (!this.campaignId) {
+      this.$store.dispatch(
+        'loadSingleCampaign',
+        process.env.VUE_APP_FEATURED_CAMPAIGN
       )
-      const latest =
-        letterVersions.data[letterVersions.data.length - 1].template_id
-      const letter = await axios.get(`/api/lob/templates/${latest}`)
+
+      this.$store.commit('setGenericValue', {
+        key: 'letterId',
+        value: process.env.VUE_APP_LETTER_TEMPLATE
+      })
+
+      this.$store.commit('setGenericValue', { key: 'mode', value: 'single' })
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize)
+    })
+  },
+  beforeunMount() {
+    window.removeEventListener('resize', this.onResize)
+  },
+  methods: {
+    clearSelectedRep() {
+      this.$store.commit('setGenericValue', { key: 'selectedRep', value: {} })
+    },
+    async loadLetterWorkflow() {
+      const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
+
+      const latest = letter.data.versions[letter.data.versions.length - 1]
 
       this.$store.commit('setGenericValue', { key: 'letterId', value: latest })
 
-      this.letterBody = letter.data.versions[0].html
+      this.letterBody = latest.html
 
       this.listVisible = true
     },
@@ -270,6 +313,9 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    onResize() {
+      this.screenWidth = window.innerWidth
     }
   }
 }

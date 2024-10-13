@@ -23,28 +23,9 @@ class Campaign extends BaseModel {
         },
         type: { type: 'string', enum: ['Starter', 'Accelerator', 'Grant'] },
         page_url: { type: 'string', minLength: 1 },
-        logo_url: { type: 'string', minLength: 1 },
-        letters_goal: {
-          anyOf: [{ type: 'integer', minimum: 0 }, { type: 'null' }]
-        },
-        donation_goal: {
-          anyOf: [{ type: 'integer', minimum: 0 }, { type: 'null' }]
-        }
-      }
-    }
-  }
-
-  // This object defines the relations to other models.
-  static get relationMappings() {
-    const LetterVersion = require('./letter-version')
-    return {
-      LetterVersions: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: LetterVersion,
-        join: {
-          from: 'campaigns.id',
-          to: 'letter_versions.campaign_id'
-        }
+        campaign_tagline: { type: 'string' },
+        campaign_text: { type: 'string' },
+        supplemental_text: { type: 'string' }
       }
     }
   }

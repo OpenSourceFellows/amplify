@@ -1,53 +1,34 @@
 <template>
-  <div v-if="mode === 'single'">
+  <div>
     <CampaignHero />
     <CampaignBlurb />
-  </div>
-  <div v-else>
-    <home-hero />
-    <campaign-cards />
   </div>
 </template>
 
 <script>
 import CampaignHero from '@/components/CampaignHero.vue'
-import HomeHero from '@/components/HomeHero.vue'
 import CampaignBlurb from '@/components/CampaignBlurb.vue'
-import CampaignCards from '@/components/CampaignCards'
 
 export default {
   name: 'Home',
   components: {
     CampaignBlurb,
-    CampaignCards,
-    CampaignHero,
-    HomeHero
+    CampaignHero
   },
-  data() {
-    return {
-      mode: ''
-    }
-  },
-  computed: {
-    campaign() {
-      return this.$store.state.campaign
-    }
-  },
-  created() {
-    this.mode = process.env.VUE_APP_CAMPAIGN_MODE
+  computed: {},
+  async created() {
+    const mode = process.env.VUE_APP_CAMPAIGN_MODE
+    const campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
 
-    if (this.mode === 'single' && !this.campaign.id) {
-      this.campaignId = process.env.VUE_APP_FEATURED_CAMPAIGN
+    // Also populates representatives and assets
+    await this.$store.dispatch('loadSingleCampaign', campaignId)
 
-      this.$store.commit('setGenericValue', {
-        key: 'letterId',
-        value: process.env.VUE_APP_LETTER_TEMPLATE
-      })
+    this.$store.commit('setGenericValue', {
+      key: 'letterId',
+      value: process.env.VUE_APP_LETTER_TEMPLATE
+    })
 
-      this.$store.commit('setGenericValue', { key: 'mode', value: 'single' })
-
-      this.$store.dispatch('loadSingleCampaign', this.campaignId)
-    }
+    this.$store.commit('setGenericValue', { key: 'mode', value: mode })
   }
 }
 </script>

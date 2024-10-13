@@ -1,0 +1,36 @@
+name: Run on Label Assignment (finish hackpod)
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  run_on_label_assignment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: npm install
+        working-directory: ./roiScript
+
+      - name: Set Branch Name
+        id: branch_name
+        run: echo "::set-output name=issue_branch::${{ github.head_ref }}"
+
+      - name: Get Current User
+        id: current_user
+        run: echo "::set-output name=gh_handle::${{ github.actor }}"
+
+      - name: Run script on label assignment
+        if: contains(github.event.pull_request.labels.*.name, 'completed hackpod issue') # no way to set a particular label workflow trigger -- https://github.com/orgs/community/discussions/26261
+        env:
+          PR_PAYLOAD: ${{ toJson(github.event.pull_request._links.comments.href) }} # was: github # github.event.pull_request._links.comments.href
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          BRANCH_NAME: ${{ steps.branch_name.outputs.issue_branch }}
+          GH_HANDLE: ${{ steps.current_user.outputs.gh_handle }}
+        run: node ./roiScript/send-metrics.mjs

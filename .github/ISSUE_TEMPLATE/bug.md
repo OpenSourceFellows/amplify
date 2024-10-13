@@ -1,12 +1,11 @@
 ---
 name: Bug
-about: Template to create bug/buildsafe issues that need to be designed for 
-title: 'QA Bug'
-labels: QA
-assignees: 'teakopp'
+about: Template to create bug/buildsafe issues that need to be designed for
+title: QA Bug
+labels: ''
+assignees: teakopp
 
 ---
-
 
 Remember, an issue is not the place to ask questions. You can use [Stack Overflow](http://stackoverflow.com/questions/tagged/angular-meteor) for that, or you may want to start a discussion on the [Meteor forum](https://forums.meteor.com/).
 
@@ -47,4 +46,4 @@ Before you open an issue, please check if a similar issue already exists or has 
 Please add the following labels dependent on the bug type 
 - Security Bug: Creates an issue that can cause harm 
 - Vulnerability Bug: Creates an issue to update a supply chain dependency error
-- Functional Bug: something that is causing a crash of the app 
+- Functional Bug: something that is causing a crash of the app
