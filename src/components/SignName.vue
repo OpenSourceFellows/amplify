@@ -162,9 +162,7 @@ export default {
 
   methods: {
     addressCheck() {
-      this.errorMessages = this.address && !this.firstName && !this.lastName
-            ? "Hey! I'm required"
-            : ''
+      this.errorMessages = this.address && !this.firstName && !this.lastName ? "Hey! I'm required" : ''
 
       return true
     },
