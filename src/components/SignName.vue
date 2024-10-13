@@ -112,15 +112,15 @@ export default {
     name: 'SignName',
     data: () => ({
       errorMessages: '',
-      firstName: null,
-      lastName: null,
-      line1: null,
-      line2: null,
-      city: null,
-      state: null,
-      zip: null,
-      country: null,
-      email: null,
+      firstName: '',
+      lastName: '',
+      line1: '',
+      line2: '',
+      city: '',
+      state: '',
+      zip: '',
+      country: '',
+      email: '',
       formHasErrors: false,
       JSONstring: '',
       message: ''
@@ -129,8 +129,8 @@ export default {
     computed: {
       form () {
         return {
-          firstName: this.first_name,
-          lastName: this.last_name,
+          firstName: this.firstName,
+          lastName: this.lastName,
           line1: this.line1,
           line2: this.line2,
           city: this.city,
@@ -149,7 +149,7 @@ export default {
 
     methods: {
         addressCheck () {
-          this.errorMessages = this.address && !this.first_name && !this.last_name
+          this.errorMessages = this.address && !this.firstName && !this.lastName
             ? "Hey! I'm required"
             : ''
 
