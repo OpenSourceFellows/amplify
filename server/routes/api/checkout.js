@@ -171,12 +171,12 @@ router.post('/process-transaction', async (req, res) => {
     console.log(`letter: ${letter.id}, ${letterTemplate}`)
     
     const lobApiKey = process.env.LOB_API_KEY
-    const lobCredentials = `:${lobApiKey}`
+    const lobCredentials = btoa(`${lobApiKey}:`)
     const lobResponse = await axios.post(
       'https://api.lob.com/v1/letters', 
       {
         headers: {
-          'Authorization': `Basic ${Buffer.from(lobCredentials).toString('base64')}`,
+          'Authorization': `Basic ${lobCredentials}`,
           'Idempotency-Key': letter.tracking_number
         },
         data: {
