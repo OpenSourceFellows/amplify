@@ -10,6 +10,7 @@ services:
       - POSTGRES_HOST=amplify_db
     ports:
       - 8080:8080
+      - 5000:5000
     volumes:
       - type: bind
         source: '../'

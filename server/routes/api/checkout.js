@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios')
 const { v4: uuidv4 } = require('uuid')
 const { Stripe, StripeError } = require('../../lib/stripe')
 const {
@@ -108,6 +109,7 @@ router.post('/create-checkout-session', async (req, res) => {
       .json({ url: session.url, sessionId: session.id })
       .end()
   } catch (error) {
+    console.error(error)
     let statusCode = 500
 
     if (error instanceof PaymentPresenterError) {
@@ -128,6 +130,7 @@ router.post('/process-transaction', async (req, res) => {
     // If livemode is false, disable signature checking
     // and event reconstructionfor ease of testing.
     let event
+    /*
     if (stripe.livemode) {
       const signature = req.headers['stripe-signature']
       if (!signature) throw new CheckoutError('No stripe signature on request!')
@@ -135,12 +138,18 @@ router.post('/process-transaction', async (req, res) => {
       event = stripe.validateEvent(signature, req.rawBody)
     } else {
       event = req.body
-      console.log(event)
+      // console.log(event)
     }
+    */
+    event = req.body
+
+    if (!event) throw new CheckoutError('Unprocessable message')
 
     const data = event.data
     const { id: paymentIntent, amount } = data.object
     const [eventType, eventOutcome] = req.body.type.split('.')
+
+    console.log(paymentIntent, amount, eventOutcome)
 
     // We are not going to send letters from here just yet
     // so we will record the transaction no matter the outcome.
@@ -150,11 +159,50 @@ router.post('/process-transaction', async (req, res) => {
       )
     }
 
-    await Transaction.query()
-      .patch({ amount, status: eventOutcome })
-      .where({ stripe_transaction_id: paymentIntent })
+    const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent })
+    await transaction.$query().patch({ status: eventOutcome })
 
-    return res.status(200).end()
+    console.log(`transaction = ${transaction.id}, ${transaction.status}`)
+
+    const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
+    letter.tracking_number = uuidv4()
+    const letterTemplate = JSON.parse(letter.letterTemplate)
+    
+    console.log(`letter: ${letter.id}, ${letterTemplate}`)
+    
+    const lobApiKey = process.env.LOB_API_KEY
+    const lobCredentials = `:${lobApiKey}`
+    const lobResponse = await axios.post(
+      'https://api.lob.com/v1/letters', 
+      {
+        headers: {
+          'Authorization': `Basic ${Buffer.from(lobCredentials).toString('base64')}`,
+          'Idempotency-Key': letter.tracking_number
+        },
+        data: {
+          to: {
+            name: letter.addressee,
+            address_line1: letter.address_line_1,
+            address_line2: letter.address_line_2,
+            address_city: letter.city,
+            address_state: letter.state,
+            address_zip: letter.zip,
+            address_country: 'US',
+          },
+          from: letter.return_address,
+          color: false,
+          use_type: 'operational',
+          file: letterTemplate.latest_template_preview.template_id,
+          merge_variables: letter.merge_variables
+        }
+      }
+    )
+
+    if (!lobResponse.statusCode === 200) throw new CheckoutError(lobResponse)
+
+    await letter.$query().patch({ sent: true})
+
+    return res.status(201).end()
   } catch (error) {
     let statusCode = 500
 
