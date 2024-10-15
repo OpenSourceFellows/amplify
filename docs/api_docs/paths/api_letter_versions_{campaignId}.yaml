@@ -1,0 +1,27 @@
+get:
+  summary: >-
+    Returns all versions of each letter, including the template id, sent out for
+    a campaign based on campaign ID
+  responses:
+    '200':
+      description: Letter Versions response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/LetterVersion.yaml
+    '500':
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: ../components/schemas/Error.yaml
+  parameters:
+    - name: campaignId
+      description: ID of campaign to return letter versions for
+      in: path
+      required: true
+      schema:
+        type: integer

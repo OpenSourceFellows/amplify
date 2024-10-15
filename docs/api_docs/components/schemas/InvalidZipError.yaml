@@ -1,0 +1,7 @@
+type: object
+properties:
+  error:
+    type: string
+    default: >-
+      Invalid zip code format, valid examples are 84054-6013 or 84054. The zip
+      code used was {zip code}

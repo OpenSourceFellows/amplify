@@ -1,0 +1,36 @@
+type: object
+required:
+  - campaign_id
+  - template_id
+  - office_division
+properties:
+  id:
+    type: integer
+  campaign_id:
+    type: integer
+    minimum: 1
+  template_id:
+    type: string
+    minLength: 1
+    maxLength: 255
+  office_division:
+    type: string
+    default: Federal
+    enum:
+      - Federal
+      - State
+      - County
+      - Municipality
+  state:
+    type: string
+    nullable: true
+    minLength: 2
+    maxLength: 2
+  county:
+    type: string
+    nullable: true
+    minLength: 1
+  municipality:
+    type: string
+    nullable: true
+    minLength: 1

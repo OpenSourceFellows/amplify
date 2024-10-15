@@ -1,0 +1,45 @@
+get:
+  summary: Returns representatives based on zip code
+  operationId: ''
+  description: >-
+    Returns Representatives based on zip code utilizing <a
+    href="https://developers.google.com/civic-information">Google's Civic
+    Information API</a>
+  externalDocs: 
+    url: https://developers.google.com/civic-information
+  responses:
+    '200':
+      description: >-
+        Array of representatives, info found via <a
+        href="https://developers.google.com/civic-information">Google's Civic
+        Information API</a>
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Representative.yaml
+    '400':
+      description: Invalid Zip Code Error
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: ../components/schemas/InvalidZipError.yaml
+    '500':
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: ../components/schemas/Error.yaml
+  parameters:
+    - name: zipCode
+      description: >-
+        Zip code around which to search for representatives.  Must be in the
+        form of a valid 5-digit or Zip+4 9-digit format.
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 10

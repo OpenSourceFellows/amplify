@@ -1,0 +1,29 @@
+summary: Create a letter to a representative
+post:
+  description: ''
+  summary: ''
+  operationId: ''
+  externalDocs: 
+    url: https://docs.lob.com/#operation/letter_create
+  requestBody:
+    $ref: ../components/requestBodies/CreateLetter.yaml
+  responses:
+    '200':
+      description: Letter sent successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              expected_delivery_date:
+                type: string
+    '500':
+      description: Something went wrong with payment, message will be "Payment is still pending or has failed" or "Something failed! A refund of ${refund.amount} ${refund.currency} has been issued"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                default: Payment is still pending or has failed

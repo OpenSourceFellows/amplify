@@ -1,0 +1,30 @@
+description: ''
+post:
+  description: ''
+  summary: ''
+  operationId: ''
+  requestBody:
+    $ref: ../components/requestBodies/CreateAddress.yaml
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              address_id:
+                type: string
+                description: id from the addressResponse recieved from Lob
+    '400': 
+      description: Address is not deliverable
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '500': 
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
