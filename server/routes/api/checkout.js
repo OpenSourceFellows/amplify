@@ -125,7 +125,7 @@ router.post('/create-checkout-session', async (req, res) => {
 
 router.post('/process-transaction', async (req, res) => {
   try {
-    const stripe = new Stripe()
+    // const stripe = new Stripe()
 
     // If livemode is false, disable signature checking
     // and event reconstructionfor ease of testing.
@@ -165,35 +165,36 @@ router.post('/process-transaction', async (req, res) => {
     console.log(`transaction = ${transaction.id}, ${transaction.status}`)
 
     const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
-    letter.tracking_number = uuidv4()
+    letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
     
     console.log(`letter: ${letter.id}, ${letterTemplate}`)
     
     const lobApiKey = process.env.LOB_API_KEY
     const lobCredentials = btoa(`${lobApiKey}:`)
+
+    console.log(letter.addressee, letter.addressLine1)
     const lobResponse = await axios.post(
       'https://api.lob.com/v1/letters', 
       {
-        headers: {
-          'Authorization': `Basic ${lobCredentials}`,
-          'Idempotency-Key': letter.tracking_number
+        to: {
+          name: letter.addressee,
+          address_line1: letter.addressLine1,
+          address_line2: letter.addressLine2,
+          address_city: letter.city,
+          address_state: letter.state,
+          address_zip: letter.zip
         },
-        data: {
-          to: {
-            name: letter.addressee,
-            address_line1: letter.address_line_1,
-            address_line2: letter.address_line_2,
-            address_city: letter.city,
-            address_state: letter.state,
-            address_zip: letter.zip,
-            address_country: 'US',
-          },
-          from: letter.return_address,
-          color: false,
-          use_type: 'operational',
-          file: letterTemplate.latest_template_preview.template_id,
-          merge_variables: letter.merge_variables
+        from: letter.returnAddress,
+        color: false,
+        use_type: 'operational',
+        file: letterTemplate.latest_template_preview.template_id,
+        merge_variables: letter.mergeVariables
+      },
+      {
+        headers: {
+          Authorization: `Basic ${lobCredentials}`,
+          'Idempotency-Key': letter.trackingNumber
         }
       }
     )
@@ -204,6 +205,7 @@ router.post('/process-transaction', async (req, res) => {
 
     return res.status(201).end()
   } catch (error) {
+    console.error(error.response.data.error)
     let statusCode = 500
 
     if (error instanceof CheckoutError) {
