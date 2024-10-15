@@ -162,18 +162,14 @@ router.post('/process-transaction', async (req, res) => {
     const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent })
     await transaction.$query().patch({ status: eventOutcome })
 
-    console.log(`transaction = ${transaction.id}, ${transaction.status}`)
-
     const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
     letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
     
-    console.log(`letter: ${letter.id}, ${letterTemplate}`)
-    
     const lobApiKey = process.env.LOB_API_KEY
     const lobCredentials = btoa(`${lobApiKey}:`)
 
-    console.log(letter.addressee, letter.addressLine1)
+    console.log(letter.mergeVariables)
     const lobResponse = await axios.post(
       'https://api.lob.com/v1/letters', 
       {
