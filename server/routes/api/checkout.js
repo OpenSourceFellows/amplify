@@ -189,7 +189,7 @@ router.post('/process-transaction', async (req, res) => {
         color: false,
         use_type: 'operational',
         file: letterTemplate.latest_template_preview.template_id,
-        merge_variables: letter.mergeVariables
+        merge_variables: JSON.parse(letter.mergeVariables)
       },
       {
         headers: {
