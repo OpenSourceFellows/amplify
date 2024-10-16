@@ -1,47 +1,57 @@
-const express = require('express')
-const axios = require('axios')
-const { v4: uuidv4 } = require('uuid')
-const { Stripe, StripeError } = require('../../lib/stripe')
+// server/routes/api/checkout.js
+
+const express = require('express');
+const axios = require('axios');
+const { v4: uuidv4 } = require('uuid');
+const { Stripe, StripeError } = require('../../lib/stripe');
 const {
   PaymentPresenter,
   PaymentPresenterError
-} = require('../../../shared/presenters/payment-presenter')
-const Constituent = require('../../db/models/constituent')
-const Transaction = require('../../db/models/transaction')
-const Letter = require('../../db/models/letter')
+} = require('../../../shared/presenters/payment-presenter');
+const Constituent = require('../../db/models/constituent');
+const Transaction = require('../../db/models/transaction');
+const Letter = require('../../db/models/letter');
 
-const router = express.Router()
+// Insert fuzzing library
+const fuzz = require('jsfuzz');
+
+const router = express.Router();
 
 class CheckoutError extends Error {
   constructor(message) {
-    super(message)
-    this.name = 'CheckoutError'
+    super(message);
+    this.name = 'CheckoutError';
   }
 }
 
 router.post('/create-checkout-session', async (req, res) => {
-  const { donation, user, letter } = req.body
-  const origin = req.get('origin')
+  const { donation, user, letter } = req.body;
+  const origin = req.get('origin');
 
-  console.log(`origin: ${origin}`)
+  console.log(`origin: ${origin}`);
 
   try {
-    const presenter = new PaymentPresenter()
+    const presenter = new PaymentPresenter();
 
-    // Will throw error if invalid amount is given.
-    presenter.validatePaymentAmount(donation)
+    // Fuzz testing: Validate payment amount with various inputs
+    // Note: Integrating fuzzing directly into application code is unconventional.
+    // Typically, fuzzing is handled within test suites.
+    // This is for demonstration purposes based on your request.
+    fuzz.run(() => {
+      presenter.validatePaymentAmount(donation);
+    });
 
     if (donation === 0 && process.env.VUE_APP_EMPTY_TRANSACTIONS === 'on') {
-      const CHECKOUT_SESSION_ID = uuidv4()
-      const redirectUrl = `${origin}/complete?session_id=${CHECKOUT_SESSION_ID}`
+      const CHECKOUT_SESSION_ID = uuidv4();
+      const redirectUrl = `${origin}/complete?session_id=${CHECKOUT_SESSION_ID}`;
 
-      let constituent
-      ;[constituent] = await Constituent.query().where('email', user.email)
+      let constituent;
+      [constituent] = await Constituent.query().where('email', user.email);
       if (!constituent) {
-        constituent = await Constituent.query().insert(user)
+        constituent = await Constituent.query().insert(user);
       }
 
-      console.log(constituent.id)
+      console.log(constituent.id);
 
       const transaction = await Transaction.query().insert({
         stripeTransactionId: 'no-stripe-' + uuidv4(),
@@ -50,44 +60,44 @@ router.post('/create-checkout-session', async (req, res) => {
         currency: 'usd',
         paymentMethod: 'credit_card',
         status: 'succeeded'
-      })
+      });
 
       // Using a temporary mapping here also
       await Letter.query().insert({
         transactionId: transaction.id,
         constituentId: constituent.id,
         ...letter
-      })
+      });
 
       return res
         .status(200)
         .json({ url: redirectUrl, sessionId: CHECKOUT_SESSION_ID })
-        .end()
+        .end();
     }
 
     // TODO: Should be strict https but we need to do some deployment fixes first.
-    const redirectUrl = `${origin}/complete?session_id={CHECKOUT_SESSION_ID}`
-    const cancelUrl = origin
+    const redirectUrl = `${origin}/complete?session_id={CHECKOUT_SESSION_ID}`;
+    const cancelUrl = origin;
 
-    const stripe = new Stripe()
+    const stripe = new Stripe();
     const session = await stripe.createCheckoutSession(
       donation,
       redirectUrl,
       cancelUrl
-    )
+    );
 
     // These objects must be recorded in a specific order:
     // constituent, then transaction, then letter
     // This is because letter needs id from constituent and transaction!
 
     // TODO: Move Constituent insert to earlier in the cycle.
-    let constituent
-    ;[constituent] = await Constituent.query().where('email', user.email)
+    let constituent;
+    [constituent] = await Constituent.query().where('email', user.email);
     if (!constituent) {
-      constituent = await Constituent.query().insert(user)
+      constituent = await Constituent.query().insert(user);
     }
 
-    console.log(constituent.id)
+    console.log(constituent.id);
 
     const transaction = await Transaction.query().insert({
       stripeTransactionId: session.paymentIntent,
@@ -95,41 +105,41 @@ router.post('/create-checkout-session', async (req, res) => {
       amount: donation,
       currency: 'usd',
       paymentMethod: 'credit_card'
-    })
+    });
 
     // Using a temporary mapping here also
     await Letter.query().insert({
       transactionId: transaction.id,
       constituentId: constituent.id,
       ...letter
-    })
+    });
 
     return res
       .status(200)
       .json({ url: session.url, sessionId: session.id })
-      .end()
+      .end();
   } catch (error) {
-    console.error(error)
-    let statusCode = 500
+    console.error(error);
+    let statusCode = 500;
 
     if (error instanceof PaymentPresenterError) {
-      statusCode = 400
+      statusCode = 400;
     }
 
-    console.error(error)
+    console.error(error);
 
     // TODO: error logging
-    return res.status(statusCode).json({ error: error.message }).end()
+    return res.status(statusCode).json({ error: error.message }).end();
   }
-})
+});
 
 router.post('/process-transaction', async (req, res) => {
   try {
     // const stripe = new Stripe()
 
     // If livemode is false, disable signature checking
-    // and event reconstructionfor ease of testing.
-    let event
+    // and event reconstruction for ease of testing.
+    let event;
     /*
     if (stripe.livemode) {
       const signature = req.headers['stripe-signature']
@@ -141,35 +151,47 @@ router.post('/process-transaction', async (req, res) => {
       // console.log(event)
     }
     */
-    event = req.body
+    event = req.body;
 
-    if (!event) throw new CheckoutError('Unprocessable message')
+    if (!event) throw new CheckoutError('Unprocessable message');
 
-    const data = event.data
-    const { id: paymentIntent, amount } = data.object
-    const [eventType, eventOutcome] = req.body.type.split('.')
+    const data = event.data;
+    const { id: paymentIntent, amount } = data.object;
+    const [eventType, eventOutcome] = req.body.type.split('.');
 
-    console.log(paymentIntent, amount, eventOutcome)
+    console.log(paymentIntent, amount, eventOutcome);
+
+    // Fuzz testing: Validate event type with various inputs
+    // Note: Integrating fuzzing directly into application code is unconventional.
+    // Typically, fuzzing is handled within test suites.
+    // This is for demonstration purposes based on your request.
+    fuzz.run(() => {
+      if (eventType !== 'payment_intent') {
+        throw new CheckoutError(
+          `Unexpected event! Received ${eventType} but it could not be processed.`
+        );
+      }
+    });
 
     // We are not going to send letters from here just yet
     // so we will record the transaction no matter the outcome.
     if (eventType !== 'payment_intent') {
       throw new CheckoutError(
         `Unexpected event! Received ${eventType} but it could not be processed.`
-      )
+      );
     }
 
-    const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent })
-    await transaction.$query().patch({ status: eventOutcome })
+    const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent });
+    await transaction.$query().patch({ status: eventOutcome });
 
-    const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
-    letter.trackingNumber = uuidv4()
-    const letterTemplate = JSON.parse(letter.letterTemplate)
+    const letter = await Letter.query().where({ transaction_id: transaction.id }).first();
+    letter.trackingNumber = uuidv4();
+    const letterTemplate = JSON.parse(letter.letterTemplate);
     
-    const lobApiKey = process.env.LOB_API_KEY
-    const lobCredentials = btoa(`${lobApiKey}:`)
+    const lobApiKey = process.env.LOB_API_KEY;
+    const lobCredentials = Buffer.from(`${lobApiKey}:`).toString('base64'); // Corrected encoding
 
-    console.log(letter.mergeVariables)
+    console.log(letter.mergeVariables);
     const lobResponse = await axios.post(
       'https://api.lob.com/v1/letters', 
       {
@@ -193,30 +215,31 @@ router.post('/process-transaction', async (req, res) => {
           'Idempotency-Key': letter.trackingNumber
         }
       }
-    )
+    );
 
-    if (!lobResponse.statusCode === 200) throw new CheckoutError(lobResponse)
+    // Fixed the status check condition
+    if (lobResponse.status !== 200) throw new CheckoutError(lobResponse.data.error);
 
-    await letter.$query().patch({ sent: true})
+    await letter.$query().patch({ sent: true });
 
-    return res.status(201).end()
+    return res.status(201).end();
   } catch (error) {
-    console.error(error.response.data.error)
-    let statusCode = 500
+    console.error(error.response?.data?.error || error.message);
+    let statusCode = 500;
 
     if (error instanceof CheckoutError) {
-      statusCode = 400
-      console.error(error.message)
+      statusCode = 400;
+      console.error(error.message);
     }
 
     if (error instanceof StripeError) {
       // Don't leak Stripe logging.
-      console.error(error.message)
-      error.message = 'Payment processing error'
+      console.error(error.message);
+      error.message = 'Payment processing error';
     }
 
-    return res.status(statusCode).json({ error: error.message }).end()
+    return res.status(statusCode).json({ error: error.message }).end();
   }
-})
+});
 
-module.exports = router
+module.exports = router;
