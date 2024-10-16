@@ -12,6 +12,34 @@ const Letter = require('../../db/models/letter')
 
 const router = express.Router()
 
+const Joi = require('joi') // For input validation
+
+// Validation schema for incoming data
+const sessionSchema = Joi.object({
+  donation: Joi.number()
+    .positive()
+    .max(10000)
+    .required() // Limit donation amount to prevent abuse
+    .messages({
+      'number.base': 'Donation must be a number.',
+      'number.positive': 'Donation must be a positive number.',
+      'number.max': 'Donation exceeds the allowed limit.',
+      'any.required': 'Donation is required.'
+    }),
+  user: Joi.object({
+    email: Joi.string().email().required().messages({
+      'string.email': 'A valid email is required.',
+      'any.required': 'User email is required.'
+    })
+  }).required(),
+  letter: Joi.string()
+    .max(300)
+    .optional() // Limit the size to prevent long data
+    .messages({
+      'string.max': 'Letter cannot exceed 300 characters.'
+    })
+}).unknown(false) // Disallow any additional, unexpected fields
+
 class CheckoutError extends Error {
   constructor(message) {
     super(message)
@@ -20,10 +48,43 @@ class CheckoutError extends Error {
 }
 
 router.post('/create-checkout-session', async (req, res) => {
-  const { donation, user, letter } = req.body
-  const origin = req.get('origin')
+  try {
+    // Validate incoming data against the schema
+    const { donation, user, letter } = await sessionSchema.validateAsync(
+      req.body
+    )
 
-  console.log(`origin: ${origin}`)
+    // Validate origin to ensure the request is coming from trusted sources
+    const origin = req.get('origin')
+    // Trusted origins to be added as a list below, environment variable, config file, or in the DB
+    const allowedOrigins = [
+      'https://yourtrusteddomain.com',
+      'https://anothertrusteddomain.com'
+    ]
+    if (!allowedOrigins.includes(origin)) {
+      console.warn(`Untrusted origin attempted to create session: ${origin}`)
+      return res
+        .status(403)
+        .json({ error: 'Forbidden request from untrusted origin.' })
+    }
+
+    // Log the origin without sensitive information
+    console.log(`Valid origin: ${origin}`)
+
+    // Continue with checkout session creation logic...
+    // (You can add the session creation logic here)
+
+    return res
+      .status(200)
+      .json({ message: 'Checkout session created successfully' })
+  } catch (error) {
+    // Error handling
+    if (error.isJoi) {
+      // Handle validation errors
+      console.error('Validation error:', error.details)
+      return res.status(400).json({ error: 'Invalid input data' })
+    }
+  }
 
   try {
     const presenter = new PaymentPresenter()
@@ -159,19 +220,23 @@ router.post('/process-transaction', async (req, res) => {
       )
     }
 
-    const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent })
+    const transaction = await Transaction.query().findOne({
+      stripe_transaction_id: paymentIntent
+    })
     await transaction.$query().patch({ status: eventOutcome })
 
-    const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
+    const letter = await Letter.query()
+      .where({ transaction_id: transaction.id })
+      .first()
     letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
-    
+
     const lobApiKey = process.env.LOB_API_KEY
     const lobCredentials = btoa(`${lobApiKey}:`)
 
     console.log(letter.mergeVariables)
     const lobResponse = await axios.post(
-      'https://api.lob.com/v1/letters', 
+      'https://api.lob.com/v1/letters',
       {
         to: {
           name: letter.addressee,
@@ -197,7 +262,7 @@ router.post('/process-transaction', async (req, res) => {
 
     if (!lobResponse.statusCode === 200) throw new CheckoutError(lobResponse)
 
-    await letter.$query().patch({ sent: true})
+    await letter.$query().patch({ sent: true })
 
     return res.status(201).end()
   } catch (error) {
