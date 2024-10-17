@@ -1,13 +1,37 @@
 const express = require('express')
 const axios = require('axios')
 const { v4: uuidv4 } = require('uuid')
-const { Stripe, StripeError } = require('../../lib/stripe')
-const {
-  PaymentPresenter,
-  PaymentPresenterError
-} = require('../../../shared/presenters/payment-presenter')
-const Constituent = require('../../db/models/constituent')
-const Transaction = require('../../db/models/transaction')
+const { Stripe, StripeError } = require('../../lib/stripe');
+const { PaymentPresenter, PaymentPresenterError } = require('../../../shared/presenters/payment-presenter');
+const Constituent = require('../../db/models/constituent');
+const Transaction = require('../../db/models/transaction');
+
+// Function for payment processing with added error handling
+async function processPayment(userId, paymentData) {
+    try {
+        // Validate user ID and payment data
+        const constituent = await Constituent.findByPk(userId);
+        if (!constituent) {
+            throw new Error('Invalid user ID');
+        }
+
+        // Process the payment securely
+        const paymentResult = await Stripe.paymentIntents.create(paymentData);
+        
+        // Handle post-payment logic
+        const transaction = await Transaction.create({ userId, amount: paymentResult.amount });
+        return transaction;
+        
+    } catch (error) {
+        // Handle specific errors
+        if (error instanceof StripeError) {
+            console.error('Stripe Error:', error.message);
+        } else if (error instanceof PaymentPresenterError) {
+            console.error('Payment Presentation Error:', error.message);
+        } else {
+            console.error('General Error:', error.message);
+        }
+        throw error;
 const Letter = require('../../db/models/letter')
 
 const router = express.Router()
