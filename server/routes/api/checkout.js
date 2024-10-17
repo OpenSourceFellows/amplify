@@ -1,13 +1,40 @@
 const express = require('express')
 const axios = require('axios')
 const { v4: uuidv4 } = require('uuid')
-const { Stripe, StripeError } = require('../../lib/stripe')
-const {
-  PaymentPresenter,
-  PaymentPresenterError
-} = require('../../../shared/presenters/payment-presenter')
-const Constituent = require('../../db/models/constituent')
-const Transaction = require('../../db/models/transaction')
+const { Stripe, StripeError } = require('../../lib/stripe');
+const { PaymentPresenter, PaymentPresenterError } = require('../../../shared/presenters/payment-presenter');
+const Constituent = require('../../db/models/constituent');
+const Transaction = require('../../db/models/transaction');
+
+// Function for payment processing with added error handling
+async function processPayment(userId, paymentData) {
+    try {
+        // Validate user ID and payment data
+        const constituent = await Constituent.findByPk(userId);
+        if (!constituent) {
+            throw new Error('Invalid user ID');
+        }
+
+        // Process the payment securely
+        const paymentResult = await Stripe.paymentIntents.create(paymentData);
+        
+        // Handle post-payment logic
+        const transaction = await Transaction.create({ userId, amount: paymentResult.amount });
+        return transaction;
+        
+    } catch (error) {
+        // Handle specific errors
+        if (error instanceof StripeError) {
+            console.error('Stripe Error:', error.message);
+        } else if (error instanceof PaymentPresenterError) {
+            console.error('Payment Presentation Error:', error.message);
+        } else {
+            console.error('General Error:', error.message);
+        }
+        throw error;
+    }
+}
+
 const Letter = require('../../db/models/letter')
 
 const router = express.Router()
@@ -123,9 +150,30 @@ router.post('/create-checkout-session', async (req, res) => {
   }
 })
 
+const Stripe = require('stripe');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 router.post('/process-transaction', async (req, res) => {
   try {
-    // const stripe = new Stripe()
+    // Validate and sanitize request body
+    const { amount, currency } = req.body;
+    if (!amount || !currency) {
+      return res.status(400).send('Invalid payment data');
+    }
+
+    // Proceed with transaction
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency,
+    });
+
+    res.status(200).send(paymentIntent);
+  } catch (error) {
+    console.error('Transaction Error:', error);
+    res.status(500).send('Transaction failed');
+  }
+});
+
 
     // If livemode is false, disable signature checking
     // and event reconstructionfor ease of testing.
@@ -217,6 +265,4 @@ router.post('/process-transaction', async (req, res) => {
 
     return res.status(statusCode).json({ error: error.message }).end()
   }
-})
-
-module.exports = router
+}
