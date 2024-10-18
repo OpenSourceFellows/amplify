@@ -12,9 +12,12 @@ module.exports = {
         cause: 'Civic Rights',
         type: 'Grant',
         page_url: 'https://protectwhitemesa.org/',
-        campaign_tagline: 'Protecting the Ute Tribal Lands and Peoples from Radioactive Waste',
-        campaign_text: '<p>White Mesa Concerned Community is a grassroots group of concerned tribal members of the Ute Mountain Ute Tribe. We work to inform our fellow tribal members and the public about our struggle to protect our community, health, water, air, land, culture, and sacred sites from toxic and radioactive contamination from the uranium mill. We demand that the uranium mill be closed and cleaned up.</p><p>Here are some of the species that continue to be impacted by the uranium mining:</p><p>Mexican Spotted Owl (Strix occidentalis lucida): This owl is found in forested canyons and riparian zones. The tribe works to protect its habitat by managing forest resources and reducing threats such as wildfires and logging.</p><p>Southwestern Willow Flycatcher (Empidonax traillii extimus): Found in riparian areas, this bird\'s protection includes restoring native vegetation, managing water resources, and preventing habitat degradation from livestock grazing and invasive species.</p><p>Gunnison Sage-Grouse (Centrocercus minimus): The tribe participates in habitat restoration and conservation efforts for this species, including managing land use and mitigating threats like overgrazing, invasive plants, and human encroachment.</p><p>Yellow-Billed Cuckoo (Coccyzus americanus): The tribe works to conserve riparian habitats crucial for this bird by managing water flow and restoring native plant communities that provide nesting and foraging opportunities.</p><p>Colorado Pikeminnow (Ptychocheilus lucius): The tribe collaborates with state and federal agencies to protect this endangered fish by managing water quality and flow in river systems, reducing the impact of non-native species, and restoring critical habitat areas.</p><p>Bonytail Chub (Gila elegans) and Humpback Chub (Gila cypha): Both fish species benefit from the tribe\'s efforts to maintain clean and healthy river systems, which include monitoring water quality, controlling non-native species, and advocating for water management practices that support native fish populations.</p>',
-        supplemental_text: '<p>The White Mesa Ute Community of the Ute Mountain Ute Tribe is located between Blanding and Bluff in San Juan County in southern Utah. It is near Cedar Mesa, the Bears Ears National Monument, Valley of the Gods, the San Juan River, national parks, and many other beautiful and sacred areas. </p><p>White Mesa, however, is adjacent to the Energy Fuels’ uranium mill, the last such facility in the United States, where uranium tailings and other radioactive materials are sent for “processing” and dumping. Not only was the mill built right next to our community, but it was built right on top of hundreds of our culturally significant sites.</p>',
+        campaign_tagline:
+          'Protecting the Ute Tribal Lands and Peoples from Radioactive Waste',
+        campaign_text:
+          "<p>White Mesa Concerned Community is a grassroots group of concerned tribal members of the Ute Mountain Ute Tribe. We work to inform our fellow tribal members and the public about our struggle to protect our community, health, water, air, land, culture, and sacred sites from toxic and radioactive contamination from the uranium mill. We demand that the uranium mill be closed and cleaned up.</p><p>Here are some of the species that continue to be impacted by the uranium mining:</p><p>Mexican Spotted Owl (Strix occidentalis lucida): This owl is found in forested canyons and riparian zones. The tribe works to protect its habitat by managing forest resources and reducing threats such as wildfires and logging.</p><p>Southwestern Willow Flycatcher (Empidonax traillii extimus): Found in riparian areas, this bird's protection includes restoring native vegetation, managing water resources, and preventing habitat degradation from livestock grazing and invasive species.</p><p>Gunnison Sage-Grouse (Centrocercus minimus): The tribe participates in habitat restoration and conservation efforts for this species, including managing land use and mitigating threats like overgrazing, invasive plants, and human encroachment.</p><p>Yellow-Billed Cuckoo (Coccyzus americanus): The tribe works to conserve riparian habitats crucial for this bird by managing water flow and restoring native plant communities that provide nesting and foraging opportunities.</p><p>Colorado Pikeminnow (Ptychocheilus lucius): The tribe collaborates with state and federal agencies to protect this endangered fish by managing water quality and flow in river systems, reducing the impact of non-native species, and restoring critical habitat areas.</p><p>Bonytail Chub (Gila elegans) and Humpback Chub (Gila cypha): Both fish species benefit from the tribe's efforts to maintain clean and healthy river systems, which include monitoring water quality, controlling non-native species, and advocating for water management practices that support native fish populations.</p>",
+        supplemental_text:
+          '<p>The White Mesa Ute Community of the Ute Mountain Ute Tribe is located between Blanding and Bluff in San Juan County in southern Utah. It is near Cedar Mesa, the Bears Ears National Monument, Valley of the Gods, the San Juan River, national parks, and many other beautiful and sacred areas. </p><p>White Mesa, however, is adjacent to the Energy Fuels’ uranium mill, the last such facility in the United States, where uranium tailings and other radioactive materials are sent for “processing” and dumping. Not only was the mill built right next to our community, but it was built right on top of hundreds of our culturally significant sites.</p>',
         representatives: JSON.stringify([
           {
             name: 'Spencer Cox',
@@ -32,8 +35,7 @@ module.exports = {
           {
             name: 'Phil Lyman',
             title: 'State Representative for District 69',
-            photoUrl:
-              'https://le.utah.gov/images/legislator/house/LYMANP.jpg',
+            photoUrl: 'https://le.utah.gov/images/legislator/house/LYMANP.jpg',
             address_line1: '333 S MAIN ST',
             address_line2: '',
             address_city: 'BLANDING',
@@ -41,15 +43,15 @@ module.exports = {
             address_zip: '84511',
             address_country: 'US',
             email: ''
-          },
+          }
         ]),
         assets: JSON.stringify({
-            campaign_logo: 'https://i.imgur.com/Lc9fG1y.png',
-            campaign_background: 'https://i.imgur.com/WcFdL78.jpeg',
-            'campaign-img-1': 'https://i.imgur.com/gpGQxZQ.jpeg',
-            'campaign-img-2': 'https://i.imgur.com/5pSUR0q.jpeg',
-            'campaign-img-3': 'https://i.imgur.com/0EctJWf.png'
-          })
+          campaign_logo: 'https://i.imgur.com/Lc9fG1y.png',
+          campaign_background: 'https://i.imgur.com/WcFdL78.jpeg',
+          'campaign-img-1': 'https://i.imgur.com/gpGQxZQ.jpeg',
+          'campaign-img-2': 'https://i.imgur.com/5pSUR0q.jpeg',
+          'campaign-img-3': 'https://i.imgur.com/0EctJWf.png'
+        })
       },
       {
         id: 2,
@@ -59,8 +61,10 @@ module.exports = {
         type: 'Grant',
         page_url: 'http://instagram.com/protecthakamwe',
         campaign_tagline: 'Protect Ha’kamwe’ - No Lithium Mine',
-        campaign_text: '<h2>What is Ha’Kamwe’?</h2><p>Ha’Kamwe’ means warm spring in the language of the Hualapai people.</p><p>Ha’Kamwe’ is fed by water naturally stored underground in volcanic rocks that seal it off from the land surface above (aka a confined volcanic aquifer). Under pressure, water flows underground along a geologic fault and emerges from the spring.</p><p>This sacred spring is a place for healing. In the words of a Hualapai elder: this is holy ground.</p><h2>Where is Ha’Kamwe’?</h2><p>Ha’Kamwe’ is part of Cholla Canyon Ranch in Wikieup, Arizona, where the Mojave and Sonoran deserts meet within the Big Sandy River basin. The ranch is managed by the Hualapai Tribe, while the ancestral homelands of the Hualapai people surrounding the site are currently managed by the Bureau of Land Management (BLM).</p>',
-        supplemental_text: '<p>Hualapai tribal members, local community members, and allies are working to prevent further exploration drilling for the Big Sandy Lithium Project that would desecrate Ha’Kamwe’ and the ancestral homelands of the Hualapai people.</p>',
+        campaign_text:
+          '<h2>What is Ha’Kamwe’?</h2><p>Ha’Kamwe’ means warm spring in the language of the Hualapai people.</p><p>Ha’Kamwe’ is fed by water naturally stored underground in volcanic rocks that seal it off from the land surface above (aka a confined volcanic aquifer). Under pressure, water flows underground along a geologic fault and emerges from the spring.</p><p>This sacred spring is a place for healing. In the words of a Hualapai elder: this is holy ground.</p><h2>Where is Ha’Kamwe’?</h2><p>Ha’Kamwe’ is part of Cholla Canyon Ranch in Wikieup, Arizona, where the Mojave and Sonoran deserts meet within the Big Sandy River basin. The ranch is managed by the Hualapai Tribe, while the ancestral homelands of the Hualapai people surrounding the site are currently managed by the Bureau of Land Management (BLM).</p>',
+        supplemental_text:
+          '<p>Hualapai tribal members, local community members, and allies are working to prevent further exploration drilling for the Big Sandy Lithium Project that would desecrate Ha’Kamwe’ and the ancestral homelands of the Hualapai people.</p>',
         representatives: JSON.stringify([
           {
             name: 'Dr. Buu Nygren',
@@ -89,16 +93,17 @@ module.exports = {
             email: 'alray.nelson@navajo-nsn.gov'
           },
           {
-            name:"Richelle Montoya",
-            title:"Vice President of the Navajo Nation",
-            photoUrl:"https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_VP_Montoya.jpg?resize=1080%2C1080&ssl=1",
-            address_line1:"PO Box 7440",
-            address_line2:"",
-            address_city:"Window Rock",
-            address_state:"AZ",
-            address_zip:"86515",
-            address_country:"US",
-            email:"josie.bowman@navajo-nsn.gov"
+            name: 'Richelle Montoya',
+            title: 'Vice President of the Navajo Nation',
+            photoUrl:
+              'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_VP_Montoya.jpg?resize=1080%2C1080&ssl=1',
+            address_line1: 'PO Box 7440',
+            address_line2: '',
+            address_city: 'Window Rock',
+            address_state: 'AZ',
+            address_zip: '86515',
+            address_country: 'US',
+            email: 'josie.bowman@navajo-nsn.gov'
           },
           {
             name: 'Ethel Branch',
@@ -297,7 +302,8 @@ module.exports = {
           },
           {
             name: 'Byron C. Shorty',
-            title: 'Telecommunications Regulatory Commission Office, Acting Executive Director',
+            title:
+              'Telecommunications Regulatory Commission Office, Acting Executive Director',
             photoUrl:
               'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2024/09/director_Shorty.jpg?resize=1080%2C1440&ssl=1',
             address_line1: 'PO Box 7440',
@@ -323,7 +329,8 @@ module.exports = {
           },
           {
             name: 'Stephen Etsitty',
-            title: 'Navajo Nation Environmental Protection Agency, Executive Director',
+            title:
+              'Navajo Nation Environmental Protection Agency, Executive Director',
             photoUrl:
               'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/director_Etsitty.jpg?resize=1080%2C1440&ssl=1',
             address_line1: 'PO Box 7440',
@@ -349,7 +356,8 @@ module.exports = {
           },
           {
             name: 'Lisa Jymm',
-            title: 'Navajo Nation Fiscal Recovery Fund Office, Executive Director',
+            title:
+              'Navajo Nation Fiscal Recovery Fund Office, Executive Director',
             photoUrl:
               'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2024/03/director.Jymm_.jpg?resize=1080%2C1440&ssl=1',
             address_line1: 'PO Box 7440',
@@ -372,16 +380,16 @@ module.exports = {
             address_zip: '86515',
             address_country: 'US',
             email: ''
-          } 
+          }
         ]),
         assets: JSON.stringify({
-            campaign_logo: 'https://i.imgur.com/o3lxGJD.png',
-            campaign_background: 'https://i.imgur.com/qGOHdiP.jpeg',
-            'campaign-img-1': 'https://i.imgur.com/h88GBNC.jpeg',
-            'campaign-img-2': 'https://i.imgur.com/lcQWK6p.jpeg',
-            'campaign-img-3': 'https://i.imgur.com/bnPQVOR.jpeg',
-            'infographic': 'https://i.imgur.com/BJCPDCR.jpeg'
-          })
+          campaign_logo: 'https://i.imgur.com/o3lxGJD.png',
+          campaign_background: 'https://i.imgur.com/qGOHdiP.jpeg',
+          'campaign-img-1': 'https://i.imgur.com/h88GBNC.jpeg',
+          'campaign-img-2': 'https://i.imgur.com/lcQWK6p.jpeg',
+          'campaign-img-3': 'https://i.imgur.com/bnPQVOR.jpeg',
+          infographic: 'https://i.imgur.com/BJCPDCR.jpeg'
+        })
       },
       {
         id: 3,

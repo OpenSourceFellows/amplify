@@ -3,12 +3,21 @@
     <v-card ref="form">
       <v-card-text>
         <v-text-field
-          ref="name"
-          v-model="name"
-          :rules="[() => !!name || 'This field is required']"
+          ref="firstName"
+          v-model="firstName"
+          :rules="[() => !!firstName || 'This field is required']"
           :error-messages="errorMessages"
-          label="Full Name"
-          placeholder="John Doe"
+          label="First Name"
+          placeholder="John"
+          required
+        />
+        <v-text-field
+          ref="lastName"
+          v-model="lastName"
+          :rules="[() => !!lastName || 'This field is required']"
+          :error-messages="errorMessages"
+          label="Last Name"
+          placeholder="Doe"
           required
         />
         <v-text-field
@@ -107,7 +116,8 @@ export default {
     emits: ['address-validated'],
     data: () => ({
       errorMessages: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       line1: '',
       line2: '',
       city: '',
@@ -123,7 +133,8 @@ export default {
   computed: {
     form() {
       return {
-        name: this.name,
+        firstName: this.firstName,
+        lastName: this.lastName,
         line1: this.line1,
         line2: this.line2,
         city: this.city,
@@ -151,7 +162,7 @@ export default {
 
   methods: {
     addressCheck() {
-      this.errorMessages = this.address && !this.name ? "Hey! I'm required" : ''
+      this.errorMessages = this.address && !this.firstName && !this.lastName ? "Hey! I'm required" : ''
 
       return true
     },
