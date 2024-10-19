@@ -14,15 +14,13 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.get('/', async (req, res) => {
+router.get('/campaigns', async (req, res) => {
   try {
-    const campaigns = await Campaign.query()
-    // console.log(campaigns)
-    res.send(campaigns)
-  } catch (error) {
-    console.log(error)
-    res.status(500).send({ error: 'Whoops' })
+    const campaigns = await Campaign.find({}, 'name startDate endDate');
+    res.status(200).json(campaigns);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching campaigns' });
   }
-})
+});
 
 module.exports = router
