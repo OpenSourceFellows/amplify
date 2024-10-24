@@ -94,7 +94,9 @@
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit()"> Send Letter </v-btn>
+      <v-btn outlined color="primary" text @click="submit()">
+        Send Letter
+      </v-btn>
     </div>
   </section>
 </template>
