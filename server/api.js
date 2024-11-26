@@ -13,6 +13,8 @@ const checkout = require('./routes/api/checkout')
 const twilio = require('./routes/api/twilio')
 const eventLogger = require('./routes/api/event_logger')
 
+const ciceroMockApi = require('./routes/api/ciceroMockApi')
+
 // import the whole collection of v1 routes
 const v1Router = require('./routes/api/v1/v1.js')
 
@@ -38,7 +40,7 @@ apiRouter.use('/lob', lob)
 apiRouter.use('/checkout', checkout)
 apiRouter.use('/twilio', twilio)
 apiRouter.use('/event_logger', eventLogger)
-
+apiRouter.use('/mock-representatives', ciceroMockApi)
 // Create the /v1 portion of the url.
 apiRouter.use('/v1', v1Router)
 
