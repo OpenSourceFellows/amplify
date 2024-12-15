@@ -39,6 +39,7 @@ export default new Vuex.Store({
   mutations: {
     // TODO: Do we really need two setters here?
     // It's good for clarity, but they can really be combined to dry things up.
+    // This can be used to replace an object, wholesale: state.mergeVariables = {} ==> state.mergeVariables = { somekey: someval }
     setGenericValue: (state, { key, value }) => {
       if (key in state) {
         state[key] = value

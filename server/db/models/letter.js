@@ -12,7 +12,6 @@ class Letter extends BaseModel {
         'constituentId',
         'transactionId',
         'letterTemplate',
-        'letterVersion',
         'addressee',
         'addressLine_1',
         'city',

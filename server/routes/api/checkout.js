@@ -6,9 +6,11 @@ const {
   PaymentPresenter,
   PaymentPresenterError
 } = require('../../../shared/presenters/payment-presenter')
+const Handlebars = require('../../lib/handlebars')
 const Constituent = require('../../db/models/constituent')
 const Transaction = require('../../db/models/transaction')
 const Letter = require('../../db/models/letter')
+const LetterTemplate = require('../../db/models/letter-template')
 
 const router = express.Router()
 
@@ -20,7 +22,9 @@ class CheckoutError extends Error {
 }
 
 router.post('/create-checkout-session', async (req, res) => {
-  const { donation, user, letter } = req.body
+  let { donation, user, letter } = req.body
+  console.dir(user)
+  console.dir(letter)
   const origin = req.get('origin')
 
   console.log(`origin: ${origin}`)
@@ -97,10 +101,16 @@ router.post('/create-checkout-session', async (req, res) => {
       paymentMethod: 'credit_card'
     })
 
+    // Re-render the letter html, merging user data to be saved in case that's in the template.
+    letter.merge_variables = { ...letter.merge_variables, firstName: user.firstName, lastName: user.lastName }
+    const template = await LetterTemplate.query().findById(letter.letter_template_id)
+    const html = Handlebars.render(letter.merge_variables, template.html)
+
     // Using a temporary mapping here also
     await Letter.query().insert({
       transactionId: transaction.id,
       constituentId: constituent.id,
+      letterTemplate: html,
       ...letter
     })
 

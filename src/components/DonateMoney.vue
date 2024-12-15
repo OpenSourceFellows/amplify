@@ -148,11 +148,12 @@ export default {
       }
     },
     letter() {
-      const rep = this.$store.state.selectedRep
-      const letterId = this.$store.state.letterId
-      const letterVersion = this.$store.state.letterVersion
-      const returnAddressId = this.$store.state.lobReturnAddressId
-      const mergeVariables = this.$store.state.mergeVariables
+      const rep              = this.$store.state.selectedRep
+      const letterId         = this.$store.state.letterId
+      const letterVersion    = this.$store.state.letterVersion
+      const returnAddressId  = this.$store.state.lobReturnAddressId
+      const mergeVariables   = this.$store.state.mergeVariables
+      const letterTemplateId = this.$store.state.campaign.letterTemplateId
 
       return {
         letterTemplate: letterId,
@@ -164,7 +165,8 @@ export default {
         city: rep.address_city,
         zip: rep.address_zip,
         returnAddress: returnAddressId,
-        merge_variables: mergeVariables
+        merge_variables: mergeVariables,
+        letter_template_id: letterTemplateId
       }
     },
     styledCustomDonation() {

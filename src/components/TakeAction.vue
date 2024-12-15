@@ -35,7 +35,7 @@
             width="160"
             dark
             color="primary"
-            @click="nextPage({ selectedRep, letterBody })"
+            @click="nextPage({ selectedRep })"
           >
             Next
           </v-btn>
@@ -78,11 +78,12 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name @address-validated="!addressNotValidated" />
+          <sign-name @address-validated="validateAddress()" />
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
           <v-btn
+            :disabled="addressButtonDisabled"
             width="160"
             dark
             color="primary"
@@ -156,7 +157,7 @@ export default {
         1: 'default',
         2: 'default'
       },
-      addressNotValidated: true
+      addressInvalid: true
     }
   },
   computed: {
@@ -168,10 +169,14 @@ export default {
     },
     campaign() {
       return this.$store.state.campaign
+    },
+    addressButtonDisabled() {
+      return this.addressInvalid
     }
   },
   methods: {
     nextPage(attrs) {
+      console.log('setting values with nextPage!')
       this.$store.dispatch('setLetterAttrs', attrs)
 
       const previousPanel = this.panel
@@ -205,6 +210,9 @@ export default {
     },
     handleAddress(address) {
       this.userData = address
+    },
+    validateAddress() {
+      this.addressInvalid = !this.addressInvalid
     }
   }
 }

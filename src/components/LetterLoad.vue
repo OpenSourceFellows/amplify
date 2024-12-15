@@ -2,6 +2,17 @@
   <section class="letter-load">
     <v-card flat>
       <div v-show="isSubmitted">
+        <v-card-text>
+          <v-select 
+            v-for="[key, entry] of Object.entries(mergeVariables)"
+            :key="key"
+            v-model="userSelections[key]"
+            :items="entry.choices"
+            :label="entry.label"
+          />
+          <br>
+        </v-card-text>
+
         <v-card-subtitle align="left">
           <div class="text-left">
             {{ currentDate }}
@@ -22,19 +33,10 @@
           <div>
             {{ formattedCityState }}
           </div>
+          <div>
+            <span v-html="letterBody" />
+          </div>
         </v-card-subtitle>
-
-        <v-card-text>
-          <v-select 
-            v-for="[key, entry] of Object.entries(mergeVariables)"
-            :key="key"
-            v-model="userSelections[key]"
-            :items="entry.choices"
-            :label="entry.label"
-          />
-          <br>
-          <span v-html="letterBody" />
-        </v-card-text>
 
         <p>{{ user.name }}</p>
       </div>
@@ -63,7 +65,7 @@ import axios from 'axios'
 
 // These fields will not show up as dropdowns for the user
 // to modify.
-const UNEDITABLE_FIELDS = ['representativeName']
+const UNEDITABLE_FIELDS = ['representativeName', 'firstName', 'lastName', 'name', 'fullName']
 
 export default {
   name: 'LetterLoad',
@@ -77,7 +79,7 @@ export default {
     return {
       isSubmitted: true,
       userSelections: {},
-      letterBody: 'poopin'
+      letterBody: 'placeholder'
     }
   },
   computed: {
@@ -108,8 +110,11 @@ export default {
   },
   watch: {
     userSelections: {
-      handler: function (oldVal, newVal) {
-        console.log(`logging new value of watch: ${newVal}`)
+      handler: function () {
+        this.$store.commit('setGenericValue', {
+          key: 'mergeVariables',
+          value: this.userSelections
+        })
         
         axios.post('/api/v1/letter_templates/render', { mergeVariables: this.userSelections, templateId: this.letterTemplate.id })
           .then((res) => {
@@ -121,7 +126,7 @@ export default {
   },
   created() {
     for(let key of Object.keys(this.letterTemplate.mergeVariables)) {
-      this.userSelections[key] = ''
+      this.$set(this.userSelections, key, '<your answer here>')
     }
 
     this.userSelections.representativeName = this.selectedRep.name
