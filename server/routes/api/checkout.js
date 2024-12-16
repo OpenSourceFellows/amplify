@@ -22,7 +22,7 @@ class CheckoutError extends Error {
 }
 
 router.post('/create-checkout-session', async (req, res) => {
-  let { donation, user, letter } = req.body
+  let { donation, user, letter, deliveryMethods } = req.body
   console.dir(user)
   console.dir(letter)
   const origin = req.get('origin')
@@ -107,12 +107,16 @@ router.post('/create-checkout-session', async (req, res) => {
     const html = Handlebars.render(letter.merge_variables, template.html)
 
     // Using a temporary mapping here also
-    await Letter.query().insert({
-      transactionId: transaction.id,
-      constituentId: constituent.id,
-      letterTemplate: html,
-      ...letter
-    })
+    for (const method of deliveryMethods) {
+      await Letter.query().insert({
+        transactionId: transaction.id,
+        constituentId: constituent.id,
+        letterTemplate: html,
+        deliveryMethod: method,
+        ...letter
+      })
+    }
+    
 
     return res
       .status(200)

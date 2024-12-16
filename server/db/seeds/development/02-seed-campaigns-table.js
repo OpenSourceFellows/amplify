@@ -18,7 +18,7 @@ module.exports = {
         supplemental_text: '<p>Did you know that PNW beavers are also all communists? Only with your help can we turn the tide and live in freedom and prosperity.</p>',
         representatives: JSON.stringify([
           {
-            name: 'Cloud Strife',
+            name: 'Velma Dinkley',
             title: 'District 1 Supervisor',
             photoUrl:
               'https://placehold.co/250',
@@ -31,7 +31,7 @@ module.exports = {
             email: 'noreply@example.com'
           },
           {
-            name: 'Bulma',
+            name: 'Jar Jar Binks',
             title: 'District 2 Supervisor',
             photoUrl:
               'https://placehold.co/250',
@@ -57,7 +57,7 @@ module.exports = {
             email: 'noreply@example.com'
           },
           {
-            name: 'Buccee',
+            name: 'Buccee Beaver',
             title: 'District 1 Supervisor',
             photoUrl:
               'https://placehold.co/250',

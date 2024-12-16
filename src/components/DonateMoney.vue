@@ -17,31 +17,40 @@
         representatives, from the comfort of your home or on the go.
       </p>
 
-      <!-- We can show an alternative link to donate money, if the showAltDonation env variable is true-->
-      <!-- Otherwise, show the donation amount buttons. This should be use in conjunction with VUE_APP_EMPTY_TRANSACTIONS -->
-      <div v-if="showExtDonation">
-        <p>
-          If you'd like to make a donation, please do so
-          <a :href="extDonationUrl" target="_blank">here.</a>
-        </p>
-        <p>Donors should add a note saying its for {{ campaign.name }}.</p>
-      </div>
-      <div v-else>
-        <v-btn-toggle
-          v-model="donationAmount"
-          class="d-flex flex-wrap justify-center"
-          tile
-          color="deep-purple accent-3"
-          group
+      <p>Please select the type of letter you want to send</p>
+      <v-btn-toggle
+        class="d-flex flex-wrap justify-center"
+        tile
+        color="deep-purple accent-3"
+        multiple
+      >
+        <v-btn
+          v-for="item in letterDeliveryMethods"
+          :key="item.type"
+          elevation="2"
+          raised
+          :value="item.type"
+          @click="setDeliveryMethods(item.type)"
         >
-          <v-btn
-            elevation="2"
-            raised
-            :value="200"
-            @click="unsetCustomAmountSelection"
-          >
-            2
-          </v-btn>
+          {{ item.label }}
+        </v-btn>
+      </v-btn-toggle>
+
+      <v-btn-toggle
+        v-model="donationAmount"
+        class="d-flex flex-wrap justify-center"
+        tile
+        color="deep-purple accent-3"
+        group
+      >
+        <v-btn
+          elevation="2"
+          raised
+          :value="200"
+          @click="unsetCustomAmountSelection"
+        >
+          2
+        </v-btn>
 
           <v-btn
             elevation="2"
@@ -103,6 +112,8 @@
 import axios from 'axios'
 import { PaymentPresenter } from '../../shared/presenters/payment-presenter'
 
+const LETTER_DELIVERY_METHODS = [{ label: 'Email', type: 'email' }, {label: 'Physical Mail', type: 'snail_mail'}]
+
 export default {
   name: 'DonateMoney',
   props: [],
@@ -111,10 +122,14 @@ export default {
       donationAmount: 0,
       customAmountSelected: false,
       customDonationAmount: null,
+      deliveryMethods: [],
     }
   },
   computed: {
     // These are temporary structures until we can reorganize the frontend.
+    letterDeliveryMethods() {
+      return LETTER_DELIVERY_METHODS
+    },
     noCostMailEnabled() {
       return Boolean(process.env.VUE_APP_NO_COST_MAIL)
     },
@@ -164,9 +179,10 @@ export default {
         state: rep.address_state,
         city: rep.address_city,
         zip: rep.address_zip,
+        email: rep.email,
         returnAddress: returnAddressId,
         merge_variables: mergeVariables,
-        letter_template_id: letterTemplateId
+        letter_template_id: letterTemplateId,
       }
     },
     styledCustomDonation() {
@@ -177,6 +193,16 @@ export default {
     }
   },
   methods: {
+    setDeliveryMethods(method) {
+      console.log('logging delivery methods', method)
+      // If item in array, delete on button click, else add to array.
+      const idx = this.deliveryMethods.indexOf(method)
+      if (idx > -1 ) {
+        return this.deliveryMethods.splice(idx, 1)
+      }
+
+      this.deliveryMethods.push(method)
+    },
     unsetCustomAmountSelection() {
       this.customAmountSelected = false
     },
@@ -189,18 +215,12 @@ export default {
 
       donation = presenter.formatPaymentAmount(donation)
 
-      this.createCheckoutSession(donation, this.user, this.letter)
+      this.createCheckoutSession(donation, this.user, this.letter, this.deliveryMethods)
     },
-    createCheckoutSession(donation, user, letter) {
-      console.log(donation, user, letter)
-      axios.post('/api/checkout/create-checkout-session', { donation, user, letter })
-        // TODO: Investigate whether we need to dump user state still. With the new stripe webhook it may not be necessary.
+    createCheckoutSession(donation, user, letter, deliveryMethods) {
+      console.log(donation, user, letter, deliveryMethods)
+      axios.post('/api/checkout/create-checkout-session', { donation, user, letter, deliveryMethods })
         .then((response) => {
-          // Dump state to local storage before redirect
-          this.$store.dispatch(
-            'dumpStateToLocalStorage',
-            response.data.sessionId
-          )
           // Redirect to Stripe
           location.href = response.data.url
         })

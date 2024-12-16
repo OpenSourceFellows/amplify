@@ -12,6 +12,11 @@ module.exports = {
     await knex.schema.alterTable('letters', (table) => {
       table.integer('letter_template_id').unsigned().notNullable()
       table.foreign('letter_template_id').references('letter_templates.id')
+      table.enu('delivery_method', ['email', 'snail_mail'], {
+        useNative: true,
+        enumName: 'delivery_methods'
+      }).notNullable()
+      table.string('email')
     })
 
     await knex.schema.alterTable('campaigns', (table) => {
