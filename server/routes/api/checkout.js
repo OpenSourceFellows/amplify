@@ -27,8 +27,6 @@ router.post('/create-checkout-session', async (req, res) => {
   console.dir(letter)
   const origin = req.get('origin')
 
-  console.log(`origin: ${origin}`)
-
   try {
     const presenter = new PaymentPresenter()
 
@@ -57,11 +55,25 @@ router.post('/create-checkout-session', async (req, res) => {
       })
 
       // Using a temporary mapping here also
-      await Letter.query().insert({
-        transactionId: transaction.id,
-        constituentId: constituent.id,
-        ...letter
-      })
+      // Re-render the letter html, merging user data to be saved in case that's in the template.
+      letter.merge_variables = { ...letter.merge_variables, firstName: user.firstName, lastName: user.lastName }
+      const template = await LetterTemplate.query().findById(letter.letter_template_id)
+      const html = Handlebars.render(letter.merge_variables, template.html)
+      
+      // Using a temporary mapping here also
+      for (const method of deliveryMethods) {
+        // Generate a uuid so letters are idempotent
+        letter.trackingNumber = uuidv4()
+        console.log(letter.trackingNumber)
+
+        await Letter.query().insert({
+          transactionId: transaction.id,
+          constituentId: constituent.id,
+          letterTemplate: html,
+          deliveryMethod: method,
+          ...letter
+        })
+      }
 
       return res
         .status(200)
@@ -105,9 +117,13 @@ router.post('/create-checkout-session', async (req, res) => {
     letter.merge_variables = { ...letter.merge_variables, firstName: user.firstName, lastName: user.lastName }
     const template = await LetterTemplate.query().findById(letter.letter_template_id)
     const html = Handlebars.render(letter.merge_variables, template.html)
-
+    
     // Using a temporary mapping here also
     for (const method of deliveryMethods) {
+      // Generate a uuid so letters are idempotent
+      letter.trackingNumber = uuidv4()
+      console.log(letter.trackingNumber)
+
       await Letter.query().insert({
         transactionId: transaction.id,
         constituentId: constituent.id,
@@ -116,7 +132,6 @@ router.post('/create-checkout-session', async (req, res) => {
         ...letter
       })
     }
-    
 
     return res
       .status(200)

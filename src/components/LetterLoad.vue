@@ -116,10 +116,13 @@ export default {
           value: this.userSelections
         })
         
-        axios.post('/api/v1/letter_templates/render', { mergeVariables: this.userSelections, templateId: this.letterTemplate.id })
-          .then((res) => {
-            this.letterBody = res.data.letter
-          })
+        this.renderLetter()
+      },
+      deep: true
+    },
+    selectedRep: {
+      handler: function() {
+        this.renderLetter()
       },
       deep: true
     }
@@ -132,7 +135,15 @@ export default {
     this.userSelections.representativeName = this.selectedRep.name
 
     this.letterBody = this.letterTemplate.html
-  }
+  },
+  methods: {
+    renderLetter() {
+      axios.post('/api/v1/letter_templates/render', { mergeVariables: { ...this.userSelections, representativeName: this.selectedRep.name }, templateId: this.letterTemplate.id })
+        .then((res) => {
+          this.letterBody = res.data.letter
+        })
+    }
+  },
 }
 </script>
 

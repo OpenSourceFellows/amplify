@@ -31,7 +31,8 @@ class Letter extends BaseModel {
         state: { type: 'string', minLength: 1, maxLength: 255 },
         zip: { type: 'string', minLength: 1, maxLength: 255 },
         email: { type: 'string', minLength: 1, maxLength: 255 },
-        deliveryMethod: { type: 'string', minLength: 1, maxLength: 255 }
+        deliveryMethod: { type: 'string', minLength: 1, maxLength: 255 },
+        trackingNumber: { type: 'string', minLength: 1, maxLength: 255 }
       }
     }
   }

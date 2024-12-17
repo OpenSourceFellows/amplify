@@ -1,22 +1,7 @@
 <template>
   <section class="donate-money">
-    <h1>Donate to the cause.</h1>
-
+    <h1>Select your delivery method</h1>
     <v-col cols="12" class="py-2">
-      <p v-if="noCostMailEnabled">
-        Your voice is super important!
-        <span v-if="couponCode">
-          Please use this code <strong>{{ couponCode }}</strong> to send email
-          and letter for free!
-        </span>
-        Donations are optional and 100% goes to {{ campaign.name }} 🙂
-      </p>
-
-      <p v-else>
-        Your donation makes it possible to change our relationship with
-        representatives, from the comfort of your home or on the go.
-      </p>
-
       <p>Please select the type of letter you want to send</p>
       <v-btn-toggle
         class="d-flex flex-wrap justify-center"
@@ -31,11 +16,26 @@
           raised
           :value="item.type"
           @click="setDeliveryMethods(item.type)"
+          class="mx-2 my-3"
         >
           {{ item.label }}
         </v-btn>
       </v-btn-toggle>
 
+      <h1>Donate to the cause.</h1>
+      <p v-if="noCostMailEnabled">
+        Your voice is super important!
+        <span v-if="couponCode">
+          Please use this code <strong>{{ couponCode }}</strong> to send email
+          and letter for free!
+        </span>
+        Donations are optional and 100% goes to {{ campaign.name }} 🙂
+      </p>
+
+      <p v-else>
+        Your donation makes it possible to change our relationship with
+        representatives, from the comfort of your home or on the go.
+      </p>
       <v-btn-toggle
         v-model="donationAmount"
         class="d-flex flex-wrap justify-center"
@@ -131,7 +131,7 @@ export default {
       return LETTER_DELIVERY_METHODS
     },
     noCostMailEnabled() {
-      return Boolean(process.env.VUE_APP_NO_COST_MAIL)
+      return process.env.VUE_APP_NO_COST_MAIL == 'true'
     },
     campaign() {
       return this.$store.state.campaign
@@ -215,6 +215,14 @@ export default {
 
       donation = presenter.formatPaymentAmount(donation)
 
+      if (this.deliveryMethods.length == 0) {
+        alert('Please pick at least one delivery method!')
+      }
+
+      if (donation === 0 && !this.noCostMailEnabled) {
+        alert('Please pick a donation amount greater than $0.')
+      }
+
       this.createCheckoutSession(donation, this.user, this.letter, this.deliveryMethods)
     },
     createCheckoutSession(donation, user, letter, deliveryMethods) {
@@ -222,6 +230,11 @@ export default {
       axios.post('/api/checkout/create-checkout-session', { donation, user, letter, deliveryMethods })
         .then((response) => {
           // Redirect to Stripe
+          this.$store.dispatch(
+            'dumpStateToLocalStorage',
+            response.data.sessionId
+          )
+          
           location.href = response.data.url
         })
         .catch((error) => {
