@@ -52,58 +52,59 @@
           2
         </v-btn>
 
-          <v-btn
-            elevation="2"
-            raised
-            :value="2000"
-            @click="unsetCustomAmountSelection"
-          >
-            20
-          </v-btn>
+        <v-btn
+          elevation="2"
+          raised
+          :value="2000"
+          @click="unsetCustomAmountSelection"
+        >
+          20
+        </v-btn>
 
-          <v-btn
-            elevation="2"
-            raised
-            :value="5000"
-            @click="unsetCustomAmountSelection"
-          >
-            50
-          </v-btn>
+        <v-btn
+          elevation="2"
+          raised
+          :value="5000"
+          @click="unsetCustomAmountSelection"
+        >
+          50
+        </v-btn>
 
-          <v-btn
-            v-if="emptyTransactionsEnabled"
-            elevation="2"
-            raised
-            :value="0"
-            @click="unsetCustomAmountSelection"
-          >
-            0
-          </v-btn>
+        <v-btn
+          v-if="emptyTransactionsEnabled"
+          elevation="2"
+          raised
+          :value="0"
+          @click="unsetCustomAmountSelection"
+        >
+          0
+        </v-btn>
 
-          <v-btn elevation="2" raised @click="toggleCustomDonation">
-            Custom Amount
-          </v-btn>
-        </v-btn-toggle>
+        <v-btn elevation="2" raised @click="toggleCustomDonation">
+          Custom Amount
+        </v-btn>
+      </v-btn-toggle>
 
-        <div class="d-flex justify-center flex-column align-center :width=100%">
-          <v-text-field
-            v-if="customAmountSelected"
-            ref="input"
-            v-model="customDonationAmount"
-            class="custom-donation-amount-textfield"
-            inputmode="numeric"
-            label="Donation Amount"
-            type="number"
-            required
-          >
-            <v-icon slot="prepend"> mdi-currency-usd </v-icon>
-            {{ styledCustomDonation }}
-          </v-text-field>
-        </div>
+      <div class="d-flex justify-center flex-column align-center :width=100%">
+        <v-text-field
+          v-if="customAmountSelected"
+          ref="input"
+          v-model="customDonationAmount"
+          class="custom-donation-amount-textfield"
+          inputmode="numeric"
+          label="Donation Amount"
+          type="number"
+          required
+        >
+          <v-icon slot="prepend"> mdi-currency-usd </v-icon>
+          {{ styledCustomDonation }}
+        </v-text-field>
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit()"> Send Letter </v-btn>
+      <v-btn outlined color="primary" text @click="submit()">
+        Send Letter
+      </v-btn>
     </div>
   </section>
 </template>
@@ -234,7 +235,7 @@ export default {
             'dumpStateToLocalStorage',
             response.data.sessionId
           )
-          
+
           location.href = response.data.url
         })
         .catch((error) => {
