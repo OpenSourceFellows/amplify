@@ -17,13 +17,13 @@ class Sendgrid {
     this.env = process.env.NODE_ENV
 
     this.sgMail = sgMail
-    this.sgClient = sgClient 
+    this.sgClient = sgClient
     this.sgMail.setApiKey(this.apiKey)
     this.sgClient.setApiKey(this.apiKey)
   }
 
   async template(id) {
-    const params = { method: 'GET', url: `/v3/templates/${id}`}
+    const params = { method: 'GET', url: `/v3/templates/${id}` }
 
     try {
       const response = await this.sgClient.request(params)
@@ -39,9 +39,7 @@ class Sendgrid {
     if (this.env != 'production') {
       return { response: 200, payload }
     }
-
-
   }
 }
 
-module.exports = { Sendgrid, SendgridError}
+module.exports = { Sendgrid, SendgridError }

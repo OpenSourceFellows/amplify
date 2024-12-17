@@ -227,10 +227,8 @@ export default {
     // Duplicated to ensure that this data stays will be in Vuex if someone happens to
     // refresh. Should be reworked in the new repo, but needs must \_(-_-)_/
     if (!this.campaignId) {
-      this.$store.dispatch(
-        'loadSingleCampaign',
-        process.env.VUE_APP_FEATURED_CAMPAIGN
-      )
+      this.$store
+        .dispatch('loadSingleCampaign', process.env.VUE_APP_FEATURED_CAMPAIGN)
         .then(() => {
           this.$store.dispatch('loadLetterTemplate')
         })

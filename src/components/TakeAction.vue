@@ -147,8 +147,7 @@ export default {
     SignName,
     DonateMoney
   },
-  props: {
-  },
+  props: {},
   data() {
     return {
       panel: 0,

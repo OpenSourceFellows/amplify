@@ -1,7 +1,7 @@
 module.exports = {
   async seed(knex) {
     await knex('letter_templates').del()
-    
+
     await knex('letter_templates').insert([
       {
         id: 1,

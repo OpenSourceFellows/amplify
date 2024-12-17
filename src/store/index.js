@@ -19,7 +19,7 @@ export default new Vuex.Store({
       campaignText: '',
       campaignTagline: '',
       supplementalText: '',
-      letterTemplateId: '',
+      letterTemplateId: ''
     },
     representatives: [],
     assets: {},
@@ -129,7 +129,10 @@ export default new Vuex.Store({
         const { letterTemplate } = res.data
         console.log(letterTemplate)
 
-        commit('setGenericValue', { key: 'letterTemplate', value: letterTemplate })
+        commit('setGenericValue', {
+          key: 'letterTemplate',
+          value: letterTemplate
+        })
       } catch (e) {
         alert(e)
       }

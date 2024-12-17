@@ -15,14 +15,14 @@ class Lob {
   constructor() {
     this.apiKey = process.env.LOB_API_KEY
     this.lobUrl = process.env.LOB_BASE_URL
-    this.env    = process.env.NODE_ENV
+    this.env = process.env.NODE_ENV
   }
 
   // auth headers
   authHeaders() {
     const encodedKey = btoa(`${this.apiKey}:`)
     console.log(encodedKey)
-    
+
     return {
       Authorization: `Basic ${encodedKey}`
     }
@@ -30,17 +30,14 @@ class Lob {
 
   // Merges all headers
   headers() {
-    return {...this.authHeaders()}
+    return { ...this.authHeaders() }
   }
 
   async template(id) {
     try {
-      const letters = await axios.get(
-        `${this.lobUrl}/templates/${id}`,
-        {
-          headers: this.headers()
-        }
-      )
+      const letters = await axios.get(`${this.lobUrl}/templates/${id}`, {
+        headers: this.headers()
+      })
 
       return letters.data.published_version
     } catch (err) {
@@ -63,7 +60,6 @@ class Lob {
         return { response: 200, payload }
       }
 
-
       const response = await axios.post({
         url: `${this.lobUrl}/letters}`,
         headers: this.headers(),
@@ -72,7 +68,7 @@ class Lob {
       })
 
       return response.data
-    } catch(err) {
+    } catch (err) {
       throw new LobError(err.message)
     }
   }
@@ -95,7 +91,7 @@ class Lob {
       })
 
       return addr.data
-    } catch(err) {
+    } catch (err) {
       throw new LobError(err.message)
     }
   }
@@ -110,7 +106,7 @@ class Lob {
       address_line2: verifiedAddress.secondary_line,
       address_city: verifiedAddress.components.city,
       address_state: verifiedAddress.components.state,
-      address_zip: verifiedAddress.components.zip_code,
+      address_zip: verifiedAddress.components.zip_code
     }
 
     try {
@@ -121,11 +117,10 @@ class Lob {
       })
 
       return addr.data
-    } catch(err) {
+    } catch (err) {
       throw new LobError(err.message)
     }
   }
 }
-
 
 module.exports = { Lob, LobError }

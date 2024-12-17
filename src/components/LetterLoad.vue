@@ -3,14 +3,14 @@
     <v-card flat>
       <div v-show="isSubmitted">
         <v-card-text>
-          <v-select 
+          <v-select
             v-for="[key, entry] of Object.entries(mergeVariables)"
             :key="key"
             v-model="userSelections[key]"
             :items="entry.choices"
             :label="entry.label"
           />
-          <br>
+          <br />
         </v-card-text>
 
         <v-card-subtitle align="left">
@@ -115,7 +115,7 @@ export default {
           key: 'mergeVariables',
           value: this.userSelections
         })
-        
+
         this.renderLetter()
       },
       deep: true

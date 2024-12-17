@@ -1,19 +1,20 @@
-const axios = require('axios');
-const letterData = require('./catchup.js');
+const axios = require('axios')
+const letterData = require('./catchup.js')
 
-(async () => {
+;(async () => {
   const data = JSON.parse(letterData)
 
   for (const transaction of data) {
     try {
-      const response = await axios.post('https://amplify-hooks-0194518485a8.herokuapp.com/api/checkout/process-transaction',
+      const response = await axios.post(
+        'https://amplify-hooks-0194518485a8.herokuapp.com/api/checkout/process-transaction',
         {
           data: {
             object: {
               id: transaction.stripe_id
             }
           },
-          type: "payment_intent.succeeded"
+          type: 'payment_intent.succeeded'
         }
       )
 
@@ -22,4 +23,4 @@ const letterData = require('./catchup.js');
       console.error(error)
     }
   }
-})();
+})()

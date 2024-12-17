@@ -13,15 +13,17 @@ module.exports = {
         type: 'Grant',
         page_url: 'https://example.com',
         letter_template_id: 1,
-        campaign_tagline: 'Protecting our Woodlands and Rivers from the Big Beaver Menace',
-        campaign_text: '<p>For years, Beavers in the Pacific Northwest have been getting more aggressive about damming rivers and gentrifying our beautiful rivers.</p><p>In recent years, they have started erecting large beaver shopping centers and abducting human children to use as low wage labor in their beaver malls!</p><p>With your help, we can stop the further encroachment of beavers into human habitats.</p>',
-        supplemental_text: '<p>Did you know that PNW beavers are also all communists? Only with your help can we turn the tide and live in freedom and prosperity.</p>',
+        campaign_tagline:
+          'Protecting our Woodlands and Rivers from the Big Beaver Menace',
+        campaign_text:
+          '<p>For years, Beavers in the Pacific Northwest have been getting more aggressive about damming rivers and gentrifying our beautiful rivers.</p><p>In recent years, they have started erecting large beaver shopping centers and abducting human children to use as low wage labor in their beaver malls!</p><p>With your help, we can stop the further encroachment of beavers into human habitats.</p>',
+        supplemental_text:
+          '<p>Did you know that PNW beavers are also all communists? Only with your help can we turn the tide and live in freedom and prosperity.</p>',
         representatives: JSON.stringify([
           {
             name: 'Velma Dinkley',
             title: 'District 1 Supervisor',
-            photoUrl:
-              'https://placehold.co/250',
+            photoUrl: 'https://placehold.co/250',
             address_line1: '123 Fake St.',
             address_line2: 'Suite 8B',
             address_city: 'Portland',
@@ -33,8 +35,7 @@ module.exports = {
           {
             name: 'Jar Jar Binks',
             title: 'District 2 Supervisor',
-            photoUrl:
-              'https://placehold.co/250',
+            photoUrl: 'https://placehold.co/250',
             address_line1: '123 Fake St.',
             address_line2: 'Suite 9B',
             address_city: 'Portland',
@@ -46,8 +47,7 @@ module.exports = {
           {
             name: 'Fei Fong Wong',
             title: 'District 3 Supervisor',
-            photoUrl:
-              'https://placehold.co/250',
+            photoUrl: 'https://placehold.co/250',
             address_line1: '123 Fake St.',
             address_line2: 'Suite 8B',
             address_city: 'Portland',
@@ -59,8 +59,7 @@ module.exports = {
           {
             name: 'Buccee Beaver',
             title: 'District 1 Supervisor',
-            photoUrl:
-              'https://placehold.co/250',
+            photoUrl: 'https://placehold.co/250',
             address_line1: '123 Fake St.',
             address_line2: 'Suite 7F',
             address_city: 'Portland',
@@ -84,16 +83,11 @@ module.exports = {
           }
         ]),
         assets: JSON.stringify({
-          campaign_logo:
-            'https://placehold.co/600x400',
-          campaign_background:
-            'https://placehold.co/1500x600',
-          'campaign-img-1':
-            'https://placehold.co/600x400',
-          'campaign-img-2':
-            'https://placehold.co/600x400',
-          'campaign-img-3':
-            'https://placehold.co/600x400'
+          campaign_logo: 'https://placehold.co/600x400',
+          campaign_background: 'https://placehold.co/1500x600',
+          'campaign-img-1': 'https://placehold.co/600x400',
+          'campaign-img-2': 'https://placehold.co/600x400',
+          'campaign-img-3': 'https://placehold.co/600x400'
         })
       },
       {

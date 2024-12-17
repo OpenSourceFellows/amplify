@@ -26,16 +26,17 @@ const reps = JSON.stringify([
     email: 'alray.nelson@navajo-nsn.gov'
   },
   {
-    name:"Richelle Montoya",
-    title:"Vice President of the Navajo Nation",
-    photoUrl:"https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_VP_Montoya.jpg?resize=1080%2C1080&ssl=1",
-    address_line1:"PO Box 7440",
-    address_line2:"",
-    address_city:"Window Rock",
-    address_state:"AZ",
-    address_zip:"86515",
-    address_country:"US",
-    email:"josie.bowman@navajo-nsn.gov"
+    name: 'Richelle Montoya',
+    title: 'Vice President of the Navajo Nation',
+    photoUrl:
+      'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2023/12/photo_VP_Montoya.jpg?resize=1080%2C1080&ssl=1',
+    address_line1: 'PO Box 7440',
+    address_line2: '',
+    address_city: 'Window Rock',
+    address_state: 'AZ',
+    address_zip: '86515',
+    address_country: 'US',
+    email: 'josie.bowman@navajo-nsn.gov'
   },
   {
     name: 'Ethel Branch',
@@ -234,7 +235,8 @@ const reps = JSON.stringify([
   },
   {
     name: 'Byron C. Shorty',
-    title: 'Telecommunications Regulatory Commission Office, Acting Executive Director',
+    title:
+      'Telecommunications Regulatory Commission Office, Acting Executive Director',
     photoUrl:
       'https://i0.wp.com/opvp.navajo-nsn.gov/wp-content/uploads/2024/09/director_Shorty.jpg?resize=1080%2C1440&ssl=1',
     address_line1: 'PO Box 7440',
@@ -309,9 +311,8 @@ const reps = JSON.stringify([
     address_zip: '86515',
     address_country: 'US',
     email: ''
-  } 
+  }
 ])
-
 
 /*
 const assets = JSON.stringify({

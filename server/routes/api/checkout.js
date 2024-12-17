@@ -56,10 +56,16 @@ router.post('/create-checkout-session', async (req, res) => {
 
       // Using a temporary mapping here also
       // Re-render the letter html, merging user data to be saved in case that's in the template.
-      letter.merge_variables = { ...letter.merge_variables, firstName: user.firstName, lastName: user.lastName }
-      const template = await LetterTemplate.query().findById(letter.letter_template_id)
+      letter.merge_variables = {
+        ...letter.merge_variables,
+        firstName: user.firstName,
+        lastName: user.lastName
+      }
+      const template = await LetterTemplate.query().findById(
+        letter.letter_template_id
+      )
       const html = Handlebars.render(letter.merge_variables, template.html)
-      
+
       // Using a temporary mapping here also
       for (const method of deliveryMethods) {
         // Generate a uuid so letters are idempotent
@@ -114,10 +120,16 @@ router.post('/create-checkout-session', async (req, res) => {
     })
 
     // Re-render the letter html, merging user data to be saved in case that's in the template.
-    letter.merge_variables = { ...letter.merge_variables, firstName: user.firstName, lastName: user.lastName }
-    const template = await LetterTemplate.query().findById(letter.letter_template_id)
+    letter.merge_variables = {
+      ...letter.merge_variables,
+      firstName: user.firstName,
+      lastName: user.lastName
+    }
+    const template = await LetterTemplate.query().findById(
+      letter.letter_template_id
+    )
     const html = Handlebars.render(letter.merge_variables, template.html)
-    
+
     // Using a temporary mapping here also
     for (const method of deliveryMethods) {
       // Generate a uuid so letters are idempotent
@@ -188,19 +200,23 @@ router.post('/process-transaction', async (req, res) => {
       )
     }
 
-    const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent })
+    const transaction = await Transaction.query().findOne({
+      stripe_transaction_id: paymentIntent
+    })
     await transaction.$query().patch({ status: eventOutcome })
 
-    const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
+    const letter = await Letter.query()
+      .where({ transaction_id: transaction.id })
+      .first()
     letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
-    
+
     const lobApiKey = process.env.LOB_API_KEY
     const lobCredentials = btoa(`${lobApiKey}:`)
 
     console.log(letter.mergeVariables)
     const lobResponse = await axios.post(
-      'https://api.lob.com/v1/letters', 
+      'https://api.lob.com/v1/letters',
       {
         to: {
           name: letter.addressee,
@@ -226,7 +242,7 @@ router.post('/process-transaction', async (req, res) => {
 
     if (!lobResponse.statusCode === 200) throw new CheckoutError(lobResponse)
 
-    await letter.$query().patch({ sent: true})
+    await letter.$query().patch({ sent: true })
 
     return res.status(201).end()
   } catch (error) {

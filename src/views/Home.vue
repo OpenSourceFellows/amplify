@@ -22,9 +22,9 @@ export default {
 
     // Also populates representatives and assets
     await this.$store.dispatch('loadSingleCampaign', campaignId)
-    
+
     this.$store.dispatch('loadLetterTemplate')
-    
+
     this.$store.commit('setGenericValue', { key: 'mode', value: mode })
   }
 }
