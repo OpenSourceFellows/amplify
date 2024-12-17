@@ -1,8 +1,28 @@
 <template>
   <section class="donate-money">
-    <h1>Donate to the cause.</h1>
-
+    <h1>Select your delivery method</h1>
     <v-col cols="12" class="py-2">
+      <p>Please select the type of letter you want to send</p>
+      <v-btn-toggle
+        class="d-flex flex-wrap justify-center"
+        tile
+        color="deep-purple accent-3"
+        multiple
+      >
+        <v-btn
+          v-for="item in letterDeliveryMethods"
+          :key="item.type"
+          elevation="2"
+          raised
+          :value="item.type"
+          @click="setDeliveryMethods(item.type)"
+          class="mx-2 my-3"
+        >
+          {{ item.label }}
+        </v-btn>
+      </v-btn-toggle>
+
+      <h1>Donate to the cause.</h1>
       <p v-if="noCostMailEnabled">
         Your voice is super important!
         <span v-if="couponCode">
@@ -16,85 +36,75 @@
         Your donation makes it possible to change our relationship with
         representatives, from the comfort of your home or on the go.
       </p>
-
-      <!-- We can show an alternative link to donate money, if the showAltDonation env variable is true-->
-      <!-- Otherwise, show the donation amount buttons. This should be use in conjunction with VUE_APP_EMPTY_TRANSACTIONS -->
-      <div v-if="showExtDonation">
-        <p>
-          If you'd like to make a donation, please do so
-          <a :href="extDonationUrl" target="_blank">here.</a>
-        </p>
-        <p>Donors should add a note saying its for {{ campaign.name }}.</p>
-      </div>
-      <div v-else>
-        <v-btn-toggle
-          v-model="donationAmount"
-          class="d-flex flex-wrap justify-center"
-          tile
-          color="deep-purple accent-3"
-          group
+      <v-btn-toggle
+        v-model="donationAmount"
+        class="d-flex flex-wrap justify-center"
+        tile
+        color="deep-purple accent-3"
+        group
+      >
+        <v-btn
+          elevation="2"
+          raised
+          :value="200"
+          @click="unsetCustomAmountSelection"
         >
-          <v-btn
-            elevation="2"
-            raised
-            :value="200"
-            @click="unsetCustomAmountSelection"
-          >
-            2
-          </v-btn>
+          2
+        </v-btn>
 
-          <v-btn
-            elevation="2"
-            raised
-            :value="2000"
-            @click="unsetCustomAmountSelection"
-          >
-            20
-          </v-btn>
+        <v-btn
+          elevation="2"
+          raised
+          :value="2000"
+          @click="unsetCustomAmountSelection"
+        >
+          20
+        </v-btn>
 
-          <v-btn
-            elevation="2"
-            raised
-            :value="5000"
-            @click="unsetCustomAmountSelection"
-          >
-            50
-          </v-btn>
+        <v-btn
+          elevation="2"
+          raised
+          :value="5000"
+          @click="unsetCustomAmountSelection"
+        >
+          50
+        </v-btn>
 
-          <v-btn
-            v-if="emptyTransactionsEnabled"
-            elevation="2"
-            raised
-            :value="0"
-            @click="unsetCustomAmountSelection"
-          >
-            0
-          </v-btn>
+        <v-btn
+          v-if="emptyTransactionsEnabled"
+          elevation="2"
+          raised
+          :value="0"
+          @click="unsetCustomAmountSelection"
+        >
+          0
+        </v-btn>
 
-          <v-btn elevation="2" raised @click="toggleCustomDonation">
-            Custom Amount
-          </v-btn>
-        </v-btn-toggle>
+        <v-btn elevation="2" raised @click="toggleCustomDonation">
+          Custom Amount
+        </v-btn>
+      </v-btn-toggle>
 
-        <div class="d-flex justify-center flex-column align-center :width=100%">
-          <v-text-field
-            v-if="customAmountSelected"
-            ref="input"
-            v-model="customDonationAmount"
-            class="custom-donation-amount-textfield"
-            inputmode="numeric"
-            label="Donation Amount"
-            type="number"
-            required
-          >
-            <v-icon slot="prepend"> mdi-currency-usd </v-icon>
-            {{ styledCustomDonation }}
-          </v-text-field>
-        </div>
+      <div class="d-flex justify-center flex-column align-center :width=100%">
+        <v-text-field
+          v-if="customAmountSelected"
+          ref="input"
+          v-model="customDonationAmount"
+          class="custom-donation-amount-textfield"
+          inputmode="numeric"
+          label="Donation Amount"
+          type="number"
+          required
+        >
+          <v-icon slot="prepend"> mdi-currency-usd </v-icon>
+          {{ styledCustomDonation }}
+        </v-text-field>
       </div>
     </v-col>
     <div>
-      <v-btn outlined color="primary" text @click="submit()"> Send Letter </v-btn>
+      <v-btn outlined color="primary" text @click="submit()">
+        Send Letter
+      </v-btn>
     </div>
   </section>
 </template>
@@ -102,6 +112,8 @@
 <script lang="js">
 import axios from 'axios'
 import { PaymentPresenter } from '../../shared/presenters/payment-presenter'
+
+const LETTER_DELIVERY_METHODS = [{ label: 'Email', type: 'email' }, {label: 'Physical Mail', type: 'snail_mail'}]
 
 export default {
   name: 'DonateMoney',
@@ -111,12 +123,16 @@ export default {
       donationAmount: 0,
       customAmountSelected: false,
       customDonationAmount: null,
+      deliveryMethods: [],
     }
   },
   computed: {
     // These are temporary structures until we can reorganize the frontend.
+    letterDeliveryMethods() {
+      return LETTER_DELIVERY_METHODS
+    },
     noCostMailEnabled() {
-      return Boolean(process.env.VUE_APP_NO_COST_MAIL)
+      return process.env.VUE_APP_NO_COST_MAIL == 'true'
     },
     campaign() {
       return this.$store.state.campaign
@@ -148,11 +164,12 @@ export default {
       }
     },
     letter() {
-      const rep = this.$store.state.selectedRep
-      const letterId = this.$store.state.letterId
-      const letterVersion = this.$store.state.letterVersion
-      const returnAddressId = this.$store.state.lobReturnAddressId
-      const mergeVariables = this.$store.state.mergeVariables
+      const rep              = this.$store.state.selectedRep
+      const letterId         = this.$store.state.letterId
+      const letterVersion    = this.$store.state.letterVersion
+      const returnAddressId  = this.$store.state.lobReturnAddressId
+      const mergeVariables   = this.$store.state.mergeVariables
+      const letterTemplateId = this.$store.state.campaign.letterTemplateId
 
       return {
         letterTemplate: letterId,
@@ -163,8 +180,10 @@ export default {
         state: rep.address_state,
         city: rep.address_city,
         zip: rep.address_zip,
+        email: rep.email,
         returnAddress: returnAddressId,
-        merge_variables: mergeVariables
+        merge_variables: mergeVariables,
+        letter_template_id: letterTemplateId,
       }
     },
     styledCustomDonation() {
@@ -175,6 +194,16 @@ export default {
     }
   },
   methods: {
+    setDeliveryMethods(method) {
+      console.log('logging delivery methods', method)
+      // If item in array, delete on button click, else add to array.
+      const idx = this.deliveryMethods.indexOf(method)
+      if (idx > -1 ) {
+        return this.deliveryMethods.splice(idx, 1)
+      }
+
+      this.deliveryMethods.push(method)
+    },
     unsetCustomAmountSelection() {
       this.customAmountSelected = false
     },
@@ -187,19 +216,26 @@ export default {
 
       donation = presenter.formatPaymentAmount(donation)
 
-      this.createCheckoutSession(donation, this.user, this.letter)
+      if (this.deliveryMethods.length == 0) {
+        alert('Please pick at least one delivery method!')
+      }
+
+      if (donation === 0 && !this.noCostMailEnabled) {
+        alert('Please pick a donation amount greater than $0.')
+      }
+
+      this.createCheckoutSession(donation, this.user, this.letter, this.deliveryMethods)
     },
-    createCheckoutSession(donation, user, letter) {
-      console.log(donation, user, letter)
-      axios.post('/api/checkout/create-checkout-session', { donation, user, letter })
-        // TODO: Investigate whether we need to dump user state still. With the new stripe webhook it may not be necessary.
+    createCheckoutSession(donation, user, letter, deliveryMethods) {
+      console.log(donation, user, letter, deliveryMethods)
+      axios.post('/api/checkout/create-checkout-session', { donation, user, letter, deliveryMethods })
         .then((response) => {
-          // Dump state to local storage before redirect
+          // Redirect to Stripe
           this.$store.dispatch(
             'dumpStateToLocalStorage',
             response.data.sessionId
           )
-          // Redirect to Stripe
+
           location.href = response.data.url
         })
         .catch((error) => {

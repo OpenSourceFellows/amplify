@@ -28,35 +28,14 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <TuolumneLetterLoad
-            v-if="campaign === 'Tuolumne River Trust'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <CaliforniaRiversLetterLoad
-            v-if="campaign.name === 'Save California Salmon'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <UtahLetterLoad
-            v-if="campaign.name === 'White Mesa Concerned Community'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <HakamweLetterLoad
-            v-if="campaign.name === 'Protect Hakamwe'"
-            :selected-rep="selectedRep"
-            :letter-body="letterBody"
-          />
-          <!-- v-else this later as fallback-->
-          <!-- <letter-load :selected-rep="selectedRep" :letter-body="letterBody" /> -->
+          <letter-load />
         </v-expansion-panel-content>
         <v-expansion-panel-content>
           <v-btn
             width="160"
             dark
             color="primary"
-            @click="nextPage({ selectedRep, letterBody })"
+            @click="nextPage({ selectedRep })"
           >
             Next
           </v-btn>
@@ -99,11 +78,12 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <sign-name @address-validated="!addressNotValidated" />
+          <sign-name @address-validated="validateAddress()" />
         </v-expansion-panel-content>
 
         <v-expansion-panel-content>
           <v-btn
+            :disabled="addressButtonDisabled"
             width="160"
             dark
             color="primary"
@@ -156,29 +136,18 @@
 </template>
 
 <script>
-import TuolumneLetterLoad from '@/components/TuolumneLetterLoad.vue'
-import CaliforniaRiversLetterLoad from '@/components/CaliforniaRiversLetterLoad.vue'
-import HakamweLetterLoad from './HakamweLetterLoad.vue'
-import UtahLetterLoad from '@/components/UtahLetterLoad.vue'
+import LetterLoad from '@/components/LetterLoad.vue'
 import SignName from '@/components/SignName.vue'
 import DonateMoney from '@/components/DonateMoney.vue'
 
 export default {
   name: 'TakeAction',
   components: {
-    TuolumneLetterLoad,
-    CaliforniaRiversLetterLoad,
-    HakamweLetterLoad,
-    UtahLetterLoad,
+    LetterLoad,
     SignName,
     DonateMoney
   },
-  props: {
-    letterBody: {
-      type: String,
-      required: true
-    }
-  },
+  props: {},
   data() {
     return {
       panel: 0,
@@ -187,7 +156,7 @@ export default {
         1: 'default',
         2: 'default'
       },
-      addressNotValidated: true
+      addressInvalid: true
     }
   },
   computed: {
@@ -199,10 +168,14 @@ export default {
     },
     campaign() {
       return this.$store.state.campaign
+    },
+    addressButtonDisabled() {
+      return this.addressInvalid
     }
   },
   methods: {
     nextPage(attrs) {
+      console.log('setting values with nextPage!')
       this.$store.dispatch('setLetterAttrs', attrs)
 
       const previousPanel = this.panel
@@ -236,6 +209,9 @@ export default {
     },
     handleAddress(address) {
       this.userData = address
+    },
+    validateAddress() {
+      this.addressInvalid = !this.addressInvalid
     }
   }
 }

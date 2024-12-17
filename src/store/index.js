@@ -8,8 +8,7 @@ export default new Vuex.Store({
   state: {
     mode: 'single',
     zipcode: '',
-    letterId: '',
-    letterVersion: 'latest',
+    letterTemplate: {},
     campaign: {
       id: '',
       organization: '',
@@ -19,7 +18,8 @@ export default new Vuex.Store({
       pageUrl: '',
       campaignText: '',
       campaignTagline: '',
-      supplementalText: ''
+      supplementalText: '',
+      letterTemplateId: ''
     },
     representatives: [],
     assets: {},
@@ -39,6 +39,7 @@ export default new Vuex.Store({
   mutations: {
     // TODO: Do we really need two setters here?
     // It's good for clarity, but they can really be combined to dry things up.
+    // This can be used to replace an object, wholesale: state.mergeVariables = {} ==> state.mergeVariables = { somekey: someval }
     setGenericValue: (state, { key, value }) => {
       if (key in state) {
         state[key] = value
@@ -117,6 +118,23 @@ export default new Vuex.Store({
         commit('setGenericValue', { key: 'assets', value: assets })
       } catch (e) {
         alert(e.message)
+      }
+    },
+    async loadLetterTemplate({ state, commit }) {
+      const templateUrl = `/api/v1/letter_templates/${state.campaign.letterTemplateId}`
+
+      try {
+        const res = await axios.get(templateUrl)
+
+        const { letterTemplate } = res.data
+        console.log(letterTemplate)
+
+        commit('setGenericValue', {
+          key: 'letterTemplate',
+          value: letterTemplate
+        })
+      } catch (e) {
+        alert(e)
       }
     }
   },

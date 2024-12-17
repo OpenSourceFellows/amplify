@@ -6,9 +6,11 @@ const {
   PaymentPresenter,
   PaymentPresenterError
 } = require('../../../shared/presenters/payment-presenter')
+const Handlebars = require('../../lib/handlebars')
 const Constituent = require('../../db/models/constituent')
 const Transaction = require('../../db/models/transaction')
 const Letter = require('../../db/models/letter')
+const LetterTemplate = require('../../db/models/letter-template')
 
 const router = express.Router()
 
@@ -20,10 +22,10 @@ class CheckoutError extends Error {
 }
 
 router.post('/create-checkout-session', async (req, res) => {
-  const { donation, user, letter } = req.body
+  let { donation, user, letter, deliveryMethods } = req.body
+  console.dir(user)
+  console.dir(letter)
   const origin = req.get('origin')
-
-  console.log(`origin: ${origin}`)
 
   try {
     const presenter = new PaymentPresenter()
@@ -53,11 +55,31 @@ router.post('/create-checkout-session', async (req, res) => {
       })
 
       // Using a temporary mapping here also
-      await Letter.query().insert({
-        transactionId: transaction.id,
-        constituentId: constituent.id,
-        ...letter
-      })
+      // Re-render the letter html, merging user data to be saved in case that's in the template.
+      letter.merge_variables = {
+        ...letter.merge_variables,
+        firstName: user.firstName,
+        lastName: user.lastName
+      }
+      const template = await LetterTemplate.query().findById(
+        letter.letter_template_id
+      )
+      const html = Handlebars.render(letter.merge_variables, template.html)
+
+      // Using a temporary mapping here also
+      for (const method of deliveryMethods) {
+        // Generate a uuid so letters are idempotent
+        letter.trackingNumber = uuidv4()
+        console.log(letter.trackingNumber)
+
+        await Letter.query().insert({
+          transactionId: transaction.id,
+          constituentId: constituent.id,
+          letterTemplate: html,
+          deliveryMethod: method,
+          ...letter
+        })
+      }
 
       return res
         .status(200)
@@ -97,12 +119,31 @@ router.post('/create-checkout-session', async (req, res) => {
       paymentMethod: 'credit_card'
     })
 
+    // Re-render the letter html, merging user data to be saved in case that's in the template.
+    letter.merge_variables = {
+      ...letter.merge_variables,
+      firstName: user.firstName,
+      lastName: user.lastName
+    }
+    const template = await LetterTemplate.query().findById(
+      letter.letter_template_id
+    )
+    const html = Handlebars.render(letter.merge_variables, template.html)
+
     // Using a temporary mapping here also
-    await Letter.query().insert({
-      transactionId: transaction.id,
-      constituentId: constituent.id,
-      ...letter
-    })
+    for (const method of deliveryMethods) {
+      // Generate a uuid so letters are idempotent
+      letter.trackingNumber = uuidv4()
+      console.log(letter.trackingNumber)
+
+      await Letter.query().insert({
+        transactionId: transaction.id,
+        constituentId: constituent.id,
+        letterTemplate: html,
+        deliveryMethod: method,
+        ...letter
+      })
+    }
 
     return res
       .status(200)
@@ -159,19 +200,23 @@ router.post('/process-transaction', async (req, res) => {
       )
     }
 
-    const transaction = await Transaction.query().findOne({ stripe_transaction_id: paymentIntent })
+    const transaction = await Transaction.query().findOne({
+      stripe_transaction_id: paymentIntent
+    })
     await transaction.$query().patch({ status: eventOutcome })
 
-    const letter = await Letter.query().where({ transaction_id: transaction.id }).first()
+    const letter = await Letter.query()
+      .where({ transaction_id: transaction.id })
+      .first()
     letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
-    
+
     const lobApiKey = process.env.LOB_API_KEY
     const lobCredentials = btoa(`${lobApiKey}:`)
 
     console.log(letter.mergeVariables)
     const lobResponse = await axios.post(
-      'https://api.lob.com/v1/letters', 
+      'https://api.lob.com/v1/letters',
       {
         to: {
           name: letter.addressee,
@@ -197,7 +242,7 @@ router.post('/process-transaction', async (req, res) => {
 
     if (!lobResponse.statusCode === 200) throw new CheckoutError(lobResponse)
 
-    await letter.$query().patch({ sent: true})
+    await letter.$query().patch({ sent: true })
 
     return res.status(201).end()
   } catch (error) {

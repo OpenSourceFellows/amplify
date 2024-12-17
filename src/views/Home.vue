@@ -23,10 +23,7 @@ export default {
     // Also populates representatives and assets
     await this.$store.dispatch('loadSingleCampaign', campaignId)
 
-    this.$store.commit('setGenericValue', {
-      key: 'letterId',
-      value: process.env.VUE_APP_LETTER_TEMPLATE
-    })
+    this.$store.dispatch('loadLetterTemplate')
 
     this.$store.commit('setGenericValue', { key: 'mode', value: mode })
   }
