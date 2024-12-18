@@ -21,7 +21,7 @@ module.exports = {
     })
 
     await knex.schema.alterTable('campaigns', (table) => {
-      table.integer('letter_template_id').unsigned().notNullable()
+      table.integer('letter_template_id').unsigned()
       table.foreign('letter_template_id').references('letter_templates.id')
     })
   },
