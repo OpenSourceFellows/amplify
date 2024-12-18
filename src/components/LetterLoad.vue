@@ -24,21 +24,10 @@
             {{ selectedRep.address_zip }}
           </div>
           <br />
-          <div>{{ user.name }}</div>
-          <div>
-            {{ user.line1 }}
-            <br />
-            {{ user.line2 }}
-          </div>
-          <div>
-            {{ formattedCityState }}
-          </div>
           <div>
             <span v-html="letterBody" />
           </div>
         </v-card-subtitle>
-
-        <p>{{ user.name }}</p>
       </div>
       <div v-show="!isSubmitted">
         <v-card-text> clicked</v-card-text>
@@ -135,10 +124,13 @@ export default {
     this.userSelections.representativeName = this.selectedRep.name
 
     this.letterBody = this.letterTemplate.html
+
+    // First Letter Render to set user's name
+    this.renderLetter()
   },
   methods: {
     renderLetter() {
-      axios.post('/api/v1/letter_templates/render', { mergeVariables: { ...this.userSelections, representativeName: this.selectedRep.name }, templateId: this.letterTemplate.id })
+      axios.post('/api/v1/letter_templates/render', { mergeVariables: { ...this.userSelections, representativeName: this.selectedRep.name, name: this.user.name }, templateId: this.letterTemplate.id })
         .then((res) => {
           this.letterBody = res.data.letter
         })

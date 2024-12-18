@@ -26,7 +26,7 @@ export default new Vuex.Store({
     lobReturnAddressId: '',
     selectedRep: {},
     userData: {
-      name: '',
+      name: '<Your name here>',
       line1: '',
       line2: '',
       city: '',
