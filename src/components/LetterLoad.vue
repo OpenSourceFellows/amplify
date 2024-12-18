@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     renderLetter() {
-      axios.post('/api/v1/letter_templates/render', { mergeVariables: { ...this.userSelections, representativeName: this.selectedRep.name, name: this.user.name }, templateId: this.letterTemplate.id })
+      axios.post('/api/v1/letter_templates/render', { mergeVariables: { ...this.userSelections, representativeName: this.selectedRep.name, firstName: '<Your name here>', lastName: '' }, templateId: this.letterTemplate.id })
         .then((res) => {
           this.letterBody = res.data.letter
         })
