@@ -17,7 +17,6 @@ module.exports = {
           useNative: true,
           enumName: 'delivery_methods'
         })
-        .notNullable()
       table.string('email')
     })
 
