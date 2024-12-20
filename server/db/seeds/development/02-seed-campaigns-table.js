@@ -142,7 +142,7 @@ module.exports = {
           }
         ]),
         assets: JSON.stringify({
-          campaign_logo: 'https://ggjalliance.org/wp-content/uploads/2019/09/Equality-Labs.png',
+          campaign_logo: 'https://i.imgur.com/0I80XGh.png',
           campaign_background: 'https://media.assettype.com/freepressjournal/2024-09-04/i722yxsy/lg_NR15OldQueensGate0889_edit.jpg?rect=0%2C0%2C3900%2C2194&w=1200&auto=format%2Ccompress&ogImage=true',
           'campaign-img-1': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-yngrxizvU5kAZ3CP9-iQnn1OD14eXkpeXUYo96KOL6sg19Icwoes_JYlm_a61pzAcRE&usqp=CAU',
           'campaign-img-2': 'https://images-prod.gothamist.com/images/GettyImages-1481222828.width-1000.jpg',
