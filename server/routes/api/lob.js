@@ -393,68 +393,47 @@ router.post('/addressVerification', async (req, res) => {
 
 module.exports = router
 
+const LOB_API_KEY = process.env.LOB_API_KEY
+const DEPRECATED_LOB_KEY = process.env.LiveLob
+
 // Temporary implementation for fallback with deprecation warnings
 function getLobApiKey() {
-  const { LOB_API_KEY, LiveLob } = process.env
-  const lobApiKey = LOB_API_KEY || LiveLob
+  if (LOB_API_KEY) {
+    return LOB_API_KEY
+  }
+  if (DEPRECATED_LOB_KEY) {
+    console.warn(
+      '[DEPRECATION WARNING] Using deprecated "LiveLob" environment variable.'
+    )
+    console.warn('Please migrate to "LOB_API_KEY" as soon as possible.')
 
-  if (LiveLob) {
-    if (LOB_API_KEY) {
-      console.warn('Using "LOB_API_KEY" environment variable.')
-      console.warn(
-        'Please remove your deprecated "LiveLob" environment variable!'
-      )
-    } else {
-      console.warn('Expected "LOB_API_KEY" environment variable was not found.')
-      console.warn(
-        'Falling back to deprecated "LiveLob" environment variable....'
-      )
-      console.warn('Please update your environment to use the expected key!')
-    }
+    return DEPRECATED_LOB_KEY
   }
 
-  return lobApiKey
+  throw new Error(
+    'Lob API key is missing. Please set the "LOB_API_KEY" environment variable.'
+  )
 }
 
 function handleLobError(error, res) {
   let status = 500
-  let errorMessage = 'Whoops'
+  let errorMessage = 'Something went wrong.'
 
   if (error) {
     // error.response is from the `axios` package
     // error._response is from the `lob` package
-    if (error.response || error._response) {
-      status = 502
+    const response = error.response || error._response
 
-      let lobStatus = null
-      let lobApiError = {}
+    if (response) {
+      status = response.status || 502
+      const lobError = response.data?.error || response.body?.error
 
-      // Handle Lob API errors from `axios` requests
-      if (error.response) {
-        lobStatus = error.response.status
-        lobApiError = error.response.data.error
+      if (lobError) {
+        errorMessage = lobError.message
       }
-      // Handle Lob API errors from `lob` requests
-      else if (error._response) {
-        lobStatus = error._response.statusCode
-        lobApiError = error._response.body.error
-      }
-
-      if (process.env.NODE_ENV !== 'test') {
-        console.error(
-          `Lob API error (${lobStatus}): ${JSON.stringify(lobApiError)}`
-        )
-      }
-
-      // If the error is being blamed on the request...
-      // See: https://docs.lob.com/#errors
-      if ([400, 404, 422].includes(lobStatus)) {
-        status = 400
-        errorMessage = lobApiError.message
-      }
-    } else {
-      console.error(error)
     }
+
+    console.error(`Lob API error: ${errorMessage}`)
   }
 
   return res.status(status).send({ error: errorMessage })
