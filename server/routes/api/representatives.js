@@ -36,7 +36,10 @@ const axios = setupCache(Axios, { storage: STORAGE })
 
 const router = express.Router()
 
-const { CICERO_API_KEY } = process.env
+const CICERO_API_KEY = process.env.CICERO_API_KEY
+if (!CICERO_API_KEY) {
+  throw new Error('CICERO API key is missing')
+}
 
 const JURISDICTION_FILTER_MAP = {
   federal: ['NATIONAL_UPPER', 'NATIONAL_LOWER'],
