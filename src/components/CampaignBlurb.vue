@@ -2,22 +2,25 @@
   <div class="d-flex flex-column align-center blurb">
     <div>
       <img
+        v-if="assets['campaign-img-1']"
         :src="assets['campaign-img-1']"
         alt="supplemental image one"
-        class="mx-2 my-4 supplemental-img"
+        class="mx-2 my-2 supplemental-img"
       />
       <img
+        v-if="assets['campaign-img-2']"
         :src="assets['campaign-img-2']"
         alt="supplemental image two"
-        class="mx-2 my-4 supplemental-img"
+        class="mx-2 my-2 supplemental-img"
       />
       <img
+        v-if="assets['campaign-img-3']"
         :src="assets['campaign-img-3']"
         alt="supplemental image three"
-        class="mx-2 my-4 supplemental-img"
+        class="mx-2 my-2 supplemental-img"
       />
     </div>
-    <div class="px-6 text-content">
+    <div class="px-6 py-2 text-content">
       <p class="flavor-text" v-html="flavorText"></p>
     </div>
     <img

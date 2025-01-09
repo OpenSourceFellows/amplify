@@ -196,6 +196,8 @@ export default {
             key: 'userData',
             data: this.form
           })
+
+          this.$emit('address-validated', true)
         })
         .catch(function (error) {
           console.log(error)
