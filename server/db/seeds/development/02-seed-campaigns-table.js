@@ -92,341 +92,61 @@ module.exports = {
       },
       {
         id: 2,
-        organization: 'Tuolumne River Trust',
-        name: 'Tuolumne River Trust',
+        organization: 'Equality Labs',
+        name: 'Protect Caste Equity at Rutgers University',
         cause: 'Civic Rights',
         type: 'Grant',
-        page_url: 'https://www.tuolumne.org/revive-the-tuolumne',
-        letter_template_id: 1,
-        campaign_tagline: 'For a Healthy and Vibrant River',
-        campaign_text:
-          '<p><strong>The Tuolumne River is on the verge of ecological collapse. </strong>Historically, the River hosted well over <strong>100,000 salmon</strong>, but in 2020 only <strong>1,000</strong> returned to spawn. And it’s not just about fish. Before dams were constructed to divert water to farms and urban areas, salmon transported millions of pounds of nutrients from the ocean to upland habitats, where they fueled the food web and fertilized forests and meadows. Absent those nutrients, the Tuolumne’s salmon-based ecosystem is in a state of crisis.</p><p>The main cause of the River’s demise is inadequate instream flows. In an average year, <a href=”https://www.tuolumne.org/questions” target=”_blank”>only 21% of the Tuolumne’s unimpaired flow</a> reaches the San Joaquin River. During the recent drought, <a href=”https://www.tuolumne.org/questions” target=”_blank”>unimpaired flow averaged just 12%</a> for five straight years. Meanwhile, more than three years’ worth of water remained impounded behind SFPUC dams, and all that water (and much more) had to be “dumped” back into the River two years later to prevent flooding downstream. The Tuolumne experienced one exceptionally good year at the expense of five terrible years.</p><p>Revive the Tuolumne aims to reverse this negative trend and restore the River. Our <a href=”https://www.tuolumne.org/let-it-flow” target=”_blank”>Let it Flow</a> campaign advocates for higher instream flows through <a href=”https://www.tuolumne.org/ferc” target=”_blank”>federal licensing of dams</a> and by supporting the State Water Board’s update of the <a href=”https://www.tuolumne.org/ferc” target=”_blank”>Bay Delta Water Quality Control Plan.</a> Our <a href=”https://www.tuolumne.org/use-it-wisely” target=”_blank”>Use It Wisely</a> campaign promotes water conservation and alternative water supplies to reduce reliance on Tuolumne River water so that more can be made available for environmental purposes.</p>',
-        supplemental_text:
-          '<p>SFPUC water policies create unnecessary water scarcity throughout the Tuolumne watershed and skyrocketing water costs for ratepayers. These water woes are the result of dubious “science” and conservative water storage based on an SFPUC-manufactured drought plan called the Design Drought.</p><p>The Design Drought arbitrarily combines two of the worst droughts on record to create a megadrought that might occur once in 25,000 years. The Design Drought has prompted the SFPUC to create an Alternative Water Supply Plan that would double the SFPUC budget (and water rates) to produce expensive water we won’t ever need, while continuing to minimize river flows in the Tuolumne.</p><p>Low flows along the Tuolumne River harm the environment: the wild salmon population is on the brink of collapse and the scarcity of this keystone species negatively impacts riparian, delta, bay, and ocean ecosystems as well; frontline communities experience illness from toxic algae blooms and water scarcity; and Indigenous Tribes and commercial fishing communities that rely on healthy fisheries experience the collapse of lifeways and economies.</p><p>We encourage you to send a letter to the San Francisco Board of Supervisors, demanding science-backed water policies and a financially viable SFPUC budget.</p><p>Let your supervisor know that the citizens call for an independent audit of the SFPUC!</p>',
-        representatives: JSON.stringify([
-          {
-            name: 'Connie Chan',
-            title: 'District 1 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Connie_Chan_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'chanstaff@sfgov.org'
-          },
-          {
-            name: 'Catherine Stefani',
-            title: 'District 2 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Supervisor_Stefani_2018.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'Catherine.Stefani@sfgov.org'
-          },
-          {
-            name: 'Aaron Peskin',
-            title: 'District 3 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Aaron_Peskin_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'Aaron.Peskin@sfgov.org'
-          },
-          {
-            name: 'Joel Engardio',
-            title: 'District 4 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Joel_Engardio_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: ''
-          },
-          {
-            name: 'Dean Preston',
-            title: 'District 5 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Dean_Preston_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'prestonstaff@sfgov.org'
-          },
-          {
-            name: 'Matt Dorsey',
-            title: 'District 6 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Dorsey_2022_lg.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'DorseyStaff@sfgov.org'
-          },
-          {
-            name: 'Myrna Melgar',
-            title: 'District 7 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Myrna_Melgar_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'melgarstaff@sfgov.org'
-          },
-          {
-            name: 'Rafael Mandelman',
-            title: 'District 8 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Supervisor_Mandelman_2018.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'mandelmanstaff@sfgov.org'
-          },
-          {
-            name: 'Hillary Ronen',
-            title: 'District 9 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Supervisor_Ronen_2019.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'RonenStaff@sfgov.org'
-          },
-          {
-            name: 'Shamann Walton',
-            title: 'District 10 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Shamann_Walton_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'waltonstaff@sfgov.org'
-          },
-          {
-            name: 'Ahsha Safai',
-            title: 'District 11 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Ahsha_Safai_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'Ahsha.Safai@sfgov.org'
-          }
-        ]),
-        assets: JSON.stringify({
-          campaign_logo:
-            'https://images.squarespace-cdn.com/content/v1/5eebc0039b04b54b2fb0ce52/1598500758914-E5HAIIGCP0ZXKKMN2FT0/TRT+Logo-13.png?format=500w',
-          campaign_background:
-            'https://images.squarespace-cdn.com/content/v1/5eebc0039b04b54b2fb0ce52/1610135975708-FV42Q30BPWF887M05O51/Poppies-13.jpg?format=1500w',
-          'campaign-img-1':
-            'https://images.squarespace-cdn.com/content/v1/5eebc0039b04b54b2fb0ce52/1609785926325-63M9MY247ORIL8ON8P5E/tuolumne-camp-960x540.jpg?format=1500w',
-          'campaign-img-2':
-            'https://images.squarespace-cdn.com/content/v1/5eebc0039b04b54b2fb0ce52/1592586646372-TBY3WC065NJ04KT2B38Z/000091400001.jpg?format=1500w',
-          'campaign-img-3':
-            'https://images.squarespace-cdn.com/content/v1/5eebc0039b04b54b2fb0ce52/1609781359705-Q5YNFL6DET5ORHW62ZU7/IMG_2249_WEBSITE+copy.jpg?format=1500w'
-        })
-      },
-      {
-        id: 3,
-        organization: 'Save California Salmon',
-        name: 'Save California Salmon',
-        cause: 'Civic Rights',
-        type: 'Grant',
-        page_url: 'https://www.californiasalmon.org/',
-        letter_template_id: 1,
+        page_url: 'https://rutgersaaup.org/wp-content/uploads/2024/08/Rutgers-Caste-Report-August-2024.pdf',
+        letter_template_id: 2,
         campaign_tagline:
-          'Restoring and Protecting California Salmon and Rivers for Future Generations',
-        campaign_text:
-          '<p><strong>#UNDAMTHEKLAMATH</strong></p><p>Save California Salmon (SCS) is dedicated to policy change and community advocacy for Northern California’s salmon and fish dependent people. We support the fisheries and water protection work of the local communities, and advocate effective policy change for clean water, restored fisheries and vibrant communities. We aim to help to support Tribes and the general public in engaging with public comments related to water pollution, fisheries, and beneficial use issues.</p><p>Restoration of the Klamath River does not stop with dam removal. Salmon populations are continuing to plummet throughout California, leaving Tribal communities without salmon for subsistence, and ocean fishermen without a season. Restoration of the Klamath’s tributaries, which are often dewatered for animal agriculture, is also critical. We continued to support Tribal efforts to establish both permanent and temporary emergency flows in the Scott and Shasta Rivers through the California Water Resources Control Board. In December, the board passed emergency irrigation curtailments for both rivers, and we are still pushing for permanent instream flow requirements.</p><p>We also continued to fight for Trinity River flows, which are critical to the river, and to stop fish kills in the Klamath River. The Trinity is the Klamath’s largest tributary, but it is also an artificial Sacramento River tributary that feeds the Central Valley Water Project. The federal government is working on a new Biological Opinion for Endangered Species (water operations plan) for the Central Valley and State Water Projects. We are calling for a separate, protective Biological Opinion for the Trinity River, and for flows in the Bay Delta watersheds.</p><p>We are deeply dedicated to dam removal and flow restoration in all the North State’s watersheds. We want salmon back for all Northern California Tribes, which is why we are hopeful about Pacific Gas & Electric’s (PGE) December proposal to fully decommission the Eel River Dams.</p>',
+          'URGE RUTGERS TO PRIORITIZE CASTE EQUITY',
+        campaign_text: '<p>We applaud Rutgers University for taking a crucial step toward addressing caste inequity through the recent <strong><a href="https://rutgersaaup.org/wp-content/uploads/2024/08/Rutgers-Caste-Report-August-2024.pdf">University Task Force Report on Caste Discrimination in Higher Education and at Rutgers</strong> Global caste systems enforce discrimination through inherited social status. They are a systemic injustice that has long been overlooked in the United States, despite its prevalence in many American institutions including higher education. That is why the findings of this report are so crucial. By recommending to add caste as a protected category, Rutgers has an opportunity to lead the way in creating equitable spaces for all, especially for caste-oppressed faculty, students, and workers who experience this bias.</p><p>The testimonies presented in Rutgers’ task force report are a powerful reminder of the urgent need to address caste-based exclusion, harassment, and inequities in higher education. Caste is not an abstract concept; it is a harsh reality for millions. Caste discrimination spans across industries and includes bullying, harassment, bias, wage theft, sexual harassment, and even trafficking. Caste-oppressed individuals have also been denied rental housing upon the discovery of their caste identity. This issue has gained significant attention in New Jersey following <a href="https://www.npr.org/2021/06/03/1002547517/human-trafficking-allegations-thrust-caste-into-spotlight-for-american-hindus">human trafficking allegations</a> against the BAPS temples, where caste-oppressed workers were held against their will and paid just a dollar an hour under <a href="https://www.nytimes.com/2021/05/11/nyregion/nj-hindu-temple-india-baps.html">inhumane conditions</a></p><p>In New Jersey there are many communities who suffer caste discrimination in their communities from Africa, South Asia, Asia, and Indigenous residents of the state. Students, faculty and staff from these backgrounds must be able to access the campus as a place of learning and as a workplace free from discrimination and harm.</p><p>From workplace discrimination to campus bullying, the insidious impacts of caste privilege have been well-documented by marginalized communities, In our own 2016 report <a href="https://equalitylabs.wpengine.com/wp-content/uploads/2023/10/Caste_in_the_United_States_Report2018.pdf">Caste in the United States</a> we have found caste oppressed people face alarming discrimination and harassment with 1 in 4 facing physical and verbal assault, 1 in 3 education discrimination and 2 out 3 workplace discrimination.</p><p>As a U.S.-based civil rights group we urge Rutgers’ administration **to fully adopt the task force’s recommendations and implement robust enforcement mechanisms.** This includes education on caste equity for students, staff, and faculty and meaningful support for those who come forward with experiences of caste-based harm.</p><p>As Rutgers advances this work, we caution against narratives that dismiss caste protections as “anti-Hindu” or as targeting specific communities. Such arguments weaponize bad faith arguments and privilege to silence Dalit voices and maintain systems of oppression. Caste is found across multiple geographies and faiths and it must be addressed as its own system of exclusion. We believe in fostering dialogue that centers the experiences of the most vulnerable while rejecting extremist  rhetoric that masquerades falsely as a defense of cultural identity.</p><p>Rutgers’ initiative is part of a broader, necessary movement to confront caste oppression in the United States. We look forward to standing alongside other universities and institutions in their journey toward caste equity. Together, we can build communities where everyone can thrive with dignity and equal opportunity.</p><p>In solidarity,</p><p>Equality Labs</p>',
         supplemental_text:
-          '<p>At the end of 2020 California, Oregon and Berkshire Hathaway entered a new agreement to undam the Klamath River. This decision came after almost twenty years of organizing, testifying, actions and planning from the native peoples of the Klamath basin, coastal fishermen and their allies. This year we continue our advocacy to make sure these dams come down.<p>',
+          '<p>Caste-oppressed students and staff deserve protection—yet Rutgers University continues to delay adopting crucial caste protections in its anti-discrimination policy. This hesitation comes after pressure from far-right nationalist groups that aim to erase the realities of caste-based harm.</p><p>In August 2024, the Rutgers Task Force on Caste Discrimination recommended adding caste as a protected category after collecting powerful testimony from affected community members. These recommendations are a critical step toward equity but remain stalled.</p><p>It’s time to demand action! Let’s ensure Rutgers doesn’t back down in the face of opposition. Flood the administration’s inboxes today and call for the immediate adoption of caste protections. Together, we can build a campus where no one has to endure caste discrimination.</p>',
         representatives: JSON.stringify([
           {
-            name: 'Connie Chan',
-            title: 'District 1 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Connie_Chan_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
+            name: 'President Jonathan Holloway',
+            title: 'President, Rutgers University',
+            photoUrl: 'https://www.rutgers.edu/sites/default/files/styles/3x4_one_third_full_1024_1x/public/2020-07/pro_NR20HollowayJonathan1819.jpg?h=ef631461&itok=uRWXEI4G',
+            address_line1: '7 College Avenue',
+            address_line2: '2nd Floor',
+            address_city: 'New Brunswick',
+            address_state: 'NJ',
+            address_zip: '08901',
             address_country: 'US',
-            email: 'chanstaff@sfgov.org'
+            email: 'president@rutgers.edu'
           },
           {
-            name: 'Catherine Stefani',
-            title: 'District 2 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Supervisor_Stefani_2018.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
+            name: 'Anna (Enobong) Branch',
+            title: 'Senior Vice President for University Equity and Inclusion',
+            photoUrl: 'https://www.rutgers.edu/sites/default/files/styles/3x4_one_third_full_1024_1x/public/2020-09/pro_Ann_Branch.jpg?h=3dfac914&itok=rA6GxwC_',
+            address_line1: '106 Sommerset Street',
+            address_line2: '7th Floor',
+            address_city: 'New Brunswick',
+            address_state: 'NJ',
+            address_zip: '08901',
             address_country: 'US',
-            email: 'Catherine.Stefani@sfgov.org'
+            email: 'enobong.branch@rutgers.edu'
           },
           {
-            name: 'Aaron Peskin',
-            title: 'District 3 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Aaron_Peskin_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
+            name: 'Prabhas Moghe',
+            title: 'Executive Vice President for Academic Affairs at Rutgers',
+            photoUrl: 'https://www.rutgers.edu/sites/default/files/styles/max_width_embed_default_2x/public/2020-09/pro_Prabhas_Moghe.jpg?itok=dLd3TLhW',
+            address_line1: '7 College Avenue',
+            address_line2: '2nd Floor',
+            address_city: 'New Brunswick',
+            address_state: 'NJ',
+            address_zip: '08901',
             address_country: 'US',
-            email: 'Aaron.Peskin@sfgov.org'
-          },
-          {
-            name: 'Joel Engardio',
-            title: 'District 4 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Joel_Engardio_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: ''
-          },
-          {
-            name: 'Dean Preston',
-            title: 'District 5 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Dean_Preston_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'prestonstaff@sfgov.org'
-          },
-          {
-            name: 'Matt Dorsey',
-            title: 'District 6 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Dorsey_2022_lg.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'DorseyStaff@sfgov.org'
-          },
-          {
-            name: 'Myrna Melgar',
-            title: 'District 7 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Myrna_Melgar_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'melgarstaff@sfgov.org'
-          },
-          {
-            name: 'Rafael Mandelman',
-            title: 'District 8 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Supervisor_Mandelman_2018.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'mandelmanstaff@sfgov.org'
-          },
-          {
-            name: 'Hillary Ronen',
-            title: 'District 9 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Supervisor_Ronen_2019.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'RonenStaff@sfgov.org'
-          },
-          {
-            name: 'Shamann Walton',
-            title: 'District 10 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Shamann_Walton_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'waltonstaff@sfgov.org'
-          },
-          {
-            name: 'Ahsha Safai',
-            title: 'District 11 Supervisor',
-            photoUrl:
-              'https://sfbos.org/sites/default/files/Ahsha_Safai_2023.jpg',
-            address_line1: '1 Dr Carlton B Goodlett Pl',
-            address_line2: '#244',
-            address_city: 'San Francisco',
-            address_state: 'CA',
-            address_zip: '94102',
-            address_country: 'US',
-            email: 'Ahsha.Safai@sfgov.org'
+            email: 'nbprovost@rutgers.edu.'
           }
         ]),
         assets: JSON.stringify({
-          campaign_logo:
-            'https://static.wixstatic.com/media/d97ff6_b61eff2e17cc4511b92752e6af420835~mv2.png/v1/fill/w_96,h_97,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/White%20circle%2C%20Black%20background%20SCS%20Logo.png',
-          campaign_background: 'https://i.imgur.com/4OsValj.png',
-          'campaign-img-1': 'https://i.imgur.com/fGMy8Wz.png',
-          'campaign-img-2': 'https://i.imgur.com/toMnnE0.png',
-          'campaign-img-3': 'https://i.imgur.com/wXRXDCd.png'
+          campaign_logo: 'https://i.imgur.com/0I80XGh.png',
+          campaign_background: 'https://media.assettype.com/freepressjournal/2024-09-04/i722yxsy/lg_NR15OldQueensGate0889_edit.jpg?rect=0%2C0%2C3900%2C2194&w=1200&auto=format%2Ccompress&ogImage=true',
+          'campaign-img-1': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-yngrxizvU5kAZ3CP9-iQnn1OD14eXkpeXUYo96KOL6sg19Icwoes_JYlm_a61pzAcRE&usqp=CAU',
+          'campaign-img-2': 'https://images-prod.gothamist.com/images/GettyImages-1481222828.width-1000.jpg',
+          'campaign-img-3': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2X0OYEKhzrxmyMymuEaqDUIq0jDakYX4i4jaqRI3AUs0svGfcNDbpdatY4WUD6LMPRqg&usqp=CAU'
         })
       }
     ])
