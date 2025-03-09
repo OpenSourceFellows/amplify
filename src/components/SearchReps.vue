@@ -162,18 +162,15 @@
           </div>
 
           <div v-if="!listVisible">
-            <div
-              v-if="mode === 'single'"
-              class="text-p pa-4"
-            >
-              <div v-html="campaignText"/>
+            <div v-if="mode === 'single'" class="text-p pa-4">
+              <div v-html="campaignText" />
               <img
-                  v-if="assets['infographic']"
-                  :src="assets['infographic']"
-                  alt="infographic for campaign"
-                  class="infographic-img"
-                />
-          </div>
+                v-if="assets['infographic']"
+                :src="assets['infographic']"
+                alt="infographic for campaign"
+                class="infographic-img"
+              />
+            </div>
             <div v-else>
               <img
                 alt="Vue logo"

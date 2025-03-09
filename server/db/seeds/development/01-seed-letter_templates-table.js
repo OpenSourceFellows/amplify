@@ -43,7 +43,8 @@ module.exports = {
       {
         id: 3,
         name: 'Pueblo Action Alliance Los Alamos Campaign',
-        subject: 'Halt Los Alamos National Lab’s Flanged Tritium Waste Container (FTWC) Venting in Pueblo Communities',
+        subject:
+          'Halt Los Alamos National Lab’s Flanged Tritium Waste Container (FTWC) Venting in Pueblo Communities',
         merge_variables: {},
         html: '<p class="p1">Dear Mr. Hoffman,</p> \
               <p class="p1">&nbsp;</p> \
