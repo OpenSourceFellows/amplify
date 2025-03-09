@@ -12,11 +12,10 @@ module.exports = {
     await knex.schema.alterTable('letters', (table) => {
       table.integer('letter_template_id').unsigned()
       table.foreign('letter_template_id').references('letter_templates.id')
-      table
-        .enu('delivery_method', ['email', 'snail_mail'], {
-          useNative: true,
-          enumName: 'delivery_methods'
-        })
+      table.enu('delivery_method', ['email', 'snail_mail'], {
+        useNative: true,
+        enumName: 'delivery_methods'
+      })
       table.string('email')
     })
 

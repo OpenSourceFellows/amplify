@@ -162,11 +162,15 @@
           </div>
 
           <div v-if="!listVisible">
-            <div
-              v-if="mode === 'single'"
-              class="text-h6 pa-4"
-              v-html="campaignText"
-            ></div>
+            <div v-if="mode === 'single'" class="text-p pa-4">
+              <div v-html="campaignText" />
+              <img
+                v-if="assets['infographic']"
+                :src="assets['infographic']"
+                alt="infographic for campaign"
+                class="infographic-img"
+              />
+            </div>
             <div v-else>
               <img
                 alt="Vue logo"
@@ -221,6 +225,9 @@ export default {
     },
     representatives() {
       return this.$store.state.representatives
+    },
+    assets() {
+      return this.$store.state.assets
     }
   },
   created() {
@@ -317,5 +324,9 @@ export default {
 <style scoped lang="less">
 .search-reps-button {
   margin: 5px 10px;
+}
+
+.infographic-img {
+  max-width: 100%;
 }
 </style>
