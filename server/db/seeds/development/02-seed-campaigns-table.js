@@ -144,6 +144,43 @@ module.exports = {
         assets: JSON.stringify({
           campaign_logo: 'https://i.imgur.com/0I80XGh.png',
           campaign_background: 'https://media.assettype.com/freepressjournal/2024-09-04/i722yxsy/lg_NR15OldQueensGate0889_edit.jpg?rect=0%2C0%2C3900%2C2194&w=1200&auto=format%2Ccompress&ogImage=true',
+          infographic: 'https://i.imgur.com/I7E3J5Q.png',
+          'campaign-img-1': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-yngrxizvU5kAZ3CP9-iQnn1OD14eXkpeXUYo96KOL6sg19Icwoes_JYlm_a61pzAcRE&usqp=CAU',
+          'campaign-img-2': 'https://images-prod.gothamist.com/images/GettyImages-1481222828.width-1000.jpg',
+          'campaign-img-3': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2X0OYEKhzrxmyMymuEaqDUIq0jDakYX4i4jaqRI3AUs0svGfcNDbpdatY4WUD6LMPRqg&usqp=CAU'
+        })
+      },
+      {
+        id: 3,
+        organization: 'Pueblo Action Alliance',
+        name: 'Pueblo Action Alliance',
+        cause: 'Civic Rights',
+        type: 'Grant',
+        page_url: 'https://rutgersaaup.org/wp-content/uploads/2024/08/Rutgers-Caste-Report-August-2024.pdf',
+        letter_template_id: 3,
+        campaign_tagline:
+          'Halt Los Alamos National Lab’s Flanged Tritium Waste Container (FTWC) Venting in Pueblo Communities',
+        campaign_text: '<p>Los Alamos National Labs (LANL) has proposed the Flanged Tritium Waste Container venting, four containers, near LANL and neighboring Pueblos. [Tewa Women United](https://tewawomenunited.org/) (TWU) took a position alongside many other concerned citizens and organizations opposing the FTWC venting and started a petition on Change.org called [“Protect Vulnerable New Mexico Communities: Halt Radioactive Tritium Release from LANL,”](https://www.change.org/p/protect-vulnerable-nm-communities-halt-radioactive-tritium-release-from-lanl) that accumulated 3,112 signatures that helped postpone the proposed venting on April 1st 2020. The All Pueblo Council of Governors also released a <a href="https://www.apcg.org/uncategorized/pueblos-concerned-about-los-alamos-national-laboratories-planned-release-of-radioactive-vapors/?fbclid=IwAR0h-aoTtDGSk9a2QSEuPFG1qfihzhc5JuITswVBFk0Ku66xh8aG7-J9ygs">press release<a/> on March, 30th in opposition that alluded to the lack of tribal consultation as well as the lack of capacity in tribal governments due to COVID19.</p><p>The All Pueblo Council of Governers is set to give public comment to the NM Hazardous Waste Committee Meeting on September, 9th. It’s been stated that the New Mexico Environmental Department (NMED) and NM Hazardous Waste Board (NM HWB) do not oversee radiological contamination from LANL and that all radiological contamination remediation and radiological release approvals are under the regulatory authority of the Department of Energy (DOE). Even though it is the responsibility of NMED to ensure safety regulations for New Mexico citizens. In 2009 DOE enacted a policy, [Order 144.1](https://www.energy.gov/sites/prod/files/DOE%20O%20144.1.pdf), to ensure responsible interactions and consultation with sovereign tribal nations that we believe aren\'t being upheld.</p>',
+        supplemental_text:
+          '<p>Caste-oppressed students and staff deserve protection—yet Rutgers University continues to delay adopting crucial caste protections in its anti-discrimination policy. This hesitation comes after pressure from far-right nationalist groups that aim to erase the realities of caste-based harm.</p><p>In August 2024, the Rutgers Task Force on Caste Discrimination recommended adding caste as a protected category after collecting powerful testimony from affected community members. These recommendations are a critical step toward equity but remain stalled.</p><p>It’s time to demand action! Let’s ensure Rutgers doesn’t back down in the face of opposition. Flood the administration’s inboxes today and call for the immediate adoption of caste protections. Together, we can build a campus where no one has to endure caste discrimination.</p>',
+        representatives: JSON.stringify([
+          {
+            name: 'Stephen Hoffman',
+            title: 'LANL SWEIS Document Manager, DOE/NNSA ',
+            photoUrl: 'https://imgs.search.brave.com/G46oqr3VnummnoFmkqT_NqalvvWvKQxpoX-EJITKqGQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9uYXRp/b25hbG1hZ2xhYi5v/cmcvaW1hZ2VzL2xh/eW91dC9sb3MtYWxh/bW9zLWxvZ28uanBn/P2Q9MjAyMzAyMDc',
+            address_line1: '3747 West Jemez Road ',
+            address_line2: '',
+            address_city: 'Los Alamos',
+            address_state: 'NM',
+            address_zip: '87544',
+            address_country: 'US',
+            email: 'lanlsweis@nnsa.doe.gov'
+          }
+        ]),
+        assets: JSON.stringify({
+          campaign_logo: 'https://i.imgur.com/0I80XGh.png',
+          campaign_background: 'https://media.assettype.com/freepressjournal/2024-09-04/i722yxsy/lg_NR15OldQueensGate0889_edit.jpg?rect=0%2C0%2C3900%2C2194&w=1200&auto=format%2Ccompress&ogImage=true',
+          infographic: 'https://i.imgur.com/I7E3J5Q.png',
           'campaign-img-1': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-yngrxizvU5kAZ3CP9-iQnn1OD14eXkpeXUYo96KOL6sg19Icwoes_JYlm_a61pzAcRE&usqp=CAU',
           'campaign-img-2': 'https://images-prod.gothamist.com/images/GettyImages-1481222828.width-1000.jpg',
           'campaign-img-3': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2X0OYEKhzrxmyMymuEaqDUIq0jDakYX4i4jaqRI3AUs0svGfcNDbpdatY4WUD6LMPRqg&usqp=CAU'
