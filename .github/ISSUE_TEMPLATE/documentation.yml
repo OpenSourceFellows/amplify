@@ -1,0 +1,25 @@
+name: Documentation issue
+description: File a Documentation issue
+title: '[Documentation]: '
+labels: ['Documentation']
+assignees:
+  - teakopp
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe what Amplify documentation needs additional information or to be otherwise corrected.
+
+        Examples of poor documentation include:
+        * Typos, grammatical errors or nonsensical wording
+        * Outdated information
+        * Nonexistent or insufficient examples where appropriate
+
+        **If possible, provide a link to the documentation in question.**
+  - type: textarea
+    id: what-needs-fixing
+    attributes:
+      label: Issue description
+      placeholder: Describe the issue with the documentation
+    validations:
+      required: true
