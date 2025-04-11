@@ -70,6 +70,9 @@ async function saveLetters(transactionId, constituentId, letter, html, deliveryM
 }
 
 router.post('/create-transaction', async (req, res) => {
+  const stripe = new Stripe();
+  const db = require('../../db/connection');
+
   try {
     const { sessionId } = req.body;
 
