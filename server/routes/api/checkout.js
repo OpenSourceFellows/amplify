@@ -37,10 +37,12 @@ router.post('/create-checkout-session', async (req, res) => {
       const CHECKOUT_SESSION_ID = uuidv4()
       const redirectUrl = `${origin}/complete?session_id=${CHECKOUT_SESSION_ID}`
 
-      let constituent
-      ;[constituent] = await Constituent.query().where('email', user.email)
+      let constituent = await Constituent.query()
+        .where('email', user.email)
+        .first(); 
+
       if (!constituent) {
-        constituent = await Constituent.query().insert(user)
+        constituent = await Constituent.query().insert(user);
       }
 
       console.log(constituent.id)
@@ -56,11 +58,21 @@ router.post('/create-checkout-session', async (req, res) => {
 
       // Using a temporary mapping here also
       // Re-render the letter html, merging user data to be saved in case that's in the template.
+      const sanitizeInput = (input) => {
+        if (typeof input !== 'string') return input;
+              
+        return input
+          .replace(/['";--]/g, '') 
+          .replace(/[<>]/g, '')    
+          .replace(/[\n\r]/g, '')  
+          .trim();                 
+      };
+
       letter.merge_variables = {
         ...letter.merge_variables,
-        firstName: user.firstName,
-        lastName: user.lastName
-      }
+        firstName: sanitizeInput(user.firstName),
+        lastName: sanitizeInput(user.lastName),
+      };
       const template = await LetterTemplate.query().findById(
         letter.letter_template_id
       )
@@ -103,10 +115,12 @@ router.post('/create-checkout-session', async (req, res) => {
     // This is because letter needs id from constituent and transaction!
 
     // TODO: Move Constituent insert to earlier in the cycle.
-    let constituent
-    ;[constituent] = await Constituent.query().where('email', user.email)
+    let constituent = await Constituent.query()
+      .where('email', user.email)
+      .first(); 
+
     if (!constituent) {
-      constituent = await Constituent.query().insert(user)
+      constituent = await Constituent.query().insert(user);
     }
 
     console.log(constituent.id)
@@ -120,11 +134,19 @@ router.post('/create-checkout-session', async (req, res) => {
     })
 
     // Re-render the letter html, merging user data to be saved in case that's in the template.
+    if (typeof input !== 'string') return input;
+              
+        return input
+          .replace(/['";--]/g, '') 
+          .replace(/[<>]/g, '')    
+          .replace(/[\n\r]/g, '')  
+          .trim();     
+
     letter.merge_variables = {
       ...letter.merge_variables,
-      firstName: user.firstName,
-      lastName: user.lastName
-    }
+      firstName: sanitizeInput(user.firstName),
+      lastName: sanitizeInput(user.lastName),
+    };
     const template = await LetterTemplate.query().findById(
       letter.letter_template_id
     )
@@ -202,12 +224,14 @@ router.post('/process-transaction', async (req, res) => {
 
     const transaction = await Transaction.query().findOne({
       stripe_transaction_id: paymentIntent
-    })
+    });
+
     await transaction.$query().patch({ status: eventOutcome })
 
     const letter = await Letter.query()
       .where({ transaction_id: transaction.id })
-      .first()
+      .first();
+
     letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
 
