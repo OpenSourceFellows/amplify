@@ -69,6 +69,45 @@ async function saveLetters(transactionId, constituentId, letter, html, deliveryM
   }
 }
 
+router.post('/create-transaction', async (req, res) => {
+  try {
+    const { sessionId } = req.body;
+
+    if (!sessionId) {
+      return res.status(400).json({ error: 'Session ID is required' });
+    }
+
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    if (!session) {
+      return res.status(404).json({ error: 'Stripe session not found' });
+    }
+
+    const formattedTransaction = {
+      stripe_transaction_id: sessionId,
+      amount: session.amount_total,
+      currency: session.currency,
+      payment_method: session.payment_method_types[0] || 'unknown',
+      email: session.customer_details?.email || 'unknown',
+    };
+
+    await db('transactions').insert(formattedTransaction);
+
+    return res.status(201).json({
+      message: 'Transaction created successfully',
+      transaction: formattedTransaction,
+    });
+  } catch (error) {
+    console.error('Error creating transaction:', error);
+
+    const statusCode = error instanceof CheckoutError ? 400 : 500;
+
+    return res.status(statusCode).json({ error: error.message });
+  }
+});
+
+
+
 // Refactored /create-checkout-session route
 router.post('/create-checkout-session', async (req, res) => {
   const { donation, user, letter, deliveryMethods } = req.body;
