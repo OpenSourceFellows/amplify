@@ -162,11 +162,15 @@
           </div>
 
           <div v-if="!listVisible">
-            <div
-              v-if="mode === 'single'"
-              class="text-h6 pa-4"
-              v-html="campaignText"
-            ></div>
+            <div v-if="mode === 'single'" class="text-p pa-4">
+              <div v-html="campaignText" />
+              <img
+                v-if="assets['infographic']"
+                :src="assets['infographic']"
+                alt="infographic for campaign"
+                class="infographic-img"
+              />
+            </div>
             <div v-else>
               <img
                 alt="Vue logo"
@@ -221,16 +225,20 @@ export default {
     },
     representatives() {
       return this.$store.state.representatives
+    },
+    assets() {
+      return this.$store.state.assets
     }
   },
   created() {
     // Duplicated to ensure that this data stays will be in Vuex if someone happens to
     // refresh. Should be reworked in the new repo, but needs must \_(-_-)_/
     if (!this.campaignId) {
-      this.$store.dispatch(
-        'loadSingleCampaign',
-        process.env.VUE_APP_FEATURED_CAMPAIGN
-      )
+      this.$store
+        .dispatch('loadSingleCampaign', process.env.VUE_APP_FEATURED_CAMPAIGN)
+        .then(() => {
+          this.$store.dispatch('loadLetterTemplate')
+        })
 
       this.$store.commit('setGenericValue', {
         key: 'letterId',
@@ -252,15 +260,7 @@ export default {
     clearSelectedRep() {
       this.$store.commit('setGenericValue', { key: 'selectedRep', value: {} })
     },
-    async loadLetterWorkflow() {
-      const letter = await axios.get(`/api/lob/templates/${this.letterId}`)
-
-      const latest = letter.data.versions[letter.data.versions.length - 1]
-
-      this.$store.commit('setGenericValue', { key: 'letterId', value: latest })
-
-      this.letterBody = latest.html
-
+    loadLetterWorkflow() {
       this.listVisible = true
     },
     CheckInputContent: function () {
@@ -324,5 +324,9 @@ export default {
 <style scoped lang="less">
 .search-reps-button {
   margin: 5px 10px;
+}
+
+.infographic-img {
+  max-width: 100%;
 }
 </style>
