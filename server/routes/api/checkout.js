@@ -130,6 +130,7 @@ router.post('/create-checkout-session', async (req, res) => {
     )
     const html = Handlebars.render(letter.merge_variables, template.html)
 
+    
     // Using a temporary mapping here also
     for (const method of deliveryMethods) {
       // Generate a uuid so letters are idempotent
