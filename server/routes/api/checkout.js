@@ -190,7 +190,7 @@ router.post('/process-transaction', async (req, res) => {
     const { id: paymentIntent, amount } = data.object
     const [eventType, eventOutcome] = req.body.type.split('.')
 
-    console.log(paymentIntent, amount, eventOutcome)
+    console.log('%s %s %s', paymentIntent, amount, eventOutcome)
 
     // We are not going to send letters from here just yet
     // so we will record the transaction no matter the outcome.
