@@ -93,9 +93,3 @@ Goal Structure:
 
 <img width="739" alt="Goal_Structure" src="https://github.com/ProgramEquity/amplify/assets/109990289/36652da8-51e1-4666-af6b-bea8c9ea5041">
 
-**User Journey:**
-
-https://user-images.githubusercontent.com/9143339/159093855-c01e1d77-0d6a-4f6e-b691-81491830001a.mp4
-
-<img width="1561" alt="MVP_Screenshot" src="https://github.com/ProgramEquity/amplify/assets/109990289/3c9e074a-0fad-43af-a08b-1da6c0e7c1d1">
-
