@@ -24,8 +24,8 @@ describe('test Axios cache with two requests', () => {
     const cache_interceptor = setupCache(axios)
 
     // we make two sequential requests to the same api endpoint
-    const req1 = cache_interceptor.get('https://api.publicapis.org/entries')
-    const req2 = cache_interceptor.get('https://api.publicapis.org/entries/')
+    const req1 = cache_interceptor.get('https://github.com/OpenSourceFellows/amplify')
+    const req2 = cache_interceptor.get('https://github.com/OpenSourceFellows/amplify/')
     const res1 = await req1
     const res2 = await req2
 
