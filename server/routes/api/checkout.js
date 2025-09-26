@@ -21,167 +21,152 @@ class CheckoutError extends Error {
   }
 }
 
+// Helper function to find or create a constituent
+async function findOrCreateConstituent(user) {
+  let constituent = await Constituent.query().where('email', user.email).first()
+  if (!constituent) {
+    constituent = await Constituent.query().insert(user)
+  }
+  return constituent
+}
+
+// Helper function to create a transaction
+async function createTransaction(stripeTransactionId, constituentId, donation, status = 'pending') {
+  return await Transaction.query().insert({
+    stripeTransactionId,
+    constituentId,
+    amount: donation,
+    currency: 'usd',
+    paymentMethod: 'credit_card',
+    status
+  })
+}
+
+// Helper function to render letter HTML
+async function renderLetterHtml(letter, user) {
+  letter.merge_variables = {
+    ...letter.merge_variables,
+    firstName: user.firstName,
+    lastName: user.lastName
+  }
+  const template = await LetterTemplate.query().findById(letter.letter_template_id)
+  return Handlebars.render(letter.merge_variables, template.html)
+}
+
+// Helper function to save letters for each delivery method
+async function saveLetters(transactionId, constituentId, letter, html, deliveryMethods) {
+  for (const method of deliveryMethods) {
+    letter.trackingNumber = uuidv4() // Generate unique tracking number
+    console.log(letter.trackingNumber)
+
+    await Letter.query().insert({
+      transactionId,
+      constituentId,
+      letterTemplate: html,
+      deliveryMethod: method,
+      ...letter
+    })
+  }
+}
+
+
+router.post('/create-transaction', async (req, res) => {
+  const stripe = new Stripe()
+  const db = require('../../db/connection')
+
+  try {
+    const { sessionId } = req.body
+
+    if (!sessionId) {
+      return res.status(400).json({ error: 'Session ID is required' })
+    }
+
+    const session = await stripe.checkout.sessions.retrieve(sessionId)
+
+    if (!session) {
+      return res.status(404).json({ error: 'Stripe session not found' })
+    }
+
+    const formattedTransaction = {
+      stripe_transaction_id: sessionId,
+      amount: session.amount_total,
+      currency: session.currency,
+      payment_method: session.payment_method_types[0] || 'unknown',
+      email: session.customer_details?.email || 'unknown'
+    }
+
+    await db('transactions').insert(formattedTransaction)
+
+    return res.status(201).json({
+      message: 'Transaction created successfully',
+      transaction: formattedTransaction
+    })
+  } catch (error) {
+    console.error('Error creating transaction:', error)
+
+    const statusCode = error instanceof CheckoutError ? 400 : 500
+
+    return res.status(statusCode).json({ error: error.message })
+  }
+})
+
+// Refactored /create-checkout-session route
 router.post('/create-checkout-session', async (req, res) => {
-  let { donation, user, letter, deliveryMethods } = req.body
-  console.dir(user)
-  console.dir(letter)
+  const { donation, user, letter, deliveryMethods } = req.body
   const origin = req.get('origin')
 
   try {
     const presenter = new PaymentPresenter()
+    presenter.validatePaymentAmount(donation) // Validate donation amount
 
-    // Will throw error if invalid amount is given.
-    presenter.validatePaymentAmount(donation)
-
+    // Handle free transactions
     if (donation === 0 && process.env.VUE_APP_EMPTY_TRANSACTIONS === 'on') {
       const CHECKOUT_SESSION_ID = uuidv4()
       const redirectUrl = `${origin}/complete?session_id=${CHECKOUT_SESSION_ID}`
 
-      let constituent
-      ;[constituent] = await Constituent.query().where('email', user.email)
-      if (!constituent) {
-        constituent = await Constituent.query().insert(user)
-      }
-
+      const constituent = await findOrCreateConstituent(user)
       console.log(constituent.id)
 
-      const transaction = await Transaction.query().insert({
-        stripeTransactionId: 'no-stripe-' + uuidv4(),
-        constituentId: constituent.id,
-        amount: donation,
-        currency: 'usd',
-        paymentMethod: 'credit_card',
-        status: 'succeeded'
-      })
-
-      // Using a temporary mapping here also
-      // Re-render the letter html, merging user data to be saved in case that's in the template.
-      letter.merge_variables = {
-        ...letter.merge_variables,
-        firstName: user.firstName,
-        lastName: user.lastName
-      }
-      const template = await LetterTemplate.query().findById(
-        letter.letter_template_id
+      const transaction = await createTransaction(
+        `no-stripe-${uuidv4()}`,
+        constituent.id,
+        donation,
+        'succeeded'
       )
-      const html = Handlebars.render(letter.merge_variables, template.html)
 
-      // Using a temporary mapping here also
-      for (const method of deliveryMethods) {
-        // Generate a uuid so letters are idempotent
-        letter.trackingNumber = uuidv4()
-        console.log(letter.trackingNumber)
+      const html = await renderLetterHtml(letter, user)
+      await saveLetters(transaction.id, constituent.id, letter, html, deliveryMethods)
 
-        await Letter.query().insert({
-          transactionId: transaction.id,
-          constituentId: constituent.id,
-          letterTemplate: html,
-          deliveryMethod: method,
-          ...letter
-        })
-      }
-
-      return res
-        .status(200)
-        .json({ url: redirectUrl, sessionId: CHECKOUT_SESSION_ID })
-        .end()
+      return res.status(200).json({ url: redirectUrl, sessionId: CHECKOUT_SESSION_ID }).end()
     }
 
-    // TODO: Should be strict https but we need to do some deployment fixes first.
+    // Handle paid transactions
     const redirectUrl = `${origin}/complete?session_id={CHECKOUT_SESSION_ID}`
     const cancelUrl = origin
 
     const stripe = new Stripe()
-    const session = await stripe.createCheckoutSession(
-      donation,
-      redirectUrl,
-      cancelUrl
-    )
+    const session = await stripe.createCheckoutSession(donation, redirectUrl, cancelUrl)
 
-    // These objects must be recorded in a specific order:
-    // constituent, then transaction, then letter
-    // This is because letter needs id from constituent and transaction!
-
-    // TODO: Move Constituent insert to earlier in the cycle.
-    let constituent
-    ;[constituent] = await Constituent.query().where('email', user.email)
-    if (!constituent) {
-      constituent = await Constituent.query().insert(user)
-    }
-
+    const constituent = await findOrCreateConstituent(user)
     console.log(constituent.id)
 
-    const transaction = await Transaction.query().insert({
-      stripeTransactionId: session.paymentIntent,
-      constituentId: constituent.id,
-      amount: donation,
-      currency: 'usd',
-      paymentMethod: 'credit_card'
-    })
+    const transaction = await createTransaction(session.paymentIntent, constituent.id, donation)
 
-    // Re-render the letter html, merging user data to be saved in case that's in the template.
-    letter.merge_variables = {
-      ...letter.merge_variables,
-      firstName: user.firstName,
-      lastName: user.lastName
-    }
-    const template = await LetterTemplate.query().findById(
-      letter.letter_template_id
-    )
-    const html = Handlebars.render(letter.merge_variables, template.html)
+    const html = await renderLetterHtml(letter, user)
+    await saveLetters(transaction.id, constituent.id, letter, html, deliveryMethods)
 
-    // Using a temporary mapping here also
-    for (const method of deliveryMethods) {
-      // Generate a uuid so letters are idempotent
-      letter.trackingNumber = uuidv4()
-      console.log(letter.trackingNumber)
-
-      await Letter.query().insert({
-        transactionId: transaction.id,
-        constituentId: constituent.id,
-        letterTemplate: html,
-        deliveryMethod: method,
-        ...letter
-      })
-    }
-
-    return res
-      .status(200)
-      .json({ url: session.url, sessionId: session.id })
-      .end()
+    return res.status(200).json({ url: session.url, sessionId: session.id }).end()
   } catch (error) {
     console.error(error)
-    let statusCode = 500
 
-    if (error instanceof PaymentPresenterError) {
-      statusCode = 400
-    }
-
-    console.error(error)
-
-    // TODO: error logging
+    const statusCode = error instanceof PaymentPresenterError ? 400 : 500
     return res.status(statusCode).json({ error: error.message }).end()
   }
 })
 
 router.post('/process-transaction', async (req, res) => {
   try {
-    // const stripe = new Stripe()
-
-    // If livemode is false, disable signature checking
-    // and event reconstructionfor ease of testing.
     let event
-    /*
-    if (stripe.livemode) {
-      const signature = req.headers['stripe-signature']
-      if (!signature) throw new CheckoutError('No stripe signature on request!')
-
-      event = stripe.validateEvent(signature, req.rawBody)
-    } else {
-      event = req.body
-      // console.log(event)
-    }
-    */
     event = req.body
 
     if (!event) throw new CheckoutError('Unprocessable message')
@@ -192,8 +177,6 @@ router.post('/process-transaction', async (req, res) => {
 
     console.log(paymentIntent, amount, eventOutcome)
 
-    // We are not going to send letters from here just yet
-    // so we will record the transaction no matter the outcome.
     if (eventType !== 'payment_intent') {
       throw new CheckoutError(
         `Unexpected event! Received ${eventType} but it could not be processed.`
@@ -255,7 +238,6 @@ router.post('/process-transaction', async (req, res) => {
     }
 
     if (error instanceof StripeError) {
-      // Don't leak Stripe logging.
       console.error(error.message)
       error.message = 'Payment processing error'
     }
