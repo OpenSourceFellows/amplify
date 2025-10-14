@@ -1,0 +1,11 @@
+name: Are They Awake Yet
+on: [issues, pull_request]
+jobs:
+  are-they-awake-yet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Are They Awake Yet?
+        uses: hummusonrails/awake-yet-action@v0.1.0
+    env:
+      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      GOOGLE_API_KEY: "${{ secrets.GOOGLE_API_KEY }}"
