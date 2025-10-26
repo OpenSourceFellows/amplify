@@ -41,12 +41,11 @@ describe('test Axios cache invalidation option', () => {
     // we set the ttl to 10 seconds
     const axios = Axios.create()
     const cache_interceptor = setupCache(axios, { ttl: 10000 })
-    // we make a simple request
-    cache_interceptor.get('https://github.com/OpenSourceFellows/amplify')
-    // we wait for 11 seconds and make another call
+    // make a simple request
+    await cache_interceptor.get('https://github.com/OpenSourceFellows/amplify')
+    // wait for 11 seconds and make another call
     await new Promise((resolve) => setTimeout(() => resolve(), 11000))
-    const req3 = cache_interceptor.get('https://github.com/OpenSourceFellows/amplify')
-    const res3 = await req3
+    const res3 = await cache_interceptor.get('https://github.com/OpenSourceFellows/amplify')
     // assertions: the second request is expected not to be cached, due to the ttl
     expect(res3.cached).toBe(false)
   }, 70000)
