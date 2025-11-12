@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const history = require('connect-history-api-fallback')
 const apiRouter = require('./api')
+const authRouter = require('./routes/api/authentication')
 
 const app = express()
 
@@ -11,6 +12,9 @@ app.set('trust proxy', true)
 
 // Load the API router
 app.use('/api', apiRouter)
+
+// Load the authentication router
+app.use('/api/v1/auth', authRouter)
 
 // Fix for hash URLs in Vue
 // IMPORTANT: MUST be added before the `express.static` middleware for the `dist/` directory
