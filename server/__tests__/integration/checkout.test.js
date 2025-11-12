@@ -13,8 +13,11 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
+// Describe the test suite for the GET /api/... endpoint
 describe('GET /api/...', () => {
+  // Skip this fake test for now
   test.skip('fake test', async () => {
+    // Expect true to be true
     expect(true).toBe(true)
   })
 })
