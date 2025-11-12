@@ -2,34 +2,42 @@
 
 set -e
 
+# If homebrew is not installed, install it
 command -v brew >/dev/null 2>&1 || {
   echo "==> Installing Homebrew..."
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
-if [[ -z "${CODESPACES}" ]]; then
+# If we're on linux or in Github Codespaces, set up linuxbrew
+if [[ "$OSTYPE" =~ ^linux ]] || [[ -n "${CODESPACES}" ]]; then
   echo "==> Adding Homebrew to the PATH..."
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/node/.profile
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# Update homebrew casks and formulas
 echo "==> Updating Homebrew..."
 brew update
 
+# Check if the Brewfile's requirements are satisfied and install them if not
 brew bundle check >/dev/null 2>&1 || {
   echo "==> Installing Homebrew dependencies..."
   brew bundle
 }
 
+# Ensure node is the correct version for us
 echo "==> Installing Node"
 nodenv install -s
 
+# Start postgres
 echo "==> Starting PostgreSQL service..."
-brew services restart postgres
+brew services restart postgresql@14
 
+# Install node dependencies
 echo "==> Installing Node dependencies..."
 npm install
 
+# Run database setup 
 echo "==> Creating and setting up databases..."
 npm run db:create
 

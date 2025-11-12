@@ -1,2 +1,2 @@
 brew "nodenv"
-brew "postgresql"
+brew "postgresql@14"
