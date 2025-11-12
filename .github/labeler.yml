@@ -1,0 +1,67 @@
+# Common Labels:
+# Add 'oss workflows' label to any change to *.yml files within the workflows directory
+oss workflows:
+  - .github/workflows/*.yml
+
+# Add 'architecture' label to any change to *.yml files within the workflows directory
+architecture:
+  - .github/workflows/*.yml
+
+# Add 'dependencies' label to any change to package.json
+dependencies:
+  - package*.json
+
+# Add '⚙️ Dev' label to any change to *.js files within the server directory
+⚙️ Back-end:
+  - server/**/*.js
+
+# Add 'test' label to any change to *.test.js files within the __tests__ directory
+test:
+  - server/__tests__/**/*.test.js
+
+# Add 'front-end' label to any change to *.js files within the src directory, as long as the 'main.js' hasn't changed
+front-end:
+  - any: ['src/**/*.js']
+    all: ['!src/main.js']
+
+# Feature Labels:
+# Add 'Browse Causes' label to any change to files CampaignHero.vue, CampaignBlurb.vue, CampaignCard.vue, and CampaignCards.vue
+Browse Causes:
+  - src/components/CampaignHero.vue
+    src/components/CampaignBlurb.vue
+    src/components/CampaignCard.vue
+    src/components/CampaignCards.vue
+
+# Add 'Browse Representatives' label to any change to the file SearchReps.vue within the components directory, and to any change to the file representatives.js within the api directory
+Browse Representatives:
+  - src/components/SearchReps.vue
+    server/routes/api/representatives.js
+
+# Add 'Choose Representative' label to any change to the file LetterLoad.vue
+Choose Representative:
+  - src/components/LetterLoad.vue
+
+# Add 'Authentication' label to any change to the file authentication.js within the api directory
+Authentication:
+  - server/routes/api/authentication.js
+
+# Add 'Review Letter'label to any change to the file LetterLoad.vue within the components directory
+Review Letter:
+  - src/components/LetterLoad.vue
+
+# Add 'Validate Address' label to any change to the file SignName.vue within the components directory
+Validate Address:
+  - src/components/SignName.vue
+
+# Add 'Select Donation' label to any change to the file DonateMoney.vue within the components directory
+Select Donation:
+  - src/components/DonateMoney.vue
+
+# Add 'Finalize Checkout & Send Letter' label to any change to the file checkout.js in the api directory
+Finalize Checkout & Send Letter:
+  - server/routes/api/checkout.js
+
+# Add 'Action Complete' label to any changes to the files ActionComplete.vue and CauseCarousel.vue in the components directory
+Action Complete:
+  - src/components/ActionComplete.vue
+    src/components/CauseCarousel.vue
