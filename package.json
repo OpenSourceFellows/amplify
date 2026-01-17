@@ -16,9 +16,9 @@
   "main": "server/server.js",
   "scripts": {
     "postinstall": "husky install",
-    "start": "node server/server.js",
-    "dev": "cross-env NODE_ENV=development concurrently -n frontend,backend \"npm run serve\" \"npm:dev:backend\"",
-    "dev:backend": "cross-env PORT=5000 nodemon -w ./server server/server.js",
+    "start": "node init && node server/server.js",
+    "dev": "node init && cross-env NODE_ENV=development concurrently -n frontend,backend \"npm run serve\" \"npm:dev:backend\"",
+    "dev:backend": "node init && cross-env PORT=5000 nodemon -w ./server server/server.js",
     "lint": "cross-env DEBUG=eslint:cli-engine eslint --fix .",
     "lint:check": "cross-env DEBUG=eslint:cli-engine eslint .",
     "format": "prettier --write .",
@@ -36,7 +36,7 @@
     "db:seed": "knex seed:run",
     "heroku-postbuild": "npm run build && npm run db:migrate:prod",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "node init && vue-cli-service build"
   },
   "engines": {
     "node": "16.x"
@@ -55,7 +55,7 @@
     "@vue-stripe/vue-stripe": "^4.4.4",
     "axios": "^0.27.2",
     "axios-cache-interceptor": "^0.10.7",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "cli-plugin-eslint": "^0.1.0",
     "connect-history-api-fallback": "^2.0.0",
     "dotenv": "^16.0.3",
