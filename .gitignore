@@ -5,10 +5,7 @@ package-lock.json
 
 
 # local env files
-.env.test
-.env.local
 .env.*.local
-.env.test
 
 # Log files
 npm-debug.log*
@@ -18,7 +15,6 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
@@ -139,3 +135,4 @@ server/views
 
 # Homebrew
 Brewfile.lock.json
+config.bat
