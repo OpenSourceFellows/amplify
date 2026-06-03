@@ -69,4 +69,14 @@ describe('API — post()', () => {
     const api = new API('/letter_templates', 'v1')
     await expect(api.post('/render', {})).rejects.toThrow(APIError)
   })
+
+  test('APIError carries HTTP status', async () => {
+    axios.post.mockRejectedValue({
+      message: 'Server error',
+      response: { status: 500 }
+    })
+
+    const api = new API('/letter_templates', 'v1')
+    await expect(api.post('/render', {})).rejects.toMatchObject({ status: 500 })
+  })
 })
