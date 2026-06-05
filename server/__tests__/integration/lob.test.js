@@ -3,6 +3,7 @@ const request = require('supertest')
 const axios = require('axios')
 const express = require('express')
 const apiRouter = require('../../api')
+const { addresses, addressEdgeCases } = require('../../__mocks__/addresses')
 
 // Create a test application
 const app = express()
@@ -505,6 +506,33 @@ describe('POST /api/lob/createLetter', () => {
     // The expected object includes an expected_delivery_date property of any string
     expect(response.body).toEqual({
       expected_delivery_date: expect.any(String)
+    })
+  })
+})
+
+describe('POST /api/lob/addressVerification edge cases', () => {
+  const route = '/api/lob/addressVerification'
+
+  // Test using addressEdgeCases
+  addressEdgeCases.forEach(({ type, input, expected }) => {
+    test(`handles edge case: ${type}`, async () => {
+      const response = await request(app).post(route).send(input)
+      if (expected.error) {
+        expect(response.status).toBe(400)
+        expect(response.body).toEqual(expected)
+      } else {
+        expect(response.status).toBe(200)
+        expect(response.body).toEqual(expected)
+      }
+    })
+  })
+
+  // Test using addresses (basic structure, can be expanded as needed)
+  addresses.forEach(({  street, zip, type }) => {
+    test(`handles mock address: ${type}`, async () => {
+      const response = await request(app).post(route).send({ line1: street, zip })
+      // Como addresses não tem expected, apenas verifica se retorna algum status (ajuste conforme necessário)
+      expect([200, 400]).toContain(response.status)
     })
   })
 })
