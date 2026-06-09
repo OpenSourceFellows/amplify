@@ -169,17 +169,17 @@ router.post('/createLetter', async (req, res) => {
     reason_input,
     community_input,
     benefit_input,
-    impact_input
+    impact_input,
+    constituent_input
   } = req.body || {}
   const lobApiKey = getLobApiKey()
   const lob = new Lob({ apiKey: lobApiKey })
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
-
+  
   try {
     // Check for completed payment before creating letter. Status can be succeeded, failed, or pending. Return server error if failure or pending.
-
     const paymentVerification = await stripe.paymentIntents.retrieve(
       checkoutSession.payment_intent
     )
@@ -189,6 +189,38 @@ router.post('/createLetter', async (req, res) => {
         .status(500)
         .json({ msg: 'Payment is still pending or has failed.' })
         .end()
+    }
+
+    // Check if there are merge variables before modifying the template ID
+    let modifiedTemplateId = template_id;
+    let mergeVariables = {};
+
+
+    if (reason_input || community_input || benefit_input || impact_input) {
+      // If merge variables are present, set mergeVariable object
+      mergeVariables = {
+        reason_input: reason_input,
+        community_input: community_input,
+        benefit_input: benefit_input,
+        impact_input: impact_input,
+        constituent_input: constituent_input
+      };
+
+      // Ensure that the merge variables payload is within Lob's constraints
+      const mergeVariablesString = JSON.stringify(mergeVariables);
+      if (mergeVariablesString.length > 25000) {
+        return res
+          .status(400)
+          .json({ msg: 'Merge variables payload exceeds Lob\'s character limit.' })
+          .end();
+      }
+
+      // Iterate through merge variables and replace them in the template_id
+      // Ensures that the template used to create the letter has all the required merge variables replaced with their actual values.
+      Object.keys(mergeVariables).forEach(mergeVar => {
+        const regex = new RegExp(`{{${mergeVar}}}`, 'g');
+        modifiedTemplateId = modifiedTemplateId.replace(regex, mergeVariables[mergeVar]);
+      });
     }
 
     // For development only, check for test_ prefix on 'from' parameter and
@@ -203,6 +235,9 @@ router.post('/createLetter', async (req, res) => {
         .end()
     }
 
+    // Append constituent_input to the template_id
+    modifiedTemplateId = `${modifiedTemplateId}{{constituent_input}}`;
+
     // Create Lob address using variables passed into route via post body
     const letter = await lob.letters.create({
       description: description,
@@ -215,14 +250,10 @@ router.post('/createLetter', async (req, res) => {
         address_zip: to.address_zip
       },
       from: from,
-      file: template_id,
+      file: modifiedTemplateId, // Using new template_id with appended consituant input
       color: false,
-      merge_variables: {
-        reason_input: reason_input,
-        community_input: community_input,
-        benefit_input: benefit_input,
-        impact_input: impact_input
-      }
+      // Set to the object that maps the merge variable names to their actual values.
+      merge_variables: mergeVariables
     })
 
     return res
