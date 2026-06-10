@@ -66,7 +66,7 @@ router.post('/create-checkout-session', async (req, res) => {
       )
       const html = Handlebars.render(letter.merge_variables, template.html)
 
-      // Using a temporary mapping here also
+      // Using a temporary mapping here
       for (const method of deliveryMethods) {
         // Generate a uuid so letters are idempotent
         letter.trackingNumber = uuidv4()
@@ -103,10 +103,15 @@ router.post('/create-checkout-session', async (req, res) => {
     // This is because letter needs id from constituent and transaction!
 
     // TODO: Move Constituent insert to earlier in the cycle.
+    const allowedFields = ['firstName', 'lastName', 'email'] // adicione os campos permitidos
+    const sanitizedUser = {}
+    for (const field of allowedFields) {
+      if (user[field]) sanitizedUser[field] = user[field]
+    }
     let constituent
-    ;[constituent] = await Constituent.query().where('email', user.email)
+    ;[constituent] = await Constituent.query().where('email', sanitizedUser.email)
     if (!constituent) {
-      constituent = await Constituent.query().insert(user)
+      constituent = await Constituent.query().insert(sanitizedUser)
     }
 
     console.log(constituent.id)
@@ -203,11 +208,17 @@ router.post('/process-transaction', async (req, res) => {
     const transaction = await Transaction.query().findOne({
       stripe_transaction_id: paymentIntent
     })
+    if (!transaction) {
+      throw new CheckoutError('Transação não encontrada para o paymentIntent informado.')
+    }
     await transaction.$query().patch({ status: eventOutcome })
 
     const letter = await Letter.query()
       .where({ transaction_id: transaction.id })
       .first()
+    if (!letter) {
+      throw new CheckoutError('Carta não encontrada para a transação informada.')
+    }
     letter.trackingNumber = uuidv4()
     const letterTemplate = JSON.parse(letter.letterTemplate)
 
