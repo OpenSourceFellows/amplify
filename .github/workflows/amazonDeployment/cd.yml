@@ -1,0 +1,55 @@
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: false
+        type: string
+        default: '.'
+      image-tag:
+        required: true
+        type: string
+name: cd
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # only execute if PR is merged or manual trigger, or not raised by dependabot
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+#      Auth example
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION }}        
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition \
+           --task-definition weather-app-task-definition-family \
+           --query taskDefinition > task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: weather-app
+          image: "${{ steps.login-ecr.outputs.registry }}/weather-app:${{ inputs.image-tag }}"
+
+      - name: Echo task definition
+        run: |
+          echo "${{ steps.task-def.outputs.task-definition }}"
+          cat ${{ steps.task-def.outputs.task-definition }}
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ secrets.ECS_SERVICE }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          wait-for-service-stability: true
