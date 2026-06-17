@@ -16,9 +16,14 @@ on:
     - cron: '27 1 * * 0'
 
 permissions:
-  actions: read
-  contents: read
-  security-events: write
+  statuses: read          # Small reduction of attack
+  checks: read            # Small reduction of attack
+  security-events: write  # Small reduction of attack
+  deployments: read       # Small reduction of attack
+  
+  contents: read          # Large reduction of attack
+  packages: read          # Large reduction of attack
+  actions: none           # Large reduction of attack
 
 # This allows a subsequently queued workflow run to interrupt previous runs
 concurrency:
