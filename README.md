@@ -4,7 +4,6 @@ Amplify is an open-source app created for users to take the initiative in being 
 
 
 ## Table of Contents
-
   * [Getting Started](#getting-started)
   * [Project Setup](#project-setup)
   * [Customize configuration](#customize-configuration)
