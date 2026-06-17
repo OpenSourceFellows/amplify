@@ -9,8 +9,16 @@ const app = express()
 // see https://expressjs.com/en/guide/behind-proxies.html
 app.set('trust proxy', true)
 
+const representativeTestMidlleware = (req, res, next) => {
+  if (req.url.includes('/representatives') && process.env.NODE_ENV === 'test') {
+    // Redirect to the test endpoint
+    req.url = '/mock-representatives/94041'
+  }
+  next()
+}
+
 // Load the API router
-app.use('/api', apiRouter)
+app.use('/api', representativeTestMidlleware, apiRouter)
 
 // Fix for hash URLs in Vue
 // IMPORTANT: MUST be added before the `express.static` middleware for the `dist/` directory
