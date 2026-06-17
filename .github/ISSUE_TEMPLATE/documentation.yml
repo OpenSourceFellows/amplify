@@ -1,0 +1,33 @@
+name: Documentation
+description: Create a documentation issue
+title: '[Documentation]'
+labels: documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You can describe what needs to be modified, corrected, or added to the Amplify documentation.
+        You can modify or correct:
+        * Typos and grammatical errors.
+        * Outdated information.
+        You can also add the documentation of new features in their appropriate place
+        **If possible, provide a link to the documentation in question.**
+
+  - type: textarea
+    id: what-needs-documenting
+    attributes:
+      label: Issue description
+      placeholder: Describe the issue with the documentation
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: documentation-categories
+    attributes:
+      label: What category/categories does your documentation issue fall in?
+      description: You may select more than one.
+      options:
+        - label: onboard campaign
+        - label: Wiki
+        - label: feature documentation
+        - label: discussion
