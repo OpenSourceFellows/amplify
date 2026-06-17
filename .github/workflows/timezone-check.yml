@@ -1,0 +1,19 @@
+name: Timezone Checks
+
+on:
+  issue_comment:
+    types: [created, edited]
+    branches:
+      - main
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check if teammate is awake?
+        id: are-they-asleep
+        uses: shundor/are-they-asleep@v1.0.1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GOOGLE_API_KEY: '${{ secrets.GOOGLE_MAP }}'
