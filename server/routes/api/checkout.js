@@ -21,6 +21,29 @@ class CheckoutError extends Error {
   }
 }
 
+/**
+ * Sanitiza uma string removendo tags HTML e caracteres perigosos.
+ * @param {string} str - A string a ser sanitizada.
+ * @returns {string} - A string sanitizada.
+ */
+function sanitizeString(str) {
+  if (typeof str !== 'string') return str; // Retorna o valor original se não for uma string
+
+  // Remove tags HTML
+  str = str.replace(/<[^>]*>?/gm, '');
+
+  // Remove caracteres especiais perigosos
+  str = str.replace(/[&<>"'`=\/]/g, '');
+
+  return str.trim(); // Remove espaços extras no início e no final
+}
+
+// Exemplo de uso
+const userInput = '<script>alert("XSS Attack!")</script>';
+const sanitizedInput = sanitizeString(userInput);
+
+console.log(sanitizedInput); // Saída: alert("XSS Attack!")
+
 router.post('/create-checkout-session', async (req, res) => {
   let { donation, user, letter, deliveryMethods } = req.body
   console.dir(user)
@@ -38,7 +61,7 @@ router.post('/create-checkout-session', async (req, res) => {
       const redirectUrl = `${origin}/complete?session_id=${CHECKOUT_SESSION_ID}`
 
       let constituent
-      ;[constituent] = await Constituent.query().where('email', user.email)
+      ;[constituent] = await Constituent.query().where('email', user.email).limit(1)
       if (!constituent) {
         constituent = await Constituent.query().insert(user)
       }
@@ -54,16 +77,29 @@ router.post('/create-checkout-session', async (req, res) => {
         status: 'succeeded'
       })
 
-      // Using a temporary mapping here also
-      // Re-render the letter html, merging user data to be saved in case that's in the template.
+      // Valida e mescla as variáveis de merge para a carta
+      if (!letter.merge_variables || typeof letter.merge_variables !== 'object') {
+        letter.merge_variables = {};
+      }
+
       letter.merge_variables = {
         ...letter.merge_variables,
-        firstName: user.firstName,
-        lastName: user.lastName
+        firstName: user.firstName || 'N/A', // Valor padrão caso user.firstName esteja ausente
+        lastName: user.lastName || 'N/A'   // Valor padrão caso user.lastName esteja ausente
+      };
+
+      // Busca o template da carta com validação de entrada
+      if (!letter.letter_template_id) {
+        throw new CheckoutError('Letter template ID is required.');
       }
-      const template = await LetterTemplate.query().findById(
-        letter.letter_template_id
-      )
+
+      const template = await LetterTemplate.query()
+        .findById(letter.letter_template_id);
+
+      if (!template) {
+        throw new CheckoutError(`Letter template with ID ${letter.letter_template_id} not found.`);
+      }
+
       const html = Handlebars.render(letter.merge_variables, template.html)
 
       // Using a temporary mapping here also
@@ -104,7 +140,7 @@ router.post('/create-checkout-session', async (req, res) => {
 
     // TODO: Move Constituent insert to earlier in the cycle.
     let constituent
-    ;[constituent] = await Constituent.query().where('email', user.email)
+    ;[constituent] = await Constituent.query().where('email', user.email).limit(1)
     if (!constituent) {
       constituent = await Constituent.query().insert(user)
     }
@@ -119,15 +155,29 @@ router.post('/create-checkout-session', async (req, res) => {
       paymentMethod: 'credit_card'
     })
 
-    // Re-render the letter html, merging user data to be saved in case that's in the template.
+    // Valida e mescla as variáveis de merge para a carta
+    if (!letter.merge_variables || typeof letter.merge_variables !== 'object') {
+      letter.merge_variables = {};
+    }
+
     letter.merge_variables = {
       ...letter.merge_variables,
-      firstName: user.firstName,
-      lastName: user.lastName
+      firstName: user.firstName || 'N/A', // Valor padrão caso user.firstName esteja ausente
+      lastName: user.lastName || 'N/A'   // Valor padrão caso user.lastName esteja ausente
+    };
+
+    // Busca o template da carta com validação de entrada
+    if (!letter.letter_template_id) {
+      throw new CheckoutError('Letter template ID is required.');
     }
-    const template = await LetterTemplate.query().findById(
-      letter.letter_template_id
-    )
+
+    const template = await LetterTemplate.query()
+      .findById(letter.letter_template_id);
+
+    if (!template) {
+      throw new CheckoutError(`Letter template with ID ${letter.letter_template_id} not found.`);
+    }
+
     const html = Handlebars.render(letter.merge_variables, template.html)
 
     // Using a temporary mapping here also
