@@ -1,6 +1,19 @@
 # Amplify
 
-Amplify is an open-source app created for users to take the initiative in being part of an actionable step in the efforts to protect against climate change. The user is able to choose a climate campaign, then using their zip code, they will be able to select a representative of their choice. The user then donates to have their letter sent out by Amplify.
+#### Amplify 101
+
+#### 🌎 What is Amplify?
+
+- Amplify is an open-source app created for users to take the initiative in being part of an actionable step in the efforts to protect against climate change.
+
+#### ⚙️ How Amplify Work?
+ - The user is able to choose a climate campaign, then using their zip code, they will be able to select a representative of their choice. The user then donates to have their letter sent out by Amplify.
+
+#### 👥 Who uses Amplify
+- Anyone who wants to make a difference
+
+#### ⛳️ What is Amplify's Goal
+- Make it more assessable for anyone who wants to make a difference and protect against Climate Change
 
 
 ## Table of Contents
@@ -12,13 +25,24 @@ Amplify is an open-source app created for users to take the initiative in being 
   
 ## Getting Started
 
+#### 💡 Overview of Amplify: 
+To get a brief overview of Amplify:
+ - How to setup 
+ - App Logic/Structure
+ - Features
+ - API info
+ 
+ Please read our [Wiki Page](https://github.com/ProgramEquity/amplify/wiki) for more info
+
+#### 🛠️ Structure
+
 This repo contains both the frontend and backend portions of the Amplify application.
 
-The frontend code is stored in the `src/` directory.
+- **Frontend** code is stored in the `src/` directory.
 
-The backend (API) code is stored in the `server/` directory.
+- **Backend** (API) code is stored in the `server/` directory.
 
-**Project Workflow:**
+#### 📝 Project Workflow:
 
 [Enablement Deck](https://docs.google.com/presentation/d/1llJgeTU1EzRSYB8kL-IQeAdoq7p6xb4ApEac5E3M8Qo/edit?usp=sharing)
 
